@@ -10,6 +10,7 @@ import (
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
+	"github.com/tagesjump/provider-upjet-yc/config/iam"
 	"github.com/tagesjump/provider-upjet-yc/config/null"
 )
 
@@ -37,6 +38,7 @@ func GetProvider() *ujconfig.Provider {
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
 		null.Configure,
+		iam.Configure,
 	} {
 		configure(pc)
 	}

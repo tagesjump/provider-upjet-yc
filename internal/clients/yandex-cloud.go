@@ -19,24 +19,42 @@ import (
 )
 
 const (
-	folderID              = "folder_id"
-	cloudID               = "cloud_id"
-	endpoint              = "endpoint"
+	// The default folder ID where resources will be placed
+	folderID = "folder_id"
+	// ID of Yandex.Cloud tenant
+	cloudID = "cloud_id"
+	// The API endpoint for Yandex.Cloud SDK client
+	endpoint = "endpoint"
+	// Either the path to or the contents of a Service Account key file in JSON format
 	serviceAccountKeyFile = "service_account_key_file"
-	regionID              = "region_id"
-	zoneID                = "zone"
-	token                 = "token"
-	allowInsecure         = "insecure"
-	plainText             = "plaintext"
-	maxRetries            = "max_retries"
-	storageEndpoint       = "storage_endpoint"
-	storageAccessKey      = "storage_access_key"
-	storageSecretKey      = "storage_secret_key"
-	ymqEndpoint           = "ymq_endpoint"
-	ymqAccessKey          = "ymq_access_key"
-	ymqSecretKey          = "ymq_secret_key"
+	// The region where operations will take place
+	regionID = "region_id"
+	// The zone where operations will take place. Examples: are ru-central1-a, ru-central2-c, etc
+	zoneID = "zone"
+	// The access token for API operations
+	token = "token"
+	// Explicitly allow the provider to perform "insecure" SSL requests, default value is `false
+	allowInsecure = "insecure"
+	// Disable use of TLS. Default value is `false`.
+	plainText = "plaintext"
+	// The maximum number of times an API request is being executed. If the API request still fails, an error is thrown.
+	maxRetries = "max_retries"
+	// Yandex.Cloud storage service endpoint
+	storageEndpoint = "storage_endpoint"
+	// Yandex.Cloud storage service access key. Used when a storage data/resource doesn't have an access key explicitly specified
+	storageAccessKey = "storage_access_key"
+	// Yandex.Cloud storage service secret key. Used when a storage data/resource doesn't have a secret key explicitly specified
+	storageSecretKey = "storage_secret_key"
+	// Yandex.Cloud Message Queue service endpoint
+	ymqEndpoint = "ymq_endpoint"
+	// Yandex.Cloud Message Queue service access key
+	ymqAccessKey = "ymq_access_key"
+	// Yandex.Cloud Message Queue service secret key
+	ymqSecretKey = "ymq_secret_key"
+	// Path to shared credentials file
 	sharedCredentialsFile = "shared_credentials_file"
-	profile               = "profile"
+	// Profile to use in the shared credentials file. Default value is `default`.
+	profile = "profile"
 )
 
 const (
@@ -89,89 +107,14 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string) terr
 		// Either the path to or the contents of a Service Account key file in JSON format
 		ps.Configuration[serviceAccountKeyFile] = string(data)
 
-		// The default folder ID where resources will be placed
-		if value, ok := creds[folderID]; ok {
-			ps.Configuration[folderID] = value
-		}
-
-		// ID of Yandex.Cloud tenant
-		if value, ok := creds[cloudID]; ok {
-			ps.Configuration[cloudID] = value
-		}
-
-		// The API endpoint for Yandex.Cloud SDK client
-		if value, ok := creds[endpoint]; ok {
-			ps.Configuration[endpoint] = value
-		}
-
-		// The region where operations will take place
-		if value, ok := creds[regionID]; ok {
-			ps.Configuration[regionID] = value
-		}
-
-		// The zone where operations will take place. Examples: are ru-central1-a, ru-central2-c, etc
-		if value, ok := creds[zoneID]; ok {
-			ps.Configuration[zoneID] = value
-		}
-
-		// The access token for API operations
-		if value, ok := creds[token]; ok {
-			ps.Configuration[token] = value
-		}
-
-		// Explicitly allow the provider to perform "insecure" SSL requests, default value is `false
-		if value, ok := creds[allowInsecure]; ok {
-			ps.Configuration[allowInsecure] = value
-		}
-
-		// Disable use of TLS. Default value is `false`.
-		if value, ok := creds[plainText]; ok {
-			ps.Configuration[plainText] = value
-		}
-
-		// The maximum number of times an API request is being executed. If the API request still fails, an error is thrown.
-		if value, ok := creds[maxRetries]; ok {
-			ps.Configuration[maxRetries] = value
-		}
-
-		// Yandex.Cloud storage service endpoint
-		if value, ok := creds[storageEndpoint]; ok {
-			ps.Configuration[storageEndpoint] = value
-		}
-
-		// Yandex.Cloud storage service access key. Used when a storage data/resource doesn't have an access key explicitly specified
-		if value, ok := creds[storageAccessKey]; ok {
-			ps.Configuration[storageAccessKey] = value
-		}
-
-		// Yandex.Cloud storage service secret key. Used when a storage data/resource doesn't have a secret key explicitly specified
-		if value, ok := creds[storageSecretKey]; ok {
-			ps.Configuration[storageSecretKey] = value
-		}
-
-		// Yandex.Cloud Message Queue service endpoint
-		if value, ok := creds[ymqEndpoint]; ok {
-			ps.Configuration[ymqEndpoint] = value
-		}
-
-		// Yandex.Cloud Message Queue service access key
-		if value, ok := creds[ymqAccessKey]; ok {
-			ps.Configuration[ymqAccessKey] = value
-		}
-
-		// Yandex.Cloud Message Queue service secret key
-		if value, ok := creds[ymqSecretKey]; ok {
-			ps.Configuration[ymqSecretKey] = value
-		}
-
-		// Path to shared credentials file
-		if value, ok := creds[sharedCredentialsFile]; ok {
-			ps.Configuration[sharedCredentialsFile] = value
-		}
-
-		// Profile to use in the shared credentials file. Default value is `default`.
-		if value, ok := creds[profile]; ok {
-			ps.Configuration[profile] = value
+		for _, setting := range []string{
+			folderID, cloudID, endpoint, regionID, zoneID, token,
+			allowInsecure, plainText, maxRetries, storageEndpoint, storageAccessKey,
+			storageSecretKey, ymqEndpoint, ymqAccessKey, ymqSecretKey, sharedCredentialsFile, profile,
+		} {
+			if value, ok := creds[setting]; ok {
+				ps.Configuration[setting] = value
+			}
 		}
 
 		return ps, nil

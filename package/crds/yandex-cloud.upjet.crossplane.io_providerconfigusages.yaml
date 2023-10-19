@@ -4,14 +4,14 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: providerconfigusages.template.upbound.io
+  name: providerconfigusages.yandex-cloud.upjet.crossplane.io
 spec:
-  group: template.upbound.io
+  group: yandex-cloud.upjet.crossplane.io
   names:
     categories:
     - crossplane
     - provider
-    - template
+    - yandex-cloud
     kind: ProviderConfigUsage
     listKind: ProviderConfigUsageList
     plural: providerconfigusages

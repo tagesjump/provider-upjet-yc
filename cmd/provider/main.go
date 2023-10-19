@@ -36,10 +36,10 @@ import (
 
 func main() {
 	var (
-		app              = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for YandexCloud").DefaultEnvars()
-		debug            = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
+		app   = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for YandexCloud").DefaultEnvars()
+		debug = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
 		// syncPeriod       = app.Flag("cache-sync", "Controller manager sync period such as 300ms, 1.5h, or 2h45m").Short('s').Default("1h").Duration()
-		syncInterval      = app.Flag("sync", "Sync interval controls how often all resources will be double checked for drift.").Short('s').Default("1h").Duration()
+		syncInterval = app.Flag("sync", "Sync interval controls how often all resources will be double checked for drift.").Short('s').Default("1h").Duration()
 
 		pollInterval     = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
 		leaderElection   = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
@@ -71,17 +71,14 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot get API server rest config")
 
 	mgr, err := ctrl.NewManager(cfg, ctrl.Options{
-		LeaderElection:             *leaderElection,
-		LeaderElectionID:           "crossplane-leader-election-provider-upjet-yc",
+		LeaderElection:   *leaderElection,
+		LeaderElectionID: "crossplane-leader-election-provider-upjet-yc",
 		Cache: cache.Options{
 			SyncPeriod: syncInterval,
 		},
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),
 		RenewDeadline:              func() *time.Duration { d := 50 * time.Second; return &d }(),
-		// Cache: cache.Options{
-		// 	SyncPeriod:                 syncPeriod,
-		// },
 	})
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add YandexCloud APIs to scheme")

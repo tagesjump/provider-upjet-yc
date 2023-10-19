@@ -10,7 +10,13 @@ import "github.com/upbound/upjet/pkg/config"
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"null_resource": config.IdentifierFromProvider,
+	"yandex_iam_service_account":                   config.NameAsIdentifier,
+	"yandex_iam_service_account_key":               config.NameAsIdentifier,
+	"yandex_iam_service_account_api_key":           config.NameAsIdentifier,
+	"yandex_iam_service_account_iam_policy":        config.NameAsIdentifier,
+	"yandex_iam_service_account_iam_binding":       config.NameAsIdentifier,
+	"yandex_iam_service_account_static_access_key": config.NameAsIdentifier,
+	"yandex_iam_service_account_iam_member":        config.NameAsIdentifier,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
