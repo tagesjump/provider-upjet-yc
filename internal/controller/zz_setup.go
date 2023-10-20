@@ -38,6 +38,14 @@ import (
 	folderiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiambinding"
 	folderiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiammember"
 	folderiampolicy "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiampolicy"
+	address "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/address"
+	defaultsecuritygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/defaultsecuritygroup"
+	gateway "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/gateway"
+	network "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/network"
+	routetable "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/routetable"
+	securitygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/securitygroup"
+	securitygrouprule "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/securitygrouprule"
+	subnet "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/subnet"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -73,6 +81,14 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		folderiambinding.Setup,
 		folderiammember.Setup,
 		folderiampolicy.Setup,
+		address.Setup,
+		defaultsecuritygroup.Setup,
+		gateway.Setup,
+		network.Setup,
+		routetable.Setup,
+		securitygroup.Setup,
+		securitygrouprule.Setup,
+		subnet.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

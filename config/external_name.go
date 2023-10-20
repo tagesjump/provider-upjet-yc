@@ -43,6 +43,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_kms_secret_ciphertext":                            config.IdentifierFromProvider,
 	"yandex_kms_symmetric_key":                                config.IdentifierFromProvider,
 	"yandex_kms_symmetric_key_iam_binding":                    config.IdentifierFromProvider,
+	"yandex_vpc_network":                                      config.IdentifierFromProvider,
+	"yandex_vpc_route_table":                                  config.IdentifierFromProvider,
+	"yandex_vpc_gateway":                                      config.IdentifierFromProvider,
+	"yandex_vpc_subnet":                                       config.IdentifierFromProvider,
+	"yandex_vpc_default_security_group":                       config.IdentifierFromProvider,
+	"yandex_vpc_security_group":                               config.IdentifierFromProvider,
+	"yandex_vpc_security_group_rule":                          config.IdentifierFromProvider,
+	"yandex_vpc_address":                                      config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

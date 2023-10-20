@@ -14,6 +14,7 @@ import (
 	"github.com/tagesjump/provider-upjet-yc/config/kms"
 	"github.com/tagesjump/provider-upjet-yc/config/organizationmanager"
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
+	"github.com/tagesjump/provider-upjet-yc/config/vpc"
 )
 
 const (
@@ -43,6 +44,7 @@ func GetProvider() *ujconfig.Provider {
 		organizationmanager.Configure,
 		resourcemanager.Configure,
 		kms.Configure,
+		vpc.Configure,
 	} {
 		configure(pc)
 	}
