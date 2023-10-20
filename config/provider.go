@@ -11,6 +11,7 @@ import (
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
+	"github.com/tagesjump/provider-upjet-yc/config/kms"
 	"github.com/tagesjump/provider-upjet-yc/config/organizationmanager"
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
 )
@@ -41,6 +42,7 @@ func GetProvider() *ujconfig.Provider {
 		iam.Configure,
 		organizationmanager.Configure,
 		resourcemanager.Configure,
+		kms.Configure,
 	} {
 		configure(pc)
 	}

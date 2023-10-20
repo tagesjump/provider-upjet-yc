@@ -36,6 +36,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_resourcemanager_folder_iam_binding":               config.IdentifierFromProvider,
 	"yandex_resourcemanager_folder_iam_member":                config.IdentifierFromProvider,
 	"yandex_resourcemanager_folder_iam_policy":                config.IdentifierFromProvider,
+	"yandex_kms_asymmetric_encryption_key":                    config.IdentifierFromProvider,
+	"yandex_kms_asymmetric_encryption_key_iam_binding":        config.IdentifierFromProvider,
+	"yandex_kms_asymmetric_signature_key":                     config.IdentifierFromProvider,
+	"yandex_kms_asymmetric_signature_key_iam_binding":         config.IdentifierFromProvider,
+	"yandex_kms_secret_ciphertext":                            config.IdentifierFromProvider,
+	"yandex_kms_symmetric_key":                                config.IdentifierFromProvider,
+	"yandex_kms_symmetric_key_iam_binding":                    config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

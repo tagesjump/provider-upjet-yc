@@ -1,0 +1,33 @@
+apiVersion: kms.crossplane.io/v1alpha1
+kind: SymmetricKeyIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/symmetrickeyiambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+spec:
+  forProvider:
+    role: viewer
+    serviceAccountRef:
+    - name: example
+    symmetricKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your-key
+
+---
+
+apiVersion: kms.crossplane.io/v1alpha1
+kind: SymmetricKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/symmetrickeyiambinding
+  labels:
+    testing.upbound.io/example-name: your-key
+  name: your-key
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: symmetric-key-name

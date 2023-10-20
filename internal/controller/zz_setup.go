@@ -16,6 +16,13 @@ import (
 	serviceaccountiampolicy "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountiampolicy"
 	serviceaccountkey "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountkey"
 	serviceaccountstaticaccesskey "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountstaticaccesskey"
+	asymmetricencryptionkey "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/asymmetricencryptionkey"
+	asymmetricencryptionkeyiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/asymmetricencryptionkeyiambinding"
+	asymmetricsignaturekey "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/asymmetricsignaturekey"
+	asymmetricsignaturekeyiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/asymmetricsignaturekeyiambinding"
+	secretciphertext "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/secretciphertext"
+	symmetrickey "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/symmetrickey"
+	symmetrickeyiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/symmetrickeyiambinding"
 	group "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
 	groupiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupiammember"
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
@@ -44,6 +51,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		serviceaccountiampolicy.Setup,
 		serviceaccountkey.Setup,
 		serviceaccountstaticaccesskey.Setup,
+		asymmetricencryptionkey.Setup,
+		asymmetricencryptionkeyiambinding.Setup,
+		asymmetricsignaturekey.Setup,
+		asymmetricsignaturekeyiambinding.Setup,
+		secretciphertext.Setup,
+		symmetrickey.Setup,
+		symmetrickeyiambinding.Setup,
 		group.Setup,
 		groupiammember.Setup,
 		groupmembership.Setup,

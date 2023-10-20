@@ -1,0 +1,33 @@
+apiVersion: kms.crossplane.io/v1alpha1
+kind: AsymmetricEncryptionKeyIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/asymmetricencryptionkeyiambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+spec:
+  forProvider:
+    asymmetricEncryptionKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your-key
+    role: viewer
+    serviceAccountRef:
+    - name: example
+
+---
+
+apiVersion: kms.crossplane.io/v1alpha1
+kind: AsymmetricEncryptionKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/asymmetricencryptionkeyiambinding
+  labels:
+    testing.upbound.io/example-name: your-key
+  name: your-key
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: asymmetric-encryption-key-name
