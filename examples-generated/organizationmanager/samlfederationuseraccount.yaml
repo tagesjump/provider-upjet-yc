@@ -1,4 +1,4 @@
-apiVersion: organizationmanager.crossplane.io/v1alpha1
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
 kind: SAMLFederationUserAccount
 metadata:
   annotations:

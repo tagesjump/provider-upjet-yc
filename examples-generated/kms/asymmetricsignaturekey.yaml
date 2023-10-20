@@ -1,4 +1,4 @@
-apiVersion: kms.crossplane.io/v1alpha1
+apiVersion: kms.yandex-cloud.upjet.crossplane.io/v1alpha1
 kind: AsymmetricSignatureKey
 metadata:
   annotations:

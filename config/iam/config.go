@@ -8,7 +8,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/pkg/errors"
-	"github.com/upbound/upjet/pkg/config"
+	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (
@@ -55,9 +55,9 @@ func serviceAccountStaticKey(attr map[string]interface{}) (map[string][]byte, er
 }
 
 // Configure adds configurations for iam group.
-func Configure(p *config.Provider) {
-	p.AddResourceConfigurator("yandex_iam_service_account_key", func(r *config.Resource) {
-		r.References["service_account_id"] = config.Reference{
+func Configure(p *ujconfig.Provider) {
+	p.AddResourceConfigurator("yandex_iam_service_account_key", func(r *ujconfig.Resource) {
+		r.References["service_account_id"] = ujconfig.Reference{
 			Type: "ServiceAccount",
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
@@ -67,23 +67,23 @@ func Configure(p *config.Provider) {
 			}, err
 		}
 	})
-	p.AddResourceConfigurator("yandex_iam_service_account_static_access_key", func(r *config.Resource) {
-		r.References["service_account_id"] = config.Reference{
+	p.AddResourceConfigurator("yandex_iam_service_account_static_access_key", func(r *ujconfig.Resource) {
+		r.References["service_account_id"] = ujconfig.Reference{
 			Type: "ServiceAccount",
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = serviceAccountStaticKey
 	})
-	p.AddResourceConfigurator("yandex_iam_service_account_api_key", func(r *config.Resource) {
-		r.References["service_account_id"] = config.Reference{
+	p.AddResourceConfigurator("yandex_iam_service_account_api_key", func(r *ujconfig.Resource) {
+		r.References["service_account_id"] = ujconfig.Reference{
 			Type: "ServiceAccount",
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = serviceAccountStaticKey
 	})
-	p.AddResourceConfigurator("yandex_iam_service_account_iam_member", func(r *config.Resource) {
-		r.References["service_account_id"] = config.Reference{
+	p.AddResourceConfigurator("yandex_iam_service_account_iam_member", func(r *ujconfig.Resource) {
+		r.References["service_account_id"] = ujconfig.Reference{
 			Type: "ServiceAccount",
 		}
-		r.References["member"] = config.Reference{
+		r.References["member"] = ujconfig.Reference{
 			Type:              "ServiceAccount",
 			Extractor:         fmt.Sprintf("%s.%s", ConfigPath, ServiceAccountRefValueFn),
 			RefFieldName:      "ServiceAccountRef",
@@ -91,11 +91,11 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("yandex_iam_service_account_iam_policy", func(r *config.Resource) {
-		r.References["service_account_id"] = config.Reference{
+	p.AddResourceConfigurator("yandex_iam_service_account_iam_policy", func(r *ujconfig.Resource) {
+		r.References["service_account_id"] = ujconfig.Reference{
 			Type: "ServiceAccount",
 		}
-		r.References["members"] = config.Reference{
+		r.References["members"] = ujconfig.Reference{
 			Type:              "ServiceAccount",
 			Extractor:         fmt.Sprintf("%s.%s", ConfigPath, ServiceAccountRefValueFn),
 			RefFieldName:      "ServiceAccountRef",
@@ -103,11 +103,11 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("yandex_iam_service_account_iam_binding", func(r *config.Resource) {
-		r.References["service_account_id"] = config.Reference{
+	p.AddResourceConfigurator("yandex_iam_service_account_iam_binding", func(r *ujconfig.Resource) {
+		r.References["service_account_id"] = ujconfig.Reference{
 			Type: "ServiceAccount",
 		}
-		r.References["members"] = config.Reference{
+		r.References["members"] = ujconfig.Reference{
 			Type:              "ServiceAccount",
 			Extractor:         fmt.Sprintf("%s.%s", ConfigPath, ServiceAccountRefValueFn),
 			RefFieldName:      "ServiceAccountRef",

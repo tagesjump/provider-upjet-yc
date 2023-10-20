@@ -1,4 +1,4 @@
-apiVersion: resourcemanager.crossplane.io/v1alpha1
+apiVersion: resourcemanager.yandex-cloud.upjet.crossplane.io/v1alpha1
 kind: FolderIAMPolicy
 metadata:
   annotations:

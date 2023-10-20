@@ -1,4 +1,4 @@
-apiVersion: vpc.crossplane.io/v1alpha1
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
 kind: SecurityGroup
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: vpc.crossplane.io/v1alpha1
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
 kind: Network
 metadata:
   annotations:
