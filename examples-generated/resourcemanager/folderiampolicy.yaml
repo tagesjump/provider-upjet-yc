@@ -1,0 +1,14 @@
+apiVersion: resourcemanager.crossplane.io/v1alpha1
+kind: FolderIAMPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resourcemanager/v1alpha1/folderiampolicy
+  labels:
+    testing.upbound.io/example-name: folder_admin_policy
+  name: folder-admin-policy
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: yandex_folder
+    policyData: ${data.yandex_iam_policy.admin.policy_data}

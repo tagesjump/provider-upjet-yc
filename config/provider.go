@@ -11,7 +11,8 @@ import (
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
-	"github.com/tagesjump/provider-upjet-yc/config/null"
+	"github.com/tagesjump/provider-upjet-yc/config/organizationmanager"
+	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
 )
 
 const (
@@ -37,8 +38,9 @@ func GetProvider() *ujconfig.Provider {
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		null.Configure,
 		iam.Configure,
+		organizationmanager.Configure,
+		resourcemanager.Configure,
 	} {
 		configure(pc)
 	}

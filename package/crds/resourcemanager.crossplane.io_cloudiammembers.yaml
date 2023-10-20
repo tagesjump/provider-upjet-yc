@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: serviceaccounts.iam.crossplane.io
+  name: cloudiammembers.resourcemanager.crossplane.io
 spec:
-  group: iam.crossplane.io
+  group: resourcemanager.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - yandex-cloud.upjet
-    kind: ServiceAccount
-    listKind: ServiceAccountList
-    plural: serviceaccounts
-    singular: serviceaccount
+    kind: CloudIAMMember
+    listKind: CloudIAMMemberList
+    plural: cloudiammembers
+    singular: cloudiammember
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ServiceAccount is the Schema for the ServiceAccounts API. Allows
-          management of a Yandex.Cloud IAM service account.
+        description: CloudIAMMember is the Schema for the CloudIAMMembers API. Allows
+          management of a single member for a single IAM binding on a Yandex Resource
+          Manager cloud.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServiceAccountSpec defines the desired state of ServiceAccount
+            description: CloudIAMMemberSpec defines the desired state of CloudIAMMember
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,16 +68,11 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description of the service account.
+                  cloudId:
+                    description: ID of the cloud to attach a policy to.
                     type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
-                    type: string
-                  folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
+                  cloudIdRef:
+                    description: Reference to a Cloud to populate cloudId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,9 +105,8 @@ spec:
                     required:
                     - name
                     type: object
-                  folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
+                  cloudIdSelector:
+                    description: Selector for a Cloud to populate cloudId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,6 +144,16 @@ spec:
                             type: string
                         type: object
                     type: object
+                  member:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
+                    type: string
+                  role:
+                    description: The role that should be assigned.
+                    type: string
+                  sleepAfter:
+                    type: number
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -163,9 +168,16 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  description:
-                    description: Description of the service account.
+                  member:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
+                  role:
+                    description: The role that should be assigned.
+                    type: string
+                  sleepAfter:
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -328,22 +340,35 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.member is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.member)
+                || (has(self.initProvider) && has(self.initProvider.member))'
+            - message: spec.forProvider.role is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.role)
+                || (has(self.initProvider) && has(self.initProvider.role))'
           status:
-            description: ServiceAccountStatus defines the observed state of ServiceAccount.
+            description: CloudIAMMemberStatus defines the observed state of CloudIAMMember.
             properties:
               atProvider:
                 properties:
-                  createdAt:
-                    type: string
-                  description:
-                    description: Description of the service account.
-                    type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
+                  cloudId:
+                    description: ID of the cloud to attach a policy to.
                     type: string
                   id:
                     type: string
+                  member:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
+                    type: string
+                  role:
+                    description: The role that should be assigned.
+                    type: string
+                  sleepAfter:
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

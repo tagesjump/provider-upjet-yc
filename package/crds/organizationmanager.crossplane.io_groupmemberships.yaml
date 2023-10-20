@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: serviceaccounts.iam.crossplane.io
+  name: groupmemberships.organizationmanager.crossplane.io
 spec:
-  group: iam.crossplane.io
+  group: organizationmanager.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - yandex-cloud.upjet
-    kind: ServiceAccount
-    listKind: ServiceAccountList
-    plural: serviceaccounts
-    singular: serviceaccount
+    kind: GroupMembership
+    listKind: GroupMembershipList
+    plural: groupmemberships
+    singular: groupmembership
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ServiceAccount is the Schema for the ServiceAccounts API. Allows
-          management of a Yandex.Cloud IAM service account.
+        description: GroupMembership is the Schema for the GroupMemberships API. Allows
+          management of members of Yandex.Cloud Organization Manager Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServiceAccountSpec defines the desired state of ServiceAccount
+            description: GroupMembershipSpec defines the desired state of GroupMembership
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,16 +67,11 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description of the service account.
+                  groupId:
+                    description: The Group to add/remove members to/from.
                     type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
-                    type: string
-                  folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
+                  groupIdRef:
+                    description: Reference to a Group to populate groupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,9 +104,8 @@ spec:
                     required:
                     - name
                     type: object
-                  folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
+                  groupIdSelector:
+                    description: Selector for a Group to populate groupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,6 +143,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  members:
+                    description: A set of members of the Group. Each member is represented
+                      by an id.
+                    items:
+                      type: string
+                    type: array
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -163,9 +163,12 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  description:
-                    description: Description of the service account.
-                    type: string
+                  members:
+                    description: A set of members of the Group. Each member is represented
+                      by an id.
+                    items:
+                      type: string
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -328,22 +331,27 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.members is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.members)
+                || (has(self.initProvider) && has(self.initProvider.members))'
           status:
-            description: ServiceAccountStatus defines the observed state of ServiceAccount.
+            description: GroupMembershipStatus defines the observed state of GroupMembership.
             properties:
               atProvider:
                 properties:
-                  createdAt:
-                    type: string
-                  description:
-                    description: Description of the service account.
-                    type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
+                  groupId:
+                    description: The Group to add/remove members to/from.
                     type: string
                   id:
                     type: string
+                  members:
+                    description: A set of members of the Group. Each member is represented
+                      by an id.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

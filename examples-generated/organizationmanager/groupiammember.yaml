@@ -1,0 +1,15 @@
+apiVersion: organizationmanager.crossplane.io/v1alpha1
+kind: GroupIAMMember
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/groupiammember
+  labels:
+    testing.upbound.io/example-name: editor
+  name: editor
+spec:
+  forProvider:
+    groupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    member: userAccount:user_id
+    role: editor

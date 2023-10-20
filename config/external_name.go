@@ -4,19 +4,38 @@ Copyright 2022 Upbound Inc.
 
 package config
 
-import "github.com/upbound/upjet/pkg/config"
+import (
+	"fmt"
+
+	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
+	"github.com/upbound/upjet/pkg/config"
+)
 
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"yandex_iam_service_account":                   config.NameAsIdentifier,
-	"yandex_iam_service_account_key":               config.NameAsIdentifier,
-	"yandex_iam_service_account_api_key":           config.NameAsIdentifier,
-	"yandex_iam_service_account_iam_policy":        config.NameAsIdentifier,
-	"yandex_iam_service_account_iam_binding":       config.NameAsIdentifier,
-	"yandex_iam_service_account_static_access_key": config.NameAsIdentifier,
-	"yandex_iam_service_account_iam_member":        config.NameAsIdentifier,
+	"yandex_iam_service_account":                              config.NameAsIdentifier,
+	"yandex_iam_service_account_key":                          config.NameAsIdentifier,
+	"yandex_iam_service_account_api_key":                      config.NameAsIdentifier,
+	"yandex_iam_service_account_iam_policy":                   config.NameAsIdentifier,
+	"yandex_iam_service_account_iam_binding":                  config.NameAsIdentifier,
+	"yandex_iam_service_account_static_access_key":            config.NameAsIdentifier,
+	"yandex_iam_service_account_iam_member":                   config.NameAsIdentifier,
+	"yandex_organizationmanager_group":                        config.IdentifierFromProvider,
+	"yandex_organizationmanager_group_iam_member":             config.IdentifierFromProvider,
+	"yandex_organizationmanager_group_membership":             config.IdentifierFromProvider,
+	"yandex_organizationmanager_organization_iam_binding":     config.IdentifierFromProvider,
+	"yandex_organizationmanager_organization_iam_member":      config.IdentifierFromProvider,
+	"yandex_organizationmanager_saml_federation":              config.IdentifierFromProvider,
+	"yandex_organizationmanager_saml_federation_user_account": config.IdentifierFromProvider,
+	"yandex_resourcemanager_cloud":                            config.IdentifierFromProvider,
+	"yandex_resourcemanager_cloud_iam_binding":                config.IdentifierFromProvider,
+	"yandex_resourcemanager_cloud_iam_member":                 config.IdentifierFromProvider,
+	"yandex_resourcemanager_folder":                           config.IdentifierFromProvider,
+	"yandex_resourcemanager_folder_iam_binding":               config.IdentifierFromProvider,
+	"yandex_resourcemanager_folder_iam_member":                config.IdentifierFromProvider,
+	"yandex_resourcemanager_folder_iam_policy":                config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
@@ -26,6 +45,18 @@ func ExternalNameConfigurations() config.ResourceOption {
 	return func(r *config.Resource) {
 		if e, ok := ExternalNameConfigs[r.Name]; ok {
 			r.ExternalName = e
+		}
+		if (r.ShortGroup != "resourcemanager" && r.ShortGroup != "organizationmanager") ||
+			r.Name == "yandex_resourcemanager_folder_iam_member" ||
+			r.Name == "yandex_resourcemanager_folder_iam_binding" ||
+			r.Name == "yandex_resourcemanager_folder_iam_policy" {
+			r.References["folder_id"] = config.Reference{
+				Type: fmt.Sprintf("%s.%s", resourcemanager.ApisPackagePath, "Folder"),
+			}
+		} else {
+			r.References["folder_id"] = config.Reference{
+				Type: "Folder",
+			}
 		}
 	}
 }

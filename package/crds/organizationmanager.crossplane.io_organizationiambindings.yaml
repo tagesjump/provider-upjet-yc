@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: serviceaccounts.iam.crossplane.io
+  name: organizationiambindings.organizationmanager.crossplane.io
 spec:
-  group: iam.crossplane.io
+  group: organizationmanager.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - yandex-cloud.upjet
-    kind: ServiceAccount
-    listKind: ServiceAccountList
-    plural: serviceaccounts
-    singular: serviceaccount
+    kind: OrganizationIAMBinding
+    listKind: OrganizationIAMBindingList
+    plural: organizationiambindings
+    singular: organizationiambinding
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ServiceAccount is the Schema for the ServiceAccounts API. Allows
-          management of a Yandex.Cloud IAM service account.
+        description: OrganizationIAMBinding is the Schema for the OrganizationIAMBindings
+          API. Allows management of a single IAM binding for a Yandex Organization
+          Manager organization.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServiceAccountSpec defines the desired state of ServiceAccount
+            description: OrganizationIAMBindingSpec defines the desired state of OrganizationIAMBinding
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,88 +68,22 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description of the service account.
+                  members:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
+                    items:
+                      type: string
+                    type: array
+                  organizationId:
+                    description: ID of the organization to attach the policy to.
                     type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
+                  role:
+                    description: The role that should be assigned. Only one yandex_organizationmanager_organization_iam_binding
+                      can be used per role.
                     type: string
-                  folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
+                  sleepAfter:
+                    type: number
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -163,9 +98,22 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  description:
-                    description: Description of the service account.
+                  members:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
+                    items:
+                      type: string
+                    type: array
+                  organizationId:
+                    description: ID of the organization to attach the policy to.
                     type: string
+                  role:
+                    description: The role that should be assigned. Only one yandex_organizationmanager_organization_iam_binding
+                      can be used per role.
+                    type: string
+                  sleepAfter:
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -328,22 +276,43 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.members is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.members)
+                || (has(self.initProvider) && has(self.initProvider.members))'
+            - message: spec.forProvider.organizationId is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.organizationId)
+                || (has(self.initProvider) && has(self.initProvider.organizationId))'
+            - message: spec.forProvider.role is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.role)
+                || (has(self.initProvider) && has(self.initProvider.role))'
           status:
-            description: ServiceAccountStatus defines the observed state of ServiceAccount.
+            description: OrganizationIAMBindingStatus defines the observed state of
+              OrganizationIAMBinding.
             properties:
               atProvider:
                 properties:
-                  createdAt:
-                    type: string
-                  description:
-                    description: Description of the service account.
-                    type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
-                    type: string
                   id:
                     type: string
+                  members:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
+                    items:
+                      type: string
+                    type: array
+                  organizationId:
+                    description: ID of the organization to attach the policy to.
+                    type: string
+                  role:
+                    description: The role that should be assigned. Only one yandex_organizationmanager_organization_iam_binding
+                      can be used per role.
+                    type: string
+                  sleepAfter:
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -13,50 +13,62 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ServiceAccountInitParameters struct {
+type CloudInitParameters struct {
 
-	// Description of the service account.
+	// A description of the Cloud.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A set of key/value label pairs to assign to the Cloud.
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// The name of the Cloud.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Yandex.Cloud Organization that the cloud belongs to. If value is omitted, the default provider Organization ID is used.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
-type ServiceAccountObservation struct {
+type CloudObservation struct {
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the service account.
+	// A description of the Cloud.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
-	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A set of key/value label pairs to assign to the Cloud.
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// The name of the Cloud.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Yandex.Cloud Organization that the cloud belongs to. If value is omitted, the default provider Organization ID is used.
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
-type ServiceAccountParameters struct {
+type CloudParameters struct {
 
-	// Description of the service account.
+	// A description of the Cloud.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
-	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	// A set of key/value label pairs to assign to the Cloud.
 	// +kubebuilder:validation:Optional
-	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Reference to a Folder in resourcemanager to populate folderId.
+	// The name of the Cloud.
 	// +kubebuilder:validation:Optional
-	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Selector for a Folder in resourcemanager to populate folderId.
+	// Yandex.Cloud Organization that the cloud belongs to. If value is omitted, the default provider Organization ID is used.
 	// +kubebuilder:validation:Optional
-	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
-// ServiceAccountSpec defines the desired state of ServiceAccount
-type ServiceAccountSpec struct {
+// CloudSpec defines the desired state of Cloud
+type CloudSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ServiceAccountParameters `json:"forProvider"`
+	ForProvider     CloudParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -68,48 +80,48 @@ type ServiceAccountSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ServiceAccountInitParameters `json:"initProvider,omitempty"`
+	InitProvider CloudInitParameters `json:"initProvider,omitempty"`
 }
 
-// ServiceAccountStatus defines the observed state of ServiceAccount.
-type ServiceAccountStatus struct {
+// CloudStatus defines the observed state of Cloud.
+type CloudStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ServiceAccountObservation `json:"atProvider,omitempty"`
+	AtProvider        CloudObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ServiceAccount is the Schema for the ServiceAccounts API. Allows management of a Yandex.Cloud IAM service account.
+// Cloud is the Schema for the Clouds API. Allows management of the Cloud resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud.upjet}
-type ServiceAccount struct {
+type Cloud struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceAccountSpec   `json:"spec"`
-	Status            ServiceAccountStatus `json:"status,omitempty"`
+	Spec              CloudSpec   `json:"spec"`
+	Status            CloudStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ServiceAccountList contains a list of ServiceAccounts
-type ServiceAccountList struct {
+// CloudList contains a list of Clouds
+type CloudList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ServiceAccount `json:"items"`
+	Items           []Cloud `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	ServiceAccount_Kind             = "ServiceAccount"
-	ServiceAccount_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ServiceAccount_Kind}.String()
-	ServiceAccount_KindAPIVersion   = ServiceAccount_Kind + "." + CRDGroupVersion.String()
-	ServiceAccount_GroupVersionKind = CRDGroupVersion.WithKind(ServiceAccount_Kind)
+	Cloud_Kind             = "Cloud"
+	Cloud_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Cloud_Kind}.String()
+	Cloud_KindAPIVersion   = Cloud_Kind + "." + CRDGroupVersion.String()
+	Cloud_GroupVersionKind = CRDGroupVersion.WithKind(Cloud_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&ServiceAccount{}, &ServiceAccountList{})
+	SchemeBuilder.Register(&Cloud{}, &CloudList{})
 }

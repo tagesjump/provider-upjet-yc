@@ -1,0 +1,14 @@
+apiVersion: organizationmanager.crossplane.io/v1alpha1
+kind: OrganizationIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/organizationiambinding
+  labels:
+    testing.upbound.io/example-name: editor
+  name: editor
+spec:
+  forProvider:
+    members:
+    - userAccount:some_user_id
+    organizationId: some_organization_id
+    role: editor

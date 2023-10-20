@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: serviceaccounts.iam.crossplane.io
+  name: folderiampolicies.resourcemanager.crossplane.io
 spec:
-  group: iam.crossplane.io
+  group: resourcemanager.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - yandex-cloud.upjet
-    kind: ServiceAccount
-    listKind: ServiceAccountList
-    plural: serviceaccounts
-    singular: serviceaccount
+    kind: FolderIAMPolicy
+    listKind: FolderIAMPolicyList
+    plural: folderiampolicies
+    singular: folderiampolicy
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ServiceAccount is the Schema for the ServiceAccounts API. Allows
-          management of a Yandex.Cloud IAM service account.
+        description: FolderIAMPolicy is the Schema for the FolderIAMPolicys API. Allows
+          management of the IAM policy for a Yandex Resource Manager folder.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServiceAccountSpec defines the desired state of ServiceAccount
+            description: FolderIAMPolicySpec defines the desired state of FolderIAMPolicy
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,16 +67,11 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description of the service account.
-                    type: string
                   folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
+                    description: ID of the folder that the policy is attached to.
                     type: string
                   folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
+                    description: Reference to a Folder to populate folderId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -110,8 +105,7 @@ spec:
                     - name
                     type: object
                   folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
+                    description: Selector for a Folder to populate folderId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,6 +143,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  policyData:
+                    description: The yandex_iam_policy data source that represents
+                      the IAM policy that will be applied to the folder. This policy
+                      overrides any existing policy applied to the folder.
+                    type: string
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -163,8 +162,10 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  description:
-                    description: Description of the service account.
+                  policyData:
+                    description: The yandex_iam_policy data source that represents
+                      the IAM policy that will be applied to the folder. This policy
+                      overrides any existing policy applied to the folder.
                     type: string
                 type: object
               managementPolicies:
@@ -328,21 +329,25 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.policyData is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyData)
+                || (has(self.initProvider) && has(self.initProvider.policyData))'
           status:
-            description: ServiceAccountStatus defines the observed state of ServiceAccount.
+            description: FolderIAMPolicyStatus defines the observed state of FolderIAMPolicy.
             properties:
               atProvider:
                 properties:
-                  createdAt:
-                    type: string
-                  description:
-                    description: Description of the service account.
-                    type: string
                   folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
+                    description: ID of the folder that the policy is attached to.
                     type: string
                   id:
+                    type: string
+                  policyData:
+                    description: The yandex_iam_policy data source that represents
+                      the IAM policy that will be applied to the folder. This policy
+                      overrides any existing policy applied to the folder.
                     type: string
                 type: object
               conditions:

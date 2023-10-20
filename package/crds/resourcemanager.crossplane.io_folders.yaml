@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: serviceaccounts.iam.crossplane.io
+  name: folders.resourcemanager.crossplane.io
 spec:
-  group: iam.crossplane.io
+  group: resourcemanager.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - yandex-cloud.upjet
-    kind: ServiceAccount
-    listKind: ServiceAccountList
-    plural: serviceaccounts
-    singular: serviceaccount
+    kind: Folder
+    listKind: FolderList
+    plural: folders
+    singular: folder
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: ServiceAccount is the Schema for the ServiceAccounts API. Allows
-          management of a Yandex.Cloud IAM service account.
+        description: Folder is the Schema for the Folders API. Allows management of
+          the Cloud Folder.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ServiceAccountSpec defines the desired state of ServiceAccount
+            description: FolderSpec defines the desired state of Folder
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,16 +67,12 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: Description of the service account.
+                  cloudId:
+                    description: Cloud that the resource belongs to. If value is omitted,
+                      the default provider Cloud ID is used.
                     type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
-                    type: string
-                  folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
+                  cloudIdRef:
+                    description: Reference to a Cloud to populate cloudId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,9 +105,8 @@ spec:
                     required:
                     - name
                     type: object
-                  folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
+                  cloudIdSelector:
+                    description: Selector for a Cloud to populate cloudId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -149,6 +144,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  description:
+                    description: A description of the Folder.
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: A set of key/value label pairs to assign to the Folder.
+                    type: object
+                  name:
+                    description: The name of the Folder.
+                    type: string
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -164,7 +170,15 @@ spec:
                   them, like an autoscaler.
                 properties:
                   description:
-                    description: Description of the service account.
+                    description: A description of the Folder.
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: A set of key/value label pairs to assign to the Folder.
+                    type: object
+                  name:
+                    description: The name of the Folder.
                     type: string
                 type: object
               managementPolicies:
@@ -329,20 +343,28 @@ spec:
             - forProvider
             type: object
           status:
-            description: ServiceAccountStatus defines the observed state of ServiceAccount.
+            description: FolderStatus defines the observed state of Folder.
             properties:
               atProvider:
                 properties:
+                  cloudId:
+                    description: Cloud that the resource belongs to. If value is omitted,
+                      the default provider Cloud ID is used.
+                    type: string
                   createdAt:
                     type: string
                   description:
-                    description: Description of the service account.
-                    type: string
-                  folderId:
-                    description: ID of the folder that the service account will be
-                      created in. Defaults to the provider folder configuration.
+                    description: A description of the Folder.
                     type: string
                   id:
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: A set of key/value label pairs to assign to the Folder.
+                    type: object
+                  name:
+                    description: The name of the Folder.
                     type: string
                 type: object
               conditions:

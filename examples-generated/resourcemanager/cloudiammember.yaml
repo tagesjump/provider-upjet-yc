@@ -1,0 +1,15 @@
+apiVersion: resourcemanager.crossplane.io/v1alpha1
+kind: CloudIAMMember
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resourcemanager/v1alpha1/cloudiammember
+  labels:
+    testing.upbound.io/example-name: admin
+  name: admin
+spec:
+  forProvider:
+    cloudIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: yandex_resourcemanager_cloud
+    member: userAccount:user_id
+    role: editor
