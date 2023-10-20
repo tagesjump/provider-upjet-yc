@@ -23,6 +23,8 @@ import (
 	secretciphertext "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/secretciphertext"
 	symmetrickey "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/symmetrickey"
 	symmetrickeyiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/symmetrickeyiambinding"
+	cluster "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/cluster"
+	nodegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/nodegroup"
 	group "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
 	groupiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupiammember"
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
@@ -66,6 +68,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secretciphertext.Setup,
 		symmetrickey.Setup,
 		symmetrickeyiambinding.Setup,
+		cluster.Setup,
+		nodegroup.Setup,
 		group.Setup,
 		groupiammember.Setup,
 		groupmembership.Setup,

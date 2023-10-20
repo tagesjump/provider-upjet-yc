@@ -51,6 +51,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_vpc_security_group":                               config.IdentifierFromProvider,
 	"yandex_vpc_security_group_rule":                          config.IdentifierFromProvider,
 	"yandex_vpc_address":                                      config.IdentifierFromProvider,
+	"yandex_kubernetes_cluster":                               config.IdentifierFromProvider,
+	"yandex_kubernetes_node_group":                            config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
