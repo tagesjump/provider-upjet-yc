@@ -53,6 +53,22 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_vpc_address":                                      config.IdentifierFromProvider,
 	"yandex_kubernetes_cluster":                               config.IdentifierFromProvider,
 	"yandex_kubernetes_node_group":                            config.IdentifierFromProvider,
+	"yandex_mdb_clickhouse_cluster":                           config.IdentifierFromProvider,
+	"yandex_mdb_elasticsearch_cluster":                        config.IdentifierFromProvider,
+	"yandex_mdb_greenplum_cluster":                            config.IdentifierFromProvider,
+	"yandex_mdb_kafka_cluster":                                config.IdentifierFromProvider,
+	"yandex_mdb_kafka_connector":                              config.IdentifierFromProvider,
+	"yandex_mdb_kafka_topic":                                  config.IdentifierFromProvider,
+	"yandex_mdb_kafka_user":                                   config.IdentifierFromProvider,
+	"yandex_mdb_mongodb_cluster":                              config.IdentifierFromProvider,
+	"yandex_mdb_mysql_cluster":                                config.IdentifierFromProvider,
+	"yandex_mdb_mysql_database":                               config.IdentifierFromProvider,
+	"yandex_mdb_mysql_user":                                   config.IdentifierFromProvider,
+	"yandex_mdb_postgresql_cluster":                           config.IdentifierFromProvider,
+	"yandex_mdb_postgresql_database":                          config.IdentifierFromProvider,
+	"yandex_mdb_postgresql_user":                              config.IdentifierFromProvider,
+	"yandex_mdb_redis_cluster":                                config.IdentifierFromProvider,
+	"yandex_mdb_sqlserver_cluster":                            config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

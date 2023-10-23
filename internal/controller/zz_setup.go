@@ -25,6 +25,22 @@ import (
 	symmetrickeyiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/symmetrickeyiambinding"
 	cluster "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/cluster"
 	nodegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/nodegroup"
+	clickhousecluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/clickhousecluster"
+	elasticsearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/elasticsearchcluster"
+	greenplumcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/greenplumcluster"
+	kafkacluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/kafkacluster"
+	kafkaconnector "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/kafkaconnector"
+	kafkatopic "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/kafkatopic"
+	kafkauser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/kafkauser"
+	mongodbcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mongodbcluster"
+	mysqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqlcluster"
+	mysqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqldatabase"
+	mysqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqluser"
+	postgresqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqlcluster"
+	postgresqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqldatabase"
+	postgresqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqluser"
+	rediscluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/rediscluster"
+	sqlservercluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/sqlservercluster"
 	group "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
 	groupiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupiammember"
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
@@ -70,6 +86,22 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		symmetrickeyiambinding.Setup,
 		cluster.Setup,
 		nodegroup.Setup,
+		clickhousecluster.Setup,
+		elasticsearchcluster.Setup,
+		greenplumcluster.Setup,
+		kafkacluster.Setup,
+		kafkaconnector.Setup,
+		kafkatopic.Setup,
+		kafkauser.Setup,
+		mongodbcluster.Setup,
+		mysqlcluster.Setup,
+		mysqldatabase.Setup,
+		mysqluser.Setup,
+		postgresqlcluster.Setup,
+		postgresqldatabase.Setup,
+		postgresqluser.Setup,
+		rediscluster.Setup,
+		sqlservercluster.Setup,
 		group.Setup,
 		groupiammember.Setup,
 		groupmembership.Setup,

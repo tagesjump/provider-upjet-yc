@@ -1,0 +1,136 @@
+apiVersion: mdb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: SqlserverCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/sqlservercluster
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    backupWindowStart:
+    - hours: 20
+      minutes: 30
+    database:
+    - name: db_name_a
+    - name: db_name
+    - name: db_name_b
+    environment: PRESTABLE
+    host:
+    - subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: foo
+      zone: ru-central1-a
+    hostGroupIds:
+    - host_group_1
+    - host_group_2
+    labels:
+      test_key: test_value
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    resources:
+    - diskSize: 20
+      diskTypeId: network-ssd
+      resourcePresetId: s2.small
+    securityGroupIdsRefs:
+    - name: test-sg-x
+    sqlserverConfig:
+      fill_factor_percent: 49
+      optimize_for_ad_hoc_workloads: true
+    user:
+    - name: bob
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    - name: alice
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      permission:
+      - databaseName: db_name
+        roles:
+        - DDLADMIN
+    - name: chuck
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      permission:
+      - databaseName: db_name_a
+        roles:
+        - OWNER
+      - databaseName: db_name
+        roles:
+        - OWNER
+        - DDLADMIN
+      - databaseName: db_name_b
+        roles:
+        - OWNER
+        - DDLADMIN
+    version: 2016sp2std
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/sqlservercluster
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/sqlservercluster
+  labels:
+    testing.upbound.io/example-name: test-sg-x
+  name: test-sg-x
+spec:
+  forProvider:
+    egress:
+    - description: Allow outgoing traffic to members of the same security group
+      fromPort: 0
+      protocol: ANY
+      toPort: 65535
+      v4CidrBlocks:
+      - 0.0.0.0/0
+    ingress:
+    - description: Allow incoming traffic from members of the same security group
+      fromPort: 0
+      protocol: ANY
+      toPort: 65535
+      v4CidrBlocks:
+      - 0.0.0.0/0
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/sqlservercluster
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-a
