@@ -9,6 +9,16 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	disk "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/disk"
+	diskplacementgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/diskplacementgroup"
+	filesystem "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/filesystem"
+	gpucluster "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/gpucluster"
+	image "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/image"
+	instance "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/instance"
+	instancegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/instancegroup"
+	placementgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/placementgroup"
+	snapshot "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/snapshot"
+	snapshotschedule "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/snapshotschedule"
 	serviceaccount "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccount"
 	serviceaccountapikey "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountapikey"
 	serviceaccountiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountiambinding"
@@ -70,6 +80,16 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		disk.Setup,
+		diskplacementgroup.Setup,
+		filesystem.Setup,
+		gpucluster.Setup,
+		image.Setup,
+		instance.Setup,
+		instancegroup.Setup,
+		placementgroup.Setup,
+		snapshot.Setup,
+		snapshotschedule.Setup,
 		serviceaccount.Setup,
 		serviceaccountapikey.Setup,
 		serviceaccountiambinding.Setup,

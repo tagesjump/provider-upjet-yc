@@ -1,0 +1,18 @@
+apiVersion: compute.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Disk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/disk
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    imageIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labels:
+      environment: test
+    name: disk-name
+    type: network-ssd
+    zone: ru-central1-a

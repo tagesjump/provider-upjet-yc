@@ -69,6 +69,17 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_mdb_postgresql_user":                              config.IdentifierFromProvider,
 	"yandex_mdb_redis_cluster":                                config.IdentifierFromProvider,
 	"yandex_mdb_sqlserver_cluster":                            config.IdentifierFromProvider,
+	"yandex_compute_disk":                                     config.IdentifierFromProvider,
+	"yandex_compute_disk_placement_group":                     config.IdentifierFromProvider,
+	"yandex_compute_filesystem":                               config.IdentifierFromProvider,
+	"yandex_compute_gpu_cluster":                              config.IdentifierFromProvider,
+	"yandex_compute_image":                                    config.IdentifierFromProvider,
+	"yandex_compute_instance":                                 config.IdentifierFromProvider,
+	"yandex_compute_instance_group":                           config.IdentifierFromProvider,
+	"yandex_compute_instance_migrate":                         config.IdentifierFromProvider,
+	"yandex_compute_placement_group":                          config.IdentifierFromProvider,
+	"yandex_compute_snapshot":                                 config.IdentifierFromProvider,
+	"yandex_compute_snapshot_schedule":                        config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
