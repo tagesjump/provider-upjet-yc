@@ -19,6 +19,12 @@ import (
 	placementgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/placementgroup"
 	snapshot "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/snapshot"
 	snapshotschedule "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/snapshotschedule"
+	registry "github.com/tagesjump/provider-upjet-yc/internal/controller/container/registry"
+	registryiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/container/registryiambinding"
+	registryippermission "github.com/tagesjump/provider-upjet-yc/internal/controller/container/registryippermission"
+	repository "github.com/tagesjump/provider-upjet-yc/internal/controller/container/repository"
+	repositoryiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/container/repositoryiambinding"
+	repositorylifecyclepolicy "github.com/tagesjump/provider-upjet-yc/internal/controller/container/repositorylifecyclepolicy"
 	serviceaccount "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccount"
 	serviceaccountapikey "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountapikey"
 	serviceaccountiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountiambinding"
@@ -90,6 +96,12 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		placementgroup.Setup,
 		snapshot.Setup,
 		snapshotschedule.Setup,
+		registry.Setup,
+		registryiambinding.Setup,
+		registryippermission.Setup,
+		repository.Setup,
+		repositoryiambinding.Setup,
+		repositorylifecyclepolicy.Setup,
 		serviceaccount.Setup,
 		serviceaccountapikey.Setup,
 		serviceaccountiambinding.Setup,

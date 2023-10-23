@@ -1,0 +1,48 @@
+apiVersion: container.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: RepositoryLifecyclePolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repositorylifecyclepolicy
+  labels:
+    testing.upbound.io/example-name: my_lifecycle_policy
+  name: my-lifecycle-policy
+spec:
+  forProvider:
+    name: test-lifecycle-policy-name
+    repositoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my_repository
+    rule:
+    - description: my description
+      retainedTop: 1
+      tagRegexp: .*
+      untagged: true
+    status: active
+
+---
+
+apiVersion: container.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repositorylifecyclepolicy
+  labels:
+    testing.upbound.io/example-name: my_registry
+  name: my-registry
+spec:
+  forProvider:
+    name: test-registry
+
+---
+
+apiVersion: container.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repositorylifecyclepolicy
+  labels:
+    testing.upbound.io/example-name: my_repository
+  name: my-repository
+spec:
+  forProvider:
+    name: ${yandex_container_registry.my_registry.id}/test-repository

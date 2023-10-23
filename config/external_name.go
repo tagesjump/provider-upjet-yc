@@ -80,6 +80,12 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_compute_placement_group":                          config.IdentifierFromProvider,
 	"yandex_compute_snapshot":                                 config.IdentifierFromProvider,
 	"yandex_compute_snapshot_schedule":                        config.IdentifierFromProvider,
+	"yandex_container_registry":                               config.IdentifierFromProvider,
+	"yandex_container_registry_iam_binding":                   config.IdentifierFromProvider,
+	"yandex_container_registry_ip_permission":                 config.IdentifierFromProvider,
+	"yandex_container_repository":                             config.IdentifierFromProvider,
+	"yandex_container_repository_iam_binding":                 config.IdentifierFromProvider,
+	"yandex_container_repository_lifecycle_policy":            config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
