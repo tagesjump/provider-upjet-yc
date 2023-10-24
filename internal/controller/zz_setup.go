@@ -52,6 +52,9 @@ import (
 	nodegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/nodegroup"
 	networkloadbalancer "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/networkloadbalancer"
 	targetgrouplb "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/targetgroup"
+	secret "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secret"
+	secretiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretiambinding"
+	secretversion "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretversion"
 	group "github.com/tagesjump/provider-upjet-yc/internal/controller/logging/group"
 	clickhousecluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/clickhousecluster"
 	elasticsearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/elasticsearchcluster"
@@ -151,6 +154,9 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		nodegroup.Setup,
 		networkloadbalancer.Setup,
 		targetgrouplb.Setup,
+		secret.Setup,
+		secretiambinding.Setup,
+		secretversion.Setup,
 		group.Setup,
 		clickhousecluster.Setup,
 		elasticsearchcluster.Setup,

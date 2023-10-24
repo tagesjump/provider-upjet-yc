@@ -108,6 +108,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_ydb_topic":                                        config.IdentifierFromProvider,
 	"yandex_datatransfer_endpoint":                            config.IdentifierFromProvider,
 	"yandex_datatransfer_transfer":                            config.IdentifierFromProvider,
+	"yandex_lockbox_secret":                                   config.IdentifierFromProvider,
+	"yandex_lockbox_secret_iam_binding":                       config.IdentifierFromProvider,
+	"yandex_lockbox_secret_version":                           config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
