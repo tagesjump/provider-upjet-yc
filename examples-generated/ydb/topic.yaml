@@ -9,20 +9,21 @@ metadata:
 spec:
   forProvider:
     consumer:
-      - name: consumer-name
-        startingMessageTimestampMs: 0
-        supportedCodecs:
-          - raw
-          - gzip
+    - name: consumer-name
+      startingMessageTimestampMs: 0
+      supportedCodecs:
+      - raw
+      - gzip
     databaseEndpoint: ${yandex_ydb_database_serverless.database_name.ydb_full_endpoint}
     name: topic-test
     partitionsCount: 1
     retention_period_ms: 2000000
     supportedCodecs:
-      - raw
-      - gzip
+    - raw
+    - gzip
 
 ---
+
 apiVersion: ydb.yandex-cloud.upjet.crossplane.io/v1alpha1
 kind: DatabaseServerless
 metadata:

@@ -106,6 +106,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_ydb_table_changefeed":                             config.IdentifierFromProvider,
 	"yandex_ydb_table_index":                                  config.IdentifierFromProvider,
 	"yandex_ydb_topic":                                        config.IdentifierFromProvider,
+	"yandex_datatransfer_endpoint":                            config.IdentifierFromProvider,
+	"yandex_datatransfer_transfer":                            config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
