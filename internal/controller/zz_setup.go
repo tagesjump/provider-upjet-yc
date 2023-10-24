@@ -30,6 +30,8 @@ import (
 	repository "github.com/tagesjump/provider-upjet-yc/internal/controller/container/repository"
 	repositoryiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/container/repositoryiambinding"
 	repositorylifecyclepolicy "github.com/tagesjump/provider-upjet-yc/internal/controller/container/repositorylifecyclepolicy"
+	recordset "github.com/tagesjump/provider-upjet-yc/internal/controller/dns/recordset"
+	zone "github.com/tagesjump/provider-upjet-yc/internal/controller/dns/zone"
 	serviceaccount "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccount"
 	serviceaccountapikey "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountapikey"
 	serviceaccountiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountiambinding"
@@ -116,6 +118,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		repository.Setup,
 		repositoryiambinding.Setup,
 		repositorylifecyclepolicy.Setup,
+		recordset.Setup,
+		zone.Setup,
 		serviceaccount.Setup,
 		serviceaccountapikey.Setup,
 		serviceaccountiambinding.Setup,

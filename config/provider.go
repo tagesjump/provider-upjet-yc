@@ -13,6 +13,7 @@ import (
 	"github.com/tagesjump/provider-upjet-yc/config/alb"
 	"github.com/tagesjump/provider-upjet-yc/config/compute"
 	"github.com/tagesjump/provider-upjet-yc/config/container"
+	"github.com/tagesjump/provider-upjet-yc/config/dns"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
 	"github.com/tagesjump/provider-upjet-yc/config/kms"
 	"github.com/tagesjump/provider-upjet-yc/config/kubernetes"
@@ -59,6 +60,7 @@ func GetProvider() *ujconfig.Provider {
 		alb.Configure,
 		storage.Configure,
 		lb.Configure,
+		dns.Configure,
 	} {
 		configure(pc)
 	}

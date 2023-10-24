@@ -13,6 +13,7 @@ import (
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/alb/v1alpha1"
 	v1alpha1compute "github.com/tagesjump/provider-upjet-yc/apis/compute/v1alpha1"
 	v1alpha1container "github.com/tagesjump/provider-upjet-yc/apis/container/v1alpha1"
+	v1alpha1dns "github.com/tagesjump/provider-upjet-yc/apis/dns/v1alpha1"
 	v1alpha1iam "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha1kms "github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1"
 	v1alpha1kubernetes "github.com/tagesjump/provider-upjet-yc/apis/kubernetes/v1alpha1"
@@ -32,6 +33,7 @@ func init() {
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1compute.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
+		v1alpha1dns.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,
 		v1alpha1kms.SchemeBuilder.AddToScheme,
 		v1alpha1kubernetes.SchemeBuilder.AddToScheme,

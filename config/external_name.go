@@ -95,6 +95,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_storage_object":                                   config.IdentifierFromProvider,
 	"yandex_lb_network_load_balancer":                         config.IdentifierFromProvider,
 	"yandex_lb_target_group":                                  config.IdentifierFromProvider,
+	"yandex_dns_recordset":                                    config.IdentifierFromProvider,
+	"yandex_dns_zone":                                         config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
