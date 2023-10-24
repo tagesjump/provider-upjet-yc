@@ -99,6 +99,13 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_dns_zone":                                         config.IdentifierFromProvider,
 	"yandex_logging_group":                                    config.IdentifierFromProvider,
 	"yandex_message_queue":                                    config.IdentifierFromProvider,
+	"yandex_ydb_database_dedicated":                           config.IdentifierFromProvider,
+	"yandex_ydb_database_iam_binding":                         config.IdentifierFromProvider,
+	"yandex_ydb_database_serverless":                          config.IdentifierFromProvider,
+	"yandex_ydb_table":                                        config.IdentifierFromProvider,
+	"yandex_ydb_table_changefeed":                             config.IdentifierFromProvider,
+	"yandex_ydb_table_index":                                  config.IdentifierFromProvider,
+	"yandex_ydb_topic":                                        config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

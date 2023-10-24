@@ -93,6 +93,13 @@ import (
 	securitygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/securitygroup"
 	securitygrouprule "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/securitygrouprule"
 	subnet "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/subnet"
+	databasededicated "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/databasededicated"
+	databaseiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/databaseiambinding"
+	databaseserverless "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/databaseserverless"
+	table "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/table"
+	tablechangefeed "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/tablechangefeed"
+	tableindex "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/tableindex"
+	topic "github.com/tagesjump/provider-upjet-yc/internal/controller/ydb/topic"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
@@ -183,6 +190,13 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		securitygroup.Setup,
 		securitygrouprule.Setup,
 		subnet.Setup,
+		databasededicated.Setup,
+		databaseiambinding.Setup,
+		databaseserverless.Setup,
+		table.Setup,
+		tablechangefeed.Setup,
+		tableindex.Setup,
+		topic.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

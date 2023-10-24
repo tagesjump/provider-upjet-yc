@@ -8,6 +8,7 @@ import (
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
 
+	"github.com/tagesjump/provider-upjet-yc/config/ydb"
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
 	"github.com/tagesjump/provider-upjet-yc/config/alb"
@@ -65,6 +66,7 @@ func GetProvider() *ujconfig.Provider {
 		dns.Configure,
 		logging.Configure,
 		message.Configure,
+		ydb.Configure,
 	} {
 		configure(pc)
 	}

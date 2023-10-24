@@ -27,6 +27,7 @@ import (
 	v1alpha1apis "github.com/tagesjump/provider-upjet-yc/apis/v1alpha1"
 	v1beta1 "github.com/tagesjump/provider-upjet-yc/apis/v1beta1"
 	v1alpha1vpc "github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1"
+	v1alpha1ydb "github.com/tagesjump/provider-upjet-yc/apis/ydb/v1alpha1"
 )
 
 func init() {
@@ -49,6 +50,7 @@ func init() {
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha1vpc.SchemeBuilder.AddToScheme,
+		v1alpha1ydb.SchemeBuilder.AddToScheme,
 	)
 }
 
