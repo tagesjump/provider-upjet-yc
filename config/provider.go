@@ -16,6 +16,7 @@ import (
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
 	"github.com/tagesjump/provider-upjet-yc/config/kms"
 	"github.com/tagesjump/provider-upjet-yc/config/kubernetes"
+	"github.com/tagesjump/provider-upjet-yc/config/lb"
 	"github.com/tagesjump/provider-upjet-yc/config/mdb"
 	"github.com/tagesjump/provider-upjet-yc/config/organizationmanager"
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
@@ -57,6 +58,7 @@ func GetProvider() *ujconfig.Provider {
 		container.Configure,
 		alb.Configure,
 		storage.Configure,
+		lb.Configure,
 	} {
 		configure(pc)
 	}

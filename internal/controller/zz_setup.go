@@ -46,6 +46,8 @@ import (
 	symmetrickeyiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/kms/symmetrickeyiambinding"
 	cluster "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/cluster"
 	nodegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/nodegroup"
+	networkloadbalancer "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/networkloadbalancer"
+	targetgrouplb "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/targetgroup"
 	clickhousecluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/clickhousecluster"
 	elasticsearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/elasticsearchcluster"
 	greenplumcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/greenplumcluster"
@@ -130,6 +132,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		symmetrickeyiambinding.Setup,
 		cluster.Setup,
 		nodegroup.Setup,
+		networkloadbalancer.Setup,
+		targetgrouplb.Setup,
 		clickhousecluster.Setup,
 		elasticsearchcluster.Setup,
 		greenplumcluster.Setup,

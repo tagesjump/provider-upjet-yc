@@ -1,0 +1,25 @@
+apiVersion: lb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: NetworkLoadBalancer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: lb/v1alpha1/networkloadbalancer
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    attachedTargetGroup:
+    - healthcheck:
+      - httpOptions:
+        - path: /ping
+          port: 8080
+        name: http
+      targetGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: my-target-group
+    listener:
+    - externalAddressSpec:
+      - ipVersion: ipv4
+      name: my-listener
+      port: 8080
+    name: my-network-load-balancer

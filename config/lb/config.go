@@ -1,0 +1,32 @@
+package lb
+
+import (
+	"fmt"
+
+	"github.com/tagesjump/provider-upjet-yc/config/vpc"
+	ujconfig "github.com/upbound/upjet/pkg/config"
+)
+
+const (
+	// ApisPackagePath is the golang path for this package.
+	ApisPackagePath = "github.com/tagesjump/provider-upjet-yc/apis/lb/v1alpha1"
+	// ConfigPath is the golang path for this package.
+	ConfigPath = "github.com/tagesjump/provider-upjet-yc/config/lb"
+)
+
+// Configure adds configurations for lb group.
+func Configure(p *ujconfig.Provider) {
+	p.AddResourceConfigurator("yandex_lb_target_group", func(r *ujconfig.Resource) {
+		r.References["target.subnet_id"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
+		}
+	})
+	p.AddResourceConfigurator("yandex_lb_network_load_balancer", func(r *ujconfig.Resource) {
+		r.References["attached_target_group.target_group_id"] = ujconfig.Reference{
+			Type: "TargetGroup",
+		}
+		r.References["listener.internal_address_spec.subnet_id"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
+		}
+	})
+}
