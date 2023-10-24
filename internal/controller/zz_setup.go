@@ -50,6 +50,7 @@ import (
 	nodegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/nodegroup"
 	networkloadbalancer "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/networkloadbalancer"
 	targetgrouplb "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/targetgroup"
+	group "github.com/tagesjump/provider-upjet-yc/internal/controller/logging/group"
 	clickhousecluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/clickhousecluster"
 	elasticsearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/elasticsearchcluster"
 	greenplumcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/greenplumcluster"
@@ -66,7 +67,7 @@ import (
 	postgresqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqluser"
 	rediscluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/rediscluster"
 	sqlservercluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/sqlservercluster"
-	group "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
+	grouporganizationmanager "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
 	groupiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupiammember"
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
 	organizationiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/organizationiambinding"
@@ -138,6 +139,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		nodegroup.Setup,
 		networkloadbalancer.Setup,
 		targetgrouplb.Setup,
+		group.Setup,
 		clickhousecluster.Setup,
 		elasticsearchcluster.Setup,
 		greenplumcluster.Setup,
@@ -154,7 +156,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		postgresqluser.Setup,
 		rediscluster.Setup,
 		sqlservercluster.Setup,
-		group.Setup,
+		grouporganizationmanager.Setup,
 		groupiammember.Setup,
 		groupmembership.Setup,
 		organizationiambinding.Setup,
