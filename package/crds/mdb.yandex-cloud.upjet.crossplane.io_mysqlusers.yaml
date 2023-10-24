@@ -11,7 +11,7 @@ spec:
     categories:
     - crossplane
     - managed
-    - yandex-cloud.upjet
+    - yandex-cloud
     kind: MySQLUser
     listKind: MySQLUserList
     plural: mysqlusers

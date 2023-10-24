@@ -22,7 +22,7 @@ import (
 )
 
 const (
-	resourcePrefix = "yandex-cloud.upjet"
+	resourcePrefix = "yandex-cloud"
 	modulePath     = "github.com/tagesjump/provider-upjet-yc"
 )
 
