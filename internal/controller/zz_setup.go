@@ -73,6 +73,7 @@ import (
 	rediscluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/rediscluster"
 	sqlservercluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/sqlservercluster"
 	queue "github.com/tagesjump/provider-upjet-yc/internal/controller/message/queue"
+	dashboard "github.com/tagesjump/provider-upjet-yc/internal/controller/monitoring/dashboard"
 	grouporganizationmanager "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
 	groupiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupiammember"
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
@@ -175,6 +176,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		rediscluster.Setup,
 		sqlservercluster.Setup,
 		queue.Setup,
+		dashboard.Setup,
 		grouporganizationmanager.Setup,
 		groupiammember.Setup,
 		groupmembership.Setup,

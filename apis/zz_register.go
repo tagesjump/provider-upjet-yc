@@ -23,6 +23,7 @@ import (
 	v1alpha1logging "github.com/tagesjump/provider-upjet-yc/apis/logging/v1alpha1"
 	v1alpha1mdb "github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1"
 	v1alpha1message "github.com/tagesjump/provider-upjet-yc/apis/message/v1alpha1"
+	v1alpha1monitoring "github.com/tagesjump/provider-upjet-yc/apis/monitoring/v1alpha1"
 	v1alpha1organizationmanager "github.com/tagesjump/provider-upjet-yc/apis/organizationmanager/v1alpha1"
 	v1alpha1resourcemanager "github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1"
 	v1alpha1storage "github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1"
@@ -48,6 +49,7 @@ func init() {
 		v1alpha1logging.SchemeBuilder.AddToScheme,
 		v1alpha1mdb.SchemeBuilder.AddToScheme,
 		v1alpha1message.SchemeBuilder.AddToScheme,
+		v1alpha1monitoring.SchemeBuilder.AddToScheme,
 		v1alpha1organizationmanager.SchemeBuilder.AddToScheme,
 		v1alpha1resourcemanager.SchemeBuilder.AddToScheme,
 		v1alpha1storage.SchemeBuilder.AddToScheme,

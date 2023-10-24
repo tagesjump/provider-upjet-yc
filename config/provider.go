@@ -10,6 +10,7 @@ import (
 
 	"github.com/tagesjump/provider-upjet-yc/config/datatransfer"
 	"github.com/tagesjump/provider-upjet-yc/config/lockbox"
+	"github.com/tagesjump/provider-upjet-yc/config/monitoring"
 	"github.com/tagesjump/provider-upjet-yc/config/ydb"
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
@@ -71,6 +72,7 @@ func GetProvider() *ujconfig.Provider {
 		ydb.Configure,
 		datatransfer.Configure,
 		lockbox.Configure,
+		monitoring.Configure,
 	} {
 		configure(pc)
 	}
