@@ -9,9 +9,9 @@ import (
 
 const (
 	// ApisPackagePath is the golang path for this package.
-	ApisPackagePath = "github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1"
+	ApisPackagePath = "github.com/tagesjump/provider-upjet-yc/apis/alb/v1alpha1"
 	// ConfigPath is the golang path for this package.
-	ConfigPath = "github.com/tagesjump/provider-upjet-yc/config/kms"
+	ConfigPath = "github.com/tagesjump/provider-upjet-yc/config/alb"
 )
 
 // Configure adds configurations for alb group.

@@ -77,6 +77,8 @@ import (
 	folderiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiambinding"
 	folderiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiammember"
 	folderiampolicy "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiampolicy"
+	bucket "github.com/tagesjump/provider-upjet-yc/internal/controller/storage/bucket"
+	object "github.com/tagesjump/provider-upjet-yc/internal/controller/storage/object"
 	address "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/address"
 	defaultsecuritygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/defaultsecuritygroup"
 	gateway "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/gateway"
@@ -159,6 +161,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		folderiambinding.Setup,
 		folderiammember.Setup,
 		folderiampolicy.Setup,
+		bucket.Setup,
+		object.Setup,
 		address.Setup,
 		defaultsecuritygroup.Setup,
 		gateway.Setup,

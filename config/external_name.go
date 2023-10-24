@@ -91,6 +91,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_alb_load_balancer":                                config.IdentifierFromProvider,
 	"yandex_alb_target_group":                                 config.IdentifierFromProvider,
 	"yandex_alb_virtual_host":                                 config.IdentifierFromProvider,
+	"yandex_storage_bucket":                                   config.IdentifierFromProvider,
+	"yandex_storage_object":                                   config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
