@@ -102,7 +102,7 @@ type ObjectParameters struct {
 
 	// The access key to use when applying changes. If omitted, storage_access_key specified in config is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccountStaticAccessKey
-	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/storage.ExtractAccessKey()
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractAccessKey()
 	// +kubebuilder:validation:Optional
 	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
 

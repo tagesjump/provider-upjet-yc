@@ -1,0 +1,574 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.13.0
+  name: queues.message.yandex-cloud.upjet.crossplane.io
+spec:
+  group: message.yandex-cloud.upjet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - yandex-cloud
+    kind: Queue
+    listKind: QueueList
+    plural: queues
+    singular: queue
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Queue is the Schema for the Queues API. Allows management of
+          a Yandex.Cloud Message Queue.
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: QueueSpec defines the desired state of Queue
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: 'DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  accessKey:
+                    description: The access key to use when applying changes. If omitted,
+                      ymq_access_key specified in provider config is used. For more
+                      information see documentation.
+                    type: string
+                  accessKeyRef:
+                    description: Reference to a ServiceAccountStaticAccessKey in iam
+                      to populate accessKey.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  accessKeySelector:
+                    description: Selector for a ServiceAccountStaticAccessKey in iam
+                      to populate accessKey.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  contentBasedDeduplication:
+                    description: Enables content-based deduplication. Can be used
+                      only if queue is FIFO.
+                    type: boolean
+                  delaySeconds:
+                    description: 'Number of seconds to delay the message from being
+                      available for processing. Valid values: from 0 to 900 seconds
+                      (15 minutes). Default: 0.'
+                    type: number
+                  fifoQueue:
+                    description: Is this queue FIFO. If this parameter is not used,
+                      a standard queue is created. You cannot change the parameter
+                      value for a created queue.
+                    type: boolean
+                  maxMessageSize:
+                    description: 'Maximum message size in bytes. Valid values: from
+                      1024 bytes (1 KB) to 262144 bytes (256 KB). Default: 262144
+                      (256 KB). For more information see documentation.'
+                    type: number
+                  messageRetentionSeconds:
+                    description: 'The length of time in seconds to retain a message.
+                      Valid values: from 60 seconds (1 minute) to 1209600 seconds
+                      (14 days). Default: 345600 (4 days). For more information see
+                      documentation.'
+                    type: number
+                  name:
+                    description: Queue name. The maximum length is 80 characters.
+                      You can use numbers, letters, underscores, and hyphens in the
+                      name. The name of a FIFO queue must end with the .fifo suffix.
+                      If not specified, random name will be generated. Conflicts with
+                      name_prefix. For more information see documentation.
+                    type: string
+                  namePrefix:
+                    description: Generates random name with the specified prefix.
+                      Conflicts with name.
+                    type: string
+                  receiveWaitTimeSeconds:
+                    description: 'Wait time for the ReceiveMessage method (for long
+                      polling), in seconds. Valid values: from 0 to 20 seconds. Default:
+                      0. For more information about long polling see documentation.'
+                    type: number
+                  redrivePolicy:
+                    description: 'Message redrive policy in Dead Letter Queue. The
+                      source queue and DLQ must be the same type: for FIFO queues,
+                      the DLQ must also be a FIFO queue. For more information about
+                      redrive policy see documentation. Also you can use example in
+                      this page.'
+                    type: string
+                  regionId:
+                    description: ID of the region where the message queue is located
+                      at. The default is 'ru-central1'.
+                    type: string
+                  secretKeySecretRef:
+                    description: The secret key to use when applying changes. If omitted,
+                      ymq_secret_key specified in provider config is used. For more
+                      information see documentation.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  visibilityTimeoutSeconds:
+                    description: 'Visibility timeout for messages in a queue, specified
+                      in seconds. Valid values: from 0 to 43200 seconds (12 hours).
+                      Default: 30.'
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  contentBasedDeduplication:
+                    description: Enables content-based deduplication. Can be used
+                      only if queue is FIFO.
+                    type: boolean
+                  delaySeconds:
+                    description: 'Number of seconds to delay the message from being
+                      available for processing. Valid values: from 0 to 900 seconds
+                      (15 minutes). Default: 0.'
+                    type: number
+                  fifoQueue:
+                    description: Is this queue FIFO. If this parameter is not used,
+                      a standard queue is created. You cannot change the parameter
+                      value for a created queue.
+                    type: boolean
+                  maxMessageSize:
+                    description: 'Maximum message size in bytes. Valid values: from
+                      1024 bytes (1 KB) to 262144 bytes (256 KB). Default: 262144
+                      (256 KB). For more information see documentation.'
+                    type: number
+                  messageRetentionSeconds:
+                    description: 'The length of time in seconds to retain a message.
+                      Valid values: from 60 seconds (1 minute) to 1209600 seconds
+                      (14 days). Default: 345600 (4 days). For more information see
+                      documentation.'
+                    type: number
+                  name:
+                    description: Queue name. The maximum length is 80 characters.
+                      You can use numbers, letters, underscores, and hyphens in the
+                      name. The name of a FIFO queue must end with the .fifo suffix.
+                      If not specified, random name will be generated. Conflicts with
+                      name_prefix. For more information see documentation.
+                    type: string
+                  namePrefix:
+                    description: Generates random name with the specified prefix.
+                      Conflicts with name.
+                    type: string
+                  receiveWaitTimeSeconds:
+                    description: 'Wait time for the ReceiveMessage method (for long
+                      polling), in seconds. Valid values: from 0 to 20 seconds. Default:
+                      0. For more information about long polling see documentation.'
+                    type: number
+                  redrivePolicy:
+                    description: 'Message redrive policy in Dead Letter Queue. The
+                      source queue and DLQ must be the same type: for FIFO queues,
+                      the DLQ must also be a FIFO queue. For more information about
+                      redrive policy see documentation. Also you can use example in
+                      this page.'
+                    type: string
+                  regionId:
+                    description: ID of the region where the message queue is located
+                      at. The default is 'ru-central1'.
+                    type: string
+                  visibilityTimeoutSeconds:
+                    description: 'Visibility timeout for messages in a queue, specified
+                      in seconds. Valid values: from 0 to 43200 seconds (12 hours).
+                      Default: 30.'
+                    type: number
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: QueueStatus defines the observed state of Queue.
+            properties:
+              atProvider:
+                properties:
+                  accessKey:
+                    description: The access key to use when applying changes. If omitted,
+                      ymq_access_key specified in provider config is used. For more
+                      information see documentation.
+                    type: string
+                  arn:
+                    description: ARN of the Yandex Message Queue. It is used for setting
+                      up a redrive policy. See documentation.
+                    type: string
+                  contentBasedDeduplication:
+                    description: Enables content-based deduplication. Can be used
+                      only if queue is FIFO.
+                    type: boolean
+                  delaySeconds:
+                    description: 'Number of seconds to delay the message from being
+                      available for processing. Valid values: from 0 to 900 seconds
+                      (15 minutes). Default: 0.'
+                    type: number
+                  fifoQueue:
+                    description: Is this queue FIFO. If this parameter is not used,
+                      a standard queue is created. You cannot change the parameter
+                      value for a created queue.
+                    type: boolean
+                  id:
+                    description: URL of the Yandex Message Queue.
+                    type: string
+                  maxMessageSize:
+                    description: 'Maximum message size in bytes. Valid values: from
+                      1024 bytes (1 KB) to 262144 bytes (256 KB). Default: 262144
+                      (256 KB). For more information see documentation.'
+                    type: number
+                  messageRetentionSeconds:
+                    description: 'The length of time in seconds to retain a message.
+                      Valid values: from 60 seconds (1 minute) to 1209600 seconds
+                      (14 days). Default: 345600 (4 days). For more information see
+                      documentation.'
+                    type: number
+                  name:
+                    description: Queue name. The maximum length is 80 characters.
+                      You can use numbers, letters, underscores, and hyphens in the
+                      name. The name of a FIFO queue must end with the .fifo suffix.
+                      If not specified, random name will be generated. Conflicts with
+                      name_prefix. For more information see documentation.
+                    type: string
+                  namePrefix:
+                    description: Generates random name with the specified prefix.
+                      Conflicts with name.
+                    type: string
+                  receiveWaitTimeSeconds:
+                    description: 'Wait time for the ReceiveMessage method (for long
+                      polling), in seconds. Valid values: from 0 to 20 seconds. Default:
+                      0. For more information about long polling see documentation.'
+                    type: number
+                  redrivePolicy:
+                    description: 'Message redrive policy in Dead Letter Queue. The
+                      source queue and DLQ must be the same type: for FIFO queues,
+                      the DLQ must also be a FIFO queue. For more information about
+                      redrive policy see documentation. Also you can use example in
+                      this page.'
+                    type: string
+                  regionId:
+                    description: ID of the region where the message queue is located
+                      at. The default is 'ru-central1'.
+                    type: string
+                  visibilityTimeoutSeconds:
+                    description: 'Visibility timeout for messages in a queue, specified
+                      in seconds. Valid values: from 0 to 43200 seconds (12 hours).
+                      Default: 30.'
+                    type: number
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

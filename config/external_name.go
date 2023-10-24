@@ -98,6 +98,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_dns_recordset":                                    config.IdentifierFromProvider,
 	"yandex_dns_zone":                                         config.IdentifierFromProvider,
 	"yandex_logging_group":                                    config.IdentifierFromProvider,
+	"yandex_message_queue":                                    config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

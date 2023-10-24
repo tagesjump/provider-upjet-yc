@@ -67,6 +67,7 @@ import (
 	postgresqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqluser"
 	rediscluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/rediscluster"
 	sqlservercluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/sqlservercluster"
+	queue "github.com/tagesjump/provider-upjet-yc/internal/controller/message/queue"
 	grouporganizationmanager "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/group"
 	groupiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupiammember"
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
@@ -156,6 +157,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		postgresqluser.Setup,
 		rediscluster.Setup,
 		sqlservercluster.Setup,
+		queue.Setup,
 		grouporganizationmanager.Setup,
 		groupiammember.Setup,
 		groupmembership.Setup,

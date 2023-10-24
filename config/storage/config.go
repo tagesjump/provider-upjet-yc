@@ -16,12 +16,9 @@ package storage
 import (
 	"fmt"
 
-	xpref "github.com/crossplane/crossplane-runtime/pkg/reference"
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-
 	ujconfig "github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/resource"
 
+	"github.com/tagesjump/provider-upjet-yc/config/common"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
 )
 
@@ -30,42 +27,20 @@ const (
 	ApisPackagePath = "github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1"
 	// ConfigPath is the golang path for this package.
 	ConfigPath = "github.com/tagesjump/provider-upjet-yc/config/storage"
-	// ExtractPublicKeyFuncPath holds the Azure resource ID extractor func name
-	ExtractPublicKeyFuncPath = ConfigPath + ".ExtractAccessKey()"
 )
-
-// ExtractAccessKey extracts the value of `spec.atProvider.accessKey`
-// from a Terraformed resource. If mr is not a Terraformed
-// resource, returns an empty string.
-func ExtractAccessKey() xpref.ExtractValueFn {
-	return func(mr xpresource.Managed) string {
-		tr, ok := mr.(resource.Terraformed)
-		if !ok {
-			return ""
-		}
-		o, err := tr.GetObservation()
-		if err != nil {
-			return ""
-		}
-		if k := o["access_key"]; k != nil {
-			return k.(string)
-		}
-		return ""
-	}
-}
 
 // Configure adds configurations for storage group.
 func Configure(p *ujconfig.Provider) {
 	p.AddResourceConfigurator("yandex_storage_bucket", func(r *ujconfig.Resource) {
 		r.References["access_key"] = ujconfig.Reference{
 			Type:      fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccountStaticAccessKey"),
-			Extractor: ExtractPublicKeyFuncPath,
+			Extractor: common.ExtractPublicKeyFuncPath,
 		}
 	})
 	p.AddResourceConfigurator("yandex_storage_object", func(r *ujconfig.Resource) {
 		r.References["access_key"] = ujconfig.Reference{
 			Type:      fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccountStaticAccessKey"),
-			Extractor: ExtractPublicKeyFuncPath,
+			Extractor: common.ExtractPublicKeyFuncPath,
 		}
 		r.References["bucket"] = ujconfig.Reference{
 			Type: "Bucket",

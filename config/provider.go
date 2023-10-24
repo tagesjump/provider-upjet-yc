@@ -20,6 +20,7 @@ import (
 	"github.com/tagesjump/provider-upjet-yc/config/lb"
 	"github.com/tagesjump/provider-upjet-yc/config/logging"
 	"github.com/tagesjump/provider-upjet-yc/config/mdb"
+	"github.com/tagesjump/provider-upjet-yc/config/message"
 	"github.com/tagesjump/provider-upjet-yc/config/organizationmanager"
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
 	"github.com/tagesjump/provider-upjet-yc/config/storage"
@@ -63,6 +64,7 @@ func GetProvider() *ujconfig.Provider {
 		lb.Configure,
 		dns.Configure,
 		logging.Configure,
+		message.Configure,
 	} {
 		configure(pc)
 	}

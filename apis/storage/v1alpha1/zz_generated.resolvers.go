@@ -11,7 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha11 "github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1"
-	storage "github.com/tagesjump/provider-upjet-yc/config/storage"
+	common "github.com/tagesjump/provider-upjet-yc/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -24,7 +24,7 @@ func (mg *Bucket) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccessKey),
-		Extract:      storage.ExtractAccessKey(),
+		Extract:      common.ExtractAccessKey(),
 		Reference:    mg.Spec.ForProvider.AccessKeyRef,
 		Selector:     mg.Spec.ForProvider.AccessKeySelector,
 		To: reference.To{
@@ -66,7 +66,7 @@ func (mg *Object) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccessKey),
-		Extract:      storage.ExtractAccessKey(),
+		Extract:      common.ExtractAccessKey(),
 		Reference:    mg.Spec.ForProvider.AccessKeyRef,
 		Selector:     mg.Spec.ForProvider.AccessKeySelector,
 		To: reference.To{
