@@ -10,6 +10,7 @@ import (
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
 
+	"github.com/tagesjump/provider-upjet-yc/config/alb"
 	"github.com/tagesjump/provider-upjet-yc/config/compute"
 	"github.com/tagesjump/provider-upjet-yc/config/container"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
@@ -53,6 +54,7 @@ func GetProvider() *ujconfig.Provider {
 		mdb.Configure,
 		compute.Configure,
 		container.Configure,
+		alb.Configure,
 	} {
 		configure(pc)
 	}

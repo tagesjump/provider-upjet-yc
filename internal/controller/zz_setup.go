@@ -9,6 +9,11 @@ import (
 
 	"github.com/upbound/upjet/pkg/controller"
 
+	backendgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/backendgroup"
+	httprouter "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/httprouter"
+	loadbalancer "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/loadbalancer"
+	targetgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/targetgroup"
+	virtualhost "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/virtualhost"
 	disk "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/disk"
 	diskplacementgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/diskplacementgroup"
 	filesystem "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/filesystem"
@@ -86,6 +91,11 @@ import (
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
+		backendgroup.Setup,
+		httprouter.Setup,
+		loadbalancer.Setup,
+		targetgroup.Setup,
+		virtualhost.Setup,
 		disk.Setup,
 		diskplacementgroup.Setup,
 		filesystem.Setup,

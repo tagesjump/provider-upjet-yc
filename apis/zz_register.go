@@ -10,7 +10,8 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/compute/v1alpha1"
+	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/alb/v1alpha1"
+	v1alpha1compute "github.com/tagesjump/provider-upjet-yc/apis/compute/v1alpha1"
 	v1alpha1container "github.com/tagesjump/provider-upjet-yc/apis/container/v1alpha1"
 	v1alpha1iam "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha1kms "github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1"
@@ -27,6 +28,7 @@ func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1compute.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,
 		v1alpha1kms.SchemeBuilder.AddToScheme,
