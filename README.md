@@ -8,7 +8,7 @@ YandexCloud API.
 ## Getting Started
 
 Install the provider by using the following command after changing the image tag
-to the [latest release](https://marketplace.upbound.io/providers/yandex-cloud/provider-upjet-yc):
+to the [latest release](https://marketplace.upbound.io/providers/tages/provider-upjet-yc):
 ```
 up ctp provider install xpkg.upbound.io/tages/provider-upjet-yc:v0.1.0
 ```
