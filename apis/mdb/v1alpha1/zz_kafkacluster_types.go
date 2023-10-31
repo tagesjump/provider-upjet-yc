@@ -136,7 +136,6 @@ type KafkaClusterConfigInitParameters struct {
 	// Enables managed schema registry on cluster. The default is false.
 	SchemaRegistry *bool `json:"schemaRegistry,omitempty" tf:"schema_registry,omitempty"`
 
-	// Allows to use Kafka AdminAPI to manage topics. The default is false.
 	UnmanagedTopics *bool `json:"unmanagedTopics,omitempty" tf:"unmanaged_topics,omitempty"`
 
 	// Version of the Kafka server software.
@@ -166,7 +165,6 @@ type KafkaClusterConfigObservation struct {
 	// Enables managed schema registry on cluster. The default is false.
 	SchemaRegistry *bool `json:"schemaRegistry,omitempty" tf:"schema_registry,omitempty"`
 
-	// Allows to use Kafka AdminAPI to manage topics. The default is false.
 	UnmanagedTopics *bool `json:"unmanagedTopics,omitempty" tf:"unmanaged_topics,omitempty"`
 
 	// Version of the Kafka server software.
@@ -201,7 +199,6 @@ type KafkaClusterConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	SchemaRegistry *bool `json:"schemaRegistry,omitempty" tf:"schema_registry,omitempty"`
 
-	// Allows to use Kafka AdminAPI to manage topics. The default is false.
 	// +kubebuilder:validation:Optional
 	UnmanagedTopics *bool `json:"unmanagedTopics,omitempty" tf:"unmanaged_topics,omitempty"`
 

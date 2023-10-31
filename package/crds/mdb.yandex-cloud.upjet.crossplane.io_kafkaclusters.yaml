@@ -174,8 +174,6 @@ spec:
                             The default is false.
                           type: boolean
                         unmanagedTopics:
-                          description: Allows to use Kafka AdminAPI to manage topics.
-                            The default is false.
                           type: boolean
                         version:
                           description: Version of the Kafka server software.
@@ -800,8 +798,6 @@ spec:
                             The default is false.
                           type: boolean
                         unmanagedTopics:
-                          description: Allows to use Kafka AdminAPI to manage topics.
-                            The default is false.
                           type: boolean
                         version:
                           description: Version of the Kafka server software.
@@ -1250,8 +1246,6 @@ spec:
                             The default is false.
                           type: boolean
                         unmanagedTopics:
-                          description: Allows to use Kafka AdminAPI to manage topics.
-                            The default is false.
                           type: boolean
                         version:
                           description: Version of the Kafka server software.

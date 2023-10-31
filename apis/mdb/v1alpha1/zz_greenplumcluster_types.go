@@ -81,6 +81,25 @@ type GreenplumClusterBackupWindowStartParameters struct {
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
+type GreenplumClusterCloudStorageInitParameters struct {
+
+	// Whether to use cloud storage or not.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
+type GreenplumClusterCloudStorageObservation struct {
+
+	// Whether to use cloud storage or not.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
+type GreenplumClusterCloudStorageParameters struct {
+
+	// Whether to use cloud storage or not.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+}
+
 type GreenplumClusterInitParameters struct {
 
 	// Access policy to the Greenplum cluster. The structure is documented below.
@@ -91,6 +110,9 @@ type GreenplumClusterInitParameters struct {
 
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []GreenplumClusterBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
+	CloudStorage []GreenplumClusterCloudStorageInitParameters `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
 	// Inhibits deletion of the cluster.  Can be either true or false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
@@ -191,6 +213,9 @@ type GreenplumClusterObservation struct {
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []GreenplumClusterBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
+	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
+	CloudStorage []GreenplumClusterCloudStorageObservation `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
+
 	// Creation timestamp of the cluster.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
@@ -283,6 +308,10 @@ type GreenplumClusterParameters struct {
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	BackupWindowStart []GreenplumClusterBackupWindowStartParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
+	// +kubebuilder:validation:Optional
+	CloudStorage []GreenplumClusterCloudStorageParameters `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
 	// Inhibits deletion of the cluster.  Can be either true or false.
 	// +kubebuilder:validation:Optional

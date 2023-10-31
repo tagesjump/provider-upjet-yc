@@ -146,6 +146,45 @@ type ConfigResourcesParameters struct {
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
+type DiskSizeAutoscalingInitParameters struct {
+
+	// Limit of disk size after autoscaling.
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingObservation struct {
+
+	// Limit of disk size after autoscaling.
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingParameters struct {
+
+	// Limit of disk size after autoscaling.
+	// +kubebuilder:validation:Optional
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
+
+	// Immediate autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// Maintenance window autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
 type ExtensionInitParameters struct {
 
 	// Name of the PostgreSQL cluster. Provided by the client when the cluster is created.
@@ -238,6 +277,9 @@ type PostgresqlClusterConfigInitParameters struct {
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []ConfigBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
+	// Cluster disk size autoscaling settings. The structure is documented below.
+	DiskSizeAutoscaling []DiskSizeAutoscalingInitParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	PerformanceDiagnostics []ConfigPerformanceDiagnosticsInitParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
 
@@ -267,6 +309,9 @@ type PostgresqlClusterConfigObservation struct {
 
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []ConfigBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// Cluster disk size autoscaling settings. The structure is documented below.
+	DiskSizeAutoscaling []DiskSizeAutoscalingObservation `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
 
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	PerformanceDiagnostics []ConfigPerformanceDiagnosticsObservation `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
@@ -301,6 +346,10 @@ type PostgresqlClusterConfigParameters struct {
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	BackupWindowStart []ConfigBackupWindowStartParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// Cluster disk size autoscaling settings. The structure is documented below.
+	// +kubebuilder:validation:Optional
+	DiskSizeAutoscaling []DiskSizeAutoscalingParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
 
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	// +kubebuilder:validation:Optional

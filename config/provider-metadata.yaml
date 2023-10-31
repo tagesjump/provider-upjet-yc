@@ -1387,8 +1387,10 @@ resources:
                 }
         argumentDocs:
             allocation_policy: '- (Required) The allocation policy of the instance group by zone and region. The structure is documented below.'
+            allocation_policy.instance_tags_pool: '- (Optional) Array of availability zone IDs with list of instance tags.'
             allocation_policy.zones: '- (Required) A list of availability zones.'
             application_load_balancer: '- (Optional) Application Load balancing (L7) specifications. The structure is documented below.'
+            application_load_balancer.ignore_health_checks: '- (Optional) Do not wait load balancer health checks.'
             application_load_balancer.max_opening_traffic_duration: '- (Optional) Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.'
             application_load_balancer.target_group_description: '- (Optional) A description of the target group.'
             application_load_balancer.target_group_labels: '- (Optional) A set of key/value label pairs.'
@@ -1472,6 +1474,8 @@ resources:
             initialize_params.size: '- (Optional) The size of the disk in GB.'
             initialize_params.snapshot_id: '- (Optional) The snapshot to initialize this disk from.'
             initialize_params.type: '- (Optional) The disk type.'
+            instance_tags_pool.tags: '- (Required) List of tags for instances in zone.'
+            instance_tags_pool.zone: '- (Required) Availability zone.'
             instance_template: '- (Required) The template for creating new instances. The structure is documented below.'
             instance_template.boot_disk: '- (Required) Boot disk specifications for the instance. The structure is documented below.'
             instance_template.description: '- (Optional) A description of the instance.'
@@ -1531,6 +1535,7 @@ resources:
             load_balancer: '- (Optional) Load balancing specifications. The structure is documented below.'
             load_balancer.0.status_message: '- The status message of the target group.'
             load_balancer.0.target_group_id: '- The ID of the target group.'
+            load_balancer.ignore_health_checks: '- (Optional) Do not wait load balancer health checks.'
             load_balancer.max_opening_traffic_duration: '- (Optional) Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.'
             load_balancer.target_group_description: '- (Optional) A description of the target group.'
             load_balancer.target_group_labels: '- (Optional) A set of key/value label pairs.'
@@ -2107,6 +2112,146 @@ resources:
             subcluster_spec.subnet_id: '- (Required) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.'
             ui_proxy: '- (Optional) Whether to enable UI Proxy feature.'
             zone_id: '- (Optional) ID of the availability zone to create cluster in. If it is not provided, the default provider zone is used.'
+        importStatements: []
+    yandex_datasphere_community:
+        subCategory: ""
+        description: Allows management of a Yandex.Cloud Datasphere Community.
+        name: yandex_datasphere_community
+        title: yandex_datasphere_community
+        examples:
+            - name: my-community
+              manifest: |-
+                {
+                  "billing_account_id": "example-organization-id",
+                  "description": "Description of community",
+                  "labels": {
+                    "foo": "bar"
+                  },
+                  "name": "example-datasphere-community",
+                  "organization_id": "example-organization-id"
+                }
+        argumentDocs:
+            billing_account_id: '- (Optional) Billing account ID to associated with community'
+            create: '- Default is 1 minute.'
+            created_at: '- Creation timestamp of the Yandex Datasphere Community'
+            created_by: '- Creator account ID of the Yandex Datasphere Community'
+            delete: '- Default is 1 minute.'
+            description: '-  (Optional) Datasphere Community description.'
+            id: '- Datasphere Community unique identifier'
+            labels: '- (Optional) A set of key/value label pairs to assign to the Datasphere Community.'
+            name: '- (Required) Name of the Datasphere Community.'
+            organization_id: '- (Required) Organization ID where community would be created'
+            update: '- Default is 1 minute.'
+        importStatements: []
+    yandex_datasphere_community_iam_binding:
+        subCategory: ""
+        description: Allows management of a single IAM binding for a Yandex Datasphere Community.
+        name: yandex_datasphere_community_iam_binding
+        title: yandex_datasphere_community_iam_binding
+        examples:
+            - name: community-iam
+              manifest: |-
+                {
+                  "community_id": "your-datasphere-community-id",
+                  "members": [
+                    "system:allUsers"
+                  ],
+                  "role": "datasphere.communities.developer"
+                }
+        argumentDocs:
+            community_id: '- (Required) The Yandex Cloud Datasphere Community ID to apply a binding to.'
+            members: |-
+                - (Required) Identities that will be granted the privilege in role.
+                Each entry can have one of the following values:
+            role: '- (Required) The role that should be applied. See roles'
+        importStatements: []
+    yandex_datasphere_project:
+        subCategory: ""
+        description: Allows management of a Yandex.Cloud Datasphere project.
+        name: yandex_datasphere_project
+        title: yandex_datasphere_project
+        examples:
+            - name: my-project
+              manifest: |-
+                {
+                  "community_id": "${yandex_datasphere_community.my-community.id}",
+                  "description": "Datasphere Project description",
+                  "labels": {
+                    "foo": "bar"
+                  },
+                  "limits": {
+                    "balance": 10,
+                    "max_units_per_execution": 10,
+                    "max_units_per_hour": 10
+                  },
+                  "name": "example-datasphere-project",
+                  "settings": {
+                    "commit_mode": "AUTO",
+                    "data_proc_cluster_id": "foo-data-proc-cluster-id",
+                    "default_folder_id": "foo-folder-id",
+                    "ide": "JUPYTER_LAB",
+                    "security_group_ids": [
+                      "${yandex_vpc_security_group.my-security-group.id}"
+                    ],
+                    "service_account_id": "${yandex_iam_service_account.my-account.id}",
+                    "stale_exec_timeout_mode": "ONE_HOUR",
+                    "subnet_id": "${yandex_vpc_subnet.my-subnet.id}"
+                  }
+                }
+              references:
+                community_id: yandex_datasphere_community.my-community.id
+        argumentDocs:
+            AUTO: ': Commit happens periodically. Also, automatic saving of state occurs when switching to another type of computing resource.'
+            JUPYTER_LAB: ': Project running on JupyterLab IDE.'
+            NO_TIMEOUT: ': Setting to never automatically stop stale executions.'
+            ONE_HOUR: ': Setting to automatically stop stale execution after one hour with low consumption.'
+            STANDARD: ': Commit happens after the execution of a cell or group of cells or after completion with an error.'
+            THREE_HOURS: ': Setting to automatically stop stale execution after three hours with low consumption.'
+            community_id: '- (Required) Community ID where project would be created'
+            create: '- Default is 1 minute.'
+            created_at: '- Creation timestamp of the Yandex Datasphere Project.'
+            created_by: '- Creator account ID of the Yandex Datasphere Project.'
+            delete: '- Default is 1 minute.'
+            description: '- (Optional) Datasphere project description.'
+            id: '- Datasphere Project unique identifier'
+            labels: '- (Optional) A set of key/value label pairs to assign to the Datasphere Project.'
+            limits: '- (Optional) Datasphere Project limits configuration. The structure is documented below.'
+            limits.balance: '- (Optional) The number of units available to the project.'
+            limits.max_units_per_execution: '- (Optional) The number of units that can be spent on the one execution.'
+            limits.max_units_per_hour: '- (Optional) The number of units that can be spent per hour.'
+            name: '- (Required) Name of the Datasphere Project.'
+            settings: '- (Optional) Datasphere Project settings configuration. The structure is documented below.'
+            settings.commit_mode: '- (Optional) Commit mode that is assigned to the project.'
+            settings.data_proc_cluster_id: '- (Optional) ID of the DataProc cluster.'
+            settings.default_folder_id: '- (Optional) Default project folder ID.'
+            settings.ide: '- (Optional) Project IDE.'
+            settings.security_group_ids: '- (Optional) List of network interfaces security groups.'
+            settings.service_account_id: '- (Optional) ID of the service account, on whose behalf all operations with clusters will be performed.'
+            settings.stale_exec_timeout_mode: '- (Optional) Timeout to automatically stop stale executions.'
+            settings.subnet_id: '- (Optional) ID of the subnet where the DataProc cluster resides. Currently only subnets created in the availability zone ru-central1-a are supported.'
+            update: '- Default is 1 minute.'
+        importStatements: []
+    yandex_datasphere_project_iam_binding:
+        subCategory: ""
+        description: Allows management of a single IAM binding for a Yandex Datasphere Project.
+        name: yandex_datasphere_project_iam_binding
+        title: yandex_datasphere_project_iam_binding
+        examples:
+            - name: project-iam
+              manifest: |-
+                {
+                  "members": [
+                    "system:allUsers"
+                  ],
+                  "project_id": "your-datasphere-project-id",
+                  "role": "datasphere.community-projects.developer"
+                }
+        argumentDocs:
+            members: |-
+                - (Required) Identities that will be granted the privilege in role.
+                Each entry can have one of the following values:
+            project_id: '- (Required) The Yandex Cloud Datasphere Project ID to apply a binding to.'
+            role: '- (Required) The role that should be applied. See roles'
         importStatements: []
     yandex_datatransfer_endpoint:
         subCategory: ""
@@ -3767,6 +3912,84 @@ resources:
                 All targets in the target group must be connected to the same subnet within a single availability zone.
             update: '- Default is 5 minute.'
         importStatements: []
+    yandex_loadtesting_agent:
+        subCategory: ""
+        description: Manages an Yandex Cloud Load Testing Agent resource.
+        name: yandex_loadtesting_agent
+        title: yandex_loadtesting_agent
+        examples:
+            - name: my-agent
+              manifest: |-
+                {
+                  "compute_instance": [
+                    {
+                      "boot_disk": [
+                        {
+                          "auto_delete": true,
+                          "initialize_params": [
+                            {
+                              "size": 15
+                            }
+                          ]
+                        }
+                      ],
+                      "network_interface": [
+                        {
+                          "subnet_id": "${yandex_vpc_subnet.my-subnet-a.id}"
+                        }
+                      ],
+                      "resources": [
+                        {
+                          "cores": 2,
+                          "memory": 4
+                        }
+                      ],
+                      "service_account_id": "${yandex_iam_service_account.test_account.id}",
+                      "zone_id": "ru-central1-b"
+                    }
+                  ],
+                  "description": "2 core 4 GB RAM agent",
+                  "folder_id": "${data.yandex_resourcemanager_folder.test_folder.id}",
+                  "name": "my-agent"
+                }
+        argumentDocs:
+            boot_disk.auto_delete: '- (Optional) Whether the disk is auto-deleted when the instance is deleted. The default value is true.'
+            boot_disk.device_name: '- (Optional) This value can be used to reference the device under /dev/disk/by-id/.'
+            boot_disk.disk_id: '- (Computed) The ID of created disk.'
+            boot_disk.initialize_params: '- (Required) Parameters for creating a disk alongside the instance. The structure is documented below.'
+            compute_instance: '- (Required) The template for creating new compute instance running load testing agent. The structure is documented below.'
+            compute_instance.boot_disk: '- (Required) Boot disk specifications for the instance. The structure is documented below.'
+            compute_instance.computed_metadata: '- (Computed) The set of metadata key:value pairs assigned to this instance. This includes user custom metadata, and predefined items created by Yandex Cloud Load Testing.'
+            compute_instance.labels: '- (Optional) A set of key/value label pairs to assign to the instance.'
+            compute_instance.metadata: '- (Optional) A set of metadata key/value pairs to make available from within the instance.'
+            compute_instance.network_interface: '- (Required) Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.'
+            compute_instance.resources: '- (Required) Compute resource specifications for the instance. The structure is documented below.'
+            compute_instance.service_account_id: '- (Required) The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.'
+            compute_instance.zone_id: |-
+                - (Optional) The availability zone where the virtual machine will be created. If it is not provided,
+                the default provider folder is used.
+            create: '- Default 30 minutes'
+            delete: '- Default 30 minutes'
+            description: '- (Optional) A description of the load testing agent.'
+            folder_id: '- (Required) The ID of the folder that the resources belong to.'
+            initialize_params.block_size: '- (Optional) Block size of the disk, specified in bytes.'
+            initialize_params.description: '- (Optional) A description of the boot disk.'
+            initialize_params.name: '- (Optional) A name of the boot disk.'
+            initialize_params.size: '- (Optional) The size of the disk in GB. Defaults to 15 GB.'
+            initialize_params.type: '- (Optional) The disk type.'
+            name: '- (Required) The name of the load testing agent. Must be unique within folder.'
+            network_interface.ip_address: '- (Optional) Manual set static IP address.'
+            network_interface.ipv4: '- (Optional) Flag for allocating IPv4 address for the network interface.'
+            network_interface.ipv6: '- (Optional) Flag for allocating IPv6 address for the network interface.'
+            network_interface.ipv6_address: '- (Optional) Manual set static IPv6 address.'
+            network_interface.nat: '- (Optional) Flag for using NAT.'
+            network_interface.nat_ip_address: '- (Optional) A public address that can be used to access the internet over NAT.'
+            network_interface.security_group_ids: '- (Optional) Security group ids for network interface.'
+            network_interface.subnet_id: '- (Required) The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.'
+            resources.core_fraction: '- (Optional) If provided, specifies baseline core performance as a percent.'
+            resources.cores: '- (Optional) The number of CPU cores for the instance. Defaults to 2 cores.'
+            resources.memory: '- (Optional) The memory size in GB. Defaults to 2 GB.'
+        importStatements: []
     yandex_lockbox_secret:
         subCategory: ""
         description: Manages Yandex Cloud Lockbox secret.
@@ -4968,6 +5191,8 @@ resources:
             backup_window_start: '- (Optional) Time to start the daily backup, in the UTC timezone. The structure is documented below.'
             backup_window_start.hours: '- (Optional) The hour at which backup will be started (UTC).'
             backup_window_start.minutes: '- (Optional) The minute at which backup will be started (UTC).'
+            cloud_storage: '- (Optional) Cloud Storage settings of the Greenplum cluster. The structure is documented below.'
+            cloud_storage.enable: '- (Optional) Whether to use cloud storage or not.'
             created_at: '- Creation timestamp of the cluster.'
             deletion_protection: '- (Optional) Inhibits deletion of the cluster.  Can be either true or false.'
             description: '- (Optional) Description of the Greenplum cluster.'
@@ -5060,7 +5285,6 @@ resources:
                         }
                       ],
                       "schema_registry": false,
-                      "unmanaged_topics": false,
                       "version": "2.8",
                       "zones": [
                         "ru-central1-a"
@@ -5160,7 +5384,6 @@ resources:
                         }
                       ],
                       "schema_registry": false,
-                      "unmanaged_topics": false,
                       "version": "2.8",
                       "zones": [
                         "ru-central1-a",
@@ -5253,7 +5476,6 @@ resources:
             config.brokers_count: '- (Optional) Count of brokers per availability zone. The default is 1.'
             config.kafka: '- (Optional) Configuration of the Kafka subcluster. The structure is documented below.'
             config.schema_registry: '- (Optional) Enables managed schema registry on cluster. The default is false.'
-            config.unmanaged_topics: '- (Optional) Allows to use Kafka AdminAPI to manage topics. The default is false.'
             config.version: '- (Required) Version of the Kafka server software.'
             config.zones: '- (Required) List of availability zones.'
             config.zookeeper: '- (Optional) Configuration of the ZooKeeper subcluster. The structure is documented below.'
@@ -5538,7 +5760,6 @@ resources:
                               ]
                             }
                           ],
-                          "unmanaged_topics": true,
                           "version": "2.8",
                           "zones": [
                             "ru-central1-a"
@@ -6804,6 +7025,7 @@ resources:
             config.autofailover: '- (Optional) Configuration setting which enables/disables autofailover in cluster.'
             config.backup_retain_period_days: '- (Optional) The period in days during which backups are stored.'
             config.backup_window_start: '- (Optional) Time to start the daily backup, in the UTC timezone. The structure is documented below.'
+            config.disk_size_autoscaling: '- Cluster disk size autoscaling settings. The structure is documented below.'
             config.performance_diagnostics: '- (Optional) Cluster performance diagnostics settings. The structure is documented below. YC Documentation'
             config.pooler_config: '- (Optional) Configuration of the connection pooler. The structure is documented below.'
             config.postgresql_config: '- (Optional) PostgreSQL cluster config. Detail info in "postresql config" section (documented below).'
@@ -6812,6 +7034,9 @@ resources:
             created_at: '- Timestamp of cluster creation.'
             deletion_protection: '- (Optional) Inhibits deletion of the cluster.  Can be either true or false.'
             description: '- (Optional) Description of the PostgreSQL cluster.'
+            disk_size_autoscaling.disk_size_limit: '- Limit of disk size after autoscaling.'
+            disk_size_autoscaling.emergency_usage_threshold: '- Immediate autoscaling disk usage (percent).'
+            disk_size_autoscaling.planned_usage_threshold: '- Maintenance window autoscaling disk usage (percent).'
             environment: '- (Required) Deployment environment of the PostgreSQL cluster.'
             folder_id: '- (Optional) The ID of the folder that the resource belongs to. If it is unset, the default provider folder_id is used for create.'
             health: '- Aggregated health of the cluster.'

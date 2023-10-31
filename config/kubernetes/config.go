@@ -33,6 +33,9 @@ func Configure(p *ujconfig.Provider) {
 		r.References["master.regional.location.subnet_id"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
 		}
+		r.References["master.master_location.subnet_id"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
+		}
 		r.References["master.zonal.subnet_id"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
 		}

@@ -72,6 +72,21 @@ spec:
                       and region. The structure is documented below.
                     items:
                       properties:
+                        instanceTagsPool:
+                          description: Array of availability zone IDs with list of
+                            instance tags.
+                          items:
+                            properties:
+                              tags:
+                                description: List of tags for instances in zone.
+                                items:
+                                  type: string
+                                type: array
+                              zone:
+                                description: Availability zone.
+                                type: string
+                            type: object
+                          type: array
                         zones:
                           description: A list of availability zones.
                           items:
@@ -84,6 +99,9 @@ spec:
                       structure is documented below.
                     items:
                       properties:
+                        ignoreHealthChecks:
+                          description: Do not wait load balancer health checks.
+                          type: boolean
                         maxOpeningTrafficDuration:
                           description: Timeout for waiting for the VM to be checked
                             by the load balancer. If the timeout is exceeded, the
@@ -933,6 +951,9 @@ spec:
                       below.
                     items:
                       properties:
+                        ignoreHealthChecks:
+                          description: Do not wait load balancer health checks.
+                          type: boolean
                         maxOpeningTrafficDuration:
                           description: Timeout for waiting for the VM to be checked
                             by the load balancer. If the timeout is exceeded, the
@@ -1250,6 +1271,21 @@ spec:
                       and region. The structure is documented below.
                     items:
                       properties:
+                        instanceTagsPool:
+                          description: Array of availability zone IDs with list of
+                            instance tags.
+                          items:
+                            properties:
+                              tags:
+                                description: List of tags for instances in zone.
+                                items:
+                                  type: string
+                                type: array
+                              zone:
+                                description: Availability zone.
+                                type: string
+                            type: object
+                          type: array
                         zones:
                           description: A list of availability zones.
                           items:
@@ -1262,6 +1298,9 @@ spec:
                       structure is documented below.
                     items:
                       properties:
+                        ignoreHealthChecks:
+                          description: Do not wait load balancer health checks.
+                          type: boolean
                         maxOpeningTrafficDuration:
                           description: Timeout for waiting for the VM to be checked
                             by the load balancer. If the timeout is exceeded, the
@@ -1681,6 +1720,9 @@ spec:
                       below.
                     items:
                       properties:
+                        ignoreHealthChecks:
+                          description: Do not wait load balancer health checks.
+                          type: boolean
                         maxOpeningTrafficDuration:
                           description: Timeout for waiting for the VM to be checked
                             by the load balancer. If the timeout is exceeded, the
@@ -2089,6 +2131,21 @@ spec:
                       and region. The structure is documented below.
                     items:
                       properties:
+                        instanceTagsPool:
+                          description: Array of availability zone IDs with list of
+                            instance tags.
+                          items:
+                            properties:
+                              tags:
+                                description: List of tags for instances in zone.
+                                items:
+                                  type: string
+                                type: array
+                              zone:
+                                description: Availability zone.
+                                type: string
+                            type: object
+                          type: array
                         zones:
                           description: A list of availability zones.
                           items:
@@ -2101,6 +2158,9 @@ spec:
                       structure is documented below.
                     items:
                       properties:
+                        ignoreHealthChecks:
+                          description: Do not wait load balancer health checks.
+                          type: boolean
                         maxOpeningTrafficDuration:
                           description: Timeout for waiting for the VM to be checked
                             by the load balancer. If the timeout is exceeded, the
@@ -2551,6 +2611,8 @@ spec:
                         instanceId:
                           description: The ID of the instance.
                           type: string
+                        instanceTag:
+                          type: string
                         name:
                           description: The name of the managed instance.
                           type: string
@@ -2623,6 +2685,9 @@ spec:
                       below.
                     items:
                       properties:
+                        ignoreHealthChecks:
+                          description: Do not wait load balancer health checks.
+                          type: boolean
                         maxOpeningTrafficDuration:
                           description: Timeout for waiting for the VM to be checked
                             by the load balancer. If the timeout is exceeded, the

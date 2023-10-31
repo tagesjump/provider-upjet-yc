@@ -103,6 +103,16 @@ spec:
                           type: number
                       type: object
                     type: array
+                  cloudStorage:
+                    description: Cloud Storage settings of the Greenplum cluster.
+                      The structure is documented below.
+                    items:
+                      properties:
+                        enable:
+                          description: Whether to use cloud storage or not.
+                          type: boolean
+                      type: object
+                    type: array
                   deletionProtection:
                     description: Inhibits deletion of the cluster.  Can be either
                       true or false.
@@ -616,6 +626,16 @@ spec:
                           type: number
                       type: object
                     type: array
+                  cloudStorage:
+                    description: Cloud Storage settings of the Greenplum cluster.
+                      The structure is documented below.
+                    items:
+                      properties:
+                        enable:
+                          description: Whether to use cloud storage or not.
+                          type: boolean
+                      type: object
+                    type: array
                   deletionProtection:
                     description: Inhibits deletion of the cluster.  Can be either
                       true or false.
@@ -994,6 +1014,16 @@ spec:
                           description: The minute at which backup will be started
                             (UTC).
                           type: number
+                      type: object
+                    type: array
+                  cloudStorage:
+                    description: Cloud Storage settings of the Greenplum cluster.
+                      The structure is documented below.
+                    items:
+                      properties:
+                        enable:
+                          description: Whether to use cloud storage or not.
+                          type: boolean
                       type: object
                     type: array
                   createdAt:

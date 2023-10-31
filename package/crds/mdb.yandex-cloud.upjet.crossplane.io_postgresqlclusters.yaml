@@ -116,6 +116,23 @@ spec:
                                 type: number
                             type: object
                           type: array
+                        diskSizeAutoscaling:
+                          description: Cluster disk size autoscaling settings. The
+                            structure is documented below.
+                          items:
+                            properties:
+                              diskSizeLimit:
+                                description: Limit of disk size after autoscaling.
+                                type: number
+                              emergencyUsageThreshold:
+                                description: Immediate autoscaling disk usage (percent).
+                                type: number
+                              plannedUsageThreshold:
+                                description: Maintenance window autoscaling disk usage
+                                  (percent).
+                                type: number
+                            type: object
+                          type: array
                         performanceDiagnostics:
                           description: Cluster performance diagnostics settings. The
                             structure is documented below. YC Documentation
@@ -750,6 +767,23 @@ spec:
                                 type: number
                             type: object
                           type: array
+                        diskSizeAutoscaling:
+                          description: Cluster disk size autoscaling settings. The
+                            structure is documented below.
+                          items:
+                            properties:
+                              diskSizeLimit:
+                                description: Limit of disk size after autoscaling.
+                                type: number
+                              emergencyUsageThreshold:
+                                description: Immediate autoscaling disk usage (percent).
+                                type: number
+                              plannedUsageThreshold:
+                                description: Maintenance window autoscaling disk usage
+                                  (percent).
+                                type: number
+                            type: object
+                          type: array
                         performanceDiagnostics:
                           description: Cluster performance diagnostics settings. The
                             structure is documented below. YC Documentation
@@ -1211,6 +1245,23 @@ spec:
                               minutes:
                                 description: The minute at which backup will be started
                                   (UTC).
+                                type: number
+                            type: object
+                          type: array
+                        diskSizeAutoscaling:
+                          description: Cluster disk size autoscaling settings. The
+                            structure is documented below.
+                          items:
+                            properties:
+                              diskSizeLimit:
+                                description: Limit of disk size after autoscaling.
+                                type: number
+                              emergencyUsageThreshold:
+                                description: Immediate autoscaling disk usage (percent).
+                                type: number
+                              plannedUsageThreshold:
+                                description: Maintenance window autoscaling disk usage
+                                  (percent).
                                 type: number
                             type: object
                           type: array

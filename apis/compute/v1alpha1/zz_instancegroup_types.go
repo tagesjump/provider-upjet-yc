@@ -15,11 +15,17 @@ import (
 
 type AllocationPolicyInitParameters struct {
 
+	// Array of availability zone IDs with list of instance tags.
+	InstanceTagsPool []InstanceTagsPoolInitParameters `json:"instanceTagsPool,omitempty" tf:"instance_tags_pool,omitempty"`
+
 	// A list of availability zones.
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type AllocationPolicyObservation struct {
+
+	// Array of availability zone IDs with list of instance tags.
+	InstanceTagsPool []InstanceTagsPoolObservation `json:"instanceTagsPool,omitempty" tf:"instance_tags_pool,omitempty"`
 
 	// A list of availability zones.
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -27,12 +33,19 @@ type AllocationPolicyObservation struct {
 
 type AllocationPolicyParameters struct {
 
+	// Array of availability zone IDs with list of instance tags.
+	// +kubebuilder:validation:Optional
+	InstanceTagsPool []InstanceTagsPoolParameters `json:"instanceTagsPool,omitempty" tf:"instance_tags_pool,omitempty"`
+
 	// A list of availability zones.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones" tf:"zones,omitempty"`
 }
 
 type ApplicationLoadBalancerInitParameters struct {
+
+	// Do not wait load balancer health checks.
+	IgnoreHealthChecks *bool `json:"ignoreHealthChecks,omitempty" tf:"ignore_health_checks,omitempty"`
 
 	// Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
 	MaxOpeningTrafficDuration *float64 `json:"maxOpeningTrafficDuration,omitempty" tf:"max_opening_traffic_duration,omitempty"`
@@ -48,6 +61,9 @@ type ApplicationLoadBalancerInitParameters struct {
 }
 
 type ApplicationLoadBalancerObservation struct {
+
+	// Do not wait load balancer health checks.
+	IgnoreHealthChecks *bool `json:"ignoreHealthChecks,omitempty" tf:"ignore_health_checks,omitempty"`
 
 	// Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
 	MaxOpeningTrafficDuration *float64 `json:"maxOpeningTrafficDuration,omitempty" tf:"max_opening_traffic_duration,omitempty"`
@@ -69,6 +85,10 @@ type ApplicationLoadBalancerObservation struct {
 }
 
 type ApplicationLoadBalancerParameters struct {
+
+	// Do not wait load balancer health checks.
+	// +kubebuilder:validation:Optional
+	IgnoreHealthChecks *bool `json:"ignoreHealthChecks,omitempty" tf:"ignore_health_checks,omitempty"`
 
 	// Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
 	// +kubebuilder:validation:Optional
@@ -733,6 +753,35 @@ type InstanceGroupParameters struct {
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
+type InstanceTagsPoolInitParameters struct {
+
+	// List of tags for instances in zone.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Availability zone.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type InstanceTagsPoolObservation struct {
+
+	// List of tags for instances in zone.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Availability zone.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type InstanceTagsPoolParameters struct {
+
+	// List of tags for instances in zone.
+	// +kubebuilder:validation:Optional
+	Tags []*string `json:"tags" tf:"tags,omitempty"`
+
+	// Availability zone.
+	// +kubebuilder:validation:Optional
+	Zone *string `json:"zone" tf:"zone,omitempty"`
+}
+
 type InstanceTemplateBootDiskInitParameters struct {
 
 	// This value can be used to reference the device under /dev/disk/by-id/.
@@ -1360,6 +1409,8 @@ type InstancesObservation struct {
 	// The ID of the instance.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
+	InstanceTag *string `json:"instanceTag,omitempty" tf:"instance_tag,omitempty"`
+
 	// The name of the managed instance.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -1383,6 +1434,9 @@ type InstancesParameters struct {
 
 type LoadBalancerInitParameters struct {
 
+	// Do not wait load balancer health checks.
+	IgnoreHealthChecks *bool `json:"ignoreHealthChecks,omitempty" tf:"ignore_health_checks,omitempty"`
+
 	// Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
 	MaxOpeningTrafficDuration *float64 `json:"maxOpeningTrafficDuration,omitempty" tf:"max_opening_traffic_duration,omitempty"`
 
@@ -1397,6 +1451,9 @@ type LoadBalancerInitParameters struct {
 }
 
 type LoadBalancerObservation struct {
+
+	// Do not wait load balancer health checks.
+	IgnoreHealthChecks *bool `json:"ignoreHealthChecks,omitempty" tf:"ignore_health_checks,omitempty"`
 
 	// Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
 	MaxOpeningTrafficDuration *float64 `json:"maxOpeningTrafficDuration,omitempty" tf:"max_opening_traffic_duration,omitempty"`
@@ -1418,6 +1475,10 @@ type LoadBalancerObservation struct {
 }
 
 type LoadBalancerParameters struct {
+
+	// Do not wait load balancer health checks.
+	// +kubebuilder:validation:Optional
+	IgnoreHealthChecks *bool `json:"ignoreHealthChecks,omitempty" tf:"ignore_health_checks,omitempty"`
 
 	// Timeout for waiting for the VM to be checked by the load balancer. If the timeout is exceeded, the VM will be turned off based on the deployment policy. Specified in seconds.
 	// +kubebuilder:validation:Optional

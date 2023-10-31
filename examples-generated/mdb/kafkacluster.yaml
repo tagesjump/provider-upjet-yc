@@ -39,7 +39,6 @@ spec:
           diskTypeId: network-ssd
           resourcePresetId: s2.micro
       schemaRegistry: false
-      unmanagedTopics: false
       version: "2.8"
       zones:
       - ru-central1-a

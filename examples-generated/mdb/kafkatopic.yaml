@@ -47,7 +47,6 @@ spec:
         - diskSize: 16
           diskTypeId: network-hdd
           resourcePresetId: s2.micro
-      unmanagedTopics: true
       version: "2.8"
       zones:
       - ru-central1-a

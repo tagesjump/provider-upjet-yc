@@ -384,6 +384,8 @@ type MaintenanceWindowParameters struct {
 }
 
 type MasterInitParameters struct {
+	EtcdClusterSize *float64 `json:"etcdClusterSize,omitempty" tf:"etcd_cluster_size,omitempty"`
+
 	ExternalV6Address *string `json:"externalV6Address,omitempty" tf:"external_v6_address,omitempty"`
 
 	// (Computed) Maintenance policy for Kubernetes master.
@@ -391,6 +393,8 @@ type MasterInitParameters struct {
 	// Revision upgrades are performed only within the same minor version, e.g. 1.13.
 	// Minor version upgrades (e.g. 1.13->1.14) should be performed manually. The structure is documented below.
 	MaintenancePolicy []MaintenancePolicyInitParameters `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
+
+	MasterLocation []MasterLocationInitParameters `json:"masterLocation,omitempty" tf:"master_location,omitempty"`
 
 	// Master Logging options. The structure is documented below.
 	MasterLogging []MasterLoggingInitParameters `json:"masterLogging,omitempty" tf:"master_logging,omitempty"`
@@ -406,6 +410,41 @@ type MasterInitParameters struct {
 
 	// Initialize parameters for Zonal Master (single node master). The structure is documented below.
 	Zonal []ZonalInitParameters `json:"zonal,omitempty" tf:"zonal,omitempty"`
+}
+
+type MasterLocationInitParameters struct {
+
+	// ID of the availability zone.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type MasterLocationObservation struct {
+
+	// ID of the subnet. If no ID is specified, and there only one subnet in specified zone, an address in this subnet will be allocated.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// ID of the availability zone.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type MasterLocationParameters struct {
+
+	// ID of the subnet. If no ID is specified, and there only one subnet in specified zone, an address in this subnet will be allocated.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// ID of the availability zone.
+	// +kubebuilder:validation:Optional
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type MasterLoggingInitParameters struct {
@@ -492,6 +531,8 @@ type MasterObservation struct {
 	// (Computed) PEM-encoded public certificate that is the root of trust for the Kubernetes cluster.
 	ClusterCACertificate *string `json:"clusterCaCertificate,omitempty" tf:"cluster_ca_certificate,omitempty"`
 
+	EtcdClusterSize *float64 `json:"etcdClusterSize,omitempty" tf:"etcd_cluster_size,omitempty"`
+
 	// (Computed) An IPv4 external network address that is assigned to the master.
 	ExternalV4Address *string `json:"externalV4Address,omitempty" tf:"external_v4_address,omitempty"`
 
@@ -513,6 +554,8 @@ type MasterObservation struct {
 	// Revision upgrades are performed only within the same minor version, e.g. 1.13.
 	// Minor version upgrades (e.g. 1.13->1.14) should be performed manually. The structure is documented below.
 	MaintenancePolicy []MaintenancePolicyObservation `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
+
+	MasterLocation []MasterLocationObservation `json:"masterLocation,omitempty" tf:"master_location,omitempty"`
 
 	// Master Logging options. The structure is documented below.
 	MasterLogging []MasterLoggingObservation `json:"masterLogging,omitempty" tf:"master_logging,omitempty"`
@@ -539,6 +582,9 @@ type MasterObservation struct {
 type MasterParameters struct {
 
 	// +kubebuilder:validation:Optional
+	EtcdClusterSize *float64 `json:"etcdClusterSize,omitempty" tf:"etcd_cluster_size,omitempty"`
+
+	// +kubebuilder:validation:Optional
 	ExternalV6Address *string `json:"externalV6Address,omitempty" tf:"external_v6_address,omitempty"`
 
 	// (Computed) Maintenance policy for Kubernetes master.
@@ -547,6 +593,9 @@ type MasterParameters struct {
 	// Minor version upgrades (e.g. 1.13->1.14) should be performed manually. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	MaintenancePolicy []MaintenancePolicyParameters `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	MasterLocation []MasterLocationParameters `json:"masterLocation,omitempty" tf:"master_location,omitempty"`
 
 	// Master Logging options. The structure is documented below.
 	// +kubebuilder:validation:Optional
