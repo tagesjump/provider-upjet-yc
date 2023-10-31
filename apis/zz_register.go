@@ -19,6 +19,7 @@ import (
 	v1alpha1kms "github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1"
 	v1alpha1kubernetes "github.com/tagesjump/provider-upjet-yc/apis/kubernetes/v1alpha1"
 	v1alpha1lb "github.com/tagesjump/provider-upjet-yc/apis/lb/v1alpha1"
+	v1alpha1loadtesting "github.com/tagesjump/provider-upjet-yc/apis/loadtesting/v1alpha1"
 	v1alpha1lockbox "github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1"
 	v1alpha1logging "github.com/tagesjump/provider-upjet-yc/apis/logging/v1alpha1"
 	v1alpha1mdb "github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1"
@@ -45,6 +46,7 @@ func init() {
 		v1alpha1kms.SchemeBuilder.AddToScheme,
 		v1alpha1kubernetes.SchemeBuilder.AddToScheme,
 		v1alpha1lb.SchemeBuilder.AddToScheme,
+		v1alpha1loadtesting.SchemeBuilder.AddToScheme,
 		v1alpha1lockbox.SchemeBuilder.AddToScheme,
 		v1alpha1logging.SchemeBuilder.AddToScheme,
 		v1alpha1mdb.SchemeBuilder.AddToScheme,

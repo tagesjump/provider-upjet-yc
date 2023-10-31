@@ -52,6 +52,7 @@ import (
 	nodegroup "github.com/tagesjump/provider-upjet-yc/internal/controller/kubernetes/nodegroup"
 	networkloadbalancer "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/networkloadbalancer"
 	targetgrouplb "github.com/tagesjump/provider-upjet-yc/internal/controller/lb/targetgroup"
+	agent "github.com/tagesjump/provider-upjet-yc/internal/controller/loadtesting/agent"
 	secret "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secret"
 	secretiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretiambinding"
 	secretversion "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretversion"
@@ -155,6 +156,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		nodegroup.Setup,
 		networkloadbalancer.Setup,
 		targetgrouplb.Setup,
+		agent.Setup,
 		secret.Setup,
 		secretiambinding.Setup,
 		secretversion.Setup,
