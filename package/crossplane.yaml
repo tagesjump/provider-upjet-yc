@@ -2,3 +2,18 @@ apiVersion: meta.pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: provider-yandex-cloud
+  annotations:
+    meta.crossplane.io/maintainer: Provider Support <provider-yc@tages.ru>
+    meta.crossplane.io/source: github.com/tagesjump/provider-upjet-yc
+    meta.crossplane.io/license: Apache-2.0
+    meta.crossplane.io/description: |
+      The Yandex Cloud Crossplane provider adds support for
+      managing YC resources in Kubernetes.
+
+    meta.crossplane.io/readme: |
+      `provider-yandex-cloud` is the Crossplane infrastructure provider for [Yandex Cloud (YC)](https://cloud.yandex.ru/).
+
+      ## Report a Bug
+
+      For filing bugs, suggesting improvements, or requesting new features, please
+      open an [issue](https://github.com/tagesjump/provider-upjet-yc/issues).
