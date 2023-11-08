@@ -1,7 +1,7 @@
 package logging
 
 import (
-	ujconfig "github.com/upbound/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 )
 
 const (

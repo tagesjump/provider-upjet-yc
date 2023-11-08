@@ -7,8 +7,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/pkg/reference"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/pkg/errors"
-	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (

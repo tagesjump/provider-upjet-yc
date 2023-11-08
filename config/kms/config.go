@@ -3,8 +3,8 @@ package kms
 import (
 	"fmt"
 
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
-	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (

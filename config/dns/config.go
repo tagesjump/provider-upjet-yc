@@ -3,7 +3,7 @@ package dns
 import (
 	"fmt"
 
-	ujconfig "github.com/upbound/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 
 	"github.com/tagesjump/provider-upjet-yc/config/vpc"
 )

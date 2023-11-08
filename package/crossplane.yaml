@@ -3,7 +3,7 @@ kind: Provider
 metadata:
   name: provider-yandex-cloud
   annotations:
-    meta.crossplane.io/maintainer: Provider Support <provider-yc@tages.ru>
+    meta.crossplane.io/maintainer: Tages <provider-yc@tages.ru>
     meta.crossplane.io/source: github.com/tagesjump/provider-upjet-yc
     meta.crossplane.io/license: Apache-2.0
     meta.crossplane.io/description: |

@@ -3,9 +3,9 @@ package lockbox
 import (
 	"fmt"
 
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
 	"github.com/tagesjump/provider-upjet-yc/config/kms"
-	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (

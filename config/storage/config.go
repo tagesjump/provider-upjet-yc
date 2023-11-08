@@ -16,7 +16,7 @@ package storage
 import (
 	"fmt"
 
-	ujconfig "github.com/upbound/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 
 	"github.com/tagesjump/provider-upjet-yc/config/common"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"

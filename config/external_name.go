@@ -7,8 +7,8 @@ package config
 import (
 	"fmt"
 
+	"github.com/crossplane/upjet/pkg/config"
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
-	"github.com/upbound/upjet/pkg/config"
 )
 
 // ExternalNameConfigs contains all external name configurations for this

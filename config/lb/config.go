@@ -3,8 +3,8 @@ package lb
 import (
 	"fmt"
 
+	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/tagesjump/provider-upjet-yc/config/vpc"
-	ujconfig "github.com/upbound/upjet/pkg/config"
 )
 
 const (
