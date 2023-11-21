@@ -5,13 +5,16 @@ on:
     branches:
       - main
       - release-*
+      - feat/*
+      - update/*
+      - fix/*
   pull_request: {}
   workflow_dispatch: {}
 
 env:
   # Common versions
-  GO_VERSION: '1.21'
-  GOLANGCI_VERSION: 'v1.50.0'
+  GO_VERSION: '1.20'
+  GOLANGCI_VERSION: 'v1.54.2'
   DOCKER_BUILDX_VERSION: 'v0.8.2'
 
   # Common users. We can't run a step 'if secrets.XXX != ""' but we can run a
@@ -27,7 +30,7 @@ jobs:
     steps:
       - name: Detect No-op Changes
         id: noop
-        uses: fkirc/skip-duplicate-actions@v5.3.0
+        uses: fkirc/skip-duplicate-actions@12aca0a884f6137d619d6a8a09fcc3406ced5281 # v5.3.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           paths_ignore: '["**.md", "**.png", "**.jpg"]'
@@ -39,13 +42,13 @@ jobs:
     if: needs.detect-noop.outputs.noop != 'true'
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
         with:
           submodules: true
 
       - name: Get modified CRDs
         id: modified-crds
-        uses: tj-actions/changed-files@v34
+        uses: tj-actions/changed-files@ce4b8e3cba2220de8132ac9721ff754efd6bb7d7 # v34
         with:
           files: |
             package/crds/**
@@ -67,30 +70,32 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
         with:
           submodules: true
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3
         with:
-          go-version: ${{ env.GO_VERSION }}
+          go-version: ${{ inputs.go-version }}
 
       - name: Find the Go Build Cache
-        id: go
-        run: echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT
+        id: go_cache
+        run: |
+          echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
+          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: ${{ steps.go.outputs.cache }}
+          path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-lint-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-lint-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: .work/pkg
+          path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
@@ -100,9 +105,10 @@ jobs:
       # We could run 'make lint' but we prefer this action because it leaves
       # 'annotations' (i.e. it comments on PRs to point out linter violations).
       - name: Lint
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@3a919529898de77ec3da873e3063ca4b10e7f5cc # v3
         with:
           version: ${{ env.GOLANGCI_VERSION }}
+          args: --timeout=30m
 
   check-diff:
     runs-on: ubuntu-22.04
@@ -154,7 +160,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
         with:
           submodules: true
 
@@ -162,25 +168,27 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3
         with:
-          go-version: ${{ env.GO_VERSION }}
+          go-version: ${{ inputs.go-version }}
 
       - name: Find the Go Build Cache
-        id: go
-        run: echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT
+        id: go_cache
+        run: |
+          echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
+          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: ${{ steps.go.outputs.cache }}
+          path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-unit-tests-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: .work/pkg
+          path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
@@ -191,7 +199,7 @@ jobs:
         run: make -j2 test
 
       - name: Publish Unit Test Coverage
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3
         with:
           flags: unittests
           file: _output/tests/linux_amd64/coverage.txt
@@ -203,7 +211,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
         with:
           submodules: true
 
@@ -211,25 +219,27 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3
         with:
-          go-version: ${{ env.GO_VERSION }}
+          go-version: ${{ inputs.go-version }}
 
       - name: Find the Go Build Cache
-        id: go
-        run: echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT
+        id: go_cache
+        run: |
+          echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
+          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: ${{ steps.go.outputs.cache }}
+          path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-unit-tests-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: .work/pkg
+          path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
@@ -246,18 +256,18 @@ jobs:
 
     steps:
       - name: Setup QEMU
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@2b82ce82d56a2a04d2637cd93a637ae1b359c0a7 # v2
         with:
           platforms: all
 
       - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@885d1462b80bc1c1c7f0b00334ad271f09369c55 # v2
         with:
           version: ${{ env.DOCKER_BUILDX_VERSION }}
           install: true
 
       - name: Login to Upbound
-        uses: docker/login-action@v2
+        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2
         if: env.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR != ''
         with:
           registry: xpkg.upbound.io
@@ -265,7 +275,7 @@ jobs:
           password: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW }}
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
         with:
           submodules: true
 
@@ -273,25 +283,27 @@ jobs:
         run: git fetch --prune --unshallow
 
       - name: Setup Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@6edd4406fa81c3da01a34fa6f6343087c207a568 # v3
         with:
-          go-version: ${{ env.GO_VERSION }}
+          go-version: ${{ inputs.go-version }}
 
       - name: Find the Go Build Cache
-        id: go
-        run: echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT
+        id: go_cache
+        run: |
+          echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
+          echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: ${{ steps.go.outputs.cache }}
+          path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-publish-artifacts-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
         with:
-          path: .work/pkg
+          path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
 
@@ -306,10 +318,25 @@ jobs:
           BUILD_ARGS: "--load"
 
       - name: Upload Artifacts to GitHub
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
         with:
           name: output
           path: _output/**
 
       - name: Publish Artifacts
         run: make publish BRANCH_NAME=${GITHUB_REF##*/}
+
+  # check-examples:
+  #   runs-on: ubuntu-22.04
+  #   needs: detect-noop
+  #   if: ${{ needs.detect-noop.outputs.noop != 'true' }}
+
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v4
+  #       with:
+  #         submodules: true
+
+  #     - name: Check Example Manifests
+  #       run: |
+  #         ./scripts/check-examples.py package/crds examples
