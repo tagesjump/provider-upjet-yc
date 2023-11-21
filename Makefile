@@ -8,10 +8,10 @@ export TERRAFORM_VERSION ?= 1.6.1
 
 export TERRAFORM_PROVIDER_SOURCE ?= yandex-cloud/yandex
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/yandex-cloud/terraform-provider-yandex
-export TERRAFORM_PROVIDER_VERSION ?= 0.101.0
+export TERRAFORM_PROVIDER_VERSION ?= 0.102.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-yandex
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://hashicorp-releases.yandexcloud.net/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-yandex_v0.101.0_x5
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-yandex_v0.102.0_x5
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 
@@ -40,8 +40,8 @@ NPROCS ?= 1
 # to half the number of CPU cores.
 GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
-GO_REQUIRED_VERSION ?= 1.21
-GOLANGCILINT_VERSION ?= 1.53.0
+GO_REQUIRED_VERSION ?= 1.20
+GOLANGCILINT_VERSION ?= 1.54.2
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
 GO_SUBDIRS += cmd internal apis
