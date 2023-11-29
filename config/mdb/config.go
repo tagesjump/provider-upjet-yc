@@ -431,6 +431,9 @@ func Configure(p *ujconfig.Provider) {
 		r.References["service_account_id"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccount"),
 		}
+		r.References["security_group_ids"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "SecurityGroup"),
+		}
 		r.UseAsync = true
 		// TODO: AdditionalConnDetails
 	})
@@ -458,6 +461,29 @@ func Configure(p *ujconfig.Provider) {
 		}
 		r.References["security_group_ids"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "SecurityGroup"),
+		}
+		r.UseAsync = true
+		// TODO: AdditionalConnDetails
+	})
+
+	p.AddResourceConfigurator("yandex_mdb_opensearch_cluster", func(r *ujconfig.Resource) {
+		r.References["network_id"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Network"),
+		}
+		r.References["host.subnet_id"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
+		}
+		r.References["service_account_id"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccount"),
+		}
+		r.References["security_group_ids"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "SecurityGroup"),
+		}
+		r.References["config.opensearch.node_groups.subnet_ids"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
+		}
+		r.References["config.dashboard.node_groups.subnet_ids"] = ujconfig.Reference{
+			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
 		}
 		r.UseAsync = true
 		// TODO: AdditionalConnDetails

@@ -113,6 +113,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_lockbox_secret_version":                           config.IdentifierFromProvider,
 	"yandex_monitoring_dashboard":                             config.IdentifierFromProvider,
 	"yandex_loadtesting_agent":                                config.IdentifierFromProvider,
+	"yandex_mdb_opensearch_cluster":                           config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
