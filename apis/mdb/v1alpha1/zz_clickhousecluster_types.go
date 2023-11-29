@@ -172,9 +172,6 @@ type ClickhouseClusterInitParameters struct {
 	// Enables admin user with user management permission.
 	SQLUserManagement *bool `json:"sqlUserManagement,omitempty" tf:"sql_user_management,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
-	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
-
 	Shard []ShardInitParameters `json:"shard,omitempty" tf:"shard,omitempty"`
 
 	// A group of clickhouse shards. The structure is documented below.
@@ -396,8 +393,17 @@ type ClickhouseClusterParameters struct {
 	SQLUserManagement *bool `json:"sqlUserManagement,omitempty" tf:"sql_user_management,omitempty"`
 
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// ID of the service account used for access to Yandex Object Storage.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount

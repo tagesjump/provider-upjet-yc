@@ -68,6 +68,7 @@ import (
 	mysqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqlcluster"
 	mysqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqldatabase"
 	mysqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqluser"
+	opensearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/opensearchcluster"
 	postgresqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqlcluster"
 	postgresqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqldatabase"
 	postgresqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqluser"
@@ -172,6 +173,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mysqlcluster.Setup,
 		mysqldatabase.Setup,
 		mysqluser.Setup,
+		opensearchcluster.Setup,
 		postgresqlcluster.Setup,
 		postgresqldatabase.Setup,
 		postgresqluser.Setup,
