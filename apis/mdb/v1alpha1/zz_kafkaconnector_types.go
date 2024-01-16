@@ -213,6 +213,17 @@ type ExternalS3Parameters struct {
 
 type KafkaConnectorInitParameters struct {
 
+	// +crossplane:generate:reference:type=KafkaCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a KafkaCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a KafkaCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// Params for MirrorMaker2 connector. The structure is documented below.
 	ConnectorConfigMirrormaker []ConnectorConfigMirrormakerInitParameters `json:"connectorConfigMirrormaker,omitempty" tf:"connector_config_mirrormaker,omitempty"`
 
@@ -223,6 +234,7 @@ type KafkaConnectorInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Additional properties for connector.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The number of the connector's parallel working tasks. Default is the number of brokers
@@ -244,6 +256,7 @@ type KafkaConnectorObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Additional properties for connector.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The number of the connector's parallel working tasks. Default is the number of brokers
@@ -278,6 +291,7 @@ type KafkaConnectorParameters struct {
 
 	// Additional properties for connector.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The number of the connector's parallel working tasks. Default is the number of brokers

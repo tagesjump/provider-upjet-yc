@@ -22,6 +22,18 @@ type BackendGroupInitParameters struct {
 	// Description of the backend group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Grpc backend specification that will be used by the ALB Backend Group. Structure is documented below.
 	GRPCBackend []GRPCBackendInitParameters `json:"grpcBackend,omitempty" tf:"grpc_backend,omitempty"`
 
@@ -29,6 +41,7 @@ type BackendGroupInitParameters struct {
 	HTTPBackend []HTTPBackendInitParameters `json:"httpBackend,omitempty" tf:"http_backend,omitempty"`
 
 	// Labels to assign to this backend group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the Backend Group.
@@ -61,6 +74,7 @@ type BackendGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this backend group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the Backend Group.
@@ -101,6 +115,7 @@ type BackendGroupParameters struct {
 
 	// Labels to assign to this backend group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the Backend Group.
@@ -182,6 +197,18 @@ type GRPCBackendInitParameters struct {
 
 	// Tls specification that will be used by this backend. Structure is documented below.
 	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// References target groups for the backend.
+	// +crossplane:generate:reference:type=TargetGroup
+	TargetGroupIds []*string `json:"targetGroupIds,omitempty" tf:"target_group_ids,omitempty"`
+
+	// References to TargetGroup to populate targetGroupIds.
+	// +kubebuilder:validation:Optional
+	TargetGroupIdsRefs []v1.Reference `json:"targetGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of TargetGroup to populate targetGroupIds.
+	// +kubebuilder:validation:Optional
+	TargetGroupIdsSelector *v1.Selector `json:"targetGroupIdsSelector,omitempty" tf:"-"`
 
 	// Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -390,6 +417,18 @@ type HTTPBackendInitParameters struct {
 
 	// Tls specification that will be used by this backend. Structure is documented below.
 	TLS []HTTPBackendTLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// References target groups for the backend.
+	// +crossplane:generate:reference:type=TargetGroup
+	TargetGroupIds []*string `json:"targetGroupIds,omitempty" tf:"target_group_ids,omitempty"`
+
+	// References to TargetGroup to populate targetGroupIds.
+	// +kubebuilder:validation:Optional
+	TargetGroupIdsRefs []v1.Reference `json:"targetGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of TargetGroup to populate targetGroupIds.
+	// +kubebuilder:validation:Optional
+	TargetGroupIdsSelector *v1.Selector `json:"targetGroupIdsSelector,omitempty" tf:"-"`
 
 	// Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -1084,6 +1123,18 @@ type StreamBackendInitParameters struct {
 
 	// Tls specification that will be used by this backend. Structure is documented below.
 	TLS []StreamBackendTLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// References target groups for the backend.
+	// +crossplane:generate:reference:type=TargetGroup
+	TargetGroupIds []*string `json:"targetGroupIds,omitempty" tf:"target_group_ids,omitempty"`
+
+	// References to TargetGroup to populate targetGroupIds.
+	// +kubebuilder:validation:Optional
+	TargetGroupIdsRefs []v1.Reference `json:"targetGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of TargetGroup to populate targetGroupIds.
+	// +kubebuilder:validation:Optional
+	TargetGroupIdsSelector *v1.Selector `json:"targetGroupIdsSelector,omitempty" tf:"-"`
 
 	// Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`

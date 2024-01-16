@@ -22,7 +22,20 @@ type TransferInitParameters struct {
 	// Arbitrary description text for the transfer.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the folder to create the transfer in. If it is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the Data Transfer transfer.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the transfer.
@@ -32,6 +45,30 @@ type TransferInitParameters struct {
 	// It is not part of the transfer parameter and is used only on create.
 	// One of "sync_activate", "async_activate", "dont_activate". The default is "sync_activate".
 	OnCreateActivateMode *string `json:"onCreateActivateMode,omitempty" tf:"on_create_activate_mode,omitempty"`
+
+	// ID of the source endpoint for the transfer.
+	// +crossplane:generate:reference:type=Endpoint
+	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
+
+	// Reference to a Endpoint to populate sourceId.
+	// +kubebuilder:validation:Optional
+	SourceIDRef *v1.Reference `json:"sourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Endpoint to populate sourceId.
+	// +kubebuilder:validation:Optional
+	SourceIDSelector *v1.Selector `json:"sourceIdSelector,omitempty" tf:"-"`
+
+	// ID of the target endpoint for the transfer.
+	// +crossplane:generate:reference:type=Endpoint
+	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
+
+	// Reference to a Endpoint to populate targetId.
+	// +kubebuilder:validation:Optional
+	TargetIDRef *v1.Reference `json:"targetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Endpoint to populate targetId.
+	// +kubebuilder:validation:Optional
+	TargetIDSelector *v1.Selector `json:"targetIdSelector,omitempty" tf:"-"`
 
 	// Type of the transfer. One of "SNAPSHOT_ONLY", "INCREMENT_ONLY", "SNAPSHOT_AND_INCREMENT".
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -49,6 +86,7 @@ type TransferObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Data Transfer transfer.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the transfer.
@@ -93,6 +131,7 @@ type TransferParameters struct {
 
 	// A set of key/value label pairs to assign to the Data Transfer transfer.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the transfer.

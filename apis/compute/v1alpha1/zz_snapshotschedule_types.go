@@ -51,7 +51,33 @@ type SnapshotScheduleInitParameters struct {
 	// Description of the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// IDs of the disk for snapshot schedule.
+	// +crossplane:generate:reference:type=Disk
+	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
+
+	// References to Disk to populate diskIds.
+	// +kubebuilder:validation:Optional
+	DiskIdsRefs []v1.Reference `json:"diskIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Disk to populate diskIds.
+	// +kubebuilder:validation:Optional
+	DiskIdsSelector *v1.Selector `json:"diskIdsSelector,omitempty" tf:"-"`
+
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the snapshot schedule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A name for the resource.
@@ -88,6 +114,7 @@ type SnapshotScheduleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the snapshot schedule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A name for the resource.
@@ -144,6 +171,7 @@ type SnapshotScheduleParameters struct {
 
 	// A set of key/value label pairs to assign to the snapshot schedule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A name for the resource.
@@ -173,6 +201,7 @@ type SnapshotSpecInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A set of key/value label pairs to assign to snapshots created by this snapshot schedule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
@@ -182,6 +211,7 @@ type SnapshotSpecObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A set of key/value label pairs to assign to snapshots created by this snapshot schedule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
@@ -193,6 +223,7 @@ type SnapshotSpecParameters struct {
 
 	// A set of key/value label pairs to assign to snapshots created by this snapshot schedule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 

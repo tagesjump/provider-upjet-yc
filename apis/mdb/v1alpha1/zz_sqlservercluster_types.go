@@ -70,6 +70,18 @@ type SqlserverClusterHostInitParameters struct {
 	// Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// The availability zone where the SQLServer host will be created.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -130,25 +142,66 @@ type SqlserverClusterInitParameters struct {
 	// Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE)
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A host of the SQLServer cluster. The structure is documented below.
 	Host []SqlserverClusterHostInitParameters `json:"host,omitempty" tf:"host,omitempty"`
 
 	// A list of IDs of the host groups hosting VMs of the cluster.
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// A set of key/value label pairs to assign to the SQLServer cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the SQLServer cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// ID of the network, to which the SQLServer cluster uses.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
 	// Resources allocated to hosts of the SQLServer cluster. The structure is documented below.
 	Resources []SqlserverClusterResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
 	Sqlcollation *string `json:"sqlcollation,omitempty" tf:"sqlcollation,omitempty"`
 
 	// SQLServer cluster config. Detail info in "SQLServer config" section (documented below).
+	// +mapType=granular
 	SqlserverConfig map[string]*string `json:"sqlserverConfig,omitempty" tf:"sqlserver_config,omitempty"`
 
 	// A user of the SQLServer cluster. The structure is documented below.
@@ -189,11 +242,13 @@ type SqlserverClusterObservation struct {
 	Host []SqlserverClusterHostObservation `json:"host,omitempty" tf:"host,omitempty"`
 
 	// A list of IDs of the host groups hosting VMs of the cluster.
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the SQLServer cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the SQLServer cluster. Provided by the client when the cluster is created.
@@ -206,12 +261,14 @@ type SqlserverClusterObservation struct {
 	Resources []SqlserverClusterResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
 	Sqlcollation *string `json:"sqlcollation,omitempty" tf:"sqlcollation,omitempty"`
 
 	// SQLServer cluster config. Detail info in "SQLServer config" section (documented below).
+	// +mapType=granular
 	SqlserverConfig map[string]*string `json:"sqlserverConfig,omitempty" tf:"sqlserver_config,omitempty"`
 
 	// Status of the cluster.
@@ -266,10 +323,12 @@ type SqlserverClusterParameters struct {
 
 	// A list of IDs of the host groups hosting VMs of the cluster.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// A set of key/value label pairs to assign to the SQLServer cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the SQLServer cluster. Provided by the client when the cluster is created.
@@ -296,6 +355,7 @@ type SqlserverClusterParameters struct {
 	// A set of ids of security groups assigned to hosts of the cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -312,6 +372,7 @@ type SqlserverClusterParameters struct {
 
 	// SQLServer cluster config. Detail info in "SQLServer config" section (documented below).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	SqlserverConfig map[string]*string `json:"sqlserverConfig,omitempty" tf:"sqlserver_config,omitempty"`
 
 	// A user of the SQLServer cluster. The structure is documented below.
@@ -399,6 +460,7 @@ type SqlserverClusterUserPermissionInitParameters struct {
 
 	// List user's roles in the database.
 	// Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
@@ -409,6 +471,7 @@ type SqlserverClusterUserPermissionObservation struct {
 
 	// List user's roles in the database.
 	// Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
@@ -421,6 +484,7 @@ type SqlserverClusterUserPermissionParameters struct {
 	// List user's roles in the database.
 	// Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 

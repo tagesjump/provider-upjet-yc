@@ -70,6 +70,7 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   column:
                     items:
                       properties:
@@ -160,6 +161,7 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   column:
                     items:
                       properties:
@@ -420,6 +422,7 @@ spec:
                     additionalProperties:
                       type: string
                     type: object
+                    x-kubernetes-map-type: granular
                   column:
                     items:
                       properties:

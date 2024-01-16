@@ -75,6 +75,60 @@ func (mg *NetworkLoadBalancer) ResolveReferences(ctx context.Context, c client.R
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AttachedTargetGroup); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AttachedTargetGroup[i3].TargetGroupID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.AttachedTargetGroup[i3].TargetGroupIDRef,
+			Selector:     mg.Spec.InitProvider.AttachedTargetGroup[i3].TargetGroupIDSelector,
+			To: reference.To{
+				List:    &TargetGroupList{},
+				Managed: &TargetGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AttachedTargetGroup[i3].TargetGroupID")
+		}
+		mg.Spec.InitProvider.AttachedTargetGroup[i3].TargetGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AttachedTargetGroup[i3].TargetGroupIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Listener); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Listener[i3].InternalAddressSpec); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Listener[i3].InternalAddressSpec[i4].SubnetID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Listener[i3].InternalAddressSpec[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Listener[i3].InternalAddressSpec[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1alpha11.SubnetList{},
+					Managed: &v1alpha11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Listener[i3].InternalAddressSpec[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Listener[i3].InternalAddressSpec[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Listener[i3].InternalAddressSpec[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -118,6 +172,40 @@ func (mg *TargetGroup) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 		mg.Spec.ForProvider.Target[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Target[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Target); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Target[i3].SubnetID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Target[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.Target[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1alpha11.SubnetList{},
+				Managed: &v1alpha11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Target[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.Target[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Target[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
 

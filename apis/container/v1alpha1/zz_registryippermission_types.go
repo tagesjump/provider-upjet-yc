@@ -20,19 +20,35 @@ import (
 type RegistryIPPermissionInitParameters struct {
 
 	// List of configured CIDRs, from which pull is allowed.
+	// +listType=set
 	Pull []*string `json:"pull,omitempty" tf:"pull,omitempty"`
 
 	// List of configured CIDRs, from which push is allowed.
+	// +listType=set
 	Push []*string `json:"push,omitempty" tf:"push,omitempty"`
+
+	// The ID of the registry that ip restrictions applied to.
+	// +crossplane:generate:reference:type=Registry
+	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// Reference to a Registry to populate registryId.
+	// +kubebuilder:validation:Optional
+	RegistryIDRef *v1.Reference `json:"registryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Registry to populate registryId.
+	// +kubebuilder:validation:Optional
+	RegistryIDSelector *v1.Selector `json:"registryIdSelector,omitempty" tf:"-"`
 }
 
 type RegistryIPPermissionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of configured CIDRs, from which pull is allowed.
+	// +listType=set
 	Pull []*string `json:"pull,omitempty" tf:"pull,omitempty"`
 
 	// List of configured CIDRs, from which push is allowed.
+	// +listType=set
 	Push []*string `json:"push,omitempty" tf:"push,omitempty"`
 
 	// The ID of the registry that ip restrictions applied to.
@@ -43,10 +59,12 @@ type RegistryIPPermissionParameters struct {
 
 	// List of configured CIDRs, from which pull is allowed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Pull []*string `json:"pull,omitempty" tf:"pull,omitempty"`
 
 	// List of configured CIDRs, from which push is allowed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Push []*string `json:"push,omitempty" tf:"push,omitempty"`
 
 	// The ID of the registry that ip restrictions applied to.

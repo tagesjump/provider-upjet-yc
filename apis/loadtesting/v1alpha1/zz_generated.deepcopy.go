@@ -55,6 +55,21 @@ func (in *AgentInitParameters) DeepCopyInto(out *AgentInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -389,6 +404,21 @@ func (in *ComputeInstanceInitParameters) DeepCopyInto(out *ComputeInstanceInitPa
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ServiceAccountID != nil {
+		in, out := &in.ServiceAccountID, &out.ServiceAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccountIDRef != nil {
+		in, out := &in.ServiceAccountIDRef, &out.ServiceAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountIDSelector != nil {
+		in, out := &in.ServiceAccountIDSelector, &out.ServiceAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneID != nil {
 		in, out := &in.ZoneID, &out.ZoneID
@@ -752,6 +782,21 @@ func (in *NetworkInterfaceInitParameters) DeepCopyInto(out *NetworkInterfaceInit
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

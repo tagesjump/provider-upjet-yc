@@ -21,6 +21,18 @@ type SecretCiphertextInitParameters struct {
 
 	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest
 	AadContext *string `json:"aadContext,omitempty" tf:"aad_context,omitempty"`
+
+	// ID of the symmetric KMS key to use for encryption.
+	// +crossplane:generate:reference:type=SymmetricKey
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a SymmetricKey to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SymmetricKey to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 }
 
 type SecretCiphertextObservation struct {

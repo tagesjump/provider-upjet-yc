@@ -179,6 +179,8 @@ type TTLParameters struct {
 }
 
 type TableInitParameters struct {
+
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
@@ -201,6 +203,8 @@ type TableInitParameters struct {
 }
 
 type TableObservation struct {
+
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
@@ -227,6 +231,7 @@ type TableObservation struct {
 type TableParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
 	// +kubebuilder:validation:Optional

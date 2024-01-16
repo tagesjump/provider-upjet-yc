@@ -71,6 +71,17 @@ type MySQLUserInitParameters struct {
 	// Authentication plugin. Allowed values: MYSQL_NATIVE_PASSWORD, CACHING_SHA2_PASSWORD, SHA256_PASSWORD (for version 5.7 MYSQL_NATIVE_PASSWORD, SHA256_PASSWORD)
 	AuthenticationPlugin *string `json:"authenticationPlugin,omitempty" tf:"authentication_plugin,omitempty"`
 
+	// +crossplane:generate:reference:type=MySQLCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a MySQLCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a MySQLCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// User's connection limits. The structure is documented below.
 	// If the attribute is not specified there will be no changes.
 	ConnectionLimits []MySQLUserConnectionLimitsInitParameters `json:"connectionLimits,omitempty" tf:"connection_limits,omitempty"`
@@ -78,6 +89,7 @@ type MySQLUserInitParameters struct {
 	// List user's global permissions
 	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
 	// If the attribute is not specified there will be no changes.
+	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
 	// The name of the user.
@@ -101,6 +113,7 @@ type MySQLUserObservation struct {
 	// List user's global permissions
 	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
 	// If the attribute is not specified there will be no changes.
+	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -139,6 +152,7 @@ type MySQLUserParameters struct {
 	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
 	// If the attribute is not specified there will be no changes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
 	// The name of the user.

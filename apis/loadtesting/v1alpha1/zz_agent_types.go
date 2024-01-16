@@ -25,6 +25,18 @@ type AgentInitParameters struct {
 	// A description of the load testing agent.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder that the resources belong to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// The name of the load testing agent. Must be unique within folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -124,9 +136,11 @@ type ComputeInstanceInitParameters struct {
 	BootDisk []BootDiskInitParameters `json:"bootDisk,omitempty" tf:"boot_disk,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A set of metadata key/value pairs to make available from within the instance.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
@@ -134,6 +148,18 @@ type ComputeInstanceInitParameters struct {
 
 	// Compute resource specifications for the instance. The structure is documented below.
 	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
+
+	// The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// Reference to a SecurityGroup in vpc to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup in vpc to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
 	// The availability zone where the virtual machine will be created. If it is not provided,
 	// the default provider folder is used.
@@ -146,12 +172,15 @@ type ComputeInstanceObservation struct {
 	BootDisk []BootDiskObservation `json:"bootDisk,omitempty" tf:"boot_disk,omitempty"`
 
 	// (Computed) The set of metadata key:value pairs assigned to this instance. This includes user custom metadata, and predefined items created by Yandex Cloud Load Testing.
+	// +mapType=granular
 	ComputedMetadata map[string]*string `json:"computedMetadata,omitempty" tf:"computed_metadata,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A set of metadata key/value pairs to make available from within the instance.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
@@ -176,10 +205,12 @@ type ComputeInstanceParameters struct {
 
 	// A set of key/value label pairs to assign to the instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A set of metadata key/value pairs to make available from within the instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
@@ -289,7 +320,20 @@ type NetworkInterfaceInitParameters struct {
 	NATIPAddress *string `json:"natIpAddress,omitempty" tf:"nat_ip_address,omitempty"`
 
 	// Security group ids for network interface.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceObservation struct {
@@ -319,6 +363,7 @@ type NetworkInterfaceObservation struct {
 	NATIPVersion *string `json:"natIpVersion,omitempty" tf:"nat_ip_version,omitempty"`
 
 	// Security group ids for network interface.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
@@ -353,6 +398,7 @@ type NetworkInterfaceParameters struct {
 
 	// Security group ids for network interface.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.

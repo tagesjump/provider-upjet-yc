@@ -23,6 +23,7 @@ type CloudInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A set of key/value label pairs to assign to the Cloud.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Cloud.
@@ -41,6 +42,7 @@ type CloudObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Cloud.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Cloud.
@@ -58,6 +60,7 @@ type CloudParameters struct {
 
 	// A set of key/value label pairs to assign to the Cloud.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Cloud.

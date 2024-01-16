@@ -35,6 +35,7 @@ type SAMLFederationInitParameters struct {
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// A set of key/value label pairs assigned to the SAML Federation.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the SAML Federation.
@@ -76,6 +77,7 @@ type SAMLFederationObservation struct {
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// A set of key/value label pairs assigned to the SAML Federation.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the SAML Federation.
@@ -118,6 +120,7 @@ type SAMLFederationParameters struct {
 
 	// A set of key/value label pairs assigned to the SAML Federation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the SAML Federation.

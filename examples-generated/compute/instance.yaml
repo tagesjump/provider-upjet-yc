@@ -9,10 +9,9 @@ metadata:
 spec:
   forProvider:
     bootDisk:
-    - initializeParams:
-      - imageIdSelector:
-          matchLabels:
-            testing.upbound.io/example-name: example
+    - diskIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: boot-disk
     metadata:
       foo: bar
       ssh-keys: ubuntu:${file("~/.ssh/id_rsa.pub")}

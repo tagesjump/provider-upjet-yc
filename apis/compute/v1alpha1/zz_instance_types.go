@@ -28,7 +28,16 @@ type BootDiskInitParameters struct {
 
 	// The ID of the existing disk (such as those managed by
 	// yandex_compute_disk) to attach as a boot disk.
+	// +crossplane:generate:reference:type=Disk
 	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
+
+	// Reference to a Disk to populate diskId.
+	// +kubebuilder:validation:Optional
+	DiskIDRef *v1.Reference `json:"diskIdRef,omitempty" tf:"-"`
+
+	// Selector for a Disk to populate diskId.
+	// +kubebuilder:validation:Optional
+	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
 
 	// Parameters for a new disk that will be created
 	// alongside the new instance. Either initialize_params or disk_id must be set. The structure is documented below.
@@ -72,8 +81,17 @@ type BootDiskParameters struct {
 
 	// The ID of the existing disk (such as those managed by
 	// yandex_compute_disk) to attach as a boot disk.
+	// +crossplane:generate:reference:type=Disk
 	// +kubebuilder:validation:Optional
 	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
+
+	// Reference to a Disk to populate diskId.
+	// +kubebuilder:validation:Optional
+	DiskIDRef *v1.Reference `json:"diskIdRef,omitempty" tf:"-"`
+
+	// Selector for a Disk to populate diskId.
+	// +kubebuilder:validation:Optional
+	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
 
 	// Parameters for a new disk that will be created
 	// alongside the new instance. Either initialize_params or disk_id must be set. The structure is documented below.
@@ -227,6 +245,18 @@ type InitializeParamsInitParameters struct {
 	// Description of the boot disk.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// A disk image to initialize this disk from.
+	// +crossplane:generate:reference:type=Image
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// Reference to a Image to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDRef *v1.Reference `json:"imageIdRef,omitempty" tf:"-"`
+
+	// Selector for a Image to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDSelector *v1.Selector `json:"imageIdSelector,omitempty" tf:"-"`
+
 	// Resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -363,6 +393,19 @@ type InstanceInitParameters struct {
 	// List of filesystems that are attached to the instance. Structure is documented below.
 	Filesystem []InstanceFilesystemInitParameters `json:"filesystem,omitempty" tf:"filesystem,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// ID of the GPU cluster to attach this instance to. The GPU cluster must exist in the same zone as the instance.
 	GpuClusterID *string `json:"gpuClusterId,omitempty" tf:"gpu_cluster_id,omitempty"`
 
@@ -373,13 +416,21 @@ type InstanceInitParameters struct {
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// List of local disks that are attached to the instance. Structure is documented below.
 	LocalDisk []LocalDiskInitParameters `json:"localDisk,omitempty" tf:"local_disk,omitempty"`
 
+	// Time between notification via metadata service and maintenance. E.g., 60s.
+	MaintenanceGracePeriod *string `json:"maintenanceGracePeriod,omitempty" tf:"maintenance_grace_period,omitempty"`
+
+	// Behaviour on maintenance events. The default is unspecified. Values: unspecified, migrate, restart.
+	MaintenancePolicy *string `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
+
 	// Metadata key/value pairs to make available from
 	// within the instance.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Options allow user to configure access to instance's metadata
@@ -410,6 +461,18 @@ type InstanceInitParameters struct {
 	// A list of disks to attach to the instance. The structure is documented below.
 	// Note: The allow_stopping_for_update property must be set to true in order to update this structure.
 	SecondaryDisk []SecondaryDiskInitParameters `json:"secondaryDisk,omitempty" tf:"secondary_disk,omitempty"`
+
+	// ID of the service account authorized for this instance.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
 	// The availability zone where the virtual machine will be created. If it is not provided,
 	// the default provider folder is used.
@@ -455,13 +518,21 @@ type InstanceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// List of local disks that are attached to the instance. Structure is documented below.
 	LocalDisk []LocalDiskObservation `json:"localDisk,omitempty" tf:"local_disk,omitempty"`
 
+	// Time between notification via metadata service and maintenance. E.g., 60s.
+	MaintenanceGracePeriod *string `json:"maintenanceGracePeriod,omitempty" tf:"maintenance_grace_period,omitempty"`
+
+	// Behaviour on maintenance events. The default is unspecified. Values: unspecified, migrate, restart.
+	MaintenancePolicy *string `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
+
 	// Metadata key/value pairs to make available from
 	// within the instance.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Options allow user to configure access to instance's metadata
@@ -553,15 +624,25 @@ type InstanceParameters struct {
 
 	// A set of key/value label pairs to assign to the instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// List of local disks that are attached to the instance. Structure is documented below.
 	// +kubebuilder:validation:Optional
 	LocalDisk []LocalDiskParameters `json:"localDisk,omitempty" tf:"local_disk,omitempty"`
 
+	// Time between notification via metadata service and maintenance. E.g., 60s.
+	// +kubebuilder:validation:Optional
+	MaintenanceGracePeriod *string `json:"maintenanceGracePeriod,omitempty" tf:"maintenance_grace_period,omitempty"`
+
+	// Behaviour on maintenance events. The default is unspecified. Values: unspecified, migrate, restart.
+	// +kubebuilder:validation:Optional
+	MaintenancePolicy *string `json:"maintenancePolicy,omitempty" tf:"maintenance_policy,omitempty"`
+
 	// Metadata key/value pairs to make available from
 	// within the instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Options allow user to configure access to instance's metadata
@@ -757,6 +838,33 @@ type NetworkInterfaceInitParameters struct {
 
 	// Provide a public address, for instance, to access the internet over NAT. Address should be already reserved in web UI.
 	NATIPAddress *string `json:"natIpAddress,omitempty" tf:"nat_ip_address,omitempty"`
+
+	// Security group ids for network interface.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// ID of the subnet to attach this
+	// interface to. The subnet must exist in the same zone where this instance will be
+	// created.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceObservation struct {
@@ -797,6 +905,7 @@ type NetworkInterfaceObservation struct {
 	NATIPVersion *string `json:"natIpVersion,omitempty" tf:"nat_ip_version,omitempty"`
 
 	// Security group ids for network interface.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// ID of the subnet to attach this
@@ -848,6 +957,7 @@ type NetworkInterfaceParameters struct {
 	// Security group ids for network interface.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.

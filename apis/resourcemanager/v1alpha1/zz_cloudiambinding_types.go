@@ -19,8 +19,21 @@ import (
 
 type CloudIAMBindingInitParameters struct {
 
+	// ID of the cloud to attach the policy to.
+	// +crossplane:generate:reference:type=Cloud
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// Reference to a Cloud to populate cloudId.
+	// +kubebuilder:validation:Optional
+	CloudIDRef *v1.Reference `json:"cloudIdRef,omitempty" tf:"-"`
+
+	// Selector for a Cloud to populate cloudId.
+	// +kubebuilder:validation:Optional
+	CloudIDSelector *v1.Selector `json:"cloudIdSelector,omitempty" tf:"-"`
+
 	// An array of identities that will be granted the privilege in the role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be assigned. Only one
@@ -39,6 +52,7 @@ type CloudIAMBindingObservation struct {
 
 	// An array of identities that will be granted the privilege in the role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be assigned. Only one
@@ -66,6 +80,7 @@ type CloudIAMBindingParameters struct {
 	// An array of identities that will be granted the privilege in the role.
 	// Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be assigned. Only one

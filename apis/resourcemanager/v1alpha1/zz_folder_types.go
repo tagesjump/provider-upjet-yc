@@ -19,10 +19,23 @@ import (
 
 type FolderInitParameters struct {
 
+	// Cloud that the resource belongs to. If value is omitted, the default provider Cloud ID is used.
+	// +crossplane:generate:reference:type=Cloud
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// Reference to a Cloud to populate cloudId.
+	// +kubebuilder:validation:Optional
+	CloudIDRef *v1.Reference `json:"cloudIdRef,omitempty" tf:"-"`
+
+	// Selector for a Cloud to populate cloudId.
+	// +kubebuilder:validation:Optional
+	CloudIDSelector *v1.Selector `json:"cloudIdSelector,omitempty" tf:"-"`
+
 	// A description of the Folder.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A set of key/value label pairs to assign to the Folder.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Folder.
@@ -42,6 +55,7 @@ type FolderObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Folder.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Folder.
@@ -69,6 +83,7 @@ type FolderParameters struct {
 
 	// A set of key/value label pairs to assign to the Folder.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the Folder.

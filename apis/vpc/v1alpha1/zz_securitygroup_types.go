@@ -26,6 +26,7 @@ type SecurityGroupEgressInitParameters struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -62,6 +63,7 @@ type SecurityGroupEgressObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -98,6 +100,7 @@ type SecurityGroupEgressParameters struct {
 
 	// Labels to assign to this security group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -138,6 +141,7 @@ type SecurityGroupIngressInitParameters struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Labels to assign to this rule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -174,6 +178,7 @@ type SecurityGroupIngressObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this rule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -210,6 +215,7 @@ type SecurityGroupIngressParameters struct {
 
 	// Labels to assign to this rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -249,14 +255,39 @@ type SecurityGroupInitParameters struct {
 	// A list of egress rules. The structure is documented below.
 	Egress []SecurityGroupEgressInitParameters `json:"egress,omitempty" tf:"egress,omitempty"`
 
+	// ID of the folder this security group belongs to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A list of ingress rules.
 	Ingress []SecurityGroupIngressInitParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the security group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the network this security group belongs to.
+	// +crossplane:generate:reference:type=Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
 }
 
 type SecurityGroupObservation struct {
@@ -280,6 +311,7 @@ type SecurityGroupObservation struct {
 	Ingress []SecurityGroupIngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the security group.
@@ -321,6 +353,7 @@ type SecurityGroupParameters struct {
 
 	// Labels to assign to this security group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the security group.

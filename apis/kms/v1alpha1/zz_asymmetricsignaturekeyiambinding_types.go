@@ -19,8 +19,37 @@ import (
 
 type AsymmetricSignatureKeyIAMBindingInitParameters struct {
 
+	// The Yandex Key Management Service Asymmetric Signature Key ID to apply a binding to.
+	// +crossplane:generate:reference:type=AsymmetricSignatureKey
+	AsymmetricSignatureKeyID *string `json:"asymmetricSignatureKeyId,omitempty" tf:"asymmetric_signature_key_id,omitempty"`
+
+	// Reference to a AsymmetricSignatureKey to populate asymmetricSignatureKeyId.
+	// +kubebuilder:validation:Optional
+	AsymmetricSignatureKeyIDRef *v1.Reference `json:"asymmetricSignatureKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a AsymmetricSignatureKey to populate asymmetricSignatureKeyId.
+	// +kubebuilder:validation:Optional
+	AsymmetricSignatureKeyIDSelector *v1.Selector `json:"asymmetricSignatureKeyIdSelector,omitempty" tf:"-"`
+
+	// Identities that will be granted the privilege in role.
+	// Each entry can have one of the following values:
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
+	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
+	// +crossplane:generate:reference:selectorFieldName=ServiceAccountSelector
+	// +listType=set
+	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
+
 	// The role that should be applied. See roles.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// References to ServiceAccount in iam to populate members.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRef []v1.Reference `json:"serviceAccountRef,omitempty" tf:"-"`
+
+	// Selector for a list of ServiceAccount in iam to populate members.
+	// +kubebuilder:validation:Optional
+	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
@@ -34,6 +63,7 @@ type AsymmetricSignatureKeyIAMBindingObservation struct {
 
 	// Identities that will be granted the privilege in role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be applied. See roles.
@@ -64,6 +94,7 @@ type AsymmetricSignatureKeyIAMBindingParameters struct {
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
 	// +crossplane:generate:reference:selectorFieldName=ServiceAccountSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be applied. See roles.

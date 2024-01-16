@@ -92,6 +92,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   applicationLoadBalancer:
@@ -116,6 +117,7 @@ spec:
                             type: string
                           description: A set of key/value label pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         targetGroupName:
                           description: The name of the target group.
                           type: string
@@ -421,6 +423,10 @@ spec:
                                 description: The access mode to the disk resource.
                                   By default a disk is attached in READ_WRITE mode.
                                 type: string
+                              name:
+                                description: When set can be later used to change
+                                  DiskSpec of actual disk.
+                                type: string
                             type: object
                           type: array
                         description:
@@ -463,12 +469,14 @@ spec:
                           description: A set of key/value label pairs to assign to
                             the instance.
                           type: object
+                          x-kubernetes-map-type: granular
                         metadata:
                           additionalProperties:
                             type: string
                           description: A set of metadata key/value pairs to make available
                             from within the instance.
                           type: object
+                          x-kubernetes-map-type: granular
                         name:
                           description: 'Name template of the instance. In order to
                             be unique it must contain at least one of instance unique
@@ -657,6 +665,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               securityGroupIdsRefs:
                                 description: References to SecurityGroup in vpc to
                                   populate securityGroupIds.
@@ -748,6 +757,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIdsRefs:
                                 description: References to Subnet in vpc to populate
                                   subnetIds.
@@ -932,6 +942,10 @@ spec:
                                 description: The access mode to the disk resource.
                                   By default a disk is attached in READ_WRITE mode.
                                 type: string
+                              name:
+                                description: When set can be later used to change
+                                  DiskSpec of actual disk.
+                                type: string
                             type: object
                           type: array
                         serviceAccountId:
@@ -946,6 +960,7 @@ spec:
                     description: A set of key/value label pairs to assign to the instance
                       group.
                     type: object
+                    x-kubernetes-map-type: granular
                   loadBalancer:
                     description: Load balancing specifications. The structure is documented
                       below.
@@ -968,6 +983,7 @@ spec:
                             type: string
                           description: A set of key/value label pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         targetGroupName:
                           description: The name of the target group.
                           type: string
@@ -1009,6 +1025,7 @@ spec:
                                       description: A set of key/value label pairs
                                         to assign to the instance group.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: The name of metric.
                                       type: string
@@ -1104,6 +1121,7 @@ spec:
                                       description: A set of key/value label pairs
                                         to assign to the instance group.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: The name of metric.
                                       type: string
@@ -1252,6 +1270,7 @@ spec:
                     description: A set of key/value  variables pairs to assign to
                       the instance group.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -1290,6 +1309,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   applicationLoadBalancer:
@@ -1314,6 +1334,7 @@ spec:
                             type: string
                           description: A set of key/value label pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         targetGroupName:
                           description: The name of the target group.
                           type: string
@@ -1365,6 +1386,84 @@ spec:
                   description:
                     description: A description of the instance group.
                     type: string
+                  folderId:
+                    description: The ID of the folder that the resources belong to.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   healthCheck:
                     description: Health check specifications. The structure is documented
                       below.
@@ -1436,6 +1535,94 @@ spec:
                                     description:
                                       description: A description of the instance.
                                       type: string
+                                    imageId:
+                                      description: The disk image to initialize this
+                                        disk from.
+                                      type: string
+                                    imageIdRef:
+                                      description: Reference to a Image to populate
+                                        imageId.
+                                      properties:
+                                        name:
+                                          description: Name of the referenced object.
+                                          type: string
+                                        policy:
+                                          description: Policies for referencing.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      required:
+                                      - name
+                                      type: object
+                                    imageIdSelector:
+                                      description: Selector for a Image to populate
+                                        imageId.
+                                      properties:
+                                        matchControllerRef:
+                                          description: MatchControllerRef ensures
+                                            an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: Resolution specifies whether
+                                                resolution of this reference is required.
+                                                The default is 'Required', which means
+                                                the reconcile will fail if the reference
+                                                cannot be resolved. 'Optional' means
+                                                this reference will be a no-op if
+                                                it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: Resolve specifies when
+                                                this reference should be resolved.
+                                                The default is 'IfNotPresent', which
+                                                will attempt to resolve the reference
+                                                only when the corresponding field
+                                                is not present. Use 'Always' to resolve
+                                                the reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
                                     size:
                                       description: The size of the disk in GB.
                                       type: number
@@ -1452,6 +1639,10 @@ spec:
                               mode:
                                 description: The access mode to the disk resource.
                                   By default a disk is attached in READ_WRITE mode.
+                                type: string
+                              name:
+                                description: When set can be later used to change
+                                  DiskSpec of actual disk.
                                 type: string
                             type: object
                           type: array
@@ -1495,12 +1686,14 @@ spec:
                           description: A set of key/value label pairs to assign to
                             the instance.
                           type: object
+                          x-kubernetes-map-type: granular
                         metadata:
                           additionalProperties:
                             type: string
                           description: A set of metadata key/value pairs to make available
                             from within the instance.
                           type: object
+                          x-kubernetes-map-type: granular
                         name:
                           description: 'Name template of the instance. In order to
                             be unique it must contain at least one of instance unique
@@ -1601,6 +1794,272 @@ spec:
                                 description: A public address that can be used to
                                   access the internet over NAT. Use variables to set.
                                 type: string
+                              networkId:
+                                description: The ID of the network.
+                                type: string
+                              networkIdRef:
+                                description: Reference to a Network in vpc to populate
+                                  networkId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              networkIdSelector:
+                                description: Selector for a Network in vpc to populate
+                                  networkId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              securityGroupIds:
+                                description: Security group ids for network interface.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              securityGroupIdsRefs:
+                                description: References to SecurityGroup in vpc to
+                                  populate securityGroupIds.
+                                items:
+                                  description: A Reference to a named object.
+                                  properties:
+                                    name:
+                                      description: Name of the referenced object.
+                                      type: string
+                                    policy:
+                                      description: Policies for referencing.
+                                      properties:
+                                        resolution:
+                                          default: Required
+                                          description: Resolution specifies whether
+                                            resolution of this reference is required.
+                                            The default is 'Required', which means
+                                            the reconcile will fail if the reference
+                                            cannot be resolved. 'Optional' means this
+                                            reference will be a no-op if it cannot
+                                            be resolved.
+                                          enum:
+                                          - Required
+                                          - Optional
+                                          type: string
+                                        resolve:
+                                          description: Resolve specifies when this
+                                            reference should be resolved. The default
+                                            is 'IfNotPresent', which will attempt
+                                            to resolve the reference only when the
+                                            corresponding field is not present. Use
+                                            'Always' to resolve the reference on every
+                                            reconcile.
+                                          enum:
+                                          - Always
+                                          - IfNotPresent
+                                          type: string
+                                      type: object
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
+                              securityGroupIdsSelector:
+                                description: Selector for a list of SecurityGroup
+                                  in vpc to populate securityGroupIds.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              subnetIds:
+                                description: The ID of the subnets to attach this
+                                  interface to.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              subnetIdsRefs:
+                                description: References to Subnet in vpc to populate
+                                  subnetIds.
+                                items:
+                                  description: A Reference to a named object.
+                                  properties:
+                                    name:
+                                      description: Name of the referenced object.
+                                      type: string
+                                    policy:
+                                      description: Policies for referencing.
+                                      properties:
+                                        resolution:
+                                          default: Required
+                                          description: Resolution specifies whether
+                                            resolution of this reference is required.
+                                            The default is 'Required', which means
+                                            the reconcile will fail if the reference
+                                            cannot be resolved. 'Optional' means this
+                                            reference will be a no-op if it cannot
+                                            be resolved.
+                                          enum:
+                                          - Required
+                                          - Optional
+                                          type: string
+                                        resolve:
+                                          description: Resolve specifies when this
+                                            reference should be resolved. The default
+                                            is 'IfNotPresent', which will attempt
+                                            to resolve the reference only when the
+                                            corresponding field is not present. Use
+                                            'Always' to resolve the reference on every
+                                            reconcile.
+                                          enum:
+                                          - Always
+                                          - IfNotPresent
+                                          type: string
+                                      type: object
+                                  required:
+                                  - name
+                                  type: object
+                                type: array
+                              subnetIdsSelector:
+                                description: Selector for a list of Subnet in vpc
+                                  to populate subnetIds.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                             type: object
                           type: array
                         networkSettings:
@@ -1700,6 +2159,10 @@ spec:
                                 description: The access mode to the disk resource.
                                   By default a disk is attached in READ_WRITE mode.
                                 type: string
+                              name:
+                                description: When set can be later used to change
+                                  DiskSpec of actual disk.
+                                type: string
                             type: object
                           type: array
                         serviceAccountId:
@@ -1714,6 +2177,7 @@ spec:
                     description: A set of key/value label pairs to assign to the instance
                       group.
                     type: object
+                    x-kubernetes-map-type: granular
                   loadBalancer:
                     description: Load balancing specifications. The structure is documented
                       below.
@@ -1736,6 +2200,7 @@ spec:
                             type: string
                           description: A set of key/value label pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         targetGroupName:
                           description: The name of the target group.
                           type: string
@@ -1777,6 +2242,7 @@ spec:
                                       description: A set of key/value label pairs
                                         to assign to the instance group.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: The name of metric.
                                       type: string
@@ -1872,6 +2338,7 @@ spec:
                                       description: A set of key/value label pairs
                                         to assign to the instance group.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: The name of metric.
                                       type: string
@@ -1935,12 +2402,92 @@ spec:
                           type: array
                       type: object
                     type: array
+                  serviceAccountId:
+                    description: The ID of the service account authorized for this
+                      instance group.
+                    type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   variables:
                     additionalProperties:
                       type: string
                     description: A set of key/value  variables pairs to assign to
                       the instance group.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -2149,6 +2696,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   applicationLoadBalancer:
@@ -2179,6 +2727,7 @@ spec:
                             type: string
                           description: A set of key/value label pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         targetGroupName:
                           description: The name of the target group.
                           type: string
@@ -2331,6 +2880,10 @@ spec:
                                 description: The access mode to the disk resource.
                                   By default a disk is attached in READ_WRITE mode.
                                 type: string
+                              name:
+                                description: When set can be later used to change
+                                  DiskSpec of actual disk.
+                                type: string
                             type: object
                           type: array
                         description:
@@ -2373,12 +2926,14 @@ spec:
                           description: A set of key/value label pairs to assign to
                             the instance.
                           type: object
+                          x-kubernetes-map-type: granular
                         metadata:
                           additionalProperties:
                             type: string
                           description: A set of metadata key/value pairs to make available
                             from within the instance.
                           type: object
+                          x-kubernetes-map-type: granular
                         name:
                           description: 'Name template of the instance. In order to
                             be unique it must contain at least one of instance unique
@@ -2487,12 +3042,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetIds:
                                 description: The ID of the subnets to attach this
                                   interface to.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         networkSettings:
@@ -2592,6 +3149,10 @@ spec:
                                 description: The access mode to the disk resource.
                                   By default a disk is attached in READ_WRITE mode.
                                 type: string
+                              name:
+                                description: When set can be later used to change
+                                  DiskSpec of actual disk.
+                                type: string
                             type: object
                           type: array
                         serviceAccountId:
@@ -2678,6 +3239,7 @@ spec:
                     description: A set of key/value label pairs to assign to the instance
                       group.
                     type: object
+                    x-kubernetes-map-type: granular
                   loadBalancer:
                     description: Load balancing specifications. The structure is documented
                       below.
@@ -2706,6 +3268,7 @@ spec:
                             type: string
                           description: A set of key/value label pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         targetGroupName:
                           description: The name of the target group.
                           type: string
@@ -2747,6 +3310,7 @@ spec:
                                       description: A set of key/value label pairs
                                         to assign to the instance group.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: The name of metric.
                                       type: string
@@ -2842,6 +3406,7 @@ spec:
                                       description: A set of key/value label pairs
                                         to assign to the instance group.
                                       type: object
+                                      x-kubernetes-map-type: granular
                                     metricName:
                                       description: The name of metric.
                                       type: string
@@ -2918,6 +3483,7 @@ spec:
                     description: A set of key/value  variables pairs to assign to
                       the instance group.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

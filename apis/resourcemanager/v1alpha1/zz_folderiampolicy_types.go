@@ -19,6 +19,18 @@ import (
 
 type FolderIAMPolicyInitParameters struct {
 
+	// ID of the folder that the policy is attached to.
+	// +crossplane:generate:reference:type=Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// The yandex_iam_policy data source that represents
 	// the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
 	PolicyData *string `json:"policyData,omitempty" tf:"policy_data,omitempty"`

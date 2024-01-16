@@ -48,6 +48,17 @@ type PostgresqlDatabaseExtensionParameters struct {
 
 type PostgresqlDatabaseInitParameters struct {
 
+	// +crossplane:generate:reference:type=PostgresqlCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a PostgresqlCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a PostgresqlCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// Inhibits deletion of the database. Can either be true, false or unspecified.
 	DeletionProtection *string `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 

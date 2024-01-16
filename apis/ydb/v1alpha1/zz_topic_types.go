@@ -26,6 +26,7 @@ type TopicConsumerInitParameters struct {
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
 	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -38,6 +39,7 @@ type TopicConsumerObservation struct {
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
 	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -53,6 +55,7 @@ type TopicConsumerParameters struct {
 
 	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -81,6 +84,7 @@ type TopicInitParameters struct {
 	RetentionStorageMb *float64 `json:"retentionStorageMb,omitempty" tf:"retention_storage_mb,omitempty"`
 
 	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -111,6 +115,7 @@ type TopicObservation struct {
 	RetentionStorageMb *float64 `json:"retentionStorageMb,omitempty" tf:"retention_storage_mb,omitempty"`
 
 	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -149,6 +154,7 @@ type TopicParameters struct {
 
 	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 

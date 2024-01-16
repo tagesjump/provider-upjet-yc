@@ -19,6 +19,18 @@ import (
 
 type GroupIAMMemberInitParameters struct {
 
+	// ID of the organization to attach a policy to.
+	// +crossplane:generate:reference:type=Group
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// Reference to a Group to populate groupId.
+	// +kubebuilder:validation:Optional
+	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
+
+	// Selector for a Group to populate groupId.
+	// +kubebuilder:validation:Optional
+	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
+
 	// The identity that will be granted the privilege that is specified in the role field.
 	// This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`

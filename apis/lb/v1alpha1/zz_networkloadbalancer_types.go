@@ -21,6 +21,18 @@ type AttachedTargetGroupInitParameters struct {
 
 	// A HealthCheck resource. The structure is documented below.
 	Healthcheck []HealthcheckInitParameters `json:"healthcheck,omitempty" tf:"healthcheck,omitempty"`
+
+	// ID of the target group.
+	// +crossplane:generate:reference:type=TargetGroup
+	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
+
+	// Reference to a TargetGroup to populate targetGroupId.
+	// +kubebuilder:validation:Optional
+	TargetGroupIDRef *v1.Reference `json:"targetGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a TargetGroup to populate targetGroupId.
+	// +kubebuilder:validation:Optional
+	TargetGroupIDSelector *v1.Selector `json:"targetGroupIdSelector,omitempty" tf:"-"`
 }
 
 type AttachedTargetGroupObservation struct {
@@ -196,6 +208,18 @@ type InternalAddressSpecInitParameters struct {
 
 	// IP version of the internal addresses that the load balancer works with. Must be one of ipv4 or ipv6. The default is ipv4.
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
+
+	// ID of the subnet to which the internal IP address belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type InternalAddressSpecObservation struct {
@@ -315,7 +339,21 @@ type NetworkLoadBalancerInitParameters struct {
 	// you create the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder to which the resource belongs.
+	// If omitted, the provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Labels to assign to this network load balancer. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Listener specification that will be used by a network load balancer. The structure is documented below.
@@ -355,6 +393,7 @@ type NetworkLoadBalancerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this network load balancer. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Listener specification that will be used by a network load balancer. The structure is documented below.
@@ -402,6 +441,7 @@ type NetworkLoadBalancerParameters struct {
 
 	// Labels to assign to this network load balancer. A list of key/value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Listener specification that will be used by a network load balancer. The structure is documented below.

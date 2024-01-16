@@ -28,7 +28,21 @@ type DatabaseDedicatedInitParameters struct {
 	// A description for the Yandex Database cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the folder that the Yandex Database cluster belongs to.
+	// It will be deduced from provider configuration if not set explicitly.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the Yandex Database cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Location for the Yandex Database cluster.
@@ -41,6 +55,18 @@ type DatabaseDedicatedInitParameters struct {
 	// Name of the Yandex Database cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// ID of the network to attach the Yandex Database cluster to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
 	// The Yandex Database cluster preset.
 	// Available presets can be obtained via yc ydb resource-preset list command.
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
@@ -52,6 +78,19 @@ type DatabaseDedicatedInitParameters struct {
 	// A list of storage configuration options for the Yandex Database cluster.
 	// The structure is documented below.
 	StorageConfig []StorageConfigInitParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
+
+	// List of subnet IDs to attach the Yandex Database cluster to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type DatabaseDedicatedObservation struct {
@@ -80,6 +119,7 @@ type DatabaseDedicatedObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Yandex Database cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Location for the Yandex Database cluster.
@@ -111,6 +151,7 @@ type DatabaseDedicatedObservation struct {
 	StorageConfig []StorageConfigObservation `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
 
 	// List of subnet IDs to attach the Yandex Database cluster to.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// Whether TLS is enabled for the Yandex Database cluster.
@@ -155,6 +196,7 @@ type DatabaseDedicatedParameters struct {
 
 	// A set of key/value label pairs to assign to the Yandex Database cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Location for the Yandex Database cluster.
@@ -201,6 +243,7 @@ type DatabaseDedicatedParameters struct {
 	// List of subnet IDs to attach the Yandex Database cluster to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in vpc to populate subnetIds.

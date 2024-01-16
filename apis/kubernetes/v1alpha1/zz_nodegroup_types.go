@@ -25,6 +25,18 @@ type AllocationPolicyInitParameters struct {
 
 type AllocationPolicyLocationInitParameters struct {
 
+	// ID of the subnet, that will be used by one compute instance in node group.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// ID of the availability zone where for one compute instance in node group.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -367,9 +379,11 @@ type InstanceTemplateInitParameters struct {
 	GpuSettings []GpuSettingsInitParameters `json:"gpuSettings,omitempty" tf:"gpu_settings,omitempty"`
 
 	// Labels that will be assigned to compute nodes (instances), created by the Node Group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The set of metadata key:value pairs assigned to this instance template. This includes custom metadata and predefined keys. Note: key "user-data" won't be provided into instances. It reserved for internal activity in kubernetes_node_group resource.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Boolean flag, enables NAT for node group compute instances.
@@ -418,9 +432,11 @@ type InstanceTemplateObservation struct {
 	GpuSettings []GpuSettingsObservation `json:"gpuSettings,omitempty" tf:"gpu_settings,omitempty"`
 
 	// Labels that will be assigned to compute nodes (instances), created by the Node Group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The set of metadata key:value pairs assigned to this instance template. This includes custom metadata and predefined keys. Note: key "user-data" won't be provided into instances. It reserved for internal activity in kubernetes_node_group resource.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Boolean flag, enables NAT for node group compute instances.
@@ -474,10 +490,12 @@ type InstanceTemplateParameters struct {
 
 	// Labels that will be assigned to compute nodes (instances), created by the Node Group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The set of metadata key:value pairs assigned to this instance template. This includes custom metadata and predefined keys. Note: key "user-data" won't be provided into instances. It reserved for internal activity in kubernetes_node_group resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Boolean flag, enables NAT for node group compute instances.
@@ -563,6 +581,32 @@ type NetworkInterfaceInitParameters struct {
 
 	// A public address that can be used to access the internet over NAT.
 	NAT *bool `json:"nat,omitempty" tf:"nat,omitempty"`
+
+	// Security group ids for network interface.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// The IDs of the subnets.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceObservation struct {
@@ -583,9 +627,11 @@ type NetworkInterfaceObservation struct {
 	NAT *bool `json:"nat,omitempty" tf:"nat,omitempty"`
 
 	// Security group ids for network interface.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The IDs of the subnets.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -614,6 +660,7 @@ type NetworkInterfaceParameters struct {
 	// Security group ids for network interface.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -627,6 +674,7 @@ type NetworkInterfaceParameters struct {
 	// The IDs of the subnets.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in vpc to populate subnetIds.
@@ -646,6 +694,18 @@ type NodeGroupInitParameters struct {
 	// A list of allowed unsafe sysctl parameters for this node group. For more details see documentation.
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
+	// The ID of the Kubernetes cluster that this node group belongs to.
+	// +crossplane:generate:reference:type=Cluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a Cluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// Deploy policy of the node group. The structure is documented below.
 	DeployPolicy []DeployPolicyInitParameters `json:"deployPolicy,omitempty" tf:"deploy_policy,omitempty"`
 
@@ -656,6 +716,7 @@ type NodeGroupInitParameters struct {
 	InstanceTemplate []InstanceTemplateInitParameters `json:"instanceTemplate,omitempty" tf:"instance_template,omitempty"`
 
 	// A set of key/value label pairs assigned to the Kubernetes node group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Computed) Maintenance policy for this Kubernetes node group.
@@ -668,6 +729,7 @@ type NodeGroupInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A set of key/value label pairs, that are assigned to all the nodes of this Kubernetes node group.
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A list of Kubernetes taints, that are applied to all the nodes of this Kubernetes node group.
@@ -748,6 +810,7 @@ type NodeGroupObservation struct {
 	InstanceTemplate []InstanceTemplateObservation `json:"instanceTemplate,omitempty" tf:"instance_template,omitempty"`
 
 	// A set of key/value label pairs assigned to the Kubernetes node group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Computed) Maintenance policy for this Kubernetes node group.
@@ -760,6 +823,7 @@ type NodeGroupObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A set of key/value label pairs, that are assigned to all the nodes of this Kubernetes node group.
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A list of Kubernetes taints, that are applied to all the nodes of this Kubernetes node group.
@@ -815,6 +879,7 @@ type NodeGroupParameters struct {
 
 	// A set of key/value label pairs assigned to the Kubernetes node group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Computed) Maintenance policy for this Kubernetes node group.
@@ -830,6 +895,7 @@ type NodeGroupParameters struct {
 
 	// A set of key/value label pairs, that are assigned to all the nodes of this Kubernetes node group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A list of Kubernetes taints, that are applied to all the nodes of this Kubernetes node group.

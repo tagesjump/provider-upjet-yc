@@ -33,6 +33,9 @@ func Configure(p *ujconfig.Provider) {
 		r.References["boot_disk.initialize_params.image_id"] = ujconfig.Reference{
 			Type: "Image",
 		}
+		r.References["boot_disk.disk_id"] = ujconfig.Reference{
+			Type: "Disk",
+		}
 		r.UseAsync = true
 	})
 

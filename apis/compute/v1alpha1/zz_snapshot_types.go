@@ -22,11 +22,37 @@ type SnapshotInitParameters struct {
 	// Description of the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the snapshot.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A name for the resource.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the disk to create a snapshot from.
+	// +crossplane:generate:reference:type=Disk
+	SourceDiskID *string `json:"sourceDiskId,omitempty" tf:"source_disk_id,omitempty"`
+
+	// Reference to a Disk to populate sourceDiskId.
+	// +kubebuilder:validation:Optional
+	SourceDiskIDRef *v1.Reference `json:"sourceDiskIdRef,omitempty" tf:"-"`
+
+	// Selector for a Disk to populate sourceDiskId.
+	// +kubebuilder:validation:Optional
+	SourceDiskIDSelector *v1.Selector `json:"sourceDiskIdSelector,omitempty" tf:"-"`
 }
 
 type SnapshotObservation struct {
@@ -47,6 +73,7 @@ type SnapshotObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the snapshot.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A name for the resource.
@@ -81,6 +108,7 @@ type SnapshotParameters struct {
 
 	// A set of key/value label pairs to assign to the snapshot.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A name for the resource.

@@ -19,6 +19,17 @@ import (
 
 type MySQLDatabaseInitParameters struct {
 
+	// +crossplane:generate:reference:type=MySQLCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a MySQLCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a MySQLCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// The name of the database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }

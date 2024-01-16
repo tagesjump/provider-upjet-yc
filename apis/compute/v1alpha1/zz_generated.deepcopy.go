@@ -464,6 +464,16 @@ func (in *BootDiskInitParameters) DeepCopyInto(out *BootDiskInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DiskIDRef != nil {
+		in, out := &in.DiskIDRef, &out.DiskIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DiskIDSelector != nil {
+		in, out := &in.DiskIDSelector, &out.DiskIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.InitializeParams != nil {
 		in, out := &in.InitializeParams, &out.InitializeParams
 		*out = make([]InitializeParamsInitParameters, len(*in))
@@ -495,6 +505,21 @@ func (in *BootDiskInitializeParamsInitParameters) DeepCopyInto(out *BootDiskInit
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.ImageID != nil {
+		in, out := &in.ImageID, &out.ImageID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ImageIDRef != nil {
+		in, out := &in.ImageIDRef, &out.ImageIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ImageIDSelector != nil {
+		in, out := &in.ImageIDSelector, &out.ImageIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Size != nil {
 		in, out := &in.Size, &out.Size
@@ -672,6 +697,16 @@ func (in *BootDiskParameters) DeepCopyInto(out *BootDiskParameters) {
 		in, out := &in.DiskID, &out.DiskID
 		*out = new(string)
 		**out = **in
+	}
+	if in.DiskIDRef != nil {
+		in, out := &in.DiskIDRef, &out.DiskIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DiskIDSelector != nil {
+		in, out := &in.DiskIDSelector, &out.DiskIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.InitializeParams != nil {
 		in, out := &in.InitializeParams, &out.InitializeParams
@@ -1172,6 +1207,36 @@ func (in *DiskInitParameters) DeepCopyInto(out *DiskInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ImageID != nil {
+		in, out := &in.ImageID, &out.ImageID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ImageIDRef != nil {
+		in, out := &in.ImageIDRef, &out.ImageIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ImageIDSelector != nil {
+		in, out := &in.ImageIDSelector, &out.ImageIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -1513,6 +1578,21 @@ func (in *DiskPlacementGroupInitParameters) DeepCopyInto(out *DiskPlacementGroup
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
@@ -1881,6 +1961,21 @@ func (in *FilesystemInitParameters) DeepCopyInto(out *FilesystemInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -2247,6 +2342,21 @@ func (in *GpuClusterInitParameters) DeepCopyInto(out *GpuClusterInitParameters) 
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.InterconnectType != nil {
 		in, out := &in.InterconnectType, &out.InterconnectType
@@ -2970,6 +3080,21 @@ func (in *ImageInitParameters) DeepCopyInto(out *ImageInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -3368,6 +3493,21 @@ func (in *InitializeParamsInitParameters) DeepCopyInto(out *InitializeParamsInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.ImageID != nil {
+		in, out := &in.ImageID, &out.ImageID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ImageIDRef != nil {
+		in, out := &in.ImageIDRef, &out.ImageIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ImageIDSelector != nil {
+		in, out := &in.ImageIDSelector, &out.ImageIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -3688,6 +3828,21 @@ func (in *InstanceGroupInitParameters) DeepCopyInto(out *InstanceGroupInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HealthCheck != nil {
 		in, out := &in.HealthCheck, &out.HealthCheck
 		*out = make([]HealthCheckInitParameters, len(*in))
@@ -3741,6 +3896,21 @@ func (in *InstanceGroupInitParameters) DeepCopyInto(out *InstanceGroupInitParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ServiceAccountID != nil {
+		in, out := &in.ServiceAccountID, &out.ServiceAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccountIDRef != nil {
+		in, out := &in.ServiceAccountIDRef, &out.ServiceAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountIDSelector != nil {
+		in, out := &in.ServiceAccountIDSelector, &out.ServiceAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Variables != nil {
 		in, out := &in.Variables, &out.Variables
@@ -4163,6 +4333,21 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.GpuClusterID != nil {
 		in, out := &in.GpuClusterID, &out.GpuClusterID
 		*out = new(string)
@@ -4195,6 +4380,16 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.MaintenanceGracePeriod != nil {
+		in, out := &in.MaintenanceGracePeriod, &out.MaintenanceGracePeriod
+		*out = new(string)
+		**out = **in
+	}
+	if in.MaintenancePolicy != nil {
+		in, out := &in.MaintenancePolicy, &out.MaintenancePolicy
+		*out = new(string)
+		**out = **in
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -4268,6 +4463,21 @@ func (in *InstanceInitParameters) DeepCopyInto(out *InstanceInitParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ServiceAccountID != nil {
+		in, out := &in.ServiceAccountID, &out.ServiceAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccountIDRef != nil {
+		in, out := &in.ServiceAccountIDRef, &out.ServiceAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountIDSelector != nil {
+		in, out := &in.ServiceAccountIDSelector, &out.ServiceAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
@@ -4402,6 +4612,16 @@ func (in *InstanceObservation) DeepCopyInto(out *InstanceObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.MaintenanceGracePeriod != nil {
+		in, out := &in.MaintenanceGracePeriod, &out.MaintenanceGracePeriod
+		*out = new(string)
+		**out = **in
+	}
+	if in.MaintenancePolicy != nil {
+		in, out := &in.MaintenancePolicy, &out.MaintenancePolicy
+		*out = new(string)
+		**out = **in
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -4582,6 +4802,16 @@ func (in *InstanceParameters) DeepCopyInto(out *InstanceParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.MaintenanceGracePeriod != nil {
+		in, out := &in.MaintenanceGracePeriod, &out.MaintenanceGracePeriod
+		*out = new(string)
+		**out = **in
+	}
+	if in.MaintenancePolicy != nil {
+		in, out := &in.MaintenancePolicy, &out.MaintenancePolicy
+		*out = new(string)
+		**out = **in
 	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
@@ -4841,6 +5071,11 @@ func (in *InstanceTemplateBootDiskInitParameters) DeepCopyInto(out *InstanceTemp
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InstanceTemplateBootDiskInitParameters.
@@ -4878,6 +5113,11 @@ func (in *InstanceTemplateBootDiskObservation) DeepCopyInto(out *InstanceTemplat
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InstanceTemplateBootDiskObservation.
@@ -4912,6 +5152,11 @@ func (in *InstanceTemplateBootDiskParameters) DeepCopyInto(out *InstanceTemplate
 	}
 	if in.Mode != nil {
 		in, out := &in.Mode, &out.Mode
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -5198,6 +5443,67 @@ func (in *InstanceTemplateNetworkInterfaceInitParameters) DeepCopyInto(out *Inst
 		in, out := &in.NATIPAddress, &out.NATIPAddress
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5937,6 +6243,11 @@ func (in *InstanceTemplateSecondaryDiskInitParameters) DeepCopyInto(out *Instanc
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InstanceTemplateSecondaryDiskInitParameters.
@@ -5974,6 +6285,11 @@ func (in *InstanceTemplateSecondaryDiskObservation) DeepCopyInto(out *InstanceTe
 		*out = new(string)
 		**out = **in
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InstanceTemplateSecondaryDiskObservation.
@@ -6008,6 +6324,11 @@ func (in *InstanceTemplateSecondaryDiskParameters) DeepCopyInto(out *InstanceTem
 	}
 	if in.Mode != nil {
 		in, out := &in.Mode, &out.Mode
+		*out = new(string)
+		**out = **in
+	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -6912,6 +7233,44 @@ func (in *NetworkInterfaceInitParameters) DeepCopyInto(out *NetworkInterfaceInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new NetworkInterfaceInitParameters.
@@ -7324,6 +7683,21 @@ func (in *PlacementGroupInitParameters) DeepCopyInto(out *PlacementGroupInitPara
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
@@ -8226,6 +8600,21 @@ func (in *SnapshotInitParameters) DeepCopyInto(out *SnapshotInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -8246,6 +8635,21 @@ func (in *SnapshotInitParameters) DeepCopyInto(out *SnapshotInitParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.SourceDiskID != nil {
+		in, out := &in.SourceDiskID, &out.SourceDiskID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SourceDiskIDRef != nil {
+		in, out := &in.SourceDiskIDRef, &out.SourceDiskIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SourceDiskIDSelector != nil {
+		in, out := &in.SourceDiskIDSelector, &out.SourceDiskIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -8467,6 +8871,44 @@ func (in *SnapshotScheduleInitParameters) DeepCopyInto(out *SnapshotScheduleInit
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.DiskIds != nil {
+		in, out := &in.DiskIds, &out.DiskIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.DiskIdsRefs != nil {
+		in, out := &in.DiskIdsRefs, &out.DiskIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.DiskIdsSelector != nil {
+		in, out := &in.DiskIdsSelector, &out.DiskIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels

@@ -91,6 +91,20 @@ type BucketInitParameters struct {
 	// Defaults to private. Conflicts with grant.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The access key to use when applying changes. If omitted, storage_access_key specified in
+	// provider config (explicitly or within shared_credentials_file) is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccountStaticAccessKey
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractAccessKey()
+	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
+
+	// Reference to a ServiceAccountStaticAccessKey in iam to populate accessKey.
+	// +kubebuilder:validation:Optional
+	AccessKeyRef *v1.Reference `json:"accessKeyRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccountStaticAccessKey in iam to populate accessKey.
+	// +kubebuilder:validation:Optional
+	AccessKeySelector *v1.Selector `json:"accessKeySelector,omitempty" tf:"-"`
+
 	// Provides various access to objects.
 	// See bucket availability
 	// for more infomation.
@@ -110,6 +124,18 @@ type BucketInitParameters struct {
 	// Available values are: "STANDARD", "COLD", "ICE". Default is "STANDARD".
 	// See storage class for more inforamtion.
 	DefaultStorageClass *string `json:"defaultStorageClass,omitempty" tf:"default_storage_class,omitempty"`
+
+	// Allow to create bucket in different folder.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
 	// A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable.
 	ForceDestroy *bool `json:"forceDestroy,omitempty" tf:"force_destroy,omitempty"`
@@ -137,6 +163,7 @@ type BucketInitParameters struct {
 	// A configuration of server-side encryption for the bucket (documented below)
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A state of versioning (documented below)
@@ -217,6 +244,7 @@ type BucketObservation struct {
 	// A configuration of server-side encryption for the bucket (documented below)
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationObservation `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A state of versioning (documented below)
@@ -333,6 +361,7 @@ type BucketParameters struct {
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A state of versioning (documented below)
@@ -494,6 +523,7 @@ type GrantInitParameters struct {
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -506,6 +536,7 @@ type GrantObservation struct {
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -520,6 +551,7 @@ type GrantParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -571,6 +603,7 @@ type LifecycleRuleInitParameters struct {
 	// Object key prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
@@ -600,6 +633,7 @@ type LifecycleRuleObservation struct {
 	// Object key prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
@@ -637,6 +671,7 @@ type LifecycleRuleParameters struct {
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).

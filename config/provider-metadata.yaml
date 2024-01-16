@@ -332,7 +332,6 @@ resources:
                 http_router_id: yandex_alb_http_router.my-router.id
                 route.http_route.http_route_action.backend_group_id: yandex_alb_backend_group.my-bg.id
         argumentDocs:
-            '"http_router_id': '- (Required) The ID of the HTTP router to which the virtual host belongs.'
             authority: |-
                 - (Optional) A list of domains (host/authority header) that will be matched to this virtual host. Wildcard
                 hosts are supported in the form of '.foo.com' or '-bar.foo.com'. If not specified, all domains will be matched.
@@ -379,6 +378,7 @@ resources:
             http_route_action.upgrade_types: |-
                 - (Optional) List of upgrade types. Only specified upgrade types will be allowed. For example,
                 "websocket".
+            http_router_id: '- (Required) The ID of the HTTP router to which the virtual host belongs.'
             id: '- The ID of the virtual host.'
             modify_request_headers: |-
                 - (Optional) Apply the following modifications to the request
@@ -413,6 +413,9 @@ resources:
             route.grpc_route: '- (Optional) GRPC route resource. The structure is documented below.'
             route.http_route: '- (Optional) HTTP route resource. The structure is documented below.'
             route.name: '- (Required) name of the route.'
+            route_options: '- (Optional) Route options for the virtual host. The structure is documented below.'
+            route_options.rbac: '- (Optional) RBAC configuration.'
+            route_options.security_profile_id: '- (Optional) SWS profile ID.'
             update: '- Default is 5 minute.'
         importStatements: []
     yandex_api_gateway:
@@ -448,6 +451,12 @@ resources:
                     "empty-label": "",
                     "label": "label"
                   },
+                  "log_options": [
+                    {
+                      "log_group_id": "\u003clog group id\u003e",
+                      "min_level": "ERROR"
+                    }
+                  ],
                   "name": "some_name",
                   "spec": "openapi: \"3.0.0\"\ninfo:\n  version: 1.0.0\n  title: Test API\nx-yc-apigateway:\n  variables:\n    installation:\n      default: \"prod\"\n      enum:\n       - \"prod\"\n       - \"dev\"\npaths:\n  /hello:\n    get:\n      summary: Say hello\n      operationId: hello\n      parameters:\n        - name: user\n          in: query\n          description: User name to appear in greetings\n          required: false\n          schema:\n            type: string\n            default: 'world'\n      responses:\n        '200':\n          description: Greeting\n          content:\n            'text/plain':\n              schema:\n                type: \"string\"\n      x-yc-apigateway-integration:\n        type: dummy\n        http_code: 200\n        http_headers:\n          'Content-Type': \"text/plain\"\n        content:\n          'text/plain': \"Hello again, {user} from ${apigw.installation} release!\\n\"\n",
                   "variables": {
@@ -463,10 +472,14 @@ resources:
             created_at: '- Creation timestamp of the Yandex Cloud API Gateway.'
             custom_domains: '- (Optional) Set of custom domains to be attached to Yandex API Gateway.'
             description: '- (Optional) Description of the Yandex Cloud API Gateway.'
+            disabled: '- Is logging from API Gateway disabled'
             domain: '- Default domain for the Yandex API Gateway. Generated at creation time.'
             folder_id: '- (Optional) Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.'
             labels: '- (Optional) A set of key/value label pairs to assign to the Yandex Cloud API Gateway.'
+            log_group_id: '- Log entries are written to specified log group'
+            log_options: '- Options for logging from Yandex Cloud API Gateway.'
             loggroup_id: '- ID of the log group for the Yandex API Gateway.'
+            min_level: '- Minimum log entry level'
             name: (Required) - Yandex Cloud API Gateway name used to define API Gateway.
             spec: '- (Required) OpenAPI specification for Yandex API Gateway.'
             status: '- Status of the Yandex API Gateway.'
@@ -1145,11 +1158,7 @@ resources:
                 {
                   "boot_disk": [
                     {
-                      "initialize_params": [
-                        {
-                          "image_id": "image_id"
-                        }
-                      ]
+                      "disk_id": "${yandex_compute_disk.boot-disk.id}"
                     }
                   ],
                   "metadata": {
@@ -1171,6 +1180,8 @@ resources:
                   ],
                   "zone": "ru-central1-a"
                 }
+              references:
+                boot_disk.disk_id: yandex_compute_disk.boot-disk.id
               dependencies:
                 yandex_vpc_network.foo: '{}'
                 yandex_vpc_subnet.foo: |-
@@ -1239,6 +1250,8 @@ resources:
             local_disk: '- (Optional) List of local disks that are attached to the instance. Structure is documented below.'
             local_disk.device_name: '- The name of the local disk device.'
             local_disk.size_bytes: '- (Required) Size of the disk, specified in bytes.'
+            maintenance_grace_period: '- (Optional) Time between notification via metadata service and maintenance. E.g., 60s.'
+            maintenance_policy: '- (Optional) Behaviour on maintenance events. The default is unspecified. Values: unspecified, migrate, restart.'
             metadata: |-
                 - (Optional) Metadata key/value pairs to make available from
                 within the instance.
@@ -1414,6 +1427,7 @@ resources:
             boot_disk.device_name: '- (Optional) This value can be used to reference the device under /dev/disk/by-id/.'
             boot_disk.initialize_params: '- (Required) Parameters for creating a disk alongside the instance. The structure is documented below.'
             boot_disk.mode: '- (Optional) The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.'
+            boot_disk.name: '- When set can be later used to change DiskSpec of actual disk.'
             create: '- Default 30 minutes'
             created_at: '- The instance group creation timestamp.'
             custom_rule.folder_id: '- (Optional) Folder ID of custom metric in Yandex Monitoring that should be used for scaling.'
@@ -1570,6 +1584,7 @@ resources:
             secondary_disk.disk_id: '- (Optional) ID of the existing disk. To set use variables.'
             secondary_disk.initialize_params: '- (Optional) Parameters used for creating a disk alongside the instance. The structure is documented below.'
             secondary_disk.mode: '- (Optional) The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.'
+            secondary_disk.name: '- (Optional) When set can be later used to change DiskSpec of actual disk.'
             service_account_id: '- (Required) The ID of the service account authorized for this instance group.'
             tcp_options.port: '- (Required) The port used for TCP health checks.'
             test_auto_scale.cpu_utilization_target: '- (Required) Target CPU load level.'
@@ -2312,6 +2327,9 @@ resources:
                               "raw": "321"
                             }
                           ],
+                          "security_groups": [
+                            "${list}"
+                          ],
                           "user": "user2"
                         }
                       ]
@@ -2343,6 +2361,8 @@ resources:
             clickhouse_target.connection.connection_options.on_premise.tls_mode: '- (Optional) TLS settings for the server connection. Empty implies plaintext connection. The structure is documented below.'
             clickhouse_target.connection.connection_options.password: '- (Required) Password for the database access. This is a block with a single field named raw which should contain the password.'
             clickhouse_target.connection.connection_options.user: '- (Required) User for database access.'
+            clickhouse_target.custom_mapping: (Optional) A custom shard mapping by the value of the specified column. The structure is documented below.
+            clickhouse_target.round_robin: (Optional) Distribute incoming rows between ClickHouse shards in a round-robin manner. Specify as an empty block to enable.
             clickhouse_target.security_groups: '- (Optional) List of security groups that the transfer associated with this endpoint should use.'
             clickhouse_target.sharding: '- (Optional) Shard selection rules for the data being transferred. The structure is documented below.'
             clickhouse_target.subnet_id: '- (Optional) Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.'
@@ -2354,6 +2374,11 @@ resources:
             connection.on_premise.subnet_id: (Optional) Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
             connection.on_premise.tls_mode: (Optional) TLS settings for the server connection. Empty implies plaintext connection. The structure is documented below.
             created_at: '- (Computed) Data Transfer endpoint creation timestamp.'
+            custom_mapping.column_name: '- (Required) The name of the column to inspect when deciding the shard to chose for an incoming row.'
+            custom_mapping.mapping: '- (Required) The mapping of the specified column values to the shard names. The structure is documented below.'
+            custom_mapping.mapping.column_value: '- (Required) The value of the column. Currently only the string columns are supported. The structure is documented below.'
+            custom_mapping.mapping.column_value.string_value: '- (Optional) The string value of the column.'
+            custom_mapping.mapping.shard_name: '- (Required) The name of the shard into which all the rows with the specified column_value will be written.'
             description: '- (Optional) Arbitrary description text for the endpoint.'
             folder_id: '- (Optional) ID of the folder to create the endpoint in. If it is not provided, the default provider folder is used.'
             id: '- (Computed) Identifier of a new Data Transfer endpoint.'
@@ -2361,7 +2386,8 @@ resources:
             kafka_source.connection: '- (Required) Connection settings.'
             kafka_source.parser: '- (Optional) Data parsing parameters. If not set, the source messages are read in raw.'
             kafka_source.security_groups: '- (Optional) List of security groups that the transfer associated with this endpoint should use.'
-            kafka_source.topic_name: '- (Required) Full source topic name.'
+            kafka_source.topic_name: '- (Optional) Deprecated. Please use topic_names instead.'
+            kafka_source.topic_names: '- (Optional) The list of full source topic names.'
             kafka_source.transformer: '- (Optional) Transform data with a custom Cloud Function.'
             kafka_target.auth: '- (Required) Authentication data.'
             kafka_target.connection: '- (Required) Connection settings.'
@@ -2400,8 +2426,10 @@ resources:
             mysql_source.include_tables_regex: '- (Optional) List of regular expressions of table names which should be transferred. A table name is formatted as schemaname.tablename. For example, a single regular expression may look like ^mydb.employees$.'
             mysql_source.object_transfer_settings: '- (Optional) Defines which database schema objects should be transferred, e.g. views, routines, etc.'
             mysql_source.password: '- (Required) Password for the database access. This is a block with a single field named raw which should contain the password.'
+            mysql_source.security_groups: '- (Optional) List of security groups that the transfer associated with this endpoint should use.'
             mysql_source.timezone: '- (Optional) Timezone to use for parsing timestamps for saving source timezones. Accepts values from IANA timezone database. Default: local timezone.'
             mysql_source.user: '- (Required) User for the database access.'
+            mysql_target.cleanup_policy: '- (Optional) How to clean tables when activating the transfer. One of "DISABLED", "DROP" or "TRUNCATE".'
             mysql_target.connection: '- (Required) Connection settings. The structure is documented below.'
             mysql_target.connection.mdb_cluster_id: '- Identifier of the Managed MySQL cluster.'
             mysql_target.connection.on_premise: '- Connection settings of the on-premise MySQL server.'
@@ -2411,6 +2439,8 @@ resources:
             mysql_target.connection.on_premise.tls_mode: '- (Optional) TLS settings for the server connection. Empty implies plaintext connection. The structure is documented below.'
             mysql_target.database: '- (Required) Name of the database to transfer.'
             mysql_target.password: '- (Required) Password for the database access. This is a block with a single field named raw which should contain the password.'
+            mysql_target.security_groups: '- (Optional) List of security groups that the transfer associated with this endpoint should use.'
+            mysql_target.service_database: '- (Optional) The name of the database where technical tables (__tm_keeper, __tm_gtid_keeper) will be created. Default is the value of the attribute database.'
             mysql_target.skip_constraint_checks: '- (Optional) When true, disables foreign key checks. See foreign_key_checks. False by default.'
             mysql_target.sql_mode: '- (Optional) sql_mode to use when interacting with the server. Defaults to "NO_AUTO_VALUE_ON_ZERO,NO_DIR_IN_CREATE,NO_ENGINE_SUBSTITUTION".'
             mysql_target.timezone: '- (Optional) Timezone to use for parsing timestamps for saving source timezones. Accepts values from IANA timezone database. Default: local timezone.'
@@ -2441,6 +2471,7 @@ resources:
             postgres_target.connection.on_premise.tls_mode: '- (Optional) TLS settings for the server connection. Empty implies plaintext connection. The structure is documented below.'
             postgres_target.database: '- (Required) Name of the database to transfer.'
             postgres_target.password: '- (Required) Password for the database access. This is a block with a single field named raw which should contain the password.'
+            postgres_target.security_groups: '- (Optional) List of security groups that the transfer associated with this endpoint should use.'
             postgres_target.user: '- (Required) User for the database access.'
             serializer.serializer_auto: '- Empty block. Select data serialization format automatically.'
             serializer.serializer_debezium: '- Serialize data in json format. The structure is documented below.'
@@ -2462,6 +2493,7 @@ resources:
             settings.postgres_source.include_tables: '- List of tables to transfer, formatted as schemaname.tablename. If omitted or an empty list is specified, all tables will be transferred.'
             settings.postgres_source.object_transfer_settings: '- (Optional) Defines which database schema objects should be transferred, e.g. views, functions, etc.'
             settings.postgres_source.password: '- (Required) Password for the database access. This is a block with a single field named raw which should contain the password.'
+            settings.postgres_source.security_groups: '- (Optional) List of security groups that the transfer associated with this endpoint should use.'
             settings.postgres_source.service_schema: '- (Optional) Name of the database schema in which auxiliary tables needed for the transfer will be created. Empty service_schema implies schema "public".'
             settings.postgres_source.slot_gigabyte_lag_limit: '- (Optional) Maximum WAL size held by the replication slot, in gigabytes. Exceeding this limit will result in a replication failure and deletion of the replication slot. Unlimited by default.'
             settings.postgres_source.user: '- (Required) User for the database access.'
@@ -2490,6 +2522,7 @@ resources:
             ydb_target.connection: '- (Required) Connection settings.'
             ydb_target.database: '-- (Required) Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
             ydb_target.instance: '-- (Optional) Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
+            ydb_target.is_table_column_oriented: -- (Optional) Whether a column-oriented (i.e. OLAP) tables should be created. Default is false (create row-oriented OLTP tables).
             ydb_target.path: -- (Optional) A path where resulting tables are stored.
             ydb_target.sa_key_content: -- (Optional, Sensitive) Authentication key.
             ydb_target.security_groups: -- (Optional) List of security groups that the transfer associated with this endpoint should use.
@@ -2735,6 +2768,12 @@ resources:
                   "description": "any description",
                   "entrypoint": "main",
                   "execution_timeout": "10",
+                  "log_options": [
+                    {
+                      "log_group_id": "e2392vo6d1bne2aeq9fr",
+                      "min_level": "ERROR"
+                    }
+                  ],
                   "memory": "128",
                   "name": "some_name",
                   "runtime": "python37",
@@ -2759,6 +2798,11 @@ resources:
             async_invocation.ymq_failure_target: '- Target for unsuccessful async invocation'
             async_invocation.ymq_success_target: '- Target for successful async invocation'
             async_invocation.ymq_success_target.arn: '- YMQ ARN'
+            async_invocation.ymq_success_target.disabled: '- Is logging from function disabled'
+            async_invocation.ymq_success_target.folder_id: '- Log entries are written to default log group for specified folder'
+            async_invocation.ymq_success_target.log_group_id: '- Log entries are written to specified log group'
+            async_invocation.ymq_success_target.log_options: 'block supports:'
+            async_invocation.ymq_success_target.min_level: '- Minimum log entry level'
             async_invocation.ymq_success_target.service_account_id: '- Service account used for writing result to queue'
             connectivity: '- Function version connectivity. If specified the version will be attached to specified network.'
             connectivity.0.network_id: '- Network the version will have access to. It''s essential to specify network with subnets in all availability zones.'
@@ -2772,6 +2816,7 @@ resources:
             folder_id: '- Folder ID for the Yandex Cloud Function'
             image_size: '- Image size for Yandex Cloud Function.'
             labels: '- A set of key/value label pairs to assign to the Yandex Cloud Function'
+            log_options: '- Options for logging from Yandex Cloud Function.'
             loggroup_id: '- Loggroup ID size for Yandex Cloud Function.'
             memory: '- (Required) Memory in megabytes (aligned to 128MB) for Yandex Cloud Function'
             name: (Required) - Yandex Cloud Function name used to define trigger
@@ -2781,11 +2826,17 @@ resources:
             package.0.sha_256: '- SHA256 hash of the version deployment package.'
             runtime: '- (Required) Runtime for Yandex Cloud Function'
             secrets: '- Secrets for Yandex Cloud Function.'
+            secrets.bucket: '- (Required) Name of the mounting bucket.'
             secrets.environment_variable: '- (Required) Function''s environment variable in which secret''s value will be stored.'
             secrets.id: '- (Required) Secret''s id.'
             secrets.key: '- (Required) Secret''s entries key which value will be stored in environment variable.'
+            secrets.mount_point_name: '- (Required) Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.'
+            secrets.prefix: '- Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.'
+            secrets.read_only: '- Mount the bucket in read-only mode.'
+            secrets.storage_mounts: 'block supports:'
             secrets.version_id: '- (Required) Secret''s version id.'
             service_account_id: '- Service account ID for Yandex Cloud Function'
+            storage_mounts: '- Storage mounts for Yandex Cloud Function.'
             tags: '- Tags for Yandex Cloud Function. Tag "$latest" isn''t returned.'
             user_hash: '- (Required) User-defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.'
             version: '- Version for Yandex Cloud Function.'
@@ -2871,7 +2922,23 @@ resources:
             container.0.retry_attempts: '- Retry attempts for Yandex.Cloud Serverless Container for Yandex Cloud Functions Trigger'
             container.0.retry_interval: '- Retry interval in seconds for Yandex.Cloud Serverless Container for Yandex Cloud Functions Trigger'
             container.0.service_account_id: '- Service account ID for Yandex.Cloud Serverless Container for Yandex Cloud Functions Trigger'
+            container_registry: '- Container Registry settings definition for Yandex Cloud Functions Trigger, if present'
+            container_registry.0.batch_cutoff: '- Batch Duration in seconds for Yandex Cloud Functions Trigger'
+            container_registry.0.batch_size: '- Batch Size for Yandex Cloud Functions Trigger'
+            container_registry.0.create_image: '- Boolean flag for setting create image event for Yandex Cloud Functions Trigger'
+            container_registry.0.create_image_tag: '- Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger'
+            container_registry.0.delete_image: '- Boolean flag for setting delete image event for Yandex Cloud Functions Trigger'
+            container_registry.0.delete_image_tag: '- Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger'
+            container_registry.0.image_name: '- Image name filter setting for Yandex Cloud Functions Trigger'
+            container_registry.0.registry_id: '- Container Registry ID for Yandex Cloud Functions Trigger'
+            container_registry.0.tag: '- Image tag filter setting for Yandex Cloud Functions Trigger'
             created_at: '- Creation timestamp of the Yandex Cloud Functions Trigger'
+            data_streams: '- Data Streams settings definition for Yandex Cloud Functions Trigger, if present'
+            data_streams.0.batch_cutoff: '- Batch Duration in seconds for Yandex Cloud Functions Trigger'
+            data_streams.0.batch_size: '- Batch Size for Yandex Cloud Functions Trigger'
+            data_streams.0.database: '- Stream database for Yandex Cloud Functions Trigger'
+            data_streams.0.service_account_id: '- Service account ID to access data stream for Yandex Cloud Functions Trigger'
+            data_streams.0.stream_name: '- Stream name for Yandex Cloud Functions Trigger'
             description: '- Description of the Yandex Cloud Functions Trigger'
             dlq: '- Dead Letter Queue settings definition for Yandex Cloud Functions Trigger'
             dlq.0.queue_id: '- ID of Dead Letter Queue for Trigger (Queue ARN)'
@@ -2898,6 +2965,11 @@ resources:
             logging.0.resource_ids: '- Resource ID filter setting for Yandex Cloud Functions Trigger'
             logging.0.resource_types: '- Resource type filter setting for Yandex Cloud Functions Trigger'
             logging.0.stream_names: '- Logging stream name filter setting for Yandex Cloud Functions Trigger'
+            mail: '- Logging settings definition for Yandex Cloud Functions Trigger, if present'
+            mail.0.attachments_bucket_id: '- Object Storage Bucket ID for Yandex Cloud Functions Trigger'
+            mail.0.batch_cutoff: '- Batch Duration in seconds for Yandex Cloud Functions Trigger'
+            mail.0.batch_size: '- Batch Size for Yandex Cloud Functions Trigger'
+            mail.0.service_account_id: '- Service account ID to access object storage for Yandex Cloud Functions Trigger'
             message_queue: '- Message Queue settings definition for Yandex Cloud Functions Trigger, if present'
             message_queue.0.batch_cutoff: '- Batch Duration in seconds for Yandex Cloud Functions Trigger'
             message_queue.0.batch_size: '- Batch Size for Yandex Cloud Functions Trigger'
@@ -3542,6 +3614,11 @@ resources:
                 If policy is omitted, automatic revision upgrades of the kubernetes master are enabled and could happen at any time.
                 Revision upgrades are performed only within the same minor version, e.g. 1.13.
                 Minor version upgrades (e.g. 1.13->1.14) should be performed manually. The structure is documented below.
+            master.master_location: |-
+                - (Optional) Cluster master's instances locations array (zone and subnet).
+                Cannot be used together with zonal or regional. Currently, supports either one, for zonal master, or three instances of master_location.
+                Can be updated inplace. When creating regional cluster (three master instances), its region will be evaluated automatically by backend.
+                The structure is documented below.
             master.master_logging: '- (Optional) Master Logging options. The structure is documented below.'
             master.public_ip: '- (Optional) (Computed) Boolean flag. When true, Kubernetes master will have visible ipv4 address.'
             master.regional: '- (Optional) Initialize parameters for Regional Master (highly available master). The structure is documented below.'
@@ -3549,6 +3626,8 @@ resources:
             master.version: '- (Optional) (Computed) Version of Kubernetes that will be used for master.'
             master.version_info: '- (Computed) Information about cluster version. The structure is documented below.'
             master.zonal: '- (Optional) Initialize parameters for Zonal Master (single node master). The structure is documented below.'
+            master_location.subnet_id: '- (Optional) ID of the subnet.'
+            master_location.zone: '- (Optional) ID of the availability zone.'
             master_logging.audit_enabled: '- (Optional) Boolean flag that specifies if kube-apiserver audit logs should be sent to Yandex Cloud Logging.'
             master_logging.cluster_autoscaler_enabled: '- (Optional) Boolean flag that specifies if cluster-autoscaler logs should be sent to Yandex Cloud Logging.'
             master_logging.enabled: '- (Optional) Boolean flag that specifies if master components logs should be sent to Yandex Cloud Logging. The exact components that will send their logs must be configured via the options described below.'
@@ -5219,6 +5298,16 @@ resources:
             pooler_config.pool_client_idle_timeout: '- (Optional) Value for pool_client_idle_timeout parameter in Odyssey.'
             pooler_config.pool_size: '- (Optional) Value for pool_size parameter in Odyssey.'
             pooler_config.pooling_mode: '- (Optional) Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.'
+            pxf_config: '- (Optional) Configuration of the PXF daemon. The structure is documented below.'
+            pxf_config.connection_timeout: '- (Optional) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.'
+            pxf_config.max_threads: '- (Optional) The maximum number of PXF tomcat threads. Value is between 1 and 1024.'
+            pxf_config.pool_allow_core_thread_timeout: '- (Optional) Identifies whether or not core streaming threads are allowed to time out.'
+            pxf_config.pool_core_size: '- (Optional) The number of core streaming threads. Value is between 1 and 1024.'
+            pxf_config.pool_max_size: '- (Optional) The maximum allowed number of core streaming threads. Value is between 1 and 1024.'
+            pxf_config.pool_queue_capacity: '- (Optional) The capacity of the core streaming thread pool queue. Value is positive.'
+            pxf_config.upload_timeout: '- (Optional) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.'
+            pxf_config.xms: '- (Optional) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.'
+            pxf_config.xmx: '- (Optional) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.'
             security_group_ids: '- (Optional) A set of ids of security groups assigned to hosts of the cluster.'
             segment_host_count: '- (Required) Number of hosts in segment subcluster (from 1 to 32).'
             segment_hosts: '- (Computed) Info about hosts in segment subcluster. The structure is documented below.'
@@ -7255,7 +7344,7 @@ resources:
             created_at: '- Timestamp of cluster creation.'
             deletion_protection: '- (Optional) Inhibits deletion of the cluster.  Can be either true or false.'
             description: '- (Optional) Description of the PostgreSQL cluster.'
-            disk_size_autoscaling.disk_size_limit: '- Limit of disk size after autoscaling.'
+            disk_size_autoscaling.disk_size_limit: '- Limit of disk size after autoscaling (GiB).'
             disk_size_autoscaling.emergency_usage_threshold: '- Immediate autoscaling disk usage (percent).'
             disk_size_autoscaling.planned_usage_threshold: '- Maintenance window autoscaling disk usage (percent).'
             environment: '- (Required) Deployment environment of the PostgreSQL cluster.'
@@ -8482,6 +8571,12 @@ resources:
                       "url": "cr.yandex/yc/test-image:v1"
                     }
                   ],
+                  "log_options": [
+                    {
+                      "log_group_id": "e2392vo6d1bne2aeq9fr",
+                      "min_level": "ERROR"
+                    }
+                  ],
                   "memory": 256,
                   "name": "some_name",
                   "secrets": [
@@ -8528,15 +8623,27 @@ resources:
             image.0.url: (Required) - URL of image that will be deployed as Yandex Cloud Serverless Container
             image.0.work_dir: '- Working directory for Yandex Cloud Serverless Container'
             labels: '- A set of key/value label pairs to assign to the Yandex Cloud Serverless Container'
+            log_options: '- Options for logging from Yandex Cloud Serverless Container'
             memory: (Required) - Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
             name: (Required) - Yandex Cloud Serverless Container name
             revision_id: '- Last revision ID of the Yandex Cloud Serverless Container'
             secrets: '- Secrets for Yandex Cloud Serverless Container'
+            secrets.bucket: '- (Required) Name of the mounting bucket.'
+            secrets.disabled: '- Is logging from container disabled'
             secrets.environment_variable: '- (Required) Container''s environment variable in which secret''s value will be stored.'
+            secrets.folder_id: '- Log entries are written to default log group for specified folder'
             secrets.id: '- (Required) Secret''s id.'
             secrets.key: '- (Required) Secret''s entries key which value will be stored in environment variable.'
+            secrets.log_group_id: '- Log entries are written to specified log group'
+            secrets.log_options: 'block supports:'
+            secrets.min_level: '- Minimum log entry level'
+            secrets.mount_point_path: '- (Required) Path inside the container to access the directory in which the bucket is mounted.'
+            secrets.prefix: '- Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.'
+            secrets.read_only: '- Mount the bucket in read-only mode.'
+            secrets.storage_mounts: 'block supports:'
             secrets.version_id: '- (Required) Secret''s version id.'
             service_account_id: '- Service account ID for Yandex Cloud Serverless Container'
+            storage_mounts: '- Storage mounts for Yandex Cloud Serverless Container'
             url: '- Invoke URL for the Yandex Cloud Serverless Container'
         importStatements: []
     yandex_serverless_container_iam_binding:

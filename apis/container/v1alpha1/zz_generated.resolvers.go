@@ -38,6 +38,22 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -81,6 +97,38 @@ func (mg *RegistryIAMBinding) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.RegistryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegistryIDRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Members),
+		Extract:       iam.ServiceAccountRefValue(),
+		References:    mg.Spec.InitProvider.ServiceAccountRef,
+		Selector:      mg.Spec.InitProvider.ServiceAccountSelector,
+		To: reference.To{
+			List:    &v1alpha11.ServiceAccountList{},
+			Managed: &v1alpha11.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Members")
+	}
+	mg.Spec.InitProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServiceAccountRef = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RegistryIDRef,
+		Selector:     mg.Spec.InitProvider.RegistryIDSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RegistryID")
+	}
+	mg.Spec.InitProvider.RegistryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RegistryIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -106,6 +154,22 @@ func (mg *RegistryIPPermission) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.RegistryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RegistryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RegistryIDRef,
+		Selector:     mg.Spec.InitProvider.RegistryIDSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RegistryID")
+	}
+	mg.Spec.InitProvider.RegistryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RegistryIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -150,6 +214,38 @@ func (mg *RepositoryIAMBinding) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.RepositoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryIDRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Members),
+		Extract:       iam.ServiceAccountRefValue(),
+		References:    mg.Spec.InitProvider.ServiceAccountRef,
+		Selector:      mg.Spec.InitProvider.ServiceAccountSelector,
+		To: reference.To{
+			List:    &v1alpha11.ServiceAccountList{},
+			Managed: &v1alpha11.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Members")
+	}
+	mg.Spec.InitProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServiceAccountRef = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RepositoryIDRef,
+		Selector:     mg.Spec.InitProvider.RepositoryIDSelector,
+		To: reference.To{
+			List:    &RepositoryList{},
+			Managed: &Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RepositoryID")
+	}
+	mg.Spec.InitProvider.RepositoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RepositoryIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -175,6 +271,22 @@ func (mg *RepositoryLifecyclePolicy) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.RepositoryID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RepositoryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RepositoryID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RepositoryIDRef,
+		Selector:     mg.Spec.InitProvider.RepositoryIDSelector,
+		To: reference.To{
+			List:    &RepositoryList{},
+			Managed: &Repository{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RepositoryID")
+	}
+	mg.Spec.InitProvider.RepositoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RepositoryIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -25,11 +25,36 @@ type DefaultSecurityGroupInitParameters struct {
 	// A list of egress rules. The structure is documented below.
 	Egress []EgressInitParameters `json:"egress,omitempty" tf:"egress,omitempty"`
 
+	// ID of the folder this security group belongs to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A list of ingress rules.
 	Ingress []IngressInitParameters `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// ID of the network this security group belongs to.
+	// +crossplane:generate:reference:type=Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
 }
 
 type DefaultSecurityGroupObservation struct {
@@ -53,6 +78,7 @@ type DefaultSecurityGroupObservation struct {
 	Ingress []IngressObservation `json:"ingress,omitempty" tf:"ingress,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of this security group.
@@ -94,6 +120,7 @@ type DefaultSecurityGroupParameters struct {
 
 	// Labels to assign to this security group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// ID of the network this security group belongs to.
@@ -119,6 +146,7 @@ type EgressInitParameters struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -155,6 +183,7 @@ type EgressObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this security group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -191,6 +220,7 @@ type EgressParameters struct {
 
 	// Labels to assign to this security group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -231,6 +261,7 @@ type IngressInitParameters struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Labels to assign to this rule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -267,6 +298,7 @@ type IngressObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this rule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -303,6 +335,7 @@ type IngressParameters struct {
 
 	// Labels to assign to this rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).

@@ -25,8 +25,22 @@ type FilesystemInitParameters struct {
 	// Description of the filesystem. Provide this property when you create a resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder that the filesystem belongs to. If it is not provided, the default
+	// provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Labels to assign to this filesystem. A list of key/value pairs. For details about the concept,
 	// see documentation.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the filesystem. Provide this property when you create a resource.
@@ -61,6 +75,7 @@ type FilesystemObservation struct {
 
 	// Labels to assign to this filesystem. A list of key/value pairs. For details about the concept,
 	// see documentation.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the filesystem. Provide this property when you create a resource.
@@ -106,6 +121,7 @@ type FilesystemParameters struct {
 	// Labels to assign to this filesystem. A list of key/value pairs. For details about the concept,
 	// see documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the filesystem. Provide this property when you create a resource.

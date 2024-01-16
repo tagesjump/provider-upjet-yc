@@ -20,6 +20,7 @@ import (
 type RecordsetInitParameters struct {
 
 	// The string data for the records in this record set.
+	// +listType=set
 	Data []*string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// The DNS name this record set will apply to.
@@ -30,11 +31,24 @@ type RecordsetInitParameters struct {
 
 	// The DNS record set type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The id of the zone in which this record set will reside.
+	// +crossplane:generate:reference:type=Zone
+	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
+
+	// Reference to a Zone to populate zoneId.
+	// +kubebuilder:validation:Optional
+	ZoneIDRef *v1.Reference `json:"zoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a Zone to populate zoneId.
+	// +kubebuilder:validation:Optional
+	ZoneIDSelector *v1.Selector `json:"zoneIdSelector,omitempty" tf:"-"`
 }
 
 type RecordsetObservation struct {
 
 	// The string data for the records in this record set.
+	// +listType=set
 	Data []*string `json:"data,omitempty" tf:"data,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -56,6 +70,7 @@ type RecordsetParameters struct {
 
 	// The string data for the records in this record set.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Data []*string `json:"data,omitempty" tf:"data,omitempty"`
 
 	// The DNS name this record set will apply to.

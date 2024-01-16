@@ -50,8 +50,10 @@ type NodeGroupsInitParameters struct {
 	Resources []NodeGroupsResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
@@ -69,8 +71,10 @@ type NodeGroupsObservation struct {
 	Resources []NodeGroupsResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
@@ -93,9 +97,11 @@ type NodeGroupsParameters struct {
 
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ZoneIds []*string `json:"zoneIds" tf:"zone_ids,omitempty"`
 }
 
@@ -192,13 +198,63 @@ type OpensearchClusterInitParameters struct {
 	// Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the OpenSearch cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	MaintenanceWindow []OpensearchClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// Name of the OpenSearch cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the network, to which the OpenSearch cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
+	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// ID of the service account authorized for this cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 }
 
 type OpensearchClusterMaintenanceWindowInitParameters struct {
@@ -267,6 +323,7 @@ type OpensearchClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the OpenSearch cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	MaintenanceWindow []OpensearchClusterMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
@@ -278,6 +335,7 @@ type OpensearchClusterObservation struct {
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// ID of the service account authorized for this cluster.
@@ -321,6 +379,7 @@ type OpensearchClusterParameters struct {
 
 	// A set of key/value label pairs to assign to the OpenSearch cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -346,6 +405,7 @@ type OpensearchClusterParameters struct {
 	// A set of ids of security groups assigned to hosts of the cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -376,6 +436,7 @@ type OpensearchInitParameters struct {
 	NodeGroups []OpensearchNodeGroupsInitParameters `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 
 	// A set of requested OpenSearch plugins.
+	// +listType=set
 	Plugins []*string `json:"plugins,omitempty" tf:"plugins,omitempty"`
 }
 
@@ -393,8 +454,23 @@ type OpensearchNodeGroupsInitParameters struct {
 	Resources []OpensearchNodeGroupsResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER]
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
+
+	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
@@ -412,11 +488,14 @@ type OpensearchNodeGroupsObservation struct {
 	Resources []OpensearchNodeGroupsResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER]
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
@@ -439,11 +518,13 @@ type OpensearchNodeGroupsParameters struct {
 
 	// A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER]
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in vpc to populate subnetIds.
@@ -455,6 +536,7 @@ type OpensearchNodeGroupsParameters struct {
 	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ZoneIds []*string `json:"zoneIds" tf:"zone_ids,omitempty"`
 }
 
@@ -500,6 +582,7 @@ type OpensearchObservation struct {
 	NodeGroups []OpensearchNodeGroupsObservation `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 
 	// A set of requested OpenSearch plugins.
+	// +listType=set
 	Plugins []*string `json:"plugins,omitempty" tf:"plugins,omitempty"`
 }
 
@@ -511,6 +594,7 @@ type OpensearchParameters struct {
 
 	// A set of requested OpenSearch plugins.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Plugins []*string `json:"plugins,omitempty" tf:"plugins,omitempty"`
 }
 

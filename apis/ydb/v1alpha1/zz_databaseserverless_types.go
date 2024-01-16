@@ -25,7 +25,21 @@ type DatabaseServerlessInitParameters struct {
 	// A description for the Yandex Database serverless cluster.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the folder that the Yandex Database serverless cluster belongs to.
+	// It will be deduced from provider configuration if not set explicitly.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the Yandex Database serverless cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Location ID for the Yandex Database serverless cluster.
@@ -63,6 +77,7 @@ type DatabaseServerlessObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Yandex Database serverless cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Location ID for the Yandex Database serverless cluster.
@@ -114,6 +129,7 @@ type DatabaseServerlessParameters struct {
 
 	// A set of key/value label pairs to assign to the Yandex Database serverless cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Location ID for the Yandex Database serverless cluster.
