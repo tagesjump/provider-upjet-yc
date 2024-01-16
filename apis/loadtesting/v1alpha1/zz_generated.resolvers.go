@@ -75,5 +75,59 @@ func (mg *Agent) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ComputeInstance); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface[i4].SubnetID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1alpha1.SubnetList{},
+					Managed: &v1alpha1.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.ComputeInstance[i3].NetworkInterface[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ComputeInstance); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeInstance[i3].ServiceAccountID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.ComputeInstance[i3].ServiceAccountIDRef,
+			Selector:     mg.Spec.InitProvider.ComputeInstance[i3].ServiceAccountIDSelector,
+			To: reference.To{
+				List:    &v1alpha1.SecurityGroupList{},
+				Managed: &v1alpha1.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ComputeInstance[i3].ServiceAccountID")
+		}
+		mg.Spec.InitProvider.ComputeInstance[i3].ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ComputeInstance[i3].ServiceAccountIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.FolderList{},
+			Managed: &v1alpha11.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
 	return nil
 }

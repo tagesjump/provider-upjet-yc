@@ -32,7 +32,33 @@ type DiskInitParameters struct {
 	// Disk placement policy configuration. The structure is documented below.
 	DiskPlacementPolicy []DiskPlacementPolicyInitParameters `json:"diskPlacementPolicy,omitempty" tf:"disk_placement_policy,omitempty"`
 
+	// The ID of the folder that the disk belongs to.
+	// If it is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// The source image to use for disk creation.
+	// +crossplane:generate:reference:type=Image
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// Reference to a Image to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDRef *v1.Reference `json:"imageIdRef,omitempty" tf:"-"`
+
+	// Selector for a Image to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDSelector *v1.Selector `json:"imageIdSelector,omitempty" tf:"-"`
+
 	// Labels to assign to this disk. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the disk. Provide this property when
@@ -85,6 +111,7 @@ type DiskObservation struct {
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
 	// Labels to assign to this disk. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the disk. Provide this property when
@@ -162,6 +189,7 @@ type DiskParameters struct {
 
 	// Labels to assign to this disk. A list of key/value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the disk. Provide this property when

@@ -19,6 +19,18 @@ import (
 
 type FolderIAMMemberInitParameters struct {
 
+	// ID of the folder to attach a policy to.
+	// +crossplane:generate:reference:type=Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// The identity that will be granted the privilege that is specified in the role field.
 	// This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`

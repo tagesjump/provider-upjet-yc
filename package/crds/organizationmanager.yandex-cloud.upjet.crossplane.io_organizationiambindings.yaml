@@ -75,6 +75,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   organizationId:
                     description: ID of the organization to attach the policy to.
                     type: string
@@ -104,6 +105,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   organizationId:
                     description: ID of the organization to attach the policy to.
                     type: string
@@ -302,6 +304,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   organizationId:
                     description: ID of the organization to attach the policy to.
                     type: string

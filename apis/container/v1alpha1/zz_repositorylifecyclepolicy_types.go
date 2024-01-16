@@ -25,6 +25,18 @@ type RepositoryLifecyclePolicyInitParameters struct {
 	// Lifecycle policy name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the repository that the resource belongs to.
+	// +crossplane:generate:reference:type=Repository
+	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
+
+	// Reference to a Repository to populate repositoryId.
+	// +kubebuilder:validation:Optional
+	RepositoryIDRef *v1.Reference `json:"repositoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Repository to populate repositoryId.
+	// +kubebuilder:validation:Optional
+	RepositoryIDSelector *v1.Selector `json:"repositoryIdSelector,omitempty" tf:"-"`
+
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// The status of lifecycle policy. Must be active or disabled.

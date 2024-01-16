@@ -261,10 +261,24 @@ type KafkaClusterInitParameters struct {
 	// The default is PRODUCTION.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A list of IDs of the host groups to place VMs of the cluster on.
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// A set of key/value label pairs to assign to the Kafka cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the Kafka cluster. The structure is documented below.
@@ -272,6 +286,43 @@ type KafkaClusterInitParameters struct {
 
 	// Name of the Kafka cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the network, to which the Kafka cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
+	// Security group ids, to which the Kafka cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// IDs of the subnets, to which the Kafka cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
 	// (Deprecated) To manage topics, please switch to using a separate resource type yandex_mdb_kafka_topic.
 	Topic []TopicInitParameters `json:"topic,omitempty" tf:"topic,omitempty"`
@@ -348,11 +399,13 @@ type KafkaClusterObservation struct {
 	Host []KafkaClusterHostObservation `json:"host,omitempty" tf:"host,omitempty"`
 
 	// A list of IDs of the host groups to place VMs of the cluster on.
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Kafka cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the Kafka cluster. The structure is documented below.
@@ -365,6 +418,7 @@ type KafkaClusterObservation struct {
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// Security group ids, to which the Kafka cluster belongs.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
@@ -415,10 +469,12 @@ type KafkaClusterParameters struct {
 
 	// A list of IDs of the host groups to place VMs of the cluster on.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// A set of key/value label pairs to assign to the Kafka cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the Kafka cluster. The structure is documented below.
@@ -445,6 +501,7 @@ type KafkaClusterParameters struct {
 	// Security group ids, to which the Kafka cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -546,8 +603,10 @@ type KafkaConfigInitParameters struct {
 
 	ReplicaFetchMaxBytes *string `json:"replicaFetchMaxBytes,omitempty" tf:"replica_fetch_max_bytes,omitempty"`
 
+	// +listType=set
 	SSLCipherSuites []*string `json:"sslCipherSuites,omitempty" tf:"ssl_cipher_suites,omitempty"`
 
+	// +listType=set
 	SaslEnabledMechanisms []*string `json:"saslEnabledMechanisms,omitempty" tf:"sasl_enabled_mechanisms,omitempty"`
 
 	SocketReceiveBufferBytes *string `json:"socketReceiveBufferBytes,omitempty" tf:"socket_receive_buffer_bytes,omitempty"`
@@ -591,8 +650,10 @@ type KafkaConfigObservation struct {
 
 	ReplicaFetchMaxBytes *string `json:"replicaFetchMaxBytes,omitempty" tf:"replica_fetch_max_bytes,omitempty"`
 
+	// +listType=set
 	SSLCipherSuites []*string `json:"sslCipherSuites,omitempty" tf:"ssl_cipher_suites,omitempty"`
 
+	// +listType=set
 	SaslEnabledMechanisms []*string `json:"saslEnabledMechanisms,omitempty" tf:"sasl_enabled_mechanisms,omitempty"`
 
 	SocketReceiveBufferBytes *string `json:"socketReceiveBufferBytes,omitempty" tf:"socket_receive_buffer_bytes,omitempty"`
@@ -654,9 +715,11 @@ type KafkaConfigParameters struct {
 	ReplicaFetchMaxBytes *string `json:"replicaFetchMaxBytes,omitempty" tf:"replica_fetch_max_bytes,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSLCipherSuites []*string `json:"sslCipherSuites,omitempty" tf:"ssl_cipher_suites,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SaslEnabledMechanisms []*string `json:"saslEnabledMechanisms,omitempty" tf:"sasl_enabled_mechanisms,omitempty"`
 
 	// +kubebuilder:validation:Optional
@@ -864,6 +927,7 @@ type TopicParameters struct {
 type UserPermissionInitParameters struct {
 
 	// Set of hosts, to which this permission grants access to.
+	// +listType=set
 	AllowHosts []*string `json:"allowHosts,omitempty" tf:"allow_hosts,omitempty"`
 
 	// The role type to grant to the topic.
@@ -876,6 +940,7 @@ type UserPermissionInitParameters struct {
 type UserPermissionObservation struct {
 
 	// Set of hosts, to which this permission grants access to.
+	// +listType=set
 	AllowHosts []*string `json:"allowHosts,omitempty" tf:"allow_hosts,omitempty"`
 
 	// The role type to grant to the topic.
@@ -889,6 +954,7 @@ type UserPermissionParameters struct {
 
 	// Set of hosts, to which this permission grants access to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowHosts []*string `json:"allowHosts,omitempty" tf:"allow_hosts,omitempty"`
 
 	// The role type to grant to the topic.

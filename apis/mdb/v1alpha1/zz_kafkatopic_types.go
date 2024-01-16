@@ -19,6 +19,17 @@ import (
 
 type KafkaTopicInitParameters_2 struct {
 
+	// +crossplane:generate:reference:type=KafkaCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a KafkaCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a KafkaCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// The name of the topic.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

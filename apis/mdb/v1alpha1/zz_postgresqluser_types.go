@@ -19,6 +19,17 @@ import (
 
 type PostgresqlUserInitParameters struct {
 
+	// +crossplane:generate:reference:type=PostgresqlCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a PostgresqlCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a PostgresqlCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// The maximum number of connections per user. (Default 50)
 	ConnLimit *float64 `json:"connLimit,omitempty" tf:"conn_limit,omitempty"`
 
@@ -38,6 +49,7 @@ type PostgresqlUserInitParameters struct {
 	Permission []PostgresqlUserPermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 
 	// Map of user settings. List of settings is documented below.
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -65,6 +77,7 @@ type PostgresqlUserObservation struct {
 	Permission []PostgresqlUserPermissionObservation `json:"permission,omitempty" tf:"permission,omitempty"`
 
 	// Map of user settings. List of settings is documented below.
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -112,6 +125,7 @@ type PostgresqlUserParameters struct {
 
 	// Map of user settings. List of settings is documented below.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 

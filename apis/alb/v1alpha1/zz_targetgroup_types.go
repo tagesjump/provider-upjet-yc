@@ -23,7 +23,21 @@ type TargetGroupInitParameters struct {
 	// you create the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder to which the resource belongs.
+	// If omitted, the provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Labels to assign to this target group. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the target group. Provided by the client when the target group is created.
@@ -50,6 +64,7 @@ type TargetGroupObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this target group. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the target group. Provided by the client when the target group is created.
@@ -82,6 +97,7 @@ type TargetGroupParameters struct {
 
 	// Labels to assign to this target group. A list of key/value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the target group. Provided by the client when the target group is created.
@@ -99,6 +115,19 @@ type TargetInitParameters struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	PrivateIPv4Address *bool `json:"privateIpv4Address,omitempty" tf:"private_ipv4_address,omitempty"`
+
+	// ID of the subnet that targets are connected to.
+	// All targets in the target group must be connected to the same subnet within a single availability zone.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type TargetObservation struct {

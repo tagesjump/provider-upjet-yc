@@ -21,6 +21,7 @@ type OrganizationIAMBindingInitParameters struct {
 
 	// An array of identities that will be granted the privilege in the role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// ID of the organization to attach the policy to.
@@ -38,6 +39,7 @@ type OrganizationIAMBindingObservation struct {
 
 	// An array of identities that will be granted the privilege in the role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// ID of the organization to attach the policy to.
@@ -55,6 +57,7 @@ type OrganizationIAMBindingParameters struct {
 	// An array of identities that will be granted the privilege in the role.
 	// Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// ID of the organization to attach the policy to.

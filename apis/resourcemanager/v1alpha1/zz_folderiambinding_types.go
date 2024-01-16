@@ -19,8 +19,21 @@ import (
 
 type FolderIAMBindingInitParameters struct {
 
+	// ID of the folder to attach a policy to.
+	// +crossplane:generate:reference:type=Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// An array of identities that will be granted the privilege that is specified in the role field.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be assigned. Only one
@@ -39,6 +52,7 @@ type FolderIAMBindingObservation struct {
 
 	// An array of identities that will be granted the privilege that is specified in the role field.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be assigned. Only one
@@ -66,6 +80,7 @@ type FolderIAMBindingParameters struct {
 	// An array of identities that will be granted the privilege that is specified in the role field.
 	// Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be assigned. Only one

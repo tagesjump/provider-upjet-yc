@@ -25,7 +25,33 @@ type SecretInitParameters struct {
 	// A description for the Yandex Cloud Lockbox secret.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the folder that the Yandex Cloud Lockbox secret belongs to.
+	// It will be deduced from provider configuration if not set explicitly.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// The KMS key used to encrypt the Yandex Cloud Lockbox secret.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1.SymmetricKey
+	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
+
+	// Reference to a SymmetricKey in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDRef *v1.Reference `json:"kmsKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SymmetricKey in kms to populate kmsKeyId.
+	// +kubebuilder:validation:Optional
+	KMSKeyIDSelector *v1.Selector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the Yandex Cloud Lockbox secret.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name for the Yandex Cloud Lockbox secret.
@@ -53,6 +79,7 @@ type SecretObservation struct {
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Yandex Cloud Lockbox secret.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name for the Yandex Cloud Lockbox secret.
@@ -101,6 +128,7 @@ type SecretParameters struct {
 
 	// A set of key/value label pairs to assign to the Yandex Cloud Lockbox secret.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name for the Yandex Cloud Lockbox secret.

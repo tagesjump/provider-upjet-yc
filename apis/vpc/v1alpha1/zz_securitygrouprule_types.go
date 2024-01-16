@@ -29,6 +29,7 @@ type SecurityGroupRuleInitParameters struct {
 	FromPort *float64 `json:"fromPort,omitempty" tf:"from_port,omitempty"`
 
 	// Labels to assign to this rule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -39,6 +40,18 @@ type SecurityGroupRuleInitParameters struct {
 
 	// One of ANY, TCP, UDP, ICMP, IPV6_ICMP.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// ID of the security group this rule belongs to.
+	// +crossplane:generate:reference:type=SecurityGroup
+	SecurityGroupBinding *string `json:"securityGroupBinding,omitempty" tf:"security_group_binding,omitempty"`
+
+	// Reference to a SecurityGroup to populate securityGroupBinding.
+	// +kubebuilder:validation:Optional
+	SecurityGroupBindingRef *v1.Reference `json:"securityGroupBindingRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup to populate securityGroupBinding.
+	// +kubebuilder:validation:Optional
+	SecurityGroupBindingSelector *v1.Selector `json:"securityGroupBindingSelector,omitempty" tf:"-"`
 
 	// Target security group ID for this rule.
 	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
@@ -68,6 +81,7 @@ type SecurityGroupRuleObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this rule.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).
@@ -111,6 +125,7 @@ type SecurityGroupRuleParameters struct {
 
 	// Labels to assign to this rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Port number (if applied to a single port).

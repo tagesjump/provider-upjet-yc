@@ -22,6 +22,31 @@ type ObjectInitParameters struct {
 	// The predefined ACL to apply. Defaults to private.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
+	// The access key to use when applying changes. If omitted, storage_access_key specified in config is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccountStaticAccessKey
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractAccessKey()
+	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
+
+	// Reference to a ServiceAccountStaticAccessKey in iam to populate accessKey.
+	// +kubebuilder:validation:Optional
+	AccessKeyRef *v1.Reference `json:"accessKeyRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccountStaticAccessKey in iam to populate accessKey.
+	// +kubebuilder:validation:Optional
+	AccessKeySelector *v1.Selector `json:"accessKeySelector,omitempty" tf:"-"`
+
+	// The name of the containing bucket.
+	// +crossplane:generate:reference:type=Bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
 	// Literal string value to use as the object content, which will be uploaded as UTF-8-encoded text.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
@@ -50,6 +75,7 @@ type ObjectInitParameters struct {
 	SourceHash *string `json:"sourceHash,omitempty" tf:"source_hash,omitempty"`
 
 	// Specifies an object tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -95,6 +121,7 @@ type ObjectObservation struct {
 	SourceHash *string `json:"sourceHash,omitempty" tf:"source_hash,omitempty"`
 
 	// Specifies an object tags.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -173,6 +200,7 @@ type ObjectParameters struct {
 
 	// Specifies an object tags.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -77,7 +77,21 @@ type HTTPRouterInitParameters struct {
 	// you create the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder to which the resource belongs.
+	// If omitted, the provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Labels to assign to this HTTP Router. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the HTTP Router. Provided by the client when the HTTP Router is created.
@@ -103,6 +117,7 @@ type HTTPRouterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this HTTP Router. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the HTTP Router. Provided by the client when the HTTP Router is created.
@@ -134,6 +149,7 @@ type HTTPRouterParameters struct {
 
 	// Labels to assign to this HTTP Router. A list of key/value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the HTTP Router. Provided by the client when the HTTP Router is created.
@@ -181,16 +197,26 @@ type RbacParameters struct {
 
 type RouteOptionsInitParameters struct {
 	Rbac []RbacInitParameters `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// The ID of the HTTP Router.
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type RouteOptionsObservation struct {
 	Rbac []RbacObservation `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// The ID of the HTTP Router.
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type RouteOptionsParameters struct {
 
 	// +kubebuilder:validation:Optional
 	Rbac []RbacParameters `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// The ID of the HTTP Router.
+	// +kubebuilder:validation:Optional
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type ValueInitParameters struct {

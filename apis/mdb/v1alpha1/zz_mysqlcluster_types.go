@@ -170,6 +170,18 @@ type MySQLClusterHostInitParameters struct {
 	// Host replication source name points to host's name from which this host should replicate. When not set then host in HA group. It works only when name is set.
 	ReplicationSourceName *string `json:"replicationSourceName,omitempty" tf:"replication_source_name,omitempty"`
 
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// The availability zone where the MySQL host will be created.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
@@ -270,22 +282,50 @@ type MySQLClusterInitParameters struct {
 	// Deployment environment of the MySQL cluster.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A host of the MySQL cluster. The structure is documented below.
 	Host []MySQLClusterHostInitParameters `json:"host,omitempty" tf:"host,omitempty"`
 
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// A set of key/value label pairs to assign to the MySQL cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the MySQL cluster. The structure is documented below.
 	MaintenanceWindow []MySQLClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// MySQL cluster config. Detail info in "MySQL config" section (documented below).
+	// +mapType=granular
 	MySQLConfig map[string]*string `json:"mysqlConfig,omitempty" tf:"mysql_config,omitempty"`
 
 	// Name of the MySQL cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the network, to which the MySQL cluster uses.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
 
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	PerformanceDiagnostics []MySQLClusterPerformanceDiagnosticsInitParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
@@ -295,6 +335,19 @@ type MySQLClusterInitParameters struct {
 
 	// The cluster will be created from the specified backup. The structure is documented below.
 	Restore []MySQLClusterRestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+
+	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// (Deprecated) To manage users, please switch to using a separate resource type yandex_mdb_mysql_user.
 	User []MySQLClusterUserInitParameters `json:"user,omitempty" tf:"user,omitempty"`
@@ -381,17 +434,20 @@ type MySQLClusterObservation struct {
 	// A host of the MySQL cluster. The structure is documented below.
 	Host []MySQLClusterHostObservation `json:"host,omitempty" tf:"host,omitempty"`
 
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the MySQL cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the MySQL cluster. The structure is documented below.
 	MaintenanceWindow []MySQLClusterMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// MySQL cluster config. Detail info in "MySQL config" section (documented below).
+	// +mapType=granular
 	MySQLConfig map[string]*string `json:"mysqlConfig,omitempty" tf:"mysql_config,omitempty"`
 
 	// Name of the MySQL cluster. Provided by the client when the cluster is created.
@@ -410,6 +466,7 @@ type MySQLClusterObservation struct {
 	Restore []MySQLClusterRestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Status of the cluster.
@@ -475,10 +532,12 @@ type MySQLClusterParameters struct {
 	Host []MySQLClusterHostParameters `json:"host,omitempty" tf:"host,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// A set of key/value label pairs to assign to the MySQL cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the MySQL cluster. The structure is documented below.
@@ -487,6 +546,7 @@ type MySQLClusterParameters struct {
 
 	// MySQL cluster config. Detail info in "MySQL config" section (documented below).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	MySQLConfig map[string]*string `json:"mysqlConfig,omitempty" tf:"mysql_config,omitempty"`
 
 	// Name of the MySQL cluster. Provided by the client when the cluster is created.
@@ -521,6 +581,7 @@ type MySQLClusterParameters struct {
 	// A set of ids of security groups assigned to hosts of the cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -656,6 +717,7 @@ type MySQLClusterUserInitParameters struct {
 	// List user's global permissions
 	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
 	// If the attribute is not specified there will be no changes.
+	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
 	// The name of the user.
@@ -677,6 +739,7 @@ type MySQLClusterUserObservation struct {
 	// List user's global permissions
 	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
 	// If the attribute is not specified there will be no changes.
+	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
 	// The name of the user.
@@ -701,6 +764,7 @@ type MySQLClusterUserParameters struct {
 	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
 	// If the attribute is not specified there will be no changes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
 	// The name of the user.

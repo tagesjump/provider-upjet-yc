@@ -26,7 +26,21 @@ type ImageInitParameters struct {
 	// The name of the image family to which this image belongs.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the image.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Minimum size in GB of the disk that will be created from this image.
@@ -43,6 +57,7 @@ type ImageInitParameters struct {
 
 	// License IDs that indicate which licenses are
 	// attached to this image.
+	// +listType=set
 	ProductIds []*string `json:"productIds,omitempty" tf:"product_ids,omitempty"`
 
 	// The ID of a disk to use as the source of the
@@ -86,6 +101,7 @@ type ImageObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the image.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Minimum size in GB of the disk that will be created from this image.
@@ -102,6 +118,7 @@ type ImageObservation struct {
 
 	// License IDs that indicate which licenses are
 	// attached to this image.
+	// +listType=set
 	ProductIds []*string `json:"productIds,omitempty" tf:"product_ids,omitempty"`
 
 	// The size of the image, specified in GB.
@@ -159,6 +176,7 @@ type ImageParameters struct {
 
 	// A set of key/value label pairs to assign to the image.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Minimum size in GB of the disk that will be created from this image.
@@ -180,6 +198,7 @@ type ImageParameters struct {
 	// License IDs that indicate which licenses are
 	// attached to this image.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ProductIds []*string `json:"productIds,omitempty" tf:"product_ids,omitempty"`
 
 	// The ID of a disk to use as the source of the

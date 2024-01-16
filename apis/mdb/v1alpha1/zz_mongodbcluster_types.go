@@ -625,6 +625,19 @@ type MongodbClusterHostInitParameters struct {
 	// The name of the shard to which the host belongs. Only for sharded cluster.
 	ShardName *string `json:"shardName,omitempty" tf:"shard_name,omitempty"`
 
+	// The ID of the subnet, to which the host belongs. The subnet must
+	// be a part of the network to which the cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// type of mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
@@ -720,10 +733,24 @@ type MongodbClusterInitParameters struct {
 	// Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A host of the MongoDB cluster. The structure is documented below.
 	Host []MongodbClusterHostInitParameters `json:"host,omitempty" tf:"host,omitempty"`
 
 	// A set of key/value label pairs to assign to the MongoDB cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance window settings of the MongoDB cluster. The structure is documented below.
@@ -731,6 +758,18 @@ type MongodbClusterInitParameters struct {
 
 	// Name of the MongoDB cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// ID of the network, to which the MongoDB cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
 
 	// (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. The structure is documented below.
 	Resources []MongodbClusterResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
@@ -749,6 +788,19 @@ type MongodbClusterInitParameters struct {
 
 	// The cluster will be created from the specified backup. The structure is documented below.
 	Restore []RestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+
+	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// A user of the MongoDB cluster. The structure is documented below.
 	User []MongodbClusterUserInitParameters `json:"user,omitempty" tf:"user,omitempty"`
@@ -830,6 +882,7 @@ type MongodbClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the MongoDB cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance window settings of the MongoDB cluster. The structure is documented below.
@@ -860,6 +913,7 @@ type MongodbClusterObservation struct {
 	Restore []RestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// MongoDB Cluster mode enabled/disabled.
@@ -919,6 +973,7 @@ type MongodbClusterParameters struct {
 
 	// A set of key/value label pairs to assign to the MongoDB cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance window settings of the MongoDB cluster. The structure is documented below.
@@ -969,6 +1024,7 @@ type MongodbClusterParameters struct {
 	// A set of ids of security groups assigned to hosts of the cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.

@@ -19,6 +19,17 @@ import (
 
 type KafkaUserInitParameters struct {
 
+	// +crossplane:generate:reference:type=KafkaCluster
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// Reference to a KafkaCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDRef *v1.Reference `json:"clusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a KafkaCluster to populate clusterId.
+	// +kubebuilder:validation:Optional
+	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -68,6 +79,7 @@ type KafkaUserParameters struct {
 type KafkaUserPermissionInitParameters struct {
 
 	// Set of hosts, to which this permission grants access to.
+	// +listType=set
 	AllowHosts []*string `json:"allowHosts,omitempty" tf:"allow_hosts,omitempty"`
 
 	// The role type to grant to the topic.
@@ -80,6 +92,7 @@ type KafkaUserPermissionInitParameters struct {
 type KafkaUserPermissionObservation struct {
 
 	// Set of hosts, to which this permission grants access to.
+	// +listType=set
 	AllowHosts []*string `json:"allowHosts,omitempty" tf:"allow_hosts,omitempty"`
 
 	// The role type to grant to the topic.
@@ -93,6 +106,7 @@ type KafkaUserPermissionParameters struct {
 
 	// Set of hosts, to which this permission grants access to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowHosts []*string `json:"allowHosts,omitempty" tf:"allow_hosts,omitempty"`
 
 	// The role type to grant to the topic.

@@ -19,8 +19,37 @@ import (
 
 type RepositoryIAMBindingInitParameters struct {
 
+	// Identities that will be granted the privilege in role.
+	// Each entry can have one of the following values:
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
+	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
+	// +crossplane:generate:reference:selectorFieldName=ServiceAccountSelector
+	// +listType=set
+	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
+
+	// The Yandex Container Repository ID to apply a binding to.
+	// +crossplane:generate:reference:type=Repository
+	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
+
+	// Reference to a Repository to populate repositoryId.
+	// +kubebuilder:validation:Optional
+	RepositoryIDRef *v1.Reference `json:"repositoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Repository to populate repositoryId.
+	// +kubebuilder:validation:Optional
+	RepositoryIDSelector *v1.Selector `json:"repositoryIdSelector,omitempty" tf:"-"`
+
 	// The role that should be applied. See roles.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// References to ServiceAccount in iam to populate members.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRef []v1.Reference `json:"serviceAccountRef,omitempty" tf:"-"`
+
+	// Selector for a list of ServiceAccount in iam to populate members.
+	// +kubebuilder:validation:Optional
+	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
@@ -30,6 +59,7 @@ type RepositoryIAMBindingObservation struct {
 
 	// Identities that will be granted the privilege in role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The Yandex Container Repository ID to apply a binding to.
@@ -50,6 +80,7 @@ type RepositoryIAMBindingParameters struct {
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
 	// +crossplane:generate:reference:selectorFieldName=ServiceAccountSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The Yandex Container Repository ID to apply a binding to.

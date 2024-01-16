@@ -38,6 +38,22 @@ func (mg *AsymmetricEncryptionKey) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -81,6 +97,38 @@ func (mg *AsymmetricEncryptionKeyIAMBinding) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ServiceAccountRef = mrsp.ResolvedReferences
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AsymmetricEncryptionKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.AsymmetricEncryptionKeyIDRef,
+		Selector:     mg.Spec.InitProvider.AsymmetricEncryptionKeyIDSelector,
+		To: reference.To{
+			List:    &AsymmetricEncryptionKeyList{},
+			Managed: &AsymmetricEncryptionKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AsymmetricEncryptionKeyID")
+	}
+	mg.Spec.InitProvider.AsymmetricEncryptionKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AsymmetricEncryptionKeyIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Members),
+		Extract:       iam.ServiceAccountRefValue(),
+		References:    mg.Spec.InitProvider.ServiceAccountRef,
+		Selector:      mg.Spec.InitProvider.ServiceAccountSelector,
+		To: reference.To{
+			List:    &v1alpha11.ServiceAccountList{},
+			Managed: &v1alpha11.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Members")
+	}
+	mg.Spec.InitProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServiceAccountRef = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -106,6 +154,22 @@ func (mg *AsymmetricSignatureKey) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -150,6 +214,38 @@ func (mg *AsymmetricSignatureKeyIAMBinding) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ServiceAccountRef = mrsp.ResolvedReferences
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AsymmetricSignatureKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.AsymmetricSignatureKeyIDRef,
+		Selector:     mg.Spec.InitProvider.AsymmetricSignatureKeyIDSelector,
+		To: reference.To{
+			List:    &AsymmetricSignatureKeyList{},
+			Managed: &AsymmetricSignatureKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AsymmetricSignatureKeyID")
+	}
+	mg.Spec.InitProvider.AsymmetricSignatureKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AsymmetricSignatureKeyIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Members),
+		Extract:       iam.ServiceAccountRefValue(),
+		References:    mg.Spec.InitProvider.ServiceAccountRef,
+		Selector:      mg.Spec.InitProvider.ServiceAccountSelector,
+		To: reference.To{
+			List:    &v1alpha11.ServiceAccountList{},
+			Managed: &v1alpha11.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Members")
+	}
+	mg.Spec.InitProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServiceAccountRef = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -176,6 +272,22 @@ func (mg *SecretCiphertext) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyIDSelector,
+		To: reference.To{
+			List:    &SymmetricKeyList{},
+			Managed: &SymmetricKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyID")
+	}
+	mg.Spec.InitProvider.KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -201,6 +313,22 @@ func (mg *SymmetricKey) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -244,6 +372,38 @@ func (mg *SymmetricKeyIAMBinding) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.SymmetricKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SymmetricKeyIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Members),
+		Extract:       iam.ServiceAccountRefValue(),
+		References:    mg.Spec.InitProvider.ServiceAccountRef,
+		Selector:      mg.Spec.InitProvider.ServiceAccountSelector,
+		To: reference.To{
+			List:    &v1alpha11.ServiceAccountList{},
+			Managed: &v1alpha11.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Members")
+	}
+	mg.Spec.InitProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ServiceAccountRef = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SymmetricKeyID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SymmetricKeyIDRef,
+		Selector:     mg.Spec.InitProvider.SymmetricKeyIDSelector,
+		To: reference.To{
+			List:    &SymmetricKeyList{},
+			Managed: &SymmetricKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SymmetricKeyID")
+	}
+	mg.Spec.InitProvider.SymmetricKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SymmetricKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }

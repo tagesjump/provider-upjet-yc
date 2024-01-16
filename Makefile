@@ -8,10 +8,10 @@ export TERRAFORM_VERSION ?= 1.6.1
 
 export TERRAFORM_PROVIDER_SOURCE ?= yandex-cloud/yandex
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/yandex-cloud/terraform-provider-yandex
-export TERRAFORM_PROVIDER_VERSION ?= 0.103.0
+export TERRAFORM_PROVIDER_VERSION ?= 0.105.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-yandex
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://hashicorp-releases.yandexcloud.net/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-yandex_v0.103.0_x5
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-yandex_v0.105.0_x5
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 
@@ -40,7 +40,7 @@ NPROCS ?= 1
 # to half the number of CPU cores.
 GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 
-GO_REQUIRED_VERSION ?= 1.20
+GO_REQUIRED_VERSION ?= 1.21
 GOLANGCILINT_VERSION ?= 1.54.2
 GO_STATIC_PACKAGES = $(GO_PROJECT)/cmd/provider $(GO_PROJECT)/cmd/generator
 GO_LDFLAGS += -X $(GO_PROJECT)/internal/version.Version=$(VERSION)
@@ -50,10 +50,10 @@ GO_SUBDIRS += cmd internal apis
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.15.0
+KIND_VERSION = v0.20.0
 UP_VERSION = v0.21.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.6.1
+UPTEST_VERSION = v0.8.0
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================

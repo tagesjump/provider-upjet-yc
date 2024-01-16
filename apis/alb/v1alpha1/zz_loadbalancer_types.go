@@ -79,6 +79,7 @@ type DefaultHandlerInitParameters struct {
 
 	// Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated
 	// with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
+	// +listType=set
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
 	// HTTP handler resource. The structure is documented below.
@@ -92,6 +93,7 @@ type DefaultHandlerObservation struct {
 
 	// Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated
 	// with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
+	// +listType=set
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
 	// HTTP handler resource. The structure is documented below.
@@ -106,6 +108,7 @@ type DefaultHandlerParameters struct {
 	// Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated
 	// with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CertificateIds []*string `json:"certificateIds" tf:"certificate_ids,omitempty"`
 
 	// HTTP handler resource. The structure is documented below.
@@ -417,6 +420,18 @@ type HandlerInitParameters struct {
 	// If set, will enable only HTTP1 protocol with HTTP1.0 support.
 	AllowHttp10 *bool `json:"allowHttp10,omitempty" tf:"allow_http10,omitempty"`
 
+	// HTTP router id.
+	// +crossplane:generate:reference:type=HTTPRouter
+	HTTPRouterID *string `json:"httpRouterId,omitempty" tf:"http_router_id,omitempty"`
+
+	// Reference to a HTTPRouter to populate httpRouterId.
+	// +kubebuilder:validation:Optional
+	HTTPRouterIDRef *v1.Reference `json:"httpRouterIdRef,omitempty" tf:"-"`
+
+	// Selector for a HTTPRouter to populate httpRouterId.
+	// +kubebuilder:validation:Optional
+	HTTPRouterIDSelector *v1.Selector `json:"httpRouterIdSelector,omitempty" tf:"-"`
+
 	// If set, will enable HTTP2 protocol for the handler. The structure is documented below.
 	Http2Options []Http2OptionsInitParameters `json:"http2Options,omitempty" tf:"http2_options,omitempty"`
 
@@ -509,6 +524,18 @@ type InternalIPv4AddressInitParameters struct {
 
 	// Provided by the client or computed automatically.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// Provided by the client or computed automatically.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type InternalIPv4AddressObservation struct {
@@ -636,7 +663,20 @@ type LoadBalancerInitParameters struct {
 	// An optional description of the Load Balancer.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder to which the resource belongs. If omitted, the provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Labels to assign to this Load Balancer. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// List of listeners for the Load Balancer. The structure is documented below.
@@ -648,8 +688,33 @@ type LoadBalancerInitParameters struct {
 	// Name of the Load Balancer. Provided by the client when the Load Balancer is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// ID of the network that the Load Balancer is located at.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
 	// ID of the region that the Load Balancer is located at.
 	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
+
+	// A list of ID's of security groups attached to the Load Balancer.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerObservation struct {
@@ -670,6 +735,7 @@ type LoadBalancerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Labels to assign to this Load Balancer. A list of key/value pairs.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// List of listeners for the Load Balancer. The structure is documented below.
@@ -691,6 +757,7 @@ type LoadBalancerObservation struct {
 	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
 
 	// A list of ID's of security groups attached to the Load Balancer.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Status of the Load Balancer.
@@ -722,6 +789,7 @@ type LoadBalancerParameters struct {
 
 	// Labels to assign to this Load Balancer. A list of key/value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// List of listeners for the Load Balancer. The structure is documented below.
@@ -756,6 +824,7 @@ type LoadBalancerParameters struct {
 	// A list of ID's of security groups attached to the Load Balancer.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -771,6 +840,18 @@ type LocationInitParameters struct {
 
 	// If set, will disable all L7 instances in the zone for request handling.
 	DisableTraffic *bool `json:"disableTraffic,omitempty" tf:"disable_traffic,omitempty"`
+
+	// ID of the subnet that location is located at.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// ID of the zone that location is located at.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
@@ -874,6 +955,7 @@ type SniHandlerHandlerInitParameters struct {
 
 	// Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated
 	// with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
+	// +listType=set
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
 	// HTTP handler resource. The structure is documented below.
@@ -887,6 +969,7 @@ type SniHandlerHandlerObservation struct {
 
 	// Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated
 	// with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
+	// +listType=set
 	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
 
 	// HTTP handler resource. The structure is documented below.
@@ -901,6 +984,7 @@ type SniHandlerHandlerParameters struct {
 	// Certificate IDs in the Certificate Manager. Multiple TLS certificates can be associated
 	// with the same context to allow both RSA and ECDSA certificates. Only the first certificate of each type will be used.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CertificateIds []*string `json:"certificateIds" tf:"certificate_ids,omitempty"`
 
 	// HTTP handler resource. The structure is documented below.
@@ -921,6 +1005,7 @@ type SniHandlerInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A set of server names.
+	// +listType=set
 	ServerNames []*string `json:"serverNames,omitempty" tf:"server_names,omitempty"`
 }
 
@@ -933,6 +1018,7 @@ type SniHandlerObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A set of server names.
+	// +listType=set
 	ServerNames []*string `json:"serverNames,omitempty" tf:"server_names,omitempty"`
 }
 
@@ -948,6 +1034,7 @@ type SniHandlerParameters struct {
 
 	// A set of server names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ServerNames []*string `json:"serverNames" tf:"server_names,omitempty"`
 }
 

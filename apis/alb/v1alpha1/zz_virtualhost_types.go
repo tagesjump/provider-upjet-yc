@@ -151,6 +151,18 @@ type GRPCRouteActionInitParameters struct {
 	// If set, will automatically rewrite host.
 	AutoHostRewrite *bool `json:"autoHostRewrite,omitempty" tf:"auto_host_rewrite,omitempty"`
 
+	// Backend group to route requests.
+	// +crossplane:generate:reference:type=BackendGroup
+	BackendGroupID *string `json:"backendGroupId,omitempty" tf:"backend_group_id,omitempty"`
+
+	// Reference to a BackendGroup to populate backendGroupId.
+	// +kubebuilder:validation:Optional
+	BackendGroupIDRef *v1.Reference `json:"backendGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackendGroup to populate backendGroupId.
+	// +kubebuilder:validation:Optional
+	BackendGroupIDSelector *v1.Selector `json:"backendGroupIdSelector,omitempty" tf:"-"`
+
 	// Host rewrite specifier.
 	HostRewrite *string `json:"hostRewrite,omitempty" tf:"host_rewrite,omitempty"`
 
@@ -287,6 +299,7 @@ type GRPCStatusResponseActionParameters struct {
 type HTTPMatchInitParameters struct {
 
 	// List of methods(strings).
+	// +listType=set
 	HTTPMethod []*string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// If not set, '/' is assumed. The structure is documented below.
@@ -296,6 +309,7 @@ type HTTPMatchInitParameters struct {
 type HTTPMatchObservation struct {
 
 	// List of methods(strings).
+	// +listType=set
 	HTTPMethod []*string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// If not set, '/' is assumed. The structure is documented below.
@@ -306,6 +320,7 @@ type HTTPMatchParameters struct {
 
 	// List of methods(strings).
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HTTPMethod []*string `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
 	// If not set, '/' is assumed. The structure is documented below.
@@ -317,6 +332,18 @@ type HTTPRouteActionInitParameters struct {
 
 	// If set, will automatically rewrite host.
 	AutoHostRewrite *bool `json:"autoHostRewrite,omitempty" tf:"auto_host_rewrite,omitempty"`
+
+	// Backend group to route requests.
+	// +crossplane:generate:reference:type=BackendGroup
+	BackendGroupID *string `json:"backendGroupId,omitempty" tf:"backend_group_id,omitempty"`
+
+	// Reference to a BackendGroup to populate backendGroupId.
+	// +kubebuilder:validation:Optional
+	BackendGroupIDRef *v1.Reference `json:"backendGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackendGroup to populate backendGroupId.
+	// +kubebuilder:validation:Optional
+	BackendGroupIDSelector *v1.Selector `json:"backendGroupIdSelector,omitempty" tf:"-"`
 
 	// Host rewrite specifier.
 	HostRewrite *string `json:"hostRewrite,omitempty" tf:"host_rewrite,omitempty"`
@@ -336,6 +363,7 @@ type HTTPRouteActionInitParameters struct {
 
 	// List of upgrade types. Only specified upgrade types will be allowed. For example,
 	// "websocket".
+	// +listType=set
 	UpgradeTypes []*string `json:"upgradeTypes,omitempty" tf:"upgrade_types,omitempty"`
 }
 
@@ -365,6 +393,7 @@ type HTTPRouteActionObservation struct {
 
 	// List of upgrade types. Only specified upgrade types will be allowed. For example,
 	// "websocket".
+	// +listType=set
 	UpgradeTypes []*string `json:"upgradeTypes,omitempty" tf:"upgrade_types,omitempty"`
 }
 
@@ -410,6 +439,7 @@ type HTTPRouteActionParameters struct {
 	// List of upgrade types. Only specified upgrade types will be allowed. For example,
 	// "websocket".
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	UpgradeTypes []*string `json:"upgradeTypes,omitempty" tf:"upgrade_types,omitempty"`
 }
 
@@ -860,6 +890,7 @@ type RouteInitParameters struct {
 	// name of the route.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Route options for the virtual host. The structure is documented below.
 	RouteOptions []RouteRouteOptionsInitParameters `json:"routeOptions,omitempty" tf:"route_options,omitempty"`
 }
 
@@ -874,6 +905,7 @@ type RouteObservation struct {
 	// name of the route.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Route options for the virtual host. The structure is documented below.
 	RouteOptions []RouteRouteOptionsObservation `json:"routeOptions,omitempty" tf:"route_options,omitempty"`
 }
 
@@ -926,29 +958,58 @@ type RouteParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Route options for the virtual host. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	RouteOptions []RouteRouteOptionsParameters `json:"routeOptions,omitempty" tf:"route_options,omitempty"`
 }
 
 type RouteRouteOptionsInitParameters struct {
+
+	// RBAC configuration.
 	Rbac []RouteOptionsRbacInitParameters `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// SWS profile ID.
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type RouteRouteOptionsObservation struct {
+
+	// RBAC configuration.
 	Rbac []RouteOptionsRbacObservation `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// SWS profile ID.
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type RouteRouteOptionsParameters struct {
 
+	// RBAC configuration.
 	// +kubebuilder:validation:Optional
 	Rbac []RouteOptionsRbacParameters `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// SWS profile ID.
+	// +kubebuilder:validation:Optional
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type VirtualHostInitParameters struct {
 
 	// A list of domains (host/authority header) that will be matched to this virtual host. Wildcard
 	// hosts are supported in the form of '.foo.com' or '-bar.foo.com'. If not specified, all domains will be matched.
+	// +listType=set
 	Authority []*string `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// The ID of the HTTP router to which the virtual host belongs.
+	// +crossplane:generate:reference:type=HTTPRouter
+	HTTPRouterID *string `json:"httpRouterId,omitempty" tf:"http_router_id,omitempty"`
+
+	// Reference to a HTTPRouter to populate httpRouterId.
+	// +kubebuilder:validation:Optional
+	HTTPRouterIDRef *v1.Reference `json:"httpRouterIdRef,omitempty" tf:"-"`
+
+	// Selector for a HTTPRouter to populate httpRouterId.
+	// +kubebuilder:validation:Optional
+	HTTPRouterIDSelector *v1.Selector `json:"httpRouterIdSelector,omitempty" tf:"-"`
 
 	// Apply the following modifications to the request
 	// headers. The structure is documented below.
@@ -965,6 +1026,7 @@ type VirtualHostInitParameters struct {
 	// http '/' match first makes all other routes unused. The structure is documented below.
 	Route []RouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 
+	// Route options for the virtual host. The structure is documented below.
 	RouteOptions []VirtualHostRouteOptionsInitParameters `json:"routeOptions,omitempty" tf:"route_options,omitempty"`
 }
 
@@ -972,9 +1034,10 @@ type VirtualHostObservation struct {
 
 	// A list of domains (host/authority header) that will be matched to this virtual host. Wildcard
 	// hosts are supported in the form of '.foo.com' or '-bar.foo.com'. If not specified, all domains will be matched.
+	// +listType=set
 	Authority []*string `json:"authority,omitempty" tf:"authority,omitempty"`
 
-	// The ID of the virtual host.
+	// The ID of the HTTP router to which the virtual host belongs.
 	HTTPRouterID *string `json:"httpRouterId,omitempty" tf:"http_router_id,omitempty"`
 
 	// The ID of the virtual host.
@@ -995,6 +1058,7 @@ type VirtualHostObservation struct {
 	// http '/' match first makes all other routes unused. The structure is documented below.
 	Route []RouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
+	// Route options for the virtual host. The structure is documented below.
 	RouteOptions []VirtualHostRouteOptionsObservation `json:"routeOptions,omitempty" tf:"route_options,omitempty"`
 }
 
@@ -1003,9 +1067,10 @@ type VirtualHostParameters struct {
 	// A list of domains (host/authority header) that will be matched to this virtual host. Wildcard
 	// hosts are supported in the form of '.foo.com' or '-bar.foo.com'. If not specified, all domains will be matched.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Authority []*string `json:"authority,omitempty" tf:"authority,omitempty"`
 
-	// The ID of the virtual host.
+	// The ID of the HTTP router to which the virtual host belongs.
 	// +crossplane:generate:reference:type=HTTPRouter
 	// +kubebuilder:validation:Optional
 	HTTPRouterID *string `json:"httpRouterId,omitempty" tf:"http_router_id,omitempty"`
@@ -1037,22 +1102,38 @@ type VirtualHostParameters struct {
 	// +kubebuilder:validation:Optional
 	Route []RouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
+	// Route options for the virtual host. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	RouteOptions []VirtualHostRouteOptionsParameters `json:"routeOptions,omitempty" tf:"route_options,omitempty"`
 }
 
 type VirtualHostRouteOptionsInitParameters struct {
+
+	// RBAC configuration.
 	Rbac []VirtualHostRouteOptionsRbacInitParameters `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// SWS profile ID.
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type VirtualHostRouteOptionsObservation struct {
+
+	// RBAC configuration.
 	Rbac []VirtualHostRouteOptionsRbacObservation `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// SWS profile ID.
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type VirtualHostRouteOptionsParameters struct {
 
+	// RBAC configuration.
 	// +kubebuilder:validation:Optional
 	Rbac []VirtualHostRouteOptionsRbacParameters `json:"rbac,omitempty" tf:"rbac,omitempty"`
+
+	// SWS profile ID.
+	// +kubebuilder:validation:Optional
+	SecurityProfileID *string `json:"securityProfileId,omitempty" tf:"security_profile_id,omitempty"`
 }
 
 type VirtualHostRouteOptionsRbacInitParameters struct {

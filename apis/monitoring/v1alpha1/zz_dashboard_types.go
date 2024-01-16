@@ -251,8 +251,22 @@ type DashboardInitParameters struct {
 	// Dashboard description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// Folder ID
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the Dashboard.
 	// Dashboard labels
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the Dashboard.
@@ -290,6 +304,7 @@ type DashboardObservation struct {
 
 	// A set of key/value label pairs to assign to the Dashboard.
 	// Dashboard labels
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the Dashboard.
@@ -333,6 +348,7 @@ type DashboardParameters struct {
 	// A set of key/value label pairs to assign to the Dashboard.
 	// Dashboard labels
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the Dashboard.
@@ -557,6 +573,19 @@ type LabelValuesInitParameters struct {
 	// Default value.
 	// Default value
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
+
+	// Labels folder ID.
+	// Folder ID
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
 	// Label key to list label values.
 	// Required. Label key to list label values

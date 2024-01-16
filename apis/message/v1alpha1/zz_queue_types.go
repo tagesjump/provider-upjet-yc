@@ -19,6 +19,19 @@ import (
 
 type QueueInitParameters struct {
 
+	// The access key to use when applying changes. If omitted, ymq_access_key specified in provider config is used. For more information see documentation.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccountStaticAccessKey
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractAccessKey()
+	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
+
+	// Reference to a ServiceAccountStaticAccessKey in iam to populate accessKey.
+	// +kubebuilder:validation:Optional
+	AccessKeyRef *v1.Reference `json:"accessKeyRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccountStaticAccessKey in iam to populate accessKey.
+	// +kubebuilder:validation:Optional
+	AccessKeySelector *v1.Selector `json:"accessKeySelector,omitempty" tf:"-"`
+
 	// Enables content-based deduplication. Can be used only if queue is FIFO.
 	ContentBasedDeduplication *bool `json:"contentBasedDeduplication,omitempty" tf:"content_based_deduplication,omitempty"`
 

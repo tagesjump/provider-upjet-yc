@@ -23,6 +23,7 @@ type AllocationPolicyInitParameters struct {
 	InstanceTagsPool []InstanceTagsPoolInitParameters `json:"instanceTagsPool,omitempty" tf:"instance_tags_pool,omitempty"`
 
 	// A list of availability zones.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -32,6 +33,7 @@ type AllocationPolicyObservation struct {
 	InstanceTagsPool []InstanceTagsPoolObservation `json:"instanceTagsPool,omitempty" tf:"instance_tags_pool,omitempty"`
 
 	// A list of availability zones.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -43,6 +45,7 @@ type AllocationPolicyParameters struct {
 
 	// A list of availability zones.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones" tf:"zones,omitempty"`
 }
 
@@ -58,6 +61,7 @@ type ApplicationLoadBalancerInitParameters struct {
 	TargetGroupDescription *string `json:"targetGroupDescription,omitempty" tf:"target_group_description,omitempty"`
 
 	// A set of key/value label pairs.
+	// +mapType=granular
 	TargetGroupLabels map[string]*string `json:"targetGroupLabels,omitempty" tf:"target_group_labels,omitempty"`
 
 	// The name of the target group.
@@ -82,6 +86,7 @@ type ApplicationLoadBalancerObservation struct {
 	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 
 	// A set of key/value label pairs.
+	// +mapType=granular
 	TargetGroupLabels map[string]*string `json:"targetGroupLabels,omitempty" tf:"target_group_labels,omitempty"`
 
 	// The name of the target group.
@@ -104,6 +109,7 @@ type ApplicationLoadBalancerParameters struct {
 
 	// A set of key/value label pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	TargetGroupLabels map[string]*string `json:"targetGroupLabels,omitempty" tf:"target_group_labels,omitempty"`
 
 	// The name of the target group.
@@ -220,6 +226,18 @@ type BootDiskInitializeParamsInitParameters struct {
 	// A description of the instance.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The disk image to initialize this disk from.
+	// +crossplane:generate:reference:type=Image
+	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
+
+	// Reference to a Image to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDRef *v1.Reference `json:"imageIdRef,omitempty" tf:"-"`
+
+	// Selector for a Image to populate imageId.
+	// +kubebuilder:validation:Optional
+	ImageIDSelector *v1.Selector `json:"imageIdSelector,omitempty" tf:"-"`
+
 	// The size of the disk in GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -286,6 +304,7 @@ type CustomRuleInitParameters struct {
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of metric.
@@ -314,6 +333,7 @@ type CustomRuleObservation struct {
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of metric.
@@ -344,6 +364,7 @@ type CustomRuleParameters struct {
 
 	// A set of key/value label pairs to assign to the instance group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of metric.
@@ -592,6 +613,18 @@ type InstanceGroupInitParameters struct {
 	// A description of the instance group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder that the resources belong to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Health check specifications. The structure is documented below.
 	HealthCheck []HealthCheckInitParameters `json:"healthCheck,omitempty" tf:"health_check,omitempty"`
 
@@ -599,6 +632,7 @@ type InstanceGroupInitParameters struct {
 	InstanceTemplate []InstanceTemplateInitParameters `json:"instanceTemplate,omitempty" tf:"instance_template,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Load balancing specifications. The structure is documented below.
@@ -613,7 +647,20 @@ type InstanceGroupInitParameters struct {
 	// The scaling policy of the instance group. The structure is documented below.
 	ScalePolicy []ScalePolicyInitParameters `json:"scalePolicy,omitempty" tf:"scale_policy,omitempty"`
 
+	// The ID of the service account authorized for this instance group.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value  variables pairs to assign to the instance group.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -652,6 +699,7 @@ type InstanceGroupObservation struct {
 	Instances []InstancesObservation `json:"instances,omitempty" tf:"instances,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Load balancing specifications. The structure is documented below.
@@ -673,6 +721,7 @@ type InstanceGroupObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// A set of key/value  variables pairs to assign to the instance group.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -721,6 +770,7 @@ type InstanceGroupParameters struct {
 
 	// A set of key/value label pairs to assign to the instance group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Load balancing specifications. The structure is documented below.
@@ -754,6 +804,7 @@ type InstanceGroupParameters struct {
 
 	// A set of key/value  variables pairs to assign to the instance group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -799,6 +850,9 @@ type InstanceTemplateBootDiskInitParameters struct {
 
 	// The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// When set can be later used to change DiskSpec of actual disk.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InstanceTemplateBootDiskObservation struct {
@@ -814,6 +868,9 @@ type InstanceTemplateBootDiskObservation struct {
 
 	// The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// When set can be later used to change DiskSpec of actual disk.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InstanceTemplateBootDiskParameters struct {
@@ -833,6 +890,10 @@ type InstanceTemplateBootDiskParameters struct {
 	// The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// When set can be later used to change DiskSpec of actual disk.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InstanceTemplateFilesystemInitParameters struct {
@@ -900,9 +961,11 @@ type InstanceTemplateInitParameters struct {
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A set of metadata key/value pairs to make available from within the instance.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name template of the instance.
@@ -967,6 +1030,44 @@ type InstanceTemplateNetworkInterfaceInitParameters struct {
 
 	// A public address that can be used to access the internet over NAT. Use variables to set.
 	NATIPAddress *string `json:"natIpAddress,omitempty" tf:"nat_ip_address,omitempty"`
+
+	// The ID of the network.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
+	// Security group ids for network interface.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
+
+	// The ID of the subnets to attach this interface to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	// +listType=set
+	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
+
+	// References to Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsRefs []v1.Reference `json:"subnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in vpc to populate subnetIds.
+	// +kubebuilder:validation:Optional
+	SubnetIdsSelector *v1.Selector `json:"subnetIdsSelector,omitempty" tf:"-"`
 }
 
 type InstanceTemplateNetworkInterfaceObservation struct {
@@ -1001,9 +1102,11 @@ type InstanceTemplateNetworkInterfaceObservation struct {
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
 	// Security group ids for network interface.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// The ID of the subnets to attach this interface to.
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 }
 
@@ -1060,6 +1163,7 @@ type InstanceTemplateNetworkInterfaceParameters struct {
 	// Security group ids for network interface.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -1073,6 +1177,7 @@ type InstanceTemplateNetworkInterfaceParameters struct {
 	// The ID of the subnets to attach this interface to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in vpc to populate subnetIds.
@@ -1110,9 +1215,11 @@ type InstanceTemplateObservation struct {
 	Hostname *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A set of metadata key/value pairs to make available from within the instance.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name template of the instance.
@@ -1181,10 +1288,12 @@ type InstanceTemplateParameters struct {
 
 	// A set of key/value label pairs to assign to the instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A set of metadata key/value pairs to make available from within the instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Name template of the instance.
@@ -1328,6 +1437,9 @@ type InstanceTemplateSecondaryDiskInitParameters struct {
 
 	// The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// When set can be later used to change DiskSpec of actual disk.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InstanceTemplateSecondaryDiskObservation struct {
@@ -1343,6 +1455,9 @@ type InstanceTemplateSecondaryDiskObservation struct {
 
 	// The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// When set can be later used to change DiskSpec of actual disk.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InstanceTemplateSecondaryDiskParameters struct {
@@ -1362,6 +1477,10 @@ type InstanceTemplateSecondaryDiskParameters struct {
 	// The access mode to the disk resource. By default a disk is attached in READ_WRITE mode.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// When set can be later used to change DiskSpec of actual disk.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type InstancesInitParameters struct {
@@ -1448,6 +1567,7 @@ type LoadBalancerInitParameters struct {
 	TargetGroupDescription *string `json:"targetGroupDescription,omitempty" tf:"target_group_description,omitempty"`
 
 	// A set of key/value label pairs.
+	// +mapType=granular
 	TargetGroupLabels map[string]*string `json:"targetGroupLabels,omitempty" tf:"target_group_labels,omitempty"`
 
 	// The name of the target group.
@@ -1472,6 +1592,7 @@ type LoadBalancerObservation struct {
 	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 
 	// A set of key/value label pairs.
+	// +mapType=granular
 	TargetGroupLabels map[string]*string `json:"targetGroupLabels,omitempty" tf:"target_group_labels,omitempty"`
 
 	// The name of the target group.
@@ -1494,6 +1615,7 @@ type LoadBalancerParameters struct {
 
 	// A set of key/value label pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	TargetGroupLabels map[string]*string `json:"targetGroupLabels,omitempty" tf:"target_group_labels,omitempty"`
 
 	// The name of the target group.
@@ -1790,6 +1912,7 @@ type TestAutoScaleCustomRuleInitParameters struct {
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of metric.
@@ -1818,6 +1941,7 @@ type TestAutoScaleCustomRuleObservation struct {
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// A set of key/value label pairs to assign to the instance group.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of metric.
@@ -1848,6 +1972,7 @@ type TestAutoScaleCustomRuleParameters struct {
 
 	// A set of key/value label pairs to assign to the instance group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of metric.

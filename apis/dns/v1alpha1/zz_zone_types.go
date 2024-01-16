@@ -22,11 +22,37 @@ type ZoneInitParameters struct {
 	// Description of the DNS zone.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// ID of the folder to create a zone in. If it is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A set of key/value label pairs to assign to the DNS zone.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// User assigned name of a specific resource. Must be unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	// +listType=set
+	PrivateNetworks []*string `json:"privateNetworks,omitempty" tf:"private_networks,omitempty"`
+
+	// References to Network in vpc to populate privateNetworks.
+	// +kubebuilder:validation:Optional
+	PrivateNetworksRefs []v1.Reference `json:"privateNetworksRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Network in vpc to populate privateNetworks.
+	// +kubebuilder:validation:Optional
+	PrivateNetworksSelector *v1.Selector `json:"privateNetworksSelector,omitempty" tf:"-"`
 
 	// The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources.
 	Public *bool `json:"public,omitempty" tf:"public,omitempty"`
@@ -50,12 +76,14 @@ type ZoneObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the DNS zone.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// User assigned name of a specific resource. Must be unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.
+	// +listType=set
 	PrivateNetworks []*string `json:"privateNetworks,omitempty" tf:"private_networks,omitempty"`
 
 	// The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources.
@@ -86,6 +114,7 @@ type ZoneParameters struct {
 
 	// A set of key/value label pairs to assign to the DNS zone.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// User assigned name of a specific resource. Must be unique within the folder.
@@ -95,6 +124,7 @@ type ZoneParameters struct {
 	// For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PrivateNetworks []*string `json:"privateNetworks,omitempty" tf:"private_networks,omitempty"`
 
 	// References to Network in vpc to populate privateNetworks.

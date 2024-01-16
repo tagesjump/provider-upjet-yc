@@ -22,12 +22,26 @@ type GpuClusterInitParameters struct {
 	// Description of the GPU cluster. Provide this property when you create a resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default
+	// provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default,
 	// and it is the only one available at the moment.
 	InterconnectType *string `json:"interconnectType,omitempty" tf:"interconnect_type,omitempty"`
 
 	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept,
 	// see documentation.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the GPU cluster. Provide this property when you create a resource.
@@ -57,6 +71,7 @@ type GpuClusterObservation struct {
 
 	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept,
 	// see documentation.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the GPU cluster. Provide this property when you create a resource.
@@ -97,6 +112,7 @@ type GpuClusterParameters struct {
 	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept,
 	// see documentation.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Name of the GPU cluster. Provide this property when you create a resource.

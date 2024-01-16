@@ -393,6 +393,21 @@ func (in *ClickhouseClusterInitParameters) DeepCopyInto(out *ClickhouseClusterIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.FormatSchema != nil {
 		in, out := &in.FormatSchema, &out.FormatSchema
 		*out = make([]FormatSchemaInitParameters, len(*in))
@@ -442,6 +457,21 @@ func (in *ClickhouseClusterInitParameters) DeepCopyInto(out *ClickhouseClusterIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SQLDatabaseManagement != nil {
 		in, out := &in.SQLDatabaseManagement, &out.SQLDatabaseManagement
 		*out = new(bool)
@@ -451,6 +481,44 @@ func (in *ClickhouseClusterInitParameters) DeepCopyInto(out *ClickhouseClusterIn
 		in, out := &in.SQLUserManagement, &out.SQLUserManagement
 		*out = new(bool)
 		**out = **in
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountID != nil {
+		in, out := &in.ServiceAccountID, &out.ServiceAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccountIDRef != nil {
+		in, out := &in.ServiceAccountIDRef, &out.ServiceAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountIDSelector != nil {
+		in, out := &in.ServiceAccountIDSelector, &out.ServiceAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Shard != nil {
 		in, out := &in.Shard, &out.Shard
@@ -3930,6 +3998,21 @@ func (in *ElasticsearchClusterHostInitParameters) DeepCopyInto(out *Elasticsearc
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -4072,6 +4155,21 @@ func (in *ElasticsearchClusterInitParameters) DeepCopyInto(out *ElasticsearchClu
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Host != nil {
 		in, out := &in.Host, &out.Host
 		*out = make([]ElasticsearchClusterHostInitParameters, len(*in))
@@ -4106,6 +4204,59 @@ func (in *ElasticsearchClusterInitParameters) DeepCopyInto(out *ElasticsearchClu
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountID != nil {
+		in, out := &in.ServiceAccountID, &out.ServiceAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccountIDRef != nil {
+		in, out := &in.ServiceAccountIDRef, &out.ServiceAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountIDSelector != nil {
+		in, out := &in.ServiceAccountIDSelector, &out.ServiceAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5281,6 +5432,21 @@ func (in *GreenplumClusterInitParameters) DeepCopyInto(out *GreenplumClusterInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.GreenplumConfig != nil {
 		in, out := &in.GreenplumConfig, &out.GreenplumConfig
 		*out = make(map[string]*string, len(*in))
@@ -5337,12 +5503,57 @@ func (in *GreenplumClusterInitParameters) DeepCopyInto(out *GreenplumClusterInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PoolerConfig != nil {
 		in, out := &in.PoolerConfig, &out.PoolerConfig
 		*out = make([]PoolerConfigInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PxfConfig != nil {
+		in, out := &in.PxfConfig, &out.PxfConfig
+		*out = make([]PxfConfigInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SegmentHostCount != nil {
 		in, out := &in.SegmentHostCount, &out.SegmentHostCount
@@ -5360,6 +5571,21 @@ func (in *GreenplumClusterInitParameters) DeepCopyInto(out *GreenplumClusterInit
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.UserName != nil {
 		in, out := &in.UserName, &out.UserName
@@ -5649,6 +5875,13 @@ func (in *GreenplumClusterObservation) DeepCopyInto(out *GreenplumClusterObserva
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PxfConfig != nil {
+		in, out := &in.PxfConfig, &out.PxfConfig
+		*out = make([]PxfConfigObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -5858,6 +6091,13 @@ func (in *GreenplumClusterParameters) DeepCopyInto(out *GreenplumClusterParamete
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PxfConfig != nil {
+		in, out := &in.PxfConfig, &out.PxfConfig
+		*out = make([]PxfConfigParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.SecurityGroupIds != nil {
 		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
 		*out = make([]*string, len(*in))
@@ -5988,6 +6228,21 @@ func (in *HostInitParameters) DeepCopyInto(out *HostInitParameters) {
 		in, out := &in.ShardName, &out.ShardName
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -6509,6 +6764,21 @@ func (in *KafkaClusterInitParameters) DeepCopyInto(out *KafkaClusterInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HostGroupIds != nil {
 		in, out := &in.HostGroupIds, &out.HostGroupIds
 		*out = make([]*string, len(*in))
@@ -6547,6 +6817,67 @@ func (in *KafkaClusterInitParameters) DeepCopyInto(out *KafkaClusterInitParamete
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Topic != nil {
 		in, out := &in.Topic, &out.Topic
@@ -7539,6 +7870,21 @@ func (in *KafkaConnector) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *KafkaConnectorInitParameters) DeepCopyInto(out *KafkaConnectorInitParameters) {
 	*out = *in
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ConnectorConfigMirrormaker != nil {
 		in, out := &in.ConnectorConfigMirrormaker, &out.ConnectorConfigMirrormaker
 		*out = make([]ConnectorConfigMirrormakerInitParameters, len(*in))
@@ -8080,6 +8426,21 @@ func (in *KafkaTopicInitParameters) DeepCopy() *KafkaTopicInitParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *KafkaTopicInitParameters_2) DeepCopyInto(out *KafkaTopicInitParameters_2) {
 	*out = *in
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -8604,6 +8965,21 @@ func (in *KafkaUser) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *KafkaUserInitParameters) DeepCopyInto(out *KafkaUserInitParameters) {
 	*out = *in
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -10486,6 +10862,21 @@ func (in *MongodbClusterHostInitParameters) DeepCopyInto(out *MongodbClusterHost
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -10655,6 +11046,21 @@ func (in *MongodbClusterInitParameters) DeepCopyInto(out *MongodbClusterInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Host != nil {
 		in, out := &in.Host, &out.Host
 		*out = make([]MongodbClusterHostInitParameters, len(*in))
@@ -10689,6 +11095,21 @@ func (in *MongodbClusterInitParameters) DeepCopyInto(out *MongodbClusterInitPara
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
@@ -10731,6 +11152,29 @@ func (in *MongodbClusterInitParameters) DeepCopyInto(out *MongodbClusterInitPara
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.User != nil {
 		in, out := &in.User, &out.User
@@ -11944,6 +12388,21 @@ func (in *MySQLClusterHostInitParameters) DeepCopyInto(out *MySQLClusterHostInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
 		*out = new(string)
@@ -12130,6 +12589,21 @@ func (in *MySQLClusterInitParameters) DeepCopyInto(out *MySQLClusterInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Host != nil {
 		in, out := &in.Host, &out.Host
 		*out = make([]MySQLClusterHostInitParameters, len(*in))
@@ -12192,6 +12666,21 @@ func (in *MySQLClusterInitParameters) DeepCopyInto(out *MySQLClusterInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PerformanceDiagnostics != nil {
 		in, out := &in.PerformanceDiagnostics, &out.PerformanceDiagnostics
 		*out = make([]MySQLClusterPerformanceDiagnosticsInitParameters, len(*in))
@@ -12212,6 +12701,29 @@ func (in *MySQLClusterInitParameters) DeepCopyInto(out *MySQLClusterInitParamete
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.User != nil {
 		in, out := &in.User, &out.User
@@ -13329,6 +13841,21 @@ func (in *MySQLDatabase) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MySQLDatabaseInitParameters) DeepCopyInto(out *MySQLDatabaseInitParameters) {
 	*out = *in
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -13617,6 +14144,21 @@ func (in *MySQLUserInitParameters) DeepCopyInto(out *MySQLUserInitParameters) {
 		in, out := &in.AuthenticationPlugin, &out.AuthenticationPlugin
 		*out = new(string)
 		**out = **in
+	}
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ConnectionLimits != nil {
 		in, out := &in.ConnectionLimits, &out.ConnectionLimits
@@ -14428,6 +14970,21 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -14455,6 +15012,59 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountID != nil {
+		in, out := &in.ServiceAccountID, &out.ServiceAccountID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ServiceAccountIDRef != nil {
+		in, out := &in.ServiceAccountIDRef, &out.ServiceAccountIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ServiceAccountIDSelector != nil {
+		in, out := &in.ServiceAccountIDSelector, &out.ServiceAccountIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -14937,6 +15547,29 @@ func (in *OpensearchNodeGroupsInitParameters) DeepCopyInto(out *OpensearchNodeGr
 				**out = **in
 			}
 		}
+	}
+	if in.SubnetIds != nil {
+		in, out := &in.SubnetIds, &out.SubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SubnetIdsRefs != nil {
+		in, out := &in.SubnetIdsRefs, &out.SubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SubnetIdsSelector != nil {
+		in, out := &in.SubnetIdsSelector, &out.SubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneIds != nil {
 		in, out := &in.ZoneIds, &out.ZoneIds
@@ -16210,6 +16843,21 @@ func (in *PostgresqlClusterHostInitParameters) DeepCopyInto(out *PostgresqlClust
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
 		*out = new(string)
@@ -16374,6 +17022,21 @@ func (in *PostgresqlClusterInitParameters) DeepCopyInto(out *PostgresqlClusterIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Host != nil {
 		in, out := &in.Host, &out.Host
 		*out = make([]PostgresqlClusterHostInitParameters, len(*in))
@@ -16425,12 +17088,50 @@ func (in *PostgresqlClusterInitParameters) DeepCopyInto(out *PostgresqlClusterIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Restore != nil {
 		in, out := &in.Restore, &out.Restore
 		*out = make([]PostgresqlClusterRestoreInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.User != nil {
 		in, out := &in.User, &out.User
@@ -17368,6 +18069,21 @@ func (in *PostgresqlDatabaseExtensionParameters) DeepCopy() *PostgresqlDatabaseE
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *PostgresqlDatabaseInitParameters) DeepCopyInto(out *PostgresqlDatabaseInitParameters) {
 	*out = *in
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DeletionProtection != nil {
 		in, out := &in.DeletionProtection, &out.DeletionProtection
 		*out = new(string)
@@ -17643,6 +18359,21 @@ func (in *PostgresqlUser) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *PostgresqlUserInitParameters) DeepCopyInto(out *PostgresqlUserInitParameters) {
 	*out = *in
+	if in.ClusterID != nil {
+		in, out := &in.ClusterID, &out.ClusterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClusterIDRef != nil {
+		in, out := &in.ClusterIDRef, &out.ClusterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ClusterIDSelector != nil {
+		in, out := &in.ClusterIDSelector, &out.ClusterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ConnLimit != nil {
 		in, out := &in.ConnLimit, &out.ConnLimit
 		*out = new(float64)
@@ -17996,6 +18727,186 @@ func (in *PostgresqlUserStatus) DeepCopy() *PostgresqlUserStatus {
 		return nil
 	}
 	out := new(PostgresqlUserStatus)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PxfConfigInitParameters) DeepCopyInto(out *PxfConfigInitParameters) {
+	*out = *in
+	if in.ConnectionTimeout != nil {
+		in, out := &in.ConnectionTimeout, &out.ConnectionTimeout
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaxThreads != nil {
+		in, out := &in.MaxThreads, &out.MaxThreads
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolAllowCoreThreadTimeout != nil {
+		in, out := &in.PoolAllowCoreThreadTimeout, &out.PoolAllowCoreThreadTimeout
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PoolCoreSize != nil {
+		in, out := &in.PoolCoreSize, &out.PoolCoreSize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolMaxSize != nil {
+		in, out := &in.PoolMaxSize, &out.PoolMaxSize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolQueueCapacity != nil {
+		in, out := &in.PoolQueueCapacity, &out.PoolQueueCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.UploadTimeout != nil {
+		in, out := &in.UploadTimeout, &out.UploadTimeout
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Xms != nil {
+		in, out := &in.Xms, &out.Xms
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Xmx != nil {
+		in, out := &in.Xmx, &out.Xmx
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PxfConfigInitParameters.
+func (in *PxfConfigInitParameters) DeepCopy() *PxfConfigInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PxfConfigInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PxfConfigObservation) DeepCopyInto(out *PxfConfigObservation) {
+	*out = *in
+	if in.ConnectionTimeout != nil {
+		in, out := &in.ConnectionTimeout, &out.ConnectionTimeout
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaxThreads != nil {
+		in, out := &in.MaxThreads, &out.MaxThreads
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolAllowCoreThreadTimeout != nil {
+		in, out := &in.PoolAllowCoreThreadTimeout, &out.PoolAllowCoreThreadTimeout
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PoolCoreSize != nil {
+		in, out := &in.PoolCoreSize, &out.PoolCoreSize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolMaxSize != nil {
+		in, out := &in.PoolMaxSize, &out.PoolMaxSize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolQueueCapacity != nil {
+		in, out := &in.PoolQueueCapacity, &out.PoolQueueCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.UploadTimeout != nil {
+		in, out := &in.UploadTimeout, &out.UploadTimeout
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Xms != nil {
+		in, out := &in.Xms, &out.Xms
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Xmx != nil {
+		in, out := &in.Xmx, &out.Xmx
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PxfConfigObservation.
+func (in *PxfConfigObservation) DeepCopy() *PxfConfigObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(PxfConfigObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PxfConfigParameters) DeepCopyInto(out *PxfConfigParameters) {
+	*out = *in
+	if in.ConnectionTimeout != nil {
+		in, out := &in.ConnectionTimeout, &out.ConnectionTimeout
+		*out = new(float64)
+		**out = **in
+	}
+	if in.MaxThreads != nil {
+		in, out := &in.MaxThreads, &out.MaxThreads
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolAllowCoreThreadTimeout != nil {
+		in, out := &in.PoolAllowCoreThreadTimeout, &out.PoolAllowCoreThreadTimeout
+		*out = new(bool)
+		**out = **in
+	}
+	if in.PoolCoreSize != nil {
+		in, out := &in.PoolCoreSize, &out.PoolCoreSize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolMaxSize != nil {
+		in, out := &in.PoolMaxSize, &out.PoolMaxSize
+		*out = new(float64)
+		**out = **in
+	}
+	if in.PoolQueueCapacity != nil {
+		in, out := &in.PoolQueueCapacity, &out.PoolQueueCapacity
+		*out = new(float64)
+		**out = **in
+	}
+	if in.UploadTimeout != nil {
+		in, out := &in.UploadTimeout, &out.UploadTimeout
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Xms != nil {
+		in, out := &in.Xms, &out.Xms
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Xmx != nil {
+		in, out := &in.Xmx, &out.Xmx
+		*out = new(float64)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PxfConfigParameters.
+func (in *PxfConfigParameters) DeepCopy() *PxfConfigParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PxfConfigParameters)
 	in.DeepCopyInto(out)
 	return out
 }
@@ -18456,6 +19367,21 @@ func (in *RedisClusterHostInitParameters) DeepCopyInto(out *RedisClusterHostInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
 		*out = new(string)
@@ -18598,6 +19524,21 @@ func (in *RedisClusterInitParameters) DeepCopyInto(out *RedisClusterInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Host != nil {
 		in, out := &in.Host, &out.Host
 		*out = make([]RedisClusterHostInitParameters, len(*in))
@@ -18633,6 +19574,21 @@ func (in *RedisClusterInitParameters) DeepCopyInto(out *RedisClusterInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PersistenceMode != nil {
 		in, out := &in.PersistenceMode, &out.PersistenceMode
 		*out = new(string)
@@ -18644,6 +19600,29 @@ func (in *RedisClusterInitParameters) DeepCopyInto(out *RedisClusterInitParamete
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Sharded != nil {
 		in, out := &in.Sharded, &out.Sharded
@@ -20934,6 +21913,21 @@ func (in *SqlserverClusterHostInitParameters) DeepCopyInto(out *SqlserverCluster
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Zone != nil {
 		in, out := &in.Zone, &out.Zone
 		*out = new(string)
@@ -21058,6 +22052,21 @@ func (in *SqlserverClusterInitParameters) DeepCopyInto(out *SqlserverClusterInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Host != nil {
 		in, out := &in.Host, &out.Host
 		*out = make([]SqlserverClusterHostInitParameters, len(*in))
@@ -21097,12 +22106,50 @@ func (in *SqlserverClusterInitParameters) DeepCopyInto(out *SqlserverClusterInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
 		*out = make([]SqlserverClusterResourcesInitParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Sqlcollation != nil {
 		in, out := &in.Sqlcollation, &out.Sqlcollation

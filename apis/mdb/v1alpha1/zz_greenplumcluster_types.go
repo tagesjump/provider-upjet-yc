@@ -127,10 +127,25 @@ type GreenplumClusterInitParameters struct {
 	// Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it
+	// is not provided, the default provider folder is used.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
+	// +mapType=granular
 	GreenplumConfig map[string]*string `json:"greenplumConfig,omitempty" tf:"greenplum_config,omitempty"`
 
 	// A set of key/value label pairs to assign to the Greenplum cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the Greenplum cluster. The structure is documented below.
@@ -145,8 +160,36 @@ type GreenplumClusterInitParameters struct {
 	// Name of the Greenplum cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// ID of the network, to which the Greenplum cluster uses.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
 	// Configuration of the connection pooler. The structure is documented below.
 	PoolerConfig []PoolerConfigInitParameters `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
+
+	// Configuration of the PXF daemon. The structure is documented below.
+	PxfConfig []PxfConfigInitParameters `json:"pxfConfig,omitempty" tf:"pxf_config,omitempty"`
+
+	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// Number of hosts in segment subcluster (from 1 to 32).
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
@@ -156,6 +199,18 @@ type GreenplumClusterInitParameters struct {
 
 	// Settings for segment subcluster. The structure is documented below.
 	SegmentSubcluster []SegmentSubclusterInitParameters `json:"segmentSubcluster,omitempty" tf:"segment_subcluster,omitempty"`
+
+	// The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Greenplum cluster admin user name.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
@@ -237,6 +292,7 @@ type GreenplumClusterObservation struct {
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
+	// +mapType=granular
 	GreenplumConfig map[string]*string `json:"greenplumConfig,omitempty" tf:"greenplum_config,omitempty"`
 
 	// Aggregated health of the cluster.
@@ -245,6 +301,7 @@ type GreenplumClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the Greenplum cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the Greenplum cluster. The structure is documented below.
@@ -268,7 +325,11 @@ type GreenplumClusterObservation struct {
 	// Configuration of the connection pooler. The structure is documented below.
 	PoolerConfig []PoolerConfigObservation `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
+	// Configuration of the PXF daemon. The structure is documented below.
+	PxfConfig []PxfConfigObservation `json:"pxfConfig,omitempty" tf:"pxf_config,omitempty"`
+
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Number of hosts in segment subcluster (from 1 to 32).
@@ -345,10 +406,12 @@ type GreenplumClusterParameters struct {
 
 	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	GreenplumConfig map[string]*string `json:"greenplumConfig,omitempty" tf:"greenplum_config,omitempty"`
 
 	// A set of key/value label pairs to assign to the Greenplum cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the Greenplum cluster. The structure is documented below.
@@ -384,9 +447,14 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PoolerConfig []PoolerConfigParameters `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
+	// Configuration of the PXF daemon. The structure is documented below.
+	// +kubebuilder:validation:Optional
+	PxfConfig []PxfConfigParameters `json:"pxfConfig,omitempty" tf:"pxf_config,omitempty"`
+
 	// A set of ids of security groups assigned to hosts of the cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -538,6 +606,105 @@ type PoolerConfigParameters struct {
 	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
 	// +kubebuilder:validation:Optional
 	PoolingMode *string `json:"poolingMode,omitempty" tf:"pooling_mode,omitempty"`
+}
+
+type PxfConfigInitParameters struct {
+
+	// The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+
+	// The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+	MaxThreads *float64 `json:"maxThreads,omitempty" tf:"max_threads,omitempty"`
+
+	// Identifies whether or not core streaming threads are allowed to time out.
+	PoolAllowCoreThreadTimeout *bool `json:"poolAllowCoreThreadTimeout,omitempty" tf:"pool_allow_core_thread_timeout,omitempty"`
+
+	// The number of core streaming threads. Value is between 1 and 1024.
+	PoolCoreSize *float64 `json:"poolCoreSize,omitempty" tf:"pool_core_size,omitempty"`
+
+	// The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+	PoolMaxSize *float64 `json:"poolMaxSize,omitempty" tf:"pool_max_size,omitempty"`
+
+	// The capacity of the core streaming thread pool queue. Value is positive.
+	PoolQueueCapacity *float64 `json:"poolQueueCapacity,omitempty" tf:"pool_queue_capacity,omitempty"`
+
+	// The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+	UploadTimeout *float64 `json:"uploadTimeout,omitempty" tf:"upload_timeout,omitempty"`
+
+	// Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+	Xms *float64 `json:"xms,omitempty" tf:"xms,omitempty"`
+
+	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
+}
+
+type PxfConfigObservation struct {
+
+	// The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+
+	// The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+	MaxThreads *float64 `json:"maxThreads,omitempty" tf:"max_threads,omitempty"`
+
+	// Identifies whether or not core streaming threads are allowed to time out.
+	PoolAllowCoreThreadTimeout *bool `json:"poolAllowCoreThreadTimeout,omitempty" tf:"pool_allow_core_thread_timeout,omitempty"`
+
+	// The number of core streaming threads. Value is between 1 and 1024.
+	PoolCoreSize *float64 `json:"poolCoreSize,omitempty" tf:"pool_core_size,omitempty"`
+
+	// The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+	PoolMaxSize *float64 `json:"poolMaxSize,omitempty" tf:"pool_max_size,omitempty"`
+
+	// The capacity of the core streaming thread pool queue. Value is positive.
+	PoolQueueCapacity *float64 `json:"poolQueueCapacity,omitempty" tf:"pool_queue_capacity,omitempty"`
+
+	// The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+	UploadTimeout *float64 `json:"uploadTimeout,omitempty" tf:"upload_timeout,omitempty"`
+
+	// Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+	Xms *float64 `json:"xms,omitempty" tf:"xms,omitempty"`
+
+	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
+}
+
+type PxfConfigParameters struct {
+
+	// The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+	// +kubebuilder:validation:Optional
+	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
+
+	// The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+	// +kubebuilder:validation:Optional
+	MaxThreads *float64 `json:"maxThreads,omitempty" tf:"max_threads,omitempty"`
+
+	// Identifies whether or not core streaming threads are allowed to time out.
+	// +kubebuilder:validation:Optional
+	PoolAllowCoreThreadTimeout *bool `json:"poolAllowCoreThreadTimeout,omitempty" tf:"pool_allow_core_thread_timeout,omitempty"`
+
+	// The number of core streaming threads. Value is between 1 and 1024.
+	// +kubebuilder:validation:Optional
+	PoolCoreSize *float64 `json:"poolCoreSize,omitempty" tf:"pool_core_size,omitempty"`
+
+	// The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+	// +kubebuilder:validation:Optional
+	PoolMaxSize *float64 `json:"poolMaxSize,omitempty" tf:"pool_max_size,omitempty"`
+
+	// The capacity of the core streaming thread pool queue. Value is positive.
+	// +kubebuilder:validation:Optional
+	PoolQueueCapacity *float64 `json:"poolQueueCapacity,omitempty" tf:"pool_queue_capacity,omitempty"`
+
+	// The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+	// +kubebuilder:validation:Optional
+	UploadTimeout *float64 `json:"uploadTimeout,omitempty" tf:"upload_timeout,omitempty"`
+
+	// Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+	// +kubebuilder:validation:Optional
+	Xms *float64 `json:"xms,omitempty" tf:"xms,omitempty"`
+
+	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+	// +kubebuilder:validation:Optional
+	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
 }
 
 type SegmentHostsInitParameters struct {

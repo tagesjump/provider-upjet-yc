@@ -19,7 +19,20 @@ import (
 
 type GroupMembershipInitParameters struct {
 
+	// The Group to add/remove members to/from.
+	// +crossplane:generate:reference:type=Group
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// Reference to a Group to populate groupId.
+	// +kubebuilder:validation:Optional
+	GroupIDRef *v1.Reference `json:"groupIdRef,omitempty" tf:"-"`
+
+	// Selector for a Group to populate groupId.
+	// +kubebuilder:validation:Optional
+	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
+
 	// A set of members of the Group. Each member is represented by an id.
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 }
 
@@ -31,6 +44,7 @@ type GroupMembershipObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of members of the Group. Each member is represented by an id.
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 }
 
@@ -51,6 +65,7 @@ type GroupMembershipParameters struct {
 
 	// A set of members of the Group. Each member is represented by an id.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 }
 

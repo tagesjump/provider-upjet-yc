@@ -152,7 +152,7 @@ type ConfigResourcesParameters struct {
 
 type DiskSizeAutoscalingInitParameters struct {
 
-	// Limit of disk size after autoscaling.
+	// Limit of disk size after autoscaling (GiB).
 	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
 
 	// Immediate autoscaling disk usage (percent).
@@ -164,7 +164,7 @@ type DiskSizeAutoscalingInitParameters struct {
 
 type DiskSizeAutoscalingObservation struct {
 
-	// Limit of disk size after autoscaling.
+	// Limit of disk size after autoscaling (GiB).
 	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
 
 	// Immediate autoscaling disk usage (percent).
@@ -176,7 +176,7 @@ type DiskSizeAutoscalingObservation struct {
 
 type DiskSizeAutoscalingParameters struct {
 
-	// Limit of disk size after autoscaling.
+	// Limit of disk size after autoscaling (GiB).
 	// +kubebuilder:validation:Optional
 	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
 
@@ -291,6 +291,7 @@ type PostgresqlClusterConfigInitParameters struct {
 	PoolerConfig []ConfigPoolerConfigInitParameters `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
 	// PostgreSQL cluster config. Detail info in "postresql config" section (documented below).
+	// +mapType=granular
 	PostgresqlConfig map[string]*string `json:"postgresqlConfig,omitempty" tf:"postgresql_config,omitempty"`
 
 	// Resources allocated to hosts of the PostgreSQL cluster. The structure is documented below.
@@ -324,6 +325,7 @@ type PostgresqlClusterConfigObservation struct {
 	PoolerConfig []ConfigPoolerConfigObservation `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
 	// PostgreSQL cluster config. Detail info in "postresql config" section (documented below).
+	// +mapType=granular
 	PostgresqlConfig map[string]*string `json:"postgresqlConfig,omitempty" tf:"postgresql_config,omitempty"`
 
 	// Resources allocated to hosts of the PostgreSQL cluster. The structure is documented below.
@@ -365,6 +367,7 @@ type PostgresqlClusterConfigParameters struct {
 
 	// PostgreSQL cluster config. Detail info in "postresql config" section (documented below).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	PostgresqlConfig map[string]*string `json:"postgresqlConfig,omitempty" tf:"postgresql_config,omitempty"`
 
 	// Resources allocated to hosts of the PostgreSQL cluster. The structure is documented below.
@@ -442,6 +445,18 @@ type PostgresqlClusterHostInitParameters struct {
 
 	// Host replication source name points to host's name from which this host should replicate. When not set then host in HA group. It works only when name is set.
 	ReplicationSourceName *string `json:"replicationSourceName,omitempty" tf:"replication_source_name,omitempty"`
+
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Subnet
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in vpc to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The availability zone where the PostgreSQL host will be created.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
@@ -531,15 +546,29 @@ type PostgresqlClusterInitParameters struct {
 	// Deployment environment of the PostgreSQL cluster.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
+	// The ID of the folder that the resource belongs to. If it is unset, the default provider folder_id is used for create.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.Reference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder in resourcemanager to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
 	// A host of the PostgreSQL cluster. The structure is documented below.
 	Host []PostgresqlClusterHostInitParameters `json:"host,omitempty" tf:"host,omitempty"`
 
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// It sets name of master host. It works only when host.name is set.
 	HostMasterName *string `json:"hostMasterName,omitempty" tf:"host_master_name,omitempty"`
 
 	// A set of key/value label pairs to assign to the PostgreSQL cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the PostgreSQL cluster. The structure is documented below.
@@ -548,8 +577,33 @@ type PostgresqlClusterInitParameters struct {
 	// Name of the PostgreSQL cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// ID of the network, to which the PostgreSQL cluster belongs.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.Network
+	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
+
+	// Reference to a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDRef *v1.Reference `json:"networkIdRef,omitempty" tf:"-"`
+
+	// Selector for a Network in vpc to populate networkId.
+	// +kubebuilder:validation:Optional
+	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
+
 	// The cluster will be created from the specified backup. The structure is documented below.
 	Restore []PostgresqlClusterRestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+
+	// A set of ids of security groups assigned to hosts of the cluster.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
+	// +listType=set
+	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
+
+	// References to SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsRefs []v1.Reference `json:"securityGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SecurityGroup in vpc to populate securityGroupIds.
+	// +kubebuilder:validation:Optional
+	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
 	// (Deprecated) To manage users, please switch to using a separate resource type yandex_mdb_postgresql_user.
 	User []PostgresqlClusterUserInitParameters `json:"user,omitempty" tf:"user,omitempty"`
@@ -623,6 +677,7 @@ type PostgresqlClusterObservation struct {
 	// A host of the PostgreSQL cluster. The structure is documented below.
 	Host []PostgresqlClusterHostObservation `json:"host,omitempty" tf:"host,omitempty"`
 
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// It sets name of master host. It works only when host.name is set.
@@ -631,6 +686,7 @@ type PostgresqlClusterObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A set of key/value label pairs to assign to the PostgreSQL cluster.
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the PostgreSQL cluster. The structure is documented below.
@@ -646,6 +702,7 @@ type PostgresqlClusterObservation struct {
 	Restore []PostgresqlClusterRestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// A set of ids of security groups assigned to hosts of the cluster.
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// Status of the cluster.
@@ -695,6 +752,7 @@ type PostgresqlClusterParameters struct {
 	Host []PostgresqlClusterHostParameters `json:"host,omitempty" tf:"host,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
 	// It sets name of master host. It works only when host.name is set.
@@ -703,6 +761,7 @@ type PostgresqlClusterParameters struct {
 
 	// A set of key/value label pairs to assign to the PostgreSQL cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Maintenance policy of the PostgreSQL cluster. The structure is documented below.
@@ -733,6 +792,7 @@ type PostgresqlClusterParameters struct {
 	// A set of ids of security groups assigned to hosts of the cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
 	// References to SecurityGroup in vpc to populate securityGroupIds.
@@ -802,6 +862,7 @@ type PostgresqlClusterUserInitParameters struct {
 
 	Permission []PostgresqlClusterUserPermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -817,6 +878,7 @@ type PostgresqlClusterUserObservation struct {
 
 	Permission []PostgresqlClusterUserPermissionObservation `json:"permission,omitempty" tf:"permission,omitempty"`
 
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 
@@ -842,6 +904,7 @@ type PostgresqlClusterUserParameters struct {
 	Permission []PostgresqlClusterUserPermissionParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 }
 

@@ -19,6 +19,18 @@ import (
 
 type CloudIAMMemberInitParameters struct {
 
+	// ID of the cloud to attach a policy to.
+	// +crossplane:generate:reference:type=Cloud
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// Reference to a Cloud to populate cloudId.
+	// +kubebuilder:validation:Optional
+	CloudIDRef *v1.Reference `json:"cloudIdRef,omitempty" tf:"-"`
+
+	// Selector for a Cloud to populate cloudId.
+	// +kubebuilder:validation:Optional
+	CloudIDSelector *v1.Selector `json:"cloudIdSelector,omitempty" tf:"-"`
+
 	// The identity that will be granted the privilege that is specified in the role field.
 	// This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`

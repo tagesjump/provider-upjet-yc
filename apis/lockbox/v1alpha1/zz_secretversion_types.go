@@ -23,6 +23,7 @@ type CommandInitParameters struct {
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
 	// Map of environment variables to set before calling the script/command.
+	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
 	// The path to the script or command to execute.
@@ -35,6 +36,7 @@ type CommandObservation struct {
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
 	// Map of environment variables to set before calling the script/command.
+	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
 	// The path to the script or command to execute.
@@ -49,6 +51,7 @@ type CommandParameters struct {
 
 	// Map of environment variables to set before calling the script/command.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
 	// The path to the script or command to execute.
@@ -96,6 +99,18 @@ type SecretVersionInitParameters struct {
 
 	// List of entries in the Yandex Cloud Lockbox secret version.
 	Entries []EntriesInitParameters `json:"entries,omitempty" tf:"entries,omitempty"`
+
+	// The Yandex Cloud Lockbox secret ID where to add the version.
+	// +crossplane:generate:reference:type=Secret
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// Reference to a Secret to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDRef *v1.Reference `json:"secretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Secret to populate secretId.
+	// +kubebuilder:validation:Optional
+	SecretIDSelector *v1.Selector `json:"secretIdSelector,omitempty" tf:"-"`
 }
 
 type SecretVersionObservation struct {

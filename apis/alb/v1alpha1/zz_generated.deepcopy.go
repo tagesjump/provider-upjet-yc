@@ -489,6 +489,21 @@ func (in *BackendGroupInitParameters) DeepCopyInto(out *BackendGroupInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.GRPCBackend != nil {
 		in, out := &in.GRPCBackend, &out.GRPCBackend
 		*out = make([]GRPCBackendInitParameters, len(*in))
@@ -1677,6 +1692,29 @@ func (in *GRPCBackendInitParameters) DeepCopyInto(out *GRPCBackendInitParameters
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.TargetGroupIds != nil {
+		in, out := &in.TargetGroupIds, &out.TargetGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.TargetGroupIdsRefs != nil {
+		in, out := &in.TargetGroupIdsRefs, &out.TargetGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.TargetGroupIdsSelector != nil {
+		in, out := &in.TargetGroupIdsSelector, &out.TargetGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
 		*out = new(float64)
@@ -1963,6 +2001,21 @@ func (in *GRPCRouteActionInitParameters) DeepCopyInto(out *GRPCRouteActionInitPa
 		in, out := &in.AutoHostRewrite, &out.AutoHostRewrite
 		*out = new(bool)
 		**out = **in
+	}
+	if in.BackendGroupID != nil {
+		in, out := &in.BackendGroupID, &out.BackendGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.BackendGroupIDRef != nil {
+		in, out := &in.BackendGroupIDRef, &out.BackendGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BackendGroupIDSelector != nil {
+		in, out := &in.BackendGroupIDSelector, &out.BackendGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.HostRewrite != nil {
 		in, out := &in.HostRewrite, &out.HostRewrite
@@ -2490,6 +2543,29 @@ func (in *HTTPBackendInitParameters) DeepCopyInto(out *HTTPBackendInitParameters
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.TargetGroupIds != nil {
+		in, out := &in.TargetGroupIds, &out.TargetGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.TargetGroupIdsRefs != nil {
+		in, out := &in.TargetGroupIdsRefs, &out.TargetGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.TargetGroupIdsSelector != nil {
+		in, out := &in.TargetGroupIdsSelector, &out.TargetGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
@@ -3305,6 +3381,21 @@ func (in *HTTPRouteActionInitParameters) DeepCopyInto(out *HTTPRouteActionInitPa
 		*out = new(bool)
 		**out = **in
 	}
+	if in.BackendGroupID != nil {
+		in, out := &in.BackendGroupID, &out.BackendGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.BackendGroupIDRef != nil {
+		in, out := &in.BackendGroupIDRef, &out.BackendGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.BackendGroupIDSelector != nil {
+		in, out := &in.BackendGroupIDSelector, &out.BackendGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.HostRewrite != nil {
 		in, out := &in.HostRewrite, &out.HostRewrite
 		*out = new(string)
@@ -3633,6 +3724,21 @@ func (in *HTTPRouterInitParameters) DeepCopyInto(out *HTTPRouterInitParameters) 
 		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
+	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
@@ -4045,6 +4151,21 @@ func (in *HandlerInitParameters) DeepCopyInto(out *HandlerInitParameters) {
 		in, out := &in.AllowHttp10, &out.AllowHttp10
 		*out = new(bool)
 		**out = **in
+	}
+	if in.HTTPRouterID != nil {
+		in, out := &in.HTTPRouterID, &out.HTTPRouterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.HTTPRouterIDRef != nil {
+		in, out := &in.HTTPRouterIDRef, &out.HTTPRouterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.HTTPRouterIDSelector != nil {
+		in, out := &in.HTTPRouterIDSelector, &out.HTTPRouterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Http2Options != nil {
 		in, out := &in.Http2Options, &out.Http2Options
@@ -4855,6 +4976,21 @@ func (in *InternalIPv4AddressInitParameters) DeepCopyInto(out *InternalIPv4Addre
 		*out = new(string)
 		**out = **in
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new InternalIPv4AddressInitParameters.
@@ -5200,6 +5336,21 @@ func (in *LoadBalancerInitParameters) DeepCopyInto(out *LoadBalancerInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -5235,10 +5386,48 @@ func (in *LoadBalancerInitParameters) DeepCopyInto(out *LoadBalancerInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkID != nil {
+		in, out := &in.NetworkID, &out.NetworkID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkIDRef != nil {
+		in, out := &in.NetworkIDRef, &out.NetworkIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkIDSelector != nil {
+		in, out := &in.NetworkIDSelector, &out.NetworkIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RegionID != nil {
 		in, out := &in.RegionID, &out.RegionID
 		*out = new(string)
 		**out = **in
+	}
+	if in.SecurityGroupIds != nil {
+		in, out := &in.SecurityGroupIds, &out.SecurityGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityGroupIdsRefs != nil {
+		in, out := &in.SecurityGroupIdsRefs, &out.SecurityGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.SecurityGroupIdsSelector != nil {
+		in, out := &in.SecurityGroupIdsSelector, &out.SecurityGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -5659,6 +5848,21 @@ func (in *LocationInitParameters) DeepCopyInto(out *LocationInitParameters) {
 		in, out := &in.DisableTraffic, &out.DisableTraffic
 		*out = new(bool)
 		**out = **in
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneID != nil {
 		in, out := &in.ZoneID, &out.ZoneID
@@ -7012,6 +7216,11 @@ func (in *RouteOptionsInitParameters) DeepCopyInto(out *RouteOptionsInitParamete
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RouteOptionsInitParameters.
@@ -7034,6 +7243,11 @@ func (in *RouteOptionsObservation) DeepCopyInto(out *RouteOptionsObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RouteOptionsObservation.
@@ -7055,6 +7269,11 @@ func (in *RouteOptionsParameters) DeepCopyInto(out *RouteOptionsParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -7266,6 +7485,11 @@ func (in *RouteRouteOptionsInitParameters) DeepCopyInto(out *RouteRouteOptionsIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RouteRouteOptionsInitParameters.
@@ -7288,6 +7512,11 @@ func (in *RouteRouteOptionsObservation) DeepCopyInto(out *RouteRouteOptionsObser
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new RouteRouteOptionsObservation.
@@ -7309,6 +7538,11 @@ func (in *RouteRouteOptionsParameters) DeepCopyInto(out *RouteRouteOptionsParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
 	}
 }
 
@@ -8126,6 +8360,29 @@ func (in *StreamBackendInitParameters) DeepCopyInto(out *StreamBackendInitParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.TargetGroupIds != nil {
+		in, out := &in.TargetGroupIds, &out.TargetGroupIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.TargetGroupIdsRefs != nil {
+		in, out := &in.TargetGroupIdsRefs, &out.TargetGroupIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.TargetGroupIdsSelector != nil {
+		in, out := &in.TargetGroupIdsSelector, &out.TargetGroupIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Weight != nil {
 		in, out := &in.Weight, &out.Weight
 		*out = new(float64)
@@ -8942,6 +9199,21 @@ func (in *TargetGroupInitParameters) DeepCopyInto(out *TargetGroupInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.FolderID != nil {
+		in, out := &in.FolderID, &out.FolderID
+		*out = new(string)
+		**out = **in
+	}
+	if in.FolderIDRef != nil {
+		in, out := &in.FolderIDRef, &out.FolderIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.FolderIDSelector != nil {
+		in, out := &in.FolderIDSelector, &out.FolderIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -9187,6 +9459,21 @@ func (in *TargetInitParameters) DeepCopyInto(out *TargetInitParameters) {
 		in, out := &in.PrivateIPv4Address, &out.PrivateIPv4Address
 		*out = new(bool)
 		**out = **in
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -9476,6 +9763,21 @@ func (in *VirtualHostInitParameters) DeepCopyInto(out *VirtualHostInitParameters
 			}
 		}
 	}
+	if in.HTTPRouterID != nil {
+		in, out := &in.HTTPRouterID, &out.HTTPRouterID
+		*out = new(string)
+		**out = **in
+	}
+	if in.HTTPRouterIDRef != nil {
+		in, out := &in.HTTPRouterIDRef, &out.HTTPRouterIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.HTTPRouterIDSelector != nil {
+		in, out := &in.HTTPRouterIDSelector, &out.HTTPRouterIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ModifyRequestHeaders != nil {
 		in, out := &in.ModifyRequestHeaders, &out.ModifyRequestHeaders
 		*out = make([]ModifyRequestHeadersInitParameters, len(*in))
@@ -9706,6 +10008,11 @@ func (in *VirtualHostRouteOptionsInitParameters) DeepCopyInto(out *VirtualHostRo
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VirtualHostRouteOptionsInitParameters.
@@ -9728,6 +10035,11 @@ func (in *VirtualHostRouteOptionsObservation) DeepCopyInto(out *VirtualHostRoute
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VirtualHostRouteOptionsObservation.
@@ -9749,6 +10061,11 @@ func (in *VirtualHostRouteOptionsParameters) DeepCopyInto(out *VirtualHostRouteO
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SecurityProfileID != nil {
+		in, out := &in.SecurityProfileID, &out.SecurityProfileID
+		*out = new(string)
+		**out = **in
 	}
 }
 

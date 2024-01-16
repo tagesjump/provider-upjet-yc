@@ -58,6 +58,44 @@ func (mg *Dashboard) ResolveReferences(ctx context.Context, c client.Reader) err
 			}
 		}
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Parametrization); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Parametrization[i3].Parameters); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues[i5].FolderID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues[i5].FolderIDRef,
+					Selector:     mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues[i5].FolderIDSelector,
+					To: reference.To{
+						List:    &v1alpha1.FolderList{},
+						Managed: &v1alpha1.Folder{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues[i5].FolderID")
+				}
+				mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues[i5].FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.Parametrization[i3].Parameters[i4].LabelValues[i5].FolderIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

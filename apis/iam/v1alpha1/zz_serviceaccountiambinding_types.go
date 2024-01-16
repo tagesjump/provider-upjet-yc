@@ -19,9 +19,38 @@ import (
 
 type ServiceAccountIAMBindingInitParameters struct {
 
+	// Identities that will be granted the privilege in role.
+	// Each entry can have one of the following values:
+	// +crossplane:generate:reference:type=ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
+	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
+	// +crossplane:generate:reference:selectorFieldName=ServiceAccountSelector
+	// +listType=set
+	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
+
 	// The role that should be applied. Only one
 	// yandex_iam_service_account_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The service account ID to apply a binding to.
+	// +crossplane:generate:reference:type=ServiceAccount
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// Reference to a ServiceAccount to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
+
+	// References to ServiceAccount to populate members.
+	// +kubebuilder:validation:Optional
+	ServiceAccountRef []v1.Reference `json:"serviceAccountRef,omitempty" tf:"-"`
+
+	// Selector for a list of ServiceAccount to populate members.
+	// +kubebuilder:validation:Optional
+	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
@@ -31,6 +60,7 @@ type ServiceAccountIAMBindingObservation struct {
 
 	// Identities that will be granted the privilege in role.
 	// Each entry can have one of the following values:
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be applied. Only one
@@ -52,6 +82,7 @@ type ServiceAccountIAMBindingParameters struct {
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
 	// +crossplane:generate:reference:selectorFieldName=ServiceAccountSelector
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// The role that should be applied. Only one

@@ -54,6 +54,38 @@ func (mg *Disk) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ImageID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ImageIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ImageID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ImageIDRef,
+		Selector:     mg.Spec.InitProvider.ImageIDSelector,
+		To: reference.To{
+			List:    &ImageList{},
+			Managed: &Image{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ImageID")
+	}
+	mg.Spec.InitProvider.ImageID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ImageIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -79,6 +111,22 @@ func (mg *DiskPlacementGroup) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -106,6 +154,22 @@ func (mg *Filesystem) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -131,6 +195,22 @@ func (mg *GpuCluster) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -158,6 +238,22 @@ func (mg *Image) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -169,6 +265,24 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.BootDisk); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.BootDisk[i3].DiskID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.BootDisk[i3].DiskIDRef,
+			Selector:     mg.Spec.ForProvider.BootDisk[i3].DiskIDSelector,
+			To: reference.To{
+				List:    &DiskList{},
+				Managed: &Disk{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.BootDisk[i3].DiskID")
+		}
+		mg.Spec.ForProvider.BootDisk[i3].DiskID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.BootDisk[i3].DiskIDRef = rsp.ResolvedReference
+
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.BootDisk); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.BootDisk[i3].InitializeParams); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -256,6 +370,112 @@ func (mg *Instance) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.BootDisk); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BootDisk[i3].DiskID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.BootDisk[i3].DiskIDRef,
+			Selector:     mg.Spec.InitProvider.BootDisk[i3].DiskIDSelector,
+			To: reference.To{
+				List:    &DiskList{},
+				Managed: &Disk{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.BootDisk[i3].DiskID")
+		}
+		mg.Spec.InitProvider.BootDisk[i3].DiskID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.BootDisk[i3].DiskIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.BootDisk); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.BootDisk[i3].InitializeParams); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.BootDisk[i3].InitializeParams[i4].ImageID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.BootDisk[i3].InitializeParams[i4].ImageIDRef,
+				Selector:     mg.Spec.InitProvider.BootDisk[i3].InitializeParams[i4].ImageIDSelector,
+				To: reference.To{
+					List:    &ImageList{},
+					Managed: &Image{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.BootDisk[i3].InitializeParams[i4].ImageID")
+			}
+			mg.Spec.InitProvider.BootDisk[i3].InitializeParams[i4].ImageID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.BootDisk[i3].InitializeParams[i4].ImageIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterface[i3].SecurityGroupIds),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.NetworkInterface[i3].SecurityGroupIdsRefs,
+			Selector:      mg.Spec.InitProvider.NetworkInterface[i3].SecurityGroupIdsSelector,
+			To: reference.To{
+				List:    &v1alpha11.SecurityGroupList{},
+				Managed: &v1alpha11.SecurityGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].SecurityGroupIds")
+		}
+		mg.Spec.InitProvider.NetworkInterface[i3].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.NetworkInterface[i3].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].SubnetID),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.NetworkInterface[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.NetworkInterface[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1alpha11.SubnetList{},
+				Managed: &v1alpha11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.NetworkInterface[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.NetworkInterface[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccountID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServiceAccountIDRef,
+		Selector:     mg.Spec.InitProvider.ServiceAccountIDSelector,
+		To: reference.To{
+			List:    &v1alpha12.ServiceAccountList{},
+			Managed: &v1alpha12.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccountID")
+	}
+	mg.Spec.InitProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -382,6 +602,120 @@ func (mg *InstanceGroup) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.InstanceTemplate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams[i5].ImageID),
+					Extract:      reference.ExternalName(),
+					Reference:    mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams[i5].ImageIDRef,
+					Selector:     mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams[i5].ImageIDSelector,
+					To: reference.To{
+						List:    &ImageList{},
+						Managed: &Image{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams[i5].ImageID")
+				}
+				mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams[i5].ImageID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.InstanceTemplate[i3].BootDisk[i4].InitializeParams[i5].ImageIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.InstanceTemplate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].NetworkID),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].NetworkIDRef,
+				Selector:     mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].NetworkIDSelector,
+				To: reference.To{
+					List:    &v1alpha11.NetworkList{},
+					Managed: &v1alpha11.Network{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].NetworkID")
+			}
+			mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].NetworkIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.InstanceTemplate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SecurityGroupIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SecurityGroupIdsRefs,
+				Selector:      mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SecurityGroupIdsSelector,
+				To: reference.To{
+					List:    &v1alpha11.SecurityGroupList{},
+					Managed: &v1alpha11.SecurityGroup{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SecurityGroupIds")
+			}
+			mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.InstanceTemplate); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface); i4++ {
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SubnetIds),
+				Extract:       reference.ExternalName(),
+				References:    mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SubnetIdsRefs,
+				Selector:      mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SubnetIdsSelector,
+				To: reference.To{
+					List:    &v1alpha11.SubnetList{},
+					Managed: &v1alpha11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SubnetIds")
+			}
+			mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.InstanceTemplate[i3].NetworkInterface[i4].SubnetIdsRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccountID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServiceAccountIDRef,
+		Selector:     mg.Spec.InitProvider.ServiceAccountIDSelector,
+		To: reference.To{
+			List:    &v1alpha12.ServiceAccountList{},
+			Managed: &v1alpha12.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccountID")
+	}
+	mg.Spec.InitProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -407,6 +741,22 @@ func (mg *PlacementGroup) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -450,6 +800,38 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.SourceDiskID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceDiskIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceDiskID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SourceDiskIDRef,
+		Selector:     mg.Spec.InitProvider.SourceDiskIDSelector,
+		To: reference.To{
+			List:    &DiskList{},
+			Managed: &Disk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceDiskID")
+	}
+	mg.Spec.InitProvider.SourceDiskID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceDiskIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -492,6 +874,38 @@ func (mg *SnapshotSchedule) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.DiskIds),
+		Extract:       reference.ExternalName(),
+		References:    mg.Spec.InitProvider.DiskIdsRefs,
+		Selector:      mg.Spec.InitProvider.DiskIdsSelector,
+		To: reference.To{
+			List:    &DiskList{},
+			Managed: &Disk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DiskIds")
+	}
+	mg.Spec.InitProvider.DiskIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.DiskIdsRefs = mrsp.ResolvedReferences
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }

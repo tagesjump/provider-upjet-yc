@@ -35,6 +35,22 @@ func (mg *CloudIAMBinding) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.CloudID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CloudIDRef,
+		Selector:     mg.Spec.InitProvider.CloudIDSelector,
+		To: reference.To{
+			List:    &CloudList{},
+			Managed: &Cloud{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CloudID")
+	}
+	mg.Spec.InitProvider.CloudID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CloudIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -60,6 +76,22 @@ func (mg *CloudIAMMember) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.CloudID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CloudIDRef,
+		Selector:     mg.Spec.InitProvider.CloudIDSelector,
+		To: reference.To{
+			List:    &CloudList{},
+			Managed: &Cloud{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CloudID")
+	}
+	mg.Spec.InitProvider.CloudID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CloudIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -87,6 +119,22 @@ func (mg *Folder) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.CloudID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CloudIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CloudID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.CloudIDRef,
+		Selector:     mg.Spec.InitProvider.CloudIDSelector,
+		To: reference.To{
+			List:    &CloudList{},
+			Managed: &Cloud{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CloudID")
+	}
+	mg.Spec.InitProvider.CloudID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CloudIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -112,6 +160,22 @@ func (mg *FolderIAMBinding) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &FolderList{},
+			Managed: &Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -139,6 +203,22 @@ func (mg *FolderIAMMember) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &FolderList{},
+			Managed: &Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -164,6 +244,22 @@ func (mg *FolderIAMPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &FolderList{},
+			Managed: &Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -24,6 +24,18 @@ type ServiceAccountAPIKeyInitParameters struct {
 
 	// An optional PGP key to encrypt the resulting secret key material. May either be a base64-encoded public key or a keybase username in the form keybase:keybaseusername.
 	PgpKey *string `json:"pgpKey,omitempty" tf:"pgp_key,omitempty"`
+
+	// ID of the service account to an API key for.
+	// +crossplane:generate:reference:type=ServiceAccount
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// Reference to a ServiceAccount to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 }
 
 type ServiceAccountAPIKeyObservation struct {
