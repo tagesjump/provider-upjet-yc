@@ -2,8 +2,6 @@ module github.com/tagesjump/provider-upjet-yc
 
 go 1.22
 
-toolchain go1.22.0
-
 require (
 	dario.cat/mergo v1.0.0
 	github.com/crossplane/crossplane-runtime v1.15.0
