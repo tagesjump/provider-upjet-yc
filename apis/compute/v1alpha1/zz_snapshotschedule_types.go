@@ -53,6 +53,7 @@ type SnapshotScheduleInitParameters struct {
 
 	// IDs of the disk for snapshot schedule.
 	// +crossplane:generate:reference:type=Disk
+	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
 	// References to Disk to populate diskIds.
@@ -105,6 +106,7 @@ type SnapshotScheduleObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// IDs of the disk for snapshot schedule.
+	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
 	// The ID of the folder that the resource belongs to. If it
@@ -145,6 +147,7 @@ type SnapshotScheduleParameters struct {
 	// IDs of the disk for snapshot schedule.
 	// +crossplane:generate:reference:type=Disk
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
 	// References to Disk to populate diskIds.

@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: placementgroups.compute.yandex-cloud.upjet.crossplane.io
+  name: osloginsettings.organizationmanager.yandex-cloud.upjet.crossplane.io
 spec:
-  group: compute.yandex-cloud.upjet.crossplane.io
+  group: organizationmanager.yandex-cloud.upjet.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - yandex-cloud
-    kind: PlacementGroup
-    listKind: PlacementGroupList
-    plural: placementgroups
-    singular: placementgroup
+    kind: OsLoginSettings
+    listKind: OsLoginSettingsList
+    plural: osloginsettings
+    singular: osloginsettings
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: PlacementGroup is the Schema for the PlacementGroups API. Manages
-          a Placement group resource.
+        description: OsLoginSettings is the Schema for the OsLoginSettingss API. Allows
+          management of OsLogin Settings within an existing Yandex.Cloud Organization.
         properties:
           apiVersion:
             description: |-
@@ -55,7 +55,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: PlacementGroupSpec defines the desired state of PlacementGroup
+            description: OsLoginSettingsSpec defines the desired state of OsLoginSettings
             properties:
               deletionPolicy:
                 default: Delete
@@ -73,108 +73,33 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  description:
-                    description: A description of the Placement Group.
+                  organizationId:
+                    description: The organization to manage it's OsLogin Settings.
                     type: string
-                  folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
-                    type: string
-                  folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  labels:
-                    additionalProperties:
-                      type: string
-                    description: A set of key/value label pairs to assign to the Placement
-                      Group.
-                    type: object
-                    x-kubernetes-map-type: granular
-                  name:
-                    description: The name of the Placement Group.
-                    type: string
-                  placementStrategyPartitions:
-                    description: A number of partitions in the placement strategy
-                      with partitions policy of the Placement Group (conflicts with
-                      placement_strategy_spread).
-                    type: number
-                  placementStrategySpread:
-                    description: A placement strategy with spread policy of the Placement
-                      Group. Should be true or unset (conflicts with placement_strategy_partitions).
-                    type: boolean
+                  sshCertificateSettings:
+                    description: The structure is documented below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables or disables usage of ssh certificates
+                            signed by trusted CA.
+                          type: boolean
+                      type: object
+                    type: array
+                  userSshKeySettings:
+                    description: The structure is documented below.
+                    items:
+                      properties:
+                        allowManageOwnKeys:
+                          description: If set to true subject is allowed to manage
+                            own ssh keys without having to be assigned specific permissions.
+                          type: boolean
+                        enabled:
+                          description: Enables or disables usage of ssh keys assigned
+                            to a specific subject.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               initProvider:
                 description: |-
@@ -189,108 +114,33 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
-                  description:
-                    description: A description of the Placement Group.
+                  organizationId:
+                    description: The organization to manage it's OsLogin Settings.
                     type: string
-                  folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
-                    type: string
-                  folderIdRef:
-                    description: Reference to a Folder in resourcemanager to populate
-                      folderId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  folderIdSelector:
-                    description: Selector for a Folder in resourcemanager to populate
-                      folderId.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  labels:
-                    additionalProperties:
-                      type: string
-                    description: A set of key/value label pairs to assign to the Placement
-                      Group.
-                    type: object
-                    x-kubernetes-map-type: granular
-                  name:
-                    description: The name of the Placement Group.
-                    type: string
-                  placementStrategyPartitions:
-                    description: A number of partitions in the placement strategy
-                      with partitions policy of the Placement Group (conflicts with
-                      placement_strategy_spread).
-                    type: number
-                  placementStrategySpread:
-                    description: A placement strategy with spread policy of the Placement
-                      Group. Should be true or unset (conflicts with placement_strategy_partitions).
-                    type: boolean
+                  sshCertificateSettings:
+                    description: The structure is documented below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables or disables usage of ssh certificates
+                            signed by trusted CA.
+                          type: boolean
+                      type: object
+                    type: array
+                  userSshKeySettings:
+                    description: The structure is documented below.
+                    items:
+                      properties:
+                        allowManageOwnKeys:
+                          description: If set to true subject is allowed to manage
+                            own ssh keys without having to be assigned specific permissions.
+                          type: boolean
+                        enabled:
+                          description: Enables or disables usage of ssh keys assigned
+                            to a specific subject.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -459,41 +309,45 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.organizationId is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.organizationId)
+                || (has(self.initProvider) && has(self.initProvider.organizationId))'
           status:
-            description: PlacementGroupStatus defines the observed state of PlacementGroup.
+            description: OsLoginSettingsStatus defines the observed state of OsLoginSettings.
             properties:
               atProvider:
                 properties:
-                  createdAt:
-                    type: string
-                  description:
-                    description: A description of the Placement Group.
-                    type: string
-                  folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
-                    type: string
                   id:
                     type: string
-                  labels:
-                    additionalProperties:
-                      type: string
-                    description: A set of key/value label pairs to assign to the Placement
-                      Group.
-                    type: object
-                    x-kubernetes-map-type: granular
-                  name:
-                    description: The name of the Placement Group.
+                  organizationId:
+                    description: The organization to manage it's OsLogin Settings.
                     type: string
-                  placementStrategyPartitions:
-                    description: A number of partitions in the placement strategy
-                      with partitions policy of the Placement Group (conflicts with
-                      placement_strategy_spread).
-                    type: number
-                  placementStrategySpread:
-                    description: A placement strategy with spread policy of the Placement
-                      Group. Should be true or unset (conflicts with placement_strategy_partitions).
-                    type: boolean
+                  sshCertificateSettings:
+                    description: The structure is documented below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Enables or disables usage of ssh certificates
+                            signed by trusted CA.
+                          type: boolean
+                      type: object
+                    type: array
+                  userSshKeySettings:
+                    description: The structure is documented below.
+                    items:
+                      properties:
+                        allowManageOwnKeys:
+                          description: If set to true subject is allowed to manage
+                            own ssh keys without having to be assigned specific permissions.
+                          type: boolean
+                        enabled:
+                          description: Enables or disables usage of ssh keys assigned
+                            to a specific subject.
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

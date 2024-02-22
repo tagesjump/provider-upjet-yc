@@ -756,11 +756,14 @@ resources:
             disable_cache: '- setup a cache status.'
             disable_proxy_force_ranges: '- disabling proxy force ranges.'
             edge_cache_settings: '- content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.'
+            enable_ip_url_signing: '-  enable access limiting by IP addresses, option available only with setting secure_key.'
             fetched_compressed: '- option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.'
             forward_host_header: '- choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.'
             gzip_on: '- GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.'
             ignore_cookie: '- set for ignoring cookie.'
             ignore_query_params: '- files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.'
+            ip_address_acl.excepted_values: '- the list of specified IP addresses to be allowed or denied depending on acl policy type.'
+            ip_address_acl.policy_type: '- the policy type for ip_address_acl option, one of "allow" or "deny" values.'
             options: (Optional) - CDN Resource settings and options to tune CDN edge behavior.
             proxy_cache_methods_set: '- allows caching for GET, HEAD and POST requests.'
             query_params_blacklist: '- files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.'
@@ -768,6 +771,7 @@ resources:
             redirect_http_to_https: '- set up a redirect from HTTP to HTTPS.'
             redirect_https_to_http: '- set up a redirect from HTTPS to HTTP.'
             secondary_hostnames: (Optional) - list of secondary hostname strings.
+            secure_key: '- set secure key for url encoding to protect contect and limit access by IP addresses and time limits.'
             slice: '- files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.'
             ssl_certificate: (Optional) - SSL certificate of CDN resource.
             stale: '-  list of errors which instruct CDN servers to serve stale content to clients.'
@@ -1626,6 +1630,8 @@ resources:
             folder_id: '- (Optional) Folder that the resource belongs to. If value is omitted, the default provider folder is used.'
             labels: '- (Optional) A set of key/value label pairs to assign to the Placement Group.'
             name: '- (Optional) The name of the Placement Group.'
+            placement_strategy_partitions: '- A number of partitions in the placement strategy with partitions policy of the Placement Group (conflicts with placement_strategy_spread).'
+            placement_strategy_spread: '- A placement strategy with spread policy of the Placement Group. Should be true or unset (conflicts with placement_strategy_partitions).'
             update: '- Default is 1 minute.'
         importStatements: []
     yandex_compute_snapshot:
@@ -3171,6 +3177,12 @@ resources:
                   "labels": {
                     "my-label": "my-label-value"
                   },
+                  "log_options": [
+                    {
+                      "log_group_id": "log-group-id",
+                      "min_level": "ERROR"
+                    }
+                  ],
                   "name": "some_name"
                 }
         argumentDocs:
@@ -3179,6 +3191,11 @@ resources:
             description: (Optional) - Description of the IoT Core Broker
             folder_id: '- Folder ID for the IoT Core Broker'
             labels: '- A set of key/value label pairs to assign to the IoT Core Broker.'
+            log_options: '- Options for logging for IoT Core Broker'
+            log_options.disabled: '- Is logging for broker disabled'
+            log_options.folder_id: '- Log entries are written to default log group for specified folder'
+            log_options.log_group_id: '- Log entries are written to specified log group'
+            log_options.min_level: '- Minimum log entry level'
             name: (Required) - IoT Core Broker name used to define broker
         importStatements: []
     yandex_iot_core_device:
@@ -3232,6 +3249,12 @@ resources:
                   "labels": {
                     "my-label": "my-label-value"
                   },
+                  "log_options": [
+                    {
+                      "log_group_id": "log-group-id",
+                      "min_level": "ERROR"
+                    }
+                  ],
                   "name": "some_name",
                   "passwords": [
                     "my-password1",
@@ -3244,6 +3267,11 @@ resources:
             description: (Optional) - Description of the IoT Core Registry
             folder_id: '- Folder ID for the IoT Core Registry'
             labels: '- A set of key/value label pairs to assign to the IoT Core Registry.'
+            log_options: '- Options for logging for IoT Core Registry'
+            log_options.disabled: '- Is logging for registry disabled'
+            log_options.folder_id: '- Log entries are written to default log group for specified folder'
+            log_options.log_group_id: '- Log entries are written to specified log group'
+            log_options.min_level: '- Minimum log entry level'
             name: (Required) - IoT Core Device name used to define registry
             passwords: '- A set of passwords''s id for the IoT Core Registry'
         importStatements: []
@@ -6137,6 +6165,11 @@ resources:
                 (see the net option).
                 The structure is documented below.
             name: '- (Required) Name of the MongoDB cluster. Provided by the client when the cluster is created.'
+            net.compressors: |-
+                - (Optional) Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                For more information, see the net.Compression.Compressors
+                description in the official documentation.
             net.max_incoming_connections: |-
                 - (Optional) The maximum number of simultaneous connections that host will accept.
                 For more information, see the net.maxIncomingConnections
@@ -6145,6 +6178,10 @@ resources:
             operation_profiling.mode: |-
                 - (Optional) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
                 For more information, see the operationProfiling.mode
+                description in the official documentation.
+            operation_profiling.slow_op_sample_rate: |-
+                - (Optional) The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                For more information, see the operationProfiling.slowOpSampleRate
                 description in the official documentation.
             operation_profiling.slow_op_threshold: |-
                 - (Optional) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
@@ -6181,6 +6218,10 @@ resources:
                 - (Optional) Enables the auditing of authorization successes. Can be either true or false.
                 For more information, see the auditAuthorizationSuccess
                 description in the official documentation. Available only in enterprise edition.
+            set_parameter.enable_flow_control: |-
+                - (Optional) Enables the flow control. Can be either true or false.
+                For more information, see the enableFlowControl
+                description in the official documentation.
             sharded: '- MongoDB Cluster mode enabled/disabled.'
             status: |-
                 - Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
@@ -6205,6 +6246,117 @@ resources:
                 - (Optional) Defines the maximum size of the internal cache that WiredTiger will use for all data.
                 For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                 description in the official documentation.
+            wired_tiger.prefix_compression: |-
+                - (Optional) Enables or disables prefix compression for index data. Сan be either true or false.
+                For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                description in the official documentation.
+        importStatements: []
+    yandex_mdb_mongodb_database:
+        subCategory: ""
+        description: Manages a MongoDB database within Yandex.Cloud.
+        name: yandex_mdb_mongodb_database
+        title: yandex_mdb_mongodb_database
+        examples:
+            - name: foo
+              manifest: |-
+                {
+                  "cluster_id": "${yandex_mdb_mongodb_cluster.foo.id}",
+                  "name": "testdb"
+                }
+              references:
+                cluster_id: yandex_mdb_mongodb_cluster.foo.id
+              dependencies:
+                yandex_mdb_mongodb_cluster.foo: |-
+                    {
+                      "cluster_config": [
+                        {
+                          "version": "6.0"
+                        }
+                      ],
+                      "environment": "PRESTABLE",
+                      "host": [
+                        {
+                          "subnet_id": "${yandex_vpc_subnet.foo.id}",
+                          "zone_id": "ru-central1-a"
+                        }
+                      ],
+                      "name": "test",
+                      "network_id": "${yandex_vpc_network.foo.id}",
+                      "resources_mongod": [
+                        {
+                          "disk_size": 16,
+                          "disk_type_id": "network-ssd",
+                          "resource_preset_id": "s2.micro"
+                        }
+                      ]
+                    }
+                yandex_vpc_network.foo: '{}'
+                yandex_vpc_subnet.foo: |-
+                    {
+                      "network_id": "${yandex_vpc_network.foo.id}",
+                      "v4_cidr_blocks": [
+                        "10.5.0.0/24"
+                      ],
+                      "zone": "ru-central1-a"
+                    }
+        argumentDocs:
+            name: '- (Required) The name of the database.'
+        importStatements: []
+    yandex_mdb_mongodb_user:
+        subCategory: ""
+        description: Manages a MongoDB user within Yandex.Cloud.
+        name: yandex_mdb_mongodb_user
+        title: yandex_mdb_mongodb_user
+        examples:
+            - name: foo
+              manifest: |-
+                {
+                  "cluster_id": "${yandex_mdb_mongodb_cluster.foo.id}",
+                  "name": "alice",
+                  "password": "password"
+                }
+              references:
+                cluster_id: yandex_mdb_mongodb_cluster.foo.id
+              dependencies:
+                yandex_mdb_mongodb_cluster.foo: |-
+                    {
+                      "cluster_config": [
+                        {
+                          "version": "6.0"
+                        }
+                      ],
+                      "environment": "PRESTABLE",
+                      "host": [
+                        {
+                          "subnet_id": "${yandex_vpc_subnet.foo.id}",
+                          "zone_id": "ru-central1-a"
+                        }
+                      ],
+                      "name": "test",
+                      "network_id": "${yandex_vpc_network.foo.id}",
+                      "resources_mongod": [
+                        {
+                          "disk_size": 16,
+                          "disk_type_id": "network-ssd",
+                          "resource_preset_id": "s2.micro"
+                        }
+                      ]
+                    }
+                yandex_vpc_network.foo: '{}'
+                yandex_vpc_subnet.foo: |-
+                    {
+                      "network_id": "${yandex_vpc_network.foo.id}",
+                      "v4_cidr_blocks": [
+                        "10.5.0.0/24"
+                      ],
+                      "zone": "ru-central1-a"
+                    }
+        argumentDocs:
+            name: '- (Required) The name of the user.'
+            password: '- (Required) The password of the user.'
+            permission: '- (Optional) Set of permissions granted to the user. The structure is documented below.'
+            permission.database_name: '- (Required) The name of the database that the permission grants access to.'
+            permission.roles: '- (Optional) List of strings. The roles of the user in this database. For more information see the official documentation.'
         importStatements: []
     yandex_mdb_mysql_cluster:
         subCategory: ""
@@ -7076,7 +7228,7 @@ resources:
             node_groups.zones_ids: '- (Required) A set of availability zones where hosts of node group may be allocated.'
             opensearch.node_groups: '- (Required) A set of named OpenSearch node group configurations. The structure is documented below.'
             opensearch.plugins: '- (Optional) A set of requested OpenSearch plugins.'
-            resources.disk_size: '- (Required) Volume of the storage available to a host, in gigabytes.'
+            resources.disk_size: '- (Required) Volume of the storage available to a host, in bytes.'
             resources.disk_type_id: '- (Required) Type of the storage of OpenSearch hosts.'
             resources.resources_preset_id: '- (Required) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.'
             security_group_ids: '- (Optional) A set of ids of security groups assigned to hosts of the cluster.'
@@ -7708,7 +7860,9 @@ resources:
                 - (Required) The ID of the preset for computational resources available to a host (CPU, memory etc.).
                 For more information, see the official documentation.
             security_group_ids: '- (Optional) A set of ids of security groups assigned to hosts of the cluster.'
-            sharded: '- (Optional) Redis Cluster mode enabled/disabled.'
+            sharded: |-
+                - (Optional) Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+                If cluster is sharded - disabling is not allowed.
             status: |-
                 - Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
                 For more information see status field of JSON representation in the official documentation.
@@ -8366,6 +8520,36 @@ resources:
             organization_id: '- (Required) ID of the organization to attach a policy to.'
             role: '- (Required) The role that should be assigned.'
         importStatements: []
+    yandex_organizationmanager_os_login_settings:
+        subCategory: ""
+        description: Allows management of OsLogin Settings within an existing Yandex.Cloud Organization.
+        name: yandex_organizationmanager_os_login_settings
+        title: yandex_organizationmanager_os_login_settings
+        examples:
+            - name: my_os_login_settings
+              manifest: |-
+                {
+                  "organization_id": "sdf4*********3fr",
+                  "ssh_certificate_settings": [
+                    {
+                      "enabled": true
+                    }
+                  ],
+                  "user_ssh_key_settings": [
+                    {
+                      "allow_manage_own_keys": true,
+                      "enabled": true
+                    }
+                  ]
+                }
+        argumentDocs:
+            organization_id: '- (Required) The organization to manage it''s OsLogin Settings.'
+            ssh_certificate_settings: '- (Optional) The structure is documented below.'
+            ssh_certificate_settings.enabled: '- Enables or disables usage of ssh certificates signed by trusted CA.'
+            user_ssh_key_settings: '- (Optional) The structure is documented below.'
+            user_ssh_key_settings.allow_manage_own_keys: '- If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.'
+            user_ssh_key_settings.enabled: '- Enables or disables usage of ssh keys assigned to a specific subject.'
+        importStatements: []
     yandex_organizationmanager_saml_federation:
         subCategory: ""
         description: Allows management of a single SAML Federation within an existing Yandex.Cloud Organization.
@@ -8412,6 +8596,26 @@ resources:
         argumentDocs:
             federation_id: '- (Required) ID of a SAML Federation.'
             name_id: '- (Required) Name ID of the SAML federated user.'
+        importStatements: []
+    yandex_organizationmanager_user_ssh_key:
+        subCategory: ""
+        description: Allows management of User Ssh Keys within an existing Yandex.Cloud Organization and Subject.
+        name: yandex_organizationmanager_user_ssh_key
+        title: yandex_organizationmanager_user_ssh_key
+        examples:
+            - name: my_user_ssh_key
+              manifest: |-
+                {
+                  "data": "ssh_key_data",
+                  "organization_id": "some_organization_id",
+                  "subject_id": "some_subject_id"
+                }
+        argumentDocs:
+            data: '- (Required) Data of the user ssh key.'
+            expires_at: '- (Optional) User ssh key will be no longer valid after expiration timestamp.'
+            name: '- (Optional) Name of the user ssh key.'
+            organization_id: '- (Required) Organization that the user ssh key belongs to.'
+            subject_id: '- (Required) Subject that the user ssh key belongs to.'
         importStatements: []
     yandex_resourcemanager_cloud:
         subCategory: ""
@@ -8847,6 +9051,47 @@ resources:
                       ],
                       "id": "tmp",
                       "prefix": "tmp/"
+                    },
+                    {
+                      "enabled": true,
+                      "expiration": [
+                        {
+                          "date": "2020-12-21"
+                        }
+                      ],
+                      "filter": [
+                        {
+                          "tag": [
+                            {
+                              "key": "key1",
+                              "value": "value1"
+                            }
+                          ]
+                        }
+                      ],
+                      "id": "test_tag"
+                    },
+                    {
+                      "enabled": true,
+                      "expiration": [
+                        {
+                          "date": "2020-12-21"
+                        }
+                      ],
+                      "filter": [
+                        {
+                          "and": [
+                            {
+                              "prefix": "path2/",
+                              "tags": {
+                                "key1": "value1",
+                                "key2": "value2"
+                              }
+                            }
+                          ]
+                        }
+                      ],
+                      "id": "test_filter"
                     }
                   ]
                 }
@@ -9160,6 +9405,8 @@ resources:
             expiration: '- (Optional) Specifies a period in the object''s expire (documented below).'
             expired_object_delete_marker: '- (Optional) On a versioned bucket (versioning-enabled or versioning-suspended bucket), you can add this element in the lifecycle configuration to direct Object Storage to delete expired object delete markers.'
             expose_headers: '- (Optional) Specifies expose header in the response.'
+            filter: '- (Optional) Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports the following options:'
+            filter.and: 'operator applied to one or more filter parameters. It should be used when both prefix and tags are used. It supports the following parameters:'
             folder_id: '- (Optional) Allow to create bucket in different folder.'
             force_destroy: '- (Optional, Default: false) A boolean that indicates all objects should be deleted from the bucket so that the bucket can be destroyed without error. These objects are not recoverable.'
             grant: '- (Optional) An ACL policy grant. Conflicts with acl.'

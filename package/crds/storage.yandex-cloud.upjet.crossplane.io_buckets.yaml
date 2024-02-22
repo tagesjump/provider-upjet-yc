@@ -374,6 +374,53 @@ spec:
                                 type: boolean
                             type: object
                           type: array
+                        filter:
+                          description: 'Filter block identifies one or more objects
+                            to which the rule applies. A Filter must have exactly
+                            one of Prefix, Tag, or And specified. The filter supports
+                            the following options:'
+                          items:
+                            properties:
+                              and:
+                                description: 'operator applied to one or more filter
+                                  parameters. It should be used when both prefix and
+                                  tags are used. It supports the following parameters:'
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      type: number
+                                    objectSizeLessThan:
+                                      type: number
+                                    prefix:
+                                      description: Object key prefix identifying one
+                                        or more objects to which the rule applies.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                type: number
+                              objectSizeLessThan:
+                                type: number
+                              prefix:
+                                description: Object key prefix identifying one or
+                                  more objects to which the rule applies.
+                                type: string
+                              tag:
+                                items:
+                                  properties:
+                                    key:
+                                      type: string
+                                    value:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         id:
                           description: Unique identifier for the rule. Must be less
                             than or equal to 255 characters in length.
@@ -413,11 +460,6 @@ spec:
                           description: Object key prefix identifying one or more objects
                             to which the rule applies.
                           type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          type: object
-                          x-kubernetes-map-type: granular
                         transition:
                           description: Specifies a period in the object's transitions
                             (documented below).
@@ -913,6 +955,53 @@ spec:
                                 type: boolean
                             type: object
                           type: array
+                        filter:
+                          description: 'Filter block identifies one or more objects
+                            to which the rule applies. A Filter must have exactly
+                            one of Prefix, Tag, or And specified. The filter supports
+                            the following options:'
+                          items:
+                            properties:
+                              and:
+                                description: 'operator applied to one or more filter
+                                  parameters. It should be used when both prefix and
+                                  tags are used. It supports the following parameters:'
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      type: number
+                                    objectSizeLessThan:
+                                      type: number
+                                    prefix:
+                                      description: Object key prefix identifying one
+                                        or more objects to which the rule applies.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                type: number
+                              objectSizeLessThan:
+                                type: number
+                              prefix:
+                                description: Object key prefix identifying one or
+                                  more objects to which the rule applies.
+                                type: string
+                              tag:
+                                items:
+                                  properties:
+                                    key:
+                                      type: string
+                                    value:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         id:
                           description: Unique identifier for the rule. Must be less
                             than or equal to 255 characters in length.
@@ -952,11 +1041,6 @@ spec:
                           description: Object key prefix identifying one or more objects
                             to which the rule applies.
                           type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          type: object
-                          x-kubernetes-map-type: granular
                         transition:
                           description: Specifies a period in the object's transitions
                             (documented below).
@@ -1447,6 +1531,53 @@ spec:
                                 type: boolean
                             type: object
                           type: array
+                        filter:
+                          description: 'Filter block identifies one or more objects
+                            to which the rule applies. A Filter must have exactly
+                            one of Prefix, Tag, or And specified. The filter supports
+                            the following options:'
+                          items:
+                            properties:
+                              and:
+                                description: 'operator applied to one or more filter
+                                  parameters. It should be used when both prefix and
+                                  tags are used. It supports the following parameters:'
+                                items:
+                                  properties:
+                                    objectSizeGreaterThan:
+                                      type: number
+                                    objectSizeLessThan:
+                                      type: number
+                                    prefix:
+                                      description: Object key prefix identifying one
+                                        or more objects to which the rule applies.
+                                      type: string
+                                    tags:
+                                      additionalProperties:
+                                        type: string
+                                      type: object
+                                      x-kubernetes-map-type: granular
+                                  type: object
+                                type: array
+                              objectSizeGreaterThan:
+                                type: number
+                              objectSizeLessThan:
+                                type: number
+                              prefix:
+                                description: Object key prefix identifying one or
+                                  more objects to which the rule applies.
+                                type: string
+                              tag:
+                                items:
+                                  properties:
+                                    key:
+                                      type: string
+                                    value:
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         id:
                           description: Unique identifier for the rule. Must be less
                             than or equal to 255 characters in length.
@@ -1486,11 +1617,6 @@ spec:
                           description: Object key prefix identifying one or more objects
                             to which the rule applies.
                           type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          type: object
-                          x-kubernetes-map-type: granular
                         transition:
                           description: Specifies a period in the object's transitions
                             (documented below).

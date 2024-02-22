@@ -548,7 +548,9 @@ spec:
                         type: object
                     type: object
                   sharded:
-                    description: Redis Cluster mode enabled/disabled.
+                    description: |-
+                      Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+                      If cluster is sharded - disabling is not allowed.
                     type: boolean
                   tlsEnabled:
                     description: TLS support mode enabled/disabled.
@@ -1023,7 +1025,9 @@ spec:
                         type: object
                     type: object
                   sharded:
-                    description: Redis Cluster mode enabled/disabled.
+                    description: |-
+                      Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+                      If cluster is sharded - disabling is not allowed.
                     type: boolean
                   tlsEnabled:
                     description: TLS support mode enabled/disabled.
@@ -1389,7 +1393,9 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   sharded:
-                    description: Redis Cluster mode enabled/disabled.
+                    description: |-
+                      Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+                      If cluster is sharded - disabling is not allowed.
                     type: boolean
                   status:
                     description: |-

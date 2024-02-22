@@ -213,6 +213,15 @@ spec:
                                   The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
                                       description: |-
                                         The maximum number of simultaneous connections that host will accept.
@@ -234,6 +243,12 @@ spec:
                                         For more information, see the operationProfiling.mode
                                         description in the official documentation.
                                       type: string
+                                    slowOpSampleRate:
+                                      description: |-
+                                        The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                                        For more information, see the operationProfiling.slowOpSampleRate
+                                        description in the official documentation.
+                                      type: number
                                     slowOpThreshold:
                                       description: |-
                                         The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
@@ -309,6 +324,12 @@ spec:
                                         For more information, see the auditAuthorizationSuccess
                                         description in the official documentation. Available only in enterprise edition.
                                       type: boolean
+                                    enableFlowControl:
+                                      description: |-
+                                        Enables the flow control. Can be either true or false.
+                                        For more information, see the enableFlowControl
+                                        description in the official documentation.
+                                      type: boolean
                                   type: object
                                 type: array
                               storage:
@@ -352,6 +373,12 @@ spec:
                                               For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
+                                          prefixCompression:
+                                            description: |-
+                                              Enables or disables prefix compression for index data. Сan be either true or false.
+                                              For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                                              description in the official documentation.
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -370,6 +397,15 @@ spec:
                                   The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
                                       description: |-
                                         The maximum number of simultaneous connections that host will accept.
@@ -1111,6 +1147,15 @@ spec:
                                   The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
                                       description: |-
                                         The maximum number of simultaneous connections that host will accept.
@@ -1132,6 +1177,12 @@ spec:
                                         For more information, see the operationProfiling.mode
                                         description in the official documentation.
                                       type: string
+                                    slowOpSampleRate:
+                                      description: |-
+                                        The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                                        For more information, see the operationProfiling.slowOpSampleRate
+                                        description in the official documentation.
+                                      type: number
                                     slowOpThreshold:
                                       description: |-
                                         The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
@@ -1207,6 +1258,12 @@ spec:
                                         For more information, see the auditAuthorizationSuccess
                                         description in the official documentation. Available only in enterprise edition.
                                       type: boolean
+                                    enableFlowControl:
+                                      description: |-
+                                        Enables the flow control. Can be either true or false.
+                                        For more information, see the enableFlowControl
+                                        description in the official documentation.
+                                      type: boolean
                                   type: object
                                 type: array
                               storage:
@@ -1250,6 +1307,12 @@ spec:
                                               For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
+                                          prefixCompression:
+                                            description: |-
+                                              Enables or disables prefix compression for index data. Сan be either true or false.
+                                              For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                                              description in the official documentation.
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -1268,6 +1331,15 @@ spec:
                                   The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
                                       description: |-
                                         The maximum number of simultaneous connections that host will accept.
@@ -2009,10 +2081,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.clusterConfig)
                 || (has(self.initProvider) && has(self.initProvider.clusterConfig))'
-            - message: spec.forProvider.database is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.database)
-                || (has(self.initProvider) && has(self.initProvider.database))'
             - message: spec.forProvider.environment is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.environment)
@@ -2025,10 +2093,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.user is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.user)
-                || (has(self.initProvider) && has(self.initProvider.user))'
           status:
             description: MongodbClusterStatus defines the observed state of MongodbCluster.
             properties:
@@ -2174,6 +2238,15 @@ spec:
                                   The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
                                       description: |-
                                         The maximum number of simultaneous connections that host will accept.
@@ -2195,6 +2268,12 @@ spec:
                                         For more information, see the operationProfiling.mode
                                         description in the official documentation.
                                       type: string
+                                    slowOpSampleRate:
+                                      description: |-
+                                        The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                                        For more information, see the operationProfiling.slowOpSampleRate
+                                        description in the official documentation.
+                                      type: number
                                     slowOpThreshold:
                                       description: |-
                                         The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
@@ -2270,6 +2349,12 @@ spec:
                                         For more information, see the auditAuthorizationSuccess
                                         description in the official documentation. Available only in enterprise edition.
                                       type: boolean
+                                    enableFlowControl:
+                                      description: |-
+                                        Enables the flow control. Can be either true or false.
+                                        For more information, see the enableFlowControl
+                                        description in the official documentation.
+                                      type: boolean
                                   type: object
                                 type: array
                               storage:
@@ -2313,6 +2398,12 @@ spec:
                                               For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
+                                          prefixCompression:
+                                            description: |-
+                                              Enables or disables prefix compression for index data. Сan be either true or false.
+                                              For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                                              description in the official documentation.
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -2331,6 +2422,15 @@ spec:
                                   The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
                                       description: |-
                                         The maximum number of simultaneous connections that host will accept.

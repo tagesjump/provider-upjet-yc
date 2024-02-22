@@ -35,6 +35,12 @@ func (tr *KafkaUser) Hub() {}
 func (tr *MongodbCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MongodbDatabase) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MongodbUser) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *MySQLCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.

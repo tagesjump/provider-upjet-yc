@@ -991,6 +991,8 @@ type PlacementPolicyInitParameters struct {
 
 	// Specifies the id of the Placement Group to assign to the instance.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	PlacementGroupPartition *float64 `json:"placementGroupPartition,omitempty" tf:"placement_group_partition,omitempty"`
 }
 
 type PlacementPolicyObservation struct {
@@ -1000,6 +1002,8 @@ type PlacementPolicyObservation struct {
 
 	// Specifies the id of the Placement Group to assign to the instance.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	PlacementGroupPartition *float64 `json:"placementGroupPartition,omitempty" tf:"placement_group_partition,omitempty"`
 }
 
 type PlacementPolicyParameters struct {
@@ -1011,6 +1015,9 @@ type PlacementPolicyParameters struct {
 	// Specifies the id of the Placement Group to assign to the instance.
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PlacementGroupPartition *float64 `json:"placementGroupPartition,omitempty" tf:"placement_group_partition,omitempty"`
 }
 
 type ResourcesInitParameters struct {

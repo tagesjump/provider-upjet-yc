@@ -107,7 +107,7 @@ type NodeGroupsParameters struct {
 
 type NodeGroupsResourcesInitParameters struct {
 
-	// Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Type of the storage of OpenSearch hosts.
@@ -118,7 +118,7 @@ type NodeGroupsResourcesInitParameters struct {
 
 type NodeGroupsResourcesObservation struct {
 
-	// Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Type of the storage of OpenSearch hosts.
@@ -129,7 +129,7 @@ type NodeGroupsResourcesObservation struct {
 
 type NodeGroupsResourcesParameters struct {
 
-	// Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in bytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
@@ -542,7 +542,7 @@ type OpensearchNodeGroupsParameters struct {
 
 type OpensearchNodeGroupsResourcesInitParameters struct {
 
-	// Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Type of the storage of OpenSearch hosts.
@@ -553,7 +553,7 @@ type OpensearchNodeGroupsResourcesInitParameters struct {
 
 type OpensearchNodeGroupsResourcesObservation struct {
 
-	// Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
 	// Type of the storage of OpenSearch hosts.
@@ -564,7 +564,7 @@ type OpensearchNodeGroupsResourcesObservation struct {
 
 type OpensearchNodeGroupsResourcesParameters struct {
 
-	// Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in bytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 

@@ -745,6 +745,8 @@ spec:
                           description: Specifies the id of the Placement Group to
                             assign to the instance.
                           type: string
+                        placementGroupPartition:
+                          type: number
                       type: object
                     type: array
                   platformId:
@@ -1576,6 +1578,8 @@ spec:
                           description: Specifies the id of the Placement Group to
                             assign to the instance.
                           type: string
+                        placementGroupPartition:
+                          type: number
                       type: object
                     type: array
                   platformId:
@@ -2219,6 +2223,8 @@ spec:
                           description: Specifies the id of the Placement Group to
                             assign to the instance.
                           type: string
+                        placementGroupPartition:
+                          type: number
                       type: object
                     type: array
                   platformId:

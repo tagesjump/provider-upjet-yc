@@ -26,7 +26,13 @@ func (tr *OrganizationIAMBinding) Hub() {}
 func (tr *OrganizationIAMMember) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *OsLoginSettings) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SAMLFederation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SAMLFederationUserAccount) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *UserSSHKey) Hub() {}

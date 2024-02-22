@@ -298,7 +298,8 @@ type RedisClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// Redis Cluster mode enabled/disabled.
+	// Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+	// If cluster is sharded - disabling is not allowed.
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
 	// TLS support mode enabled/disabled.
@@ -399,7 +400,8 @@ type RedisClusterObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Redis Cluster mode enabled/disabled.
+	// Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+	// If cluster is sharded - disabling is not allowed.
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
 	// Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
@@ -497,7 +499,8 @@ type RedisClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// Redis Cluster mode enabled/disabled.
+	// Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+	// If cluster is sharded - disabling is not allowed.
 	// +kubebuilder:validation:Optional
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
