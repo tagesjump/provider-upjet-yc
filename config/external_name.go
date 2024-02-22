@@ -20,7 +20,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_iam_service_account_api_key":                      config.NameAsIdentifier,
 	"yandex_iam_service_account_iam_policy":                   config.NameAsIdentifier,
 	"yandex_iam_service_account_iam_binding":                  config.NameAsIdentifier,
-	"yandex_iam_service_account_static_access_key":            config.NameAsIdentifier,
+	"yandex_iam_service_account_static_access_key":            config.IdentifierFromProvider,
 	"yandex_iam_service_account_iam_member":                   config.NameAsIdentifier,
 	"yandex_organizationmanager_group":                        config.IdentifierFromProvider,
 	"yandex_organizationmanager_group_iam_member":             config.IdentifierFromProvider,
