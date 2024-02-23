@@ -17,6 +17,47 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AndInitParameters struct {
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndObservation struct {
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type AndParameters struct {
+
+	// +kubebuilder:validation:Optional
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AnonymousAccessFlagsInitParameters struct {
 
 	// Allows to read objects in bucket anonymously.
@@ -518,6 +559,56 @@ type ExpirationParameters struct {
 	ExpiredObjectDeleteMarker *bool `json:"expiredObjectDeleteMarker,omitempty" tf:"expired_object_delete_marker,omitempty"`
 }
 
+type FilterInitParameters struct {
+
+	// operator applied to one or more filter parameters. It should be used when both prefix and tags are used. It supports the following parameters:
+	And []AndInitParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	Tag []TagInitParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
+type FilterObservation struct {
+
+	// operator applied to one or more filter parameters. It should be used when both prefix and tags are used. It supports the following parameters:
+	And []AndObservation `json:"and,omitempty" tf:"and,omitempty"`
+
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	Tag []TagObservation `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
+type FilterParameters struct {
+
+	// operator applied to one or more filter parameters. It should be used when both prefix and tags are used. It supports the following parameters:
+	// +kubebuilder:validation:Optional
+	And []AndParameters `json:"and,omitempty" tf:"and,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ObjectSizeGreaterThan *float64 `json:"objectSizeGreaterThan,omitempty" tf:"object_size_greater_than,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ObjectSizeLessThan *float64 `json:"objectSizeLessThan,omitempty" tf:"object_size_less_than,omitempty"`
+
+	// Object key prefix identifying one or more objects to which the rule applies.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Tag []TagParameters `json:"tag,omitempty" tf:"tag,omitempty"`
+}
+
 type GrantInitParameters struct {
 
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
@@ -591,6 +682,9 @@ type LifecycleRuleInitParameters struct {
 	// Specifies a period in the object's expire (documented below).
 	Expiration []ExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports the following options:
+	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -602,9 +696,6 @@ type LifecycleRuleInitParameters struct {
 
 	// Object key prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
 	Transition []TransitionInitParameters `json:"transition,omitempty" tf:"transition,omitempty"`
@@ -621,6 +712,9 @@ type LifecycleRuleObservation struct {
 	// Specifies a period in the object's expire (documented below).
 	Expiration []ExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports the following options:
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -632,9 +726,6 @@ type LifecycleRuleObservation struct {
 
 	// Object key prefix identifying one or more objects to which the rule applies.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
 	Transition []TransitionObservation `json:"transition,omitempty" tf:"transition,omitempty"`
@@ -654,6 +745,10 @@ type LifecycleRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Expiration []ExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
+	// Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports the following options:
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -669,10 +764,6 @@ type LifecycleRuleParameters struct {
 	// Object key prefix identifying one or more objects to which the rule applies.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	// +mapType=granular
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a period in the object's transitions (documented below).
 	// +kubebuilder:validation:Optional
@@ -837,6 +928,27 @@ type ServerSideEncryptionConfigurationRuleParameters struct {
 	ApplyServerSideEncryptionByDefault []ApplyServerSideEncryptionByDefaultParameters `json:"applyServerSideEncryptionByDefault" tf:"apply_server_side_encryption_by_default,omitempty"`
 }
 
+type TagInitParameters struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TagObservation struct {
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TagParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type TransitionInitParameters struct {
 
 	// Specifies the date after which you want the corresponding action to take effect.
@@ -968,13 +1080,14 @@ type BucketStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Bucket is the Schema for the Buckets API. Allows management of a Yandex.Cloud Storage Bucket.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud}
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`

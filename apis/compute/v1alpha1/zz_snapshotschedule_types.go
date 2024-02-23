@@ -53,6 +53,7 @@ type SnapshotScheduleInitParameters struct {
 
 	// IDs of the disk for snapshot schedule.
 	// +crossplane:generate:reference:type=Disk
+	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
 	// References to Disk to populate diskIds.
@@ -105,6 +106,7 @@ type SnapshotScheduleObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// IDs of the disk for snapshot schedule.
+	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
 	// The ID of the folder that the resource belongs to. If it
@@ -145,6 +147,7 @@ type SnapshotScheduleParameters struct {
 	// IDs of the disk for snapshot schedule.
 	// +crossplane:generate:reference:type=Disk
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
 	// References to Disk to populate diskIds.
@@ -251,13 +254,14 @@ type SnapshotScheduleStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // SnapshotSchedule is the Schema for the SnapshotSchedules API. Creates a new snapshot schedule.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud}
 type SnapshotSchedule struct {
 	metav1.TypeMeta   `json:",inline"`

@@ -991,6 +991,8 @@ type PlacementPolicyInitParameters struct {
 
 	// Specifies the id of the Placement Group to assign to the instance.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	PlacementGroupPartition *float64 `json:"placementGroupPartition,omitempty" tf:"placement_group_partition,omitempty"`
 }
 
 type PlacementPolicyObservation struct {
@@ -1000,6 +1002,8 @@ type PlacementPolicyObservation struct {
 
 	// Specifies the id of the Placement Group to assign to the instance.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	PlacementGroupPartition *float64 `json:"placementGroupPartition,omitempty" tf:"placement_group_partition,omitempty"`
 }
 
 type PlacementPolicyParameters struct {
@@ -1011,6 +1015,9 @@ type PlacementPolicyParameters struct {
 	// Specifies the id of the Placement Group to assign to the instance.
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PlacementGroupPartition *float64 `json:"placementGroupPartition,omitempty" tf:"placement_group_partition,omitempty"`
 }
 
 type ResourcesInitParameters struct {
@@ -1157,13 +1164,14 @@ type InstanceStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API. Manages a VM instance resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud}
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`

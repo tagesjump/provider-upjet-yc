@@ -421,6 +421,12 @@ type MongodInitParameters struct {
 
 type MongodNetInitParameters struct {
 
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// For more information, see the net.Compression.Compressors
+	// description in the official documentation.
+	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
+
 	// The maximum number of simultaneous connections that host will accept.
 	// For more information, see the net.maxIncomingConnections
 	// description in the official documentation.
@@ -429,6 +435,12 @@ type MongodNetInitParameters struct {
 
 type MongodNetObservation struct {
 
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// For more information, see the net.Compression.Compressors
+	// description in the official documentation.
+	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
+
 	// The maximum number of simultaneous connections that host will accept.
 	// For more information, see the net.maxIncomingConnections
 	// description in the official documentation.
@@ -436,6 +448,13 @@ type MongodNetObservation struct {
 }
 
 type MongodNetParameters struct {
+
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// For more information, see the net.Compression.Compressors
+	// description in the official documentation.
+	// +kubebuilder:validation:Optional
+	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
 	// The maximum number of simultaneous connections that host will accept.
 	// For more information, see the net.maxIncomingConnections
@@ -484,6 +503,11 @@ type MongodOperationProfilingInitParameters struct {
 	// description in the official documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+	// For more information, see the operationProfiling.slowOpSampleRate
+	// description in the official documentation.
+	SlowOpSampleRate *float64 `json:"slowOpSampleRate,omitempty" tf:"slow_op_sample_rate,omitempty"`
+
 	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
 	// For more information, see the operationProfiling.slowOpThresholdMs
 	// description in the official documentation.
@@ -496,6 +520,11 @@ type MongodOperationProfilingObservation struct {
 	// For more information, see the operationProfiling.mode
 	// description in the official documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+	// For more information, see the operationProfiling.slowOpSampleRate
+	// description in the official documentation.
+	SlowOpSampleRate *float64 `json:"slowOpSampleRate,omitempty" tf:"slow_op_sample_rate,omitempty"`
 
 	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
 	// For more information, see the operationProfiling.slowOpThresholdMs
@@ -510,6 +539,12 @@ type MongodOperationProfilingParameters struct {
 	// description in the official documentation.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+	// For more information, see the operationProfiling.slowOpSampleRate
+	// description in the official documentation.
+	// +kubebuilder:validation:Optional
+	SlowOpSampleRate *float64 `json:"slowOpSampleRate,omitempty" tf:"slow_op_sample_rate,omitempty"`
 
 	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
 	// For more information, see the operationProfiling.slowOpThresholdMs
@@ -1151,6 +1186,12 @@ type MongosInitParameters struct {
 
 type MongosNetInitParameters struct {
 
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// For more information, see the net.Compression.Compressors
+	// description in the official documentation.
+	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
+
 	// The maximum number of simultaneous connections that host will accept.
 	// For more information, see the net.maxIncomingConnections
 	// description in the official documentation.
@@ -1159,6 +1200,12 @@ type MongosNetInitParameters struct {
 
 type MongosNetObservation struct {
 
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// For more information, see the net.Compression.Compressors
+	// description in the official documentation.
+	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
+
 	// The maximum number of simultaneous connections that host will accept.
 	// For more information, see the net.maxIncomingConnections
 	// description in the official documentation.
@@ -1166,6 +1213,13 @@ type MongosNetObservation struct {
 }
 
 type MongosNetParameters struct {
+
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// For more information, see the net.Compression.Compressors
+	// description in the official documentation.
+	// +kubebuilder:validation:Optional
+	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
 	// The maximum number of simultaneous connections that host will accept.
 	// For more information, see the net.maxIncomingConnections
@@ -1508,6 +1562,11 @@ type SetParameterInitParameters struct {
 	// For more information, see the auditAuthorizationSuccess
 	// description in the official documentation. Available only in enterprise edition.
 	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// Enables the flow control. Can be either true or false.
+	// For more information, see the enableFlowControl
+	// description in the official documentation.
+	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
 }
 
 type SetParameterObservation struct {
@@ -1516,6 +1575,11 @@ type SetParameterObservation struct {
 	// For more information, see the auditAuthorizationSuccess
 	// description in the official documentation. Available only in enterprise edition.
 	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// Enables the flow control. Can be either true or false.
+	// For more information, see the enableFlowControl
+	// description in the official documentation.
+	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
 }
 
 type SetParameterParameters struct {
@@ -1525,6 +1589,12 @@ type SetParameterParameters struct {
 	// description in the official documentation. Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
 	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// Enables the flow control. Can be either true or false.
+	// For more information, see the enableFlowControl
+	// description in the official documentation.
+	// +kubebuilder:validation:Optional
+	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
 }
 
 type StorageInitParameters struct {
@@ -1564,6 +1634,11 @@ type StorageWiredTigerInitParameters struct {
 	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
 	// description in the official documentation.
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
+
+	// Enables or disables prefix compression for index data. Сan be either true or false.
+	// For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+	// description in the official documentation.
+	PrefixCompression *bool `json:"prefixCompression,omitempty" tf:"prefix_compression,omitempty"`
 }
 
 type StorageWiredTigerObservation struct {
@@ -1578,6 +1653,11 @@ type StorageWiredTigerObservation struct {
 	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
 	// description in the official documentation.
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
+
+	// Enables or disables prefix compression for index data. Сan be either true or false.
+	// For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+	// description in the official documentation.
+	PrefixCompression *bool `json:"prefixCompression,omitempty" tf:"prefix_compression,omitempty"`
 }
 
 type StorageWiredTigerParameters struct {
@@ -1594,6 +1674,12 @@ type StorageWiredTigerParameters struct {
 	// description in the official documentation.
 	// +kubebuilder:validation:Optional
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
+
+	// Enables or disables prefix compression for index data. Сan be either true or false.
+	// For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+	// description in the official documentation.
+	// +kubebuilder:validation:Optional
+	PrefixCompression *bool `json:"prefixCompression,omitempty" tf:"prefix_compression,omitempty"`
 }
 
 type WiredTigerInitParameters struct {
@@ -1645,23 +1731,22 @@ type MongodbClusterStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // MongodbCluster is the Schema for the MongodbClusters API. Manages a MongoDB cluster within Yandex.Cloud.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud}
 type MongodbCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterConfig) || (has(self.initProvider) && has(self.initProvider.clusterConfig))",message="spec.forProvider.clusterConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.database) || (has(self.initProvider) && has(self.initProvider.database))",message="spec.forProvider.database is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.environment) || (has(self.initProvider) && has(self.initProvider.environment))",message="spec.forProvider.environment is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.host) || (has(self.initProvider) && has(self.initProvider.host))",message="spec.forProvider.host is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.user) || (has(self.initProvider) && has(self.initProvider.user))",message="spec.forProvider.user is a required parameter"
 	Spec   MongodbClusterSpec   `json:"spec"`
 	Status MongodbClusterStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: instances.compute.yandex-cloud.upjet.crossplane.io
 spec:
   group: compute.yandex-cloud.upjet.crossplane.io
@@ -38,14 +38,19 @@ spec:
           resource.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -54,13 +59,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -80,16 +86,18 @@ spec:
                     items:
                       properties:
                         autoDelete:
-                          description: Defines whether the disk will be auto-deleted
-                            when the instance is deleted. The default value is True.
+                          description: |-
+                            Defines whether the disk will be auto-deleted when the instance
+                            is deleted. The default value is True.
                           type: boolean
                         deviceName:
                           description: Name that can be used to access an attached
                             disk.
                           type: string
                         diskId:
-                          description: The ID of the existing disk (such as those
-                            managed by yandex_compute_disk) to attach as a boot disk.
+                          description: |-
+                            The ID of the existing disk (such as those managed by
+                            yandex_compute_disk) to attach as a boot disk.
                           type: string
                         diskIdRef:
                           description: Reference to a Disk to populate diskId.
@@ -102,22 +110,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -130,9 +137,9 @@ spec:
                           description: Selector for a Disk to populate diskId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -145,22 +152,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -168,9 +174,9 @@ spec:
                               type: object
                           type: object
                         initializeParams:
-                          description: Parameters for a new disk that will be created
-                            alongside the new instance. Either initialize_params or
-                            disk_id must be set. The structure is documented below.
+                          description: |-
+                            Parameters for a new disk that will be created
+                            alongside the new instance. Either initialize_params or disk_id must be set. The structure is documented below.
                           items:
                             properties:
                               blockSize:
@@ -195,23 +201,21 @@ spec:
                                     properties:
                                       resolution:
                                         default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
                                         enum:
                                         - Required
                                         - Optional
                                         type: string
                                       resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
                                         enum:
                                         - Always
                                         - IfNotPresent
@@ -224,9 +228,9 @@ spec:
                                 description: Selector for a Image to populate imageId.
                                 properties:
                                   matchControllerRef:
-                                    description: MatchControllerRef ensures an object
-                                      with the same controller reference as the selecting
-                                      object is selected.
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
                                     type: boolean
                                   matchLabels:
                                     additionalProperties:
@@ -239,23 +243,21 @@ spec:
                                     properties:
                                       resolution:
                                         default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
                                         enum:
                                         - Required
                                         - Optional
                                         type: string
                                       resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
                                         enum:
                                         - Always
                                         - IfNotPresent
@@ -298,15 +300,16 @@ spec:
                           description: ID of the filesystem that should be attached.
                           type: string
                         mode:
-                          description: Mode of access to the filesystem that should
-                            be attached. By default, filesystem is attached in READ_WRITE
-                            mode.
+                          description: |-
+                            Mode of access to the filesystem that should be attached. By default, filesystem is attached
+                            in READ_WRITE mode.
                           type: string
                       type: object
                     type: array
                   folderId:
-                    description: The ID of the folder that the resource belongs to.
-                      If it is not provided, the default provider folder is used.
+                    description: |-
+                      The ID of the folder that the resource belongs to. If it
+                      is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -320,21 +323,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -348,8 +351,9 @@ spec:
                       folderId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -362,21 +366,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -388,10 +392,10 @@ spec:
                       The GPU cluster must exist in the same zone as the instance.
                     type: string
                   hostname:
-                    description: Host name for the instance. This field is used to
-                      generate the instance fqdn value. The host name must be unique
-                      within the network and region. If not specified, the host name
-                      will be equal to id of the instance and fqdn will be <id>.auto.internal.
+                    description: |-
+                      Host name for the instance. This field is used to generate the instance fqdn value.
+                      The host name must be unique within the network and region. If not specified, the host name will be equal
+                      to id of the instance and fqdn will be <id>.auto.internal.
                       Otherwise FQDN will be <hostname>.<region_id>.internal.
                     type: string
                   labels:
@@ -421,8 +425,9 @@ spec:
                   metadata:
                     additionalProperties:
                       type: string
-                    description: Metadata key/value pairs to make available from within
-                      the instance.
+                    description: |-
+                      Metadata key/value pairs to make available from
+                      within the instance.
                     type: object
                     x-kubernetes-map-type: granular
                   metadataOptions:
@@ -448,8 +453,9 @@ spec:
                       Values: standard, software_accelerated'
                     type: string
                   networkInterface:
-                    description: Networks to attach to the instance. This can be specified
-                      multiple times. The structure is documented below.
+                    description: |-
+                      Networks to attach to the instance. This can
+                      be specified multiple times. The structure is documented below.
                     items:
                       properties:
                         dnsRecord:
@@ -475,18 +481,18 @@ spec:
                             type: object
                           type: array
                         ipAddress:
-                          description: The private IP address to assign to the instance.
-                            If empty, the address will be automatically assigned from
-                            the specified subnet.
+                          description: |-
+                            The private IP address to assign to the instance. If
+                            empty, the address will be automatically assigned from the specified subnet.
                           type: string
                         ipv4:
                           description: Allocate an IPv4 address for the interface.
                             The default value is true.
                           type: boolean
                         ipv6:
-                          description: If true, allocate an IPv6 address for the interface.
-                            The address will be automatically assigned from the specified
-                            subnet.
+                          description: |-
+                            If true, allocate an IPv6 address for the interface.
+                            The address will be automatically assigned from the specified subnet.
                           type: boolean
                         ipv6Address:
                           description: The private IPv6 address to assign to the instance.
@@ -564,23 +570,21 @@ spec:
                                 properties:
                                   resolution:
                                     default: Required
-                                    description: Resolution specifies whether resolution
-                                      of this reference is required. The default is
-                                      'Required', which means the reconcile will fail
-                                      if the reference cannot be resolved. 'Optional'
-                                      means this reference will be a no-op if it cannot
-                                      be resolved.
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
                                     enum:
                                     - Required
                                     - Optional
                                     type: string
                                   resolve:
-                                    description: Resolve specifies when this reference
-                                      should be resolved. The default is 'IfNotPresent',
-                                      which will attempt to resolve the reference
-                                      only when the corresponding field is not present.
-                                      Use 'Always' to resolve the reference on every
-                                      reconcile.
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
                                     enum:
                                     - Always
                                     - IfNotPresent
@@ -595,9 +599,9 @@ spec:
                             to populate securityGroupIds.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -610,22 +614,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -633,9 +636,10 @@ spec:
                               type: object
                           type: object
                         subnetId:
-                          description: ID of the subnet to attach this interface to.
-                            The subnet must exist in the same zone where this instance
-                            will be created.
+                          description: |-
+                            ID of the subnet to attach this
+                            interface to. The subnet must exist in the same zone where this instance will be
+                            created.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -648,22 +652,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -676,9 +679,9 @@ spec:
                           description: Selector for a Subnet in vpc to populate subnetId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -691,22 +694,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -743,6 +745,8 @@ spec:
                           description: Specifies the id of the Placement Group to
                             assign to the instance.
                           type: string
+                        placementGroupPartition:
+                          type: number
                       type: object
                     type: array
                   platformId:
@@ -780,18 +784,20 @@ spec:
                       type: object
                     type: array
                   secondaryDisk:
-                    description: 'A list of disks to attach to the instance. The structure
-                      is documented below. Note: The allow_stopping_for_update property
-                      must be set to true in order to update this structure.'
+                    description: |-
+                      A list of disks to attach to the instance. The structure is documented below.
+                      Note: The allow_stopping_for_update property must be set to true in order to update this structure.
                     items:
                       properties:
                         autoDelete:
-                          description: Whether the disk is auto-deleted when the instance
+                          description: |-
+                            Whether the disk is auto-deleted when the instance
                             is deleted. The default value is false.
                           type: boolean
                         deviceName:
-                          description: Name that can be used to access an attached
-                            disk under /dev/disk/by-id/.
+                          description: |-
+                            Name that can be used to access an attached disk
+                            under /dev/disk/by-id/.
                           type: string
                         diskId:
                           description: ID of the disk that is attached to the instance.
@@ -817,21 +823,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -845,8 +851,9 @@ spec:
                       serviceAccountId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -859,21 +866,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -881,22 +888,23 @@ spec:
                         type: object
                     type: object
                   zone:
-                    description: The availability zone where the virtual machine will
-                      be created. If it is not provided, the default provider folder
-                      is used.
+                    description: |-
+                      The availability zone where the virtual machine will be created. If it is not provided,
+                      the default provider folder is used.
                     type: string
                 type: object
               initProvider:
-                description: THIS IS A BETA FIELD. It will be honored unless the Management
-                  Policies feature flag is disabled. InitProvider holds the same fields
-                  as ForProvider, with the exception of Identifier and other resource
-                  reference fields. The fields that are in InitProvider are merged
-                  into ForProvider when the resource is created. The same fields are
-                  also added to the terraform ignore_changes hook, to avoid updating
-                  them after creation. This is useful for fields that are required
-                  on creation, but we do not desire to update them after creation,
-                  for example because of an external controller is managing them,
-                  like an autoscaler.
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   allowRecreate:
                     description: Default 5 minutes
@@ -911,16 +919,18 @@ spec:
                     items:
                       properties:
                         autoDelete:
-                          description: Defines whether the disk will be auto-deleted
-                            when the instance is deleted. The default value is True.
+                          description: |-
+                            Defines whether the disk will be auto-deleted when the instance
+                            is deleted. The default value is True.
                           type: boolean
                         deviceName:
                           description: Name that can be used to access an attached
                             disk.
                           type: string
                         diskId:
-                          description: The ID of the existing disk (such as those
-                            managed by yandex_compute_disk) to attach as a boot disk.
+                          description: |-
+                            The ID of the existing disk (such as those managed by
+                            yandex_compute_disk) to attach as a boot disk.
                           type: string
                         diskIdRef:
                           description: Reference to a Disk to populate diskId.
@@ -933,22 +943,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -961,9 +970,9 @@ spec:
                           description: Selector for a Disk to populate diskId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -976,22 +985,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -999,9 +1007,9 @@ spec:
                               type: object
                           type: object
                         initializeParams:
-                          description: Parameters for a new disk that will be created
-                            alongside the new instance. Either initialize_params or
-                            disk_id must be set. The structure is documented below.
+                          description: |-
+                            Parameters for a new disk that will be created
+                            alongside the new instance. Either initialize_params or disk_id must be set. The structure is documented below.
                           items:
                             properties:
                               blockSize:
@@ -1026,23 +1034,21 @@ spec:
                                     properties:
                                       resolution:
                                         default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
                                         enum:
                                         - Required
                                         - Optional
                                         type: string
                                       resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
                                         enum:
                                         - Always
                                         - IfNotPresent
@@ -1055,9 +1061,9 @@ spec:
                                 description: Selector for a Image to populate imageId.
                                 properties:
                                   matchControllerRef:
-                                    description: MatchControllerRef ensures an object
-                                      with the same controller reference as the selecting
-                                      object is selected.
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
                                     type: boolean
                                   matchLabels:
                                     additionalProperties:
@@ -1070,23 +1076,21 @@ spec:
                                     properties:
                                       resolution:
                                         default: Required
-                                        description: Resolution specifies whether
-                                          resolution of this reference is required.
-                                          The default is 'Required', which means the
-                                          reconcile will fail if the reference cannot
-                                          be resolved. 'Optional' means this reference
-                                          will be a no-op if it cannot be resolved.
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
                                         enum:
                                         - Required
                                         - Optional
                                         type: string
                                       resolve:
-                                        description: Resolve specifies when this reference
-                                          should be resolved. The default is 'IfNotPresent',
-                                          which will attempt to resolve the reference
-                                          only when the corresponding field is not
-                                          present. Use 'Always' to resolve the reference
-                                          on every reconcile.
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
                                         enum:
                                         - Always
                                         - IfNotPresent
@@ -1129,15 +1133,16 @@ spec:
                           description: ID of the filesystem that should be attached.
                           type: string
                         mode:
-                          description: Mode of access to the filesystem that should
-                            be attached. By default, filesystem is attached in READ_WRITE
-                            mode.
+                          description: |-
+                            Mode of access to the filesystem that should be attached. By default, filesystem is attached
+                            in READ_WRITE mode.
                           type: string
                       type: object
                     type: array
                   folderId:
-                    description: The ID of the folder that the resource belongs to.
-                      If it is not provided, the default provider folder is used.
+                    description: |-
+                      The ID of the folder that the resource belongs to. If it
+                      is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -1151,21 +1156,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1179,8 +1184,9 @@ spec:
                       folderId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -1193,21 +1199,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1219,10 +1225,10 @@ spec:
                       The GPU cluster must exist in the same zone as the instance.
                     type: string
                   hostname:
-                    description: Host name for the instance. This field is used to
-                      generate the instance fqdn value. The host name must be unique
-                      within the network and region. If not specified, the host name
-                      will be equal to id of the instance and fqdn will be <id>.auto.internal.
+                    description: |-
+                      Host name for the instance. This field is used to generate the instance fqdn value.
+                      The host name must be unique within the network and region. If not specified, the host name will be equal
+                      to id of the instance and fqdn will be <id>.auto.internal.
                       Otherwise FQDN will be <hostname>.<region_id>.internal.
                     type: string
                   labels:
@@ -1252,8 +1258,9 @@ spec:
                   metadata:
                     additionalProperties:
                       type: string
-                    description: Metadata key/value pairs to make available from within
-                      the instance.
+                    description: |-
+                      Metadata key/value pairs to make available from
+                      within the instance.
                     type: object
                     x-kubernetes-map-type: granular
                   metadataOptions:
@@ -1279,8 +1286,9 @@ spec:
                       Values: standard, software_accelerated'
                     type: string
                   networkInterface:
-                    description: Networks to attach to the instance. This can be specified
-                      multiple times. The structure is documented below.
+                    description: |-
+                      Networks to attach to the instance. This can
+                      be specified multiple times. The structure is documented below.
                     items:
                       properties:
                         dnsRecord:
@@ -1306,18 +1314,18 @@ spec:
                             type: object
                           type: array
                         ipAddress:
-                          description: The private IP address to assign to the instance.
-                            If empty, the address will be automatically assigned from
-                            the specified subnet.
+                          description: |-
+                            The private IP address to assign to the instance. If
+                            empty, the address will be automatically assigned from the specified subnet.
                           type: string
                         ipv4:
                           description: Allocate an IPv4 address for the interface.
                             The default value is true.
                           type: boolean
                         ipv6:
-                          description: If true, allocate an IPv6 address for the interface.
-                            The address will be automatically assigned from the specified
-                            subnet.
+                          description: |-
+                            If true, allocate an IPv6 address for the interface.
+                            The address will be automatically assigned from the specified subnet.
                           type: boolean
                         ipv6Address:
                           description: The private IPv6 address to assign to the instance.
@@ -1395,23 +1403,21 @@ spec:
                                 properties:
                                   resolution:
                                     default: Required
-                                    description: Resolution specifies whether resolution
-                                      of this reference is required. The default is
-                                      'Required', which means the reconcile will fail
-                                      if the reference cannot be resolved. 'Optional'
-                                      means this reference will be a no-op if it cannot
-                                      be resolved.
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
                                     enum:
                                     - Required
                                     - Optional
                                     type: string
                                   resolve:
-                                    description: Resolve specifies when this reference
-                                      should be resolved. The default is 'IfNotPresent',
-                                      which will attempt to resolve the reference
-                                      only when the corresponding field is not present.
-                                      Use 'Always' to resolve the reference on every
-                                      reconcile.
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
                                     enum:
                                     - Always
                                     - IfNotPresent
@@ -1426,9 +1432,9 @@ spec:
                             to populate securityGroupIds.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -1441,22 +1447,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -1464,9 +1469,10 @@ spec:
                               type: object
                           type: object
                         subnetId:
-                          description: ID of the subnet to attach this interface to.
-                            The subnet must exist in the same zone where this instance
-                            will be created.
+                          description: |-
+                            ID of the subnet to attach this
+                            interface to. The subnet must exist in the same zone where this instance will be
+                            created.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -1479,22 +1485,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -1507,9 +1512,9 @@ spec:
                           description: Selector for a Subnet in vpc to populate subnetId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -1522,22 +1527,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -1574,6 +1578,8 @@ spec:
                           description: Specifies the id of the Placement Group to
                             assign to the instance.
                           type: string
+                        placementGroupPartition:
+                          type: number
                       type: object
                     type: array
                   platformId:
@@ -1611,18 +1617,20 @@ spec:
                       type: object
                     type: array
                   secondaryDisk:
-                    description: 'A list of disks to attach to the instance. The structure
-                      is documented below. Note: The allow_stopping_for_update property
-                      must be set to true in order to update this structure.'
+                    description: |-
+                      A list of disks to attach to the instance. The structure is documented below.
+                      Note: The allow_stopping_for_update property must be set to true in order to update this structure.
                     items:
                       properties:
                         autoDelete:
-                          description: Whether the disk is auto-deleted when the instance
+                          description: |-
+                            Whether the disk is auto-deleted when the instance
                             is deleted. The default value is false.
                           type: boolean
                         deviceName:
-                          description: Name that can be used to access an attached
-                            disk under /dev/disk/by-id/.
+                          description: |-
+                            Name that can be used to access an attached disk
+                            under /dev/disk/by-id/.
                           type: string
                         diskId:
                           description: ID of the disk that is attached to the instance.
@@ -1648,21 +1656,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1676,8 +1684,9 @@ spec:
                       serviceAccountId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -1690,21 +1699,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1712,27 +1721,29 @@ spec:
                         type: object
                     type: object
                   zone:
-                    description: The availability zone where the virtual machine will
-                      be created. If it is not provided, the default provider folder
-                      is used.
+                    description: |-
+                      The availability zone where the virtual machine will be created. If it is not provided,
+                      the default provider folder is used.
                     type: string
                 type: object
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS A BETA FIELD. It is on by default but can be
-                  opted out through a Crossplane feature flag. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -1745,9 +1756,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -1757,21 +1769,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -1781,17 +1793,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1801,21 +1815,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1830,21 +1844,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -1855,14 +1870,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -1908,21 +1924,23 @@ spec:
                     items:
                       properties:
                         autoDelete:
-                          description: Defines whether the disk will be auto-deleted
-                            when the instance is deleted. The default value is True.
+                          description: |-
+                            Defines whether the disk will be auto-deleted when the instance
+                            is deleted. The default value is True.
                           type: boolean
                         deviceName:
                           description: Name that can be used to access an attached
                             disk.
                           type: string
                         diskId:
-                          description: The ID of the existing disk (such as those
-                            managed by yandex_compute_disk) to attach as a boot disk.
+                          description: |-
+                            The ID of the existing disk (such as those managed by
+                            yandex_compute_disk) to attach as a boot disk.
                           type: string
                         initializeParams:
-                          description: Parameters for a new disk that will be created
-                            alongside the new instance. Either initialize_params or
-                            disk_id must be set. The structure is documented below.
+                          description: |-
+                            Parameters for a new disk that will be created
+                            alongside the new instance. Either initialize_params or disk_id must be set. The structure is documented below.
                           items:
                             properties:
                               blockSize:
@@ -1975,15 +1993,16 @@ spec:
                           description: ID of the filesystem that should be attached.
                           type: string
                         mode:
-                          description: Mode of access to the filesystem that should
-                            be attached. By default, filesystem is attached in READ_WRITE
-                            mode.
+                          description: |-
+                            Mode of access to the filesystem that should be attached. By default, filesystem is attached
+                            in READ_WRITE mode.
                           type: string
                       type: object
                     type: array
                   folderId:
-                    description: The ID of the folder that the resource belongs to.
-                      If it is not provided, the default provider folder is used.
+                    description: |-
+                      The ID of the folder that the resource belongs to. If it
+                      is not provided, the default provider folder is used.
                     type: string
                   fqdn:
                     description: The fully qualified DNS name of this instance.
@@ -1993,10 +2012,10 @@ spec:
                       The GPU cluster must exist in the same zone as the instance.
                     type: string
                   hostname:
-                    description: Host name for the instance. This field is used to
-                      generate the instance fqdn value. The host name must be unique
-                      within the network and region. If not specified, the host name
-                      will be equal to id of the instance and fqdn will be <id>.auto.internal.
+                    description: |-
+                      Host name for the instance. This field is used to generate the instance fqdn value.
+                      The host name must be unique within the network and region. If not specified, the host name will be equal
+                      to id of the instance and fqdn will be <id>.auto.internal.
                       Otherwise FQDN will be <hostname>.<region_id>.internal.
                     type: string
                   id:
@@ -2031,8 +2050,9 @@ spec:
                   metadata:
                     additionalProperties:
                       type: string
-                    description: Metadata key/value pairs to make available from within
-                      the instance.
+                    description: |-
+                      Metadata key/value pairs to make available from
+                      within the instance.
                     type: object
                     x-kubernetes-map-type: granular
                   metadataOptions:
@@ -2058,8 +2078,9 @@ spec:
                       Values: standard, software_accelerated'
                     type: string
                   networkInterface:
-                    description: Networks to attach to the instance. This can be specified
-                      multiple times. The structure is documented below.
+                    description: |-
+                      Networks to attach to the instance. This can
+                      be specified multiple times. The structure is documented below.
                     items:
                       properties:
                         dnsRecord:
@@ -2087,18 +2108,18 @@ spec:
                         index:
                           type: number
                         ipAddress:
-                          description: The private IP address to assign to the instance.
-                            If empty, the address will be automatically assigned from
-                            the specified subnet.
+                          description: |-
+                            The private IP address to assign to the instance. If
+                            empty, the address will be automatically assigned from the specified subnet.
                           type: string
                         ipv4:
                           description: Allocate an IPv4 address for the interface.
                             The default value is true.
                           type: boolean
                         ipv6:
-                          description: If true, allocate an IPv6 address for the interface.
-                            The address will be automatically assigned from the specified
-                            subnet.
+                          description: |-
+                            If true, allocate an IPv6 address for the interface.
+                            The address will be automatically assigned from the specified subnet.
                           type: boolean
                         ipv6Address:
                           description: The private IPv6 address to assign to the instance.
@@ -2167,9 +2188,10 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         subnetId:
-                          description: ID of the subnet to attach this interface to.
-                            The subnet must exist in the same zone where this instance
-                            will be created.
+                          description: |-
+                            ID of the subnet to attach this
+                            interface to. The subnet must exist in the same zone where this instance will be
+                            created.
                           type: string
                       type: object
                     type: array
@@ -2201,6 +2223,8 @@ spec:
                           description: Specifies the id of the Placement Group to
                             assign to the instance.
                           type: string
+                        placementGroupPartition:
+                          type: number
                       type: object
                     type: array
                   platformId:
@@ -2238,18 +2262,20 @@ spec:
                       type: object
                     type: array
                   secondaryDisk:
-                    description: 'A list of disks to attach to the instance. The structure
-                      is documented below. Note: The allow_stopping_for_update property
-                      must be set to true in order to update this structure.'
+                    description: |-
+                      A list of disks to attach to the instance. The structure is documented below.
+                      Note: The allow_stopping_for_update property must be set to true in order to update this structure.
                     items:
                       properties:
                         autoDelete:
-                          description: Whether the disk is auto-deleted when the instance
+                          description: |-
+                            Whether the disk is auto-deleted when the instance
                             is deleted. The default value is false.
                           type: boolean
                         deviceName:
-                          description: Name that can be used to access an attached
-                            disk under /dev/disk/by-id/.
+                          description: |-
+                            Name that can be used to access an attached disk
+                            under /dev/disk/by-id/.
                           type: string
                         diskId:
                           description: ID of the disk that is attached to the instance.
@@ -2267,9 +2293,9 @@ spec:
                     description: The status of this instance.
                     type: string
                   zone:
-                    description: The availability zone where the virtual machine will
-                      be created. If it is not provided, the default provider folder
-                      is used.
+                    description: |-
+                      The availability zone where the virtual machine will be created. If it is not provided,
+                      the default provider folder is used.
                     type: string
                 type: object
               conditions:
@@ -2278,13 +2304,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -2295,8 +2323,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime

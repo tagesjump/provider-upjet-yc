@@ -65,6 +65,8 @@ import (
 	kafkatopic "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/kafkatopic"
 	kafkauser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/kafkauser"
 	mongodbcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mongodbcluster"
+	mongodbdatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mongodbdatabase"
+	mongodbuser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mongodbuser"
 	mysqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqlcluster"
 	mysqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqldatabase"
 	mysqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqluser"
@@ -81,8 +83,10 @@ import (
 	groupmembership "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/groupmembership"
 	organizationiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/organizationiambinding"
 	organizationiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/organizationiammember"
+	osloginsettings "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/osloginsettings"
 	samlfederation "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/samlfederation"
 	samlfederationuseraccount "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/samlfederationuseraccount"
+	usersshkey "github.com/tagesjump/provider-upjet-yc/internal/controller/organizationmanager/usersshkey"
 	providerconfig "github.com/tagesjump/provider-upjet-yc/internal/controller/providerconfig"
 	cloud "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/cloud"
 	cloudiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/cloudiambinding"
@@ -170,6 +174,8 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		kafkatopic.Setup,
 		kafkauser.Setup,
 		mongodbcluster.Setup,
+		mongodbdatabase.Setup,
+		mongodbuser.Setup,
 		mysqlcluster.Setup,
 		mysqldatabase.Setup,
 		mysqluser.Setup,
@@ -186,8 +192,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		groupmembership.Setup,
 		organizationiambinding.Setup,
 		organizationiammember.Setup,
+		osloginsettings.Setup,
 		samlfederation.Setup,
 		samlfederationuseraccount.Setup,
+		usersshkey.Setup,
 		providerconfig.Setup,
 		cloud.Setup,
 		cloudiambinding.Setup,

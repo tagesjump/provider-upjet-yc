@@ -298,7 +298,8 @@ type RedisClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// Redis Cluster mode enabled/disabled.
+	// Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+	// If cluster is sharded - disabling is not allowed.
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
 	// TLS support mode enabled/disabled.
@@ -399,7 +400,8 @@ type RedisClusterObservation struct {
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Redis Cluster mode enabled/disabled.
+	// Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+	// If cluster is sharded - disabling is not allowed.
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
 	// Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
@@ -497,7 +499,8 @@ type RedisClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// Redis Cluster mode enabled/disabled.
+	// Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
+	// If cluster is sharded - disabling is not allowed.
 	// +kubebuilder:validation:Optional
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
@@ -566,13 +569,14 @@ type RedisClusterStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // RedisCluster is the Schema for the RedisClusters API. Manages a Redis cluster within Yandex.Cloud.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud}
 type RedisCluster struct {
 	metav1.TypeMeta   `json:",inline"`

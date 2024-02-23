@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.13.0
+    controller-gen.kubebuilder.io/version: v0.14.0
   name: mongodbclusters.mdb.yandex-cloud.upjet.crossplane.io
 spec:
   group: mdb.yandex-cloud.upjet.crossplane.io
@@ -38,14 +38,19 @@ spec:
           a MongoDB cluster within Yandex.Cloud.
         properties:
           apiVersion:
-            description: 'APIVersion defines the versioned schema of this representation
-              of an object. Servers should convert recognized schemas to the latest
-              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
             type: string
           kind:
-            description: 'Kind is a string value representing the REST resource this
-              object represents. Servers may infer this from the endpoint the client
-              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
             type: string
           metadata:
             type: object
@@ -54,13 +59,14 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: 'DeletionPolicy specifies what will happen to the underlying
-                  external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicies field in a future release. Currently,
-                  both could be set independently and non-default values would be
-                  honored if the feature flag is enabled. See the design doc for more
-                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
                 enum:
                 - Orphan
                 - Delete
@@ -113,57 +119,59 @@ spec:
                           items:
                             properties:
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               operationProfiling:
-                                description: A set of profiling settings (see the
-                                  operationProfiling option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of profiling settings
+                                  (see the operationProfiling option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     mode:
-                                      description: 'Specifies which operations should
-                                        be profiled. The following profiler levels
-                                        are available: off, slow_op, all. For more
-                                        information, see the operationProfiling.mode
-                                        description in the official documentation.'
+                                      description: |-
+                                        Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
+                                        For more information, see the operationProfiling.mode
+                                        description in the official documentation.
                                       type: string
                                     slowOpThreshold:
-                                      description: The slow operation time threshold,
-                                        in milliseconds. Operations that run for longer
-                                        than this threshold are considered slow. For
-                                        more information, see the operationProfiling.slowOpThresholdMs
+                                      description: |-
+                                        The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
+                                        For more information, see the operationProfiling.slowOpThresholdMs
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               storage:
-                                description: A set of storage settings (see the storage
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of storage settings
+                                  (see the storage option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     wiredTiger:
-                                      description: The WiredTiger engine settings.
-                                        (see the storage.wiredTiger option). These
-                                        settings available only on mongod hosts. The
-                                        structure is documented below.
+                                      description: |-
+                                        The WiredTiger engine settings.
+                                        (see the storage.wiredTiger option).
+                                        These settings available only on mongod hosts. The structure is documented below.
                                       items:
                                         properties:
                                           cacheSizeGb:
-                                            description: Defines the maximum size
-                                              of the internal cache that WiredTiger
-                                              will use for all data. For more information,
-                                              see the storage.wiredTiger.engineConfig.cacheSizeGB
+                                            description: |-
+                                              Defines the maximum size of the internal cache that WiredTiger will use for all data.
+                                              For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
                                         type: object
@@ -178,114 +186,125 @@ spec:
                           items:
                             properties:
                               auditLog:
-                                description: A set of audit log settings (see the
-                                  auditLog option). The structure is documented below.
-                                  Available only in enterprise edition.
+                                description: |-
+                                  A set of audit log settings
+                                  (see the auditLog option).
+                                  The structure is documented below. Available only in enterprise edition.
                                 items:
                                   properties:
                                     filter:
-                                      description: Configuration of the audit log
-                                        filter in JSON format. For more information
-                                        see auditLog.filter description in the official
-                                        documentation. Available only in enterprise
-                                        edition.
+                                      description: |-
+                                        Configuration of the audit log filter in JSON format.
+                                        For more information see auditLog.filter
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: string
                                     runtimeConfiguration:
-                                      description: Specifies if a node allows runtime
-                                        configuration of audit filters and the auditAuthorizationSuccess
-                                        variable. For more information see auditLog.runtimeConfiguration
-                                        description in the official documentation.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable.
+                                        For more information see auditLog.runtimeConfiguration
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: boolean
                                   type: object
                                 type: array
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               operationProfiling:
-                                description: A set of profiling settings (see the
-                                  operationProfiling option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of profiling settings
+                                  (see the operationProfiling option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     mode:
-                                      description: 'Specifies which operations should
-                                        be profiled. The following profiler levels
-                                        are available: off, slow_op, all. For more
-                                        information, see the operationProfiling.mode
-                                        description in the official documentation.'
+                                      description: |-
+                                        Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
+                                        For more information, see the operationProfiling.mode
+                                        description in the official documentation.
                                       type: string
+                                    slowOpSampleRate:
+                                      description: |-
+                                        The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                                        For more information, see the operationProfiling.slowOpSampleRate
+                                        description in the official documentation.
+                                      type: number
                                     slowOpThreshold:
-                                      description: The slow operation time threshold,
-                                        in milliseconds. Operations that run for longer
-                                        than this threshold are considered slow. For
-                                        more information, see the operationProfiling.slowOpThresholdMs
+                                      description: |-
+                                        The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
+                                        For more information, see the operationProfiling.slowOpThresholdMs
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               security:
-                                description: A set of MongoDB Security settings (see
-                                  the security option). The structure is documented
-                                  below. Available only in enterprise edition.
+                                description: |-
+                                  A set of MongoDB Security settings
+                                  (see the security option).
+                                  The structure is documented below. Available only in enterprise edition.
                                 items:
                                   properties:
                                     enableEncryption:
-                                      description: Enables the encryption for the
-                                        WiredTiger storage engine. Can be either true
-                                        or false. For more information see security.enableEncryption
-                                        description in the official documentation.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Enables the encryption for the WiredTiger storage engine. Can be either true or false.
+                                        For more information see security.enableEncryption
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: boolean
                                     kmip:
-                                      description: Configuration of the third party
-                                        key management appliance via the Key Management
-                                        Interoperability Protocol (KMIP) (see Encryption
-                                        tutorial ). Requires enable_encryption to
-                                        be true. The structure is documented below.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP)
+                                        (see Encryption tutorial ). Requires enable_encryption to be true.
+                                        The structure is documented below. Available only in enterprise edition.
                                       items:
                                         properties:
                                           clientCertificate:
-                                            description: String containing the client
-                                              certificate used for authenticating
-                                              MongoDB to the KMIP server. For more
-                                              information see security.kmip.clientCertificateFile
+                                            description: |-
+                                              String containing the client certificate used for authenticating MongoDB to the KMIP server.
+                                              For more information see security.kmip.clientCertificateFile
                                               description in the official documentation.
                                             type: string
                                           keyIdentifier:
-                                            description: Unique KMIP identifier for
-                                              an existing key within the KMIP server.
+                                            description: |-
+                                              Unique KMIP identifier for an existing key within the KMIP server.
                                               For more information see security.kmip.keyIdentifier
                                               description in the official documentation.
                                             type: string
                                           port:
-                                            description: 'Port number to use to communicate
-                                              with the KMIP server. Default: 5696
+                                            description: |-
+                                              Port number to use to communicate with the KMIP server. Default: 5696
                                               For more information see security.kmip.port
-                                              description in the official documentation.'
+                                              description in the official documentation.
                                             type: number
                                           serverCa:
-                                            description: Path to CA File. Used for
-                                              validating secure client connection
-                                              to KMIP server. For more information
-                                              see security.kmip.serverCAFile description
-                                              in the official documentation.
+                                            description: |-
+                                              Path to CA File. Used for validating secure client connection to KMIP server.
+                                              For more information see security.kmip.serverCAFile
+                                              description in the official documentation.
                                             type: string
                                           serverName:
-                                            description: Hostname or IP address of
-                                              the KMIP server to connect to. For more
-                                              information see security.kmip.serverName
+                                            description: |-
+                                              Hostname or IP address of the KMIP server to connect to.
+                                              For more information see security.kmip.serverName
                                               description in the official documentation.
                                             type: string
                                         type: object
@@ -293,64 +312,73 @@ spec:
                                   type: object
                                 type: array
                               setParameter:
-                                description: A set of MongoDB Server Parameters (see
-                                  the setParameter option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of MongoDB Server Parameters
+                                  (see the setParameter option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     auditAuthorizationSuccess:
-                                      description: Enables the auditing of authorization
-                                        successes. Can be either true or false. For
-                                        more information, see the auditAuthorizationSuccess
+                                      description: |-
+                                        Enables the auditing of authorization successes. Can be either true or false.
+                                        For more information, see the auditAuthorizationSuccess
+                                        description in the official documentation. Available only in enterprise edition.
+                                      type: boolean
+                                    enableFlowControl:
+                                      description: |-
+                                        Enables the flow control. Can be either true or false.
+                                        For more information, see the enableFlowControl
                                         description in the official documentation.
-                                        Available only in enterprise edition.
                                       type: boolean
                                   type: object
                                 type: array
                               storage:
-                                description: A set of storage settings (see the storage
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of storage settings
+                                  (see the storage option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     journal:
-                                      description: The durability journal to ensure
-                                        data files remain valid and recoverable. The
-                                        structure is documented below.
+                                      description: |-
+                                        The durability journal to ensure data files remain valid and recoverable.
+                                        The structure is documented below.
                                       items:
                                         properties:
                                           commitInterval:
-                                            description: The maximum amount of time
-                                              in milliseconds that the mongod process
-                                              allows between journal operations. For
-                                              more information, see the storage.journal.commitIntervalMs
+                                            description: |-
+                                              The maximum amount of time in milliseconds that the mongod process allows between journal operations.
+                                              For more information, see the storage.journal.commitIntervalMs
                                               description in the official documentation.
                                             type: number
                                         type: object
                                       type: array
                                     wiredTiger:
-                                      description: The WiredTiger engine settings.
-                                        (see the storage.wiredTiger option). These
-                                        settings available only on mongod hosts. The
-                                        structure is documented below.
+                                      description: |-
+                                        The WiredTiger engine settings.
+                                        (see the storage.wiredTiger option).
+                                        These settings available only on mongod hosts. The structure is documented below.
                                       items:
                                         properties:
                                           blockCompressor:
-                                            description: 'Specifies the default compression
-                                              for collection data. You can override
-                                              this on a per-collection basis when
-                                              creating collections. Available compressors
-                                              are: none, snappy, zlib, zstd. This
-                                              setting available only on mongod hosts.
+                                            description: |-
+                                              Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections.
+                                              Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts.
                                               For more information, see the storage.wiredTiger.collectionConfig.blockCompressor
-                                              description in the official documentation.'
+                                              description in the official documentation.
                                             type: string
                                           cacheSizeGb:
-                                            description: Defines the maximum size
-                                              of the internal cache that WiredTiger
-                                              will use for all data. For more information,
-                                              see the storage.wiredTiger.engineConfig.cacheSizeGB
+                                            description: |-
+                                              Defines the maximum size of the internal cache that WiredTiger will use for all data.
+                                              For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
+                                          prefixCompression:
+                                            description: |-
+                                              Enables or disables prefix compression for index data. Сan be either true or false.
+                                              For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                                              description in the official documentation.
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -363,14 +391,25 @@ spec:
                           items:
                             properties:
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
@@ -419,8 +458,9 @@ spec:
                       be either PRESTABLE or PRODUCTION.
                     type: string
                   folderId:
-                    description: The ID of the folder that the resource belongs to.
-                      If it is not provided, the default provider folder is used.
+                    description: |-
+                      The ID of the folder that the resource belongs to. If it
+                      is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -434,21 +474,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -462,8 +502,9 @@ spec:
                       folderId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -476,21 +517,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -515,9 +556,9 @@ spec:
                             Only for sharded cluster.
                           type: string
                         subnetId:
-                          description: The ID of the subnet, to which the host belongs.
-                            The subnet must be a part of the network to which the
-                            cluster belongs.
+                          description: |-
+                            The ID of the subnet, to which the host belongs. The subnet must
+                            be a part of the network to which the cluster belongs.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -530,22 +571,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -558,9 +598,9 @@ spec:
                           description: Selector for a Subnet in vpc to populate subnetId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -573,22 +613,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -600,9 +639,9 @@ spec:
                             (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
                           type: string
                         zoneId:
-                          description: The availability zone where the MongoDB host
-                            will be created. For more information see the official
-                            documentation.
+                          description: |-
+                            The availability zone where the MongoDB host will be created.
+                            For more information see the official documentation.
                           type: string
                       type: object
                     type: array
@@ -652,21 +691,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -679,8 +718,9 @@ spec:
                     description: Selector for a Network in vpc to populate networkId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -693,21 +733,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -725,8 +765,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -742,8 +783,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -759,8 +801,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -776,8 +819,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -793,8 +837,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -837,21 +882,21 @@ spec:
                           properties:
                             resolution:
                               default: Required
-                              description: Resolution specifies whether resolution
-                                of this reference is required. The default is 'Required',
-                                which means the reconcile will fail if the reference
-                                cannot be resolved. 'Optional' means this reference
-                                will be a no-op if it cannot be resolved.
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
                               enum:
                               - Required
                               - Optional
                               type: string
                             resolve:
-                              description: Resolve specifies when this reference should
-                                be resolved. The default is 'IfNotPresent', which
-                                will attempt to resolve the reference only when the
-                                corresponding field is not present. Use 'Always' to
-                                resolve the reference on every reconcile.
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
                               enum:
                               - Always
                               - IfNotPresent
@@ -866,8 +911,9 @@ spec:
                       securityGroupIds.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -880,21 +926,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -949,16 +995,17 @@ spec:
                     type: array
                 type: object
               initProvider:
-                description: THIS IS A BETA FIELD. It will be honored unless the Management
-                  Policies feature flag is disabled. InitProvider holds the same fields
-                  as ForProvider, with the exception of Identifier and other resource
-                  reference fields. The fields that are in InitProvider are merged
-                  into ForProvider when the resource is created. The same fields are
-                  also added to the terraform ignore_changes hook, to avoid updating
-                  them after creation. This is useful for fields that are required
-                  on creation, but we do not desire to update them after creation,
-                  for example because of an external controller is managing them,
-                  like an autoscaler.
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
                 properties:
                   clusterConfig:
                     description: Configuration of the MongoDB subcluster. The structure
@@ -1006,57 +1053,59 @@ spec:
                           items:
                             properties:
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               operationProfiling:
-                                description: A set of profiling settings (see the
-                                  operationProfiling option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of profiling settings
+                                  (see the operationProfiling option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     mode:
-                                      description: 'Specifies which operations should
-                                        be profiled. The following profiler levels
-                                        are available: off, slow_op, all. For more
-                                        information, see the operationProfiling.mode
-                                        description in the official documentation.'
+                                      description: |-
+                                        Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
+                                        For more information, see the operationProfiling.mode
+                                        description in the official documentation.
                                       type: string
                                     slowOpThreshold:
-                                      description: The slow operation time threshold,
-                                        in milliseconds. Operations that run for longer
-                                        than this threshold are considered slow. For
-                                        more information, see the operationProfiling.slowOpThresholdMs
+                                      description: |-
+                                        The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
+                                        For more information, see the operationProfiling.slowOpThresholdMs
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               storage:
-                                description: A set of storage settings (see the storage
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of storage settings
+                                  (see the storage option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     wiredTiger:
-                                      description: The WiredTiger engine settings.
-                                        (see the storage.wiredTiger option). These
-                                        settings available only on mongod hosts. The
-                                        structure is documented below.
+                                      description: |-
+                                        The WiredTiger engine settings.
+                                        (see the storage.wiredTiger option).
+                                        These settings available only on mongod hosts. The structure is documented below.
                                       items:
                                         properties:
                                           cacheSizeGb:
-                                            description: Defines the maximum size
-                                              of the internal cache that WiredTiger
-                                              will use for all data. For more information,
-                                              see the storage.wiredTiger.engineConfig.cacheSizeGB
+                                            description: |-
+                                              Defines the maximum size of the internal cache that WiredTiger will use for all data.
+                                              For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
                                         type: object
@@ -1071,114 +1120,125 @@ spec:
                           items:
                             properties:
                               auditLog:
-                                description: A set of audit log settings (see the
-                                  auditLog option). The structure is documented below.
-                                  Available only in enterprise edition.
+                                description: |-
+                                  A set of audit log settings
+                                  (see the auditLog option).
+                                  The structure is documented below. Available only in enterprise edition.
                                 items:
                                   properties:
                                     filter:
-                                      description: Configuration of the audit log
-                                        filter in JSON format. For more information
-                                        see auditLog.filter description in the official
-                                        documentation. Available only in enterprise
-                                        edition.
+                                      description: |-
+                                        Configuration of the audit log filter in JSON format.
+                                        For more information see auditLog.filter
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: string
                                     runtimeConfiguration:
-                                      description: Specifies if a node allows runtime
-                                        configuration of audit filters and the auditAuthorizationSuccess
-                                        variable. For more information see auditLog.runtimeConfiguration
-                                        description in the official documentation.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable.
+                                        For more information see auditLog.runtimeConfiguration
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: boolean
                                   type: object
                                 type: array
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               operationProfiling:
-                                description: A set of profiling settings (see the
-                                  operationProfiling option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of profiling settings
+                                  (see the operationProfiling option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     mode:
-                                      description: 'Specifies which operations should
-                                        be profiled. The following profiler levels
-                                        are available: off, slow_op, all. For more
-                                        information, see the operationProfiling.mode
-                                        description in the official documentation.'
+                                      description: |-
+                                        Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
+                                        For more information, see the operationProfiling.mode
+                                        description in the official documentation.
                                       type: string
+                                    slowOpSampleRate:
+                                      description: |-
+                                        The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                                        For more information, see the operationProfiling.slowOpSampleRate
+                                        description in the official documentation.
+                                      type: number
                                     slowOpThreshold:
-                                      description: The slow operation time threshold,
-                                        in milliseconds. Operations that run for longer
-                                        than this threshold are considered slow. For
-                                        more information, see the operationProfiling.slowOpThresholdMs
+                                      description: |-
+                                        The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
+                                        For more information, see the operationProfiling.slowOpThresholdMs
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               security:
-                                description: A set of MongoDB Security settings (see
-                                  the security option). The structure is documented
-                                  below. Available only in enterprise edition.
+                                description: |-
+                                  A set of MongoDB Security settings
+                                  (see the security option).
+                                  The structure is documented below. Available only in enterprise edition.
                                 items:
                                   properties:
                                     enableEncryption:
-                                      description: Enables the encryption for the
-                                        WiredTiger storage engine. Can be either true
-                                        or false. For more information see security.enableEncryption
-                                        description in the official documentation.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Enables the encryption for the WiredTiger storage engine. Can be either true or false.
+                                        For more information see security.enableEncryption
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: boolean
                                     kmip:
-                                      description: Configuration of the third party
-                                        key management appliance via the Key Management
-                                        Interoperability Protocol (KMIP) (see Encryption
-                                        tutorial ). Requires enable_encryption to
-                                        be true. The structure is documented below.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP)
+                                        (see Encryption tutorial ). Requires enable_encryption to be true.
+                                        The structure is documented below. Available only in enterprise edition.
                                       items:
                                         properties:
                                           clientCertificate:
-                                            description: String containing the client
-                                              certificate used for authenticating
-                                              MongoDB to the KMIP server. For more
-                                              information see security.kmip.clientCertificateFile
+                                            description: |-
+                                              String containing the client certificate used for authenticating MongoDB to the KMIP server.
+                                              For more information see security.kmip.clientCertificateFile
                                               description in the official documentation.
                                             type: string
                                           keyIdentifier:
-                                            description: Unique KMIP identifier for
-                                              an existing key within the KMIP server.
+                                            description: |-
+                                              Unique KMIP identifier for an existing key within the KMIP server.
                                               For more information see security.kmip.keyIdentifier
                                               description in the official documentation.
                                             type: string
                                           port:
-                                            description: 'Port number to use to communicate
-                                              with the KMIP server. Default: 5696
+                                            description: |-
+                                              Port number to use to communicate with the KMIP server. Default: 5696
                                               For more information see security.kmip.port
-                                              description in the official documentation.'
+                                              description in the official documentation.
                                             type: number
                                           serverCa:
-                                            description: Path to CA File. Used for
-                                              validating secure client connection
-                                              to KMIP server. For more information
-                                              see security.kmip.serverCAFile description
-                                              in the official documentation.
+                                            description: |-
+                                              Path to CA File. Used for validating secure client connection to KMIP server.
+                                              For more information see security.kmip.serverCAFile
+                                              description in the official documentation.
                                             type: string
                                           serverName:
-                                            description: Hostname or IP address of
-                                              the KMIP server to connect to. For more
-                                              information see security.kmip.serverName
+                                            description: |-
+                                              Hostname or IP address of the KMIP server to connect to.
+                                              For more information see security.kmip.serverName
                                               description in the official documentation.
                                             type: string
                                         type: object
@@ -1186,64 +1246,73 @@ spec:
                                   type: object
                                 type: array
                               setParameter:
-                                description: A set of MongoDB Server Parameters (see
-                                  the setParameter option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of MongoDB Server Parameters
+                                  (see the setParameter option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     auditAuthorizationSuccess:
-                                      description: Enables the auditing of authorization
-                                        successes. Can be either true or false. For
-                                        more information, see the auditAuthorizationSuccess
+                                      description: |-
+                                        Enables the auditing of authorization successes. Can be either true or false.
+                                        For more information, see the auditAuthorizationSuccess
+                                        description in the official documentation. Available only in enterprise edition.
+                                      type: boolean
+                                    enableFlowControl:
+                                      description: |-
+                                        Enables the flow control. Can be either true or false.
+                                        For more information, see the enableFlowControl
                                         description in the official documentation.
-                                        Available only in enterprise edition.
                                       type: boolean
                                   type: object
                                 type: array
                               storage:
-                                description: A set of storage settings (see the storage
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of storage settings
+                                  (see the storage option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     journal:
-                                      description: The durability journal to ensure
-                                        data files remain valid and recoverable. The
-                                        structure is documented below.
+                                      description: |-
+                                        The durability journal to ensure data files remain valid and recoverable.
+                                        The structure is documented below.
                                       items:
                                         properties:
                                           commitInterval:
-                                            description: The maximum amount of time
-                                              in milliseconds that the mongod process
-                                              allows between journal operations. For
-                                              more information, see the storage.journal.commitIntervalMs
+                                            description: |-
+                                              The maximum amount of time in milliseconds that the mongod process allows between journal operations.
+                                              For more information, see the storage.journal.commitIntervalMs
                                               description in the official documentation.
                                             type: number
                                         type: object
                                       type: array
                                     wiredTiger:
-                                      description: The WiredTiger engine settings.
-                                        (see the storage.wiredTiger option). These
-                                        settings available only on mongod hosts. The
-                                        structure is documented below.
+                                      description: |-
+                                        The WiredTiger engine settings.
+                                        (see the storage.wiredTiger option).
+                                        These settings available only on mongod hosts. The structure is documented below.
                                       items:
                                         properties:
                                           blockCompressor:
-                                            description: 'Specifies the default compression
-                                              for collection data. You can override
-                                              this on a per-collection basis when
-                                              creating collections. Available compressors
-                                              are: none, snappy, zlib, zstd. This
-                                              setting available only on mongod hosts.
+                                            description: |-
+                                              Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections.
+                                              Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts.
                                               For more information, see the storage.wiredTiger.collectionConfig.blockCompressor
-                                              description in the official documentation.'
+                                              description in the official documentation.
                                             type: string
                                           cacheSizeGb:
-                                            description: Defines the maximum size
-                                              of the internal cache that WiredTiger
-                                              will use for all data. For more information,
-                                              see the storage.wiredTiger.engineConfig.cacheSizeGB
+                                            description: |-
+                                              Defines the maximum size of the internal cache that WiredTiger will use for all data.
+                                              For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
+                                          prefixCompression:
+                                            description: |-
+                                              Enables or disables prefix compression for index data. Сan be either true or false.
+                                              For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                                              description in the official documentation.
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -1256,14 +1325,25 @@ spec:
                           items:
                             properties:
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
@@ -1312,8 +1392,9 @@ spec:
                       be either PRESTABLE or PRODUCTION.
                     type: string
                   folderId:
-                    description: The ID of the folder that the resource belongs to.
-                      If it is not provided, the default provider folder is used.
+                    description: |-
+                      The ID of the folder that the resource belongs to. If it
+                      is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -1327,21 +1408,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1355,8 +1436,9 @@ spec:
                       folderId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -1369,21 +1451,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1408,9 +1490,9 @@ spec:
                             Only for sharded cluster.
                           type: string
                         subnetId:
-                          description: The ID of the subnet, to which the host belongs.
-                            The subnet must be a part of the network to which the
-                            cluster belongs.
+                          description: |-
+                            The ID of the subnet, to which the host belongs. The subnet must
+                            be a part of the network to which the cluster belongs.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -1423,22 +1505,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -1451,9 +1532,9 @@ spec:
                           description: Selector for a Subnet in vpc to populate subnetId.
                           properties:
                             matchControllerRef:
-                              description: MatchControllerRef ensures an object with
-                                the same controller reference as the selecting object
-                                is selected.
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
                               type: boolean
                             matchLabels:
                               additionalProperties:
@@ -1466,22 +1547,21 @@ spec:
                               properties:
                                 resolution:
                                   default: Required
-                                  description: Resolution specifies whether resolution
-                                    of this reference is required. The default is
-                                    'Required', which means the reconcile will fail
-                                    if the reference cannot be resolved. 'Optional'
-                                    means this reference will be a no-op if it cannot
-                                    be resolved.
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
                                   enum:
                                   - Required
                                   - Optional
                                   type: string
                                 resolve:
-                                  description: Resolve specifies when this reference
-                                    should be resolved. The default is 'IfNotPresent',
-                                    which will attempt to resolve the reference only
-                                    when the corresponding field is not present. Use
-                                    'Always' to resolve the reference on every reconcile.
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
                                   enum:
                                   - Always
                                   - IfNotPresent
@@ -1493,9 +1573,9 @@ spec:
                             (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
                           type: string
                         zoneId:
-                          description: The availability zone where the MongoDB host
-                            will be created. For more information see the official
-                            documentation.
+                          description: |-
+                            The availability zone where the MongoDB host will be created.
+                            For more information see the official documentation.
                           type: string
                       type: object
                     type: array
@@ -1545,21 +1625,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1572,8 +1652,9 @@ spec:
                     description: Selector for a Network in vpc to populate networkId.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -1586,21 +1667,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1618,8 +1699,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -1635,8 +1717,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -1652,8 +1735,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -1669,8 +1753,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -1686,8 +1771,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -1730,21 +1816,21 @@ spec:
                           properties:
                             resolution:
                               default: Required
-                              description: Resolution specifies whether resolution
-                                of this reference is required. The default is 'Required',
-                                which means the reconcile will fail if the reference
-                                cannot be resolved. 'Optional' means this reference
-                                will be a no-op if it cannot be resolved.
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
                               enum:
                               - Required
                               - Optional
                               type: string
                             resolve:
-                              description: Resolve specifies when this reference should
-                                be resolved. The default is 'IfNotPresent', which
-                                will attempt to resolve the reference only when the
-                                corresponding field is not present. Use 'Always' to
-                                resolve the reference on every reconcile.
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
                               enum:
                               - Always
                               - IfNotPresent
@@ -1759,8 +1845,9 @@ spec:
                       securityGroupIds.
                     properties:
                       matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
                         type: boolean
                       matchLabels:
                         additionalProperties:
@@ -1773,21 +1860,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1825,19 +1912,21 @@ spec:
               managementPolicies:
                 default:
                 - '*'
-                description: 'THIS IS A BETA FIELD. It is on by default but can be
-                  opted out through a Crossplane feature flag. ManagementPolicies
-                  specify the array of actions Crossplane is allowed to take on the
-                  managed and external resources. This field is planned to replace
-                  the DeletionPolicy field in a future release. Currently, both could
-                  be set independently and non-default values would be honored if
-                  the feature flag is enabled. If both are custom, the DeletionPolicy
-                  field will be ignored. See the design doc for more information:
-                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
-                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
                 items:
-                  description: A ManagementAction represents an action that the Crossplane
-                    controllers can take on an external resource.
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
                   enum:
                   - Observe
                   - Create
@@ -1850,9 +1939,10 @@ spec:
               providerConfigRef:
                 default:
                   name: default
-                description: ProviderConfigReference specifies how the provider that
-                  will be used to create, observe, update, and delete this managed
-                  resource should be configured.
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
                 properties:
                   name:
                     description: Name of the referenced object.
@@ -1862,21 +1952,21 @@ spec:
                     properties:
                       resolution:
                         default: Required
-                        description: Resolution specifies whether resolution of this
-                          reference is required. The default is 'Required', which
-                          means the reconcile will fail if the reference cannot be
-                          resolved. 'Optional' means this reference will be a no-op
-                          if it cannot be resolved.
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
                         enum:
                         - Required
                         - Optional
                         type: string
                       resolve:
-                        description: Resolve specifies when this reference should
-                          be resolved. The default is 'IfNotPresent', which will attempt
-                          to resolve the reference only when the corresponding field
-                          is not present. Use 'Always' to resolve the reference on
-                          every reconcile.
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
                         enum:
                         - Always
                         - IfNotPresent
@@ -1886,17 +1976,19 @@ spec:
                 - name
                 type: object
               publishConnectionDetailsTo:
-                description: PublishConnectionDetailsTo specifies the connection secret
-                  config which contains a name, metadata and a reference to secret
-                  store config to which any connection details for this managed resource
-                  should be written. Connection details frequently include the endpoint,
-                  username, and password required to connect to the managed resource.
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
                 properties:
                   configRef:
                     default:
                       name: default
-                    description: SecretStoreConfigRef specifies which secret store
-                      config should be used for this ConnectionSecret.
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1906,21 +1998,21 @@ spec:
                         properties:
                           resolution:
                             default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
                             enum:
                             - Required
                             - Optional
                             type: string
                           resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
                             enum:
                             - Always
                             - IfNotPresent
@@ -1935,21 +2027,22 @@ spec:
                       annotations:
                         additionalProperties:
                           type: string
-                        description: Annotations are the annotations to be added to
-                          connection secret. - For Kubernetes secrets, this will be
-                          used as "metadata.annotations". - It is up to Secret Store
-                          implementation for others store types.
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       labels:
                         additionalProperties:
                           type: string
-                        description: Labels are the labels/tags to be added to connection
-                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
-                          - It is up to Secret Store implementation for others store
-                          types.
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
                         type: object
                       type:
-                        description: Type is the SecretType for the connection secret.
+                        description: |-
+                          Type is the SecretType for the connection secret.
                           - Only valid for Kubernetes Secret Stores.
                         type: string
                     type: object
@@ -1960,14 +2053,15 @@ spec:
                 - name
                 type: object
               writeConnectionSecretToRef:
-                description: WriteConnectionSecretToReference specifies the namespace
-                  and name of a Secret to which any connection details for this managed
-                  resource should be written. Connection details frequently include
-                  the endpoint, username, and password required to connect to the
-                  managed resource. This field is planned to be replaced in a future
-                  release in favor of PublishConnectionDetailsTo. Currently, both
-                  could be set independently and connection details would be published
-                  to both without affecting each other.
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
                 properties:
                   name:
                     description: Name of the secret.
@@ -1987,10 +2081,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.clusterConfig)
                 || (has(self.initProvider) && has(self.initProvider.clusterConfig))'
-            - message: spec.forProvider.database is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.database)
-                || (has(self.initProvider) && has(self.initProvider.database))'
             - message: spec.forProvider.environment is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.environment)
@@ -2003,10 +2093,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
                 || (has(self.initProvider) && has(self.initProvider.name))'
-            - message: spec.forProvider.user is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.user)
-                || (has(self.initProvider) && has(self.initProvider.user))'
           status:
             description: MongodbClusterStatus defines the observed state of MongodbCluster.
             properties:
@@ -2058,57 +2144,59 @@ spec:
                           items:
                             properties:
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               operationProfiling:
-                                description: A set of profiling settings (see the
-                                  operationProfiling option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of profiling settings
+                                  (see the operationProfiling option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     mode:
-                                      description: 'Specifies which operations should
-                                        be profiled. The following profiler levels
-                                        are available: off, slow_op, all. For more
-                                        information, see the operationProfiling.mode
-                                        description in the official documentation.'
+                                      description: |-
+                                        Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
+                                        For more information, see the operationProfiling.mode
+                                        description in the official documentation.
                                       type: string
                                     slowOpThreshold:
-                                      description: The slow operation time threshold,
-                                        in milliseconds. Operations that run for longer
-                                        than this threshold are considered slow. For
-                                        more information, see the operationProfiling.slowOpThresholdMs
+                                      description: |-
+                                        The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
+                                        For more information, see the operationProfiling.slowOpThresholdMs
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               storage:
-                                description: A set of storage settings (see the storage
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of storage settings
+                                  (see the storage option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     wiredTiger:
-                                      description: The WiredTiger engine settings.
-                                        (see the storage.wiredTiger option). These
-                                        settings available only on mongod hosts. The
-                                        structure is documented below.
+                                      description: |-
+                                        The WiredTiger engine settings.
+                                        (see the storage.wiredTiger option).
+                                        These settings available only on mongod hosts. The structure is documented below.
                                       items:
                                         properties:
                                           cacheSizeGb:
-                                            description: Defines the maximum size
-                                              of the internal cache that WiredTiger
-                                              will use for all data. For more information,
-                                              see the storage.wiredTiger.engineConfig.cacheSizeGB
+                                            description: |-
+                                              Defines the maximum size of the internal cache that WiredTiger will use for all data.
+                                              For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
                                         type: object
@@ -2123,114 +2211,125 @@ spec:
                           items:
                             properties:
                               auditLog:
-                                description: A set of audit log settings (see the
-                                  auditLog option). The structure is documented below.
-                                  Available only in enterprise edition.
+                                description: |-
+                                  A set of audit log settings
+                                  (see the auditLog option).
+                                  The structure is documented below. Available only in enterprise edition.
                                 items:
                                   properties:
                                     filter:
-                                      description: Configuration of the audit log
-                                        filter in JSON format. For more information
-                                        see auditLog.filter description in the official
-                                        documentation. Available only in enterprise
-                                        edition.
+                                      description: |-
+                                        Configuration of the audit log filter in JSON format.
+                                        For more information see auditLog.filter
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: string
                                     runtimeConfiguration:
-                                      description: Specifies if a node allows runtime
-                                        configuration of audit filters and the auditAuthorizationSuccess
-                                        variable. For more information see auditLog.runtimeConfiguration
-                                        description in the official documentation.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable.
+                                        For more information see auditLog.runtimeConfiguration
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: boolean
                                   type: object
                                 type: array
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               operationProfiling:
-                                description: A set of profiling settings (see the
-                                  operationProfiling option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of profiling settings
+                                  (see the operationProfiling option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     mode:
-                                      description: 'Specifies which operations should
-                                        be profiled. The following profiler levels
-                                        are available: off, slow_op, all. For more
-                                        information, see the operationProfiling.mode
-                                        description in the official documentation.'
+                                      description: |-
+                                        Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
+                                        For more information, see the operationProfiling.mode
+                                        description in the official documentation.
                                       type: string
+                                    slowOpSampleRate:
+                                      description: |-
+                                        The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
+                                        For more information, see the operationProfiling.slowOpSampleRate
+                                        description in the official documentation.
+                                      type: number
                                     slowOpThreshold:
-                                      description: The slow operation time threshold,
-                                        in milliseconds. Operations that run for longer
-                                        than this threshold are considered slow. For
-                                        more information, see the operationProfiling.slowOpThresholdMs
+                                      description: |-
+                                        The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
+                                        For more information, see the operationProfiling.slowOpThresholdMs
                                         description in the official documentation.
                                       type: number
                                   type: object
                                 type: array
                               security:
-                                description: A set of MongoDB Security settings (see
-                                  the security option). The structure is documented
-                                  below. Available only in enterprise edition.
+                                description: |-
+                                  A set of MongoDB Security settings
+                                  (see the security option).
+                                  The structure is documented below. Available only in enterprise edition.
                                 items:
                                   properties:
                                     enableEncryption:
-                                      description: Enables the encryption for the
-                                        WiredTiger storage engine. Can be either true
-                                        or false. For more information see security.enableEncryption
-                                        description in the official documentation.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Enables the encryption for the WiredTiger storage engine. Can be either true or false.
+                                        For more information see security.enableEncryption
+                                        description in the official documentation. Available only in enterprise edition.
                                       type: boolean
                                     kmip:
-                                      description: Configuration of the third party
-                                        key management appliance via the Key Management
-                                        Interoperability Protocol (KMIP) (see Encryption
-                                        tutorial ). Requires enable_encryption to
-                                        be true. The structure is documented below.
-                                        Available only in enterprise edition.
+                                      description: |-
+                                        Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP)
+                                        (see Encryption tutorial ). Requires enable_encryption to be true.
+                                        The structure is documented below. Available only in enterprise edition.
                                       items:
                                         properties:
                                           clientCertificate:
-                                            description: String containing the client
-                                              certificate used for authenticating
-                                              MongoDB to the KMIP server. For more
-                                              information see security.kmip.clientCertificateFile
+                                            description: |-
+                                              String containing the client certificate used for authenticating MongoDB to the KMIP server.
+                                              For more information see security.kmip.clientCertificateFile
                                               description in the official documentation.
                                             type: string
                                           keyIdentifier:
-                                            description: Unique KMIP identifier for
-                                              an existing key within the KMIP server.
+                                            description: |-
+                                              Unique KMIP identifier for an existing key within the KMIP server.
                                               For more information see security.kmip.keyIdentifier
                                               description in the official documentation.
                                             type: string
                                           port:
-                                            description: 'Port number to use to communicate
-                                              with the KMIP server. Default: 5696
+                                            description: |-
+                                              Port number to use to communicate with the KMIP server. Default: 5696
                                               For more information see security.kmip.port
-                                              description in the official documentation.'
+                                              description in the official documentation.
                                             type: number
                                           serverCa:
-                                            description: Path to CA File. Used for
-                                              validating secure client connection
-                                              to KMIP server. For more information
-                                              see security.kmip.serverCAFile description
-                                              in the official documentation.
+                                            description: |-
+                                              Path to CA File. Used for validating secure client connection to KMIP server.
+                                              For more information see security.kmip.serverCAFile
+                                              description in the official documentation.
                                             type: string
                                           serverName:
-                                            description: Hostname or IP address of
-                                              the KMIP server to connect to. For more
-                                              information see security.kmip.serverName
+                                            description: |-
+                                              Hostname or IP address of the KMIP server to connect to.
+                                              For more information see security.kmip.serverName
                                               description in the official documentation.
                                             type: string
                                         type: object
@@ -2238,64 +2337,73 @@ spec:
                                   type: object
                                 type: array
                               setParameter:
-                                description: A set of MongoDB Server Parameters (see
-                                  the setParameter option). The structure is documented
-                                  below.
+                                description: |-
+                                  A set of MongoDB Server Parameters
+                                  (see the setParameter option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     auditAuthorizationSuccess:
-                                      description: Enables the auditing of authorization
-                                        successes. Can be either true or false. For
-                                        more information, see the auditAuthorizationSuccess
+                                      description: |-
+                                        Enables the auditing of authorization successes. Can be either true or false.
+                                        For more information, see the auditAuthorizationSuccess
+                                        description in the official documentation. Available only in enterprise edition.
+                                      type: boolean
+                                    enableFlowControl:
+                                      description: |-
+                                        Enables the flow control. Can be either true or false.
+                                        For more information, see the enableFlowControl
                                         description in the official documentation.
-                                        Available only in enterprise edition.
                                       type: boolean
                                   type: object
                                 type: array
                               storage:
-                                description: A set of storage settings (see the storage
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of storage settings
+                                  (see the storage option).
+                                  The structure is documented below.
                                 items:
                                   properties:
                                     journal:
-                                      description: The durability journal to ensure
-                                        data files remain valid and recoverable. The
-                                        structure is documented below.
+                                      description: |-
+                                        The durability journal to ensure data files remain valid and recoverable.
+                                        The structure is documented below.
                                       items:
                                         properties:
                                           commitInterval:
-                                            description: The maximum amount of time
-                                              in milliseconds that the mongod process
-                                              allows between journal operations. For
-                                              more information, see the storage.journal.commitIntervalMs
+                                            description: |-
+                                              The maximum amount of time in milliseconds that the mongod process allows between journal operations.
+                                              For more information, see the storage.journal.commitIntervalMs
                                               description in the official documentation.
                                             type: number
                                         type: object
                                       type: array
                                     wiredTiger:
-                                      description: The WiredTiger engine settings.
-                                        (see the storage.wiredTiger option). These
-                                        settings available only on mongod hosts. The
-                                        structure is documented below.
+                                      description: |-
+                                        The WiredTiger engine settings.
+                                        (see the storage.wiredTiger option).
+                                        These settings available only on mongod hosts. The structure is documented below.
                                       items:
                                         properties:
                                           blockCompressor:
-                                            description: 'Specifies the default compression
-                                              for collection data. You can override
-                                              this on a per-collection basis when
-                                              creating collections. Available compressors
-                                              are: none, snappy, zlib, zstd. This
-                                              setting available only on mongod hosts.
+                                            description: |-
+                                              Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections.
+                                              Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts.
                                               For more information, see the storage.wiredTiger.collectionConfig.blockCompressor
-                                              description in the official documentation.'
+                                              description in the official documentation.
                                             type: string
                                           cacheSizeGb:
-                                            description: Defines the maximum size
-                                              of the internal cache that WiredTiger
-                                              will use for all data. For more information,
-                                              see the storage.wiredTiger.engineConfig.cacheSizeGB
+                                            description: |-
+                                              Defines the maximum size of the internal cache that WiredTiger will use for all data.
+                                              For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
                                               description in the official documentation.
                                             type: number
+                                          prefixCompression:
+                                            description: |-
+                                              Enables or disables prefix compression for index data. Сan be either true or false.
+                                              For more information, see the storage.wiredTiger.indexConfig.prefixCompression
+                                              description in the official documentation.
+                                            type: boolean
                                         type: object
                                       type: array
                                   type: object
@@ -2308,14 +2416,25 @@ spec:
                           items:
                             properties:
                               net:
-                                description: A set of network settings (see the net
-                                  option). The structure is documented below.
+                                description: |-
+                                  A set of network settings
+                                  (see the net option).
+                                  The structure is documented below.
                                 items:
                                   properties:
+                                    compressors:
+                                      description: |-
+                                        Specifies the default compressor(s) to use for communication between this mongod or mongos.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        For more information, see the net.Compression.Compressors
+                                        description in the official documentation.
+                                      items:
+                                        type: string
+                                      type: array
                                     maxIncomingConnections:
-                                      description: The maximum number of simultaneous
-                                        connections that host will accept. For more
-                                        information, see the net.maxIncomingConnections
+                                      description: |-
+                                        The maximum number of simultaneous connections that host will accept.
+                                        For more information, see the net.maxIncomingConnections
                                         description in the official documentation.
                                       type: number
                                   type: object
@@ -2367,13 +2486,14 @@ spec:
                       be either PRESTABLE or PRODUCTION.
                     type: string
                   folderId:
-                    description: The ID of the folder that the resource belongs to.
-                      If it is not provided, the default provider folder is used.
+                    description: |-
+                      The ID of the folder that the resource belongs to. If it
+                      is not provided, the default provider folder is used.
                     type: string
                   health:
-                    description: Aggregated health of the cluster. Can be either ALIVE,
-                      DEGRADED, DEAD or HEALTH_UNKNOWN. For more information see health
-                      field of JSON representation in the official documentation.
+                    description: |-
+                      Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN.
+                      For more information see health field of JSON representation in the official documentation.
                     type: string
                   host:
                     description: A host of the MongoDB cluster. The structure is documented
@@ -2400,18 +2520,18 @@ spec:
                             Only for sharded cluster.
                           type: string
                         subnetId:
-                          description: The ID of the subnet, to which the host belongs.
-                            The subnet must be a part of the network to which the
-                            cluster belongs.
+                          description: |-
+                            The ID of the subnet, to which the host belongs. The subnet must
+                            be a part of the network to which the cluster belongs.
                           type: string
                         type:
                           description: type of mongo daemon which runs on this host
                             (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
                           type: string
                         zoneId:
-                          description: The availability zone where the MongoDB host
-                            will be created. For more information see the official
-                            documentation.
+                          description: |-
+                            The availability zone where the MongoDB host will be created.
+                            For more information see the official documentation.
                           type: string
                       type: object
                     type: array
@@ -2463,8 +2583,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -2480,8 +2601,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -2497,8 +2619,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -2514,8 +2637,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -2531,8 +2655,9 @@ spec:
                             host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of MongoDB hosts. For more
-                            information see the official documentation.
+                          description: |-
+                            Type of the storage of MongoDB hosts.
+                            For more information see the official documentation.
                           type: string
                         resourcePresetId:
                           type: string
@@ -2566,10 +2691,9 @@ spec:
                     description: MongoDB Cluster mode enabled/disabled.
                     type: boolean
                   status:
-                    description: Status of the cluster. Can be either CREATING, STARTING,
-                      RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
-                      For more information see status field of JSON representation
-                      in the official documentation.
+                    description: |-
+                      Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
+                      For more information see status field of JSON representation in the official documentation.
                     type: string
                   user:
                     description: A user of the MongoDB cluster. The structure is documented
@@ -2605,13 +2729,15 @@ spec:
                   description: A Condition that may apply to a resource.
                   properties:
                     lastTransitionTime:
-                      description: LastTransitionTime is the last time this condition
-                        transitioned from one status to another.
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
                       format: date-time
                       type: string
                     message:
-                      description: A Message containing details about this condition's
-                        last transition from one status to another, if any.
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
                       type: string
                     reason:
                       description: A Reason for this condition's last transition from
@@ -2622,8 +2748,9 @@ spec:
                         False, or Unknown?
                       type: string
                     type:
-                      description: Type of this condition. At most one of each condition
-                        type may apply to a resource at any point in time.
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
                       type: string
                   required:
                   - lastTransitionTime

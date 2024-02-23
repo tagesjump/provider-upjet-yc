@@ -32,12 +32,14 @@ const (
 // Configure adds configurations for storage group.
 func Configure(p *ujconfig.Provider) {
 	p.AddResourceConfigurator("yandex_storage_bucket", func(r *ujconfig.Resource) {
+		r.UseAsync = true
 		r.References["access_key"] = ujconfig.Reference{
 			Type:      fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccountStaticAccessKey"),
 			Extractor: common.ExtractPublicKeyFuncPath,
 		}
 	})
 	p.AddResourceConfigurator("yandex_storage_object", func(r *ujconfig.Resource) {
+		r.UseAsync = true
 		r.References["access_key"] = ujconfig.Reference{
 			Type:      fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccountStaticAccessKey"),
 			Extractor: common.ExtractPublicKeyFuncPath,

@@ -368,6 +368,21 @@ func Configure(p *ujconfig.Provider) {
 			return mongodbConnDetails(attr), nil
 		}
 	})
+
+	p.AddResourceConfigurator("yandex_mdb_mongodb_user", func(r *ujconfig.Resource) {
+		r.References["cluster_id"] = ujconfig.Reference{
+			Type: "MongodbCluster",
+		}
+		r.UseAsync = true
+	})
+
+	p.AddResourceConfigurator("yandex_mdb_mongodb_database", func(r *ujconfig.Resource) {
+		r.References["cluster_id"] = ujconfig.Reference{
+			Type: "MongodbCluster",
+		}
+		r.UseAsync = true
+	})
+
 	p.AddResourceConfigurator("yandex_mdb_elasticsearch_cluster", func(r *ujconfig.Resource) {
 		r.References["network_id"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Network"),

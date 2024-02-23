@@ -1,0 +1,13 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: UserSSHKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/usersshkey
+  labels:
+    testing.upbound.io/example-name: my_user_ssh_key
+  name: my-user-ssh-key
+spec:
+  forProvider:
+    data: ssh_key_data
+    organizationId: some_organization_id
+    subjectId: some_subject_id

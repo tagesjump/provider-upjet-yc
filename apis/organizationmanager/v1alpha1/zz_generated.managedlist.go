@@ -52,6 +52,15 @@ func (l *OrganizationIAMMemberList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this OsLoginSettingsList.
+func (l *OsLoginSettingsList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SAMLFederationList.
 func (l *SAMLFederationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -63,6 +72,15 @@ func (l *SAMLFederationList) GetItems() []resource.Managed {
 
 // GetItems of this SAMLFederationUserAccountList.
 func (l *SAMLFederationUserAccountList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this UserSSHKeyList.
+func (l *UserSSHKeyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

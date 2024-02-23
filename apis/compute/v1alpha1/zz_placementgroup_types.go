@@ -40,6 +40,12 @@ type PlacementGroupInitParameters struct {
 
 	// The name of the Placement Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A number of partitions in the placement strategy with partitions policy of the Placement Group (conflicts with placement_strategy_spread).
+	PlacementStrategyPartitions *float64 `json:"placementStrategyPartitions,omitempty" tf:"placement_strategy_partitions,omitempty"`
+
+	// A placement strategy with spread policy of the Placement Group. Should be true or unset (conflicts with placement_strategy_partitions).
+	PlacementStrategySpread *bool `json:"placementStrategySpread,omitempty" tf:"placement_strategy_spread,omitempty"`
 }
 
 type PlacementGroupObservation struct {
@@ -59,6 +65,12 @@ type PlacementGroupObservation struct {
 
 	// The name of the Placement Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A number of partitions in the placement strategy with partitions policy of the Placement Group (conflicts with placement_strategy_spread).
+	PlacementStrategyPartitions *float64 `json:"placementStrategyPartitions,omitempty" tf:"placement_strategy_partitions,omitempty"`
+
+	// A placement strategy with spread policy of the Placement Group. Should be true or unset (conflicts with placement_strategy_partitions).
+	PlacementStrategySpread *bool `json:"placementStrategySpread,omitempty" tf:"placement_strategy_spread,omitempty"`
 }
 
 type PlacementGroupParameters struct {
@@ -88,6 +100,14 @@ type PlacementGroupParameters struct {
 	// The name of the Placement Group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A number of partitions in the placement strategy with partitions policy of the Placement Group (conflicts with placement_strategy_spread).
+	// +kubebuilder:validation:Optional
+	PlacementStrategyPartitions *float64 `json:"placementStrategyPartitions,omitempty" tf:"placement_strategy_partitions,omitempty"`
+
+	// A placement strategy with spread policy of the Placement Group. Should be true or unset (conflicts with placement_strategy_partitions).
+	// +kubebuilder:validation:Optional
+	PlacementStrategySpread *bool `json:"placementStrategySpread,omitempty" tf:"placement_strategy_spread,omitempty"`
 }
 
 // PlacementGroupSpec defines the desired state of PlacementGroup
@@ -114,13 +134,14 @@ type PlacementGroupStatus struct {
 }
 
 // +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 // PlacementGroup is the Schema for the PlacementGroups API. Manages a Placement group resource.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
-// +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,yandex-cloud}
 type PlacementGroup struct {
 	metav1.TypeMeta   `json:",inline"`
