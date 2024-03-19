@@ -1,7 +1,3 @@
-/*
-Copyright 2022 Upbound Inc.
-*/
-
 package config
 
 import (
@@ -101,6 +97,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_lb_target_group":                                  config.IdentifierFromProvider,
 	"yandex_dns_recordset":                                    config.IdentifierFromProvider,
 	"yandex_dns_zone":                                         config.IdentifierFromProvider,
+	"yandex_dns_zone_iam_binding":                             config.IdentifierFromProvider,
 	"yandex_logging_group":                                    config.IdentifierFromProvider,
 	"yandex_message_queue":                                    config.IdentifierFromProvider,
 	"yandex_ydb_database_dedicated":                           config.IdentifierFromProvider,

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -188,6 +188,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                 type: object
               initProvider:
                 description: |-
@@ -317,6 +319,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -549,6 +553,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                   status:
                     description: Status of the Yandex Database serverless cluster.
                     type: string

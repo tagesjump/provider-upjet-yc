@@ -110,10 +110,12 @@ resources:
             - name: tf-router
               manifest: |-
                 {
-                  "labels": {
-                    "empty-label": "",
-                    "tf-label": "tf-label-value"
-                  },
+                  "labels": [
+                    {
+                      "empty-label": "s",
+                      "tf-label": "tf-label-value"
+                    }
+                  ],
                   "name": "my-http-router"
                 }
         argumentDocs:
@@ -232,7 +234,7 @@ resources:
             http2_options.max_concurrent_streams: '- (Optional) Maximum number of concurrent streams.'
             id: '- The ID of the Load Balancer.'
             internal_ipv4_address.address: '- (Optional) Provided by the client or computed automatically.'
-            internal_ipv4_address.subnet_id: '- (Optional) Provided by the client or computed automatically.'
+            internal_ipv4_address.subnet_id: '- (Required) Provided by the client or computed automatically.'
             labels: '- (Optional) Labels to assign to this Load Balancer. A list of key/value pairs.'
             listener: '- (Optional) List of listeners for the Load Balancer. The structure is documented below.'
             listener.endpoint: '- (Required) Network endpoints (addresses and ports) of the listener. The structure is documented below.'
@@ -1296,6 +1298,7 @@ resources:
             resources: '- (Required) Compute resources that are allocated for the instance. The structure is documented below.'
             resources.core_fraction: '- (Optional) If provided, specifies baseline performance for a core as a percent.'
             resources.cores: '- (Required) CPU cores for the instance.'
+            resources.gpus: '- (Optional) If provided, specifies the number of GPU devices for the instance'
             resources.memory: '- (Required) Memory size in GB.'
             scheduling_policy: '- (Optional) Scheduling policy configuration. The structure is documented below.'
             scheduling_policy.preemptible: '- (Optional) Specifies if the instance is preemptible. Defaults to false.'
@@ -1513,6 +1516,7 @@ resources:
                 It may also contain another placeholders, see metadata doc for full list.
             instance_template.labels: '- (Optional) A set of key/value label pairs to assign to the instance.'
             instance_template.metadata: '- (Optional) A set of metadata key/value pairs to make available from within the instance.'
+            instance_template.metadata_options: '- (Optional) Options allow user to configure access to managed instances metadata'
             instance_template.name: |-
                 - (Optional) Name template of the instance.
                 In order to be unique it must contain at least one of instance unique placeholders:
@@ -2467,6 +2471,7 @@ resources:
             parser.json_parser.data_schema.fields.type: '- (Required) Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.'
             parser.json_parser.data_schema.json_fields: '- Description of the data schema as JSON specification.'
             parser.json_parser.null_keys_allowed: '- Allow null keys. If false - null keys will be putted to unparsed data'
+            parser.json_parser.unescape_string_values: '- Allow unescape string values.'
             parser.tskv_parser: '- Parse data if tskv format.'
             postgres_target.connection: '- (Required) Connection settings. The structure is documented below.'
             postgres_target.connection.mdb_cluster_id: '- Identifier of the Managed PostgreSQL cluster.'
@@ -2506,6 +2511,8 @@ resources:
             settings.postgres_target: '- (Optional) Settings specific to the PostgreSQL target endpoint.'
             settings.ydb_source: '- (Optional) Settings specific to the YDB source endpoint.'
             settings.ydb_target: '- (Optional) Settings specific to the YDB target endpoint.'
+            settings.yds_source: '- (Optional) Settings specific to the YDS source endpoint.'
+            settings.yds_target: '- (Optional) Settings specific to the YDS target endpoint.'
             sharding.column_value_hash: '- Shard data by the hash value of the specified column. The structure is documented below.'
             sharding.column_value_hash.column_name: '- The name of the column to calculate hash from.'
             sharding.transfer_id: '- Shard data by ID of the transfer.'
@@ -2516,6 +2523,7 @@ resources:
             topic_settings.topic.save_tx_order: '- Not to split events queue into separate per-table queues.'
             topic_settings.topic.topic_name: '- Full topic name'
             topic_settings.topic_prefix: '- Topic name prefix. Messages will be sent to topic with name <topic_prefix>..<table_name>.'
+            ydb_source.changefeed_custom_name: -- (Optional) Custom name for changefeed.
             ydb_source.database: '-- (Required) Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
             ydb_source.instance: '-- (Optional) Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
             ydb_source.paths: -- (Optional) A list of paths which should be uploaded. When not specified, all available tables are uploaded.
@@ -2527,6 +2535,7 @@ resources:
             ydb_target.cleanup_policy: -- (Optional) How to clean collections when activating the transfer. One of "YDB_CLEANUP_POLICY_DISABLED" or "YDB_CLEANUP_POLICY_DROP".
             ydb_target.connection: '- (Required) Connection settings.'
             ydb_target.database: '-- (Required) Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+            ydb_target.default_compression: -- (Optional) Compression that will be used for default columns family on YDB table creation One of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED", "YDB_DEFAULT_COMPRESSION_LZ4".
             ydb_target.instance: '-- (Optional) Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
             ydb_target.is_table_column_oriented: -- (Optional) Whether a column-oriented (i.e. OLAP) tables should be created. Default is false (create row-oriented OLTP tables).
             ydb_target.path: -- (Optional) A path where resulting tables are stored.
@@ -2535,6 +2544,24 @@ resources:
             ydb_target.service_account_id: -- (Optional) Service account ID for interaction with database.
             ydb_target.subnet_id: -- (Optional) Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
             ydb_target.topic_settings: '- (Required) Target topic settings.'
+            yds_source.allow_ttl_rewind: -- (Optional) Should continue working, if consumer read lag exceed TTL of topic.
+            yds_source.consumer: -- (Optional) Consumer.
+            yds_source.database: -- (Required) Database.
+            yds_source.endpoint: -- (Optional) YDS Endpoint.
+            yds_source.parser: -- (Optional) Data parsing rules.
+            yds_source.security_groups: -- (Optional) List of security groups that the transfer associated with this endpoint should use.
+            yds_source.service_account_id: -- (Required) Service account ID for interaction with database.
+            yds_source.stream: -- (Optional) Stream.
+            yds_source.subnet_id: -- (Optional) Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+            yds_source.supported_codecs: -- (Optional) List of supported compression codec.
+            yds_target.database: -- (Required) Database.
+            yds_target.endpoint: -- (Optional) YDS Endpoint.
+            yds_target.save_tx_order: -- (Optional) Save transaction order
+            yds_target.security_groups: -- (Optional) List of security groups that the transfer associated with this endpoint should use.
+            yds_target.serializer: -- (Optional) Data serialization format.
+            yds_target.service_account_id: -- (Required) Service account ID for interaction with database.
+            yds_target.stream: -- (Optional) Stream.
+            yds_target.subnet_id: -- (Optional) Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
         importStatements: []
     yandex_datatransfer_transfer:
         subCategory: ""
@@ -2547,8 +2574,47 @@ resources:
                 {
                   "folder_id": "some_folder_id",
                   "name": "pgpg",
+                  "runtime": [
+                    {
+                      "yc_runtime": [
+                        {
+                          "job_count": 1,
+                          "upload_shard_params": [
+                            {
+                              "job_count": 4,
+                              "process_count": 1
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
                   "source_id": "${yandex_datatransfer_endpoint.pg_source.id}",
                   "target_id": "${yandex_datatransfer_endpoint.pg_target.id}",
+                  "transformation": [
+                    {
+                      "transformers": [
+                        {
+                          "one": {
+                            "of": {
+                              "transfomer": [
+                                {}
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "one": {
+                            "of": {
+                              "transfomers": [
+                                {}
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
                   "type": "SNAPSHOT_AND_INCREMENT"
                 }
               references:
@@ -2613,7 +2679,15 @@ resources:
                       ]
                     }
         argumentDocs:
+            columns.exclude_columns: '- (Optional) List of columns that will be excluded to transfer.'
+            columns.include_columns: '- (Optional) List of columns that will be included to transfer.'
+            convert_to_string.columns: '- (Optional) List of the columns to transfer to the target tables using lists of included and excluded columns (see block documentation below).'
+            convert_to_string.tables: '- (Optional) Table filter (see block documentation below).'
             description: '- (Optional) Arbitrary description text for the transfer.'
+            filter_columns.columns: '- (Optional) List of the columns to transfer to the target tables using lists of included and excluded columns (see block documentation below).'
+            filter_columns.tables: '- (Optional) Table filter (see block documentation below).'
+            filter_rows.filter: '- (Optional) Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. Details here: https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#append-only-sources'
+            filter_rows.tables: '- (Optional) Table filter (see block documentation below).'
             folder_id: '- (Optional) ID of the folder to create the transfer in. If it is not provided, the default provider folder is used.'
             id: '- (Computed) Identifier of a new Data Transfer transfer.'
             labels: '- (Optional) A set of key/value label pairs to assign to the Data Transfer transfer.'
@@ -2622,8 +2696,42 @@ resources:
                 - (Optional) Activation action on create a new incremental transfer.
                 It is not part of the transfer parameter and is used only on create.
                 One of "sync_activate", "async_activate", "dont_activate". The default is "sync_activate".
+            rename_tables.rename_tables: '- (Optional) List of renaming rules.'
+            rename_tables.rename_tables.new_name: '- (Optional) Specify the new names for this table in the target.'
+            rename_tables.rename_tables.original_name: '- (Optional) Specify the current names of the table in the source.'
+            replace_primary_key.keys: '- (Optional) List of columns to be used as primary keys.'
+            replace_primary_key.tables: '- (Optional) Table filter (see block documentation below).'
+            runtime: '- (Optional) Runtime parameters for the transfer.'
+            runtime.yc_runtime: '- (Optional) YC Runtime parameters for the transfer.'
+            runtime.yc_runtime.job_count: '- (Optional) Number of workers in parallel replication.'
+            runtime.yc_runtime.upload_shard_params: '- (Optional) Parallel snapshot parameters.'
+            runtime.yc_runtime.upload_shard_params.job_count: '- (Optional) Number of workers.'
+            runtime.yc_runtime.upload_shard_params.process_count: '- (Optional) Number of threads.'
+            sharder_transformer.columns: '- (Optional) List of the columns to transfer to the target tables using lists of included and excluded columns (see block documentation below).'
+            sharder_transformer.shards_count: '- (Optional) Number of shards.'
+            sharder_transformer.tables: '- (Optional) Table filter (see block documentation below).'
             source_id: '- (Optional) ID of the source endpoint for the transfer.'
+            table_splitter_transformer.columns: '- (Optional) List of strings that specify the columns in the tables to be partitioned.'
+            table_splitter_transformer.splitter: '- (Optional) Specify the split string to be used for merging components in a new table name.'
+            table_splitter_transformer.tables: '- (Optional) Table filter (see block documentation below).'
+            tables.exclude_tables: '- (Optional) List of tables that will be excluded to transfer.'
+            tables.include_tables: '- (Optional) List of tables that will be included to transfer.'
             target_id: '- (Optional) ID of the target endpoint for the transfer.'
+            transformation: '- (Optional) Transformation for the transfer.'
+            transformation.transformers: '- (Optional) A list of transformers. You can specify exactly 1 transformer in each element of list.'
+            transformation.transformers.convert_to_string: '- (Optional) Convert column values to strings.'
+            transformation.transformers.filter_columns: '- (Optional) Set up a list of table columns to transfer.'
+            transformation.transformers.filter_rows: '- (Optional) This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed.'
+            transformation.transformers.mask_field: '- (Optional) Mask field transformer allows you to hash data.'
+            transformation.transformers.mask_field.columns: '- (Optional) List of strings that specify the name of the column for data masking (a regular expression).'
+            transformation.transformers.mask_field.function: '- (Optional) Mask function.'
+            transformation.transformers.mask_field.function.mask_function_hash: '- (Optional) Hash mask function.'
+            transformation.transformers.mask_field.function.mask_function_hash.user_defined_salt: '- (Optional) This string will be used in the HMAC(sha256, salt) function applied to the column data.'
+            transformation.transformers.mask_field.tables: '- (Optional) Table filter.'
+            transformation.transformers.rename_tables: '- (Optional) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target.'
+            transformation.transformers.replace_primary_key: '- (Optional) Override primary keys.'
+            transformation.transformers.sharder_transformer: '- (Optional) Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard.'
+            transformation.transformers.table_splitter_transformer: '- (Optional) Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data.'
             type: '- (Required) Type of the transfer. One of "SNAPSHOT_ONLY", "INCREMENT_ONLY", "SNAPSHOT_AND_INCREMENT".'
             warning: '- (Computed) Error description if transfer has any errors.'
         importStatements: []
@@ -2738,6 +2846,36 @@ resources:
             private_networks: '- (Optional) For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.'
             public: '- (Optional) The zone''s visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources.'
             zone: '- (Required) The DNS name of this zone, e.g. "example.com.". Must ends with dot.'
+        importStatements: []
+    yandex_dns_zone_iam_binding:
+        subCategory: ""
+        description: Allows management of a single IAM binding for a
+        name: yandex_dns_zone_iam_binding
+        title: yandex_dns_zone_iam_binding
+        examples:
+            - name: viewer
+              manifest: |-
+                {
+                  "dns_zone_id": "${yandex_dns_zone.zone1.id}",
+                  "members": [
+                    "userAccount:foo_user_id"
+                  ],
+                  "role": "dns.viewer"
+                }
+              references:
+                dns_zone_id: yandex_dns_zone.zone1.id
+              dependencies:
+                yandex_dns_zone.zone1: |-
+                    {
+                      "name": "my-private-zone",
+                      "zone": "example.com."
+                    }
+        argumentDocs:
+            dns_zone_id: '- (Required) The DNS Zone ID to apply a binding to.'
+            members: |-
+                - (Required) Identities that will be granted the privilege in role.
+                Each entry can have one of the following values:
+            role: '- (Required) The role that should be applied. See roles.'
         importStatements: []
     yandex_function:
         subCategory: ""
@@ -10057,6 +10195,93 @@ resources:
                 - API endpoint of the Yandex Database serverless cluster.
                 Useful for SDK configuration.
             ydb_full_endpoint: '- Full endpoint of the Yandex Database serverless cluster.'
+        importStatements: []
+    yandex_ydb_table:
+        subCategory: ""
+        description: Manages Yandex Database dedicated cluster.
+        name: yandex_ydb_table
+        title: yandex_ydb_table
+        examples:
+            - name: test_table
+              manifest: |-
+                {
+                  "column": [
+                    {
+                      "name": "a",
+                      "not_null": true,
+                      "type": "Utf8"
+                    },
+                    {
+                      "name": "b",
+                      "not_null": true,
+                      "type": "Uint32"
+                    },
+                    {
+                      "name": "c",
+                      "not_null": false,
+                      "type": "Int32"
+                    },
+                    {
+                      "name": "d",
+                      "type": "Timestamp"
+                    }
+                  ],
+                  "connection_string": "${yandex_ydb_database_serverless.database1.ydb_full_endpoint}",
+                  "path": "test_dir/test_table_3_col",
+                  "primary_key": [
+                    "a",
+                    "b”]"
+                  ]
+                }
+              references:
+                connection_string: yandex_ydb_database_serverless.database1.ydb_full_endpoint
+        argumentDocs:
+            attributes: "- (Optional)\tA map of table attributes."
+            column: |-
+                - (Required)	A list of column configuration options.
+                The structure is documented below.
+            column.family: "- (Optional)\tColumn group"
+            column.name: '- (Required) Column name'
+            column.not_null: "- (Optional) A column cannot have the NULL data type. (\tDefault: false\t)"
+            column.type: '- (Required) Column data type. YQL data types are used.'
+            connection_string: '- (Required) Connection string for database.'
+            family: |-
+                - (Optional)	A list of column group configuration options.
+                The structure is documented below.
+            family.compression: '- (Optional) Data codec (acceptable values: off, lz4).'
+            family.data: '- (Optional) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).'
+            family.name: '- (Required) Column family name'
+            key_bloom_filter: '- (Optional) Use the Bloom filter for the primary key'
+            partitioning_settings: |-
+                - (Optional) Table partiotioning settings
+                The structure is documented below.
+            path: '- (Required) Table path.'
+            primary_key: '- (Required) A list of table columns to be uased as primary key.'
+            read_replicas_settings: "- (Optional)\tRead replication settings"
+            ttl: |-
+                - (Optional)	ttl		TTL settings
+                The structure is documented below.
+            ttl.column_name: '- (Required) Column name for TTL'
+            ttl.expire_interval: '- (Required) Interval in the ISO 8601 format'
+        importStatements: []
+    yandex_ydb_table_changefeed:
+        subCategory: ""
+        description: Manages Yandex Database dedicated cluster.
+        name: yandex_ydb_table_changefeed
+        title: yandex_ydb_table_changefeed
+        argumentDocs:
+            connection_string: '- (Required) Connection string, conflicts with table_id'
+            consumer: '- (Optional) Changefeed consumers - named entities for reading data from the topic.'
+            database_id: '- (Required) Database ID, conflicts with table_path and connection_string'
+            format: ': Changefeed format. Only JSON format is available.'
+            mode: ': Changefeed operating mode. The available changefeed operating modes are presented in the documentation.'
+            name: ': Changefeed name.'
+            retention_period: '- (Optional) Time of data retention in the topic, ISO 8601 format'
+            starting_message_timestamp_ms: '- (Optional) Timestamp in the UNIX timestamp format, from which the consumer will start reading data'
+            supported_codecs: '- (Optional) Supported data encodings'
+            table_id: ': ID of the table for which we create the changefeed.'
+            table_path: '- (Required) Table path'
+            virtual_timestamps: '- (Optional) Use virtual timestamps'
         importStatements: []
     yandex_ydb_topic:
         subCategory: ""

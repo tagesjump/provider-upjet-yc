@@ -12,12 +12,28 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     name: pgpg
+    runtime:
+    - ycRuntime:
+      - jobCount: 1
+        uploadShardParams:
+        - jobCount: 4
+          processCount: 1
     sourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pg_source
     targetIdSelector:
       matchLabels:
         testing.upbound.io/example-name: pg_target
+    transformation:
+    - transformers:
+      - one:
+          of:
+            transfomer:
+            - {}
+      - one:
+          of:
+            transfomers:
+            - {}
     type: SNAPSHOT_AND_INCREMENT
 
 ---
