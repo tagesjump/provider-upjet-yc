@@ -300,6 +300,8 @@ spec:
                           type: array
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                   storageConfig:
                     description: |-
                       A list of storage configuration options for the Yandex Database cluster.
@@ -643,6 +645,8 @@ spec:
                           type: array
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                   storageConfig:
                     description: |-
                       A list of storage configuration options for the Yandex Database cluster.
@@ -1023,6 +1027,8 @@ spec:
                           type: array
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                   status:
                     description: Status of the Yandex Database cluster.
                     type: string

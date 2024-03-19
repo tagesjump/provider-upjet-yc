@@ -172,6 +172,33 @@ spec:
                       It is not part of the transfer parameter and is used only on create.
                       One of "sync_activate", "async_activate", "dont_activate". The default is "sync_activate".
                     type: string
+                  runtime:
+                    description: Runtime parameters for the transfer.
+                    items:
+                      properties:
+                        ycRuntime:
+                          description: YC Runtime parameters for the transfer.
+                          items:
+                            properties:
+                              jobCount:
+                                description: Number of workers in parallel replication.
+                                type: number
+                              uploadShardParams:
+                                description: Parallel snapshot parameters.
+                                items:
+                                  properties:
+                                    jobCount:
+                                      description: Number of workers.
+                                      type: number
+                                    processCount:
+                                      description: Number of threads.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   sourceId:
                     description: ID of the source endpoint for the transfer.
                     type: string
@@ -326,6 +353,348 @@ spec:
                             type: string
                         type: object
                     type: object
+                  transformation:
+                    description: Transformation for the transfer.
+                    items:
+                      properties:
+                        transformers:
+                          description: A list of transformers. You can specify exactly
+                            1 transformer in each element of list.
+                          items:
+                            properties:
+                              convertToString:
+                                description: Convert column values to strings.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              filterColumns:
+                                description: Set up a list of table columns to transfer.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              filterRows:
+                                description: This filter only applies to transfers
+                                  with queues (Apache Kafka®) as a data source. When
+                                  running a transfer, only the strings meeting the
+                                  specified criteria remain in a changefeed.
+                                items:
+                                  properties:
+                                    filter:
+                                      description: 'Filtering criterion. This can
+                                        be comparison operators for numeric, string,
+                                        and Boolean values, comparison to NULL, and
+                                        checking whether a substring is part of a
+                                        string. Details here: https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#append-only-sources'
+                                      type: string
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              maskField:
+                                description: Mask field transformer allows you to
+                                  hash data.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        type: string
+                                      type: array
+                                    function:
+                                      description: Mask function.
+                                      items:
+                                        properties:
+                                          maskFunctionHash:
+                                            description: Hash mask function.
+                                            items:
+                                              properties:
+                                                userDefinedSalt:
+                                                  description: This string will be
+                                                    used in the HMAC(sha256, salt)
+                                                    function applied to the column
+                                                    data.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              renameTables:
+                                description: Set rules for renaming tables by specifying
+                                  the current names of the tables in the source and
+                                  new names for these tables in the target.
+                                items:
+                                  properties:
+                                    renameTables:
+                                      description: Set rules for renaming tables by
+                                        specifying the current names of the tables
+                                        in the source and new names for these tables
+                                        in the target.
+                                      items:
+                                        properties:
+                                          newName:
+                                            description: Specify the new names for
+                                              this table in the target.
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the transfer.
+                                                  type: string
+                                                nameSpace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          originalName:
+                                            description: Specify the current names
+                                              of the table in the source.
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the transfer.
+                                                  type: string
+                                                nameSpace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              replacePrimaryKey:
+                                description: Override primary keys.
+                                items:
+                                  properties:
+                                    keys:
+                                      description: List of columns to be used as primary
+                                        keys.
+                                      items:
+                                        type: string
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              sharderTransformer:
+                                description: Set the number of shards for particular
+                                  tables and a list of columns whose values will be
+                                  used for calculating a hash to determine a shard.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    shardsCount:
+                                      description: Number of shards.
+                                      type: number
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              tableSplitterTransformer:
+                                description: Splits the X table into multiple tables
+                                  (X_1, X_2, ..., X_n) based on data.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        type: string
+                                      type: array
+                                    splitter:
+                                      description: Specify the split string to be
+                                        used for merging components in a new table
+                                        name.
+                                      type: string
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   type:
                     description: Type of the transfer. One of "SNAPSHOT_ONLY", "INCREMENT_ONLY",
                       "SNAPSHOT_AND_INCREMENT".
@@ -443,6 +812,33 @@ spec:
                       It is not part of the transfer parameter and is used only on create.
                       One of "sync_activate", "async_activate", "dont_activate". The default is "sync_activate".
                     type: string
+                  runtime:
+                    description: Runtime parameters for the transfer.
+                    items:
+                      properties:
+                        ycRuntime:
+                          description: YC Runtime parameters for the transfer.
+                          items:
+                            properties:
+                              jobCount:
+                                description: Number of workers in parallel replication.
+                                type: number
+                              uploadShardParams:
+                                description: Parallel snapshot parameters.
+                                items:
+                                  properties:
+                                    jobCount:
+                                      description: Number of workers.
+                                      type: number
+                                    processCount:
+                                      description: Number of threads.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   sourceId:
                     description: ID of the source endpoint for the transfer.
                     type: string
@@ -597,6 +993,348 @@ spec:
                             type: string
                         type: object
                     type: object
+                  transformation:
+                    description: Transformation for the transfer.
+                    items:
+                      properties:
+                        transformers:
+                          description: A list of transformers. You can specify exactly
+                            1 transformer in each element of list.
+                          items:
+                            properties:
+                              convertToString:
+                                description: Convert column values to strings.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              filterColumns:
+                                description: Set up a list of table columns to transfer.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              filterRows:
+                                description: This filter only applies to transfers
+                                  with queues (Apache Kafka®) as a data source. When
+                                  running a transfer, only the strings meeting the
+                                  specified criteria remain in a changefeed.
+                                items:
+                                  properties:
+                                    filter:
+                                      description: 'Filtering criterion. This can
+                                        be comparison operators for numeric, string,
+                                        and Boolean values, comparison to NULL, and
+                                        checking whether a substring is part of a
+                                        string. Details here: https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#append-only-sources'
+                                      type: string
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              maskField:
+                                description: Mask field transformer allows you to
+                                  hash data.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        type: string
+                                      type: array
+                                    function:
+                                      description: Mask function.
+                                      items:
+                                        properties:
+                                          maskFunctionHash:
+                                            description: Hash mask function.
+                                            items:
+                                              properties:
+                                                userDefinedSalt:
+                                                  description: This string will be
+                                                    used in the HMAC(sha256, salt)
+                                                    function applied to the column
+                                                    data.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              renameTables:
+                                description: Set rules for renaming tables by specifying
+                                  the current names of the tables in the source and
+                                  new names for these tables in the target.
+                                items:
+                                  properties:
+                                    renameTables:
+                                      description: Set rules for renaming tables by
+                                        specifying the current names of the tables
+                                        in the source and new names for these tables
+                                        in the target.
+                                      items:
+                                        properties:
+                                          newName:
+                                            description: Specify the new names for
+                                              this table in the target.
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the transfer.
+                                                  type: string
+                                                nameSpace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          originalName:
+                                            description: Specify the current names
+                                              of the table in the source.
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the transfer.
+                                                  type: string
+                                                nameSpace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              replacePrimaryKey:
+                                description: Override primary keys.
+                                items:
+                                  properties:
+                                    keys:
+                                      description: List of columns to be used as primary
+                                        keys.
+                                      items:
+                                        type: string
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              sharderTransformer:
+                                description: Set the number of shards for particular
+                                  tables and a list of columns whose values will be
+                                  used for calculating a hash to determine a shard.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    shardsCount:
+                                      description: Number of shards.
+                                      type: number
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              tableSplitterTransformer:
+                                description: Splits the X table into multiple tables
+                                  (X_1, X_2, ..., X_n) based on data.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        type: string
+                                      type: array
+                                    splitter:
+                                      description: Specify the split string to be
+                                        used for merging components in a new table
+                                        name.
+                                      type: string
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   type:
                     description: Type of the transfer. One of "SNAPSHOT_ONLY", "INCREMENT_ONLY",
                       "SNAPSHOT_AND_INCREMENT".
@@ -800,12 +1538,381 @@ spec:
                       It is not part of the transfer parameter and is used only on create.
                       One of "sync_activate", "async_activate", "dont_activate". The default is "sync_activate".
                     type: string
+                  runtime:
+                    description: Runtime parameters for the transfer.
+                    items:
+                      properties:
+                        ycRuntime:
+                          description: YC Runtime parameters for the transfer.
+                          items:
+                            properties:
+                              jobCount:
+                                description: Number of workers in parallel replication.
+                                type: number
+                              uploadShardParams:
+                                description: Parallel snapshot parameters.
+                                items:
+                                  properties:
+                                    jobCount:
+                                      description: Number of workers.
+                                      type: number
+                                    processCount:
+                                      description: Number of threads.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   sourceId:
                     description: ID of the source endpoint for the transfer.
                     type: string
                   targetId:
                     description: ID of the target endpoint for the transfer.
                     type: string
+                  transformation:
+                    description: Transformation for the transfer.
+                    items:
+                      properties:
+                        transformers:
+                          description: A list of transformers. You can specify exactly
+                            1 transformer in each element of list.
+                          items:
+                            properties:
+                              convertToString:
+                                description: Convert column values to strings.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              filterColumns:
+                                description: Set up a list of table columns to transfer.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              filterRows:
+                                description: This filter only applies to transfers
+                                  with queues (Apache Kafka®) as a data source. When
+                                  running a transfer, only the strings meeting the
+                                  specified criteria remain in a changefeed.
+                                items:
+                                  properties:
+                                    filter:
+                                      description: 'Filtering criterion. This can
+                                        be comparison operators for numeric, string,
+                                        and Boolean values, comparison to NULL, and
+                                        checking whether a substring is part of a
+                                        string. Details here: https://cloud.yandex.com/en/docs/data-transfer/concepts/data-transformation#append-only-sources'
+                                      type: string
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              maskField:
+                                description: Mask field transformer allows you to
+                                  hash data.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        type: string
+                                      type: array
+                                    function:
+                                      description: Mask function.
+                                      items:
+                                        properties:
+                                          maskFunctionHash:
+                                            description: Hash mask function.
+                                            items:
+                                              properties:
+                                                userDefinedSalt:
+                                                  description: This string will be
+                                                    used in the HMAC(sha256, salt)
+                                                    function applied to the column
+                                                    data.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              renameTables:
+                                description: Set rules for renaming tables by specifying
+                                  the current names of the tables in the source and
+                                  new names for these tables in the target.
+                                items:
+                                  properties:
+                                    renameTables:
+                                      description: Set rules for renaming tables by
+                                        specifying the current names of the tables
+                                        in the source and new names for these tables
+                                        in the target.
+                                      items:
+                                        properties:
+                                          newName:
+                                            description: Specify the new names for
+                                              this table in the target.
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the transfer.
+                                                  type: string
+                                                nameSpace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          originalName:
+                                            description: Specify the current names
+                                              of the table in the source.
+                                            items:
+                                              properties:
+                                                name:
+                                                  description: Name of the transfer.
+                                                  type: string
+                                                nameSpace:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              replacePrimaryKey:
+                                description: Override primary keys.
+                                items:
+                                  properties:
+                                    keys:
+                                      description: List of columns to be used as primary
+                                        keys.
+                                      items:
+                                        type: string
+                                      type: array
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              sharderTransformer:
+                                description: Set the number of shards for particular
+                                  tables and a list of columns whose values will be
+                                  used for calculating a hash to determine a shard.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        properties:
+                                          excludeColumns:
+                                            description: List of columns that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeColumns:
+                                            description: List of columns that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    shardsCount:
+                                      description: Number of shards.
+                                      type: number
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              tableSplitterTransformer:
+                                description: Splits the X table into multiple tables
+                                  (X_1, X_2, ..., X_n) based on data.
+                                items:
+                                  properties:
+                                    columns:
+                                      description: List of strings that specify the
+                                        name of the column for data masking (a regular
+                                        expression).
+                                      items:
+                                        type: string
+                                      type: array
+                                    splitter:
+                                      description: Specify the split string to be
+                                        used for merging components in a new table
+                                        name.
+                                      type: string
+                                    tables:
+                                      description: Table filter.
+                                      items:
+                                        properties:
+                                          excludeTables:
+                                            description: List of tables that will
+                                              be excluded to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                          includeTables:
+                                            description: List of tables that will
+                                              be included to transfer.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   type:
                     description: Type of the transfer. One of "SNAPSHOT_ONLY", "INCREMENT_ONLY",
                       "SNAPSHOT_AND_INCREMENT".

@@ -75,6 +75,8 @@ type DatabaseDedicatedInitParameters struct {
 	// The structure is documented below.
 	ScalePolicy []ScalePolicyInitParameters `json:"scalePolicy,omitempty" tf:"scale_policy,omitempty"`
 
+	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
+
 	// A list of storage configuration options for the Yandex Database cluster.
 	// The structure is documented below.
 	StorageConfig []StorageConfigInitParameters `json:"storageConfig,omitempty" tf:"storage_config,omitempty"`
@@ -142,6 +144,8 @@ type DatabaseDedicatedObservation struct {
 	// Scaling policy for the Yandex Database cluster.
 	// The structure is documented below.
 	ScalePolicy []ScalePolicyObservation `json:"scalePolicy,omitempty" tf:"scale_policy,omitempty"`
+
+	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 
 	// Status of the Yandex Database cluster.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
@@ -234,6 +238,9 @@ type DatabaseDedicatedParameters struct {
 	// The structure is documented below.
 	// +kubebuilder:validation:Optional
 	ScalePolicy []ScalePolicyParameters `json:"scalePolicy,omitempty" tf:"scale_policy,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 
 	// A list of storage configuration options for the Yandex Database cluster.
 	// The structure is documented below.

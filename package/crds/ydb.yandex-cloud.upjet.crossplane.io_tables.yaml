@@ -34,7 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Table is the Schema for the Tables API. <no value>
+        description: Table is the Schema for the Tables API. Manages Yandex Database
+          dedicated cluster.
         properties:
           apiVersion:
             description: |-
@@ -75,37 +76,59 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
+                    description: A map of table attributes.
                     type: object
                     x-kubernetes-map-type: granular
                   column:
+                    description: |-
+                      A list of column configuration options.
+                      The structure is documented below.
                     items:
                       properties:
                         family:
+                          description: Column group
                           type: string
                         name:
+                          description: Column name
                           type: string
                         notNull:
+                          description: "A column cannot have the NULL data type. (\tDefault:
+                            false\t)"
                           type: boolean
                         type:
+                          description: Column data type. YQL data types are used.
                           type: string
                       type: object
                     type: array
                   connectionString:
+                    description: Connection string for database.
                     type: string
                   family:
+                    description: |-
+                      A list of column group configuration options.
+                      The structure is documented below.
                     items:
                       properties:
                         compression:
+                          description: 'Data codec (acceptable values: off, lz4).'
                           type: string
                         data:
+                          description: 'Type of storage device for column data in
+                            this group (acceptable values: ssd, rot (from HDD spindle
+                            rotation)).'
                           type: string
                         name:
+                          description: Column family name
                           type: string
                       type: object
                     type: array
                   keyBloomFilter:
+                    description: Use the Bloom filter for the primary key
                     type: boolean
                   partitioningSettings:
+                    description: |-
+                      Table partiotioning settings
+                      The structure is documented below.
                     items:
                       properties:
                         autoPartitioningByLoad:
@@ -132,19 +155,26 @@ spec:
                       type: object
                     type: array
                   path:
+                    description: Table path.
                     type: string
                   primaryKey:
+                    description: A list of table columns to be uased as primary key.
                     items:
                       type: string
                     type: array
                   readReplicasSettings:
+                    description: Read replication settings
                     type: string
                   ttl:
+                    description: "ttl\t\tTTL settings\nThe structure is documented
+                      below."
                     items:
                       properties:
                         columnName:
+                          description: Column name for TTL
                           type: string
                         expireInterval:
+                          description: Interval in the ISO 8601 format
                           type: string
                         unit:
                           type: string
@@ -167,37 +197,59 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
+                    description: A map of table attributes.
                     type: object
                     x-kubernetes-map-type: granular
                   column:
+                    description: |-
+                      A list of column configuration options.
+                      The structure is documented below.
                     items:
                       properties:
                         family:
+                          description: Column group
                           type: string
                         name:
+                          description: Column name
                           type: string
                         notNull:
+                          description: "A column cannot have the NULL data type. (\tDefault:
+                            false\t)"
                           type: boolean
                         type:
+                          description: Column data type. YQL data types are used.
                           type: string
                       type: object
                     type: array
                   connectionString:
+                    description: Connection string for database.
                     type: string
                   family:
+                    description: |-
+                      A list of column group configuration options.
+                      The structure is documented below.
                     items:
                       properties:
                         compression:
+                          description: 'Data codec (acceptable values: off, lz4).'
                           type: string
                         data:
+                          description: 'Type of storage device for column data in
+                            this group (acceptable values: ssd, rot (from HDD spindle
+                            rotation)).'
                           type: string
                         name:
+                          description: Column family name
                           type: string
                       type: object
                     type: array
                   keyBloomFilter:
+                    description: Use the Bloom filter for the primary key
                     type: boolean
                   partitioningSettings:
+                    description: |-
+                      Table partiotioning settings
+                      The structure is documented below.
                     items:
                       properties:
                         autoPartitioningByLoad:
@@ -224,19 +276,26 @@ spec:
                       type: object
                     type: array
                   path:
+                    description: Table path.
                     type: string
                   primaryKey:
+                    description: A list of table columns to be uased as primary key.
                     items:
                       type: string
                     type: array
                   readReplicasSettings:
+                    description: Read replication settings
                     type: string
                   ttl:
+                    description: "ttl\t\tTTL settings\nThe structure is documented
+                      below."
                     items:
                       properties:
                         columnName:
+                          description: Column name for TTL
                           type: string
                         expireInterval:
+                          description: Interval in the ISO 8601 format
                           type: string
                         unit:
                           type: string
@@ -435,39 +494,61 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
+                    description: A map of table attributes.
                     type: object
                     x-kubernetes-map-type: granular
                   column:
+                    description: |-
+                      A list of column configuration options.
+                      The structure is documented below.
                     items:
                       properties:
                         family:
+                          description: Column group
                           type: string
                         name:
+                          description: Column name
                           type: string
                         notNull:
+                          description: "A column cannot have the NULL data type. (\tDefault:
+                            false\t)"
                           type: boolean
                         type:
+                          description: Column data type. YQL data types are used.
                           type: string
                       type: object
                     type: array
                   connectionString:
+                    description: Connection string for database.
                     type: string
                   family:
+                    description: |-
+                      A list of column group configuration options.
+                      The structure is documented below.
                     items:
                       properties:
                         compression:
+                          description: 'Data codec (acceptable values: off, lz4).'
                           type: string
                         data:
+                          description: 'Type of storage device for column data in
+                            this group (acceptable values: ssd, rot (from HDD spindle
+                            rotation)).'
                           type: string
                         name:
+                          description: Column family name
                           type: string
                       type: object
                     type: array
                   id:
                     type: string
                   keyBloomFilter:
+                    description: Use the Bloom filter for the primary key
                     type: boolean
                   partitioningSettings:
+                    description: |-
+                      Table partiotioning settings
+                      The structure is documented below.
                     items:
                       properties:
                         autoPartitioningByLoad:
@@ -494,19 +575,26 @@ spec:
                       type: object
                     type: array
                   path:
+                    description: Table path.
                     type: string
                   primaryKey:
+                    description: A list of table columns to be uased as primary key.
                     items:
                       type: string
                     type: array
                   readReplicasSettings:
+                    description: Read replication settings
                     type: string
                   ttl:
+                    description: "ttl\t\tTTL settings\nThe structure is documented
+                      below."
                     items:
                       properties:
                         columnName:
+                          description: Column name for TTL
                           type: string
                         expireInterval:
+                          description: Interval in the ISO 8601 format
                           type: string
                         unit:
                           type: string

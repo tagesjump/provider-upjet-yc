@@ -766,6 +766,8 @@ spec:
                           description: CPU cores for the instance.
                           type: number
                         gpus:
+                          description: If provided, specifies the number of GPU devices
+                            for the instance
                           type: number
                         memory:
                           description: Memory size in GB.
@@ -1599,6 +1601,8 @@ spec:
                           description: CPU cores for the instance.
                           type: number
                         gpus:
+                          description: If provided, specifies the number of GPU devices
+                            for the instance
                           type: number
                         memory:
                           description: Memory size in GB.
@@ -2244,6 +2248,8 @@ spec:
                           description: CPU cores for the instance.
                           type: number
                         gpus:
+                          description: If provided, specifies the number of GPU devices
+                            for the instance
                           type: number
                         memory:
                           description: Memory size in GB.

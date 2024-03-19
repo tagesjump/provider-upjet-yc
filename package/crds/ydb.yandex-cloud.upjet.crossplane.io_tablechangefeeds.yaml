@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: TableChangefeed is the Schema for the TableChangefeeds API. <no
-          value>
+        description: TableChangefeed is the Schema for the TableChangefeeds API. Manages
+          Yandex Database dedicated cluster.
         properties:
           apiVersion:
             description: |-
@@ -74,33 +74,48 @@ spec:
               forProvider:
                 properties:
                   connectionString:
+                    description: Connection string, conflicts with table_id
                     type: string
                   consumer:
+                    description: Changefeed consumers - named entities for reading
+                      data from the topic.
                     items:
                       properties:
                         name:
+                          description: ': Changefeed name.'
                           type: string
                         startingMessageTimestampMs:
+                          description: Timestamp in the UNIX timestamp format, from
+                            which the consumer will start reading data
                           type: number
                         supportedCodecs:
+                          description: Supported data encodings
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   format:
+                    description: ': Changefeed format. Only JSON format is available.'
                     type: string
                   mode:
+                    description: ': Changefeed operating mode. The available changefeed
+                      operating modes are presented in the documentation.'
                     type: string
                   name:
+                    description: ': Changefeed name.'
                     type: string
                   retentionPeriod:
+                    description: Time of data retention in the topic, ISO 8601 format
                     type: string
                   tableId:
+                    description: ': ID of the table for which we create the changefeed.'
                     type: string
                   tablePath:
+                    description: Table path
                     type: string
                   virtualTimestamps:
+                    description: Use virtual timestamps
                     type: boolean
                 type: object
               initProvider:
@@ -117,33 +132,48 @@ spec:
                   autoscaler.
                 properties:
                   connectionString:
+                    description: Connection string, conflicts with table_id
                     type: string
                   consumer:
+                    description: Changefeed consumers - named entities for reading
+                      data from the topic.
                     items:
                       properties:
                         name:
+                          description: ': Changefeed name.'
                           type: string
                         startingMessageTimestampMs:
+                          description: Timestamp in the UNIX timestamp format, from
+                            which the consumer will start reading data
                           type: number
                         supportedCodecs:
+                          description: Supported data encodings
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   format:
+                    description: ': Changefeed format. Only JSON format is available.'
                     type: string
                   mode:
+                    description: ': Changefeed operating mode. The available changefeed
+                      operating modes are presented in the documentation.'
                     type: string
                   name:
+                    description: ': Changefeed name.'
                     type: string
                   retentionPeriod:
+                    description: Time of data retention in the topic, ISO 8601 format
                     type: string
                   tableId:
+                    description: ': ID of the table for which we create the changefeed.'
                     type: string
                   tablePath:
+                    description: Table path
                     type: string
                   virtualTimestamps:
+                    description: Use virtual timestamps
                     type: boolean
                 type: object
               managementPolicies:
@@ -332,35 +362,50 @@ spec:
               atProvider:
                 properties:
                   connectionString:
+                    description: Connection string, conflicts with table_id
                     type: string
                   consumer:
+                    description: Changefeed consumers - named entities for reading
+                      data from the topic.
                     items:
                       properties:
                         name:
+                          description: ': Changefeed name.'
                           type: string
                         startingMessageTimestampMs:
+                          description: Timestamp in the UNIX timestamp format, from
+                            which the consumer will start reading data
                           type: number
                         supportedCodecs:
+                          description: Supported data encodings
                           items:
                             type: string
                           type: array
                       type: object
                     type: array
                   format:
+                    description: ': Changefeed format. Only JSON format is available.'
                     type: string
                   id:
                     type: string
                   mode:
+                    description: ': Changefeed operating mode. The available changefeed
+                      operating modes are presented in the documentation.'
                     type: string
                   name:
+                    description: ': Changefeed name.'
                     type: string
                   retentionPeriod:
+                    description: Time of data retention in the topic, ISO 8601 format
                     type: string
                   tableId:
+                    description: ': ID of the table for which we create the changefeed.'
                     type: string
                   tablePath:
+                    description: Table path
                     type: string
                   virtualTimestamps:
+                    description: Use virtual timestamps
                     type: boolean
                 type: object
               conditions:

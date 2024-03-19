@@ -476,6 +476,21 @@ spec:
                             from within the instance.
                           type: object
                           x-kubernetes-map-type: granular
+                        metadataOptions:
+                          description: Options allow user to configure access to managed
+                            instances metadata
+                          items:
+                            properties:
+                              awsV1HttpEndpoint:
+                                type: number
+                              awsV1HttpToken:
+                                type: number
+                              gceHttpEndpoint:
+                                type: number
+                              gceHttpToken:
+                                type: number
+                            type: object
+                          type: array
                         name:
                           description: |-
                             Name template of the instance.
@@ -1660,6 +1675,21 @@ spec:
                             from within the instance.
                           type: object
                           x-kubernetes-map-type: granular
+                        metadataOptions:
+                          description: Options allow user to configure access to managed
+                            instances metadata
+                          items:
+                            properties:
+                              awsV1HttpEndpoint:
+                                type: number
+                              awsV1HttpToken:
+                                type: number
+                              gceHttpEndpoint:
+                                type: number
+                              gceHttpToken:
+                                type: number
+                            type: object
+                          type: array
                         name:
                           description: |-
                             Name template of the instance.
@@ -2880,6 +2910,21 @@ spec:
                             from within the instance.
                           type: object
                           x-kubernetes-map-type: granular
+                        metadataOptions:
+                          description: Options allow user to configure access to managed
+                            instances metadata
+                          items:
+                            properties:
+                              awsV1HttpEndpoint:
+                                type: number
+                              awsV1HttpToken:
+                                type: number
+                              gceHttpEndpoint:
+                                type: number
+                              gceHttpToken:
+                                type: number
+                            type: object
+                          type: array
                         name:
                           description: |-
                             Name template of the instance.

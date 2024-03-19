@@ -188,6 +188,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                 type: object
               initProvider:
                 description: |-
@@ -317,6 +319,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -549,6 +553,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  sleepAfter:
+                    type: number
                   status:
                     description: Status of the Yandex Database serverless cluster.
                     type: string

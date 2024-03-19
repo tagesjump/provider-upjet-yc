@@ -968,6 +968,9 @@ type InstanceTemplateInitParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// Options allow user to configure access to managed instances metadata
+	MetadataOptions []InstanceTemplateMetadataOptionsInitParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
 	// Name template of the instance.
 	// In order to be unique it must contain at least one of instance unique placeholders:
 	// {instance.short_id}
@@ -1001,6 +1004,41 @@ type InstanceTemplateInitParameters struct {
 
 	// The ID of the service account authorized for this instance.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+}
+
+type InstanceTemplateMetadataOptionsInitParameters struct {
+	AwsV1HTTPEndpoint *float64 `json:"awsV1HttpEndpoint,omitempty" tf:"aws_v1_http_endpoint,omitempty"`
+
+	AwsV1HTTPToken *float64 `json:"awsV1HttpToken,omitempty" tf:"aws_v1_http_token,omitempty"`
+
+	GceHTTPEndpoint *float64 `json:"gceHttpEndpoint,omitempty" tf:"gce_http_endpoint,omitempty"`
+
+	GceHTTPToken *float64 `json:"gceHttpToken,omitempty" tf:"gce_http_token,omitempty"`
+}
+
+type InstanceTemplateMetadataOptionsObservation struct {
+	AwsV1HTTPEndpoint *float64 `json:"awsV1HttpEndpoint,omitempty" tf:"aws_v1_http_endpoint,omitempty"`
+
+	AwsV1HTTPToken *float64 `json:"awsV1HttpToken,omitempty" tf:"aws_v1_http_token,omitempty"`
+
+	GceHTTPEndpoint *float64 `json:"gceHttpEndpoint,omitempty" tf:"gce_http_endpoint,omitempty"`
+
+	GceHTTPToken *float64 `json:"gceHttpToken,omitempty" tf:"gce_http_token,omitempty"`
+}
+
+type InstanceTemplateMetadataOptionsParameters struct {
+
+	// +kubebuilder:validation:Optional
+	AwsV1HTTPEndpoint *float64 `json:"awsV1HttpEndpoint,omitempty" tf:"aws_v1_http_endpoint,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	AwsV1HTTPToken *float64 `json:"awsV1HttpToken,omitempty" tf:"aws_v1_http_token,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	GceHTTPEndpoint *float64 `json:"gceHttpEndpoint,omitempty" tf:"gce_http_endpoint,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	GceHTTPToken *float64 `json:"gceHttpToken,omitempty" tf:"gce_http_token,omitempty"`
 }
 
 type InstanceTemplateNetworkInterfaceInitParameters struct {
@@ -1222,6 +1260,9 @@ type InstanceTemplateObservation struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// Options allow user to configure access to managed instances metadata
+	MetadataOptions []InstanceTemplateMetadataOptionsObservation `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
 	// Name template of the instance.
 	// In order to be unique it must contain at least one of instance unique placeholders:
 	// {instance.short_id}
@@ -1295,6 +1336,10 @@ type InstanceTemplateParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// Options allow user to configure access to managed instances metadata
+	// +kubebuilder:validation:Optional
+	MetadataOptions []InstanceTemplateMetadataOptionsParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
 
 	// Name template of the instance.
 	// In order to be unique it must contain at least one of instance unique placeholders:

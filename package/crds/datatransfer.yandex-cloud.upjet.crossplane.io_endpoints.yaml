@@ -186,8 +186,7 @@ spec:
                                       items:
                                         properties:
                                           database:
-                                            description: '-  Database path in YDB
-                                              where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                            description: '-  Database.'
                                             type: string
                                           mdbClusterId:
                                             description: Identifier of the Managed
@@ -443,8 +442,7 @@ spec:
                                       items:
                                         properties:
                                           database:
-                                            description: '-  Database path in YDB
-                                              where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                            description: '-  Database.'
                                             type: string
                                           mdbClusterId:
                                             description: Identifier of the Managed
@@ -837,8 +835,7 @@ spec:
                                   type: object
                                 type: array
                               parser:
-                                description: Data parsing parameters. If not set,
-                                  the source messages are read in raw.
+                                description: '-  Data parsing rules.'
                                 items:
                                   properties:
                                     auditTrailsV1Parser:
@@ -919,6 +916,9 @@ spec:
                                               - null keys will be putted to unparsed
                                               data
                                             type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
                                         type: object
                                       type: array
                                     tskvParser:
@@ -986,6 +986,9 @@ spec:
                                             description: Allow null keys. If false
                                               - null keys will be putted to unparsed
                                               data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
                                             type: boolean
                                         type: object
                                       type: array
@@ -1152,7 +1155,7 @@ spec:
                                   type: string
                                 type: array
                               serializer:
-                                description: Data serialization settings.
+                                description: '-  Data serialization format.'
                                 items:
                                   properties:
                                     serializerAuto:
@@ -1200,8 +1203,7 @@ spec:
                                       items:
                                         properties:
                                           saveTxOrder:
-                                            description: Not to split events queue
-                                              into separate per-table queues.
+                                            description: '-  Save transaction order'
                                             type: boolean
                                           topicName:
                                             description: Full topic name
@@ -1729,8 +1731,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               securityGroups:
                                 description: '-  List of security groups that the
@@ -2046,8 +2047,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               databaseRef:
                                 description: Reference to a MySQLDatabase in mdb to
@@ -2590,8 +2590,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               databaseRef:
                                 description: Reference to a MySQLDatabase in mdb to
@@ -3683,8 +3682,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               databaseRef:
                                 description: Reference to a PostgresqlDatabase in
@@ -3958,9 +3956,11 @@ spec:
                           description: Settings specific to the YDB source endpoint.
                           items:
                             properties:
+                              changefeedCustomName:
+                                description: '-  Custom name for changefeed.'
+                                type: string
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               instance:
                                 description: '-  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
@@ -4015,8 +4015,13 @@ spec:
                                   or "YDB_CLEANUP_POLICY_DROP".'
                                 type: string
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
+                                type: string
+                              defaultCompression:
+                                description: '-  Compression that will be used for
+                                  default columns family on YDB table creation One
+                                  of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED",
+                                  "YDB_DEFAULT_COMPRESSION_LZ4".'
                                 type: string
                               instance:
                                 description: '-  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
@@ -4056,6 +4061,280 @@ spec:
                               serviceAccountId:
                                 description: '-  Service account ID for interaction
                                   with database.'
+                                type: string
+                              subnetId:
+                                description: '-  Identifier of the Yandex Cloud VPC
+                                  subnetwork to user for accessing the database. If
+                                  omitted, the server has to be accessible via Internet.'
+                                type: string
+                            type: object
+                          type: array
+                        ydsSource:
+                          description: Settings specific to the YDS source endpoint.
+                          items:
+                            properties:
+                              allowTtlRewind:
+                                description: '-  Should continue working, if consumer
+                                  read lag exceed TTL of topic.'
+                                type: boolean
+                              consumer:
+                                description: '-  Consumer.'
+                                type: string
+                              database:
+                                description: '-  Database.'
+                                type: string
+                              endpoint:
+                                description: '-  YDS Endpoint.'
+                                type: string
+                              parser:
+                                description: '-  Data parsing rules.'
+                                items:
+                                  properties:
+                                    auditTrailsV1Parser:
+                                      description: Parse Audit Trails data. Empty
+                                        struct.
+                                      items:
+                                        type: object
+                                      type: array
+                                    cloudLoggingParser:
+                                      description: Parse Cloud Logging data. Empty
+                                        struct.
+                                      items:
+                                        type: object
+                                      type: array
+                                    jsonParser:
+                                      description: Parse data in json format.
+                                      items:
+                                        properties:
+                                          addRestColumn:
+                                            description: Add fields, that are not
+                                              in the schema, into the _rest column.
+                                            type: boolean
+                                          dataSchema:
+                                            description: Data parsing scheme.The structure
+                                              is documented below.
+                                            items:
+                                              properties:
+                                                fields:
+                                                  description: Description of the
+                                                    data schema in the array of fields
+                                                    structure (documented below).
+                                                  items:
+                                                    properties:
+                                                      fields:
+                                                        description: Description of
+                                                          the data schema in the array
+                                                          of fields structure (documented
+                                                          below).
+                                                        items:
+                                                          properties:
+                                                            key:
+                                                              description: Mark field
+                                                                as Primary Key.
+                                                              type: boolean
+                                                            name:
+                                                              description: Field name.
+                                                              type: string
+                                                            path:
+                                                              description: '-  A path
+                                                                where resulting tables
+                                                                are stored.'
+                                                              type: string
+                                                            required:
+                                                              description: Mark field
+                                                                as required.
+                                                              type: boolean
+                                                            type:
+                                                              description: 'Field
+                                                                type, one of: INT64,
+                                                                INT32, INT16, INT8,
+                                                                UINT64, UINT32, UINT16,
+                                                                UINT8, DOUBLE, BOOLEAN,
+                                                                STRING, UTF8, ANY,
+                                                                DATETIME.'
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                                jsonFields:
+                                                  description: Description of the
+                                                    data schema as JSON specification.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          nullKeysAllowed:
+                                            description: Allow null keys. If false
+                                              - null keys will be putted to unparsed
+                                              data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    tskvParser:
+                                      description: Parse data if tskv format.
+                                      items:
+                                        properties:
+                                          addRestColumn:
+                                            description: Add fields, that are not
+                                              in the schema, into the _rest column.
+                                            type: boolean
+                                          dataSchema:
+                                            description: Data parsing scheme.The structure
+                                              is documented below.
+                                            items:
+                                              properties:
+                                                fields:
+                                                  description: Description of the
+                                                    data schema in the array of fields
+                                                    structure (documented below).
+                                                  items:
+                                                    properties:
+                                                      fields:
+                                                        description: Description of
+                                                          the data schema in the array
+                                                          of fields structure (documented
+                                                          below).
+                                                        items:
+                                                          properties:
+                                                            key:
+                                                              description: Mark field
+                                                                as Primary Key.
+                                                              type: boolean
+                                                            name:
+                                                              description: Field name.
+                                                              type: string
+                                                            path:
+                                                              description: '-  A path
+                                                                where resulting tables
+                                                                are stored.'
+                                                              type: string
+                                                            required:
+                                                              description: Mark field
+                                                                as required.
+                                                              type: boolean
+                                                            type:
+                                                              description: 'Field
+                                                                type, one of: INT64,
+                                                                INT32, INT16, INT8,
+                                                                UINT64, UINT32, UINT16,
+                                                                UINT8, DOUBLE, BOOLEAN,
+                                                                STRING, UTF8, ANY,
+                                                                DATETIME.'
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                                jsonFields:
+                                                  description: Description of the
+                                                    data schema as JSON specification.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          nullKeysAllowed:
+                                            description: Allow null keys. If false
+                                              - null keys will be putted to unparsed
+                                              data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              securityGroups:
+                                description: '-  List of security groups that the
+                                  transfer associated with this endpoint should use.'
+                                items:
+                                  type: string
+                                type: array
+                              serviceAccountId:
+                                description: '-  Service account ID for interaction
+                                  with database.'
+                                type: string
+                              stream:
+                                description: '-  Stream.'
+                                type: string
+                              subnetId:
+                                description: '-  Identifier of the Yandex Cloud VPC
+                                  subnetwork to user for accessing the database. If
+                                  omitted, the server has to be accessible via Internet.'
+                                type: string
+                              supportedCodecs:
+                                description: '-  List of supported compression codec.'
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        ydsTarget:
+                          description: Settings specific to the YDS target endpoint.
+                          items:
+                            properties:
+                              database:
+                                description: '-  Database.'
+                                type: string
+                              endpoint:
+                                description: '-  YDS Endpoint.'
+                                type: string
+                              saveTxOrder:
+                                description: '-  Save transaction order'
+                                type: boolean
+                              securityGroups:
+                                description: '-  List of security groups that the
+                                  transfer associated with this endpoint should use.'
+                                items:
+                                  type: string
+                                type: array
+                              serializer:
+                                description: '-  Data serialization format.'
+                                items:
+                                  properties:
+                                    serializerAuto:
+                                      description: Empty block. Select data serialization
+                                        format automatically.
+                                      items:
+                                        type: object
+                                      type: array
+                                    serializerDebezium:
+                                      description: Serialize data in json format.
+                                        The structure is documented below.
+                                      items:
+                                        properties:
+                                          serializerParameters:
+                                            description: A list of debezium parameters
+                                              set by the structure of the key and
+                                              value string fields.
+                                            items:
+                                              properties:
+                                                key:
+                                                  description: Mark field as Primary
+                                                    Key.
+                                                  type: string
+                                                value:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    serializerJson:
+                                      description: Empty block. Serialize data in
+                                        json format.
+                                      items:
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              serviceAccountId:
+                                description: '-  Service account ID for interaction
+                                  with database.'
+                                type: string
+                              stream:
+                                description: '-  Stream.'
                                 type: string
                               subnetId:
                                 description: '-  Identifier of the Yandex Cloud VPC
@@ -4193,8 +4472,7 @@ spec:
                                       items:
                                         properties:
                                           database:
-                                            description: '-  Database path in YDB
-                                              where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                            description: '-  Database.'
                                             type: string
                                           mdbClusterId:
                                             description: Identifier of the Managed
@@ -4429,8 +4707,7 @@ spec:
                                       items:
                                         properties:
                                           database:
-                                            description: '-  Database path in YDB
-                                              where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                            description: '-  Database.'
                                             type: string
                                           mdbClusterId:
                                             description: Identifier of the Managed
@@ -4781,8 +5058,7 @@ spec:
                                   type: object
                                 type: array
                               parser:
-                                description: Data parsing parameters. If not set,
-                                  the source messages are read in raw.
+                                description: '-  Data parsing rules.'
                                 items:
                                   properties:
                                     auditTrailsV1Parser:
@@ -4863,6 +5139,9 @@ spec:
                                               - null keys will be putted to unparsed
                                               data
                                             type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
                                         type: object
                                       type: array
                                     tskvParser:
@@ -4930,6 +5209,9 @@ spec:
                                             description: Allow null keys. If false
                                               - null keys will be putted to unparsed
                                               data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
                                             type: boolean
                                         type: object
                                       type: array
@@ -5075,7 +5357,7 @@ spec:
                                   type: string
                                 type: array
                               serializer:
-                                description: Data serialization settings.
+                                description: '-  Data serialization format.'
                                 items:
                                   properties:
                                     serializerAuto:
@@ -5123,8 +5405,7 @@ spec:
                                       items:
                                         properties:
                                           saveTxOrder:
-                                            description: Not to split events queue
-                                              into separate per-table queues.
+                                            description: '-  Save transaction order'
                                             type: boolean
                                           topicName:
                                             description: Full topic name
@@ -5610,8 +5891,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               securityGroups:
                                 description: '-  List of security groups that the
@@ -5927,8 +6207,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               databaseRef:
                                 description: Reference to a MySQLDatabase in mdb to
@@ -6452,8 +6731,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               databaseRef:
                                 description: Reference to a MySQLDatabase in mdb to
@@ -7507,8 +7785,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               databaseRef:
                                 description: Reference to a PostgresqlDatabase in
@@ -7763,9 +8040,11 @@ spec:
                           description: Settings specific to the YDB source endpoint.
                           items:
                             properties:
+                              changefeedCustomName:
+                                description: '-  Custom name for changefeed.'
+                                type: string
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               instance:
                                 description: '-  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
@@ -7803,8 +8082,13 @@ spec:
                                   or "YDB_CLEANUP_POLICY_DROP".'
                                 type: string
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
+                                type: string
+                              defaultCompression:
+                                description: '-  Compression that will be used for
+                                  default columns family on YDB table creation One
+                                  of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED",
+                                  "YDB_DEFAULT_COMPRESSION_LZ4".'
                                 type: string
                               instance:
                                 description: '-  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
@@ -7827,6 +8111,280 @@ spec:
                               serviceAccountId:
                                 description: '-  Service account ID for interaction
                                   with database.'
+                                type: string
+                              subnetId:
+                                description: '-  Identifier of the Yandex Cloud VPC
+                                  subnetwork to user for accessing the database. If
+                                  omitted, the server has to be accessible via Internet.'
+                                type: string
+                            type: object
+                          type: array
+                        ydsSource:
+                          description: Settings specific to the YDS source endpoint.
+                          items:
+                            properties:
+                              allowTtlRewind:
+                                description: '-  Should continue working, if consumer
+                                  read lag exceed TTL of topic.'
+                                type: boolean
+                              consumer:
+                                description: '-  Consumer.'
+                                type: string
+                              database:
+                                description: '-  Database.'
+                                type: string
+                              endpoint:
+                                description: '-  YDS Endpoint.'
+                                type: string
+                              parser:
+                                description: '-  Data parsing rules.'
+                                items:
+                                  properties:
+                                    auditTrailsV1Parser:
+                                      description: Parse Audit Trails data. Empty
+                                        struct.
+                                      items:
+                                        type: object
+                                      type: array
+                                    cloudLoggingParser:
+                                      description: Parse Cloud Logging data. Empty
+                                        struct.
+                                      items:
+                                        type: object
+                                      type: array
+                                    jsonParser:
+                                      description: Parse data in json format.
+                                      items:
+                                        properties:
+                                          addRestColumn:
+                                            description: Add fields, that are not
+                                              in the schema, into the _rest column.
+                                            type: boolean
+                                          dataSchema:
+                                            description: Data parsing scheme.The structure
+                                              is documented below.
+                                            items:
+                                              properties:
+                                                fields:
+                                                  description: Description of the
+                                                    data schema in the array of fields
+                                                    structure (documented below).
+                                                  items:
+                                                    properties:
+                                                      fields:
+                                                        description: Description of
+                                                          the data schema in the array
+                                                          of fields structure (documented
+                                                          below).
+                                                        items:
+                                                          properties:
+                                                            key:
+                                                              description: Mark field
+                                                                as Primary Key.
+                                                              type: boolean
+                                                            name:
+                                                              description: Field name.
+                                                              type: string
+                                                            path:
+                                                              description: '-  A path
+                                                                where resulting tables
+                                                                are stored.'
+                                                              type: string
+                                                            required:
+                                                              description: Mark field
+                                                                as required.
+                                                              type: boolean
+                                                            type:
+                                                              description: 'Field
+                                                                type, one of: INT64,
+                                                                INT32, INT16, INT8,
+                                                                UINT64, UINT32, UINT16,
+                                                                UINT8, DOUBLE, BOOLEAN,
+                                                                STRING, UTF8, ANY,
+                                                                DATETIME.'
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                                jsonFields:
+                                                  description: Description of the
+                                                    data schema as JSON specification.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          nullKeysAllowed:
+                                            description: Allow null keys. If false
+                                              - null keys will be putted to unparsed
+                                              data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    tskvParser:
+                                      description: Parse data if tskv format.
+                                      items:
+                                        properties:
+                                          addRestColumn:
+                                            description: Add fields, that are not
+                                              in the schema, into the _rest column.
+                                            type: boolean
+                                          dataSchema:
+                                            description: Data parsing scheme.The structure
+                                              is documented below.
+                                            items:
+                                              properties:
+                                                fields:
+                                                  description: Description of the
+                                                    data schema in the array of fields
+                                                    structure (documented below).
+                                                  items:
+                                                    properties:
+                                                      fields:
+                                                        description: Description of
+                                                          the data schema in the array
+                                                          of fields structure (documented
+                                                          below).
+                                                        items:
+                                                          properties:
+                                                            key:
+                                                              description: Mark field
+                                                                as Primary Key.
+                                                              type: boolean
+                                                            name:
+                                                              description: Field name.
+                                                              type: string
+                                                            path:
+                                                              description: '-  A path
+                                                                where resulting tables
+                                                                are stored.'
+                                                              type: string
+                                                            required:
+                                                              description: Mark field
+                                                                as required.
+                                                              type: boolean
+                                                            type:
+                                                              description: 'Field
+                                                                type, one of: INT64,
+                                                                INT32, INT16, INT8,
+                                                                UINT64, UINT32, UINT16,
+                                                                UINT8, DOUBLE, BOOLEAN,
+                                                                STRING, UTF8, ANY,
+                                                                DATETIME.'
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                                jsonFields:
+                                                  description: Description of the
+                                                    data schema as JSON specification.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          nullKeysAllowed:
+                                            description: Allow null keys. If false
+                                              - null keys will be putted to unparsed
+                                              data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              securityGroups:
+                                description: '-  List of security groups that the
+                                  transfer associated with this endpoint should use.'
+                                items:
+                                  type: string
+                                type: array
+                              serviceAccountId:
+                                description: '-  Service account ID for interaction
+                                  with database.'
+                                type: string
+                              stream:
+                                description: '-  Stream.'
+                                type: string
+                              subnetId:
+                                description: '-  Identifier of the Yandex Cloud VPC
+                                  subnetwork to user for accessing the database. If
+                                  omitted, the server has to be accessible via Internet.'
+                                type: string
+                              supportedCodecs:
+                                description: '-  List of supported compression codec.'
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        ydsTarget:
+                          description: Settings specific to the YDS target endpoint.
+                          items:
+                            properties:
+                              database:
+                                description: '-  Database.'
+                                type: string
+                              endpoint:
+                                description: '-  YDS Endpoint.'
+                                type: string
+                              saveTxOrder:
+                                description: '-  Save transaction order'
+                                type: boolean
+                              securityGroups:
+                                description: '-  List of security groups that the
+                                  transfer associated with this endpoint should use.'
+                                items:
+                                  type: string
+                                type: array
+                              serializer:
+                                description: '-  Data serialization format.'
+                                items:
+                                  properties:
+                                    serializerAuto:
+                                      description: Empty block. Select data serialization
+                                        format automatically.
+                                      items:
+                                        type: object
+                                      type: array
+                                    serializerDebezium:
+                                      description: Serialize data in json format.
+                                        The structure is documented below.
+                                      items:
+                                        properties:
+                                          serializerParameters:
+                                            description: A list of debezium parameters
+                                              set by the structure of the key and
+                                              value string fields.
+                                            items:
+                                              properties:
+                                                key:
+                                                  description: Mark field as Primary
+                                                    Key.
+                                                  type: string
+                                                value:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    serializerJson:
+                                      description: Empty block. Serialize data in
+                                        json format.
+                                      items:
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              serviceAccountId:
+                                description: '-  Service account ID for interaction
+                                  with database.'
+                                type: string
+                              stream:
+                                description: '-  Stream.'
                                 type: string
                               subnetId:
                                 description: '-  Identifier of the Yandex Cloud VPC
@@ -8050,8 +8608,7 @@ spec:
                                       items:
                                         properties:
                                           database:
-                                            description: '-  Database path in YDB
-                                              where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                            description: '-  Database.'
                                             type: string
                                           mdbClusterId:
                                             description: Identifier of the Managed
@@ -8231,8 +8788,7 @@ spec:
                                       items:
                                         properties:
                                           database:
-                                            description: '-  Database path in YDB
-                                              where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                            description: '-  Database.'
                                             type: string
                                           mdbClusterId:
                                             description: Identifier of the Managed
@@ -8549,8 +9105,7 @@ spec:
                                   type: object
                                 type: array
                               parser:
-                                description: Data parsing parameters. If not set,
-                                  the source messages are read in raw.
+                                description: '-  Data parsing rules.'
                                 items:
                                   properties:
                                     auditTrailsV1Parser:
@@ -8631,6 +9186,9 @@ spec:
                                               - null keys will be putted to unparsed
                                               data
                                             type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
                                         type: object
                                       type: array
                                     tskvParser:
@@ -8698,6 +9256,9 @@ spec:
                                             description: Allow null keys. If false
                                               - null keys will be putted to unparsed
                                               data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
                                             type: boolean
                                         type: object
                                       type: array
@@ -8864,7 +9425,7 @@ spec:
                                   type: string
                                 type: array
                               serializer:
-                                description: Data serialization settings.
+                                description: '-  Data serialization format.'
                                 items:
                                   properties:
                                     serializerAuto:
@@ -8912,8 +9473,7 @@ spec:
                                       items:
                                         properties:
                                           saveTxOrder:
-                                            description: Not to split events queue
-                                              into separate per-table queues.
+                                            description: '-  Save transaction order'
                                             type: boolean
                                           topicName:
                                             description: Full topic name
@@ -9211,8 +9771,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               securityGroups:
                                 description: '-  List of security groups that the
@@ -9299,8 +9858,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               excludeTablesRegex:
                                 description: Opposite of include_table_regex. The
@@ -9459,8 +10017,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               password:
                                 description: Password for the database access. This
@@ -9784,8 +10341,7 @@ spec:
                                   type: object
                                 type: array
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               password:
                                 description: Password for the database access. This
@@ -9828,9 +10384,11 @@ spec:
                           description: Settings specific to the YDB source endpoint.
                           items:
                             properties:
+                              changefeedCustomName:
+                                description: '-  Custom name for changefeed.'
+                                type: string
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
                                 type: string
                               instance:
                                 description: '-  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
@@ -9868,8 +10426,13 @@ spec:
                                   or "YDB_CLEANUP_POLICY_DROP".'
                                 type: string
                               database:
-                                description: '-  Database path in YDB where tables
-                                  are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".'
+                                description: '-  Database.'
+                                type: string
+                              defaultCompression:
+                                description: '-  Compression that will be used for
+                                  default columns family on YDB table creation One
+                                  of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED",
+                                  "YDB_DEFAULT_COMPRESSION_LZ4".'
                                 type: string
                               instance:
                                 description: '-  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".'
@@ -9892,6 +10455,280 @@ spec:
                               serviceAccountId:
                                 description: '-  Service account ID for interaction
                                   with database.'
+                                type: string
+                              subnetId:
+                                description: '-  Identifier of the Yandex Cloud VPC
+                                  subnetwork to user for accessing the database. If
+                                  omitted, the server has to be accessible via Internet.'
+                                type: string
+                            type: object
+                          type: array
+                        ydsSource:
+                          description: Settings specific to the YDS source endpoint.
+                          items:
+                            properties:
+                              allowTtlRewind:
+                                description: '-  Should continue working, if consumer
+                                  read lag exceed TTL of topic.'
+                                type: boolean
+                              consumer:
+                                description: '-  Consumer.'
+                                type: string
+                              database:
+                                description: '-  Database.'
+                                type: string
+                              endpoint:
+                                description: '-  YDS Endpoint.'
+                                type: string
+                              parser:
+                                description: '-  Data parsing rules.'
+                                items:
+                                  properties:
+                                    auditTrailsV1Parser:
+                                      description: Parse Audit Trails data. Empty
+                                        struct.
+                                      items:
+                                        type: object
+                                      type: array
+                                    cloudLoggingParser:
+                                      description: Parse Cloud Logging data. Empty
+                                        struct.
+                                      items:
+                                        type: object
+                                      type: array
+                                    jsonParser:
+                                      description: Parse data in json format.
+                                      items:
+                                        properties:
+                                          addRestColumn:
+                                            description: Add fields, that are not
+                                              in the schema, into the _rest column.
+                                            type: boolean
+                                          dataSchema:
+                                            description: Data parsing scheme.The structure
+                                              is documented below.
+                                            items:
+                                              properties:
+                                                fields:
+                                                  description: Description of the
+                                                    data schema in the array of fields
+                                                    structure (documented below).
+                                                  items:
+                                                    properties:
+                                                      fields:
+                                                        description: Description of
+                                                          the data schema in the array
+                                                          of fields structure (documented
+                                                          below).
+                                                        items:
+                                                          properties:
+                                                            key:
+                                                              description: Mark field
+                                                                as Primary Key.
+                                                              type: boolean
+                                                            name:
+                                                              description: Field name.
+                                                              type: string
+                                                            path:
+                                                              description: '-  A path
+                                                                where resulting tables
+                                                                are stored.'
+                                                              type: string
+                                                            required:
+                                                              description: Mark field
+                                                                as required.
+                                                              type: boolean
+                                                            type:
+                                                              description: 'Field
+                                                                type, one of: INT64,
+                                                                INT32, INT16, INT8,
+                                                                UINT64, UINT32, UINT16,
+                                                                UINT8, DOUBLE, BOOLEAN,
+                                                                STRING, UTF8, ANY,
+                                                                DATETIME.'
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                                jsonFields:
+                                                  description: Description of the
+                                                    data schema as JSON specification.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          nullKeysAllowed:
+                                            description: Allow null keys. If false
+                                              - null keys will be putted to unparsed
+                                              data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                    tskvParser:
+                                      description: Parse data if tskv format.
+                                      items:
+                                        properties:
+                                          addRestColumn:
+                                            description: Add fields, that are not
+                                              in the schema, into the _rest column.
+                                            type: boolean
+                                          dataSchema:
+                                            description: Data parsing scheme.The structure
+                                              is documented below.
+                                            items:
+                                              properties:
+                                                fields:
+                                                  description: Description of the
+                                                    data schema in the array of fields
+                                                    structure (documented below).
+                                                  items:
+                                                    properties:
+                                                      fields:
+                                                        description: Description of
+                                                          the data schema in the array
+                                                          of fields structure (documented
+                                                          below).
+                                                        items:
+                                                          properties:
+                                                            key:
+                                                              description: Mark field
+                                                                as Primary Key.
+                                                              type: boolean
+                                                            name:
+                                                              description: Field name.
+                                                              type: string
+                                                            path:
+                                                              description: '-  A path
+                                                                where resulting tables
+                                                                are stored.'
+                                                              type: string
+                                                            required:
+                                                              description: Mark field
+                                                                as required.
+                                                              type: boolean
+                                                            type:
+                                                              description: 'Field
+                                                                type, one of: INT64,
+                                                                INT32, INT16, INT8,
+                                                                UINT64, UINT32, UINT16,
+                                                                UINT8, DOUBLE, BOOLEAN,
+                                                                STRING, UTF8, ANY,
+                                                                DATETIME.'
+                                                              type: string
+                                                          type: object
+                                                        type: array
+                                                    type: object
+                                                  type: array
+                                                jsonFields:
+                                                  description: Description of the
+                                                    data schema as JSON specification.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          nullKeysAllowed:
+                                            description: Allow null keys. If false
+                                              - null keys will be putted to unparsed
+                                              data
+                                            type: boolean
+                                          unescapeStringValues:
+                                            description: Allow unescape string values.
+                                            type: boolean
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              securityGroups:
+                                description: '-  List of security groups that the
+                                  transfer associated with this endpoint should use.'
+                                items:
+                                  type: string
+                                type: array
+                              serviceAccountId:
+                                description: '-  Service account ID for interaction
+                                  with database.'
+                                type: string
+                              stream:
+                                description: '-  Stream.'
+                                type: string
+                              subnetId:
+                                description: '-  Identifier of the Yandex Cloud VPC
+                                  subnetwork to user for accessing the database. If
+                                  omitted, the server has to be accessible via Internet.'
+                                type: string
+                              supportedCodecs:
+                                description: '-  List of supported compression codec.'
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        ydsTarget:
+                          description: Settings specific to the YDS target endpoint.
+                          items:
+                            properties:
+                              database:
+                                description: '-  Database.'
+                                type: string
+                              endpoint:
+                                description: '-  YDS Endpoint.'
+                                type: string
+                              saveTxOrder:
+                                description: '-  Save transaction order'
+                                type: boolean
+                              securityGroups:
+                                description: '-  List of security groups that the
+                                  transfer associated with this endpoint should use.'
+                                items:
+                                  type: string
+                                type: array
+                              serializer:
+                                description: '-  Data serialization format.'
+                                items:
+                                  properties:
+                                    serializerAuto:
+                                      description: Empty block. Select data serialization
+                                        format automatically.
+                                      items:
+                                        type: object
+                                      type: array
+                                    serializerDebezium:
+                                      description: Serialize data in json format.
+                                        The structure is documented below.
+                                      items:
+                                        properties:
+                                          serializerParameters:
+                                            description: A list of debezium parameters
+                                              set by the structure of the key and
+                                              value string fields.
+                                            items:
+                                              properties:
+                                                key:
+                                                  description: Mark field as Primary
+                                                    Key.
+                                                  type: string
+                                                value:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    serializerJson:
+                                      description: Empty block. Serialize data in
+                                        json format.
+                                      items:
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              serviceAccountId:
+                                description: '-  Service account ID for interaction
+                                  with database.'
+                                type: string
+                              stream:
+                                description: '-  Stream.'
                                 type: string
                               subnetId:
                                 description: '-  Identifier of the Yandex Cloud VPC

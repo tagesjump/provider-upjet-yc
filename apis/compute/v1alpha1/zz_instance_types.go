@@ -1028,6 +1028,7 @@ type ResourcesInitParameters struct {
 	// CPU cores for the instance.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
+	// If provided, specifies the number of GPU devices for the instance
 	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
 
 	// Memory size in GB.
@@ -1042,6 +1043,7 @@ type ResourcesObservation struct {
 	// CPU cores for the instance.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
+	// If provided, specifies the number of GPU devices for the instance
 	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
 
 	// Memory size in GB.
@@ -1058,6 +1060,7 @@ type ResourcesParameters struct {
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores" tf:"cores,omitempty"`
 
+	// If provided, specifies the number of GPU devices for the instance
 	// +kubebuilder:validation:Optional
 	Gpus *float64 `json:"gpus,omitempty" tf:"gpus,omitempty"`
 

@@ -8,10 +8,10 @@ export TERRAFORM_VERSION ?= 1.6.1
 
 export TERRAFORM_PROVIDER_SOURCE ?= yandex-cloud/yandex
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/yandex-cloud/terraform-provider-yandex
-export TERRAFORM_PROVIDER_VERSION ?= 0.108.1
+export TERRAFORM_PROVIDER_VERSION ?= 0.112.0
 export TERRAFORM_PROVIDER_DOWNLOAD_NAME ?= terraform-provider-yandex
 export TERRAFORM_PROVIDER_DOWNLOAD_URL_PREFIX ?= https://hashicorp-releases.yandexcloud.net/$(TERRAFORM_PROVIDER_DOWNLOAD_NAME)/$(TERRAFORM_PROVIDER_VERSION)
-export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-yandex_v0.108.1_x5
+export TERRAFORM_NATIVE_PROVIDER_BINARY ?= terraform-provider-yandex_v$(TERRAFORM_PROVIDER_VERSION)_x5
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 

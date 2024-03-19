@@ -18,101 +18,141 @@ import (
 )
 
 type ConsumerInitParameters struct {
+
+	// : Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
+	// Supported data encodings
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type ConsumerObservation struct {
+
+	// : Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
+	// Supported data encodings
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type ConsumerParameters struct {
 
+	// : Changefeed name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data
 	// +kubebuilder:validation:Optional
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
+	// Supported data encodings
 	// +kubebuilder:validation:Optional
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type TableChangefeedInitParameters struct {
+
+	// Connection string, conflicts with table_id
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// Changefeed consumers - named entities for reading data from the topic.
 	Consumer []ConsumerInitParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
+	// : Changefeed format. Only JSON format is available.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
+	// : Changefeed operating mode. The available changefeed operating modes are presented in the documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// : Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Time of data retention in the topic, ISO 8601 format
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
+	// : ID of the table for which we create the changefeed.
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
+	// Table path
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
+	// Use virtual timestamps
 	VirtualTimestamps *bool `json:"virtualTimestamps,omitempty" tf:"virtual_timestamps,omitempty"`
 }
 
 type TableChangefeedObservation struct {
+
+	// Connection string, conflicts with table_id
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// Changefeed consumers - named entities for reading data from the topic.
 	Consumer []ConsumerObservation `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
+	// : Changefeed format. Only JSON format is available.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// : Changefeed operating mode. The available changefeed operating modes are presented in the documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// : Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Time of data retention in the topic, ISO 8601 format
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
+	// : ID of the table for which we create the changefeed.
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
+	// Table path
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
+	// Use virtual timestamps
 	VirtualTimestamps *bool `json:"virtualTimestamps,omitempty" tf:"virtual_timestamps,omitempty"`
 }
 
 type TableChangefeedParameters struct {
 
+	// Connection string, conflicts with table_id
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// Changefeed consumers - named entities for reading data from the topic.
 	// +kubebuilder:validation:Optional
 	Consumer []ConsumerParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
+	// : Changefeed format. Only JSON format is available.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
+	// : Changefeed operating mode. The available changefeed operating modes are presented in the documentation.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
+	// : Changefeed name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Time of data retention in the topic, ISO 8601 format
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
+	// : ID of the table for which we create the changefeed.
 	// +kubebuilder:validation:Optional
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
+	// Table path
 	// +kubebuilder:validation:Optional
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
+	// Use virtual timestamps
 	// +kubebuilder:validation:Optional
 	VirtualTimestamps *bool `json:"virtualTimestamps,omitempty" tf:"virtual_timestamps,omitempty"`
 }
@@ -144,7 +184,7 @@ type TableChangefeedStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// TableChangefeed is the Schema for the TableChangefeeds API. <no value>
+// TableChangefeed is the Schema for the TableChangefeeds API. Manages Yandex Database dedicated cluster.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

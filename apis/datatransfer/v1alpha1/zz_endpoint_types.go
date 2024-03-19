@@ -410,7 +410,7 @@ type ColumnValueParameters struct {
 
 type ConnectionConnectionOptionsInitParameters struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Identifier of the Managed PostgreSQL cluster.
@@ -428,7 +428,7 @@ type ConnectionConnectionOptionsInitParameters struct {
 
 type ConnectionConnectionOptionsObservation struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Identifier of the Managed PostgreSQL cluster.
@@ -552,7 +552,7 @@ type ConnectionConnectionOptionsOnPremiseTLSModeParameters struct {
 
 type ConnectionConnectionOptionsParameters struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -695,7 +695,7 @@ type ConnectionOnPremiseTLSModeParameters struct {
 
 type ConnectionOptionsInitParameters struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Identifier of the Managed PostgreSQL cluster.
@@ -713,7 +713,7 @@ type ConnectionOptionsInitParameters struct {
 
 type ConnectionOptionsObservation struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Identifier of the Managed PostgreSQL cluster.
@@ -837,7 +837,7 @@ type ConnectionOptionsOnPremiseTLSModeParameters struct {
 
 type ConnectionOptionsParameters struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -1231,6 +1231,113 @@ type FieldsParameters struct {
 	Fields []FieldsFieldsParameters `json:"fields,omitempty" tf:"fields,omitempty"`
 }
 
+type JSONParserDataSchemaFieldsFieldsInitParameters struct {
+
+	// Mark field as Primary Key.
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Field name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// -  A path where resulting tables are stored.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Mark field as required.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type JSONParserDataSchemaFieldsFieldsObservation struct {
+
+	// Mark field as Primary Key.
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Field name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// -  A path where resulting tables are stored.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Mark field as required.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type JSONParserDataSchemaFieldsFieldsParameters struct {
+
+	// Mark field as Primary Key.
+	// +kubebuilder:validation:Optional
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Field name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// -  A path where resulting tables are stored.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Mark field as required.
+	// +kubebuilder:validation:Optional
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type JSONParserDataSchemaFieldsInitParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []JSONParserDataSchemaFieldsFieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+}
+
+type JSONParserDataSchemaFieldsObservation struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []JSONParserDataSchemaFieldsFieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+}
+
+type JSONParserDataSchemaFieldsParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	// +kubebuilder:validation:Optional
+	Fields []JSONParserDataSchemaFieldsFieldsParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+}
+
+type JSONParserDataSchemaInitParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []JSONParserDataSchemaFieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// Description of the data schema as JSON specification.
+	JSONFields *string `json:"jsonFields,omitempty" tf:"json_fields,omitempty"`
+}
+
+type JSONParserDataSchemaObservation struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []JSONParserDataSchemaFieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// Description of the data schema as JSON specification.
+	JSONFields *string `json:"jsonFields,omitempty" tf:"json_fields,omitempty"`
+}
+
+type JSONParserDataSchemaParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	// +kubebuilder:validation:Optional
+	Fields []JSONParserDataSchemaFieldsParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// Description of the data schema as JSON specification.
+	// +kubebuilder:validation:Optional
+	JSONFields *string `json:"jsonFields,omitempty" tf:"json_fields,omitempty"`
+}
+
 type JSONParserInitParameters struct {
 
 	// Add fields, that are not in the schema, into the _rest column.
@@ -1241,6 +1348,9 @@ type JSONParserInitParameters struct {
 
 	// Allow null keys. If false - null keys will be putted to unparsed data
 	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type JSONParserObservation struct {
@@ -1253,6 +1363,9 @@ type JSONParserObservation struct {
 
 	// Allow null keys. If false - null keys will be putted to unparsed data
 	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type JSONParserParameters struct {
@@ -1268,6 +1381,10 @@ type JSONParserParameters struct {
 	// Allow null keys. If false - null keys will be putted to unparsed data
 	// +kubebuilder:validation:Optional
 	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	// +kubebuilder:validation:Optional
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type KafkaSourceConnectionInitParameters struct {
@@ -1307,7 +1424,7 @@ type KafkaSourceInitParameters struct {
 	// Connection settings.
 	Connection []KafkaSourceConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// Data parsing parameters. If not set, the source messages are read in raw.
+	// -  Data parsing rules.
 	Parser []ParserInitParameters `json:"parser,omitempty" tf:"parser,omitempty"`
 
 	// -  List of security groups that the transfer associated with this endpoint should use.
@@ -1331,7 +1448,7 @@ type KafkaSourceObservation struct {
 	// Connection settings.
 	Connection []KafkaSourceConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// Data parsing parameters. If not set, the source messages are read in raw.
+	// -  Data parsing rules.
 	Parser []ParserObservation `json:"parser,omitempty" tf:"parser,omitempty"`
 
 	// -  List of security groups that the transfer associated with this endpoint should use.
@@ -1357,7 +1474,7 @@ type KafkaSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Connection []KafkaSourceConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// Data parsing parameters. If not set, the source messages are read in raw.
+	// -  Data parsing rules.
 	// +kubebuilder:validation:Optional
 	Parser []ParserParameters `json:"parser,omitempty" tf:"parser,omitempty"`
 
@@ -1515,7 +1632,7 @@ type KafkaTargetInitParameters struct {
 	// -  List of security groups that the transfer associated with this endpoint should use.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// Data serialization settings.
+	// -  Data serialization format.
 	Serializer []SerializerInitParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
 
 	// Target topic settings.
@@ -1533,7 +1650,7 @@ type KafkaTargetObservation struct {
 	// -  List of security groups that the transfer associated with this endpoint should use.
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// Data serialization settings.
+	// -  Data serialization format.
 	Serializer []SerializerObservation `json:"serializer,omitempty" tf:"serializer,omitempty"`
 
 	// Target topic settings.
@@ -1554,7 +1671,7 @@ type KafkaTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
 
-	// Data serialization settings.
+	// -  Data serialization format.
 	// +kubebuilder:validation:Optional
 	Serializer []SerializerParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
 
@@ -1940,7 +2057,7 @@ type MongoTargetInitParameters struct {
 	// Connection settings.
 	Connection []MongoTargetConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// -  List of security groups that the transfer associated with this endpoint should use.
@@ -1967,7 +2084,7 @@ type MongoTargetObservation struct {
 	// Connection settings.
 	Connection []MongoTargetConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// -  List of security groups that the transfer associated with this endpoint should use.
@@ -1987,7 +2104,7 @@ type MongoTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	Connection []MongoTargetConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -2185,7 +2302,7 @@ type MySQLSourceInitParameters struct {
 	// Connection settings.
 	Connection []MySQLSourceConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.MySQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractSpecName()
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
@@ -2247,7 +2364,7 @@ type MySQLSourceObservation struct {
 	// Connection settings.
 	Connection []MySQLSourceConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Opposite of include_table_regex. The tables matching the specified regular expressions will not be transferred.
@@ -2281,7 +2398,7 @@ type MySQLSourceParameters struct {
 	// +kubebuilder:validation:Optional
 	Connection []MySQLSourceConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.MySQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractSpecName()
 	// +kubebuilder:validation:Optional
@@ -2538,7 +2655,7 @@ type MySQLTargetInitParameters struct {
 	// Connection settings.
 	Connection []MySQLTargetConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.MySQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractSpecName()
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
@@ -2600,7 +2717,7 @@ type MySQLTargetObservation struct {
 	// Connection settings.
 	Connection []MySQLTargetConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Password for the database access. This is a block with a single field named raw which should contain the password.
@@ -2635,7 +2752,7 @@ type MySQLTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	Connection []MySQLTargetConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.MySQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractSpecName()
 	// +kubebuilder:validation:Optional
@@ -2891,6 +3008,24 @@ type OnPremiseTLSModeParameters struct {
 	Enabled []TLSModeEnabledParameters `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
+type ParserAuditTrailsV1ParserInitParameters struct {
+}
+
+type ParserAuditTrailsV1ParserObservation struct {
+}
+
+type ParserAuditTrailsV1ParserParameters struct {
+}
+
+type ParserCloudLoggingParserInitParameters struct {
+}
+
+type ParserCloudLoggingParserObservation struct {
+}
+
+type ParserCloudLoggingParserParameters struct {
+}
+
 type ParserInitParameters struct {
 
 	// Parse Audit Trails data. Empty struct.
@@ -2904,6 +3039,55 @@ type ParserInitParameters struct {
 
 	// Parse data if tskv format.
 	TskvParser []TskvParserInitParameters `json:"tskvParser,omitempty" tf:"tskv_parser,omitempty"`
+}
+
+type ParserJSONParserInitParameters struct {
+
+	// Add fields, that are not in the schema, into the _rest column.
+	AddRestColumn *bool `json:"addRestColumn,omitempty" tf:"add_rest_column,omitempty"`
+
+	// Data parsing scheme.The structure is documented below.
+	DataSchema []JSONParserDataSchemaInitParameters `json:"dataSchema,omitempty" tf:"data_schema,omitempty"`
+
+	// Allow null keys. If false - null keys will be putted to unparsed data
+	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
+}
+
+type ParserJSONParserObservation struct {
+
+	// Add fields, that are not in the schema, into the _rest column.
+	AddRestColumn *bool `json:"addRestColumn,omitempty" tf:"add_rest_column,omitempty"`
+
+	// Data parsing scheme.The structure is documented below.
+	DataSchema []JSONParserDataSchemaObservation `json:"dataSchema,omitempty" tf:"data_schema,omitempty"`
+
+	// Allow null keys. If false - null keys will be putted to unparsed data
+	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
+}
+
+type ParserJSONParserParameters struct {
+
+	// Add fields, that are not in the schema, into the _rest column.
+	// +kubebuilder:validation:Optional
+	AddRestColumn *bool `json:"addRestColumn,omitempty" tf:"add_rest_column,omitempty"`
+
+	// Data parsing scheme.The structure is documented below.
+	// +kubebuilder:validation:Optional
+	DataSchema []JSONParserDataSchemaParameters `json:"dataSchema,omitempty" tf:"data_schema,omitempty"`
+
+	// Allow null keys. If false - null keys will be putted to unparsed data
+	// +kubebuilder:validation:Optional
+	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	// +kubebuilder:validation:Optional
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type ParserObservation struct {
@@ -2938,6 +3122,84 @@ type ParserParameters struct {
 	// Parse data if tskv format.
 	// +kubebuilder:validation:Optional
 	TskvParser []TskvParserParameters `json:"tskvParser,omitempty" tf:"tskv_parser,omitempty"`
+}
+
+type ParserTskvParserDataSchemaInitParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []TskvParserDataSchemaFieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// Description of the data schema as JSON specification.
+	JSONFields *string `json:"jsonFields,omitempty" tf:"json_fields,omitempty"`
+}
+
+type ParserTskvParserDataSchemaObservation struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []TskvParserDataSchemaFieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// Description of the data schema as JSON specification.
+	JSONFields *string `json:"jsonFields,omitempty" tf:"json_fields,omitempty"`
+}
+
+type ParserTskvParserDataSchemaParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	// +kubebuilder:validation:Optional
+	Fields []TskvParserDataSchemaFieldsParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+
+	// Description of the data schema as JSON specification.
+	// +kubebuilder:validation:Optional
+	JSONFields *string `json:"jsonFields,omitempty" tf:"json_fields,omitempty"`
+}
+
+type ParserTskvParserInitParameters struct {
+
+	// Add fields, that are not in the schema, into the _rest column.
+	AddRestColumn *bool `json:"addRestColumn,omitempty" tf:"add_rest_column,omitempty"`
+
+	// Data parsing scheme.The structure is documented below.
+	DataSchema []ParserTskvParserDataSchemaInitParameters `json:"dataSchema,omitempty" tf:"data_schema,omitempty"`
+
+	// Allow null keys. If false - null keys will be putted to unparsed data
+	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
+}
+
+type ParserTskvParserObservation struct {
+
+	// Add fields, that are not in the schema, into the _rest column.
+	AddRestColumn *bool `json:"addRestColumn,omitempty" tf:"add_rest_column,omitempty"`
+
+	// Data parsing scheme.The structure is documented below.
+	DataSchema []ParserTskvParserDataSchemaObservation `json:"dataSchema,omitempty" tf:"data_schema,omitempty"`
+
+	// Allow null keys. If false - null keys will be putted to unparsed data
+	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
+}
+
+type ParserTskvParserParameters struct {
+
+	// Add fields, that are not in the schema, into the _rest column.
+	// +kubebuilder:validation:Optional
+	AddRestColumn *bool `json:"addRestColumn,omitempty" tf:"add_rest_column,omitempty"`
+
+	// Data parsing scheme.The structure is documented below.
+	// +kubebuilder:validation:Optional
+	DataSchema []ParserTskvParserDataSchemaParameters `json:"dataSchema,omitempty" tf:"data_schema,omitempty"`
+
+	// Allow null keys. If false - null keys will be putted to unparsed data
+	// +kubebuilder:validation:Optional
+	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	// +kubebuilder:validation:Optional
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type PasswordInitParameters struct {
@@ -3625,7 +3887,7 @@ type PostgresTargetInitParameters struct {
 	// Connection settings.
 	Connection []PostgresTargetConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.PostgresqlDatabase
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractSpecName()
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
@@ -3675,7 +3937,7 @@ type PostgresTargetObservation struct {
 	// Connection settings.
 	Connection []PostgresTargetConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// Password for the database access. This is a block with a single field named raw which should contain the password.
@@ -3698,7 +3960,7 @@ type PostgresTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	Connection []PostgresTargetConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.PostgresqlDatabase
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractSpecName()
 	// +kubebuilder:validation:Optional
@@ -3839,6 +4101,32 @@ type SerializerDebeziumParameters struct {
 	SerializerParameters []SerializerParametersParameters `json:"serializerParameters,omitempty" tf:"serializer_parameters,omitempty"`
 }
 
+type SerializerDebeziumSerializerParametersInitParameters struct {
+
+	// Mark field as Primary Key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SerializerDebeziumSerializerParametersObservation struct {
+
+	// Mark field as Primary Key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SerializerDebeziumSerializerParametersParameters struct {
+
+	// Mark field as Primary Key.
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type SerializerInitParameters struct {
 
 	// Empty block. Select data serialization format automatically.
@@ -3913,6 +4201,43 @@ type SerializerParametersParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type SerializerSerializerAutoInitParameters struct {
+}
+
+type SerializerSerializerAutoObservation struct {
+}
+
+type SerializerSerializerAutoParameters struct {
+}
+
+type SerializerSerializerDebeziumInitParameters struct {
+
+	// A list of debezium parameters set by the structure of the key and value string fields.
+	SerializerParameters []SerializerDebeziumSerializerParametersInitParameters `json:"serializerParameters,omitempty" tf:"serializer_parameters,omitempty"`
+}
+
+type SerializerSerializerDebeziumObservation struct {
+
+	// A list of debezium parameters set by the structure of the key and value string fields.
+	SerializerParameters []SerializerDebeziumSerializerParametersObservation `json:"serializerParameters,omitempty" tf:"serializer_parameters,omitempty"`
+}
+
+type SerializerSerializerDebeziumParameters struct {
+
+	// A list of debezium parameters set by the structure of the key and value string fields.
+	// +kubebuilder:validation:Optional
+	SerializerParameters []SerializerDebeziumSerializerParametersParameters `json:"serializerParameters,omitempty" tf:"serializer_parameters,omitempty"`
+}
+
+type SerializerSerializerJSONInitParameters struct {
+}
+
+type SerializerSerializerJSONObservation struct {
+}
+
+type SerializerSerializerJSONParameters struct {
+}
+
 type SettingsInitParameters struct {
 
 	// Settings specific to the ClickHouse source endpoint.
@@ -3950,6 +4275,12 @@ type SettingsInitParameters struct {
 
 	// Settings specific to the YDB target endpoint.
 	YdbTarget []YdbTargetInitParameters `json:"ydbTarget,omitempty" tf:"ydb_target,omitempty"`
+
+	// Settings specific to the YDS source endpoint.
+	YdsSource []YdsSourceInitParameters `json:"ydsSource,omitempty" tf:"yds_source,omitempty"`
+
+	// Settings specific to the YDS target endpoint.
+	YdsTarget []YdsTargetInitParameters `json:"ydsTarget,omitempty" tf:"yds_target,omitempty"`
 }
 
 type SettingsObservation struct {
@@ -3989,6 +4320,12 @@ type SettingsObservation struct {
 
 	// Settings specific to the YDB target endpoint.
 	YdbTarget []YdbTargetObservation `json:"ydbTarget,omitempty" tf:"ydb_target,omitempty"`
+
+	// Settings specific to the YDS source endpoint.
+	YdsSource []YdsSourceObservation `json:"ydsSource,omitempty" tf:"yds_source,omitempty"`
+
+	// Settings specific to the YDS target endpoint.
+	YdsTarget []YdsTargetObservation `json:"ydsTarget,omitempty" tf:"yds_target,omitempty"`
 }
 
 type SettingsParameters struct {
@@ -4040,6 +4377,14 @@ type SettingsParameters struct {
 	// Settings specific to the YDB target endpoint.
 	// +kubebuilder:validation:Optional
 	YdbTarget []YdbTargetParameters `json:"ydbTarget,omitempty" tf:"ydb_target,omitempty"`
+
+	// Settings specific to the YDS source endpoint.
+	// +kubebuilder:validation:Optional
+	YdsSource []YdsSourceParameters `json:"ydsSource,omitempty" tf:"yds_source,omitempty"`
+
+	// Settings specific to the YDS target endpoint.
+	// +kubebuilder:validation:Optional
+	YdsTarget []YdsTargetParameters `json:"ydsTarget,omitempty" tf:"yds_target,omitempty"`
 }
 
 type ShardingInitParameters struct {
@@ -4179,7 +4524,7 @@ type TLSModeParameters struct {
 
 type TopicInitParameters struct {
 
-	// Not to split events queue into separate per-table queues.
+	// -  Save transaction order
 	SaveTxOrder *bool `json:"saveTxOrder,omitempty" tf:"save_tx_order,omitempty"`
 
 	// Full topic name
@@ -4188,7 +4533,7 @@ type TopicInitParameters struct {
 
 type TopicObservation struct {
 
-	// Not to split events queue into separate per-table queues.
+	// -  Save transaction order
 	SaveTxOrder *bool `json:"saveTxOrder,omitempty" tf:"save_tx_order,omitempty"`
 
 	// Full topic name
@@ -4197,7 +4542,7 @@ type TopicObservation struct {
 
 type TopicParameters struct {
 
-	// Not to split events queue into separate per-table queues.
+	// -  Save transaction order
 	// +kubebuilder:validation:Optional
 	SaveTxOrder *bool `json:"saveTxOrder,omitempty" tf:"save_tx_order,omitempty"`
 
@@ -4296,6 +4641,84 @@ type TransformerParameters struct {
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
+type TskvParserDataSchemaFieldsFieldsInitParameters struct {
+
+	// Mark field as Primary Key.
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Field name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// -  A path where resulting tables are stored.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Mark field as required.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TskvParserDataSchemaFieldsFieldsObservation struct {
+
+	// Mark field as Primary Key.
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Field name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// -  A path where resulting tables are stored.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Mark field as required.
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TskvParserDataSchemaFieldsFieldsParameters struct {
+
+	// Mark field as Primary Key.
+	// +kubebuilder:validation:Optional
+	Key *bool `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Field name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// -  A path where resulting tables are stored.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Mark field as required.
+	// +kubebuilder:validation:Optional
+	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+
+	// Field type, one of: INT64, INT32, INT16, INT8, UINT64, UINT32, UINT16, UINT8, DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type TskvParserDataSchemaFieldsInitParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []TskvParserDataSchemaFieldsFieldsInitParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+}
+
+type TskvParserDataSchemaFieldsObservation struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	Fields []TskvParserDataSchemaFieldsFieldsObservation `json:"fields,omitempty" tf:"fields,omitempty"`
+}
+
+type TskvParserDataSchemaFieldsParameters struct {
+
+	// Description of the data schema in the array of fields structure (documented below).
+	// +kubebuilder:validation:Optional
+	Fields []TskvParserDataSchemaFieldsFieldsParameters `json:"fields,omitempty" tf:"fields,omitempty"`
+}
+
 type TskvParserDataSchemaInitParameters struct {
 
 	// Description of the data schema in the array of fields structure (documented below).
@@ -4335,6 +4758,9 @@ type TskvParserInitParameters struct {
 
 	// Allow null keys. If false - null keys will be putted to unparsed data
 	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type TskvParserObservation struct {
@@ -4347,6 +4773,9 @@ type TskvParserObservation struct {
 
 	// Allow null keys. If false - null keys will be putted to unparsed data
 	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type TskvParserParameters struct {
@@ -4362,11 +4791,18 @@ type TskvParserParameters struct {
 	// Allow null keys. If false - null keys will be putted to unparsed data
 	// +kubebuilder:validation:Optional
 	NullKeysAllowed *bool `json:"nullKeysAllowed,omitempty" tf:"null_keys_allowed,omitempty"`
+
+	// Allow unescape string values.
+	// +kubebuilder:validation:Optional
+	UnescapeStringValues *bool `json:"unescapeStringValues,omitempty" tf:"unescape_string_values,omitempty"`
 }
 
 type YdbSourceInitParameters struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Custom name for changefeed.
+	ChangefeedCustomName *string `json:"changefeedCustomName,omitempty" tf:"changefeed_custom_name,omitempty"`
+
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// -  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".
@@ -4387,7 +4823,10 @@ type YdbSourceInitParameters struct {
 
 type YdbSourceObservation struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Custom name for changefeed.
+	ChangefeedCustomName *string `json:"changefeedCustomName,omitempty" tf:"changefeed_custom_name,omitempty"`
+
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// -  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".
@@ -4408,7 +4847,11 @@ type YdbSourceObservation struct {
 
 type YdbSourceParameters struct {
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Custom name for changefeed.
+	// +kubebuilder:validation:Optional
+	ChangefeedCustomName *string `json:"changefeedCustomName,omitempty" tf:"changefeed_custom_name,omitempty"`
+
+	// -  Database.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
@@ -4442,8 +4885,11 @@ type YdbTargetInitParameters struct {
 	// -  How to clean collections when activating the transfer. One of "YDB_CLEANUP_POLICY_DISABLED" or "YDB_CLEANUP_POLICY_DROP".
 	CleanupPolicy *string `json:"cleanupPolicy,omitempty" tf:"cleanup_policy,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  Compression that will be used for default columns family on YDB table creation One of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED", "YDB_DEFAULT_COMPRESSION_LZ4".
+	DefaultCompression *string `json:"defaultCompression,omitempty" tf:"default_compression,omitempty"`
 
 	// -  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
@@ -4469,8 +4915,11 @@ type YdbTargetObservation struct {
 	// -  How to clean collections when activating the transfer. One of "YDB_CLEANUP_POLICY_DISABLED" or "YDB_CLEANUP_POLICY_DROP".
 	CleanupPolicy *string `json:"cleanupPolicy,omitempty" tf:"cleanup_policy,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  Compression that will be used for default columns family on YDB table creation One of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED", "YDB_DEFAULT_COMPRESSION_LZ4".
+	DefaultCompression *string `json:"defaultCompression,omitempty" tf:"default_compression,omitempty"`
 
 	// -  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".
 	Instance *string `json:"instance,omitempty" tf:"instance,omitempty"`
@@ -4497,9 +4946,13 @@ type YdbTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	CleanupPolicy *string `json:"cleanupPolicy,omitempty" tf:"cleanup_policy,omitempty"`
 
-	// -  Database path in YDB where tables are stored. Example: "/ru/transfer_manager/prod/data-transfer-yt".
+	// -  Database.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  Compression that will be used for default columns family on YDB table creation One of "YDB_DEFAULT_COMPRESSION_UNSPECIFIED", "YDB_DEFAULT_COMPRESSION_DISABLED", "YDB_DEFAULT_COMPRESSION_LZ4".
+	// +kubebuilder:validation:Optional
+	DefaultCompression *string `json:"defaultCompression,omitempty" tf:"default_compression,omitempty"`
 
 	// -  Instance of YDB. Example: "my-cute-ydb.cloud.yandex.ru:2135".
 	// +kubebuilder:validation:Optional
@@ -4528,6 +4981,292 @@ type YdbTargetParameters struct {
 	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type YdsSourceInitParameters struct {
+
+	// -  Should continue working, if consumer read lag exceed TTL of topic.
+	AllowTTLRewind *bool `json:"allowTtlRewind,omitempty" tf:"allow_ttl_rewind,omitempty"`
+
+	// -  Consumer.
+	Consumer *string `json:"consumer,omitempty" tf:"consumer,omitempty"`
+
+	// -  Database.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  YDS Endpoint.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// -  Data parsing rules.
+	Parser []YdsSourceParserInitParameters `json:"parser,omitempty" tf:"parser,omitempty"`
+
+	// -  List of security groups that the transfer associated with this endpoint should use.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// -  Service account ID for interaction with database.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// -  Stream.
+	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+
+	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// -  List of supported compression codec.
+	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
+}
+
+type YdsSourceObservation struct {
+
+	// -  Should continue working, if consumer read lag exceed TTL of topic.
+	AllowTTLRewind *bool `json:"allowTtlRewind,omitempty" tf:"allow_ttl_rewind,omitempty"`
+
+	// -  Consumer.
+	Consumer *string `json:"consumer,omitempty" tf:"consumer,omitempty"`
+
+	// -  Database.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  YDS Endpoint.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// -  Data parsing rules.
+	Parser []YdsSourceParserObservation `json:"parser,omitempty" tf:"parser,omitempty"`
+
+	// -  List of security groups that the transfer associated with this endpoint should use.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// -  Service account ID for interaction with database.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// -  Stream.
+	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+
+	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// -  List of supported compression codec.
+	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
+}
+
+type YdsSourceParameters struct {
+
+	// -  Should continue working, if consumer read lag exceed TTL of topic.
+	// +kubebuilder:validation:Optional
+	AllowTTLRewind *bool `json:"allowTtlRewind,omitempty" tf:"allow_ttl_rewind,omitempty"`
+
+	// -  Consumer.
+	// +kubebuilder:validation:Optional
+	Consumer *string `json:"consumer,omitempty" tf:"consumer,omitempty"`
+
+	// -  Database.
+	// +kubebuilder:validation:Optional
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  YDS Endpoint.
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// -  Data parsing rules.
+	// +kubebuilder:validation:Optional
+	Parser []YdsSourceParserParameters `json:"parser,omitempty" tf:"parser,omitempty"`
+
+	// -  List of security groups that the transfer associated with this endpoint should use.
+	// +kubebuilder:validation:Optional
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// -  Service account ID for interaction with database.
+	// +kubebuilder:validation:Optional
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// -  Stream.
+	// +kubebuilder:validation:Optional
+	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+
+	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// -  List of supported compression codec.
+	// +kubebuilder:validation:Optional
+	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
+}
+
+type YdsSourceParserInitParameters struct {
+
+	// Parse Audit Trails data. Empty struct.
+	AuditTrailsV1Parser []ParserAuditTrailsV1ParserInitParameters `json:"auditTrailsV1Parser,omitempty" tf:"audit_trails_v1_parser,omitempty"`
+
+	// Parse Cloud Logging data. Empty struct.
+	CloudLoggingParser []ParserCloudLoggingParserInitParameters `json:"cloudLoggingParser,omitempty" tf:"cloud_logging_parser,omitempty"`
+
+	// Parse data in json format.
+	JSONParser []ParserJSONParserInitParameters `json:"jsonParser,omitempty" tf:"json_parser,omitempty"`
+
+	// Parse data if tskv format.
+	TskvParser []ParserTskvParserInitParameters `json:"tskvParser,omitempty" tf:"tskv_parser,omitempty"`
+}
+
+type YdsSourceParserObservation struct {
+
+	// Parse Audit Trails data. Empty struct.
+	AuditTrailsV1Parser []ParserAuditTrailsV1ParserParameters `json:"auditTrailsV1Parser,omitempty" tf:"audit_trails_v1_parser,omitempty"`
+
+	// Parse Cloud Logging data. Empty struct.
+	CloudLoggingParser []ParserCloudLoggingParserParameters `json:"cloudLoggingParser,omitempty" tf:"cloud_logging_parser,omitempty"`
+
+	// Parse data in json format.
+	JSONParser []ParserJSONParserObservation `json:"jsonParser,omitempty" tf:"json_parser,omitempty"`
+
+	// Parse data if tskv format.
+	TskvParser []ParserTskvParserObservation `json:"tskvParser,omitempty" tf:"tskv_parser,omitempty"`
+}
+
+type YdsSourceParserParameters struct {
+
+	// Parse Audit Trails data. Empty struct.
+	// +kubebuilder:validation:Optional
+	AuditTrailsV1Parser []ParserAuditTrailsV1ParserParameters `json:"auditTrailsV1Parser,omitempty" tf:"audit_trails_v1_parser,omitempty"`
+
+	// Parse Cloud Logging data. Empty struct.
+	// +kubebuilder:validation:Optional
+	CloudLoggingParser []ParserCloudLoggingParserParameters `json:"cloudLoggingParser,omitempty" tf:"cloud_logging_parser,omitempty"`
+
+	// Parse data in json format.
+	// +kubebuilder:validation:Optional
+	JSONParser []ParserJSONParserParameters `json:"jsonParser,omitempty" tf:"json_parser,omitempty"`
+
+	// Parse data if tskv format.
+	// +kubebuilder:validation:Optional
+	TskvParser []ParserTskvParserParameters `json:"tskvParser,omitempty" tf:"tskv_parser,omitempty"`
+}
+
+type YdsTargetInitParameters struct {
+
+	// -  Database.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  YDS Endpoint.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// -  Save transaction order
+	SaveTxOrder *bool `json:"saveTxOrder,omitempty" tf:"save_tx_order,omitempty"`
+
+	// -  List of security groups that the transfer associated with this endpoint should use.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// -  Data serialization format.
+	Serializer []YdsTargetSerializerInitParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
+
+	// -  Service account ID for interaction with database.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// -  Stream.
+	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+
+	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type YdsTargetObservation struct {
+
+	// -  Database.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  YDS Endpoint.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// -  Save transaction order
+	SaveTxOrder *bool `json:"saveTxOrder,omitempty" tf:"save_tx_order,omitempty"`
+
+	// -  List of security groups that the transfer associated with this endpoint should use.
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// -  Data serialization format.
+	Serializer []YdsTargetSerializerObservation `json:"serializer,omitempty" tf:"serializer,omitempty"`
+
+	// -  Service account ID for interaction with database.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// -  Stream.
+	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+
+	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type YdsTargetParameters struct {
+
+	// -  Database.
+	// +kubebuilder:validation:Optional
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// -  YDS Endpoint.
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// -  Save transaction order
+	// +kubebuilder:validation:Optional
+	SaveTxOrder *bool `json:"saveTxOrder,omitempty" tf:"save_tx_order,omitempty"`
+
+	// -  List of security groups that the transfer associated with this endpoint should use.
+	// +kubebuilder:validation:Optional
+	SecurityGroups []*string `json:"securityGroups,omitempty" tf:"security_groups,omitempty"`
+
+	// -  Data serialization format.
+	// +kubebuilder:validation:Optional
+	Serializer []YdsTargetSerializerParameters `json:"serializer,omitempty" tf:"serializer,omitempty"`
+
+	// -  Service account ID for interaction with database.
+	// +kubebuilder:validation:Optional
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// -  Stream.
+	// +kubebuilder:validation:Optional
+	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+
+	// -  Identifier of the Yandex Cloud VPC subnetwork to user for accessing the database. If omitted, the server has to be accessible via Internet.
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type YdsTargetSerializerInitParameters struct {
+
+	// Empty block. Select data serialization format automatically.
+	SerializerAuto []SerializerSerializerAutoInitParameters `json:"serializerAuto,omitempty" tf:"serializer_auto,omitempty"`
+
+	// Serialize data in json format. The structure is documented below.
+	SerializerDebezium []SerializerSerializerDebeziumInitParameters `json:"serializerDebezium,omitempty" tf:"serializer_debezium,omitempty"`
+
+	// Empty block. Serialize data in json format.
+	SerializerJSON []SerializerSerializerJSONInitParameters `json:"serializerJson,omitempty" tf:"serializer_json,omitempty"`
+}
+
+type YdsTargetSerializerObservation struct {
+
+	// Empty block. Select data serialization format automatically.
+	SerializerAuto []SerializerSerializerAutoParameters `json:"serializerAuto,omitempty" tf:"serializer_auto,omitempty"`
+
+	// Serialize data in json format. The structure is documented below.
+	SerializerDebezium []SerializerSerializerDebeziumObservation `json:"serializerDebezium,omitempty" tf:"serializer_debezium,omitempty"`
+
+	// Empty block. Serialize data in json format.
+	SerializerJSON []SerializerSerializerJSONParameters `json:"serializerJson,omitempty" tf:"serializer_json,omitempty"`
+}
+
+type YdsTargetSerializerParameters struct {
+
+	// Empty block. Select data serialization format automatically.
+	// +kubebuilder:validation:Optional
+	SerializerAuto []SerializerSerializerAutoParameters `json:"serializerAuto,omitempty" tf:"serializer_auto,omitempty"`
+
+	// Serialize data in json format. The structure is documented below.
+	// +kubebuilder:validation:Optional
+	SerializerDebezium []SerializerSerializerDebeziumParameters `json:"serializerDebezium,omitempty" tf:"serializer_debezium,omitempty"`
+
+	// Empty block. Serialize data in json format.
+	// +kubebuilder:validation:Optional
+	SerializerJSON []SerializerSerializerJSONParameters `json:"serializerJson,omitempty" tf:"serializer_json,omitempty"`
 }
 
 // EndpointSpec defines the desired state of Endpoint

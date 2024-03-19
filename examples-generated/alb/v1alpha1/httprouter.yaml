@@ -9,6 +9,6 @@ metadata:
 spec:
   forProvider:
     labels:
-      empty-label: ""
+    - empty-label: s
       tf-label: tf-label-value
     name: my-http-router
