@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: Apache-2.0
-
 package controller
 
 import (
@@ -34,6 +30,7 @@ import (
 	transfer "github.com/tagesjump/provider-upjet-yc/internal/controller/datatransfer/transfer"
 	recordset "github.com/tagesjump/provider-upjet-yc/internal/controller/dns/recordset"
 	zone "github.com/tagesjump/provider-upjet-yc/internal/controller/dns/zone"
+	zoneiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/dns/zoneiambinding"
 	serviceaccount "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccount"
 	serviceaccountapikey "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountapikey"
 	serviceaccountiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/iam/serviceaccountiambinding"
@@ -143,6 +140,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		transfer.Setup,
 		recordset.Setup,
 		zone.Setup,
+		zoneiambinding.Setup,
 		serviceaccount.Setup,
 		serviceaccountapikey.Setup,
 		serviceaccountiambinding.Setup,
