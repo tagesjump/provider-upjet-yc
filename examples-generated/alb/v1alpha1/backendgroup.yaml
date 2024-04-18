@@ -25,3 +25,6 @@ spec:
       - sni: backend-domain.internal
       weight: 1
     name: my-backend-group
+    sessionAffinity:
+    - connection:
+      - sourceIp: 127.0.0.1

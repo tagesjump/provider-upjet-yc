@@ -115,6 +115,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_monitoring_dashboard":                             config.IdentifierFromProvider,
 	"yandex_loadtesting_agent":                                config.IdentifierFromProvider,
 	"yandex_mdb_opensearch_cluster":                           config.IdentifierFromProvider,
+	"yandex_audit_trails_trail":                               config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

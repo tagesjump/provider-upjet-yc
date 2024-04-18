@@ -29,6 +29,10 @@ type AgentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// A set of key/value label pairs to assign to the agent.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
 	// The name of the load testing agent. Must be unique within folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -47,6 +51,10 @@ type AgentObservation struct {
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A set of key/value label pairs to assign to the agent.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the load testing agent. Must be unique within folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -74,6 +82,11 @@ type AgentParameters struct {
 	// Selector for a Folder in resourcemanager to populate folderId.
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// A set of key/value label pairs to assign to the agent.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The name of the load testing agent. Must be unique within folder.
 	// +kubebuilder:validation:Optional

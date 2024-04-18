@@ -39,6 +39,7 @@ type BackendGroupInitParameters struct {
 	// Name of the Backend Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Session affinity mode determines how incoming requests are grouped into one session. Structure is documented below.
 	SessionAffinity []SessionAffinityInitParameters `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
 
 	// Stream backend specification that will be used by the ALB Backend Group. Structure is documented below.
@@ -72,6 +73,7 @@ type BackendGroupObservation struct {
 	// Name of the Backend Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Session affinity mode determines how incoming requests are grouped into one session. Structure is documented below.
 	SessionAffinity []SessionAffinityObservation `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
 
 	// Stream backend specification that will be used by the ALB Backend Group. Structure is documented below.
@@ -114,6 +116,7 @@ type BackendGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Session affinity mode determines how incoming requests are grouped into one session. Structure is documented below.
 	// +kubebuilder:validation:Optional
 	SessionAffinity []SessionAffinityParameters `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
 
@@ -124,18 +127,21 @@ type BackendGroupParameters struct {
 
 type ConnectionInitParameters struct {
 
+	// Source IP address to use with affinity.
 	// Use source IP address
 	SourceIP *bool `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
 type ConnectionObservation struct {
 
+	// Source IP address to use with affinity.
 	// Use source IP address
 	SourceIP *bool `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
 type ConnectionParameters struct {
 
+	// Source IP address to use with affinity.
 	// Use source IP address
 	// +kubebuilder:validation:Optional
 	SourceIP *bool `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
@@ -148,6 +154,7 @@ type CookieInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// TTL for the cookie (if not set, session cookie will be used)
+	// TTL for the cookie (if not set, session cookie will be used)
 	TTL *string `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
@@ -157,6 +164,7 @@ type CookieObservation struct {
 	// Name of the HTTP cookie
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// TTL for the cookie (if not set, session cookie will be used)
 	// TTL for the cookie (if not set, session cookie will be used)
 	TTL *string `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
@@ -168,6 +176,7 @@ type CookieParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// TTL for the cookie (if not set, session cookie will be used)
 	// TTL for the cookie (if not set, session cookie will be used)
 	// +kubebuilder:validation:Optional
 	TTL *string `json:"ttl,omitempty" tf:"ttl,omitempty"`
@@ -618,21 +627,21 @@ type HTTPHealthcheckParameters struct {
 
 type HeaderInitParameters struct {
 
-	// Name of the Backend Group.
+	// The name of the request header that will be used with affinity.
 	// The name of the request header that will be used
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 }
 
 type HeaderObservation struct {
 
-	// Name of the Backend Group.
+	// The name of the request header that will be used with affinity.
 	// The name of the request header that will be used
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 }
 
 type HeaderParameters struct {
 
-	// Name of the Backend Group.
+	// The name of the request header that will be used with affinity.
 	// The name of the request header that will be used
 	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
@@ -875,38 +884,47 @@ type LoadBalancingConfigParameters struct {
 
 type SessionAffinityInitParameters struct {
 
+	// Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.
 	// IP address affinity
 	Connection []ConnectionInitParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
+	// Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
 	// Cookie affinity
 	Cookie []CookieInitParameters `json:"cookie,omitempty" tf:"cookie,omitempty"`
 
+	// Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
 	// Request header affinity
 	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
 }
 
 type SessionAffinityObservation struct {
 
+	// Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.
 	// IP address affinity
 	Connection []ConnectionObservation `json:"connection,omitempty" tf:"connection,omitempty"`
 
+	// Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
 	// Cookie affinity
 	Cookie []CookieObservation `json:"cookie,omitempty" tf:"cookie,omitempty"`
 
+	// Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
 	// Request header affinity
 	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
 }
 
 type SessionAffinityParameters struct {
 
+	// Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.
 	// IP address affinity
 	// +kubebuilder:validation:Optional
 	Connection []ConnectionParameters `json:"connection,omitempty" tf:"connection,omitempty"`
 
+	// Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
 	// Cookie affinity
 	// +kubebuilder:validation:Optional
 	Cookie []CookieParameters `json:"cookie,omitempty" tf:"cookie,omitempty"`
 
+	// Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
 	// Request header affinity
 	// +kubebuilder:validation:Optional
 	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`

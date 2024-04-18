@@ -73,6 +73,9 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  deletionProtection:
+                    description: Flag that protects the dns zone from accidental deletion.
+                    type: boolean
                   description:
                     description: Description of the DNS zone.
                     type: string
@@ -275,6 +278,9 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  deletionProtection:
+                    description: Flag that protects the dns zone from accidental deletion.
+                    type: boolean
                   description:
                     description: Description of the DNS zone.
                     type: string
@@ -644,6 +650,9 @@ spec:
                   createdAt:
                     description: (Computed) The DNS zone creation timestamp.
                     type: string
+                  deletionProtection:
+                    description: Flag that protects the dns zone from accidental deletion.
+                    type: boolean
                   description:
                     description: Description of the DNS zone.
                     type: string

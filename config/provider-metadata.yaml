@@ -41,9 +41,20 @@ resources:
                       "weight": 1
                     }
                   ],
-                  "name": "my-backend-group"
+                  "name": "my-backend-group",
+                  "session_affinity": [
+                    {
+                      "connection": [
+                        {
+                          "source_ip": "127.0.0.1"
+                        }
+                      ]
+                    }
+                  ]
                 }
         argumentDocs:
+            cookie.name: '- (Required) Name of the HTTP cookie to use with affinity.'
+            cookie.ttl: '- (Optional) TTL for the cookie (if not set, session cookie will be used)'
             create: '- Default is 5 minute.'
             created_at: '- The backend group creation timestamp.'
             delete: '- Default is 5 minute.'
@@ -61,6 +72,7 @@ resources:
             grpc_backend.tls.validation_context.0.trusted_ca_id: '- (Optional) Trusted CA certificate ID in the Certificate Manager.'
             grpc_backend.weight: '- (Optional) Weight of the backend. Traffic will be split between backends of the same BackendGroup according to their weights.'
             grpc_healthcheck.service_name: '- (Optional) Service name for grpc.health.v1.HealthCheckRequest message.'
+            header.header_name: '- (Required) The name of the request header that will be used with affinity.'
             healthcheck.grpc_healthcheck: '- (Optional) Grpc Healthcheck specification that will be used by this healthcheck. Structure is documented below.'
             healthcheck.healthcheck_port: '- (Optional) Optional alternative port for health checking.'
             healthcheck.healthy_threshold: '- (Optional) Number of consecutive successful health checks required to promote endpoint into the healthy state. 0 means 1. Note that during startup, only a single successful health check is required to mark a host healthy.'
@@ -91,6 +103,11 @@ resources:
             load_balancing_config.panic_threshold: '- (Optional) If percentage of healthy hosts in the backend is lower than panic_threshold, traffic will be routed to all backends no matter what the health status is. This helps to avoid healthy backends overloading  when everything is bad. Zero means no panic threshold.'
             load_balancing_config.strict_locality: '- (Optional) If set, will route requests only to the same availability zone. Balancer won''t know about endpoints in other zones.'
             name: '- (Optional) Name of the Backend Group.'
+            session_affinity: '- (Optional) Session affinity mode determines how incoming requests are grouped into one session. Structure is documented below.'
+            session_affinity.connection: '- (Optional) Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.'
+            session_affinity.connection.source_ip: '- (Optional) Source IP address to use with affinity.'
+            session_affinity.cookie: '- (Optional) Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.'
+            session_affinity.header: '- (Optional) Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.'
             stream_backend: '- (Optional) Stream backend specification that will be used by the ALB Backend Group. Structure is documented below.'
             stream_backend.healthcheck: '- (Optional) Healthcheck specification that will be used by this backend. Structure is documented below.'
             stream_backend.load_balancing_config: '- (Optional) Load Balancing Config specification that will be used by this backend. Structure is documented below.'
@@ -487,6 +504,124 @@ resources:
             status: '- Status of the Yandex API Gateway.'
             user_domains: '- (DEPRECATED, use custom_domains instead) Set of user domains attached to Yandex API Gateway.'
             variables: '- (Optional) A set of values for variables in gateway specification.'
+        importStatements: []
+    yandex_audit_trails_trail:
+        subCategory: ""
+        description: Manages a trail resource.
+        name: yandex_audit_trails_trail
+        title: yandex_audit_trails_trail
+        examples:
+            - name: basic_trail
+              manifest: |-
+                {
+                  "description": "Some trail description",
+                  "filter": [
+                    {
+                      "event_filters": [
+                        {
+                          "categories": [
+                            {
+                              "plane": "DATA_PLANE",
+                              "type": "WRITE"
+                            }
+                          ],
+                          "path_filter": [
+                            {
+                              "any_filter": [
+                                {
+                                  "resource_id": "home-folder",
+                                  "resource_type": "resource-manager.folder"
+                                }
+                              ]
+                            }
+                          ],
+                          "service": "storage"
+                        },
+                        {
+                          "categories": [
+                            {
+                              "plane": "DATA_PLANE",
+                              "type": "READ"
+                            }
+                          ],
+                          "path_filter": [
+                            {
+                              "some_filter": [
+                                {
+                                  "any_filters": [
+                                    {
+                                      "resource_id": "vpc-net-id-1",
+                                      "resource_type": "vpc.network"
+                                    },
+                                    {
+                                      "resource_id": "vpc-net-id-2",
+                                      "resource_type": "vpc.network"
+                                    }
+                                  ],
+                                  "resource_id": "home-folder",
+                                  "resource_type": "resource-manager.folder"
+                                }
+                              ]
+                            }
+                          ],
+                          "service": "dns"
+                        }
+                      ],
+                      "path_filter": [
+                        {
+                          "any_filter": [
+                            {
+                              "resource_id": "home-folder",
+                              "resource_type": "resource-manager.folder"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "folder_id": "home-folder",
+                  "labels": {
+                    "key": "value"
+                  },
+                  "logging_destination": [
+                    {
+                      "log_group_id": "some-log-group"
+                    }
+                  ],
+                  "name": "a-trail",
+                  "service_account_id": "trail-service-account"
+                }
+        argumentDocs:
+            any_filter: '- Structure describing that events will be gathered from all cloud resources that belong to the parent resource. Mutually exclusive with some_filter.'
+            any_filters: '- (Required) List of child resources from which events will be gathered'
+            bucket_name: '- (Required) Name of the destination bucket'
+            categories: '- (Required) List of structures describing categories of gathered data plane events'
+            create: '- Default 5 minutes.'
+            data_stream_destination: '- Structure describing destination data stream of the trail. Mutually exclusive with logging_destination and storage_destination.'
+            database_id: '- (Required) ID of the YDB hosting the destination data stream.'
+            delete: '- Default 5 minutes.'
+            description: '- (Optional) Description of the trail.'
+            event_filters: '- Structure describing filtering process for the service-specific data plane events'
+            filter: '- Structure describing event filtering process for the trail.'
+            folder_id: '- (Required) ID of the folder to which the trail belongs.'
+            labels: '- (Optional) Labels defined by the user.'
+            log_group_id: '- (Required) ID of the destination Cloud Logging Group'
+            logging_destination: '- Structure describing destination log group of the trail. Mutually exclusive with storage_destination and data_stream_destination.'
+            name: '- (Required) Name of the trail.'
+            object_prefix: '- (Optional) Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id'
+            path_filter: '- (Optional) Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category'
+            plane: '- (Required) Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE'
+            resource_id: '- (Required) ID of the parent resource.'
+            resource_type: '- (Required) Resource type of the parent resource.'
+            service: '- (Required) ID of the service which events will be gathered'
+            service_account_id: '- (Required) ID of the IAM service account that is used by the trail.'
+            some_filter: '- Structure describing that events will be gathered from some of the cloud resources that belong to the parent resource. Mutually exclusive with any_filter.'
+            status: '- Status of this trail.'
+            storage_destination: '- Structure describing destination bucket of the trail. Mutually exclusive with logging_destination and data_stream_destination.'
+            stream_name: '- (Required) Name of the YDS stream belonging to the specified YDB.'
+            trail_id: '- ID of the trail resource.'
+            type: '- (Required) Type of the event by its operation effect on the resource. Possible values: READ/WRITE'
+            update: '- Default 5 minutes.'
         importStatements: []
     yandex_backup_policy:
         subCategory: ""
@@ -1303,7 +1438,7 @@ resources:
             scheduling_policy: '- (Optional) Scheduling policy configuration. The structure is documented below.'
             scheduling_policy.preemptible: '- (Optional) Specifies if the instance is preemptible. Defaults to false.'
             secondary_disk: |-
-                - (Optional) A list of disks to attach to the instance. The structure is documented below.
+                - (Optional) A set of disks to attach to the instance. The structure is documented below.
                 Note: The allow_stopping_for_update property must be set to true in order to update this structure.
             secondary_disk.auto_delete: |-
                 - (Optional) Whether the disk is auto-deleted when the instance
@@ -2813,6 +2948,7 @@ resources:
             - name: zone1
               manifest: |-
                 {
+                  "deletion_protection": true,
                   "description": "desc",
                   "labels": {
                     "label1": "label-1-value"
@@ -2838,6 +2974,7 @@ resources:
                 yandex_vpc_network.foo: '{}'
         argumentDocs:
             created_at: '- (Computed) The DNS zone creation timestamp.'
+            deletion_protection: '- (Optional) Flag that protects the dns zone from accidental deletion.'
             description: '- (Optional) Description of the DNS zone.'
             folder_id: '- (Optional) ID of the folder to create a zone in. If it is not provided, the default provider folder is used.'
             id: '- (Computed) ID of a new DNS zone.'
@@ -4195,6 +4332,9 @@ resources:
                   ],
                   "description": "2 core 4 GB RAM agent",
                   "folder_id": "${data.yandex_resourcemanager_folder.test_folder.id}",
+                  "labels": {
+                    "jmeter": "5"
+                  },
                   "name": "my-agent"
                 }
         argumentDocs:
@@ -4213,8 +4353,8 @@ resources:
             compute_instance.zone_id: |-
                 - (Optional) The availability zone where the virtual machine will be created. If it is not provided,
                 the default provider folder is used.
-            create: '- Default 30 minutes'
-            delete: '- Default 30 minutes'
+            create: '- Default 10 minutes'
+            delete: '- Default 10 minutes'
             description: '- (Optional) A description of the load testing agent.'
             folder_id: '- (Required) The ID of the folder that the resources belong to.'
             initialize_params.block_size: '- (Optional) Block size of the disk, specified in bytes.'
@@ -4222,6 +4362,7 @@ resources:
             initialize_params.name: '- (Optional) A name of the boot disk.'
             initialize_params.size: '- (Optional) The size of the disk in GB. Defaults to 15 GB.'
             initialize_params.type: '- (Optional) The disk type.'
+            labels: '- (Optional) A set of key/value label pairs to assign to the agent.'
             name: '- (Required) The name of the load testing agent. Must be unique within folder.'
             network_interface.ip_address: '- (Optional) Manual set static IP address.'
             network_interface.ipv4: '- (Optional) Flag for allocating IPv4 address for the network interface.'
@@ -4234,6 +4375,7 @@ resources:
             resources.core_fraction: '- (Optional) If provided, specifies baseline core performance as a percent.'
             resources.cores: '- (Optional) The number of CPU cores for the instance. Defaults to 2 cores.'
             resources.memory: '- (Optional) The memory size in GB. Defaults to 2 GB.'
+            update: '- Default 10 minutes'
         importStatements: []
     yandex_lockbox_secret:
         subCategory: ""
@@ -6208,9 +6350,11 @@ resources:
             cluster_config.performance_diagnostics: '- (Optional) Performance diagnostics to the MongoDB cluster. The structure is documented below.'
             cluster_config.version: '- (Required) Version of the MongoDB server software. Can be either 4.2, 4.4, 4.4-enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.'
             cluster_id: '- The ID of the cluster.'
+            create: '- Default 30 minutes.'
             created_at: '- Creation timestamp of the key.'
             database: '- (Required) A database of the MongoDB cluster. The structure is documented below.'
             database.name: '- (Required) The name of the database.'
+            delete: '- Default 30 minutes.'
             deletion_protection: '- (Optional) Inhibits deletion of the cluster.  Can be either true or false.'
             description: '- (Optional) Description of the MongoDB cluster.'
             environment: '- (Required, ForceNew) Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.'
@@ -6305,7 +6449,7 @@ resources:
             name: '- (Required) Name of the MongoDB cluster. Provided by the client when the cluster is created.'
             net.compressors: |-
                 - (Optional) Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                 For more information, see the net.Compression.Compressors
                 description in the official documentation.
             net.max_incoming_connections: |-
@@ -6371,6 +6515,7 @@ resources:
                 - (Optional) The WiredTiger engine settings.
                 (see the storage.wiredTiger option).
                 These settings available only on mongod hosts. The structure is documented below.
+            update: '- Default 60 minutes.'
             user: '- (Required) A user of the MongoDB cluster. The structure is documented below.'
             user.name: '- (Required) The name of the user.'
             user.password: '- (Required) The password of the user.'
@@ -9651,6 +9796,11 @@ resources:
                 you create the resource.
             external_ipv4_address: '- (Optional) spec of IP v4 address'
             external_ipv4_address.ddos_protection_provider: '- (Optional) Enable DDOS protection. Possible values are: "qrator"'
+            external_ipv4_address.dns_record: '- (Optional) DNS record specification of address'
+            external_ipv4_address.dns_record.dns_zone_id: '- (Required) DNS zone id to create record at.'
+            external_ipv4_address.dns_record.fqdn: '- (Required) FQDN for record to address'
+            external_ipv4_address.dns_record.ptr: '- (Optional) If PTR record is needed'
+            external_ipv4_address.dns_record.ttl: '- (Optional) TTL of DNS record'
             external_ipv4_address.outgoing_smtp_capability: '- (Optional) Wanted outgoing smtp capability.'
             external_ipv4_address.zone_id: '- Zone for allocating address.'
             folder_id: |-
