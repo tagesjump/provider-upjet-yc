@@ -11,6 +11,9 @@ import (
 
 type AddressInitParameters struct {
 
+	// DNS record specification of address
+	DNSRecord []DNSRecordInitParameters `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
+
 	// Flag that protects the address from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
@@ -47,6 +50,9 @@ type AddressObservation struct {
 	// Creation timestamp of the key.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// DNS record specification of address
+	DNSRecord []DNSRecordObservation `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
+
 	// Flag that protects the address from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
@@ -78,6 +84,10 @@ type AddressObservation struct {
 }
 
 type AddressParameters struct {
+
+	// DNS record specification of address
+	// +kubebuilder:validation:Optional
+	DNSRecord []DNSRecordParameters `json:"dnsRecord,omitempty" tf:"dns_record,omitempty"`
 
 	// Flag that protects the address from accidental deletion.
 	// +kubebuilder:validation:Optional
@@ -114,6 +124,55 @@ type AddressParameters struct {
 	// Name of the address. Provided by the client when the address is created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type DNSRecordInitParameters struct {
+
+	// DNS zone id to create record at.
+	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// FQDN for record to address
+	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
+	// If PTR record is needed
+	Ptr *bool `json:"ptr,omitempty" tf:"ptr,omitempty"`
+
+	// TTL of DNS record
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+}
+
+type DNSRecordObservation struct {
+
+	// DNS zone id to create record at.
+	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// FQDN for record to address
+	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
+	// If PTR record is needed
+	Ptr *bool `json:"ptr,omitempty" tf:"ptr,omitempty"`
+
+	// TTL of DNS record
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+}
+
+type DNSRecordParameters struct {
+
+	// DNS zone id to create record at.
+	// +kubebuilder:validation:Optional
+	DNSZoneID *string `json:"dnsZoneId" tf:"dns_zone_id,omitempty"`
+
+	// FQDN for record to address
+	// +kubebuilder:validation:Optional
+	Fqdn *string `json:"fqdn" tf:"fqdn,omitempty"`
+
+	// If PTR record is needed
+	// +kubebuilder:validation:Optional
+	Ptr *bool `json:"ptr,omitempty" tf:"ptr,omitempty"`
+
+	// TTL of DNS record
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type ExternalIPv4AddressInitParameters struct {

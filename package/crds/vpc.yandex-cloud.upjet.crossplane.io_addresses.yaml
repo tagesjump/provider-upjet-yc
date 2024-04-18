@@ -81,6 +81,24 @@ spec:
                       An optional description of this resource. Provide this property when
                       you create the resource.
                     type: string
+                  dnsRecord:
+                    description: DNS record specification of address
+                    items:
+                      properties:
+                        dnsZoneId:
+                          description: DNS zone id to create record at.
+                          type: string
+                        fqdn:
+                          description: FQDN for record to address
+                          type: string
+                        ptr:
+                          description: If PTR record is needed
+                          type: boolean
+                        ttl:
+                          description: TTL of DNS record
+                          type: number
+                      type: object
+                    type: array
                   externalIpv4Address:
                     description: spec of IP v4 address
                     items:
@@ -211,6 +229,24 @@ spec:
                       An optional description of this resource. Provide this property when
                       you create the resource.
                     type: string
+                  dnsRecord:
+                    description: DNS record specification of address
+                    items:
+                      properties:
+                        dnsZoneId:
+                          description: DNS zone id to create record at.
+                          type: string
+                        fqdn:
+                          description: FQDN for record to address
+                          type: string
+                        ptr:
+                          description: If PTR record is needed
+                          type: boolean
+                        ttl:
+                          description: TTL of DNS record
+                          type: number
+                      type: object
+                    type: array
                   externalIpv4Address:
                     description: spec of IP v4 address
                     items:
@@ -503,6 +539,24 @@ spec:
                       An optional description of this resource. Provide this property when
                       you create the resource.
                     type: string
+                  dnsRecord:
+                    description: DNS record specification of address
+                    items:
+                      properties:
+                        dnsZoneId:
+                          description: DNS zone id to create record at.
+                          type: string
+                        fqdn:
+                          description: FQDN for record to address
+                          type: string
+                        ptr:
+                          description: If PTR record is needed
+                          type: boolean
+                        ttl:
+                          description: TTL of DNS record
+                          type: number
+                      type: object
+                    type: array
                   externalIpv4Address:
                     description: spec of IP v4 address
                     items:

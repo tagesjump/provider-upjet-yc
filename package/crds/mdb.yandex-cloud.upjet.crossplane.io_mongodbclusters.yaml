@@ -216,7 +216,7 @@ spec:
                                     compressors:
                                       description: |-
                                         Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                                         For more information, see the net.Compression.Compressors
                                         description in the official documentation.
                                       items:
@@ -400,7 +400,7 @@ spec:
                                     compressors:
                                       description: |-
                                         Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                                         For more information, see the net.Compression.Compressors
                                         description in the official documentation.
                                       items:
@@ -1150,7 +1150,7 @@ spec:
                                     compressors:
                                       description: |-
                                         Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                                         For more information, see the net.Compression.Compressors
                                         description in the official documentation.
                                       items:
@@ -1334,7 +1334,7 @@ spec:
                                     compressors:
                                       description: |-
                                         Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                                         For more information, see the net.Compression.Compressors
                                         description in the official documentation.
                                       items:
@@ -2241,7 +2241,7 @@ spec:
                                     compressors:
                                       description: |-
                                         Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                                         For more information, see the net.Compression.Compressors
                                         description in the official documentation.
                                       items:
@@ -2425,7 +2425,7 @@ spec:
                                     compressors:
                                       description: |-
                                         Specifies the default compressor(s) to use for communication between this mongod or mongos.
-                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+                                        Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
                                         For more information, see the net.Compression.Compressors
                                         description in the official documentation.
                                       items:

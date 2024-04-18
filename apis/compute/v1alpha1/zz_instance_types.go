@@ -450,7 +450,7 @@ type InstanceInitParameters struct {
 	// Scheduling policy configuration. The structure is documented below.
 	SchedulingPolicy []SchedulingPolicyInitParameters `json:"schedulingPolicy,omitempty" tf:"scheduling_policy,omitempty"`
 
-	// A list of disks to attach to the instance. The structure is documented below.
+	// A set of disks to attach to the instance. The structure is documented below.
 	// Note: The allow_stopping_for_update property must be set to true in order to update this structure.
 	SecondaryDisk []SecondaryDiskInitParameters `json:"secondaryDisk,omitempty" tf:"secondary_disk,omitempty"`
 
@@ -552,7 +552,7 @@ type InstanceObservation struct {
 	// Scheduling policy configuration. The structure is documented below.
 	SchedulingPolicy []SchedulingPolicyObservation `json:"schedulingPolicy,omitempty" tf:"scheduling_policy,omitempty"`
 
-	// A list of disks to attach to the instance. The structure is documented below.
+	// A set of disks to attach to the instance. The structure is documented below.
 	// Note: The allow_stopping_for_update property must be set to true in order to update this structure.
 	SecondaryDisk []SecondaryDiskObservation `json:"secondaryDisk,omitempty" tf:"secondary_disk,omitempty"`
 
@@ -670,7 +670,7 @@ type InstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SchedulingPolicy []SchedulingPolicyParameters `json:"schedulingPolicy,omitempty" tf:"scheduling_policy,omitempty"`
 
-	// A list of disks to attach to the instance. The structure is documented below.
+	// A set of disks to attach to the instance. The structure is documented below.
 	// Note: The allow_stopping_for_update property must be set to true in order to update this structure.
 	// +kubebuilder:validation:Optional
 	SecondaryDisk []SecondaryDiskParameters `json:"secondaryDisk,omitempty" tf:"secondary_disk,omitempty"`

@@ -18,6 +18,7 @@ type ConsumerInitParameters struct {
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
 	// Supported data encodings
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -30,6 +31,7 @@ type ConsumerObservation struct {
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
 	// Supported data encodings
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
@@ -45,6 +47,7 @@ type ConsumerParameters struct {
 
 	// Supported data encodings
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 

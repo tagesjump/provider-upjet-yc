@@ -653,19 +653,27 @@ spec:
                     description: Name of the Backend Group.
                     type: string
                   sessionAffinity:
+                    description: Session affinity mode determines how incoming requests
+                      are grouped into one session. Structure is documented below.
                     items:
                       properties:
                         connection:
-                          description: IP address affinity
+                          description: |-
+                            Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.
+                            IP address affinity
                           items:
                             properties:
                               sourceIp:
-                                description: Use source IP address
+                                description: |-
+                                  Source IP address to use with affinity.
+                                  Use source IP address
                                 type: boolean
                             type: object
                           type: array
                         cookie:
-                          description: Cookie affinity
+                          description: |-
+                            Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
+                            Cookie affinity
                           items:
                             properties:
                               name:
@@ -674,18 +682,21 @@ spec:
                                   Name of the HTTP cookie
                                 type: string
                               ttl:
-                                description: TTL for the cookie (if not set, session
-                                  cookie will be used)
+                                description: |-
+                                  TTL for the cookie (if not set, session cookie will be used)
+                                  TTL for the cookie (if not set, session cookie will be used)
                                 type: string
                             type: object
                           type: array
                         header:
-                          description: Request header affinity
+                          description: |-
+                            Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
+                            Request header affinity
                           items:
                             properties:
                               headerName:
                                 description: |-
-                                  Name of the Backend Group.
+                                  The name of the request header that will be used with affinity.
                                   The name of the request header that will be used
                                 type: string
                             type: object
@@ -1527,19 +1538,27 @@ spec:
                     description: Name of the Backend Group.
                     type: string
                   sessionAffinity:
+                    description: Session affinity mode determines how incoming requests
+                      are grouped into one session. Structure is documented below.
                     items:
                       properties:
                         connection:
-                          description: IP address affinity
+                          description: |-
+                            Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.
+                            IP address affinity
                           items:
                             properties:
                               sourceIp:
-                                description: Use source IP address
+                                description: |-
+                                  Source IP address to use with affinity.
+                                  Use source IP address
                                 type: boolean
                             type: object
                           type: array
                         cookie:
-                          description: Cookie affinity
+                          description: |-
+                            Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
+                            Cookie affinity
                           items:
                             properties:
                               name:
@@ -1548,18 +1567,21 @@ spec:
                                   Name of the HTTP cookie
                                 type: string
                               ttl:
-                                description: TTL for the cookie (if not set, session
-                                  cookie will be used)
+                                description: |-
+                                  TTL for the cookie (if not set, session cookie will be used)
+                                  TTL for the cookie (if not set, session cookie will be used)
                                 type: string
                             type: object
                           type: array
                         header:
-                          description: Request header affinity
+                          description: |-
+                            Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
+                            Request header affinity
                           items:
                             properties:
                               headerName:
                                 description: |-
-                                  Name of the Backend Group.
+                                  The name of the request header that will be used with affinity.
                                   The name of the request header that will be used
                                 type: string
                             type: object
@@ -2334,19 +2356,27 @@ spec:
                     description: Name of the Backend Group.
                     type: string
                   sessionAffinity:
+                    description: Session affinity mode determines how incoming requests
+                      are grouped into one session. Structure is documented below.
                     items:
                       properties:
                         connection:
-                          description: IP address affinity
+                          description: |-
+                            Requests received from the same IP are combined into a session. Stream backend groups only support session affinity by client IP address. Structure is documented below.
+                            IP address affinity
                           items:
                             properties:
                               sourceIp:
-                                description: Use source IP address
+                                description: |-
+                                  Source IP address to use with affinity.
+                                  Use source IP address
                                 type: boolean
                             type: object
                           type: array
                         cookie:
-                          description: Cookie affinity
+                          description: |-
+                            Requests with the same cookie value and the specified file name are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
+                            Cookie affinity
                           items:
                             properties:
                               name:
@@ -2355,18 +2385,21 @@ spec:
                                   Name of the HTTP cookie
                                 type: string
                               ttl:
-                                description: TTL for the cookie (if not set, session
-                                  cookie will be used)
+                                description: |-
+                                  TTL for the cookie (if not set, session cookie will be used)
+                                  TTL for the cookie (if not set, session cookie will be used)
                                 type: string
                             type: object
                           type: array
                         header:
-                          description: Request header affinity
+                          description: |-
+                            Requests with the same value of the specified HTTP header, such as with user authentication data, are combined into a session. Allowed only for HTTP and gRPC backend groups. Structure is documented below.
+                            Request header affinity
                           items:
                             properties:
                               headerName:
                                 description: |-
-                                  Name of the Backend Group.
+                                  The name of the request header that will be used with affinity.
                                   The name of the request header that will be used
                                 type: string
                             type: object

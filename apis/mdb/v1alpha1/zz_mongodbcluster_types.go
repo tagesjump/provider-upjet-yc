@@ -414,7 +414,7 @@ type MongodInitParameters struct {
 type MongodNetInitParameters struct {
 
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
 	// For more information, see the net.Compression.Compressors
 	// description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
@@ -428,7 +428,7 @@ type MongodNetInitParameters struct {
 type MongodNetObservation struct {
 
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
 	// For more information, see the net.Compression.Compressors
 	// description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
@@ -442,7 +442,7 @@ type MongodNetObservation struct {
 type MongodNetParameters struct {
 
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
 	// For more information, see the net.Compression.Compressors
 	// description in the official documentation.
 	// +kubebuilder:validation:Optional
@@ -1179,7 +1179,7 @@ type MongosInitParameters struct {
 type MongosNetInitParameters struct {
 
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
 	// For more information, see the net.Compression.Compressors
 	// description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
@@ -1193,7 +1193,7 @@ type MongosNetInitParameters struct {
 type MongosNetObservation struct {
 
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
 	// For more information, see the net.Compression.Compressors
 	// description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
@@ -1207,7 +1207,7 @@ type MongosNetObservation struct {
 type MongosNetParameters struct {
 
 	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd. To disable network compression, set the value to disabled.
+	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
 	// For more information, see the net.Compression.Compressors
 	// description in the official documentation.
 	// +kubebuilder:validation:Optional

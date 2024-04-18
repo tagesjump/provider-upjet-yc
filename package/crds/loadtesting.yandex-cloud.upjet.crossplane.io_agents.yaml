@@ -437,6 +437,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: A set of key/value label pairs to assign to the agent.
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: The name of the load testing agent. Must be unique
                       within folder.
@@ -819,6 +825,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: A set of key/value label pairs to assign to the agent.
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: The name of the load testing agent. Must be unique
                       within folder.
@@ -1162,6 +1174,12 @@ spec:
                     type: string
                   id:
                     type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: A set of key/value label pairs to assign to the agent.
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: The name of the load testing agent. Must be unique
                       within folder.

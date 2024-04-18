@@ -28,4 +28,6 @@ spec:
     folderIdSelector:
       matchLabels:
         testing.upbound.io/example-name: yandex_resourcemanager_folder
+    labels:
+      jmeter: "5"
     name: my-agent

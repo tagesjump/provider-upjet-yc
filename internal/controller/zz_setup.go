@@ -10,6 +10,7 @@ import (
 	loadbalancer "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/loadbalancer"
 	targetgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/targetgroup"
 	virtualhost "github.com/tagesjump/provider-upjet-yc/internal/controller/alb/virtualhost"
+	trailstrail "github.com/tagesjump/provider-upjet-yc/internal/controller/audit/trailstrail"
 	disk "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/disk"
 	diskplacementgroup "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/diskplacementgroup"
 	filesystem "github.com/tagesjump/provider-upjet-yc/internal/controller/compute/filesystem"
@@ -120,6 +121,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		loadbalancer.Setup,
 		targetgroup.Setup,
 		virtualhost.Setup,
+		trailstrail.Setup,
 		disk.Setup,
 		diskplacementgroup.Setup,
 		filesystem.Setup,
