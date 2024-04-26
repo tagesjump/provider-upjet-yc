@@ -12,7 +12,17 @@ import (
 type ZoneIAMBindingInitParameters struct {
 
 	// The DNS Zone ID to apply a binding to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/dns/v1alpha1.Zone
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// Reference to a Zone in dns to populate dnsZoneId.
+	// +kubebuilder:validation:Optional
+	DNSZoneIDRef *v1.Reference `json:"dnsZoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a Zone in dns to populate dnsZoneId.
+	// +kubebuilder:validation:Optional
+	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Identities that will be granted the privilege in role.
 	// Each entry can have one of the following values:
@@ -46,8 +56,18 @@ type ZoneIAMBindingObservation struct {
 type ZoneIAMBindingParameters struct {
 
 	// The DNS Zone ID to apply a binding to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/dns/v1alpha1.Zone
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// Reference to a Zone in dns to populate dnsZoneId.
+	// +kubebuilder:validation:Optional
+	DNSZoneIDRef *v1.Reference `json:"dnsZoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a Zone in dns to populate dnsZoneId.
+	// +kubebuilder:validation:Optional
+	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Identities that will be granted the privilege in role.
 	// Each entry can have one of the following values:
@@ -99,7 +119,6 @@ type ZoneIAMBindingStatus struct {
 type ZoneIAMBinding struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsZoneId) || (has(self.initProvider) && has(self.initProvider.dnsZoneId))",message="spec.forProvider.dnsZoneId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.members) || (has(self.initProvider) && has(self.initProvider.members))",message="spec.forProvider.members is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.role) || (has(self.initProvider) && has(self.initProvider.role))",message="spec.forProvider.role is a required parameter"
 	Spec   ZoneIAMBindingSpec   `json:"spec"`

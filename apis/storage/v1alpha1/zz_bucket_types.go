@@ -92,7 +92,17 @@ type AnonymousAccessFlagsParameters struct {
 type ApplyServerSideEncryptionByDefaultInitParameters struct {
 
 	// The KMS master key ID used for the SSE-KMS encryption.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1.SymmetricKey
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
+	// Reference to a SymmetricKey in kms to populate kmsMasterKeyId.
+	// +kubebuilder:validation:Optional
+	KMSMasterKeyIDRef *v1.Reference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SymmetricKey in kms to populate kmsMasterKeyId.
+	// +kubebuilder:validation:Optional
+	KMSMasterKeyIDSelector *v1.Selector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
 	// The server-side encryption algorithm to use. Single valid value is aws:kms
 	SseAlgorithm *string `json:"sseAlgorithm,omitempty" tf:"sse_algorithm,omitempty"`
@@ -110,8 +120,18 @@ type ApplyServerSideEncryptionByDefaultObservation struct {
 type ApplyServerSideEncryptionByDefaultParameters struct {
 
 	// The KMS master key ID used for the SSE-KMS encryption.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1.SymmetricKey
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	KMSMasterKeyID *string `json:"kmsMasterKeyId" tf:"kms_master_key_id,omitempty"`
+	KMSMasterKeyID *string `json:"kmsMasterKeyId,omitempty" tf:"kms_master_key_id,omitempty"`
+
+	// Reference to a SymmetricKey in kms to populate kmsMasterKeyId.
+	// +kubebuilder:validation:Optional
+	KMSMasterKeyIDRef *v1.Reference `json:"kmsMasterKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SymmetricKey in kms to populate kmsMasterKeyId.
+	// +kubebuilder:validation:Optional
+	KMSMasterKeyIDSelector *v1.Selector `json:"kmsMasterKeyIdSelector,omitempty" tf:"-"`
 
 	// The server-side encryption algorithm to use. Single valid value is aws:kms
 	// +kubebuilder:validation:Optional
@@ -765,7 +785,17 @@ type LifecycleRuleParameters struct {
 type LoggingInitParameters struct {
 
 	// The name of the bucket that will receive the log objects.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate targetBucket.
+	// +kubebuilder:validation:Optional
+	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate targetBucket.
+	// +kubebuilder:validation:Optional
+	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
 	// To specify a key prefix for log objects.
 	TargetPrefix *string `json:"targetPrefix,omitempty" tf:"target_prefix,omitempty"`
@@ -783,8 +813,18 @@ type LoggingObservation struct {
 type LoggingParameters struct {
 
 	// The name of the bucket that will receive the log objects.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	TargetBucket *string `json:"targetBucket" tf:"target_bucket,omitempty"`
+	TargetBucket *string `json:"targetBucket,omitempty" tf:"target_bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate targetBucket.
+	// +kubebuilder:validation:Optional
+	TargetBucketRef *v1.Reference `json:"targetBucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate targetBucket.
+	// +kubebuilder:validation:Optional
+	TargetBucketSelector *v1.Selector `json:"targetBucketSelector,omitempty" tf:"-"`
 
 	// To specify a key prefix for log objects.
 	// +kubebuilder:validation:Optional

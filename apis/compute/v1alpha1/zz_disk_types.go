@@ -214,7 +214,17 @@ type DiskParameters struct {
 type DiskPlacementPolicyInitParameters struct {
 
 	// Specifies Disk Placement Group id.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/compute/v1alpha1.DiskPlacementGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DiskPlacementGroupID *string `json:"diskPlacementGroupId,omitempty" tf:"disk_placement_group_id,omitempty"`
+
+	// Reference to a DiskPlacementGroup in compute to populate diskPlacementGroupId.
+	// +kubebuilder:validation:Optional
+	DiskPlacementGroupIDRef *v1.Reference `json:"diskPlacementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a DiskPlacementGroup in compute to populate diskPlacementGroupId.
+	// +kubebuilder:validation:Optional
+	DiskPlacementGroupIDSelector *v1.Selector `json:"diskPlacementGroupIdSelector,omitempty" tf:"-"`
 }
 
 type DiskPlacementPolicyObservation struct {
@@ -226,8 +236,18 @@ type DiskPlacementPolicyObservation struct {
 type DiskPlacementPolicyParameters struct {
 
 	// Specifies Disk Placement Group id.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/compute/v1alpha1.DiskPlacementGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	DiskPlacementGroupID *string `json:"diskPlacementGroupId" tf:"disk_placement_group_id,omitempty"`
+	DiskPlacementGroupID *string `json:"diskPlacementGroupId,omitempty" tf:"disk_placement_group_id,omitempty"`
+
+	// Reference to a DiskPlacementGroup in compute to populate diskPlacementGroupId.
+	// +kubebuilder:validation:Optional
+	DiskPlacementGroupIDRef *v1.Reference `json:"diskPlacementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a DiskPlacementGroup in compute to populate diskPlacementGroupId.
+	// +kubebuilder:validation:Optional
+	DiskPlacementGroupIDSelector *v1.Selector `json:"diskPlacementGroupIdSelector,omitempty" tf:"-"`
 }
 
 // DiskSpec defines the desired state of Disk

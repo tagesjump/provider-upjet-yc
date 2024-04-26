@@ -214,7 +214,17 @@ type TableInitParameters struct {
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Connection string for database.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/ydb/v1alpha1.DatabaseServerless
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// Reference to a DatabaseServerless in ydb to populate connectionString.
+	// +kubebuilder:validation:Optional
+	ConnectionStringRef *v1.Reference `json:"connectionStringRef,omitempty" tf:"-"`
+
+	// Selector for a DatabaseServerless in ydb to populate connectionString.
+	// +kubebuilder:validation:Optional
+	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
 	// A list of column group configuration options.
 	// The structure is documented below.
@@ -294,8 +304,18 @@ type TableParameters struct {
 	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Connection string for database.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/ydb/v1alpha1.DatabaseServerless
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// Reference to a DatabaseServerless in ydb to populate connectionString.
+	// +kubebuilder:validation:Optional
+	ConnectionStringRef *v1.Reference `json:"connectionStringRef,omitempty" tf:"-"`
+
+	// Selector for a DatabaseServerless in ydb to populate connectionString.
+	// +kubebuilder:validation:Optional
+	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
 	// A list of column group configuration options.
 	// The structure is documented below.
@@ -366,7 +386,6 @@ type Table struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.column) || (has(self.initProvider) && has(self.initProvider.column))",message="spec.forProvider.column is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString) || (has(self.initProvider) && has(self.initProvider.connectionString))",message="spec.forProvider.connectionString is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.path) || (has(self.initProvider) && has(self.initProvider.path))",message="spec.forProvider.path is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.primaryKey) || (has(self.initProvider) && has(self.initProvider.primaryKey))",message="spec.forProvider.primaryKey is a required parameter"
 	Spec   TableSpec   `json:"spec"`

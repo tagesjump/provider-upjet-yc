@@ -67,7 +67,17 @@ type PostgresqlDatabaseInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Name of the user assigned as the owner of the database. Forbidden to change in an existing database.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.PostgresqlUser
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Reference to a PostgresqlUser in mdb to populate owner.
+	// +kubebuilder:validation:Optional
+	OwnerRef *v1.Reference `json:"ownerRef,omitempty" tf:"-"`
+
+	// Selector for a PostgresqlUser in mdb to populate owner.
+	// +kubebuilder:validation:Optional
+	OwnerSelector *v1.Selector `json:"ownerSelector,omitempty" tf:"-"`
 
 	// Name of the template database.
 	TemplateDB *string `json:"templateDb,omitempty" tf:"template_db,omitempty"`
@@ -135,8 +145,18 @@ type PostgresqlDatabaseParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Name of the user assigned as the owner of the database. Forbidden to change in an existing database.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.PostgresqlUser
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// Reference to a PostgresqlUser in mdb to populate owner.
+	// +kubebuilder:validation:Optional
+	OwnerRef *v1.Reference `json:"ownerRef,omitempty" tf:"-"`
+
+	// Selector for a PostgresqlUser in mdb to populate owner.
+	// +kubebuilder:validation:Optional
+	OwnerSelector *v1.Selector `json:"ownerSelector,omitempty" tf:"-"`
 
 	// Name of the template database.
 	// +kubebuilder:validation:Optional
@@ -180,7 +200,6 @@ type PostgresqlDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.owner) || (has(self.initProvider) && has(self.initProvider.owner))",message="spec.forProvider.owner is a required parameter"
 	Spec   PostgresqlDatabaseSpec   `json:"spec"`
 	Status PostgresqlDatabaseStatus `json:"status,omitempty"`
 }

@@ -245,6 +245,16 @@ func (in *ApplyServerSideEncryptionByDefaultInitParameters) DeepCopyInto(out *Ap
 		*out = new(string)
 		**out = **in
 	}
+	if in.KMSMasterKeyIDRef != nil {
+		in, out := &in.KMSMasterKeyIDRef, &out.KMSMasterKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSMasterKeyIDSelector != nil {
+		in, out := &in.KMSMasterKeyIDSelector, &out.KMSMasterKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SseAlgorithm != nil {
 		in, out := &in.SseAlgorithm, &out.SseAlgorithm
 		*out = new(string)
@@ -294,6 +304,16 @@ func (in *ApplyServerSideEncryptionByDefaultParameters) DeepCopyInto(out *ApplyS
 		in, out := &in.KMSMasterKeyID, &out.KMSMasterKeyID
 		*out = new(string)
 		**out = **in
+	}
+	if in.KMSMasterKeyIDRef != nil {
+		in, out := &in.KMSMasterKeyIDRef, &out.KMSMasterKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.KMSMasterKeyIDSelector != nil {
+		in, out := &in.KMSMasterKeyIDSelector, &out.KMSMasterKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SseAlgorithm != nil {
 		in, out := &in.SseAlgorithm, &out.SseAlgorithm
@@ -1834,6 +1854,16 @@ func (in *LoggingInitParameters) DeepCopyInto(out *LoggingInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.TargetBucketRef != nil {
+		in, out := &in.TargetBucketRef, &out.TargetBucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetBucketSelector != nil {
+		in, out := &in.TargetBucketSelector, &out.TargetBucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetPrefix != nil {
 		in, out := &in.TargetPrefix, &out.TargetPrefix
 		*out = new(string)
@@ -1883,6 +1913,16 @@ func (in *LoggingParameters) DeepCopyInto(out *LoggingParameters) {
 		in, out := &in.TargetBucket, &out.TargetBucket
 		*out = new(string)
 		**out = **in
+	}
+	if in.TargetBucketRef != nil {
+		in, out := &in.TargetBucketRef, &out.TargetBucketRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetBucketSelector != nil {
+		in, out := &in.TargetBucketSelector, &out.TargetBucketSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TargetPrefix != nil {
 		in, out := &in.TargetPrefix, &out.TargetPrefix

@@ -2837,6 +2837,16 @@ func (in *TableInitParameters) DeepCopyInto(out *TableInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ConnectionStringRef != nil {
+		in, out := &in.ConnectionStringRef, &out.ConnectionStringRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ConnectionStringSelector != nil {
+		in, out := &in.ConnectionStringSelector, &out.ConnectionStringSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Family != nil {
 		in, out := &in.Family, &out.Family
 		*out = make([]FamilyInitParameters, len(*in))
@@ -3053,6 +3063,16 @@ func (in *TableParameters) DeepCopyInto(out *TableParameters) {
 		in, out := &in.ConnectionString, &out.ConnectionString
 		*out = new(string)
 		**out = **in
+	}
+	if in.ConnectionStringRef != nil {
+		in, out := &in.ConnectionStringRef, &out.ConnectionStringRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ConnectionStringSelector != nil {
+		in, out := &in.ConnectionStringSelector, &out.ConnectionStringSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Family != nil {
 		in, out := &in.Family, &out.Family

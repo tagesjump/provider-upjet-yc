@@ -163,7 +163,17 @@ type MySQLUserParameters struct {
 type MySQLUserPermissionInitParameters struct {
 
 	// The name of the database that the permission grants access to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.MySQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a MySQLDatabase in mdb to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a MySQLDatabase in mdb to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// List user's roles in the database.
 	// Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
@@ -185,8 +195,18 @@ type MySQLUserPermissionObservation struct {
 type MySQLUserPermissionParameters struct {
 
 	// The name of the database that the permission grants access to.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/mdb/v1alpha1.MySQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a MySQLDatabase in mdb to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a MySQLDatabase in mdb to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// List user's roles in the database.
 	// Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,

@@ -328,6 +328,16 @@ func (in *ZoneIAMBindingInitParameters) DeepCopyInto(out *ZoneIAMBindingInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.DNSZoneIDRef != nil {
+		in, out := &in.DNSZoneIDRef, &out.DNSZoneIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DNSZoneIDSelector != nil {
+		in, out := &in.DNSZoneIDSelector, &out.DNSZoneIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Members != nil {
 		in, out := &in.Members, &out.Members
 		*out = make([]*string, len(*in))
@@ -446,6 +456,16 @@ func (in *ZoneIAMBindingParameters) DeepCopyInto(out *ZoneIAMBindingParameters) 
 		in, out := &in.DNSZoneID, &out.DNSZoneID
 		*out = new(string)
 		**out = **in
+	}
+	if in.DNSZoneIDRef != nil {
+		in, out := &in.DNSZoneIDRef, &out.DNSZoneIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DNSZoneIDSelector != nil {
+		in, out := &in.DNSZoneIDSelector, &out.DNSZoneIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Members != nil {
 		in, out := &in.Members, &out.Members

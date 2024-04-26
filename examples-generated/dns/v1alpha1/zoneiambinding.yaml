@@ -8,7 +8,9 @@ metadata:
   name: viewer
 spec:
   forProvider:
-    dnsZoneId: ${yandex_dns_zone.zone1.id}
+    dnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zone1
     members:
     - userAccount:foo_user_id
     role: dns.viewer

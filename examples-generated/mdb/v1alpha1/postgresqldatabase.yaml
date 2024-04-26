@@ -17,7 +17,9 @@ spec:
     lcCollate: en_US.UTF-8
     lcType: en_US.UTF-8
     name: testdb
-    owner: alice
+    ownerSelector:
+      matchLabels:
+        testing.upbound.io/example-name: alice
 
 ---
 

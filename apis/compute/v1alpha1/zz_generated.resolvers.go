@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha12 "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1"
@@ -19,6 +20,24 @@ func (mg *Disk) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DiskPlacementPolicy); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DiskPlacementPolicy[i3].DiskPlacementGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.DiskPlacementPolicy[i3].DiskPlacementGroupIDRef,
+			Selector:     mg.Spec.ForProvider.DiskPlacementPolicy[i3].DiskPlacementGroupIDSelector,
+			To: reference.To{
+				List:    &DiskPlacementGroupList{},
+				Managed: &DiskPlacementGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DiskPlacementPolicy[i3].DiskPlacementGroupID")
+		}
+		mg.Spec.ForProvider.DiskPlacementPolicy[i3].DiskPlacementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DiskPlacementPolicy[i3].DiskPlacementGroupIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
 		Extract:      reference.ExternalName(),
@@ -51,6 +70,24 @@ func (mg *Disk) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ImageID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ImageIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DiskPlacementPolicy); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiskPlacementPolicy[i3].DiskPlacementGroupID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DiskPlacementPolicy[i3].DiskPlacementGroupIDRef,
+			Selector:     mg.Spec.InitProvider.DiskPlacementPolicy[i3].DiskPlacementGroupIDSelector,
+			To: reference.To{
+				List:    &DiskPlacementGroupList{},
+				Managed: &DiskPlacementGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DiskPlacementPolicy[i3].DiskPlacementGroupID")
+		}
+		mg.Spec.InitProvider.DiskPlacementPolicy[i3].DiskPlacementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DiskPlacementPolicy[i3].DiskPlacementGroupIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
 		Extract:      reference.ExternalName(),

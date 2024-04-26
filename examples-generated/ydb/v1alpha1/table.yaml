@@ -20,7 +20,9 @@ spec:
       type: Int32
     - name: d
       type: Timestamp
-    connectionString: ${yandex_ydb_database_serverless.database1.ydb_full_endpoint}
+    connectionStringSelector:
+      matchLabels:
+        testing.upbound.io/example-name: database1
     path: test_dir/test_table_3_col
     primaryKey:
     - a

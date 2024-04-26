@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha12 "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1"
@@ -233,6 +234,48 @@ func (mg *DatabaseServerless) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Table.
+func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ConnectionString),
+		Extract:      resource.ExtractParamPath("ydb_full_endpoint", true),
+		Reference:    mg.Spec.ForProvider.ConnectionStringRef,
+		Selector:     mg.Spec.ForProvider.ConnectionStringSelector,
+		To: reference.To{
+			List:    &DatabaseServerlessList{},
+			Managed: &DatabaseServerless{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ConnectionString")
+	}
+	mg.Spec.ForProvider.ConnectionString = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ConnectionStringRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ConnectionString),
+		Extract:      resource.ExtractParamPath("ydb_full_endpoint", true),
+		Reference:    mg.Spec.InitProvider.ConnectionStringRef,
+		Selector:     mg.Spec.InitProvider.ConnectionStringSelector,
+		To: reference.To{
+			List:    &DatabaseServerlessList{},
+			Managed: &DatabaseServerless{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ConnectionString")
+	}
+	mg.Spec.InitProvider.ConnectionString = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ConnectionStringRef = rsp.ResolvedReference
 
 	return nil
 }
