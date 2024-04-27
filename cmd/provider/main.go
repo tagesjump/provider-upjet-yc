@@ -8,6 +8,8 @@ import (
 	"context"
 	"io"
 	"log"
+	"net/http"
+	"net/http/pprof"
 	"os"
 	"path/filepath"
 	"time"
@@ -62,6 +64,18 @@ func main() {
 		// *very* verbose even at info level, so we only provide it a real
 		// logger when we're running in debug mode.
 		ctrl.SetLogger(zl)
+
+		pprofServer := http.NewServeMux()
+
+		pprofServer.HandleFunc("/debug/pprof/", pprof.Index)
+		pprofServer.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
+		pprofServer.HandleFunc("/debug/pprof/profile", pprof.Profile)
+		pprofServer.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
+		pprofServer.HandleFunc("/debug/pprof/trace", pprof.Trace)
+
+		go func() {
+			http.ListenAndServe(":9090", pprofServer)
+		}()
 	}
 	// currently, we configure the jitter to be the 5% of the poll interval
 	pollJitter := time.Duration(float64(*pollInterval) * 0.05)
