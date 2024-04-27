@@ -84,8 +84,7 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add YandexCloud APIs to scheme")
 
-	ctx := context.Background()
-	provider, err := config.GetProvider(ctx, false)
+	provider, err := config.GetProvider(false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
@@ -114,6 +113,7 @@ func main() {
 			o.ESSOptions.TLSConfig = tCfg
 		}
 
+		ctx := context.Background()
 		// Ensure default store config exists.
 		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &v1alpha1.StoreConfig{
 			TypeMeta: metav1.TypeMeta{},
