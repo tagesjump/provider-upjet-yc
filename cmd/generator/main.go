@@ -5,11 +5,13 @@ Copyright 2021 Upbound Inc.
 package main
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
 
 	"github.com/crossplane/upjet/pkg/pipeline"
+	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/tagesjump/provider-upjet-yc/config"
 )
@@ -23,5 +25,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
-	pipeline.Run(config.GetProvider(), absRootDir)
+	p, err := config.GetProvider(context.Background(), true)
+	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
+	pipeline.Run(p, absRootDir)
 }

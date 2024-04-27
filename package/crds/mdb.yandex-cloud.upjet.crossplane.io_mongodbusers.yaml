@@ -149,9 +149,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  name:
-                    description: The name of the user.
-                    type: string
                   passwordSecretRef:
                     description: The password of the user.
                     properties:
@@ -277,9 +274,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  name:
-                    description: The name of the user.
-                    type: string
                   permission:
                     description: Set of permissions granted to the user. The structure
                       is documented below.
@@ -467,10 +461,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.passwordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
@@ -482,9 +472,6 @@ spec:
                   clusterId:
                     type: string
                   id:
-                    type: string
-                  name:
-                    description: The name of the user.
                     type: string
                   permission:
                     description: Set of permissions granted to the user. The structure

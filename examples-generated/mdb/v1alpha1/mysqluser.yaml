@@ -25,10 +25,14 @@ spec:
       name: example-secret
       namespace: upbound-system
     permission:
-    - databaseName: testdb
+    - databaseNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: testdb
       roles:
       - ALL
-    - databaseName: testdb
+    - databaseNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: new_testdb
       roles:
       - ALL
       - INSERT

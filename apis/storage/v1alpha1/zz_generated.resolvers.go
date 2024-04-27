@@ -5,8 +5,10 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
+	v1alpha12 "github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1"
 	v1alpha11 "github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1"
 	common "github.com/tagesjump/provider-upjet-yc/config/common"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -51,6 +53,46 @@ func (mg *Bucket) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Logging); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Logging[i3].TargetBucket),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.Logging[i3].TargetBucketRef,
+			Selector:     mg.Spec.ForProvider.Logging[i3].TargetBucketSelector,
+			To: reference.To{
+				List:    &BucketList{},
+				Managed: &Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Logging[i3].TargetBucket")
+		}
+		mg.Spec.ForProvider.Logging[i3].TargetBucket = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Logging[i3].TargetBucketRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID),
+					Extract:      resource.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDRef,
+					Selector:     mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDSelector,
+					To: reference.To{
+						List:    &v1alpha12.SymmetricKeyList{},
+						Managed: &v1alpha12.SymmetricKey{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID")
+				}
+				mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.ForProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccessKey),
 		Extract:      common.ExtractAccessKey(),
@@ -82,6 +124,47 @@ func (mg *Bucket) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Logging); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Logging[i3].TargetBucket),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Logging[i3].TargetBucketRef,
+			Selector:     mg.Spec.InitProvider.Logging[i3].TargetBucketSelector,
+			To: reference.To{
+				List:    &BucketList{},
+				Managed: &Bucket{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Logging[i3].TargetBucket")
+		}
+		mg.Spec.InitProvider.Logging[i3].TargetBucket = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Logging[i3].TargetBucketRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ServerSideEncryptionConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault); i5++ {
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID),
+					Extract:      resource.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDRef,
+					Selector:     mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDSelector,
+					To: reference.To{
+						List:    &v1alpha12.SymmetricKeyList{},
+						Managed: &v1alpha12.SymmetricKey{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID")
+				}
+				mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+				mg.Spec.InitProvider.ServerSideEncryptionConfiguration[i3].Rule[i4].ApplyServerSideEncryptionByDefault[i5].KMSMasterKeyIDRef = rsp.ResolvedReference
+
+			}
+		}
+	}
 
 	return nil
 }

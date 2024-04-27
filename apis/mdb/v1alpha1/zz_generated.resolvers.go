@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha12 "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1"
@@ -1201,6 +1202,24 @@ func (mg *MySQLUser) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Permission); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Permission[i3].DatabaseName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Reference:    mg.Spec.ForProvider.Permission[i3].DatabaseNameRef,
+			Selector:     mg.Spec.ForProvider.Permission[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &MySQLDatabaseList{},
+				Managed: &MySQLDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Permission[i3].DatabaseName")
+		}
+		mg.Spec.ForProvider.Permission[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Permission[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
 		Extract:      reference.ExternalName(),
@@ -1216,6 +1235,25 @@ func (mg *MySQLUser) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Permission); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Permission[i3].DatabaseName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Reference:    mg.Spec.InitProvider.Permission[i3].DatabaseNameRef,
+			Selector:     mg.Spec.InitProvider.Permission[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &MySQLDatabaseList{},
+				Managed: &MySQLDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Permission[i3].DatabaseName")
+		}
+		mg.Spec.InitProvider.Permission[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Permission[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -1570,6 +1608,22 @@ func (mg *PostgresqlDatabase) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Owner),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.ForProvider.OwnerRef,
+		Selector:     mg.Spec.ForProvider.OwnerSelector,
+		To: reference.To{
+			List:    &PostgresqlUserList{},
+			Managed: &PostgresqlUser{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Owner")
+	}
+	mg.Spec.ForProvider.Owner = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OwnerRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.InitProvider.ClusterIDRef,
@@ -1584,6 +1638,22 @@ func (mg *PostgresqlDatabase) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Owner),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.OwnerRef,
+		Selector:     mg.Spec.InitProvider.OwnerSelector,
+		To: reference.To{
+			List:    &PostgresqlUserList{},
+			Managed: &PostgresqlUser{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Owner")
+	}
+	mg.Spec.InitProvider.Owner = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.OwnerRef = rsp.ResolvedReference
 
 	return nil
 }

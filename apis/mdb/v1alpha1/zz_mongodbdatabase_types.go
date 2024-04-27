@@ -21,18 +21,12 @@ type MongodbDatabaseInitParameters struct {
 	// Selector for a MongodbCluster to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
-
-	// The name of the database.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type MongodbDatabaseObservation struct {
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// The name of the database.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type MongodbDatabaseParameters struct {
@@ -48,10 +42,6 @@ type MongodbDatabaseParameters struct {
 	// Selector for a MongodbCluster to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
-
-	// The name of the database.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // MongodbDatabaseSpec defines the desired state of MongodbDatabase
@@ -90,9 +80,8 @@ type MongodbDatabaseStatus struct {
 type MongodbDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
-	Spec   MongodbDatabaseSpec   `json:"spec"`
-	Status MongodbDatabaseStatus `json:"status,omitempty"`
+	Spec              MongodbDatabaseSpec   `json:"spec"`
+	Status            MongodbDatabaseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
