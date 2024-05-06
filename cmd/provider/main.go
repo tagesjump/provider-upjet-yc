@@ -65,16 +65,23 @@ func main() {
 		// logger when we're running in debug mode.
 		ctrl.SetLogger(zl)
 
-		pprofServer := http.NewServeMux()
+		pprofRouter := http.NewServeMux()
 
-		pprofServer.HandleFunc("/debug/pprof/", pprof.Index)
-		pprofServer.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
-		pprofServer.HandleFunc("/debug/pprof/profile", pprof.Profile)
-		pprofServer.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
-		pprofServer.HandleFunc("/debug/pprof/trace", pprof.Trace)
+		pprofRouter.HandleFunc("/debug/pprof/", pprof.Index)
+		pprofRouter.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
+		pprofRouter.HandleFunc("/debug/pprof/profile", pprof.Profile)
+		pprofRouter.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
+		pprofRouter.HandleFunc("/debug/pprof/trace", pprof.Trace)
 
 		go func() {
-			http.ListenAndServe(":9090", pprofServer)
+			server := &http.Server{
+				Addr:         ":9090",
+				Handler:      pprofRouter,
+				ReadTimeout:  10 * time.Second,
+				WriteTimeout: 120 * time.Second,
+				IdleTimeout:  15 * time.Second,
+			}
+			_ = server.ListenAndServe()
 		}()
 	}
 	// currently, we configure the jitter to be the 5% of the poll interval
