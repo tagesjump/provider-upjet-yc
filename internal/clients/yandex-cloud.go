@@ -112,11 +112,11 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn {
 				ps.Configuration[setting] = value
 			}
 		}
-		return ps, errors.Wrap(configureTFProviderMeta(ctx, &ps, *tfProvider), "failed to configure the Terraform AzureAD provider meta")
+		return ps, errors.Wrap(configureNoForkYandexCloudClient(ctx, &ps, *tfProvider), "failed to configure the Terraform AzureAD provider meta")
 	}
 }
 
-func configureTFProviderMeta(ctx context.Context, ps *terraform.Setup, p schema.Provider) error {
+func configureNoForkYandexCloudClient(ctx context.Context, ps *terraform.Setup, p schema.Provider) error {
 	// Please be aware that this implementation relies on the schema.Provider
 	// parameter `p` being a non-pointer. This is because normally
 	// the Terraform plugin SDK normally configures the provider
