@@ -5,8 +5,6 @@ Copyright 2021 Upbound Inc.
 package config
 
 import (
-	"context"
-
 	"github.com/yandex-cloud/terraform-provider-yandex/yandex"
 
 	// Note(turkenh): we are importing this to embed provider schema document
@@ -74,7 +72,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 }
 
 // GetProvider returns provider configuration
-func GetProvider(ctx context.Context, generationProvider bool) (*ujconfig.Provider, error) {
+func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 	var p *schema.Provider
 	var err error
 	if generationProvider {
@@ -90,7 +88,6 @@ func GetProvider(ctx context.Context, generationProvider bool) (*ujconfig.Provid
 		ujconfig.WithRootGroup("yandex-cloud.upjet.crossplane.io"),
 		ujconfig.WithIncludeList(resourceList(cliReconciledExternalNameConfigs)),
 		ujconfig.WithTerraformPluginSDKIncludeList(resourceList(ExternalNameConfigs)),
-		// ujconfig.WithTerraformPluginSDKIncludeList(ExternalNameConfigured()),
 		ujconfig.WithFeaturesPackage("internal/features"),
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),

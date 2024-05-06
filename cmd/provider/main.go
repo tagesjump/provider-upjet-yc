@@ -8,6 +8,8 @@ import (
 	"context"
 	"io"
 	"log"
+	"net/http"
+	"net/http/pprof"
 	"os"
 	"path/filepath"
 	"time"
@@ -62,6 +64,25 @@ func main() {
 		// *very* verbose even at info level, so we only provide it a real
 		// logger when we're running in debug mode.
 		ctrl.SetLogger(zl)
+
+		pprofRouter := http.NewServeMux()
+
+		pprofRouter.HandleFunc("/debug/pprof/", pprof.Index)
+		pprofRouter.HandleFunc("/debug/pprof/cmdline", pprof.Cmdline)
+		pprofRouter.HandleFunc("/debug/pprof/profile", pprof.Profile)
+		pprofRouter.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
+		pprofRouter.HandleFunc("/debug/pprof/trace", pprof.Trace)
+
+		go func() {
+			server := &http.Server{
+				Addr:         ":9090",
+				Handler:      pprofRouter,
+				ReadTimeout:  10 * time.Second,
+				WriteTimeout: 120 * time.Second,
+				IdleTimeout:  15 * time.Second,
+			}
+			_ = server.ListenAndServe()
+		}()
 	}
 	// currently, we configure the jitter to be the 5% of the poll interval
 	pollJitter := time.Duration(float64(*pollInterval) * 0.05)
@@ -84,8 +105,7 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add YandexCloud APIs to scheme")
 
-	ctx := context.Background()
-	provider, err := config.GetProvider(ctx, false)
+	provider, err := config.GetProvider(false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
@@ -114,6 +134,7 @@ func main() {
 			o.ESSOptions.TLSConfig = tCfg
 		}
 
+		ctx := context.Background()
 		// Ensure default store config exists.
 		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &v1alpha1.StoreConfig{
 			TypeMeta: metav1.TypeMeta{},
