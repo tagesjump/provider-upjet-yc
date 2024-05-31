@@ -151,6 +151,9 @@ type ComputeInstanceInitParameters struct {
 	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
 	NetworkInterface []NetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
+	// The Compute platform of virtual machine. If it is not provided, the standard-v2 platform will be used.
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
+
 	// Compute resource specifications for the instance. The structure is documented below.
 	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -191,6 +194,9 @@ type ComputeInstanceObservation struct {
 	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
 	NetworkInterface []NetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
+	// The Compute platform of virtual machine. If it is not provided, the standard-v2 platform will be used.
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
+
 	// Compute resource specifications for the instance. The structure is documented below.
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
@@ -221,6 +227,10 @@ type ComputeInstanceParameters struct {
 	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	NetworkInterface []NetworkInterfaceParameters `json:"networkInterface" tf:"network_interface,omitempty"`
+
+	// The Compute platform of virtual machine. If it is not provided, the standard-v2 platform will be used.
+	// +kubebuilder:validation:Optional
+	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
 	// Compute resource specifications for the instance. The structure is documented below.
 	// +kubebuilder:validation:Optional

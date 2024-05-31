@@ -277,7 +277,7 @@ type BucketObservation struct {
 	// Manages https certificates for bucket. See https for more infomation.
 	HTTPS []HTTPSObservation `json:"https,omitempty" tf:"https,omitempty"`
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A configuration of object lifecycle management (documented below).
@@ -623,43 +623,52 @@ type FilterParameters struct {
 
 type GrantInitParameters struct {
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of permissions to apply for grantee. Valid values are READ, WRITE, FULL_CONTROL.
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// Type of grantee to apply for. Valid values are CanonicalUser and Group.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// Uri address to grant for. Used only when type is Group.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type GrantObservation struct {
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of permissions to apply for grantee. Valid values are READ, WRITE, FULL_CONTROL.
 	// +listType=set
 	Permissions []*string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// Type of grantee to apply for. Valid values are CanonicalUser and Group.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// Uri address to grant for. Used only when type is Group.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type GrantParameters struct {
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// List of permissions to apply for grantee. Valid values are READ, WRITE, FULL_CONTROL.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Permissions []*string `json:"permissions" tf:"permissions,omitempty"`
 
+	// Type of grantee to apply for. Valid values are CanonicalUser and Group.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 
+	// Uri address to grant for. Used only when type is Group.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
@@ -697,7 +706,7 @@ type LifecycleRuleInitParameters struct {
 	// Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports the following options:
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies when noncurrent object versions expire (documented below).
@@ -727,7 +736,7 @@ type LifecycleRuleObservation struct {
 	// Filter block identifies one or more objects to which the rule applies. A Filter must have exactly one of Prefix, Tag, or And specified. The filter supports the following options:
 	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies when noncurrent object versions expire (documented below).
@@ -761,7 +770,7 @@ type LifecycleRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// Unique identifier for the rule. Must be less than or equal to 255 characters in length.
+	// Canonical user id to grant for. Used only when type is CanonicalUser.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

@@ -17,7 +17,8 @@ spec:
       ssh-keys: ubuntu:${file("~/.ssh/id_rsa.pub")}
     name: test
     networkInterface:
-    - subnetIdSelector:
+    - index: 1
+      subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: foo
     platformId: standard-v1

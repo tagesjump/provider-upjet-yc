@@ -330,6 +330,12 @@ spec:
                                         For more information, see the enableFlowControl
                                         description in the official documentation.
                                       type: boolean
+                                    minSnapshotHistoryWindowInSeconds:
+                                      description: |-
+                                        The minimum time window in seconds for which the storage engine keeps the snapshot history.
+                                        For more information, see the minSnapshotHistoryWindowInSeconds
+                                        description in the official documentation.
+                                      type: number
                                   type: object
                                 type: array
                               storage:
@@ -1264,6 +1270,12 @@ spec:
                                         For more information, see the enableFlowControl
                                         description in the official documentation.
                                       type: boolean
+                                    minSnapshotHistoryWindowInSeconds:
+                                      description: |-
+                                        The minimum time window in seconds for which the storage engine keeps the snapshot history.
+                                        For more information, see the minSnapshotHistoryWindowInSeconds
+                                        description in the official documentation.
+                                      type: number
                                   type: object
                                 type: array
                               storage:
@@ -2355,6 +2367,12 @@ spec:
                                         For more information, see the enableFlowControl
                                         description in the official documentation.
                                       type: boolean
+                                    minSnapshotHistoryWindowInSeconds:
+                                      description: |-
+                                        The minimum time window in seconds for which the storage engine keeps the snapshot history.
+                                        For more information, see the minSnapshotHistoryWindowInSeconds
+                                        description in the official documentation.
+                                      type: number
                                   type: object
                                 type: array
                               storage:

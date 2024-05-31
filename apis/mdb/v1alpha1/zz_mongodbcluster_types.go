@@ -1559,6 +1559,11 @@ type SetParameterInitParameters struct {
 	// For more information, see the enableFlowControl
 	// description in the official documentation.
 	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
+
+	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
+	// For more information, see the minSnapshotHistoryWindowInSeconds
+	// description in the official documentation.
+	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
 }
 
 type SetParameterObservation struct {
@@ -1572,6 +1577,11 @@ type SetParameterObservation struct {
 	// For more information, see the enableFlowControl
 	// description in the official documentation.
 	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
+
+	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
+	// For more information, see the minSnapshotHistoryWindowInSeconds
+	// description in the official documentation.
+	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
 }
 
 type SetParameterParameters struct {
@@ -1587,6 +1597,12 @@ type SetParameterParameters struct {
 	// description in the official documentation.
 	// +kubebuilder:validation:Optional
 	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
+
+	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
+	// For more information, see the minSnapshotHistoryWindowInSeconds
+	// description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
 }
 
 type StorageInitParameters struct {
