@@ -312,17 +312,23 @@ spec:
                     items:
                       properties:
                         id:
-                          description: Unique identifier for the rule. Must be less
-                            than or equal to 255 characters in length.
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         permissions:
+                          description: List of permissions to apply for grantee. Valid
+                            values are READ, WRITE, FULL_CONTROL.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
+                          description: Type of grantee to apply for. Valid values
+                            are CanonicalUser and Group.
                           type: string
                         uri:
+                          description: Uri address to grant for. Used only when type
+                            is Group.
                           type: string
                       type: object
                     type: array
@@ -422,8 +428,8 @@ spec:
                             type: object
                           type: array
                         id:
-                          description: Unique identifier for the rule. Must be less
-                            than or equal to 255 characters in length.
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         noncurrentVersionExpiration:
                           description: Specifies when noncurrent object versions expire
@@ -1045,17 +1051,23 @@ spec:
                     items:
                       properties:
                         id:
-                          description: Unique identifier for the rule. Must be less
-                            than or equal to 255 characters in length.
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         permissions:
+                          description: List of permissions to apply for grantee. Valid
+                            values are READ, WRITE, FULL_CONTROL.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
+                          description: Type of grantee to apply for. Valid values
+                            are CanonicalUser and Group.
                           type: string
                         uri:
+                          description: Uri address to grant for. Used only when type
+                            is Group.
                           type: string
                       type: object
                     type: array
@@ -1155,8 +1167,8 @@ spec:
                             type: object
                           type: array
                         id:
-                          description: Unique identifier for the rule. Must be less
-                            than or equal to 255 characters in length.
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         noncurrentVersionExpiration:
                           description: Specifies when noncurrent object versions expire
@@ -1769,17 +1781,23 @@ spec:
                     items:
                       properties:
                         id:
-                          description: Unique identifier for the rule. Must be less
-                            than or equal to 255 characters in length.
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         permissions:
+                          description: List of permissions to apply for grantee. Valid
+                            values are READ, WRITE, FULL_CONTROL.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
+                          description: Type of grantee to apply for. Valid values
+                            are CanonicalUser and Group.
                           type: string
                         uri:
+                          description: Uri address to grant for. Used only when type
+                            is Group.
                           type: string
                       type: object
                     type: array
@@ -1795,8 +1813,8 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: Unique identifier for the rule. Must be less than
-                      or equal to 255 characters in length.
+                    description: Canonical user id to grant for. Used only when type
+                      is CanonicalUser.
                     type: string
                   lifecycleRule:
                     description: A configuration of object lifecycle management (documented
@@ -1883,8 +1901,8 @@ spec:
                             type: object
                           type: array
                         id:
-                          description: Unique identifier for the rule. Must be less
-                            than or equal to 255 characters in length.
+                          description: Canonical user id to grant for. Used only when
+                            type is CanonicalUser.
                           type: string
                         noncurrentVersionExpiration:
                           description: Specifies when noncurrent object versions expire

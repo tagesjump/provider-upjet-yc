@@ -248,6 +248,10 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        platformId:
+                          description: The Compute platform of virtual machine. If
+                            it is not provided, the standard-v2 platform will be used.
+                          type: string
                         resources:
                           description: Compute resource specifications for the instance.
                             The structure is documented below.
@@ -636,6 +640,10 @@ spec:
                                 type: object
                             type: object
                           type: array
+                        platformId:
+                          description: The Compute platform of virtual machine. If
+                            it is not provided, the standard-v2 platform will be used.
+                          type: string
                         resources:
                           description: Compute resource specifications for the instance.
                             The structure is documented below.
@@ -1133,6 +1141,10 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        platformId:
+                          description: The Compute platform of virtual machine. If
+                            it is not provided, the standard-v2 platform will be used.
+                          type: string
                         resources:
                           description: Compute resource specifications for the instance.
                             The structure is documented below.

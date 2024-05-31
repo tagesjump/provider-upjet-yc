@@ -442,6 +442,11 @@ func (in *ComputeInstanceInitParameters) DeepCopyInto(out *ComputeInstanceInitPa
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PlatformID != nil {
+		in, out := &in.PlatformID, &out.PlatformID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
 		*out = make([]ResourcesInitParameters, len(*in))
@@ -546,6 +551,11 @@ func (in *ComputeInstanceObservation) DeepCopyInto(out *ComputeInstanceObservati
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PlatformID != nil {
+		in, out := &in.PlatformID, &out.PlatformID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
 		*out = make([]ResourcesObservation, len(*in))
@@ -623,6 +633,11 @@ func (in *ComputeInstanceParameters) DeepCopyInto(out *ComputeInstanceParameters
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PlatformID != nil {
+		in, out := &in.PlatformID, &out.PlatformID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Resources != nil {
 		in, out := &in.Resources, &out.Resources
