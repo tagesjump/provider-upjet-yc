@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha12 "github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1"
 	v1alpha11 "github.com/tagesjump/provider-upjet-yc/apis/kms/v1alpha1"
@@ -188,6 +189,48 @@ func (mg *SecretVersion) ResolveReferences(ctx context.Context, c client.Reader)
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
 		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.SecretIDRef,
+		Selector:     mg.Spec.InitProvider.SecretIDSelector,
+		To: reference.To{
+			List:    &SecretList{},
+			Managed: &Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SecretID")
+	}
+	mg.Spec.InitProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SecretIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SecretVersionHashed.
+func (mg *SecretVersionHashed) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecretID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SecretIDRef,
+		Selector:     mg.Spec.ForProvider.SecretIDSelector,
+		To: reference.To{
+			List:    &SecretList{},
+			Managed: &Secret{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SecretID")
+	}
+	mg.Spec.ForProvider.SecretID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SecretIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SecretID),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.InitProvider.SecretIDRef,
 		Selector:     mg.Spec.InitProvider.SecretIDSelector,
 		To: reference.To{

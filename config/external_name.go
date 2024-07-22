@@ -116,6 +116,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_loadtesting_agent":                     config.IdentifierFromProvider,
 	"yandex_mdb_opensearch_cluster":                config.IdentifierFromProvider,
 	"yandex_audit_trails_trail":                    config.IdentifierFromProvider,
+	"yandex_lockbox_secret_version_hashed":         config.IdentifierFromProvider,
+	"yandex_sws_security_profile":                  config.IdentifierFromProvider,
+	"yandex_smartcaptcha_captcha":                  config.IdentifierFromProvider,
 }
 
 // cliReconciledExternalNameConfigs contains all external name configurations
