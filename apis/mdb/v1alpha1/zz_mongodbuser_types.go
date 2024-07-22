@@ -22,6 +22,9 @@ type MongodbUserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
+	// The password of the user.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Set of permissions granted to the user. The structure is documented below.
 	Permission []MongodbUserPermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 }

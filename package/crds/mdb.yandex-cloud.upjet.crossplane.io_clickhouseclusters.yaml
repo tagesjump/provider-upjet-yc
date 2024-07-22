@@ -1800,8 +1800,6 @@ spec:
                                 type: number
                             type: object
                           type: array
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                   version:
@@ -1877,6 +1875,24 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  adminPasswordSecretRef:
+                    description: A password used to authorize as user admin when sql_user_management
+                      enabled.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   backupWindowStart:
                     description: Time to start the daily backup, in the UTC timezone.
                       The structure is documented below.
@@ -2001,6 +2017,23 @@ spec:
                                     saslMechanism:
                                       description: SASL mechanism used in kafka authentication.
                                       type: string
+                                    saslPasswordSecretRef:
+                                      description: User password on kafka server.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                     saslUsername:
                                       description: Username on kafka server.
                                       type: string
@@ -2050,6 +2083,23 @@ spec:
                                             description: SASL mechanism used in kafka
                                               authentication.
                                             type: string
+                                          saslPasswordSecretRef:
+                                            description: User password on kafka server.
+                                            properties:
+                                              key:
+                                                description: The key to select.
+                                                type: string
+                                              name:
+                                                description: Name of the secret.
+                                                type: string
+                                              namespace:
+                                                description: Namespace of the secret.
+                                                type: string
+                                            required:
+                                            - key
+                                            - name
+                                            - namespace
+                                            type: object
                                           saslUsername:
                                             description: Username on kafka server.
                                             type: string
@@ -2234,6 +2284,23 @@ spec:
                                   structure is documented below.
                                 items:
                                   properties:
+                                    passwordSecretRef:
+                                      description: The password of the user.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                     username:
                                       description: RabbitMQ username.
                                       type: string
@@ -2899,6 +2966,23 @@ spec:
                         name:
                           description: The name of the user.
                           type: string
+                        passwordSecretRef:
+                          description: The password of the user.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         permission:
                           description: Set of permissions granted to the user. The
                             structure is documented below.
@@ -3487,6 +3571,8 @@ spec:
                                 type: number
                             type: object
                           type: array
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                   version:

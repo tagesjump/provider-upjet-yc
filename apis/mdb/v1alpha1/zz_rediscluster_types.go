@@ -32,6 +32,9 @@ type RedisClusterConfigInitParameters struct {
 	// Select the events that Redis will notify among a set of classes.
 	NotifyKeyspaceEvents *string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty"`
 
+	// Password for the Redis cluster.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Log slow queries below this number in microseconds.
 	SlowlogLogSlowerThan *float64 `json:"slowlogLogSlowerThan,omitempty" tf:"slowlog_log_slower_than,omitempty"`
 
@@ -111,7 +114,7 @@ type RedisClusterConfigParameters struct {
 	NotifyKeyspaceEvents *string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty"`
 
 	// Password for the Redis cluster.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Log slow queries below this number in microseconds.

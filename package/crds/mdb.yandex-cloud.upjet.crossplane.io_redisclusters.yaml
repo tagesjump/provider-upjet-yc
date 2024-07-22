@@ -137,8 +137,6 @@ spec:
                         version:
                           description: Version of Redis (6.2).
                           type: string
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                   deletionProtection:
@@ -603,6 +601,23 @@ spec:
                           description: Select the events that Redis will notify among
                             a set of classes.
                           type: string
+                        passwordSecretRef:
+                          description: Password for the Redis cluster.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         slowlogLogSlowerThan:
                           description: Log slow queries below this number in microseconds.
                           type: number
@@ -616,6 +631,8 @@ spec:
                         version:
                           description: Version of Redis (6.2).
                           type: string
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                   deletionProtection:

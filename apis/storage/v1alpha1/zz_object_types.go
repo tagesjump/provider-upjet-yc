@@ -60,6 +60,9 @@ type ObjectInitParameters struct {
 	// Specifies date and time in RTC3339 format until which an object is to be locked. It must be set simultaneously with object_lock_mode. Requires object_lock_configuration to be enabled on a bucket.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
+	// The secret key to use when applying changes. If omitted, storage_secret_key specified in config is used.
+	SecretKeySecretRef *v1.SecretKeySelector `json:"secretKeySecretRef,omitempty" tf:"-"`
+
 	// The path to a file that will be read and uploaded as raw bytes for the object content.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 

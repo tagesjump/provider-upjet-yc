@@ -10,6 +10,7 @@ import (
 )
 
 type TopicConsumerInitParameters struct {
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -23,6 +24,7 @@ type TopicConsumerInitParameters struct {
 }
 
 type TopicConsumerObservation struct {
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -36,6 +38,9 @@ type TopicConsumerObservation struct {
 }
 
 type TopicConsumerParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
 	// +kubebuilder:validation:Optional

@@ -55,6 +55,9 @@ type QueueInitParameters struct {
 	// The default is 'ru-central1'.
 	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
 
+	// The secret key to use when applying changes. If omitted, ymq_secret_key specified in provider config is used. For more information see documentation.
+	SecretKeySecretRef *v1.SecretKeySelector `json:"secretKeySecretRef,omitempty" tf:"-"`
+
 	// Visibility timeout for messages in a queue, specified in seconds. Valid values: from 0 to 43200 seconds (12 hours). Default: 30.
 	VisibilityTimeoutSeconds *float64 `json:"visibilityTimeoutSeconds,omitempty" tf:"visibility_timeout_seconds,omitempty"`
 }

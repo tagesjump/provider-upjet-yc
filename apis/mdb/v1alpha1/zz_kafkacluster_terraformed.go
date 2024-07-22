@@ -17,7 +17,7 @@ func (mg *KafkaCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this KafkaCluster
 func (tr *KafkaCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"user[*].password": "spec.forProvider.user[*].passwordSecretRef"}
+	return map[string]string{"user[*].password": "user[*].passwordSecretRef"}
 }
 
 // GetObservation of this KafkaCluster

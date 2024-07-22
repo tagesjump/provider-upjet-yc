@@ -1363,6 +1363,25 @@ spec:
                     type: array
                   policy:
                     type: string
+                  secretKeySecretRef:
+                    description: |-
+                      The secret key to use when applying changes. If omitted, storage_secret_key specified in
+                      provider config (explicitly or within shared_credentials_file) is used.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   serverSideEncryptionConfiguration:
                     description: A configuration of server-side encryption for the
                       bucket (documented below)

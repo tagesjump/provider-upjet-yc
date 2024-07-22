@@ -78,6 +78,8 @@ spec:
                       Default value: null.'
                     items:
                       properties:
+                        important:
+                          type: boolean
                         name:
                           description: 'Topic name. Type: string, required. Default
                             value: "".'
@@ -144,6 +146,8 @@ spec:
                       Default value: null.'
                     items:
                       properties:
+                        important:
+                          type: boolean
                         name:
                           description: 'Topic name. Type: string, required. Default
                             value: "".'
@@ -378,6 +382,8 @@ spec:
                       Default value: null.'
                     items:
                       properties:
+                        important:
+                          type: boolean
                         name:
                           description: 'Topic name. Type: string, required. Default
                             value: "".'

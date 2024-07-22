@@ -213,6 +213,10 @@ type BucketInitParameters struct {
 
 	Policy *string `json:"policy,omitempty" tf:"policy,omitempty"`
 
+	// The secret key to use when applying changes. If omitted, storage_secret_key specified in
+	// provider config (explicitly or within shared_credentials_file) is used.
+	SecretKeySecretRef *v1.SecretKeySelector `json:"secretKeySecretRef,omitempty" tf:"-"`
+
 	// A configuration of server-side encryption for the bucket (documented below)
 	ServerSideEncryptionConfiguration []ServerSideEncryptionConfigurationInitParameters `json:"serverSideEncryptionConfiguration,omitempty" tf:"server_side_encryption_configuration,omitempty"`
 

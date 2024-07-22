@@ -17,7 +17,7 @@ func (mg *SecretVersion) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SecretVersion
 func (tr *SecretVersion) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"entries[*].text_value": "spec.forProvider.entries[*].textValueSecretRef"}
+	return map[string]string{"entries[*].text_value": "entries[*].textValueSecretRef"}
 }
 
 // GetObservation of this SecretVersion

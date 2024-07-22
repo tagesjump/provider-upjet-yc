@@ -425,6 +425,23 @@ spec:
                   name:
                     description: The name of the user.
                     type: string
+                  passwordSecretRef:
+                    description: The password of the user.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   permission:
                     description: Set of permissions granted to the user. The structure
                       is documented below.
@@ -520,6 +537,8 @@ spec:
                           type: array
                       type: object
                     type: array
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:
