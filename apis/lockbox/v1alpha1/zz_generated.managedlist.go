@@ -22,15 +22,6 @@ func (l *SecretList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this SecretVersionHashedList.
-func (l *SecretVersionHashedList) GetItems() []resource.Managed {
-	items := make([]resource.Managed, len(l.Items))
-	for i := range l.Items {
-		items[i] = &l.Items[i]
-	}
-	return items
-}
-
 // GetItems of this SecretVersionList.
 func (l *SecretVersionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

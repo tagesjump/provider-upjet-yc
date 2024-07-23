@@ -54,7 +54,6 @@ import (
 	secret "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secret"
 	secretiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretiambinding"
 	secretversion "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretversion"
-	secretversionhashed "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretversionhashed"
 	group "github.com/tagesjump/provider-upjet-yc/internal/controller/logging/group"
 	clickhousecluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/clickhousecluster"
 	elasticsearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/elasticsearchcluster"
@@ -168,7 +167,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secret.Setup,
 		secretiambinding.Setup,
 		secretversion.Setup,
-		secretversionhashed.Setup,
 		group.Setup,
 		clickhousecluster.Setup,
 		elasticsearchcluster.Setup,
