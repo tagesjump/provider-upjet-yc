@@ -10,6 +10,3 @@ func (tr *SecretIAMBinding) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SecretVersion) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SecretVersionHashed) Hub() {}
