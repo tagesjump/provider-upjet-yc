@@ -852,6 +852,8 @@ type PostgresqlClusterUserInitParameters struct {
 	// Name of the PostgreSQL cluster. Provided by the client when the cluster is created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	Permission []PostgresqlClusterUserPermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 
 	// +mapType=granular
@@ -889,7 +891,7 @@ type PostgresqlClusterUserParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// +kubebuilder:validation:Optional

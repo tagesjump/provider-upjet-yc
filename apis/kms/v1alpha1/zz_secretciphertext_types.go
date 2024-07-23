@@ -25,6 +25,9 @@ type SecretCiphertextInitParameters struct {
 	// Selector for a SymmetricKey to populate keyId.
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+
+	// Plaintext to be encrypted.
+	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
 }
 
 type SecretCiphertextObservation struct {

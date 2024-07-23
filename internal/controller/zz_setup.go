@@ -54,6 +54,7 @@ import (
 	secret "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secret"
 	secretiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretiambinding"
 	secretversion "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretversion"
+	secretversionhashed "github.com/tagesjump/provider-upjet-yc/internal/controller/lockbox/secretversionhashed"
 	group "github.com/tagesjump/provider-upjet-yc/internal/controller/logging/group"
 	clickhousecluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/clickhousecluster"
 	elasticsearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/elasticsearchcluster"
@@ -93,8 +94,10 @@ import (
 	folderiambinding "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiambinding"
 	folderiammember "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiammember"
 	folderiampolicy "github.com/tagesjump/provider-upjet-yc/internal/controller/resourcemanager/folderiampolicy"
+	captcha "github.com/tagesjump/provider-upjet-yc/internal/controller/smartcaptcha/captcha"
 	bucket "github.com/tagesjump/provider-upjet-yc/internal/controller/storage/bucket"
 	object "github.com/tagesjump/provider-upjet-yc/internal/controller/storage/object"
+	securityprofile "github.com/tagesjump/provider-upjet-yc/internal/controller/sws/securityprofile"
 	address "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/address"
 	defaultsecuritygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/defaultsecuritygroup"
 	gateway "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/gateway"
@@ -165,6 +168,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		secret.Setup,
 		secretiambinding.Setup,
 		secretversion.Setup,
+		secretversionhashed.Setup,
 		group.Setup,
 		clickhousecluster.Setup,
 		elasticsearchcluster.Setup,
@@ -204,8 +208,10 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		folderiambinding.Setup,
 		folderiammember.Setup,
 		folderiampolicy.Setup,
+		captcha.Setup,
 		bucket.Setup,
 		object.Setup,
+		securityprofile.Setup,
 		address.Setup,
 		defaultsecuritygroup.Setup,
 		gateway.Setup,

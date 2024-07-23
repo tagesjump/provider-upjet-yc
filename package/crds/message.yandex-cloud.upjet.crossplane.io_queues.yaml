@@ -379,6 +379,25 @@ spec:
                       ID of the region where the message queue is located at.
                       The default is 'ru-central1'.
                     type: string
+                  secretKeySecretRef:
+                    description: The secret key to use when applying changes. If omitted,
+                      ymq_secret_key specified in provider config is used. For more
+                      information see documentation.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   visibilityTimeoutSeconds:
                     description: 'Visibility timeout for messages in a queue, specified
                       in seconds. Valid values: from 0 to 43200 seconds (12 hours).

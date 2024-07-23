@@ -17,7 +17,7 @@ func (mg *GreenplumCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this GreenplumCluster
 func (tr *GreenplumCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"user_password": "spec.forProvider.userPasswordSecretRef"}
+	return map[string]string{"user_password": "userPasswordSecretRef"}
 }
 
 // GetObservation of this GreenplumCluster

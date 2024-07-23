@@ -66,6 +66,9 @@ type DataNodeResourcesParameters struct {
 
 type ElasticsearchClusterConfigInitParameters struct {
 
+	// Password for admin user of Elasticsearch.
+	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+
 	// Configuration for Elasticsearch data nodes subcluster. The structure is documented below.
 	DataNode []DataNodeInitParameters `json:"dataNode,omitempty" tf:"data_node,omitempty"`
 
@@ -105,7 +108,7 @@ type ElasticsearchClusterConfigObservation struct {
 type ElasticsearchClusterConfigParameters struct {
 
 	// Password for admin user of Elasticsearch.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// Configuration for Elasticsearch data nodes subcluster. The structure is documented below.

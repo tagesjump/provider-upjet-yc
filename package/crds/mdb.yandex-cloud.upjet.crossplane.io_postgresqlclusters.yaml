@@ -709,8 +709,6 @@ spec:
                             type: string
                           type: object
                           x-kubernetes-map-type: granular
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                 type: object
@@ -1331,6 +1329,24 @@ spec:
                           description: Name of the PostgreSQL cluster. Provided by
                             the client when the cluster is created.
                           type: string
+                        passwordSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         permission:
                           items:
                             properties:
@@ -1345,6 +1361,8 @@ spec:
                             type: string
                           type: object
                           x-kubernetes-map-type: granular
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                 type: object

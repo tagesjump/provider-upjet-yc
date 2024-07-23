@@ -7,7 +7,7 @@ PROJECT_REPO ?= github.com/tagesjump/$(PROJECT_NAME)
 export TERRAFORM_VERSION ?= 1.6.1
 export TERRAFORM_PROVIDER_SOURCE ?= yandex-cloud/yandex
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/yandex-cloud/terraform-provider-yandex
-export TERRAFORM_PROVIDER_VERSION ?= 0.119.0
+export TERRAFORM_PROVIDER_VERSION ?= 0.123.0
 export TERRAFORM_DOCS_PATH ?= website/docs/r
 
 
@@ -46,10 +46,10 @@ GO_SUBDIRS += cmd internal apis
 # ====================================================================================
 # Setup Kubernetes tools
 
-KIND_VERSION = v0.21.0
+KIND_VERSION = v0.23.0
 UP_VERSION = v0.28.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.11.0
+UPTEST_VERSION = v0.11.1
 -include build/makelib/k8s_tools.mk
 
 # ====================================================================================

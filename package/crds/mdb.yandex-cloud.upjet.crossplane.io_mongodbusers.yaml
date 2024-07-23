@@ -274,6 +274,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  passwordSecretRef:
+                    description: The password of the user.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   permission:
                     description: Set of permissions granted to the user. The structure
                       is documented below.
@@ -292,6 +309,8 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

@@ -112,6 +112,9 @@ type ClickhouseClusterInitParameters struct {
 	// Access policy to the ClickHouse cluster. The structure is documented below.
 	Access []AccessInitParameters `json:"access,omitempty" tf:"access,omitempty"`
 
+	// A password used to authorize as user admin when sql_user_management enabled.
+	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []BackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
@@ -1124,6 +1127,9 @@ type KafkaInitParameters struct {
 	// SASL mechanism used in kafka authentication.
 	SaslMechanism *string `json:"saslMechanism,omitempty" tf:"sasl_mechanism,omitempty"`
 
+	// User password on kafka server.
+	SaslPasswordSecretRef *v1.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
+
 	// Username on kafka server.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
 
@@ -1621,6 +1627,9 @@ type QuotaParameters struct {
 
 type RabbitmqInitParameters struct {
 
+	// The password of the user.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// RabbitMQ username.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
@@ -1730,6 +1739,9 @@ type SettingsInitParameters struct {
 
 	// SASL mechanism used in kafka authentication.
 	SaslMechanism *string `json:"saslMechanism,omitempty" tf:"sasl_mechanism,omitempty"`
+
+	// User password on kafka server.
+	SaslPasswordSecretRef *v1.SecretKeySelector `json:"saslPasswordSecretRef,omitempty" tf:"-"`
 
 	// Username on kafka server.
 	SaslUsername *string `json:"saslUsername,omitempty" tf:"sasl_username,omitempty"`
@@ -1915,6 +1927,9 @@ type UserInitParameters struct {
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The password of the user.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Set of permissions granted to the user. The structure is documented below.
 	Permission []PermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 
@@ -1947,7 +1962,7 @@ type UserParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The password of the user.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Set of permissions granted to the user. The structure is documented below.

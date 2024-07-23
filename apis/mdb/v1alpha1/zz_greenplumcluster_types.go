@@ -207,6 +207,9 @@ type GreenplumClusterInitParameters struct {
 	// Greenplum cluster admin user name.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
+	// Greenplum cluster admin password name.
+	UserPasswordSecretRef v1.SecretKeySelector `json:"userPasswordSecretRef" tf:"-"`
+
 	// Version of the Greenplum cluster. (6.22 or 6.25)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 

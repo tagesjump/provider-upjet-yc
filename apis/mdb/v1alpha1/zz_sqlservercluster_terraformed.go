@@ -17,7 +17,7 @@ func (mg *SqlserverCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SqlserverCluster
 func (tr *SqlserverCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"user[*].password": "spec.forProvider.user[*].passwordSecretRef"}
+	return map[string]string{"user[*].password": "user[*].passwordSecretRef"}
 }
 
 // GetObservation of this SqlserverCluster

@@ -1218,6 +1218,52 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        metrikaSource:
+                          items:
+                            properties:
+                              counterIds:
+                                items:
+                                  type: number
+                                type: array
+                              streams:
+                                items:
+                                  properties:
+                                    columns:
+                                      items:
+                                        type: string
+                                      type: array
+                                    type:
+                                      description: 'Field type, one of: INT64, INT32,
+                                        INT16, INT8, UINT64, UINT32, UINT16, UINT8,
+                                        DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.'
+                                      type: string
+                                  type: object
+                                type: array
+                              token:
+                                items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         mongoSource:
                           description: Settings specific to the MongoDB source endpoint.
                           items:
@@ -4558,6 +4604,27 @@ spec:
                                               field named raw which should contain
                                               the password.
                                             items:
+                                              properties:
+                                                rawSecretRef:
+                                                  description: A SecretKeySelector
+                                                    is a reference to a secret key
+                                                    in an arbitrary namespace.
+                                                  properties:
+                                                    key:
+                                                      description: The key to select.
+                                                      type: string
+                                                    name:
+                                                      description: Name of the secret.
+                                                      type: string
+                                                    namespace:
+                                                      description: Namespace of the
+                                                        secret.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - name
+                                                  - namespace
+                                                  type: object
                                               type: object
                                             type: array
                                           user:
@@ -4793,6 +4860,27 @@ spec:
                                               field named raw which should contain
                                               the password.
                                             items:
+                                              properties:
+                                                rawSecretRef:
+                                                  description: A SecretKeySelector
+                                                    is a reference to a secret key
+                                                    in an arbitrary namespace.
+                                                  properties:
+                                                    key:
+                                                      description: The key to select.
+                                                      type: string
+                                                    name:
+                                                      description: Name of the secret.
+                                                      type: string
+                                                    namespace:
+                                                      description: Namespace of the
+                                                        secret.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - name
+                                                  - namespace
+                                                  type: object
                                               type: object
                                             type: array
                                           user:
@@ -4986,6 +5074,27 @@ spec:
                                               field named raw which should contain
                                               the password.
                                             items:
+                                              properties:
+                                                rawSecretRef:
+                                                  description: A SecretKeySelector
+                                                    is a reference to a secret key
+                                                    in an arbitrary namespace.
+                                                  properties:
+                                                    key:
+                                                      description: The key to select.
+                                                      type: string
+                                                    name:
+                                                      description: Name of the secret.
+                                                      type: string
+                                                    namespace:
+                                                      description: Namespace of the
+                                                        secret.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - name
+                                                  - namespace
+                                                  type: object
                                               type: object
                                             type: array
                                           user:
@@ -5279,6 +5388,27 @@ spec:
                                               field named raw which should contain
                                               the password.
                                             items:
+                                              properties:
+                                                rawSecretRef:
+                                                  description: A SecretKeySelector
+                                                    is a reference to a secret key
+                                                    in an arbitrary namespace.
+                                                  properties:
+                                                    key:
+                                                      description: The key to select.
+                                                      type: string
+                                                    name:
+                                                      description: Name of the secret.
+                                                      type: string
+                                                    namespace:
+                                                      description: Namespace of the
+                                                        secret.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - name
+                                                  - namespace
+                                                  type: object
                                               type: object
                                             type: array
                                           user:
@@ -5416,6 +5546,52 @@ spec:
                                       description: Topic name prefix. Messages will
                                         be sent to topic with name <topic_prefix>..<table_name>.
                                       type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        metrikaSource:
+                          items:
+                            properties:
+                              counterIds:
+                                items:
+                                  type: number
+                                type: array
+                              streams:
+                                items:
+                                  properties:
+                                    columns:
+                                      items:
+                                        type: string
+                                      type: array
+                                    type:
+                                      description: 'Field type, one of: INT64, INT32,
+                                        INT16, INT8, UINT64, UINT32, UINT16, UINT8,
+                                        DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.'
+                                      type: string
+                                  type: object
+                                type: array
+                              token:
+                                items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                             type: object
@@ -5598,6 +5774,27 @@ spec:
                                               field named raw which should contain
                                               the password.
                                             items:
+                                              properties:
+                                                rawSecretRef:
+                                                  description: A SecretKeySelector
+                                                    is a reference to a secret key
+                                                    in an arbitrary namespace.
+                                                  properties:
+                                                    key:
+                                                      description: The key to select.
+                                                      type: string
+                                                    name:
+                                                      description: Name of the secret.
+                                                      type: string
+                                                    namespace:
+                                                      description: Namespace of the
+                                                        secret.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - name
+                                                  - namespace
+                                                  type: object
                                               type: object
                                             type: array
                                           user:
@@ -5881,6 +6078,27 @@ spec:
                                               field named raw which should contain
                                               the password.
                                             items:
+                                              properties:
+                                                rawSecretRef:
+                                                  description: A SecretKeySelector
+                                                    is a reference to a secret key
+                                                    in an arbitrary namespace.
+                                                  properties:
+                                                    key:
+                                                      description: The key to select.
+                                                      type: string
+                                                    name:
+                                                      description: Name of the secret.
+                                                      type: string
+                                                    namespace:
+                                                      description: Namespace of the
+                                                        secret.
+                                                      type: string
+                                                  required:
+                                                  - key
+                                                  - name
+                                                  - namespace
+                                                  type: object
                                               type: object
                                             type: array
                                           user:
@@ -6323,6 +6541,25 @@ spec:
                                   is a block with a single field named raw which should
                                   contain the password.
                                 items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                               securityGroups:
@@ -6814,6 +7051,25 @@ spec:
                                   is a block with a single field named raw which should
                                   contain the password.
                                 items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                               securityGroups:
@@ -7375,6 +7631,25 @@ spec:
                                   is a block with a single field named raw which should
                                   contain the password.
                                 items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                               securityGroups:
@@ -7868,6 +8143,25 @@ spec:
                                   is a block with a single field named raw which should
                                   contain the password.
                                 items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                               securityGroups:
@@ -8055,6 +8349,23 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                              saKeyContentSecretRef:
+                                description: '-  Authentication key.'
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               securityGroups:
                                 description: '-  List of security groups that the
                                   transfer associated with this endpoint should use.'
@@ -8102,6 +8413,23 @@ spec:
                                 description: '-  A path where resulting tables are
                                   stored.'
                                 type: string
+                              saKeyContentSecretRef:
+                                description: '-  Authentication key.'
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               securityGroups:
                                 description: '-  List of security groups that the
                                   transfer associated with this endpoint should use.'
@@ -9484,6 +9812,52 @@ spec:
                                       description: Topic name prefix. Messages will
                                         be sent to topic with name <topic_prefix>..<table_name>.
                                       type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        metrikaSource:
+                          items:
+                            properties:
+                              counterIds:
+                                items:
+                                  type: number
+                                type: array
+                              streams:
+                                items:
+                                  properties:
+                                    columns:
+                                      items:
+                                        type: string
+                                      type: array
+                                    type:
+                                      description: 'Field type, one of: INT64, INT32,
+                                        INT16, INT8, UINT64, UINT32, UINT16, UINT8,
+                                        DOUBLE, BOOLEAN, STRING, UTF8, ANY, DATETIME.'
+                                      type: string
+                                  type: object
+                                type: array
+                              token:
+                                items:
+                                  properties:
+                                    rawSecretRef:
+                                      description: A SecretKeySelector is a reference
+                                        to a secret key in an arbitrary namespace.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                             type: object

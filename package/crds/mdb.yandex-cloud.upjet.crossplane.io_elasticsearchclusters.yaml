@@ -158,8 +158,6 @@ spec:
                         version:
                           description: Version of Elasticsearch.
                           type: string
-                      required:
-                      - adminPasswordSecretRef
                       type: object
                     type: array
                   deletionProtection:
@@ -646,6 +644,23 @@ spec:
                       is documented below.
                     items:
                       properties:
+                        adminPasswordSecretRef:
+                          description: Password for admin user of Elasticsearch.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         dataNode:
                           description: Configuration for Elasticsearch data nodes
                             subcluster. The structure is documented below.
@@ -709,6 +724,8 @@ spec:
                         version:
                           description: Version of Elasticsearch.
                           type: string
+                      required:
+                      - adminPasswordSecretRef
                       type: object
                     type: array
                   deletionProtection:

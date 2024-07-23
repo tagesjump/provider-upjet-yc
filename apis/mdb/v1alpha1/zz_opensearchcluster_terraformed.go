@@ -17,7 +17,7 @@ func (mg *OpensearchCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OpensearchCluster
 func (tr *OpensearchCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"config[*].admin_password": "spec.forProvider.config[*].adminPasswordSecretRef"}
+	return map[string]string{"config[*].admin_password": "config[*].adminPasswordSecretRef"}
 }
 
 // GetObservation of this OpensearchCluster

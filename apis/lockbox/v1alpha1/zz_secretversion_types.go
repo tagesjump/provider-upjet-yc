@@ -58,6 +58,9 @@ type EntriesInitParameters struct {
 
 	// The key of the entry.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The text value of the entry.
+	TextValueSecretRef *v1.SecretKeySelector `json:"textValueSecretRef,omitempty" tf:"-"`
 }
 
 type EntriesObservation struct {

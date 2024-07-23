@@ -715,6 +715,9 @@ type MySQLClusterUserInitParameters struct {
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The password of the user.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Set of permissions granted to the user. The structure is documented below.
 	Permission []MySQLClusterUserPermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 }
@@ -764,7 +767,7 @@ type MySQLClusterUserParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The password of the user.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Set of permissions granted to the user. The structure is documented below.

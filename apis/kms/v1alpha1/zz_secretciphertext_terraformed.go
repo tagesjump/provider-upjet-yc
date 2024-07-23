@@ -17,7 +17,7 @@ func (mg *SecretCiphertext) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SecretCiphertext
 func (tr *SecretCiphertext) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"plaintext": "spec.forProvider.plaintextSecretRef"}
+	return map[string]string{"plaintext": "plaintextSecretRef"}
 }
 
 // GetObservation of this SecretCiphertext

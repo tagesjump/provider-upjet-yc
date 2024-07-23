@@ -470,6 +470,24 @@ spec:
                                       description: Type of SASL authentification mechanism
                                         to use
                                       type: string
+                                    saslPasswordSecretRef:
+                                      description: Password to use in SASL authentification
+                                        mechanism
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                     saslUsername:
                                       description: Username to use in SASL authentification
                                         mechanism
@@ -508,6 +526,24 @@ spec:
                                       description: Type of SASL authentification mechanism
                                         to use
                                       type: string
+                                    saslPasswordSecretRef:
+                                      description: Password to use in SASL authentification
+                                        mechanism
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                     saslUsername:
                                       description: Username to use in SASL authentification
                                         mechanism
@@ -564,6 +600,24 @@ spec:
                                       description: region of s3-compatible storage.
                                         Available region list.
                                       type: string
+                                    secretAccessKeySecretRef:
+                                      description: Secret key of aws-compatible static
+                                        key.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
                                   type: object
                                 type: array
                             type: object

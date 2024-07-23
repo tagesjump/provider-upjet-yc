@@ -1183,6 +1183,23 @@ spec:
                   userName:
                     description: Greenplum cluster admin user name.
                     type: string
+                  userPasswordSecretRef:
+                    description: Greenplum cluster admin password name.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   version:
                     description: Version of the Greenplum cluster. (6.22 or 6.25)
                     type: string
@@ -1190,6 +1207,8 @@ spec:
                     description: The availability zone where the Greenplum hosts will
                       be created.
                     type: string
+                required:
+                - userPasswordSecretRef
                 type: object
               managementPolicies:
                 default:
