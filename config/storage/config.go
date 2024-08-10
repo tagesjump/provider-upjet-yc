@@ -37,6 +37,9 @@ func Configure(p *ujconfig.Provider) {
 			Type:      fmt.Sprintf("%s.%s", iam.ApisPackagePath, "ServiceAccountStaticAccessKey"),
 			Extractor: common.ExtractPublicKeyFuncPath,
 		}
+		r.LateInitializer = ujconfig.LateInitializer{
+			IgnoredFields: []string{"anonymous_access_flags", "anonymous_access_flags.config_read", "anonymous_access_flags.list", "anonymous_access_flags.read"},
+		}
 	})
 	p.AddResourceConfigurator("yandex_storage_object", func(r *ujconfig.Resource) {
 		r.UseAsync = true
