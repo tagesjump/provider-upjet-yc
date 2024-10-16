@@ -6,6 +6,7 @@ package config
 
 import (
 	"github.com/yandex-cloud/terraform-provider-yandex/yandex"
+	yandex_framework "github.com/yandex-cloud/terraform-provider-yandex/yandex-framework/provider"
 
 	// Note(turkenh): we are importing this to embed provider schema document
 	_ "embed"
@@ -18,11 +19,15 @@ import (
 
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/tagesjump/provider-upjet-yc/config/alb"
+	"github.com/tagesjump/provider-upjet-yc/config/cdn"
+	"github.com/tagesjump/provider-upjet-yc/config/cm"
 	"github.com/tagesjump/provider-upjet-yc/config/compute"
 	"github.com/tagesjump/provider-upjet-yc/config/container"
 	"github.com/tagesjump/provider-upjet-yc/config/datatransfer"
 	"github.com/tagesjump/provider-upjet-yc/config/dns"
+	"github.com/tagesjump/provider-upjet-yc/config/function"
 	"github.com/tagesjump/provider-upjet-yc/config/iam"
+	"github.com/tagesjump/provider-upjet-yc/config/iot"
 	"github.com/tagesjump/provider-upjet-yc/config/kms"
 	"github.com/tagesjump/provider-upjet-yc/config/kubernetes"
 	"github.com/tagesjump/provider-upjet-yc/config/lb"
@@ -34,6 +39,7 @@ import (
 	"github.com/tagesjump/provider-upjet-yc/config/monitoring"
 	"github.com/tagesjump/provider-upjet-yc/config/organizationmanager"
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
+	"github.com/tagesjump/provider-upjet-yc/config/serverless"
 	"github.com/tagesjump/provider-upjet-yc/config/storage"
 	"github.com/tagesjump/provider-upjet-yc/config/vpc"
 	"github.com/tagesjump/provider-upjet-yc/config/ydb"
@@ -73,12 +79,12 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 
 // GetProvider returns provider configuration
 func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
-	var p *schema.Provider
+	var providerInstance *schema.Provider
 	var err error
 	if generationProvider {
-		p, err = getProviderSchema(providerSchema)
+		providerInstance, err = getProviderSchema(providerSchema)
 	} else {
-		p = yandex.NewSDKProvider()
+		providerInstance = yandex.NewSDKProvider()
 	}
 	if err != nil {
 		return nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
@@ -86,14 +92,16 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
 		ujconfig.WithRootGroup("yandex-cloud.upjet.crossplane.io"),
-		ujconfig.WithIncludeList(resourceList(cliReconciledExternalNameConfigs)),
-		ujconfig.WithTerraformPluginSDKIncludeList(resourceList(ExternalNameConfigs)),
 		ujconfig.WithFeaturesPackage("internal/features"),
+		ujconfig.WithTerraformProvider(providerInstance),
+		ujconfig.WithTerraformPluginSDKIncludeList(resourceList(TerraformPluginSDKExternalNameConfigs)),
+		ujconfig.WithTerraformPluginFrameworkProvider(yandex_framework.NewFrameworkProvider()),
+		ujconfig.WithTerraformPluginFrameworkIncludeList(resourceList(TerraformPluginFrameworkExternalNameConfigs)),
+		ujconfig.WithIncludeList(resourceList(cliReconciledExternalNameConfigs)),
 		ujconfig.WithDefaultResourceOptions(
 			ExternalNameConfigurations(),
 		),
 		ujconfig.WithReferenceInjectors([]ujconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
-		ujconfig.WithTerraformProvider(p),
 	)
 
 	for _, configure := range []func(provider *ujconfig.Provider){
@@ -118,6 +126,11 @@ func GetProvider(generationProvider bool) (*ujconfig.Provider, error) {
 		lockbox.Configure,
 		monitoring.Configure,
 		loadtesting.Configure,
+		serverless.Configure,
+		iot.Configure,
+		function.Configure,
+		cm.Configure,
+		cdn.Configure,
 	} {
 		configure(pc)
 	}
@@ -132,7 +145,7 @@ func resourceList(t map[string]ujconfig.ExternalName) []string {
 	l := make([]string, len(t))
 	i := 0
 	for n := range t {
-		// Expected format is regex and we'd like to have exact matches.
+		// Expected format is regex, and we'd like to have exact matches.
 		l[i] = n + "$"
 		i++
 	}

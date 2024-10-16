@@ -1,0 +1,24 @@
+apiVersion: iot.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: CoreRegistry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/coreregistry
+  labels:
+    testing.upbound.io/example-name: my_registry
+  name: my-registry
+spec:
+  forProvider:
+    certificates:
+    - public part of certificate1
+    - public part of certificate2
+    description: any description
+    labels:
+      my-label: my-label-value
+    logOptions:
+    - logGroupId: log-group-id
+      minLevel: ERROR
+    name: some_name
+    passwordsSecretRef:
+    - key: example-key
+      name: example-secret
+      namespace: upbound-system

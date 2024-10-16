@@ -22,6 +22,9 @@ type MongodbUserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
+	// The name of the user.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The password of the user.
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
@@ -33,6 +36,9 @@ type MongodbUserObservation struct {
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the user.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Set of permissions granted to the user. The structure is documented below.
 	Permission []MongodbUserPermissionObservation `json:"permission,omitempty" tf:"permission,omitempty"`
@@ -51,6 +57,10 @@ type MongodbUserParameters struct {
 	// Selector for a MongodbCluster to populate clusterId.
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
+
+	// The name of the user.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The password of the user.
 	// +kubebuilder:validation:Optional
@@ -129,6 +139,7 @@ type MongodbUserStatus struct {
 type MongodbUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="spec.forProvider.passwordSecretRef is a required parameter"
 	Spec   MongodbUserSpec   `json:"spec"`
 	Status MongodbUserStatus `json:"status,omitempty"`
