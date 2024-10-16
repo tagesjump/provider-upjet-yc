@@ -4,8 +4,26 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
+// GetItems of this DiskIAMBindingList.
+func (l *DiskIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this DiskList.
 func (l *DiskList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this DiskPlacementGroupIAMBindingList.
+func (l *DiskPlacementGroupIAMBindingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -22,6 +40,15 @@ func (l *DiskPlacementGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this FilesystemIAMBindingList.
+func (l *FilesystemIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FilesystemList.
 func (l *FilesystemList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -31,8 +58,26 @@ func (l *FilesystemList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this GpuClusterIAMBindingList.
+func (l *GpuClusterIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this GpuClusterList.
 func (l *GpuClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ImageIAMBindingList.
+func (l *ImageIAMBindingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -58,8 +103,26 @@ func (l *InstanceGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this InstanceIAMBindingList.
+func (l *InstanceIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this InstanceList.
 func (l *InstanceList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PlacementGroupIAMBindingList.
+func (l *PlacementGroupIAMBindingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -76,8 +139,26 @@ func (l *PlacementGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this SnapshotIAMBindingList.
+func (l *SnapshotIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SnapshotList.
 func (l *SnapshotList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SnapshotScheduleIAMBindingList.
+func (l *SnapshotScheduleIAMBindingList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

@@ -1,0 +1,14 @@
+apiVersion: serverless.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: ContainerIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: serverless/v1alpha1/containeriambinding
+  labels:
+    testing.upbound.io/example-name: container-iam
+  name: container-iam
+spec:
+  forProvider:
+    containerId: your-container-id
+    members:
+    - system:allUsers
+    role: serverless.containers.invoker

@@ -149,6 +149,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: The name of the database.
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -239,6 +242,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: The name of the database.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -407,6 +413,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: MongodbDatabaseStatus defines the observed state of MongodbDatabase.
             properties:
@@ -415,6 +426,9 @@ spec:
                   clusterId:
                     type: string
                   id:
+                    type: string
+                  name:
+                    description: The name of the database.
                     type: string
                 type: object
               conditions:

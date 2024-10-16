@@ -1,0 +1,27 @@
+apiVersion: serverless.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: serverless/v1alpha1/container
+  labels:
+    testing.upbound.io/example-name: test-container
+  name: test-container
+spec:
+  forProvider:
+    coreFraction: 100
+    cores: 1
+    description: any description
+    executionTimeout: 15s
+    image:
+    - url: cr.yandex/yc/test-image:v1
+    logOptions:
+    - logGroupId: e2392vo6d1bne2aeq9fr
+      minLevel: ERROR
+    memory: 256
+    name: some_name
+    secrets:
+    - environmentVariable: ENV_VARIABLE
+      id: ${yandex_lockbox_secret.secret.id}
+      key: secret-key
+      versionId: ${yandex_lockbox_secret_version.secret_version.id}
+    serviceAccountId: are1service2account3id

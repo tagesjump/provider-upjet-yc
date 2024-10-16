@@ -1,0 +1,33 @@
+apiVersion: compute.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: SnapshotIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshotiambinding
+  labels:
+    testing.upbound.io/example-name: editor
+  name: editor
+spec:
+  forProvider:
+    members:
+    - userAccount:some_user_id
+    role: editor
+    snapshotId: ${data.yandex_compute_snapshot.snapshot1.id}
+
+---
+
+apiVersion: compute.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Snapshot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshotiambinding
+  labels:
+    testing.upbound.io/example-name: snapshot1
+  name: snapshot1
+spec:
+  forProvider:
+    labels:
+      my-label: my-label-value
+    name: test-snapshot
+    sourceDiskIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

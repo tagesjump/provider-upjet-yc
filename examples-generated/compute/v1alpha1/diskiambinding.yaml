@@ -1,0 +1,35 @@
+apiVersion: compute.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: DiskIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/diskiambinding
+  labels:
+    testing.upbound.io/example-name: editor
+  name: editor
+spec:
+  forProvider:
+    diskId: ${data.yandex_compute_disk.disk1.id}
+    members:
+    - userAccount:some_user_id
+    role: editor
+
+---
+
+apiVersion: compute.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Disk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/diskiambinding
+  labels:
+    testing.upbound.io/example-name: disk1
+  name: disk1
+spec:
+  forProvider:
+    imageIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labels:
+      environment: test
+    name: disk-name
+    type: network-ssd
+    zone: ru-central1-a
