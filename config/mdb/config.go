@@ -293,7 +293,6 @@ func Configure(p *ujconfig.Provider) {
 		r.References["security_group_ids"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "SecurityGroup"),
 		}
-		r.UseAsync = true
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			return postgresqlConnDetails(attr), nil
 		}
@@ -303,13 +302,11 @@ func Configure(p *ujconfig.Provider) {
 		r.References["cluster_id"] = ujconfig.Reference{
 			Type: "PostgresqlCluster",
 		}
-		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("yandex_mdb_postgresql_user", func(r *ujconfig.Resource) {
 		r.References["cluster_id"] = ujconfig.Reference{
 			Type: "PostgresqlCluster",
 		}
-		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("yandex_mdb_mysql_cluster", func(r *ujconfig.Resource) {
 		r.References["network_id"] = ujconfig.Reference{

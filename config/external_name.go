@@ -7,10 +7,15 @@ import (
 	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
 )
 
-// ExternalNameConfigs contains all external name configurations for this
-// provider.
-var ExternalNameConfigs = map[string]config.ExternalName{
+// TerraformPluginSDKExternalNameConfigs contains all external name configurations
+// belonging to Terraform Plugin SDKv2 resources to be reconciled
+// under the no-fork architecture for this provider.
+var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
+	"yandex_airflow_cluster":                                  config.IdentifierFromProvider,
+	"yandex_api_gateway":                                      config.IdentifierFromProvider,
+	"yandex_backup_policy":                                    config.IdentifierFromProvider,
+	"yandex_backup_policy_bindings":                           config.IdentifierFromProvider,
 	"yandex_iam_service_account":                              config.NameAsIdentifier,
 	"yandex_iam_service_account_key":                          config.NameAsIdentifier,
 	"yandex_iam_service_account_api_key":                      config.NameAsIdentifier,
@@ -49,6 +54,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_vpc_security_group":                               config.IdentifierFromProvider,
 	"yandex_vpc_security_group_rule":                          config.IdentifierFromProvider,
 	"yandex_vpc_address":                                      config.IdentifierFromProvider,
+	"yandex_vpc_private_endpoint":                             config.IdentifierFromProvider,
 	"yandex_kubernetes_cluster":                               config.IdentifierFromProvider,
 	"yandex_kubernetes_node_group":                            config.IdentifierFromProvider,
 	"yandex_mdb_clickhouse_cluster":                           config.IdentifierFromProvider,
@@ -76,7 +82,6 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_compute_image":                         config.IdentifierFromProvider,
 	"yandex_compute_instance":                      config.IdentifierFromProvider,
 	"yandex_compute_instance_group":                config.IdentifierFromProvider,
-	"yandex_compute_instance_migrate":              config.IdentifierFromProvider,
 	"yandex_compute_placement_group":               config.IdentifierFromProvider,
 	"yandex_compute_snapshot":                      config.IdentifierFromProvider,
 	"yandex_compute_snapshot_schedule":             config.IdentifierFromProvider,
@@ -109,32 +114,69 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_ydb_topic":                             config.IdentifierFromProvider,
 	"yandex_datatransfer_endpoint":                 config.IdentifierFromProvider,
 	"yandex_datatransfer_transfer":                 config.IdentifierFromProvider,
-	"yandex_lockbox_secret":                        config.IdentifierFromProvider,
-	"yandex_lockbox_secret_iam_binding":            config.IdentifierFromProvider,
-	"yandex_lockbox_secret_version":                config.IdentifierFromProvider,
-	"yandex_monitoring_dashboard":                  config.IdentifierFromProvider,
-	"yandex_loadtesting_agent":                     config.IdentifierFromProvider,
-	"yandex_mdb_opensearch_cluster":                config.IdentifierFromProvider,
-	"yandex_audit_trails_trail":                    config.IdentifierFromProvider,
+	"yandex_dataproc_cluster":                      config.IdentifierFromProvider,
+	// "yandex_datasphere_community": config.IdentifierFromProvider,
+	// "yandex_datasphere_community_iam_binding": config.IdentifierFromProvider,
+	// "yandex_datasphere_project": config.IdentifierFromProvider,
+	// "yandex_datasphere_project_iam_binding": config.IdentifierFromProvider,
+	"yandex_lockbox_secret":             config.IdentifierFromProvider,
+	"yandex_lockbox_secret_iam_binding": config.IdentifierFromProvider,
+	"yandex_lockbox_secret_version":     config.IdentifierFromProvider,
+	"yandex_monitoring_dashboard":       config.IdentifierFromProvider,
+	"yandex_loadtesting_agent":          config.IdentifierFromProvider,
+	"yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
+	"yandex_audit_trails_trail":         config.IdentifierFromProvider,
 	// "yandex_lockbox_secret_version_hashed":         config.IdentifierFromProvider,
-	"yandex_sws_security_profile": config.IdentifierFromProvider,
-	"yandex_smartcaptcha_captcha": config.IdentifierFromProvider,
+	"yandex_sws_security_profile":             config.IdentifierFromProvider,
+	"yandex_smartcaptcha_captcha":             config.IdentifierFromProvider,
+	"yandex_cm_certificate":                   config.IdentifierFromProvider,
+	"yandex_cdn_resource":                     config.IdentifierFromProvider,
+	"yandex_cdn_origin_group":                 config.IdentifierFromProvider,
+	"yandex_function":                         config.IdentifierFromProvider,
+	"yandex_function_iam_binding":             config.IdentifierFromProvider,
+	"yandex_function_scaling_policy":          config.IdentifierFromProvider,
+	"yandex_function_trigger":                 config.IdentifierFromProvider,
+	"yandex_iot_core_broker":                  config.IdentifierFromProvider,
+	"yandex_iot_core_device":                  config.IdentifierFromProvider,
+	"yandex_iot_core_registry":                config.IdentifierFromProvider,
+	"yandex_serverless_container":             config.IdentifierFromProvider,
+	"yandex_serverless_container_iam_binding": config.IdentifierFromProvider,
+}
+
+// TerraformPluginFrameworkExternalNameConfigs contains all external
+// name configurations belonging to Terraform Plugin Framework
+// resources to be reconciled under the no-fork architecture for this
+// provider.
+var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
+	"yandex_mdb_mongodb_user":                         config.IdentifierFromProvider,
+	"yandex_mdb_mongodb_database":                     config.IdentifierFromProvider,
+	"yandex_compute_disk_placement_group_iam_binding": config.IdentifierFromProvider,
+	"yandex_compute_disk_iam_binding":                 config.IdentifierFromProvider,
+	"yandex_compute_image_iam_binding":                config.IdentifierFromProvider,
+	"yandex_compute_snapshot_iam_binding":             config.IdentifierFromProvider,
+	"yandex_compute_instance_iam_binding":             config.IdentifierFromProvider,
+	"yandex_compute_filesystem_iam_binding":           config.IdentifierFromProvider,
+	"yandex_compute_gpu_cluster_iam_binding":          config.IdentifierFromProvider,
+	"yandex_compute_placement_group_iam_binding":      config.IdentifierFromProvider,
+	"yandex_compute_snapshot_schedule_iam_binding":    config.IdentifierFromProvider,
+	"yandex_billing_cloud_binding":                    config.IdentifierFromProvider,
 }
 
 // cliReconciledExternalNameConfigs contains all external name configurations
 // belonging to Terraform resources to be reconciled under the CLI-based
 // architecture for this provider.
-var cliReconciledExternalNameConfigs = map[string]config.ExternalName{
-	"yandex_mdb_mongodb_user":     config.IdentifierFromProvider,
-	"yandex_mdb_mongodb_database": config.IdentifierFromProvider,
-}
+var cliReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
 // ExternalNameConfigurations applies all external name configs listed in the
 // table ExternalNameConfigs and sets the version of those resources to v1beta1
 // assuming they will be tested.
 func ExternalNameConfigurations() config.ResourceOption {
 	return func(r *config.Resource) {
-		if e, ok := ExternalNameConfigs[r.Name]; ok {
+		if e, ok := TerraformPluginSDKExternalNameConfigs[r.Name]; ok {
+			r.ExternalName = e
+		} else if e, ok := TerraformPluginFrameworkExternalNameConfigs[r.Name]; ok {
+			r.ExternalName = e
+		} else if e, ok := cliReconciledExternalNameConfigs[r.Name]; ok {
 			r.ExternalName = e
 		}
 		if (r.ShortGroup != "resourcemanager" && r.ShortGroup != "organizationmanager") ||
