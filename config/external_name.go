@@ -12,7 +12,6 @@ import (
 // under the no-fork architecture for this provider.
 var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"yandex_airflow_cluster":                                  config.IdentifierFromProvider,
 	"yandex_api_gateway":                                      config.IdentifierFromProvider,
 	"yandex_backup_policy":                                    config.IdentifierFromProvider,
 	"yandex_backup_policy_bindings":                           config.IdentifierFromProvider,
@@ -124,7 +123,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_lockbox_secret_version":     config.IdentifierFromProvider,
 	"yandex_monitoring_dashboard":       config.IdentifierFromProvider,
 	"yandex_loadtesting_agent":          config.IdentifierFromProvider,
-	"yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
 	"yandex_audit_trails_trail":         config.IdentifierFromProvider,
 	// "yandex_lockbox_secret_version_hashed":         config.IdentifierFromProvider,
 	"yandex_sws_security_profile":             config.IdentifierFromProvider,
@@ -165,7 +163,10 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 // cliReconciledExternalNameConfigs contains all external name configurations
 // belonging to Terraform resources to be reconciled under the CLI-based
 // architecture for this provider.
-var cliReconciledExternalNameConfigs = map[string]config.ExternalName{}
+var cliReconciledExternalNameConfigs = map[string]config.ExternalName{
+	"yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
+	// "yandex_airflow_cluster":                                  config.IdentifierFromProvider,
+}
 
 // ExternalNameConfigurations applies all external name configs listed in the
 // table ExternalNameConfigs and sets the version of those resources to v1beta1

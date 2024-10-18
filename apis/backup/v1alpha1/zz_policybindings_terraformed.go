@@ -13,18 +13,18 @@ import (
 	
 )
 
-// GetTerraformResourceType returns Terraform resource type for this Function
-func (mg *Function) GetTerraformResourceType() string {
-    return "yandex_function"
+// GetTerraformResourceType returns Terraform resource type for this PolicyBindings
+func (mg *PolicyBindings) GetTerraformResourceType() string {
+    return "yandex_backup_policy_bindings"
 }
 
-// GetConnectionDetailsMapping for this Function
-func (tr *Function) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this PolicyBindings
+func (tr *PolicyBindings) GetConnectionDetailsMapping() map[string]string {
   return nil
 }
 
-// GetObservation of this Function
-func (tr *Function) GetObservation() (map[string]any, error) {
+// GetObservation of this PolicyBindings
+func (tr *PolicyBindings) GetObservation() (map[string]any, error) {
     o, err := json.TFParser.Marshal(tr.Status.AtProvider)
     if err != nil {
         return nil, err
@@ -33,8 +33,8 @@ func (tr *Function) GetObservation() (map[string]any, error) {
     return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this Function
-func (tr *Function) SetObservation(obs map[string]any) error {
+// SetObservation for this PolicyBindings
+func (tr *PolicyBindings) SetObservation(obs map[string]any) error {
     p, err := json.TFParser.Marshal(obs)
     if err != nil {
         return err
@@ -42,16 +42,16 @@ func (tr *Function) SetObservation(obs map[string]any) error {
     return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this Function
-func (tr *Function) GetID() string {
+// GetID returns ID of underlying Terraform resource of this PolicyBindings
+func (tr *PolicyBindings) GetID() string {
     if tr.Status.AtProvider.ID == nil {
         return ""
     }
     return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this Function
-func (tr *Function) GetParameters() (map[string]any, error) {
+// GetParameters of this PolicyBindings
+func (tr *PolicyBindings) GetParameters() (map[string]any, error) {
     p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
     if err != nil {
         return nil, err
@@ -60,8 +60,8 @@ func (tr *Function) GetParameters() (map[string]any, error) {
     return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this Function
-func (tr *Function) SetParameters(params map[string]any) error {
+// SetParameters for this PolicyBindings
+func (tr *PolicyBindings) SetParameters(params map[string]any) error {
     p, err := json.TFParser.Marshal(params)
     if err != nil {
         return err
@@ -69,8 +69,8 @@ func (tr *Function) SetParameters(params map[string]any) error {
     return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// GetInitParameters of this Function
-func (tr *Function) GetInitParameters() (map[string]any, error) {
+// GetInitParameters of this PolicyBindings
+func (tr *PolicyBindings) GetInitParameters() (map[string]any, error) {
     p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
     if err != nil {
         return nil, err
@@ -79,8 +79,8 @@ func (tr *Function) GetInitParameters() (map[string]any, error) {
     return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// GetInitParameters of this Function
-func (tr *Function) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
+// GetInitParameters of this PolicyBindings
+func (tr *PolicyBindings) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
     params, err := tr.GetParameters()
     if err != nil {
         return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
@@ -109,10 +109,10 @@ func (tr *Function) GetMergedParameters(shouldMergeInitProvider bool) (map[strin
     return params, nil
 }
 
-// LateInitialize this Function using its observed tfState.
+// LateInitialize this PolicyBindings using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *Function) LateInitialize(attrs []byte) (bool, error) {
-    params := &FunctionParameters{}
+func (tr *PolicyBindings) LateInitialize(attrs []byte) (bool, error) {
+    params := &PolicyBindingsParameters{}
     if err := json.TFParser.Unmarshal(attrs, params); err != nil {
         return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
     }
@@ -124,6 +124,6 @@ func (tr *Function) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *Function) GetTerraformSchemaVersion() int {
-    return 1
+func (tr *PolicyBindings) GetTerraformSchemaVersion() int {
+    return 0
 }
