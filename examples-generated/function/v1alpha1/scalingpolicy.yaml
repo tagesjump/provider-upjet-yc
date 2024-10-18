@@ -1,0 +1,18 @@
+apiVersion: function.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: ScalingPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/scalingpolicy
+  labels:
+    testing.upbound.io/example-name: my_scaling_policy
+  name: my-scaling-policy
+spec:
+  forProvider:
+    functionId: are1samplefunction11
+    policy:
+    - tag: $latest
+      zoneInstancesLimit: 3
+      zoneRequestsLimit: 100
+    - tag: my_tag
+      zoneInstancesLimit: 4
+      zoneRequestsLimit: 150

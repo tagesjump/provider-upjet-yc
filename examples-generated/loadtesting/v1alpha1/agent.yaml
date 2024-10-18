@@ -1,0 +1,33 @@
+apiVersion: loadtesting.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Agent
+metadata:
+  annotations:
+    meta.upbound.io/example-id: loadtesting/v1alpha1/agent
+  labels:
+    testing.upbound.io/example-name: my-agent
+  name: my-agent
+spec:
+  forProvider:
+    computeInstance:
+    - bootDisk:
+      - autoDelete: true
+        initializeParams:
+        - size: 15
+      networkInterface:
+      - subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: my-subnet-a
+      resources:
+      - cores: 2
+        memory: 4
+      serviceAccountIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test_account
+      zoneId: ru-central1-b
+    description: 2 core 4 GB RAM agent
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: yandex_resourcemanager_folder
+    labels:
+      jmeter: "5"
+    name: my-agent

@@ -1,0 +1,29 @@
+apiVersion: ydb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Table
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ydb/v1alpha1/table
+  labels:
+    testing.upbound.io/example-name: test_table
+  name: test-table
+spec:
+  forProvider:
+    column:
+    - name: a
+      notNull: true
+      type: Utf8
+    - name: b
+      notNull: true
+      type: Uint32
+    - name: c
+      notNull: false
+      type: Int32
+    - name: d
+      type: Timestamp
+    connectionStringSelector:
+      matchLabels:
+        testing.upbound.io/example-name: database1
+    path: test_dir/test_table_3_col
+    primaryKey:
+    - a
+    - b”]

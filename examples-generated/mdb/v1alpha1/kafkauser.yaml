@@ -1,0 +1,71 @@
+apiVersion: mdb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: KafkaUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkauser
+  labels:
+    testing.upbound.io/example-name: user_events
+  name: user-events
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    name: user-events
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    permission:
+    - allowHosts:
+      - host1.db.yandex.net
+      - host2.db.yandex.net
+      role: ACCESS_ROLE_CONSUMER
+      topicName: events
+    - role: ACCESS_ROLE_PRODUCER
+      topicName: events
+
+---
+
+apiVersion: mdb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: KafkaCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkauser
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    config:
+    - kafka:
+      - resources:
+        - diskSize: 16
+          diskTypeId: network-hdd
+          resourcePresetId: s2.micro
+      version: "2.8"
+      zones:
+      - ru-central1-a
+    name: foo
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: mdb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: KafkaTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkauser
+  labels:
+    testing.upbound.io/example-name: events
+  name: events
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    name: events
+    partitions: 4
+    replicationFactor: 1

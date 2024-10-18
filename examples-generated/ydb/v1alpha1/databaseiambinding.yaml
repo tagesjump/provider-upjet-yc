@@ -1,0 +1,33 @@
+apiVersion: ydb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: DatabaseIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ydb/v1alpha1/databaseiambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+spec:
+  forProvider:
+    databaseIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: database1
+    role: ydb.viewer
+    serviceAccountRef:
+    - name: example
+
+---
+
+apiVersion: ydb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: DatabaseServerless
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ydb/v1alpha1/databaseiambinding
+  labels:
+    testing.upbound.io/example-name: database1
+  name: database1
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: yandex_resourcemanager_folder
+    name: test-ydb-serverless

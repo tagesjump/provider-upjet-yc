@@ -1,0 +1,36 @@
+apiVersion: audit.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: TrailsTrail
+metadata:
+  annotations:
+    meta.upbound.io/example-id: audit/v1alpha1/trailstrail
+  labels:
+    testing.upbound.io/example-name: basic_trail
+  name: basic-trail
+spec:
+  forProvider:
+    description: Some trail description
+    filteringPolicy:
+    - dataEventsFilter:
+      - resourceScope:
+        - resourceId: home-folder
+          resourceType: resource-manager.folder
+        service: storage
+      - resourceScope:
+        - resourceId: vpc-net-id-1
+          resourceType: vpc.network
+        - resourceId: vpc-net-id-2
+          resourceType: vpc.network
+        service: dns
+      managementEventsFilter:
+      - resourceScope:
+        - resourceId: home-folder
+          resourceType: resource-manager.folder
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labels:
+      key: value
+    loggingDestination:
+    - logGroupId: some-log-group
+    name: a-trail
+    serviceAccountId: trail-service-account

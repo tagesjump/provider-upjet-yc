@@ -1,0 +1,109 @@
+apiVersion: mdb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: GreenplumCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumcluster
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    access:
+    - webSql: true
+    assignPublicIp: true
+    description: test greenplum cluster
+    environment: PRESTABLE
+    greenplumConfig:
+      gp_workfile_compression: "false"
+      max_connections: 395
+    masterHostCount: 2
+    masterSubcluster:
+    - resources:
+      - diskSize: 24
+        diskTypeId: network-ssd
+        resourcePresetId: s2.micro
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    securityGroupIdsRefs:
+    - name: test-sg-x
+    segmentHostCount: 5
+    segmentInHost: 1
+    segmentSubcluster:
+    - resources:
+      - diskSize: 24
+        diskTypeId: network-ssd
+        resourcePresetId: s2.micro
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    userName: admin_user
+    userPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    version: "6.22"
+    zone_id: ru-central1-a
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumcluster
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumcluster
+  labels:
+    testing.upbound.io/example-name: test-sg-x
+  name: test-sg-x
+spec:
+  forProvider:
+    egress:
+    - description: Allow outgoing traffic to members of the same security group
+      fromPort: 0
+      protocol: ANY
+      toPort: 65535
+      v4CidrBlocks:
+      - 0.0.0.0/0
+    ingress:
+    - description: Allow incoming traffic from members of the same security group
+      fromPort: 0
+      protocol: ANY
+      toPort: 65535
+      v4CidrBlocks:
+      - 0.0.0.0/0
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumcluster
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-a

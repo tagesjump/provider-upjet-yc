@@ -146,8 +146,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 // resources to be reconciled under the no-fork architecture for this
 // provider.
 var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
-	"yandex_mdb_mongodb_user":                         config.IdentifierFromProvider,
-	"yandex_mdb_mongodb_database":                     config.IdentifierFromProvider,
+	"yandex_mdb_mongodb_user":     config.IdentifierFromProvider,
+	"yandex_mdb_mongodb_database": config.IdentifierFromProvider,
+	// "yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
+	// "yandex_airflow_cluster":                                  config.IdentifierFromProvider,
 	"yandex_compute_disk_placement_group_iam_binding": config.IdentifierFromProvider,
 	"yandex_compute_disk_iam_binding":                 config.IdentifierFromProvider,
 	"yandex_compute_image_iam_binding":                config.IdentifierFromProvider,
@@ -163,10 +165,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 // cliReconciledExternalNameConfigs contains all external name configurations
 // belonging to Terraform resources to be reconciled under the CLI-based
 // architecture for this provider.
-var cliReconciledExternalNameConfigs = map[string]config.ExternalName{
-	"yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
-	// "yandex_airflow_cluster":                                  config.IdentifierFromProvider,
-}
+var cliReconciledExternalNameConfigs = map[string]config.ExternalName{}
 
 // ExternalNameConfigurations applies all external name configs listed in the
 // table ExternalNameConfigs and sets the version of those resources to v1beta1

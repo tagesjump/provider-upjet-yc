@@ -1,0 +1,21 @@
+apiVersion: backup.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Policy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: backup/v1alpha1/policy
+  labels:
+    testing.upbound.io/example-name: basic_policy
+  name: basic-policy
+spec:
+  forProvider:
+    name: basic policy
+    reattempts:
+    - {}
+    retention:
+    - afterBackup: false
+    scheduling:
+    - backupSets:
+      - executeByInterval: 86400
+      enabled: false
+    vmSnapshotReattempts:
+    - {}

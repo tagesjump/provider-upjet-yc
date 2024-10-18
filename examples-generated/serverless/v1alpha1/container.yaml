@@ -1,0 +1,39 @@
+apiVersion: serverless.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: serverless/v1alpha1/container
+  labels:
+    testing.upbound.io/example-name: test-container
+  name: test-container
+spec:
+  forProvider:
+    coreFraction: 100
+    cores: 1
+    description: any description
+    executionTimeout: 15s
+    image:
+    - url: cr.yandex/yc/test-image:v1
+    logOptions:
+    - logGroupId: e2392vo6d1bne2aeq9fr
+      minLevel: ERROR
+    memory: 256
+    mounts:
+    - ephemeralDisk:
+      - sizeGb: 5
+      mountPointPath: /mount/point
+    name: some_name
+    provisionPolicy:
+    - minInstances: 1
+    secrets:
+    - environmentVariable: ENV_VARIABLE
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secret
+      key: secret-key
+      versionIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secret_version
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

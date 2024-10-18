@@ -1,0 +1,31 @@
+apiVersion: dns.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: ZoneIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dns/v1alpha1/zoneiambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+spec:
+  forProvider:
+    dnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: zone1
+    members:
+    - userAccount:foo_user_id
+    role: dns.viewer
+
+---
+
+apiVersion: dns.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Zone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dns/v1alpha1/zoneiambinding
+  labels:
+    testing.upbound.io/example-name: zone1
+  name: zone1
+spec:
+  forProvider:
+    name: my-private-zone
+    zone: example.com.
