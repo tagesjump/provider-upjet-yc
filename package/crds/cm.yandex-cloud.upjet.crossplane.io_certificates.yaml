@@ -176,10 +176,12 @@ spec:
                     items:
                       properties:
                         challengeCount:
-                          description: |-
-                            . Expected number of challenge count needed to validate certificate.
-                            Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-                            This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+                          description: . Expected number of challenge count needed
+                            to validate certificate. Resource creation will fail if
+                            the specified value does not match the actual number of
+                            challenges received from issue provider. This argument
+                            is helpful for safe automatic resource creation for passing
+                            challenges for multi-domain certificates.
                           type: number
                         challengeType:
                           description: 'Domain owner-check method. Possible values:'
@@ -346,10 +348,12 @@ spec:
                     items:
                       properties:
                         challengeCount:
-                          description: |-
-                            . Expected number of challenge count needed to validate certificate.
-                            Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-                            This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+                          description: . Expected number of challenge count needed
+                            to validate certificate. Resource creation will fail if
+                            the specified value does not match the actual number of
+                            challenges received from issue provider. This argument
+                            is helpful for safe automatic resource creation for passing
+                            challenges for multi-domain certificates.
                           type: number
                         challengeType:
                           description: 'Domain owner-check method. Possible values:'
@@ -655,10 +659,12 @@ spec:
                     items:
                       properties:
                         challengeCount:
-                          description: |-
-                            . Expected number of challenge count needed to validate certificate.
-                            Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-                            This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+                          description: . Expected number of challenge count needed
+                            to validate certificate. Resource creation will fail if
+                            the specified value does not match the actual number of
+                            challenges received from issue provider. This argument
+                            is helpful for safe automatic resource creation for passing
+                            challenges for multi-domain certificates.
                           type: number
                         challengeType:
                           description: 'Domain owner-check method. Possible values:'
@@ -702,7 +708,7 @@ spec:
                     description: Certificate serial number.
                     type: string
                   status:
-                    description: 'Certificate status: "VALIDATING", "INVALID",  "ISSUED",
+                    description: 'Certificate status: "VALIDATING", "INVALID", "ISSUED",
                       "REVOKED", "RENEWING" or "RENEWAL_FAILED".'
                     type: string
                   subject:

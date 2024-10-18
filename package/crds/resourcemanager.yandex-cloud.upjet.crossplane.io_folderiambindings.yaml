@@ -152,17 +152,16 @@ spec:
                         type: object
                     type: object
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege that is specified in the role field.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege that is specified in the role field. Each entry can
+                      have one of the following values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_resourcemanager_folder_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_resourcemanager_folder_iam_binding
+                      can be used per role.
                     type: string
                   sleepAfter:
                     type: number
@@ -258,17 +257,16 @@ spec:
                         type: object
                     type: object
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege that is specified in the role field.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege that is specified in the role field. Each entry can
+                      have one of the following values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_resourcemanager_folder_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_resourcemanager_folder_iam_binding
+                      can be used per role.
                     type: string
                   sleepAfter:
                     type: number
@@ -460,17 +458,16 @@ spec:
                   id:
                     type: string
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege that is specified in the role field.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege that is specified in the role field. Each entry can
+                      have one of the following values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_resourcemanager_folder_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_resourcemanager_folder_iam_binding
+                      can be used per role.
                     type: string
                   sleepAfter:
                     type: number

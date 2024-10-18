@@ -60,54 +60,83 @@ type AsyncInvocationParameters struct {
 
 type ConnectivityInitParameters struct {
 
-	// Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+	// Network the version will have access to. It's essential to specify network with subnets in all availability zones
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 }
 
 type ConnectivityObservation struct {
 
-	// Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+	// Network the version will have access to. It's essential to specify network with subnets in all availability zones
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 }
 
 type ConnectivityParameters struct {
 
-	// Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+	// Network the version will have access to. It's essential to specify network with subnets in all availability zones
 	// +kubebuilder:validation:Optional
 	NetworkID *string `json:"networkId" tf:"network_id,omitempty"`
 }
 
 type ContentInitParameters struct {
 
-	// Filename to zip archive for the version.
+	// Filename to zip archive for the version
 	ZipFilename *string `json:"zipFilename,omitempty" tf:"zip_filename,omitempty"`
 }
 
 type ContentObservation struct {
 
-	// Filename to zip archive for the version.
+	// Filename to zip archive for the version
 	ZipFilename *string `json:"zipFilename,omitempty" tf:"zip_filename,omitempty"`
 }
 
 type ContentParameters struct {
 
-	// Filename to zip archive for the version.
+	// Filename to zip archive for the version
 	// +kubebuilder:validation:Optional
 	ZipFilename *string `json:"zipFilename" tf:"zip_filename,omitempty"`
 }
 
+type EphemeralDiskInitParameters struct {
+
+	// Optional block size of the ephemeral disk in KB
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// Size of the ephemeral disk in GB
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type EphemeralDiskObservation struct {
+
+	// Optional block size of the ephemeral disk in KB
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// Size of the ephemeral disk in GB
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type EphemeralDiskParameters struct {
+
+	// Optional block size of the ephemeral disk in KB
+	// +kubebuilder:validation:Optional
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// Size of the ephemeral disk in GB
+	// +kubebuilder:validation:Optional
+	SizeGb *float64 `json:"sizeGb" tf:"size_gb,omitempty"`
+}
+
 type FunctionInitParameters struct {
 
-	// Config for asynchronous invocations of Yandex Cloud Function.
+	// Config for asynchronous invocations of Yandex Cloud Function
 	AsyncInvocation []AsyncInvocationInitParameters `json:"asyncInvocation,omitempty" tf:"async_invocation,omitempty"`
 
-	// The maximum number of requests processed by a function instance at the same time.
+	// The maximum number of requests processed by a function instance at the same time
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 
-	// Function version connectivity. If specified the version will be attached to specified network.
+	// Function version connectivity. If specified the version will be attached to specified network
 	Connectivity []ConnectivityInitParameters `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified.
+	// Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified
 	Content []ContentInitParameters `json:"content,omitempty" tf:"content,omitempty"`
 
 	// Description of the Yandex Cloud Function
@@ -139,16 +168,19 @@ type FunctionInitParameters struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging from Yandex Cloud Function.
+	// Options for logging from Yandex Cloud Function
 	LogOptions []LogOptionsInitParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
 	// Memory in megabytes (aligned to 128MB) for Yandex Cloud Function
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
+	// Mounts for Yandex Cloud Function.
+	Mounts []MountsInitParameters `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
 	// Yandex Cloud Function name used to define trigger
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified.
+	// Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified
 	Package []PackageInitParameters `json:"package,omitempty" tf:"package,omitempty"`
 
 	// Runtime for Yandex Cloud Function
@@ -160,14 +192,14 @@ type FunctionInitParameters struct {
 	// Service account ID for Yandex Cloud Function
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Function.
+	// (DEPRECATED, use mounts.0.object_storage instead) Storage mounts for Yandex Cloud Function
 	StorageMounts []StorageMountsInitParameters `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 
-	// Tags for Yandex Cloud Function. Tag "$latest" isn't returned.
+	// Tags for Yandex Cloud Function. Tag "$latest" isn't returned
 	// +listType=set
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Tmpfs size for Yandex Cloud Function.
+	// Tmpfs size for Yandex Cloud Function
 	TmpfsSize *float64 `json:"tmpfsSize,omitempty" tf:"tmpfs_size,omitempty"`
 
 	// User-defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
@@ -176,19 +208,19 @@ type FunctionInitParameters struct {
 
 type FunctionObservation struct {
 
-	// Config for asynchronous invocations of Yandex Cloud Function.
+	// Config for asynchronous invocations of Yandex Cloud Function
 	AsyncInvocation []AsyncInvocationObservation `json:"asyncInvocation,omitempty" tf:"async_invocation,omitempty"`
 
-	// The maximum number of requests processed by a function instance at the same time.
+	// The maximum number of requests processed by a function instance at the same time
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 
-	// Function version connectivity. If specified the version will be attached to specified network.
+	// Function version connectivity. If specified the version will be attached to specified network
 	Connectivity []ConnectivityObservation `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified.
+	// Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified
 	Content []ContentObservation `json:"content,omitempty" tf:"content,omitempty"`
 
-	// Creation timestamp of the Yandex Cloud Function.
+	// Creation timestamp of the Yandex Cloud Function
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
 	// Description of the Yandex Cloud Function
@@ -207,29 +239,29 @@ type FunctionObservation struct {
 	// Folder ID for the Yandex Cloud Function
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Secret's id.
+	// Secret's id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Image size for Yandex Cloud Function.
+	// Image size for Yandex Cloud Function
 	ImageSize *float64 `json:"imageSize,omitempty" tf:"image_size,omitempty"`
 
 	// A set of key/value label pairs to assign to the Yandex Cloud Function
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging from Yandex Cloud Function.
+	// Options for logging from Yandex Cloud Function
 	LogOptions []LogOptionsObservation `json:"logOptions,omitempty" tf:"log_options,omitempty"`
-
-	// Loggroup ID size for Yandex Cloud Function.
-	LoggroupID *string `json:"loggroupId,omitempty" tf:"loggroup_id,omitempty"`
 
 	// Memory in megabytes (aligned to 128MB) for Yandex Cloud Function
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
+	// Mounts for Yandex Cloud Function.
+	Mounts []MountsObservation `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
 	// Yandex Cloud Function name used to define trigger
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified.
+	// Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified
 	Package []PackageObservation `json:"package,omitempty" tf:"package,omitempty"`
 
 	// Runtime for Yandex Cloud Function
@@ -241,38 +273,38 @@ type FunctionObservation struct {
 	// Service account ID for Yandex Cloud Function
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Function.
+	// (DEPRECATED, use mounts.0.object_storage instead) Storage mounts for Yandex Cloud Function
 	StorageMounts []StorageMountsObservation `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 
-	// Tags for Yandex Cloud Function. Tag "$latest" isn't returned.
+	// Tags for Yandex Cloud Function. Tag "$latest" isn't returned
 	// +listType=set
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Tmpfs size for Yandex Cloud Function.
+	// Tmpfs size for Yandex Cloud Function
 	TmpfsSize *float64 `json:"tmpfsSize,omitempty" tf:"tmpfs_size,omitempty"`
 
 	// User-defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
 	UserHash *string `json:"userHash,omitempty" tf:"user_hash,omitempty"`
 
-	// Version for Yandex Cloud Function.
+	// Version for Yandex Cloud Function
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type FunctionParameters struct {
 
-	// Config for asynchronous invocations of Yandex Cloud Function.
+	// Config for asynchronous invocations of Yandex Cloud Function
 	// +kubebuilder:validation:Optional
 	AsyncInvocation []AsyncInvocationParameters `json:"asyncInvocation,omitempty" tf:"async_invocation,omitempty"`
 
-	// The maximum number of requests processed by a function instance at the same time.
+	// The maximum number of requests processed by a function instance at the same time
 	// +kubebuilder:validation:Optional
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 
-	// Function version connectivity. If specified the version will be attached to specified network.
+	// Function version connectivity. If specified the version will be attached to specified network
 	// +kubebuilder:validation:Optional
 	Connectivity []ConnectivityParameters `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified.
+	// Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified
 	// +kubebuilder:validation:Optional
 	Content []ContentParameters `json:"content,omitempty" tf:"content,omitempty"`
 
@@ -311,7 +343,7 @@ type FunctionParameters struct {
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging from Yandex Cloud Function.
+	// Options for logging from Yandex Cloud Function
 	// +kubebuilder:validation:Optional
 	LogOptions []LogOptionsParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
@@ -319,11 +351,15 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
+	// Mounts for Yandex Cloud Function.
+	// +kubebuilder:validation:Optional
+	Mounts []MountsParameters `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
 	// Yandex Cloud Function name used to define trigger
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified.
+	// Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified
 	// +kubebuilder:validation:Optional
 	Package []PackageParameters `json:"package,omitempty" tf:"package,omitempty"`
 
@@ -339,16 +375,16 @@ type FunctionParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Function.
+	// (DEPRECATED, use mounts.0.object_storage instead) Storage mounts for Yandex Cloud Function
 	// +kubebuilder:validation:Optional
 	StorageMounts []StorageMountsParameters `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 
-	// Tags for Yandex Cloud Function. Tag "$latest" isn't returned.
+	// Tags for Yandex Cloud Function. Tag "$latest" isn't returned
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Tmpfs size for Yandex Cloud Function.
+	// Tmpfs size for Yandex Cloud Function
 	// +kubebuilder:validation:Optional
 	TmpfsSize *float64 `json:"tmpfsSize,omitempty" tf:"tmpfs_size,omitempty"`
 
@@ -362,7 +398,7 @@ type LogOptionsInitParameters struct {
 	// Is logging from function disabled
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Folder ID for the Yandex Cloud Function
+	// Log entries are written to default log group for specified folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// Log entries are written to specified log group
@@ -377,7 +413,7 @@ type LogOptionsObservation struct {
 	// Is logging from function disabled
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Folder ID for the Yandex Cloud Function
+	// Log entries are written to default log group for specified folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// Log entries are written to specified log group
@@ -393,7 +429,7 @@ type LogOptionsParameters struct {
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Folder ID for the Yandex Cloud Function
+	// Log entries are written to default log group for specified folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -406,139 +442,277 @@ type LogOptionsParameters struct {
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
+type MountsInitParameters struct {
+
+	// One of the available mount types. Disk available during the function execution time
+	EphemeralDisk []EphemeralDiskInitParameters `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// Mount’s accessibility mode. Valid values are ro and rw
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Yandex Cloud Function name used to define trigger
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One of the available mount types. Object storage as a mount
+	ObjectStorage []ObjectStorageInitParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type MountsObservation struct {
+
+	// One of the available mount types. Disk available during the function execution time
+	EphemeralDisk []EphemeralDiskObservation `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// Mount’s accessibility mode. Valid values are ro and rw
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Yandex Cloud Function name used to define trigger
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One of the available mount types. Object storage as a mount
+	ObjectStorage []ObjectStorageObservation `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type MountsParameters struct {
+
+	// One of the available mount types. Disk available during the function execution time
+	// +kubebuilder:validation:Optional
+	EphemeralDisk []EphemeralDiskParameters `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// Mount’s accessibility mode. Valid values are ro and rw
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Yandex Cloud Function name used to define trigger
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// One of the available mount types. Object storage as a mount
+	// +kubebuilder:validation:Optional
+	ObjectStorage []ObjectStorageParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type ObjectStorageInitParameters struct {
+
+	// Name of the mounting bucket
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ObjectStorageObservation struct {
+
+	// Name of the mounting bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ObjectStorageParameters struct {
+
+	// Name of the mounting bucket
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
 type PackageInitParameters struct {
 
-	// Name of the bucket that stores the code for the version.
+	// Name of the bucket that stores the code for the version
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Name of the object in the bucket that stores the code for the version.
+	// Name of the object in the bucket that stores the code for the version
 	ObjectName *string `json:"objectName,omitempty" tf:"object_name,omitempty"`
 
-	// SHA256 hash of the version deployment package.
+	// SHA256 hash of the version deployment package
 	Sha256 *string `json:"sha256,omitempty" tf:"sha_256,omitempty"`
 }
 
 type PackageObservation struct {
 
-	// Name of the bucket that stores the code for the version.
+	// Name of the bucket that stores the code for the version
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Name of the object in the bucket that stores the code for the version.
+	// Name of the object in the bucket that stores the code for the version
 	ObjectName *string `json:"objectName,omitempty" tf:"object_name,omitempty"`
 
-	// SHA256 hash of the version deployment package.
+	// SHA256 hash of the version deployment package
 	Sha256 *string `json:"sha256,omitempty" tf:"sha_256,omitempty"`
 }
 
 type PackageParameters struct {
 
-	// Name of the bucket that stores the code for the version.
+	// Name of the bucket that stores the code for the version
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
-	// Name of the object in the bucket that stores the code for the version.
+	// Name of the object in the bucket that stores the code for the version
 	// +kubebuilder:validation:Optional
 	ObjectName *string `json:"objectName" tf:"object_name,omitempty"`
 
-	// SHA256 hash of the version deployment package.
+	// SHA256 hash of the version deployment package
 	// +kubebuilder:validation:Optional
 	Sha256 *string `json:"sha256,omitempty" tf:"sha_256,omitempty"`
 }
 
 type SecretsInitParameters struct {
 
-	// Function's environment variable in which secret's value will be stored.
+	// Function's environment variable in which secret's value will be stored
 	EnvironmentVariable *string `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// Secret's id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret's entries key which value will be stored in environment variable.
+	// Reference to a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// Secret's entries key which value will be stored in environment variable
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// Secret's version id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.SecretVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+
+	// Reference to a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDRef *v1.Reference `json:"versionIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDSelector *v1.Selector `json:"versionIdSelector,omitempty" tf:"-"`
 }
 
 type SecretsObservation struct {
 
-	// Function's environment variable in which secret's value will be stored.
+	// Function's environment variable in which secret's value will be stored
 	EnvironmentVariable *string `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// Secret's id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret's entries key which value will be stored in environment variable.
+	// Secret's entries key which value will be stored in environment variable
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// Secret's version id
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type SecretsParameters struct {
 
-	// Function's environment variable in which secret's value will be stored.
+	// Function's environment variable in which secret's value will be stored
 	// +kubebuilder:validation:Optional
 	EnvironmentVariable *string `json:"environmentVariable" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// Secret's id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret's entries key which value will be stored in environment variable.
+	// Reference to a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// Secret's entries key which value will be stored in environment variable
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// Secret's version id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.SecretVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+
+	// Reference to a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDRef *v1.Reference `json:"versionIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDSelector *v1.Selector `json:"versionIdSelector,omitempty" tf:"-"`
 }
 
 type StorageMountsInitParameters struct {
 
-	// Name of the mounting bucket.
+	// Name of the mounting bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.
+	// Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path
 	MountPointName *string `json:"mountPointName,omitempty" tf:"mount_point_name,omitempty"`
 
-	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Mount the bucket in read-only mode.
+	// Mount the bucket in read-only mode
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type StorageMountsObservation struct {
 
-	// Name of the mounting bucket.
+	// Name of the mounting bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.
+	// Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path
 	MountPointName *string `json:"mountPointName,omitempty" tf:"mount_point_name,omitempty"`
 
-	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Mount the bucket in read-only mode.
+	// Mount the bucket in read-only mode
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type StorageMountsParameters struct {
 
-	// Name of the mounting bucket.
+	// Name of the mounting bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
-	// Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.
+	// Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path
 	// +kubebuilder:validation:Optional
 	MountPointName *string `json:"mountPointName" tf:"mount_point_name,omitempty"`
 
-	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Mount the bucket in read-only mode.
+	// Mount the bucket in read-only mode
 	// +kubebuilder:validation:Optional
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }

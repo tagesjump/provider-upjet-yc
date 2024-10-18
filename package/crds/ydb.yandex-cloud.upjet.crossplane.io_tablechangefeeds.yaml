@@ -81,6 +81,8 @@ spec:
                       data from the topic.
                     items:
                       properties:
+                        important:
+                          type: boolean
                         name:
                           description: ': Changefeed name.'
                           type: string
@@ -140,6 +142,8 @@ spec:
                       data from the topic.
                     items:
                       properties:
+                        important:
+                          type: boolean
                         name:
                           description: ': Changefeed name.'
                           type: string
@@ -371,6 +375,8 @@ spec:
                       data from the topic.
                     items:
                       properties:
+                        important:
+                          type: boolean
                         name:
                           description: ': Changefeed name.'
                           type: string

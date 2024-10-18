@@ -169,8 +169,7 @@ type ComputeInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
-	// The availability zone where the virtual machine will be created. If it is not provided,
-	// the default provider folder is used.
+	// The availability zone where the virtual machine will be created. If it is not provided, the default provider folder is used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
@@ -178,6 +177,10 @@ type ComputeInstanceObservation struct {
 
 	// Boot disk specifications for the instance. The structure is documented below.
 	BootDisk []BootDiskObservation `json:"bootDisk,omitempty" tf:"boot_disk,omitempty"`
+
+	// (Computed) The set of labels key:value pairs assigned to this instance. This includes user custom labels and predefined items created by Yandex Cloud Load Testing.
+	// +mapType=granular
+	ComputedLabels map[string]*string `json:"computedLabels,omitempty" tf:"computed_labels,omitempty"`
 
 	// (Computed) The set of metadata key:value pairs assigned to this instance. This includes user custom metadata, and predefined items created by Yandex Cloud Load Testing.
 	// +mapType=granular
@@ -203,8 +206,7 @@ type ComputeInstanceObservation struct {
 	// The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// The availability zone where the virtual machine will be created. If it is not provided,
-	// the default provider folder is used.
+	// The availability zone where the virtual machine will be created. If it is not provided, the default provider folder is used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
@@ -249,8 +251,7 @@ type ComputeInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
-	// The availability zone where the virtual machine will be created. If it is not provided,
-	// the default provider folder is used.
+	// The availability zone where the virtual machine will be created. If it is not provided, the default provider folder is used.
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }

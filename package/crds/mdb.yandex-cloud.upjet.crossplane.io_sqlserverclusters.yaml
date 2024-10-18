@@ -97,8 +97,8 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the SQLServer cluster.
@@ -108,9 +108,8 @@ spec:
                       (PRODUCTION, PRESTABLE)
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                    description: The ID of the folder that the resource belongs to.
+                      If it is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -526,9 +525,10 @@ spec:
                                   grants access to.
                                 type: string
                               roles:
-                                description: |-
-                                  List user's roles in the database.
-                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                description: 'List user''s roles in the database.
+                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN,
+                                  BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER,
+                                  DENYDATAWRITER, DENYDATAREADER.'
                                 items:
                                   type: string
                                 type: array
@@ -578,8 +578,8 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the SQLServer cluster.
@@ -589,9 +589,8 @@ spec:
                       (PRODUCTION, PRESTABLE)
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                    description: The ID of the folder that the resource belongs to.
+                      If it is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -1007,9 +1006,10 @@ spec:
                                   grants access to.
                                 type: string
                               roles:
-                                description: |-
-                                  List user's roles in the database.
-                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                description: 'List user''s roles in the database.
+                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN,
+                                  BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER,
+                                  DENYDATAWRITER, DENYDATAREADER.'
                                 items:
                                   type: string
                                 type: array
@@ -1252,8 +1252,8 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the SQLServer cluster.
@@ -1263,9 +1263,8 @@ spec:
                       (PRODUCTION, PRESTABLE)
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                    description: The ID of the folder that the resource belongs to.
+                      If it is not provided, the default provider folder is used.
                     type: string
                   health:
                     description: Aggregated health of the cluster.
@@ -1374,9 +1373,10 @@ spec:
                                   grants access to.
                                 type: string
                               roles:
-                                description: |-
-                                  List user's roles in the database.
-                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                description: 'List user''s roles in the database.
+                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN,
+                                  BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER,
+                                  DENYDATAWRITER, DENYDATAREADER.'
                                 items:
                                   type: string
                                 type: array

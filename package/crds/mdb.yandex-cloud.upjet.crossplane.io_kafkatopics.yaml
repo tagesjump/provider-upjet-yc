@@ -165,10 +165,8 @@ spec:
                     items:
                       properties:
                         cleanupPolicy:
-                          description: |-
-                            Kafka topic settings. For more information, see
-                            the official documentation
-                            and the Kafka documentation.
+                          description: Kafka topic settings. For more information,
+                            see the official documentation and the Kafka documentation.
                           type: string
                         compressionType:
                           type: string
@@ -302,10 +300,8 @@ spec:
                     items:
                       properties:
                         cleanupPolicy:
-                          description: |-
-                            Kafka topic settings. For more information, see
-                            the official documentation
-                            and the Kafka documentation.
+                          description: Kafka topic settings. For more information,
+                            see the official documentation and the Kafka documentation.
                           type: string
                         compressionType:
                           type: string
@@ -539,10 +535,8 @@ spec:
                     items:
                       properties:
                         cleanupPolicy:
-                          description: |-
-                            Kafka topic settings. For more information, see
-                            the official documentation
-                            and the Kafka documentation.
+                          description: Kafka topic settings. For more information,
+                            see the official documentation and the Kafka documentation.
                           type: string
                         compressionType:
                           type: string

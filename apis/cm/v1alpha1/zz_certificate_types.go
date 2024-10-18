@@ -94,7 +94,7 @@ type CertificateObservation struct {
 	// Certificate serial number.
 	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
-	// Certificate status: "VALIDATING", "INVALID",  "ISSUED", "REVOKED", "RENEWING" or "RENEWAL_FAILED".
+	// Certificate status: "VALIDATING", "INVALID", "ISSUED", "REVOKED", "RENEWING" or "RENEWAL_FAILED".
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// Certificate subject.
@@ -192,9 +192,7 @@ type ChallengesParameters struct {
 
 type ManagedInitParameters struct {
 
-	// . Expected number of challenge count needed to validate certificate.
-	// Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-	// This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+	// . Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
 	ChallengeCount *float64 `json:"challengeCount,omitempty" tf:"challenge_count,omitempty"`
 
 	// Domain owner-check method. Possible values:
@@ -203,9 +201,7 @@ type ManagedInitParameters struct {
 
 type ManagedObservation struct {
 
-	// . Expected number of challenge count needed to validate certificate.
-	// Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-	// This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+	// . Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
 	ChallengeCount *float64 `json:"challengeCount,omitempty" tf:"challenge_count,omitempty"`
 
 	// Domain owner-check method. Possible values:
@@ -214,9 +210,7 @@ type ManagedObservation struct {
 
 type ManagedParameters struct {
 
-	// . Expected number of challenge count needed to validate certificate.
-	// Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-	// This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+	// . Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
 	// +kubebuilder:validation:Optional
 	ChallengeCount *float64 `json:"challengeCount,omitempty" tf:"challenge_count,omitempty"`
 

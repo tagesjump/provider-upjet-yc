@@ -17,7 +17,7 @@ type ColumnInitParameters struct {
 	// Column name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A column cannot have the NULL data type. (	Default: false	)
+	// A column cannot have the NULL data type. ( Default: false )
 	NotNull *bool `json:"notNull,omitempty" tf:"not_null,omitempty"`
 
 	// Column data type. YQL data types are used.
@@ -32,7 +32,7 @@ type ColumnObservation struct {
 	// Column name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A column cannot have the NULL data type. (	Default: false	)
+	// A column cannot have the NULL data type. ( Default: false )
 	NotNull *bool `json:"notNull,omitempty" tf:"not_null,omitempty"`
 
 	// Column data type. YQL data types are used.
@@ -49,7 +49,7 @@ type ColumnParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A column cannot have the NULL data type. (	Default: false	)
+	// A column cannot have the NULL data type. ( Default: false )
 	// +kubebuilder:validation:Optional
 	NotNull *bool `json:"notNull,omitempty" tf:"not_null,omitempty"`
 
@@ -209,8 +209,7 @@ type TableInitParameters struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// A list of column configuration options.
-	// The structure is documented below.
+	// A list of column configuration options. The structure is documented below.
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Connection string for database.
@@ -226,15 +225,13 @@ type TableInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
-	// A list of column group configuration options.
-	// The structure is documented below.
+	// A list of column group configuration options. The structure is documented below.
 	Family []FamilyInitParameters `json:"family,omitempty" tf:"family,omitempty"`
 
 	// Use the Bloom filter for the primary key
 	KeyBloomFilter *bool `json:"keyBloomFilter,omitempty" tf:"key_bloom_filter,omitempty"`
 
-	// Table partiotioning settings
-	// The structure is documented below.
+	// Table partiotioning settings The structure is documented below.
 	PartitioningSettings []PartitioningSettingsInitParameters `json:"partitioningSettings,omitempty" tf:"partitioning_settings,omitempty"`
 
 	// Table path.
@@ -246,8 +243,7 @@ type TableInitParameters struct {
 	// Read replication settings
 	ReadReplicasSettings *string `json:"readReplicasSettings,omitempty" tf:"read_replicas_settings,omitempty"`
 
-	// ttl		TTL settings
-	// The structure is documented below.
+	// ttl TTL settings The structure is documented below.
 	TTL []TTLInitParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
@@ -257,15 +253,13 @@ type TableObservation struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// A list of column configuration options.
-	// The structure is documented below.
+	// A list of column configuration options. The structure is documented below.
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
 
 	// Connection string for database.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// A list of column group configuration options.
-	// The structure is documented below.
+	// A list of column group configuration options. The structure is documented below.
 	Family []FamilyObservation `json:"family,omitempty" tf:"family,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -273,8 +267,7 @@ type TableObservation struct {
 	// Use the Bloom filter for the primary key
 	KeyBloomFilter *bool `json:"keyBloomFilter,omitempty" tf:"key_bloom_filter,omitempty"`
 
-	// Table partiotioning settings
-	// The structure is documented below.
+	// Table partiotioning settings The structure is documented below.
 	PartitioningSettings []PartitioningSettingsObservation `json:"partitioningSettings,omitempty" tf:"partitioning_settings,omitempty"`
 
 	// Table path.
@@ -286,8 +279,7 @@ type TableObservation struct {
 	// Read replication settings
 	ReadReplicasSettings *string `json:"readReplicasSettings,omitempty" tf:"read_replicas_settings,omitempty"`
 
-	// ttl		TTL settings
-	// The structure is documented below.
+	// ttl TTL settings The structure is documented below.
 	TTL []TTLObservation `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
@@ -298,8 +290,7 @@ type TableParameters struct {
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
-	// A list of column configuration options.
-	// The structure is documented below.
+	// A list of column configuration options. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
 
@@ -317,8 +308,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
-	// A list of column group configuration options.
-	// The structure is documented below.
+	// A list of column group configuration options. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	Family []FamilyParameters `json:"family,omitempty" tf:"family,omitempty"`
 
@@ -326,8 +316,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyBloomFilter *bool `json:"keyBloomFilter,omitempty" tf:"key_bloom_filter,omitempty"`
 
-	// Table partiotioning settings
-	// The structure is documented below.
+	// Table partiotioning settings The structure is documented below.
 	// +kubebuilder:validation:Optional
 	PartitioningSettings []PartitioningSettingsParameters `json:"partitioningSettings,omitempty" tf:"partitioning_settings,omitempty"`
 
@@ -343,8 +332,7 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	ReadReplicasSettings *string `json:"readReplicasSettings,omitempty" tf:"read_replicas_settings,omitempty"`
 
-	// ttl		TTL settings
-	// The structure is documented below.
+	// ttl TTL settings The structure is documented below.
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }

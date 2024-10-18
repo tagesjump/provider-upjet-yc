@@ -38,7 +38,7 @@ type SecretCiphertextObservation struct {
 	// Resulting ciphertext, encoded with "standard" base64 alphabet as defined in RFC 4648 section 4
 	Ciphertext *string `json:"ciphertext,omitempty" tf:"ciphertext,omitempty"`
 
-	// an identifier for the resource with format {{key_id}}/{{ciphertext}}
+	// an identifier for the resource with format {key_id}/{ciphertext}
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// ID of the symmetric KMS key to use for encryption.

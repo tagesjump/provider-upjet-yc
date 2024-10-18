@@ -73,16 +73,32 @@ type ContainerInitParameters struct {
 	// Container memory in megabytes, should be aligned to 128
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
+	// Mounts for Yandex Cloud Serverless Container
+	Mounts []MountsInitParameters `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
 	// Yandex Cloud Serverless Container name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Provision policy. If specified the revision will have prepared instances
+	ProvisionPolicy []ProvisionPolicyInitParameters `json:"provisionPolicy,omitempty" tf:"provision_policy,omitempty"`
 
 	// Secrets for Yandex Cloud Serverless Container
 	Secrets []SecretsInitParameters `json:"secrets,omitempty" tf:"secrets,omitempty"`
 
 	// Service account ID for Yandex Cloud Serverless Container
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Serverless Container
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
+
+	// (DEPRECATED, use mounts.0.object_storage instead) Storage mounts for Yandex Cloud Serverless Container
 	StorageMounts []StorageMountsInitParameters `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 }
 
@@ -111,7 +127,7 @@ type ContainerObservation struct {
 	// Folder ID for the Yandex Cloud Serverless Container
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Secret's id.
+	// Secret's id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Revision deployment image for Yandex Cloud Serverless Container
@@ -128,8 +144,14 @@ type ContainerObservation struct {
 	// Container memory in megabytes, should be aligned to 128
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
+	// Mounts for Yandex Cloud Serverless Container
+	Mounts []MountsObservation `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
 	// Yandex Cloud Serverless Container name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Provision policy. If specified the revision will have prepared instances
+	ProvisionPolicy []ProvisionPolicyObservation `json:"provisionPolicy,omitempty" tf:"provision_policy,omitempty"`
 
 	// Last revision ID of the Yandex Cloud Serverless Container
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
@@ -140,7 +162,7 @@ type ContainerObservation struct {
 	// Service account ID for Yandex Cloud Serverless Container
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Serverless Container
+	// (DEPRECATED, use mounts.0.object_storage instead) Storage mounts for Yandex Cloud Serverless Container
 	StorageMounts []StorageMountsObservation `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 
 	// Invoke URL for the Yandex Cloud Serverless Container
@@ -203,21 +225,68 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
+	// Mounts for Yandex Cloud Serverless Container
+	// +kubebuilder:validation:Optional
+	Mounts []MountsParameters `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
 	// Yandex Cloud Serverless Container name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Provision policy. If specified the revision will have prepared instances
+	// +kubebuilder:validation:Optional
+	ProvisionPolicy []ProvisionPolicyParameters `json:"provisionPolicy,omitempty" tf:"provision_policy,omitempty"`
 
 	// Secrets for Yandex Cloud Serverless Container
 	// +kubebuilder:validation:Optional
 	Secrets []SecretsParameters `json:"secrets,omitempty" tf:"secrets,omitempty"`
 
 	// Service account ID for Yandex Cloud Serverless Container
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Serverless Container
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
+
+	// (DEPRECATED, use mounts.0.object_storage instead) Storage mounts for Yandex Cloud Serverless Container
 	// +kubebuilder:validation:Optional
 	StorageMounts []StorageMountsParameters `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
+}
+
+type EphemeralDiskInitParameters struct {
+
+	// Optional block size of the ephemeral disk in KB
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// Size of the ephemeral disk in GB
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type EphemeralDiskObservation struct {
+
+	// Optional block size of the ephemeral disk in KB
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// Size of the ephemeral disk in GB
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type EphemeralDiskParameters struct {
+
+	// Optional block size of the ephemeral disk in KB
+	// +kubebuilder:validation:Optional
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// Size of the ephemeral disk in GB
+	// +kubebuilder:validation:Optional
+	SizeGb *float64 `json:"sizeGb" tf:"size_gb,omitempty"`
 }
 
 type ImageInitParameters struct {
@@ -228,10 +297,7 @@ type ImageInitParameters struct {
 	// List of commands for Yandex Cloud Serverless Container
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Digest of image that will be deployed as Yandex Cloud Serverless Container.
-	// If presented, should be equal to digest that will be resolved at server side by URL.
-	// Container will be updated on digest change even if image.0.url stays the same.
-	// If field not specified then its value will be computed.
+	// Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
 	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container
@@ -253,10 +319,7 @@ type ImageObservation struct {
 	// List of commands for Yandex Cloud Serverless Container
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Digest of image that will be deployed as Yandex Cloud Serverless Container.
-	// If presented, should be equal to digest that will be resolved at server side by URL.
-	// Container will be updated on digest change even if image.0.url stays the same.
-	// If field not specified then its value will be computed.
+	// Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
 	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container
@@ -280,10 +343,7 @@ type ImageParameters struct {
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Digest of image that will be deployed as Yandex Cloud Serverless Container.
-	// If presented, should be equal to digest that will be resolved at server side by URL.
-	// Container will be updated on digest change even if image.0.url stays the same.
-	// If field not specified then its value will be computed.
+	// Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
 	// +kubebuilder:validation:Optional
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
@@ -350,100 +410,257 @@ type LogOptionsParameters struct {
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
+type MountsInitParameters struct {
+
+	// One of the available mount types. Disk available during the function execution time
+	EphemeralDisk []EphemeralDiskInitParameters `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// Mount’s accessibility mode. Valid values are ro and rw
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Path inside the container to access the directory in which the bucket is mounted
+	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
+
+	// One of the available mount types. Object storage as a mount
+	ObjectStorage []ObjectStorageInitParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type MountsObservation struct {
+
+	// One of the available mount types. Disk available during the function execution time
+	EphemeralDisk []EphemeralDiskObservation `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// Mount’s accessibility mode. Valid values are ro and rw
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Path inside the container to access the directory in which the bucket is mounted
+	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
+
+	// One of the available mount types. Object storage as a mount
+	ObjectStorage []ObjectStorageObservation `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type MountsParameters struct {
+
+	// One of the available mount types. Disk available during the function execution time
+	// +kubebuilder:validation:Optional
+	EphemeralDisk []EphemeralDiskParameters `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// Mount’s accessibility mode. Valid values are ro and rw
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Path inside the container to access the directory in which the bucket is mounted
+	// +kubebuilder:validation:Optional
+	MountPointPath *string `json:"mountPointPath" tf:"mount_point_path,omitempty"`
+
+	// One of the available mount types. Object storage as a mount
+	// +kubebuilder:validation:Optional
+	ObjectStorage []ObjectStorageParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type ObjectStorageInitParameters struct {
+
+	// Name of the mounting bucket
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ObjectStorageObservation struct {
+
+	// Name of the mounting bucket
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ObjectStorageParameters struct {
+
+	// Name of the mounting bucket
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("bucket",false)
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ProvisionPolicyInitParameters struct {
+
+	// Minimum number of prepared instances that are always ready to serve requests
+	MinInstances *float64 `json:"minInstances,omitempty" tf:"min_instances,omitempty"`
+}
+
+type ProvisionPolicyObservation struct {
+
+	// Minimum number of prepared instances that are always ready to serve requests
+	MinInstances *float64 `json:"minInstances,omitempty" tf:"min_instances,omitempty"`
+}
+
+type ProvisionPolicyParameters struct {
+
+	// Minimum number of prepared instances that are always ready to serve requests
+	// +kubebuilder:validation:Optional
+	MinInstances *float64 `json:"minInstances" tf:"min_instances,omitempty"`
+}
+
 type SecretsInitParameters struct {
 
-	// Container's environment variable in which secret's value will be stored.
+	// Container's environment variable in which secret's value will be stored
 	EnvironmentVariable *string `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// Secret's id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret's entries key which value will be stored in environment variable.
+	// Reference to a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// Secret's entries key which value will be stored in environment variable
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// Secret's version id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.SecretVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+
+	// Reference to a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDRef *v1.Reference `json:"versionIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDSelector *v1.Selector `json:"versionIdSelector,omitempty" tf:"-"`
 }
 
 type SecretsObservation struct {
 
-	// Container's environment variable in which secret's value will be stored.
+	// Container's environment variable in which secret's value will be stored
 	EnvironmentVariable *string `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// Secret's id
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret's entries key which value will be stored in environment variable.
+	// Secret's entries key which value will be stored in environment variable
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// Secret's version id
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type SecretsParameters struct {
 
-	// Container's environment variable in which secret's value will be stored.
+	// Container's environment variable in which secret's value will be stored
 	// +kubebuilder:validation:Optional
 	EnvironmentVariable *string `json:"environmentVariable" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// Secret's id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret's entries key which value will be stored in environment variable.
+	// Reference to a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// Secret's entries key which value will be stored in environment variable
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// Secret's version id
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/lockbox/v1alpha1.SecretVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+
+	// Reference to a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDRef *v1.Reference `json:"versionIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDSelector *v1.Selector `json:"versionIdSelector,omitempty" tf:"-"`
 }
 
 type StorageMountsInitParameters struct {
 
-	// Name of the mounting bucket.
+	// Name of the mounting bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Path inside the container to access the directory in which the bucket is mounted.
+	// Path inside the container to access the directory in which the bucket is mounted
 	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
 
-	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Mount the bucket in read-only mode.
+	// Mount the bucket in read-only mode
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type StorageMountsObservation struct {
 
-	// Name of the mounting bucket.
+	// Name of the mounting bucket
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Path inside the container to access the directory in which the bucket is mounted.
+	// Path inside the container to access the directory in which the bucket is mounted
 	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
 
-	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Mount the bucket in read-only mode.
+	// Mount the bucket in read-only mode
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type StorageMountsParameters struct {
 
-	// Name of the mounting bucket.
+	// Name of the mounting bucket
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
-	// Path inside the container to access the directory in which the bucket is mounted.
+	// Path inside the container to access the directory in which the bucket is mounted
 	// +kubebuilder:validation:Optional
 	MountPointPath *string `json:"mountPointPath" tf:"mount_point_path,omitempty"`
 
-	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Mount the bucket in read-only mode.
+	// Mount the bucket in read-only mode
 	// +kubebuilder:validation:Optional
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }

@@ -14,8 +14,7 @@ type GpuClusterInitParameters struct {
 	// Description of the GPU cluster. Provide this property when you create a resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default
-	// provider folder is used.
+	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -27,12 +26,10 @@ type GpuClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default,
-	// and it is the only one available at the moment.
+	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default, and it is the only one available at the moment.
 	InterconnectType *string `json:"interconnectType,omitempty" tf:"interconnect_type,omitempty"`
 
-	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept,
-	// see documentation.
+	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept, see documentation.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
@@ -51,18 +48,15 @@ type GpuClusterObservation struct {
 	// Description of the GPU cluster. Provide this property when you create a resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default
-	// provider folder is used.
+	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default provider folder is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default,
-	// and it is the only one available at the moment.
+	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default, and it is the only one available at the moment.
 	InterconnectType *string `json:"interconnectType,omitempty" tf:"interconnect_type,omitempty"`
 
-	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept,
-	// see documentation.
+	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept, see documentation.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
@@ -82,8 +76,7 @@ type GpuClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default
-	// provider folder is used.
+	// The ID of the folder that the GPU cluster belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -96,13 +89,11 @@ type GpuClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default,
-	// and it is the only one available at the moment.
+	// Type of interconnect between nodes to use in GPU cluster. Type infiniband is set by default, and it is the only one available at the moment.
 	// +kubebuilder:validation:Optional
 	InterconnectType *string `json:"interconnectType,omitempty" tf:"interconnect_type,omitempty"`
 
-	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept,
-	// see documentation.
+	// Labels to assign to this GPU cluster. A list of key/value pairs. For details about the concept, see documentation.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`

@@ -74,17 +74,16 @@ spec:
               forProvider:
                 properties:
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_compute_snapshot_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_compute_snapshot_iam_binding
+                      can be used per role.
                     type: string
                   snapshotId:
                     description: ID of the snapshot to attach the policy to.
@@ -104,17 +103,16 @@ spec:
                   autoscaler.
                 properties:
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_compute_snapshot_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_compute_snapshot_iam_binding
+                      can be used per role.
                     type: string
                   snapshotId:
                     description: ID of the snapshot to attach the policy to.
@@ -308,17 +306,16 @@ spec:
                   id:
                     type: string
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_compute_snapshot_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_compute_snapshot_iam_binding
+                      can be used per role.
                     type: string
                   snapshotId:
                     description: ID of the snapshot to attach the policy to.

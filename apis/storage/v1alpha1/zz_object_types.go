@@ -14,7 +14,7 @@ type ObjectInitParameters struct {
 	// The predefined ACL to apply. Defaults to private.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The access key to use when applying changes. If omitted, storage_access_key specified in config is used.
+	// The access key to use when applying changes. This value can also be provided as storage_access_key specified in provider config (explicitly or within shared_credentials_file) is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccountStaticAccessKey
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractAccessKey()
 	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
@@ -60,7 +60,7 @@ type ObjectInitParameters struct {
 	// Specifies date and time in RTC3339 format until which an object is to be locked. It must be set simultaneously with object_lock_mode. Requires object_lock_configuration to be enabled on a bucket.
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
-	// The secret key to use when applying changes. If omitted, storage_secret_key specified in config is used.
+	// The secret key to use when applying changes. This value can also be provided as storage_secret_key specified in provider config (explicitly or within shared_credentials_file) is used.
 	SecretKeySecretRef *v1.SecretKeySelector `json:"secretKeySecretRef,omitempty" tf:"-"`
 
 	// The path to a file that will be read and uploaded as raw bytes for the object content.
@@ -79,7 +79,7 @@ type ObjectObservation struct {
 	// The predefined ACL to apply. Defaults to private.
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The access key to use when applying changes. If omitted, storage_access_key specified in config is used.
+	// The access key to use when applying changes. This value can also be provided as storage_access_key specified in provider config (explicitly or within shared_credentials_file) is used.
 	AccessKey *string `json:"accessKey,omitempty" tf:"access_key,omitempty"`
 
 	// The name of the containing bucket.
@@ -126,7 +126,7 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ACL *string `json:"acl,omitempty" tf:"acl,omitempty"`
 
-	// The access key to use when applying changes. If omitted, storage_access_key specified in config is used.
+	// The access key to use when applying changes. This value can also be provided as storage_access_key specified in provider config (explicitly or within shared_credentials_file) is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccountStaticAccessKey
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/common.ExtractAccessKey()
 	// +kubebuilder:validation:Optional
@@ -181,7 +181,7 @@ type ObjectParameters struct {
 	// +kubebuilder:validation:Optional
 	ObjectLockRetainUntilDate *string `json:"objectLockRetainUntilDate,omitempty" tf:"object_lock_retain_until_date,omitempty"`
 
-	// The secret key to use when applying changes. If omitted, storage_secret_key specified in config is used.
+	// The secret key to use when applying changes. This value can also be provided as storage_secret_key specified in provider config (explicitly or within shared_credentials_file) is used.
 	// +kubebuilder:validation:Optional
 	SecretKeySecretRef *v1.SecretKeySelector `json:"secretKeySecretRef,omitempty" tf:"-"`
 

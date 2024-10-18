@@ -38,6 +38,45 @@ type ConfigBackupWindowStartParameters struct {
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
+type ConfigDiskSizeAutoscalingInitParameters struct {
+
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type ConfigDiskSizeAutoscalingObservation struct {
+
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type ConfigDiskSizeAutoscalingParameters struct {
+
+	// Limit of disk size after autoscaling (GiB).
+	// +kubebuilder:validation:Optional
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
+
+	// Immediate autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// Maintenance window autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
 type ConfigPerformanceDiagnosticsInitParameters struct {
 
 	// Enable performance diagnostics
@@ -142,45 +181,6 @@ type ConfigResourcesParameters struct {
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
-type DiskSizeAutoscalingInitParameters struct {
-
-	// Limit of disk size after autoscaling (GiB).
-	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
-
-	// Immediate autoscaling disk usage (percent).
-	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
-
-	// Maintenance window autoscaling disk usage (percent).
-	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
-}
-
-type DiskSizeAutoscalingObservation struct {
-
-	// Limit of disk size after autoscaling (GiB).
-	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
-
-	// Immediate autoscaling disk usage (percent).
-	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
-
-	// Maintenance window autoscaling disk usage (percent).
-	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
-}
-
-type DiskSizeAutoscalingParameters struct {
-
-	// Limit of disk size after autoscaling (GiB).
-	// +kubebuilder:validation:Optional
-	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
-
-	// Immediate autoscaling disk usage (percent).
-	// +kubebuilder:validation:Optional
-	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
-
-	// Maintenance window autoscaling disk usage (percent).
-	// +kubebuilder:validation:Optional
-	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
-}
-
 type ExtensionInitParameters struct {
 
 	// Name of the PostgreSQL cluster. Provided by the client when the cluster is created.
@@ -274,7 +274,7 @@ type PostgresqlClusterConfigInitParameters struct {
 	BackupWindowStart []ConfigBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
 	// Cluster disk size autoscaling settings. The structure is documented below.
-	DiskSizeAutoscaling []DiskSizeAutoscalingInitParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+	DiskSizeAutoscaling []ConfigDiskSizeAutoscalingInitParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
 
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	PerformanceDiagnostics []ConfigPerformanceDiagnosticsInitParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
@@ -308,7 +308,7 @@ type PostgresqlClusterConfigObservation struct {
 	BackupWindowStart []ConfigBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
 	// Cluster disk size autoscaling settings. The structure is documented below.
-	DiskSizeAutoscaling []DiskSizeAutoscalingObservation `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+	DiskSizeAutoscaling []ConfigDiskSizeAutoscalingObservation `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
 
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	PerformanceDiagnostics []ConfigPerformanceDiagnosticsObservation `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
@@ -347,7 +347,7 @@ type PostgresqlClusterConfigParameters struct {
 
 	// Cluster disk size autoscaling settings. The structure is documented below.
 	// +kubebuilder:validation:Optional
-	DiskSizeAutoscaling []DiskSizeAutoscalingParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+	DiskSizeAutoscaling []ConfigDiskSizeAutoscalingParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
 
 	// Cluster performance diagnostics settings. The structure is documented below. YC Documentation
 	// +kubebuilder:validation:Optional
@@ -428,8 +428,7 @@ type PostgresqlClusterHostInitParameters struct {
 	// Sets whether the host should get a public IP address on creation. It can be changed on the fly only when name is set.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see replication_source_name parameter.
-	// Also, this field is used to select which host will be selected as a master host. Please see host_master_name parameter.
+	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see replication_source_name parameter. Also, this field is used to select which host will be selected as a master host. Please see host_master_name parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Host priority in HA group. It works only when name is set.
@@ -462,8 +461,7 @@ type PostgresqlClusterHostObservation struct {
 	// (Computed) The fully qualified domain name of the host.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see replication_source_name parameter.
-	// Also, this field is used to select which host will be selected as a master host. Please see host_master_name parameter.
+	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see replication_source_name parameter. Also, this field is used to select which host will be selected as a master host. Please see host_master_name parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Host priority in HA group. It works only when name is set.
@@ -490,8 +488,7 @@ type PostgresqlClusterHostParameters struct {
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see replication_source_name parameter.
-	// Also, this field is used to select which host will be selected as a master host. Please see host_master_name parameter.
+	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see replication_source_name parameter. Also, this field is used to select which host will be selected as a master host. Please see host_master_name parameter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -529,7 +526,7 @@ type PostgresqlClusterInitParameters struct {
 	// (Deprecated) To manage databases, please switch to using a separate resource type yandex_mdb_postgresql_database.
 	Database []PostgresqlClusterDatabaseInitParameters `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// Inhibits deletion of the cluster. Can be either true or false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// Description of the PostgreSQL cluster.
@@ -651,7 +648,7 @@ type PostgresqlClusterObservation struct {
 	// (Deprecated) To manage databases, please switch to using a separate resource type yandex_mdb_postgresql_database.
 	Database []PostgresqlClusterDatabaseObservation `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// Inhibits deletion of the cluster. Can be either true or false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// Description of the PostgreSQL cluster.
@@ -714,7 +711,7 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Database []PostgresqlClusterDatabaseParameters `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// Inhibits deletion of the cluster. Can be either true or false.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 

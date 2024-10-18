@@ -14,13 +14,11 @@ type GpuClusterIAMBindingInitParameters struct {
 	// ID of the gpu cluster to attach the policy to.
 	GpuClusterID *string `json:"gpuClusterId,omitempty" tf:"gpu_cluster_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_gpu_cluster_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_gpu_cluster_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -31,13 +29,11 @@ type GpuClusterIAMBindingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_gpu_cluster_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_gpu_cluster_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -47,14 +43,12 @@ type GpuClusterIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	GpuClusterID *string `json:"gpuClusterId,omitempty" tf:"gpu_cluster_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_gpu_cluster_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_gpu_cluster_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }

@@ -15,6 +15,9 @@ func (tr *Gateway) Hub() {}
 func (tr *Network) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PrivateEndpoint) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *RouteTable) Hub() {}
 
 // Hub marks this type as a conversion hub.

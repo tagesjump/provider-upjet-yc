@@ -24,8 +24,7 @@ type ZoneIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
@@ -42,8 +41,7 @@ type ZoneIAMBindingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
@@ -69,8 +67,7 @@ type ZoneIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`

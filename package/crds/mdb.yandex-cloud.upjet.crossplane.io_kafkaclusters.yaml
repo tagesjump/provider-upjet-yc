@@ -96,6 +96,29 @@ spec:
                           description: Count of brokers per availability zone. The
                             default is 1.
                           type: number
+                        diskSizeAutoscaling:
+                          description: Disk autoscaling settings of the Kafka cluster.
+                            The structure is documented below.
+                          items:
+                            properties:
+                              diskSizeLimit:
+                                description: Maximum possible size of disk in bytes.
+                                type: number
+                              emergencyUsageThreshold:
+                                description: Percent of disk utilization. Disk will
+                                  autoscale immediately, if this threshold reached.
+                                  Value is between 0 and 100. Default value is 0 (autoscaling
+                                  disabled). Must be not less then 'planned_usage_threshold'
+                                  value.
+                                type: number
+                              plannedUsageThreshold:
+                                description: Percent of disk utilization. During maintenance
+                                  disk will autoscale, if this threshold reached.
+                                  Value is between 0 and 100. Default value is 0 (autoscaling
+                                  disabled).
+                                type: number
+                            type: object
+                          type: array
                         kafka:
                           description: Configuration of the Kafka subcluster. The
                             structure is documented below.
@@ -109,9 +132,8 @@ spec:
                                     autoCreateTopicsEnable:
                                       type: boolean
                                     compressionType:
-                                      description: |-
-                                        Kafka topic settings. For more information, see
-                                        the official documentation
+                                      description: Kafka topic settings. For more
+                                        information, see the official documentation
                                         and the Kafka documentation.
                                       type: string
                                     defaultReplicationFactor:
@@ -168,9 +190,9 @@ spec:
                                         to a ZooKeeper host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: |-
-                                        Type of the storage of ZooKeeper hosts.
-                                        For more information see the official documentation.
+                                      description: Type of the storage of ZooKeeper
+                                        hosts. For more information see the official
+                                        documentation.
                                       type: string
                                     resourcePresetId:
                                       type: string
@@ -207,9 +229,9 @@ spec:
                                         to a ZooKeeper host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: |-
-                                        Type of the storage of ZooKeeper hosts.
-                                        For more information see the official documentation.
+                                      description: Type of the storage of ZooKeeper
+                                        hosts. For more information see the official
+                                        documentation.
                                       type: string
                                     resourcePresetId:
                                       type: string
@@ -220,16 +242,15 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Kafka cluster.
                     type: string
                   environment:
-                    description: |-
-                      Deployment environment of the Kafka cluster. Can be either PRESTABLE or PRODUCTION.
-                      The default is PRODUCTION.
+                    description: Deployment environment of the Kafka cluster. Can
+                      be either PRESTABLE or PRODUCTION. The default is PRODUCTION.
                     type: string
                   folderId:
                     description: The ID of the folder that the resource belongs to.
@@ -616,10 +637,8 @@ spec:
                               cleanupPolicy:
                                 type: string
                               compressionType:
-                                description: |-
-                                  Kafka topic settings. For more information, see
-                                  the official documentation
-                                  and the Kafka documentation.
+                                description: Kafka topic settings. For more information,
+                                  see the official documentation and the Kafka documentation.
                                 type: string
                               deleteRetentionMs:
                                 type: string
@@ -732,6 +751,29 @@ spec:
                           description: Count of brokers per availability zone. The
                             default is 1.
                           type: number
+                        diskSizeAutoscaling:
+                          description: Disk autoscaling settings of the Kafka cluster.
+                            The structure is documented below.
+                          items:
+                            properties:
+                              diskSizeLimit:
+                                description: Maximum possible size of disk in bytes.
+                                type: number
+                              emergencyUsageThreshold:
+                                description: Percent of disk utilization. Disk will
+                                  autoscale immediately, if this threshold reached.
+                                  Value is between 0 and 100. Default value is 0 (autoscaling
+                                  disabled). Must be not less then 'planned_usage_threshold'
+                                  value.
+                                type: number
+                              plannedUsageThreshold:
+                                description: Percent of disk utilization. During maintenance
+                                  disk will autoscale, if this threshold reached.
+                                  Value is between 0 and 100. Default value is 0 (autoscaling
+                                  disabled).
+                                type: number
+                            type: object
+                          type: array
                         kafka:
                           description: Configuration of the Kafka subcluster. The
                             structure is documented below.
@@ -745,9 +787,8 @@ spec:
                                     autoCreateTopicsEnable:
                                       type: boolean
                                     compressionType:
-                                      description: |-
-                                        Kafka topic settings. For more information, see
-                                        the official documentation
+                                      description: Kafka topic settings. For more
+                                        information, see the official documentation
                                         and the Kafka documentation.
                                       type: string
                                     defaultReplicationFactor:
@@ -804,9 +845,9 @@ spec:
                                         to a ZooKeeper host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: |-
-                                        Type of the storage of ZooKeeper hosts.
-                                        For more information see the official documentation.
+                                      description: Type of the storage of ZooKeeper
+                                        hosts. For more information see the official
+                                        documentation.
                                       type: string
                                     resourcePresetId:
                                       type: string
@@ -843,9 +884,9 @@ spec:
                                         to a ZooKeeper host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: |-
-                                        Type of the storage of ZooKeeper hosts.
-                                        For more information see the official documentation.
+                                      description: Type of the storage of ZooKeeper
+                                        hosts. For more information see the official
+                                        documentation.
                                       type: string
                                     resourcePresetId:
                                       type: string
@@ -856,16 +897,15 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Kafka cluster.
                     type: string
                   environment:
-                    description: |-
-                      Deployment environment of the Kafka cluster. Can be either PRESTABLE or PRODUCTION.
-                      The default is PRODUCTION.
+                    description: Deployment environment of the Kafka cluster. Can
+                      be either PRESTABLE or PRODUCTION. The default is PRODUCTION.
                     type: string
                   folderId:
                     description: The ID of the folder that the resource belongs to.
@@ -1252,10 +1292,8 @@ spec:
                               cleanupPolicy:
                                 type: string
                               compressionType:
-                                description: |-
-                                  Kafka topic settings. For more information, see
-                                  the official documentation
-                                  and the Kafka documentation.
+                                description: Kafka topic settings. For more information,
+                                  see the official documentation and the Kafka documentation.
                                 type: string
                               deleteRetentionMs:
                                 type: string
@@ -1538,6 +1576,29 @@ spec:
                           description: Count of brokers per availability zone. The
                             default is 1.
                           type: number
+                        diskSizeAutoscaling:
+                          description: Disk autoscaling settings of the Kafka cluster.
+                            The structure is documented below.
+                          items:
+                            properties:
+                              diskSizeLimit:
+                                description: Maximum possible size of disk in bytes.
+                                type: number
+                              emergencyUsageThreshold:
+                                description: Percent of disk utilization. Disk will
+                                  autoscale immediately, if this threshold reached.
+                                  Value is between 0 and 100. Default value is 0 (autoscaling
+                                  disabled). Must be not less then 'planned_usage_threshold'
+                                  value.
+                                type: number
+                              plannedUsageThreshold:
+                                description: Percent of disk utilization. During maintenance
+                                  disk will autoscale, if this threshold reached.
+                                  Value is between 0 and 100. Default value is 0 (autoscaling
+                                  disabled).
+                                type: number
+                            type: object
+                          type: array
                         kafka:
                           description: Configuration of the Kafka subcluster. The
                             structure is documented below.
@@ -1551,9 +1612,8 @@ spec:
                                     autoCreateTopicsEnable:
                                       type: boolean
                                     compressionType:
-                                      description: |-
-                                        Kafka topic settings. For more information, see
-                                        the official documentation
+                                      description: Kafka topic settings. For more
+                                        information, see the official documentation
                                         and the Kafka documentation.
                                       type: string
                                     defaultReplicationFactor:
@@ -1610,9 +1670,9 @@ spec:
                                         to a ZooKeeper host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: |-
-                                        Type of the storage of ZooKeeper hosts.
-                                        For more information see the official documentation.
+                                      description: Type of the storage of ZooKeeper
+                                        hosts. For more information see the official
+                                        documentation.
                                       type: string
                                     resourcePresetId:
                                       type: string
@@ -1649,9 +1709,9 @@ spec:
                                         to a ZooKeeper host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: |-
-                                        Type of the storage of ZooKeeper hosts.
-                                        For more information see the official documentation.
+                                      description: Type of the storage of ZooKeeper
+                                        hosts. For more information see the official
+                                        documentation.
                                       type: string
                                     resourcePresetId:
                                       type: string
@@ -1665,25 +1725,24 @@ spec:
                     description: Timestamp of cluster creation.
                     type: string
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Kafka cluster.
                     type: string
                   environment:
-                    description: |-
-                      Deployment environment of the Kafka cluster. Can be either PRESTABLE or PRODUCTION.
-                      The default is PRODUCTION.
+                    description: Deployment environment of the Kafka cluster. Can
+                      be either PRESTABLE or PRODUCTION. The default is PRODUCTION.
                     type: string
                   folderId:
                     description: The ID of the folder that the resource belongs to.
                       If it is not provided, the default provider folder is used.
                     type: string
                   health:
-                    description: |-
-                      Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN.
-                      For more information see health field of JSON representation in the official documentation.
+                    description: Aggregated health of the cluster. Can be either ALIVE,
+                      DEGRADED, DEAD or HEALTH_UNKNOWN. For more information see health
+                      field of JSON representation in the official documentation.
                     type: string
                   host:
                     description: A host of the Kafka cluster. The structure is documented
@@ -1762,9 +1821,10 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   status:
-                    description: |-
-                      Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
-                      For more information see status field of JSON representation in the official documentation.
+                    description: Status of the cluster. Can be either CREATING, STARTING,
+                      RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
+                      For more information see status field of JSON representation
+                      in the official documentation.
                     type: string
                   subnetIds:
                     description: IDs of the subnets, to which the Kafka cluster belongs.
@@ -1794,10 +1854,8 @@ spec:
                               cleanupPolicy:
                                 type: string
                               compressionType:
-                                description: |-
-                                  Kafka topic settings. For more information, see
-                                  the official documentation
-                                  and the Kafka documentation.
+                                description: Kafka topic settings. For more information,
+                                  see the official documentation and the Kafka documentation.
                                 type: string
                               deleteRetentionMs:
                                 type: string

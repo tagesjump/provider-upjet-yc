@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RepositoryIAMBinding is the Schema for the RepositoryIAMBindings
-          API. Allows management of a single IAM binding for a
+          API.
         properties:
           apiVersion:
             description: |-
@@ -74,16 +74,13 @@ spec:
               forProvider:
                 properties:
                   members:
-                    description: |-
-                      Identities that will be granted the privilege in role.
-                      Each entry can have one of the following values:
+                    description: (Set of String)
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   repositoryId:
-                    description: The Yandex Container Repository ID to apply a binding
-                      to.
+                    description: (String)
                     type: string
                   repositoryIdRef:
                     description: Reference to a Repository to populate repositoryId.
@@ -160,7 +157,7 @@ spec:
                         type: object
                     type: object
                   role:
-                    description: The role that should be applied. See roles.
+                    description: (String)
                     type: string
                   serviceAccountRef:
                     description: References to ServiceAccount in iam to populate members.
@@ -241,6 +238,7 @@ spec:
                         type: object
                     type: object
                   sleepAfter:
+                    description: (Number)
                     type: number
                 type: object
               initProvider:
@@ -257,16 +255,13 @@ spec:
                   autoscaler.
                 properties:
                   members:
-                    description: |-
-                      Identities that will be granted the privilege in role.
-                      Each entry can have one of the following values:
+                    description: (Set of String)
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   repositoryId:
-                    description: The Yandex Container Repository ID to apply a binding
-                      to.
+                    description: (String)
                     type: string
                   repositoryIdRef:
                     description: Reference to a Repository to populate repositoryId.
@@ -343,7 +338,7 @@ spec:
                         type: object
                     type: object
                   role:
-                    description: The role that should be applied. See roles.
+                    description: (String)
                     type: string
                   serviceAccountRef:
                     description: References to ServiceAccount in iam to populate members.
@@ -424,6 +419,7 @@ spec:
                         type: object
                     type: object
                   sleepAfter:
+                    description: (Number)
                     type: number
                 type: object
               managementPolicies:
@@ -605,23 +601,22 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   members:
-                    description: |-
-                      Identities that will be granted the privilege in role.
-                      Each entry can have one of the following values:
+                    description: (Set of String)
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   repositoryId:
-                    description: The Yandex Container Repository ID to apply a binding
-                      to.
+                    description: (String)
                     type: string
                   role:
-                    description: The role that should be applied. See roles.
+                    description: (String)
                     type: string
                   sleepAfter:
+                    description: (Number)
                     type: number
                 type: object
               conditions:

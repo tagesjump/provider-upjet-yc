@@ -9,6 +9,94 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AnalyzeAndVacuumInitParameters struct {
+
+	// Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+	AnalyzeTimeout *float64 `json:"analyzeTimeout,omitempty" tf:"analyze_timeout,omitempty"`
+
+	// Time of day in 'HH:MM' format when scripts should run.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+	VacuumTimeout *float64 `json:"vacuumTimeout,omitempty" tf:"vacuum_timeout,omitempty"`
+}
+
+type AnalyzeAndVacuumObservation struct {
+
+	// Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+	AnalyzeTimeout *float64 `json:"analyzeTimeout,omitempty" tf:"analyze_timeout,omitempty"`
+
+	// Time of day in 'HH:MM' format when scripts should run.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+	VacuumTimeout *float64 `json:"vacuumTimeout,omitempty" tf:"vacuum_timeout,omitempty"`
+}
+
+type AnalyzeAndVacuumParameters struct {
+
+	// Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+	// +kubebuilder:validation:Optional
+	AnalyzeTimeout *float64 `json:"analyzeTimeout,omitempty" tf:"analyze_timeout,omitempty"`
+
+	// Time of day in 'HH:MM' format when scripts should run.
+	// +kubebuilder:validation:Optional
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+	// +kubebuilder:validation:Optional
+	VacuumTimeout *float64 `json:"vacuumTimeout,omitempty" tf:"vacuum_timeout,omitempty"`
+}
+
+type BackgroundActivitiesInitParameters struct {
+
+	// Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+	AnalyzeAndVacuum []AnalyzeAndVacuumInitParameters `json:"analyzeAndVacuum,omitempty" tf:"analyze_and_vacuum,omitempty"`
+
+	// Block to configure script that kills long running queries that are in idle state.
+	QueryKillerIdle []QueryKillerIdleInitParameters `json:"queryKillerIdle,omitempty" tf:"query_killer_idle,omitempty"`
+
+	// block to configure script that kills long running queries that are in idle in transaction state.
+	QueryKillerIdleInTransaction []QueryKillerIdleInTransactionInitParameters `json:"queryKillerIdleInTransaction,omitempty" tf:"query_killer_idle_in_transaction,omitempty"`
+
+	// block to configure script that kills long running queries (in any state).
+	QueryKillerLongRunning []QueryKillerLongRunningInitParameters `json:"queryKillerLongRunning,omitempty" tf:"query_killer_long_running,omitempty"`
+}
+
+type BackgroundActivitiesObservation struct {
+
+	// Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+	AnalyzeAndVacuum []AnalyzeAndVacuumObservation `json:"analyzeAndVacuum,omitempty" tf:"analyze_and_vacuum,omitempty"`
+
+	// Block to configure script that kills long running queries that are in idle state.
+	QueryKillerIdle []QueryKillerIdleObservation `json:"queryKillerIdle,omitempty" tf:"query_killer_idle,omitempty"`
+
+	// block to configure script that kills long running queries that are in idle in transaction state.
+	QueryKillerIdleInTransaction []QueryKillerIdleInTransactionObservation `json:"queryKillerIdleInTransaction,omitempty" tf:"query_killer_idle_in_transaction,omitempty"`
+
+	// block to configure script that kills long running queries (in any state).
+	QueryKillerLongRunning []QueryKillerLongRunningObservation `json:"queryKillerLongRunning,omitempty" tf:"query_killer_long_running,omitempty"`
+}
+
+type BackgroundActivitiesParameters struct {
+
+	// Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+	// +kubebuilder:validation:Optional
+	AnalyzeAndVacuum []AnalyzeAndVacuumParameters `json:"analyzeAndVacuum,omitempty" tf:"analyze_and_vacuum,omitempty"`
+
+	// Block to configure script that kills long running queries that are in idle state.
+	// +kubebuilder:validation:Optional
+	QueryKillerIdle []QueryKillerIdleParameters `json:"queryKillerIdle,omitempty" tf:"query_killer_idle,omitempty"`
+
+	// block to configure script that kills long running queries that are in idle in transaction state.
+	// +kubebuilder:validation:Optional
+	QueryKillerIdleInTransaction []QueryKillerIdleInTransactionParameters `json:"queryKillerIdleInTransaction,omitempty" tf:"query_killer_idle_in_transaction,omitempty"`
+
+	// block to configure script that kills long running queries (in any state).
+	// +kubebuilder:validation:Optional
+	QueryKillerLongRunning []QueryKillerLongRunningParameters `json:"queryKillerLongRunning,omitempty" tf:"query_killer_long_running,omitempty"`
+}
+
 type GreenplumClusterAccessInitParameters struct {
 
 	// Allow access for Yandex DataLens.
@@ -19,6 +107,9 @@ type GreenplumClusterAccessInitParameters struct {
 
 	// Allows access for SQL queries in the management console.
 	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
+
+	// Allow access for Yandex Query
+	YandexQuery *bool `json:"yandexQuery,omitempty" tf:"yandex_query,omitempty"`
 }
 
 type GreenplumClusterAccessObservation struct {
@@ -31,6 +122,9 @@ type GreenplumClusterAccessObservation struct {
 
 	// Allows access for SQL queries in the management console.
 	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
+
+	// Allow access for Yandex Query
+	YandexQuery *bool `json:"yandexQuery,omitempty" tf:"yandex_query,omitempty"`
 }
 
 type GreenplumClusterAccessParameters struct {
@@ -46,6 +140,10 @@ type GreenplumClusterAccessParameters struct {
 	// Allows access for SQL queries in the management console.
 	// +kubebuilder:validation:Optional
 	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
+
+	// Allow access for Yandex Query
+	// +kubebuilder:validation:Optional
+	YandexQuery *bool `json:"yandexQuery,omitempty" tf:"yandex_query,omitempty"`
 }
 
 type GreenplumClusterBackupWindowStartInitParameters struct {
@@ -104,13 +202,15 @@ type GreenplumClusterInitParameters struct {
 	// Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	BackgroundActivities []BackgroundActivitiesInitParameters `json:"backgroundActivities,omitempty" tf:"background_activities,omitempty"`
+
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []GreenplumClusterBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
 	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
 	CloudStorage []GreenplumClusterCloudStorageInitParameters `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// Inhibits deletion of the cluster. Can be either true or false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// Description of the Greenplum cluster.
@@ -119,8 +219,7 @@ type GreenplumClusterInitParameters struct {
 	// Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -145,6 +244,10 @@ type GreenplumClusterInitParameters struct {
 
 	// Number of hosts in master subcluster (1 or 2).
 	MasterHostCount *float64 `json:"masterHostCount,omitempty" tf:"master_host_count,omitempty"`
+
+	// A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// +listType=set
+	MasterHostGroupIds []*string `json:"masterHostGroupIds,omitempty" tf:"master_host_group_ids,omitempty"`
 
 	// Settings for master subcluster. The structure is documented below.
 	MasterSubcluster []MasterSubclusterInitParameters `json:"masterSubcluster,omitempty" tf:"master_subcluster,omitempty"`
@@ -185,6 +288,10 @@ type GreenplumClusterInitParameters struct {
 
 	// Number of hosts in segment subcluster (from 1 to 32).
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
+
+	// A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// +listType=set
+	SegmentHostGroupIds []*string `json:"segmentHostGroupIds,omitempty" tf:"segment_host_group_ids,omitempty"`
 
 	// Number of segments on segment host (not more then 1 + RAM/8).
 	SegmentInHost *float64 `json:"segmentInHost,omitempty" tf:"segment_in_host,omitempty"`
@@ -264,6 +371,8 @@ type GreenplumClusterObservation struct {
 	// Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	BackgroundActivities []BackgroundActivitiesObservation `json:"backgroundActivities,omitempty" tf:"background_activities,omitempty"`
+
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	BackupWindowStart []GreenplumClusterBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
@@ -273,7 +382,7 @@ type GreenplumClusterObservation struct {
 	// Creation timestamp of the cluster.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// Inhibits deletion of the cluster. Can be either true or false.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
 	// Description of the Greenplum cluster.
@@ -282,8 +391,7 @@ type GreenplumClusterObservation struct {
 	// Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
@@ -304,6 +412,10 @@ type GreenplumClusterObservation struct {
 
 	// Number of hosts in master subcluster (1 or 2).
 	MasterHostCount *float64 `json:"masterHostCount,omitempty" tf:"master_host_count,omitempty"`
+
+	// A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// +listType=set
+	MasterHostGroupIds []*string `json:"masterHostGroupIds,omitempty" tf:"master_host_group_ids,omitempty"`
 
 	// (Computed) Info about hosts in master subcluster. The structure is documented below.
 	MasterHosts []MasterHostsObservation `json:"masterHosts,omitempty" tf:"master_hosts,omitempty"`
@@ -329,6 +441,10 @@ type GreenplumClusterObservation struct {
 
 	// Number of hosts in segment subcluster (from 1 to 32).
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
+
+	// A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// +listType=set
+	SegmentHostGroupIds []*string `json:"segmentHostGroupIds,omitempty" tf:"segment_host_group_ids,omitempty"`
 
 	// (Computed) Info about hosts in segment subcluster. The structure is documented below.
 	SegmentHosts []SegmentHostsObservation `json:"segmentHosts,omitempty" tf:"segment_hosts,omitempty"`
@@ -365,6 +481,9 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	BackgroundActivities []BackgroundActivitiesParameters `json:"backgroundActivities,omitempty" tf:"background_activities,omitempty"`
+
 	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
 	// +kubebuilder:validation:Optional
 	BackupWindowStart []GreenplumClusterBackupWindowStartParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
@@ -373,7 +492,7 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudStorage []GreenplumClusterCloudStorageParameters `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// Inhibits deletion of the cluster. Can be either true or false.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
@@ -385,8 +504,7 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -416,6 +534,11 @@ type GreenplumClusterParameters struct {
 	// Number of hosts in master subcluster (1 or 2).
 	// +kubebuilder:validation:Optional
 	MasterHostCount *float64 `json:"masterHostCount,omitempty" tf:"master_host_count,omitempty"`
+
+	// A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	MasterHostGroupIds []*string `json:"masterHostGroupIds,omitempty" tf:"master_host_group_ids,omitempty"`
 
 	// Settings for master subcluster. The structure is documented below.
 	// +kubebuilder:validation:Optional
@@ -463,6 +586,11 @@ type GreenplumClusterParameters struct {
 	// Number of hosts in segment subcluster (from 1 to 32).
 	// +kubebuilder:validation:Optional
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
+
+	// A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SegmentHostGroupIds []*string `json:"segmentHostGroupIds,omitempty" tf:"segment_host_group_ids,omitempty"`
 
 	// Number of segments on segment host (not more then 1 + RAM/8).
 	// +kubebuilder:validation:Optional
@@ -700,6 +828,123 @@ type PxfConfigParameters struct {
 	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// +kubebuilder:validation:Optional
 	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
+}
+
+type QueryKillerIdleInTransactionInitParameters struct {
+
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleInTransactionObservation struct {
+
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleInTransactionParameters struct {
+
+	// Flag that indicates whether script is enabled.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	// +kubebuilder:validation:Optional
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	// +kubebuilder:validation:Optional
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleInitParameters struct {
+
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleObservation struct {
+
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleParameters struct {
+
+	// Flag that indicates whether script is enabled.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	// +kubebuilder:validation:Optional
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	// +kubebuilder:validation:Optional
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerLongRunningInitParameters struct {
+
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerLongRunningObservation struct {
+
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerLongRunningParameters struct {
+
+	// Flag that indicates whether script is enabled.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// List of users to ignore when considering queries to terminate.
+	// +kubebuilder:validation:Optional
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// Maximum duration for this type of queries (in seconds).
+	// +kubebuilder:validation:Optional
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type SegmentHostsInitParameters struct {

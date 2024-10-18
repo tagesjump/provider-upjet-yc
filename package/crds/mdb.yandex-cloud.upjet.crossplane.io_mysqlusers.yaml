@@ -155,9 +155,8 @@ spec:
                         type: object
                     type: object
                   connectionLimits:
-                    description: |-
-                      User's connection limits. The structure is documented below.
-                      If the attribute is not specified there will be no changes.
+                    description: User's connection limits. The structure is documented
+                      below. If the attribute is not specified there will be no changes.
                     items:
                       properties:
                         maxConnectionsPerHour:
@@ -177,8 +176,7 @@ spec:
                   globalPermissions:
                     description: |-
                       List user's global permissions
-                      Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
-                      If the attribute is not specified there will be no changes.
+                      Allowed permissions: REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list. If the attribute is not specified there will be no changes.
                     items:
                       type: string
                     type: array
@@ -289,10 +287,9 @@ spec:
                               type: object
                           type: object
                         roles:
-                          description: |-
-                            List user's roles in the database.
-                            Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
-                            CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
+                          description: 'List user''s roles in the database. Allowed
+                            roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
+                            CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.'
                           items:
                             type: string
                           type: array
@@ -394,9 +391,8 @@ spec:
                         type: object
                     type: object
                   connectionLimits:
-                    description: |-
-                      User's connection limits. The structure is documented below.
-                      If the attribute is not specified there will be no changes.
+                    description: User's connection limits. The structure is documented
+                      below. If the attribute is not specified there will be no changes.
                     items:
                       properties:
                         maxConnectionsPerHour:
@@ -416,8 +412,7 @@ spec:
                   globalPermissions:
                     description: |-
                       List user's global permissions
-                      Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
-                      If the attribute is not specified there will be no changes.
+                      Allowed permissions: REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list. If the attribute is not specified there will be no changes.
                     items:
                       type: string
                     type: array
@@ -528,10 +523,9 @@ spec:
                               type: object
                           type: object
                         roles:
-                          description: |-
-                            List user's roles in the database.
-                            Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
-                            CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
+                          description: 'List user''s roles in the database. Allowed
+                            roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
+                            CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.'
                           items:
                             type: string
                           type: array
@@ -728,9 +722,8 @@ spec:
                   clusterId:
                     type: string
                   connectionLimits:
-                    description: |-
-                      User's connection limits. The structure is documented below.
-                      If the attribute is not specified there will be no changes.
+                    description: User's connection limits. The structure is documented
+                      below. If the attribute is not specified there will be no changes.
                     items:
                       properties:
                         maxConnectionsPerHour:
@@ -750,8 +743,7 @@ spec:
                   globalPermissions:
                     description: |-
                       List user's global permissions
-                      Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
-                      If the attribute is not specified there will be no changes.
+                      Allowed permissions: REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list. If the attribute is not specified there will be no changes.
                     items:
                       type: string
                     type: array
@@ -771,10 +763,9 @@ spec:
                             grants access to.
                           type: string
                         roles:
-                          description: |-
-                            List user's roles in the database.
-                            Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
-                            CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
+                          description: 'List user''s roles in the database. Allowed
+                            roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
+                            CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.'
                           items:
                             type: string
                           type: array

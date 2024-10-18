@@ -78,14 +78,12 @@ spec:
                       archives.'
                     type: string
                   cbt:
-                    description: |-
-                      — Configuration of Changed Block Tracking.
-                      Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+                    description: '— Configuration of Changed Block Tracking. Available
+                      values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".'
                     type: string
                   compression:
-                    description: |-
-                      — Archive compression level. Affects CPU.
-                      Available values: "NORMAL", "HIGH", "MAX", "OFF".
+                    description: '— Archive compression level. Affects CPU. Available
+                      values: "NORMAL", "HIGH", "MAX", "OFF".'
                     type: string
                   fastBackupEnabled:
                     description: — Enable flag
@@ -170,9 +168,9 @@ spec:
                         type: object
                     type: object
                   format:
-                    description: |-
-                      — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-                      Available values: "AUTO", "VERSION_11", "VERSION_12".
+                    description: '— Format of the backup. It''s strongly recommend
+                      to leave this option empty or "AUTO". Available values: "AUTO",
+                      "VERSION_11", "VERSION_12".'
                     type: string
                   multiVolumeSnapshottingEnabled:
                     description: — If true, snapshots of multiple volumes will be
@@ -193,9 +191,9 @@ spec:
                       will be taken.
                     type: boolean
                   reattempts:
-                    description: |-
-                      — Amount of reattempts that should be performed while trying to make backup at the host.
-                      This attribute consists of the following parameters:
+                    description: '— Amount of reattempts that should be performed
+                      while trying to make backup at the host. This attribute consists
+                      of the following parameters:'
                     items:
                       properties:
                         enabled:
@@ -212,9 +210,9 @@ spec:
                       type: object
                     type: array
                   retention:
-                    description: |-
-                      — Retention policy for backups. Allows to setup backups lifecycle.
-                      This attribute consists of the following parameters:
+                    description: '— Retention policy for backups. Allows to setup
+                      backups lifecycle. This attribute consists of the following
+                      parameters:'
                     items:
                       properties:
                         afterBackup:
@@ -248,13 +246,76 @@ spec:
                     description: — Schedule settings for creating backups on the host.
                     items:
                       properties:
+                        backupSets:
+                          description: A list of schedules with backup sets that compose
+                            the whole scheme.
+                          items:
+                            properties:
+                              executeByInterval:
+                                description: '— Perform backup by interval, since
+                                  last backup of the host. Maximum value is: 9999
+                                  days. See interval_type for available values. Exactly
+                                  on of options should be set: execute_by_interval
+                                  or execute_by_time.'
+                                type: number
+                              executeByTime:
+                                description: '— Perform backup periodically at specific
+                                  time. Exactly on of options should be set: execute_by_interval
+                                  or execute_by_time.'
+                                items:
+                                  properties:
+                                    includeLastDayOfMonth:
+                                      description: — If true, schedule will be applied
+                                        on the last day of month. See day_type for
+                                        available values.
+                                      type: boolean
+                                    monthdays:
+                                      description: — List of days when schedule applies.
+                                        Used in "MONTHLY" type.
+                                      items:
+                                        type: number
+                                      type: array
+                                    months:
+                                      description: — seconds
+                                      items:
+                                        type: number
+                                      type: array
+                                    repeatAt:
+                                      description: hours format), when the schedule
+                                        applies.
+                                      items:
+                                        type: string
+                                      type: array
+                                    repeatEvery:
+                                      description: — Frequency of backup repetition.
+                                        See interval_type for available values.
+                                      type: string
+                                    type:
+                                      description: '— Type of the scheduling. Available
+                                        values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                      type: string
+                                    weekdays:
+                                      description: — List of weekdays when the backup
+                                        will be applied. Used in "WEEKLY" type.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: '— Type of the scheduling. Available
+                                  values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                type: string
+                            type: object
+                          type: array
                         enabled:
                           description: — Enable flag
                           type: boolean
                         executeByInterval:
-                          description: |-
-                            — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-                            See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                          description: '— Perform backup by interval, since last backup
+                            of the host. Maximum value is: 9999 days. See interval_type
+                            for available values. Exactly on of options should be
+                            set: execute_by_interval or execute_by_time.'
                           type: number
                         executeByTime:
                           description: '— Perform backup periodically at specific
@@ -263,9 +324,9 @@ spec:
                           items:
                             properties:
                               includeLastDayOfMonth:
-                                description: |-
-                                  — If true, schedule will be applied on the last day of month.
-                                  See day_type for available values.
+                                description: — If true, schedule will be applied on
+                                  the last day of month. See day_type for available
+                                  values.
                                 type: boolean
                               monthdays:
                                 description: — List of days when schedule applies.
@@ -304,19 +365,18 @@ spec:
                             to run in parallel. 0 for unlimited.
                           type: number
                         randomMaxDelay:
-                          description: |-
-                            — Configuration of the random delay between the execution of parallel tasks.
-                            See interval_type for available values.
+                          description: — Configuration of the random delay between
+                            the execution of parallel tasks. See interval_type for
+                            available values.
                           type: string
                         scheme:
-                          description: |-
-                            — Scheme of the backups.
-                            Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+                          description: '— Scheme of the backups. Available values
+                            are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL",
+                            ''WEEKLY_INCREMENTAL".'
                           type: string
                         weeklyBackupDay:
-                          description: |-
-                            — A day of week to start weekly backups.
-                            See day_type for available values.
+                          description: — A day of week to start weekly backups. See
+                            day_type for available values.
                           type: string
                       type: object
                     type: array
@@ -329,9 +389,9 @@ spec:
                       to leave this option unchanged.
                     type: string
                   vmSnapshotReattempts:
-                    description: |-
-                      (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-                      This attribute consists of the following parameters:
+                    description: '(Requied) — Amount of reattempts that should be
+                      performed while trying to make snapshot. This attribute consists
+                      of the following parameters:'
                     items:
                       properties:
                         enabled:
@@ -348,9 +408,8 @@ spec:
                       type: object
                     type: array
                   vssProvider:
-                    description: |-
-                      — Settings for the volume shadow copy service.
-                      Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+                    description: '— Settings for the volume shadow copy service. Available
+                      values are: "NATIVE", "TARGET_SYSTEM_DEFINED"'
                     type: string
                 type: object
               initProvider:
@@ -371,14 +430,12 @@ spec:
                       archives.'
                     type: string
                   cbt:
-                    description: |-
-                      — Configuration of Changed Block Tracking.
-                      Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+                    description: '— Configuration of Changed Block Tracking. Available
+                      values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".'
                     type: string
                   compression:
-                    description: |-
-                      — Archive compression level. Affects CPU.
-                      Available values: "NORMAL", "HIGH", "MAX", "OFF".
+                    description: '— Archive compression level. Affects CPU. Available
+                      values: "NORMAL", "HIGH", "MAX", "OFF".'
                     type: string
                   fastBackupEnabled:
                     description: — Enable flag
@@ -463,9 +520,9 @@ spec:
                         type: object
                     type: object
                   format:
-                    description: |-
-                      — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-                      Available values: "AUTO", "VERSION_11", "VERSION_12".
+                    description: '— Format of the backup. It''s strongly recommend
+                      to leave this option empty or "AUTO". Available values: "AUTO",
+                      "VERSION_11", "VERSION_12".'
                     type: string
                   multiVolumeSnapshottingEnabled:
                     description: — If true, snapshots of multiple volumes will be
@@ -486,9 +543,9 @@ spec:
                       will be taken.
                     type: boolean
                   reattempts:
-                    description: |-
-                      — Amount of reattempts that should be performed while trying to make backup at the host.
-                      This attribute consists of the following parameters:
+                    description: '— Amount of reattempts that should be performed
+                      while trying to make backup at the host. This attribute consists
+                      of the following parameters:'
                     items:
                       properties:
                         enabled:
@@ -505,9 +562,9 @@ spec:
                       type: object
                     type: array
                   retention:
-                    description: |-
-                      — Retention policy for backups. Allows to setup backups lifecycle.
-                      This attribute consists of the following parameters:
+                    description: '— Retention policy for backups. Allows to setup
+                      backups lifecycle. This attribute consists of the following
+                      parameters:'
                     items:
                       properties:
                         afterBackup:
@@ -541,13 +598,76 @@ spec:
                     description: — Schedule settings for creating backups on the host.
                     items:
                       properties:
+                        backupSets:
+                          description: A list of schedules with backup sets that compose
+                            the whole scheme.
+                          items:
+                            properties:
+                              executeByInterval:
+                                description: '— Perform backup by interval, since
+                                  last backup of the host. Maximum value is: 9999
+                                  days. See interval_type for available values. Exactly
+                                  on of options should be set: execute_by_interval
+                                  or execute_by_time.'
+                                type: number
+                              executeByTime:
+                                description: '— Perform backup periodically at specific
+                                  time. Exactly on of options should be set: execute_by_interval
+                                  or execute_by_time.'
+                                items:
+                                  properties:
+                                    includeLastDayOfMonth:
+                                      description: — If true, schedule will be applied
+                                        on the last day of month. See day_type for
+                                        available values.
+                                      type: boolean
+                                    monthdays:
+                                      description: — List of days when schedule applies.
+                                        Used in "MONTHLY" type.
+                                      items:
+                                        type: number
+                                      type: array
+                                    months:
+                                      description: — seconds
+                                      items:
+                                        type: number
+                                      type: array
+                                    repeatAt:
+                                      description: hours format), when the schedule
+                                        applies.
+                                      items:
+                                        type: string
+                                      type: array
+                                    repeatEvery:
+                                      description: — Frequency of backup repetition.
+                                        See interval_type for available values.
+                                      type: string
+                                    type:
+                                      description: '— Type of the scheduling. Available
+                                        values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                      type: string
+                                    weekdays:
+                                      description: — List of weekdays when the backup
+                                        will be applied. Used in "WEEKLY" type.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: '— Type of the scheduling. Available
+                                  values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                type: string
+                            type: object
+                          type: array
                         enabled:
                           description: — Enable flag
                           type: boolean
                         executeByInterval:
-                          description: |-
-                            — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-                            See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                          description: '— Perform backup by interval, since last backup
+                            of the host. Maximum value is: 9999 days. See interval_type
+                            for available values. Exactly on of options should be
+                            set: execute_by_interval or execute_by_time.'
                           type: number
                         executeByTime:
                           description: '— Perform backup periodically at specific
@@ -556,9 +676,9 @@ spec:
                           items:
                             properties:
                               includeLastDayOfMonth:
-                                description: |-
-                                  — If true, schedule will be applied on the last day of month.
-                                  See day_type for available values.
+                                description: — If true, schedule will be applied on
+                                  the last day of month. See day_type for available
+                                  values.
                                 type: boolean
                               monthdays:
                                 description: — List of days when schedule applies.
@@ -597,19 +717,18 @@ spec:
                             to run in parallel. 0 for unlimited.
                           type: number
                         randomMaxDelay:
-                          description: |-
-                            — Configuration of the random delay between the execution of parallel tasks.
-                            See interval_type for available values.
+                          description: — Configuration of the random delay between
+                            the execution of parallel tasks. See interval_type for
+                            available values.
                           type: string
                         scheme:
-                          description: |-
-                            — Scheme of the backups.
-                            Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+                          description: '— Scheme of the backups. Available values
+                            are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL",
+                            ''WEEKLY_INCREMENTAL".'
                           type: string
                         weeklyBackupDay:
-                          description: |-
-                            — A day of week to start weekly backups.
-                            See day_type for available values.
+                          description: — A day of week to start weekly backups. See
+                            day_type for available values.
                           type: string
                       type: object
                     type: array
@@ -622,9 +741,9 @@ spec:
                       to leave this option unchanged.
                     type: string
                   vmSnapshotReattempts:
-                    description: |-
-                      (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-                      This attribute consists of the following parameters:
+                    description: '(Requied) — Amount of reattempts that should be
+                      performed while trying to make snapshot. This attribute consists
+                      of the following parameters:'
                     items:
                       properties:
                         enabled:
@@ -641,9 +760,8 @@ spec:
                       type: object
                     type: array
                   vssProvider:
-                    description: |-
-                      — Settings for the volume shadow copy service.
-                      Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+                    description: '— Settings for the volume shadow copy service. Available
+                      values are: "NATIVE", "TARGET_SYSTEM_DEFINED"'
                     type: string
                 type: object
               managementPolicies:
@@ -844,14 +962,12 @@ spec:
                       archives.'
                     type: string
                   cbt:
-                    description: |-
-                      — Configuration of Changed Block Tracking.
-                      Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+                    description: '— Configuration of Changed Block Tracking. Available
+                      values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".'
                     type: string
                   compression:
-                    description: |-
-                      — Archive compression level. Affects CPU.
-                      Available values: "NORMAL", "HIGH", "MAX", "OFF".
+                    description: '— Archive compression level. Affects CPU. Available
+                      values: "NORMAL", "HIGH", "MAX", "OFF".'
                     type: string
                   createdAt:
                     type: string
@@ -865,9 +981,9 @@ spec:
                     description: — days
                     type: string
                   format:
-                    description: |-
-                      — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-                      Available values: "AUTO", "VERSION_11", "VERSION_12".
+                    description: '— Format of the backup. It''s strongly recommend
+                      to leave this option empty or "AUTO". Available values: "AUTO",
+                      "VERSION_11", "VERSION_12".'
                     type: string
                   id:
                     description: — days
@@ -891,9 +1007,9 @@ spec:
                       will be taken.
                     type: boolean
                   reattempts:
-                    description: |-
-                      — Amount of reattempts that should be performed while trying to make backup at the host.
-                      This attribute consists of the following parameters:
+                    description: '— Amount of reattempts that should be performed
+                      while trying to make backup at the host. This attribute consists
+                      of the following parameters:'
                     items:
                       properties:
                         enabled:
@@ -910,9 +1026,9 @@ spec:
                       type: object
                     type: array
                   retention:
-                    description: |-
-                      — Retention policy for backups. Allows to setup backups lifecycle.
-                      This attribute consists of the following parameters:
+                    description: '— Retention policy for backups. Allows to setup
+                      backups lifecycle. This attribute consists of the following
+                      parameters:'
                     items:
                       properties:
                         afterBackup:
@@ -946,13 +1062,76 @@ spec:
                     description: — Schedule settings for creating backups on the host.
                     items:
                       properties:
+                        backupSets:
+                          description: A list of schedules with backup sets that compose
+                            the whole scheme.
+                          items:
+                            properties:
+                              executeByInterval:
+                                description: '— Perform backup by interval, since
+                                  last backup of the host. Maximum value is: 9999
+                                  days. See interval_type for available values. Exactly
+                                  on of options should be set: execute_by_interval
+                                  or execute_by_time.'
+                                type: number
+                              executeByTime:
+                                description: '— Perform backup periodically at specific
+                                  time. Exactly on of options should be set: execute_by_interval
+                                  or execute_by_time.'
+                                items:
+                                  properties:
+                                    includeLastDayOfMonth:
+                                      description: — If true, schedule will be applied
+                                        on the last day of month. See day_type for
+                                        available values.
+                                      type: boolean
+                                    monthdays:
+                                      description: — List of days when schedule applies.
+                                        Used in "MONTHLY" type.
+                                      items:
+                                        type: number
+                                      type: array
+                                    months:
+                                      description: — seconds
+                                      items:
+                                        type: number
+                                      type: array
+                                    repeatAt:
+                                      description: hours format), when the schedule
+                                        applies.
+                                      items:
+                                        type: string
+                                      type: array
+                                    repeatEvery:
+                                      description: — Frequency of backup repetition.
+                                        See interval_type for available values.
+                                      type: string
+                                    type:
+                                      description: '— Type of the scheduling. Available
+                                        values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                      type: string
+                                    weekdays:
+                                      description: — List of weekdays when the backup
+                                        will be applied. Used in "WEEKLY" type.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: '— Type of the scheduling. Available
+                                  values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                type: string
+                            type: object
+                          type: array
                         enabled:
                           description: — Enable flag
                           type: boolean
                         executeByInterval:
-                          description: |-
-                            — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-                            See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                          description: '— Perform backup by interval, since last backup
+                            of the host. Maximum value is: 9999 days. See interval_type
+                            for available values. Exactly on of options should be
+                            set: execute_by_interval or execute_by_time.'
                           type: number
                         executeByTime:
                           description: '— Perform backup periodically at specific
@@ -961,9 +1140,9 @@ spec:
                           items:
                             properties:
                               includeLastDayOfMonth:
-                                description: |-
-                                  — If true, schedule will be applied on the last day of month.
-                                  See day_type for available values.
+                                description: — If true, schedule will be applied on
+                                  the last day of month. See day_type for available
+                                  values.
                                 type: boolean
                               monthdays:
                                 description: — List of days when schedule applies.
@@ -1002,19 +1181,18 @@ spec:
                             to run in parallel. 0 for unlimited.
                           type: number
                         randomMaxDelay:
-                          description: |-
-                            — Configuration of the random delay between the execution of parallel tasks.
-                            See interval_type for available values.
+                          description: — Configuration of the random delay between
+                            the execution of parallel tasks. See interval_type for
+                            available values.
                           type: string
                         scheme:
-                          description: |-
-                            — Scheme of the backups.
-                            Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+                          description: '— Scheme of the backups. Available values
+                            are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL",
+                            ''WEEKLY_INCREMENTAL".'
                           type: string
                         weeklyBackupDay:
-                          description: |-
-                            — A day of week to start weekly backups.
-                            See day_type for available values.
+                          description: — A day of week to start weekly backups. See
+                            day_type for available values.
                           type: string
                       type: object
                     type: array
@@ -1029,9 +1207,9 @@ spec:
                   updatedAt:
                     type: string
                   vmSnapshotReattempts:
-                    description: |-
-                      (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-                      This attribute consists of the following parameters:
+                    description: '(Requied) — Amount of reattempts that should be
+                      performed while trying to make snapshot. This attribute consists
+                      of the following parameters:'
                     items:
                       properties:
                         enabled:
@@ -1048,9 +1226,8 @@ spec:
                       type: object
                     type: array
                   vssProvider:
-                    description: |-
-                      — Settings for the volume shadow copy service.
-                      Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+                    description: '— Settings for the volume shadow copy service. Available
+                      values are: "NATIVE", "TARGET_SYSTEM_DEFINED"'
                     type: string
                 type: object
               conditions:

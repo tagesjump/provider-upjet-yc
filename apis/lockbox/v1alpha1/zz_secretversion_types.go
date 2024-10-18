@@ -92,7 +92,7 @@ type SecretVersionInitParameters struct {
 	// The Yandex Cloud Lockbox secret version description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// List of entries in the Yandex Cloud Lockbox secret version.
+	// List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
 	Entries []EntriesInitParameters `json:"entries,omitempty" tf:"entries,omitempty"`
 
 	// The Yandex Cloud Lockbox secret ID where to add the version.
@@ -113,7 +113,7 @@ type SecretVersionObservation struct {
 	// The Yandex Cloud Lockbox secret version description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// List of entries in the Yandex Cloud Lockbox secret version.
+	// List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
 	Entries []EntriesObservation `json:"entries,omitempty" tf:"entries,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -128,7 +128,7 @@ type SecretVersionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// List of entries in the Yandex Cloud Lockbox secret version.
+	// List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
 	// +kubebuilder:validation:Optional
 	Entries []EntriesParameters `json:"entries,omitempty" tf:"entries,omitempty"`
 
@@ -182,9 +182,8 @@ type SecretVersionStatus struct {
 type SecretVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.entries) || (has(self.initProvider) && has(self.initProvider.entries))",message="spec.forProvider.entries is a required parameter"
-	Spec   SecretVersionSpec   `json:"spec"`
-	Status SecretVersionStatus `json:"status,omitempty"`
+	Spec              SecretVersionSpec   `json:"spec"`
+	Status            SecretVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

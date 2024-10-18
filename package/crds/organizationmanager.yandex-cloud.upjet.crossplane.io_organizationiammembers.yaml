@@ -75,9 +75,9 @@ spec:
               forProvider:
                 properties:
                   member:
-                    description: |-
-                      The identity that will be granted the privilege that is specified in the role field.
-                      This field can have one of the following values:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
                   organizationId:
                     description: ID of the organization to attach a policy to.
@@ -102,9 +102,9 @@ spec:
                   autoscaler.
                 properties:
                   member:
-                    description: |-
-                      The identity that will be granted the privilege that is specified in the role field.
-                      This field can have one of the following values:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
                   organizationId:
                     description: ID of the organization to attach a policy to.
@@ -304,9 +304,9 @@ spec:
                   id:
                     type: string
                   member:
-                    description: |-
-                      The identity that will be granted the privilege that is specified in the role field.
-                      This field can have one of the following values:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
                   organizationId:
                     description: ID of the organization to attach a policy to.

@@ -217,13 +217,11 @@ spec:
                       accidental deletion.
                     type: boolean
                   description:
-                    description: |-
-                      An optional description of the network load balancer. Provide this property when
-                      you create the resource.
+                    description: An optional description of the network load balancer.
+                      Provide this property when you create the resource.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder to which the resource belongs.
+                    description: The ID of the folder to which the resource belongs.
                       If omitted, the provider folder is used.
                     type: string
                   folderIdRef:
@@ -450,9 +448,8 @@ spec:
                       client when the network load balancer is created.
                     type: string
                   regionId:
-                    description: |-
-                      ID of the availability zone where the network load balancer resides.
-                      If omitted, default region is being used.
+                    description: ID of the availability zone where the network load
+                      balancer resides. If omitted, default region is being used.
                     type: string
                   type:
                     description: Type of the network load balancer. Must be one of
@@ -615,13 +612,11 @@ spec:
                       accidental deletion.
                     type: boolean
                   description:
-                    description: |-
-                      An optional description of the network load balancer. Provide this property when
-                      you create the resource.
+                    description: An optional description of the network load balancer.
+                      Provide this property when you create the resource.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder to which the resource belongs.
+                    description: The ID of the folder to which the resource belongs.
                       If omitted, the provider folder is used.
                     type: string
                   folderIdRef:
@@ -848,9 +843,8 @@ spec:
                       client when the network load balancer is created.
                     type: string
                   regionId:
-                    description: |-
-                      ID of the availability zone where the network load balancer resides.
-                      If omitted, default region is being used.
+                    description: ID of the availability zone where the network load
+                      balancer resides. If omitted, default region is being used.
                     type: string
                   type:
                     description: Type of the network load balancer. Must be one of
@@ -1101,13 +1095,11 @@ spec:
                       accidental deletion.
                     type: boolean
                   description:
-                    description: |-
-                      An optional description of the network load balancer. Provide this property when
-                      you create the resource.
+                    description: An optional description of the network load balancer.
+                      Provide this property when you create the resource.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder to which the resource belongs.
+                    description: The ID of the folder to which the resource belongs.
                       If omitted, the provider folder is used.
                     type: string
                   id:
@@ -1185,9 +1177,8 @@ spec:
                       client when the network load balancer is created.
                     type: string
                   regionId:
-                    description: |-
-                      ID of the availability zone where the network load balancer resides.
-                      If omitted, default region is being used.
+                    description: ID of the availability zone where the network load
+                      balancer resides. If omitted, default region is being used.
                     type: string
                   type:
                     description: Type of the network load balancer. Must be one of

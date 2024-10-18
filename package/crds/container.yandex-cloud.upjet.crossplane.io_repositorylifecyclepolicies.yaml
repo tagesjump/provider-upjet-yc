@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: RepositoryLifecyclePolicy is the Schema for the RepositoryLifecyclePolicys
-          API. Creates a new container repository lifecycle policy.
+          API.
         properties:
           apiVersion:
             description: |-
@@ -75,14 +75,13 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: Description of the lifecycle policy.
+                    description: (String)
                     type: string
                   name:
-                    description: Lifecycle policy name.
+                    description: (String)
                     type: string
                   repositoryId:
-                    description: The ID of the repository that the resource belongs
-                      to.
+                    description: (String)
                     type: string
                   repositoryIdRef:
                     description: Reference to a Repository to populate repositoryId.
@@ -159,33 +158,28 @@ spec:
                         type: object
                     type: object
                   rule:
+                    description: (Block List) (see below for nested schema)
                     items:
                       properties:
                         description:
-                          description: Description of the lifecycle policy.
+                          description: (String)
                           type: string
                         expirePeriod:
-                          description: The period of time that must pass after creating
-                            a image for it to suit the automatic deletion criteria.
-                            It must be a multiple of 24 hours.
+                          description: (String)
                           type: string
                         retainedTop:
-                          description: The number of images to be retained even if
-                            the expire_period already expired.
+                          description: (Number)
                           type: number
                         tagRegexp:
-                          description: Tag to specify a filter as a regular expression.
-                            For example .* - all images with tags.
+                          description: (String)
                           type: string
                         untagged:
-                          description: If enabled, rules apply to untagged Docker
-                            images.
+                          description: (Boolean)
                           type: boolean
                       type: object
                     type: array
                   status:
-                    description: The status of lifecycle policy. Must be active or
-                      disabled.
+                    description: (String)
                     type: string
                 type: object
               initProvider:
@@ -202,14 +196,13 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: Description of the lifecycle policy.
+                    description: (String)
                     type: string
                   name:
-                    description: Lifecycle policy name.
+                    description: (String)
                     type: string
                   repositoryId:
-                    description: The ID of the repository that the resource belongs
-                      to.
+                    description: (String)
                     type: string
                   repositoryIdRef:
                     description: Reference to a Repository to populate repositoryId.
@@ -286,33 +279,28 @@ spec:
                         type: object
                     type: object
                   rule:
+                    description: (Block List) (see below for nested schema)
                     items:
                       properties:
                         description:
-                          description: Description of the lifecycle policy.
+                          description: (String)
                           type: string
                         expirePeriod:
-                          description: The period of time that must pass after creating
-                            a image for it to suit the automatic deletion criteria.
-                            It must be a multiple of 24 hours.
+                          description: (String)
                           type: string
                         retainedTop:
-                          description: The number of images to be retained even if
-                            the expire_period already expired.
+                          description: (Number)
                           type: number
                         tagRegexp:
-                          description: Tag to specify a filter as a regular expression.
-                            For example .* - all images with tags.
+                          description: (String)
                           type: string
                         untagged:
-                          description: If enabled, rules apply to untagged Docker
-                            images.
+                          description: (Boolean)
                           type: boolean
                       type: object
                     type: array
                   status:
-                    description: The status of lifecycle policy. Must be active or
-                      disabled.
+                    description: (String)
                     type: string
                 type: object
               managementPolicies:
@@ -494,48 +482,43 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: Creation timestamp of the instance.
+                    description: (String)
                     type: string
                   description:
-                    description: Description of the lifecycle policy.
+                    description: (String)
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   name:
-                    description: Lifecycle policy name.
+                    description: (String)
                     type: string
                   repositoryId:
-                    description: The ID of the repository that the resource belongs
-                      to.
+                    description: (String)
                     type: string
                   rule:
+                    description: (Block List) (see below for nested schema)
                     items:
                       properties:
                         description:
-                          description: Description of the lifecycle policy.
+                          description: (String)
                           type: string
                         expirePeriod:
-                          description: The period of time that must pass after creating
-                            a image for it to suit the automatic deletion criteria.
-                            It must be a multiple of 24 hours.
+                          description: (String)
                           type: string
                         retainedTop:
-                          description: The number of images to be retained even if
-                            the expire_period already expired.
+                          description: (Number)
                           type: number
                         tagRegexp:
-                          description: Tag to specify a filter as a regular expression.
-                            For example .* - all images with tags.
+                          description: (String)
                           type: string
                         untagged:
-                          description: If enabled, rules apply to untagged Docker
-                            images.
+                          description: (Boolean)
                           type: boolean
                       type: object
                     type: array
                   status:
-                    description: The status of lifecycle policy. Must be active or
-                      disabled.
+                    description: (String)
                     type: string
                 type: object
               conditions:

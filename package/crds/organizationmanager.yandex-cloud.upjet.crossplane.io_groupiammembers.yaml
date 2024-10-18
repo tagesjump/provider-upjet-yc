@@ -152,9 +152,9 @@ spec:
                         type: object
                     type: object
                   member:
-                    description: |-
-                      The identity that will be granted the privilege that is specified in the role field.
-                      This field can have one of the following values:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
                   role:
                     description: The role that should be assigned.
@@ -253,9 +253,9 @@ spec:
                         type: object
                     type: object
                   member:
-                    description: |-
-                      The identity that will be granted the privilege that is specified in the role field.
-                      This field can have one of the following values:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
                   role:
                     description: The role that should be assigned.
@@ -450,9 +450,9 @@ spec:
                   id:
                     type: string
                   member:
-                    description: |-
-                      The identity that will be granted the privilege that is specified in the role field.
-                      This field can have one of the following values:
+                    description: 'The identity that will be granted the privilege
+                      that is specified in the role field. This field can have one
+                      of the following values:'
                     type: string
                   role:
                     description: The role that should be assigned.

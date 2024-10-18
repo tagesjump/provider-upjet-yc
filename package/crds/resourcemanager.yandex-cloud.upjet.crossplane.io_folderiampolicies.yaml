@@ -151,9 +151,9 @@ spec:
                         type: object
                     type: object
                   policyData:
-                    description: |-
-                      The yandex_iam_policy data source that represents
-                      the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
+                    description: The yandex_iam_policy data source that represents
+                      the IAM policy that will be applied to the folder. This policy
+                      overrides any existing policy applied to the folder.
                     type: string
                 type: object
               initProvider:
@@ -247,9 +247,9 @@ spec:
                         type: object
                     type: object
                   policyData:
-                    description: |-
-                      The yandex_iam_policy data source that represents
-                      the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
+                    description: The yandex_iam_policy data source that represents
+                      the IAM policy that will be applied to the folder. This policy
+                      overrides any existing policy applied to the folder.
                     type: string
                 type: object
               managementPolicies:
@@ -435,9 +435,9 @@ spec:
                   id:
                     type: string
                   policyData:
-                    description: |-
-                      The yandex_iam_policy data source that represents
-                      the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
+                    description: The yandex_iam_policy data source that represents
+                      the IAM policy that will be applied to the folder. This policy
+                      overrides any existing policy applied to the folder.
                     type: string
                 type: object
               conditions:

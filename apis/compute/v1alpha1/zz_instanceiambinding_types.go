@@ -14,13 +14,11 @@ type InstanceIAMBindingInitParameters struct {
 	// ID of the instance to attach the policy to.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_instance_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_instance_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -30,13 +28,11 @@ type InstanceIAMBindingObservation struct {
 	// ID of the instance to attach the policy to.
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_instance_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_instance_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -46,14 +42,12 @@ type InstanceIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	InstanceID *string `json:"instanceId,omitempty" tf:"instance_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_instance_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_instance_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }

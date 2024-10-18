@@ -496,6 +496,22 @@ func (in *ComputeInstanceObservation) DeepCopyInto(out *ComputeInstanceObservati
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ComputedLabels != nil {
+		in, out := &in.ComputedLabels, &out.ComputedLabels
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.ComputedMetadata != nil {
 		in, out := &in.ComputedMetadata, &out.ComputedMetadata
 		*out = make(map[string]*string, len(*in))

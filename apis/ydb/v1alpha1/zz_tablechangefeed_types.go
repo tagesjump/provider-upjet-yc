@@ -10,6 +10,7 @@ import (
 )
 
 type ConsumerInitParameters struct {
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// : Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -23,6 +24,7 @@ type ConsumerInitParameters struct {
 }
 
 type ConsumerObservation struct {
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// : Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -36,6 +38,9 @@ type ConsumerObservation struct {
 }
 
 type ConsumerParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// : Changefeed name.
 	// +kubebuilder:validation:Optional

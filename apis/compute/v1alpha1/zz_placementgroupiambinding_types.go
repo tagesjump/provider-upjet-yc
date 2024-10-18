@@ -11,39 +11,34 @@ import (
 
 type PlacementGroupIAMBindingInitParameters struct {
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// ID of the placement group to attach the policy to.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_placement_group_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_placement_group_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type PlacementGroupIAMBindingObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
 	// ID of the placement group to attach the policy to.
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_placement_group_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_placement_group_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
 type PlacementGroupIAMBindingParameters struct {
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
@@ -52,8 +47,7 @@ type PlacementGroupIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	PlacementGroupID *string `json:"placementGroupId,omitempty" tf:"placement_group_id,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_placement_group_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_placement_group_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }

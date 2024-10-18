@@ -23,13 +23,11 @@ type FolderIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// An array of identities that will be granted the privilege that is specified in the role field.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege that is specified in the role field. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_resourcemanager_folder_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_resourcemanager_folder_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
@@ -42,13 +40,11 @@ type FolderIAMBindingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An array of identities that will be granted the privilege that is specified in the role field.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege that is specified in the role field. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_resourcemanager_folder_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_resourcemanager_folder_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
@@ -69,14 +65,12 @@ type FolderIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// An array of identities that will be granted the privilege that is specified in the role field.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege that is specified in the role field. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_resourcemanager_folder_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_resourcemanager_folder_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 

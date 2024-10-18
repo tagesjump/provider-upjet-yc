@@ -74,13 +74,11 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: |-
-                      An optional description of the HTTP Router. Provide this property when
-                      you create the resource.
+                    description: An optional description of the HTTP Router. Provide
+                      this property when you create the resource.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder to which the resource belongs.
+                    description: The ID of the folder to which the resource belongs.
                       If omitted, the provider folder is used.
                     type: string
                   folderIdRef:
@@ -235,13 +233,11 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: |-
-                      An optional description of the HTTP Router. Provide this property when
-                      you create the resource.
+                    description: An optional description of the HTTP Router. Provide
+                      this property when you create the resource.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder to which the resource belongs.
+                    description: The ID of the folder to which the resource belongs.
                       If omitted, the provider folder is used.
                     type: string
                   folderIdRef:
@@ -558,13 +554,11 @@ spec:
                     description: The HTTP Router creation timestamp.
                     type: string
                   description:
-                    description: |-
-                      An optional description of the HTTP Router. Provide this property when
-                      you create the resource.
+                    description: An optional description of the HTTP Router. Provide
+                      this property when you create the resource.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder to which the resource belongs.
+                    description: The ID of the folder to which the resource belongs.
                       If omitted, the provider folder is used.
                     type: string
                   id:

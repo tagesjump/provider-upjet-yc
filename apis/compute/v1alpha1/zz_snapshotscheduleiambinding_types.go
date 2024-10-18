@@ -11,13 +11,11 @@ import (
 
 type SnapshotScheduleIAMBindingInitParameters struct {
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_snapshot_schedule_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_snapshot_schedule_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// ID of the snapshot schedule to attach the policy to.
@@ -27,13 +25,11 @@ type SnapshotScheduleIAMBindingInitParameters struct {
 type SnapshotScheduleIAMBindingObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_snapshot_schedule_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_snapshot_schedule_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// ID of the snapshot schedule to attach the policy to.
@@ -42,14 +38,12 @@ type SnapshotScheduleIAMBindingObservation struct {
 
 type SnapshotScheduleIAMBindingParameters struct {
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_snapshot_schedule_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_snapshot_schedule_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 

@@ -383,8 +383,8 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Data Proc cluster.
@@ -906,8 +906,8 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Data Proc cluster.
@@ -1453,8 +1453,8 @@ spec:
                     description: (Computed) The Data Proc cluster creation timestamp.
                     type: string
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Data Proc cluster.

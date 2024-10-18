@@ -13,6 +13,7 @@ import (
 	gateway "github.com/tagesjump/provider-upjet-yc/internal/controller/api/gateway"
 	trailstrail "github.com/tagesjump/provider-upjet-yc/internal/controller/audit/trailstrail"
 	policy "github.com/tagesjump/provider-upjet-yc/internal/controller/backup/policy"
+	policybindings "github.com/tagesjump/provider-upjet-yc/internal/controller/backup/policybindings"
 	cloudbinding "github.com/tagesjump/provider-upjet-yc/internal/controller/billing/cloudbinding"
 	origingroup "github.com/tagesjump/provider-upjet-yc/internal/controller/cdn/origingroup"
 	resource "github.com/tagesjump/provider-upjet-yc/internal/controller/cdn/resource"
@@ -90,7 +91,6 @@ import (
 	mysqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqlcluster"
 	mysqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqldatabase"
 	mysqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/mysqluser"
-	opensearchcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/opensearchcluster"
 	postgresqlcluster "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqlcluster"
 	postgresqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqldatabase"
 	postgresqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/mdb/postgresqluser"
@@ -125,6 +125,7 @@ import (
 	defaultsecuritygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/defaultsecuritygroup"
 	gatewayvpc "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/gateway"
 	network "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/network"
+	privateendpoint "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/privateendpoint"
 	routetable "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/routetable"
 	securitygroup "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/securitygroup"
 	securitygrouprule "github.com/tagesjump/provider-upjet-yc/internal/controller/vpc/securitygrouprule"
@@ -151,6 +152,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		gateway.Setup,
 		trailstrail.Setup,
 		policy.Setup,
+		policybindings.Setup,
 		cloudbinding.Setup,
 		origingroup.Setup,
 		resource.Setup,
@@ -228,7 +230,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		mysqlcluster.Setup,
 		mysqldatabase.Setup,
 		mysqluser.Setup,
-		opensearchcluster.Setup,
 		postgresqlcluster.Setup,
 		postgresqldatabase.Setup,
 		postgresqluser.Setup,
@@ -263,6 +264,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		defaultsecuritygroup.Setup,
 		gatewayvpc.Setup,
 		network.Setup,
+		privateendpoint.Setup,
 		routetable.Setup,
 		securitygroup.Setup,
 		securitygrouprule.Setup,

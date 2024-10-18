@@ -69,31 +69,80 @@ type AnyFiltersParameters struct {
 
 type CategoriesInitParameters struct {
 
-	// Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE
+	// Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE.
 	Plane *string `json:"plane,omitempty" tf:"plane,omitempty"`
 
-	// Type of the event by its operation effect on the resource. Possible values: READ/WRITE
+	// Type of the event by its operation effect on the resource. Possible values: READ/WRITE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CategoriesObservation struct {
 
-	// Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE
+	// Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE.
 	Plane *string `json:"plane,omitempty" tf:"plane,omitempty"`
 
-	// Type of the event by its operation effect on the resource. Possible values: READ/WRITE
+	// Type of the event by its operation effect on the resource. Possible values: READ/WRITE.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CategoriesParameters struct {
 
-	// Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE
+	// Type of the event by its relation to the cloud resource model. Possible values: CONTROL_PLANE/DATA_PLANE.
 	// +kubebuilder:validation:Optional
 	Plane *string `json:"plane" tf:"plane,omitempty"`
 
-	// Type of the event by its operation effect on the resource. Possible values: READ/WRITE
+	// Type of the event by its operation effect on the resource. Possible values: READ/WRITE.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type DataEventsFilterInitParameters struct {
+
+	// A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with included_events.
+	ExcludedEvents []*string `json:"excludedEvents,omitempty" tf:"excluded_events,omitempty"`
+
+	// A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with excluded_events.
+	IncludedEvents []*string `json:"includedEvents,omitempty" tf:"included_events,omitempty"`
+
+	// Structure describing that events will be gathered from the specified resource.
+	ResourceScope []ResourceScopeInitParameters `json:"resourceScope,omitempty" tf:"resource_scope,omitempty"`
+
+	// ID of the service which events will be gathered.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+}
+
+type DataEventsFilterObservation struct {
+
+	// A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with included_events.
+	ExcludedEvents []*string `json:"excludedEvents,omitempty" tf:"excluded_events,omitempty"`
+
+	// A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with excluded_events.
+	IncludedEvents []*string `json:"includedEvents,omitempty" tf:"included_events,omitempty"`
+
+	// Structure describing that events will be gathered from the specified resource.
+	ResourceScope []ResourceScopeObservation `json:"resourceScope,omitempty" tf:"resource_scope,omitempty"`
+
+	// ID of the service which events will be gathered.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+}
+
+type DataEventsFilterParameters struct {
+
+	// A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with included_events.
+	// +kubebuilder:validation:Optional
+	ExcludedEvents []*string `json:"excludedEvents,omitempty" tf:"excluded_events,omitempty"`
+
+	// A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with excluded_events.
+	// +kubebuilder:validation:Optional
+	IncludedEvents []*string `json:"includedEvents,omitempty" tf:"included_events,omitempty"`
+
+	// Structure describing that events will be gathered from the specified resource.
+	// +kubebuilder:validation:Optional
+	ResourceScope []ResourceScopeParameters `json:"resourceScope" tf:"resource_scope,omitempty"`
+
+	// ID of the service which events will be gathered.
+	// +kubebuilder:validation:Optional
+	Service *string `json:"service" tf:"service,omitempty"`
 }
 
 type DataStreamDestinationInitParameters struct {
@@ -127,68 +176,68 @@ type DataStreamDestinationParameters struct {
 
 type EventFiltersInitParameters struct {
 
-	// List of structures describing categories of gathered data plane events
+	// blocks. With the introduction of included_events/excluded_events you can configure filtering per each event type.
 	Categories []CategoriesInitParameters `json:"categories,omitempty" tf:"categories,omitempty"`
 
-	// Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category
+	// with the appropriate resource_scope blocks. You have to account that resource_scope does not support specifying relations between resources, so your configuration will simplify to only the actual resources, that will be monitored.
 	PathFilter []PathFilterInitParameters `json:"pathFilter,omitempty" tf:"path_filter,omitempty"`
 
-	// ID of the service which events will be gathered
+	// ID of the service which events will be gathered.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type EventFiltersObservation struct {
 
-	// List of structures describing categories of gathered data plane events
+	// blocks. With the introduction of included_events/excluded_events you can configure filtering per each event type.
 	Categories []CategoriesObservation `json:"categories,omitempty" tf:"categories,omitempty"`
 
-	// Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category
+	// with the appropriate resource_scope blocks. You have to account that resource_scope does not support specifying relations between resources, so your configuration will simplify to only the actual resources, that will be monitored.
 	PathFilter []PathFilterObservation `json:"pathFilter,omitempty" tf:"path_filter,omitempty"`
 
-	// ID of the service which events will be gathered
+	// ID of the service which events will be gathered.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
 type EventFiltersParameters struct {
 
-	// List of structures describing categories of gathered data plane events
+	// blocks. With the introduction of included_events/excluded_events you can configure filtering per each event type.
 	// +kubebuilder:validation:Optional
 	Categories []CategoriesParameters `json:"categories" tf:"categories,omitempty"`
 
-	// Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category
+	// with the appropriate resource_scope blocks. You have to account that resource_scope does not support specifying relations between resources, so your configuration will simplify to only the actual resources, that will be monitored.
 	// +kubebuilder:validation:Optional
 	PathFilter []PathFilterParameters `json:"pathFilter" tf:"path_filter,omitempty"`
 
-	// ID of the service which events will be gathered
+	// ID of the service which events will be gathered.
 	// +kubebuilder:validation:Optional
 	Service *string `json:"service" tf:"service,omitempty"`
 }
 
 type FilterInitParameters struct {
 
-	// Structure describing filtering process for the service-specific data plane events
+	// Structure describing filtering process for the service-specific data plane events.
 	EventFilters []EventFiltersInitParameters `json:"eventFilters,omitempty" tf:"event_filters,omitempty"`
 
-	// Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category
+	// block with the filtering_policy.management_events_filter. New API states management events filtration in a more clear way. The resources, that were specified, must migrate into the filtering_policy.management_events_filter.resource_scope
 	PathFilter []FilterPathFilterInitParameters `json:"pathFilter,omitempty" tf:"path_filter,omitempty"`
 }
 
 type FilterObservation struct {
 
-	// Structure describing filtering process for the service-specific data plane events
+	// Structure describing filtering process for the service-specific data plane events.
 	EventFilters []EventFiltersObservation `json:"eventFilters,omitempty" tf:"event_filters,omitempty"`
 
-	// Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category
+	// block with the filtering_policy.management_events_filter. New API states management events filtration in a more clear way. The resources, that were specified, must migrate into the filtering_policy.management_events_filter.resource_scope
 	PathFilter []FilterPathFilterObservation `json:"pathFilter,omitempty" tf:"path_filter,omitempty"`
 }
 
 type FilterParameters struct {
 
-	// Structure describing filtering process for the service-specific data plane events
+	// Structure describing filtering process for the service-specific data plane events.
 	// +kubebuilder:validation:Optional
 	EventFilters []EventFiltersParameters `json:"eventFilters,omitempty" tf:"event_filters,omitempty"`
 
-	// Structure describing filtering process for default control plane events. If omitted, the trail will not deliver this category
+	// block with the filtering_policy.management_events_filter. New API states management events filtration in a more clear way. The resources, that were specified, must migrate into the filtering_policy.management_events_filter.resource_scope
 	// +kubebuilder:validation:Optional
 	PathFilter []FilterPathFilterParameters `json:"pathFilter,omitempty" tf:"path_filter,omitempty"`
 }
@@ -222,23 +271,100 @@ type FilterPathFilterParameters struct {
 	SomeFilter []PathFilterSomeFilterParameters `json:"someFilter,omitempty" tf:"some_filter,omitempty"`
 }
 
+type FilteringPolicyInitParameters struct {
+
+	// Structure describing filtering process for the service-specific data events.
+	DataEventsFilter []DataEventsFilterInitParameters `json:"dataEventsFilter,omitempty" tf:"data_events_filter,omitempty"`
+
+	// Structure describing filtering process for management events.
+	ManagementEventsFilter []ManagementEventsFilterInitParameters `json:"managementEventsFilter,omitempty" tf:"management_events_filter,omitempty"`
+}
+
+type FilteringPolicyObservation struct {
+
+	// Structure describing filtering process for the service-specific data events.
+	DataEventsFilter []DataEventsFilterObservation `json:"dataEventsFilter,omitempty" tf:"data_events_filter,omitempty"`
+
+	// Structure describing filtering process for management events.
+	ManagementEventsFilter []ManagementEventsFilterObservation `json:"managementEventsFilter,omitempty" tf:"management_events_filter,omitempty"`
+}
+
+type FilteringPolicyParameters struct {
+
+	// Structure describing filtering process for the service-specific data events.
+	// +kubebuilder:validation:Optional
+	DataEventsFilter []DataEventsFilterParameters `json:"dataEventsFilter,omitempty" tf:"data_events_filter,omitempty"`
+
+	// Structure describing filtering process for management events.
+	// +kubebuilder:validation:Optional
+	ManagementEventsFilter []ManagementEventsFilterParameters `json:"managementEventsFilter,omitempty" tf:"management_events_filter,omitempty"`
+}
+
 type LoggingDestinationInitParameters struct {
 
-	// ID of the destination Cloud Logging Group
+	// ID of the destination Cloud Logging Group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 }
 
 type LoggingDestinationObservation struct {
 
-	// ID of the destination Cloud Logging Group
+	// ID of the destination Cloud Logging Group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 }
 
 type LoggingDestinationParameters struct {
 
-	// ID of the destination Cloud Logging Group
+	// ID of the destination Cloud Logging Group.
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId" tf:"log_group_id,omitempty"`
+}
+
+type ManagementEventsFilterInitParameters struct {
+
+	// Structure describing that events will be gathered from the specified resource.
+	ResourceScope []ManagementEventsFilterResourceScopeInitParameters `json:"resourceScope,omitempty" tf:"resource_scope,omitempty"`
+}
+
+type ManagementEventsFilterObservation struct {
+
+	// Structure describing that events will be gathered from the specified resource.
+	ResourceScope []ManagementEventsFilterResourceScopeObservation `json:"resourceScope,omitempty" tf:"resource_scope,omitempty"`
+}
+
+type ManagementEventsFilterParameters struct {
+
+	// Structure describing that events will be gathered from the specified resource.
+	// +kubebuilder:validation:Optional
+	ResourceScope []ManagementEventsFilterResourceScopeParameters `json:"resourceScope" tf:"resource_scope,omitempty"`
+}
+
+type ManagementEventsFilterResourceScopeInitParameters struct {
+
+	// ID of the parent resource.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Resource type of the parent resource.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type ManagementEventsFilterResourceScopeObservation struct {
+
+	// ID of the parent resource.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Resource type of the parent resource.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type ManagementEventsFilterResourceScopeParameters struct {
+
+	// ID of the parent resource.
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+
+	// Resource type of the parent resource.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
 }
 
 type PathFilterAnyFilterInitParameters struct {
@@ -301,7 +427,7 @@ type PathFilterParameters struct {
 
 type PathFilterSomeFilterInitParameters struct {
 
-	// List of child resources from which events will be gathered
+	// List of child resources from which events will be gathered.
 	AnyFilters []SomeFilterAnyFiltersInitParameters `json:"anyFilters,omitempty" tf:"any_filters,omitempty"`
 
 	// ID of the parent resource.
@@ -313,7 +439,7 @@ type PathFilterSomeFilterInitParameters struct {
 
 type PathFilterSomeFilterObservation struct {
 
-	// List of child resources from which events will be gathered
+	// List of child resources from which events will be gathered.
 	AnyFilters []SomeFilterAnyFiltersObservation `json:"anyFilters,omitempty" tf:"any_filters,omitempty"`
 
 	// ID of the parent resource.
@@ -325,9 +451,38 @@ type PathFilterSomeFilterObservation struct {
 
 type PathFilterSomeFilterParameters struct {
 
-	// List of child resources from which events will be gathered
+	// List of child resources from which events will be gathered.
 	// +kubebuilder:validation:Optional
 	AnyFilters []SomeFilterAnyFiltersParameters `json:"anyFilters" tf:"any_filters,omitempty"`
+
+	// ID of the parent resource.
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+
+	// Resource type of the parent resource.
+	// +kubebuilder:validation:Optional
+	ResourceType *string `json:"resourceType" tf:"resource_type,omitempty"`
+}
+
+type ResourceScopeInitParameters struct {
+
+	// ID of the parent resource.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Resource type of the parent resource.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type ResourceScopeObservation struct {
+
+	// ID of the parent resource.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Resource type of the parent resource.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+}
+
+type ResourceScopeParameters struct {
 
 	// ID of the parent resource.
 	// +kubebuilder:validation:Optional
@@ -369,7 +524,7 @@ type SomeFilterAnyFiltersParameters struct {
 
 type SomeFilterInitParameters struct {
 
-	// List of child resources from which events will be gathered
+	// List of child resources from which events will be gathered.
 	AnyFilters []AnyFiltersInitParameters `json:"anyFilters,omitempty" tf:"any_filters,omitempty"`
 
 	// ID of the parent resource.
@@ -381,7 +536,7 @@ type SomeFilterInitParameters struct {
 
 type SomeFilterObservation struct {
 
-	// List of child resources from which events will be gathered
+	// List of child resources from which events will be gathered.
 	AnyFilters []AnyFiltersObservation `json:"anyFilters,omitempty" tf:"any_filters,omitempty"`
 
 	// ID of the parent resource.
@@ -393,7 +548,7 @@ type SomeFilterObservation struct {
 
 type SomeFilterParameters struct {
 
-	// List of child resources from which events will be gathered
+	// List of child resources from which events will be gathered.
 	// +kubebuilder:validation:Optional
 	AnyFilters []AnyFiltersParameters `json:"anyFilters" tf:"any_filters,omitempty"`
 
@@ -408,29 +563,29 @@ type SomeFilterParameters struct {
 
 type StorageDestinationInitParameters struct {
 
-	// Name of the destination bucket
+	// Name of the destination bucket.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id
+	// Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id.
 	ObjectPrefix *string `json:"objectPrefix,omitempty" tf:"object_prefix,omitempty"`
 }
 
 type StorageDestinationObservation struct {
 
-	// Name of the destination bucket
+	// Name of the destination bucket.
 	BucketName *string `json:"bucketName,omitempty" tf:"bucket_name,omitempty"`
 
-	// Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id
+	// Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id.
 	ObjectPrefix *string `json:"objectPrefix,omitempty" tf:"object_prefix,omitempty"`
 }
 
 type StorageDestinationParameters struct {
 
-	// Name of the destination bucket
+	// Name of the destination bucket.
 	// +kubebuilder:validation:Optional
 	BucketName *string `json:"bucketName" tf:"bucket_name,omitempty"`
 
-	// Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id
+	// Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id.
 	// +kubebuilder:validation:Optional
 	ObjectPrefix *string `json:"objectPrefix,omitempty" tf:"object_prefix,omitempty"`
 }
@@ -445,6 +600,9 @@ type TrailsTrailInitParameters struct {
 
 	// Structure describing event filtering process for the trail.
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Structure describing event filtering process for the trail. Mutually exclusive with filter. At least one of the management_events_filter or data_events_filter fields will be filled.
+	FilteringPolicy []FilteringPolicyInitParameters `json:"filteringPolicy,omitempty" tf:"filtering_policy,omitempty"`
 
 	// ID of the folder to which the trail belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
@@ -485,6 +643,9 @@ type TrailsTrailObservation struct {
 
 	// Structure describing event filtering process for the trail.
 	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Structure describing event filtering process for the trail. Mutually exclusive with filter. At least one of the management_events_filter or data_events_filter fields will be filled.
+	FilteringPolicy []FilteringPolicyObservation `json:"filteringPolicy,omitempty" tf:"filtering_policy,omitempty"`
 
 	// ID of the folder to which the trail belongs.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -527,6 +688,10 @@ type TrailsTrailParameters struct {
 	// Structure describing event filtering process for the trail.
 	// +kubebuilder:validation:Optional
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Structure describing event filtering process for the trail. Mutually exclusive with filter. At least one of the management_events_filter or data_events_filter fields will be filled.
+	// +kubebuilder:validation:Optional
+	FilteringPolicy []FilteringPolicyParameters `json:"filteringPolicy,omitempty" tf:"filtering_policy,omitempty"`
 
 	// ID of the folder to which the trail belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
@@ -599,7 +764,6 @@ type TrailsTrailStatus struct {
 type TrailsTrail struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filter) || (has(self.initProvider) && has(self.initProvider.filter))",message="spec.forProvider.filter is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceAccountId) || (has(self.initProvider) && has(self.initProvider.serviceAccountId))",message="spec.forProvider.serviceAccountId is a required parameter"
 	Spec   TrailsTrailSpec   `json:"spec"`

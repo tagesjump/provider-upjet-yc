@@ -28,7 +28,9 @@ spec:
         enabled: true
         eventsEnabled: true
         kubeApiserverEnabled: true
-        logGroupId: ${yandex_logging_group.log_group_resoruce_name.id}
+        logGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: log_group_resoruce_name
       publicIp: true
       securityGroupIdsRefs:
       - name: security_group_name
@@ -37,7 +39,9 @@ spec:
       - subnetIdSelector:
           matchLabels:
             testing.upbound.io/example-name: subnet_resource_name
-        zone: ru-central1-a
+        zoneSelector:
+          matchLabels:
+            testing.upbound.io/example-name: subnet_resource_name
     name: name
     networkIdSelector:
       matchLabels:

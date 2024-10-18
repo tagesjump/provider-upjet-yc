@@ -34,8 +34,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SecurityProfile is the Schema for the SecurityProfiles API. <no
-          value>
+        description: SecurityProfile is the Schema for the SecurityProfiles API. With
+          security profiles you can protect your infrastructure from DDoS attacks
+          at the application level (L7).
         properties:
           apiVersion:
             description: |-
@@ -73,15 +74,27 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  advancedRateLimiterProfileId:
+                    description: Advanced rate limiter profile ID to use with this
+                      security profile. Set empty to use default.
+                    type: string
                   captchaId:
+                    description: Captcha ID to use with this security profile. Set
+                      empty to use default.
                     type: string
                   cloudId:
+                    description: ID of the security profile.
                     type: string
                   defaultAction:
+                    description: 'Action to perform if none of rules matched. Possible
+                      values: ALLOW or DENY.'
                     type: string
                   description:
+                    description: Optional description of the security profile.
                     type: string
                   folderId:
+                    description: ID of the folder to create a profile in. If omitted,
+                      the provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -162,27 +175,47 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
+                    description: Labels as key:value pairs. Maximum of 64 per resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: Name of the security profile. The name is unique
+                      within the folder. 1-50 characters long.
                     type: string
                   securityRule:
+                    description: List of security rules. The structure is documented
+                      below.
                     items:
                       properties:
                         description:
+                          description: Optional description of the rule. 0-512 characters
+                            long.
                           type: string
                         dryRun:
+                          description: This mode allows you to test your security
+                            profile or a single rule.
                           type: boolean
                         name:
+                          description: Name of the rule. The name is unique within
+                            the security profile. 1-50 characters long.
                           type: string
                         priority:
+                          description: Determines the priority for checking the incoming
+                            traffic.
                           type: number
                         ruleCondition:
+                          description: Rule actions, see Rule actions. The structure
+                            is documented below.
                           items:
                             properties:
                               action:
+                                description: 'Action to perform if this rule matched.
+                                  Possible values: ALLOW or DENY.'
                                 type: string
                               condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
                                 items:
                                   properties:
                                     authority:
@@ -211,6 +244,9 @@ spec:
                                       items:
                                         properties:
                                           name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
                                             type: string
                                           value:
                                             items:
@@ -345,9 +381,14 @@ spec:
                             type: object
                           type: array
                         smartProtection:
+                          description: Smart Protection rule, see Smart Protection
+                            rules. The structure is documented below.
                           items:
                             properties:
                               condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
                                 items:
                                   properties:
                                     authority:
@@ -376,6 +417,9 @@ spec:
                                       items:
                                         properties:
                                           name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
                                             type: string
                                           value:
                                             items:
@@ -508,6 +552,200 @@ spec:
                                   type: object
                                 type: array
                               mode:
+                                description: 'Mode of protection. Possible values:
+                                  FULL (full protection means that the traffic will
+                                  be checked based on ML models and behavioral analysis,
+                                  with suspicious requests being sent to SmartCaptcha)
+                                  or API (API protection means checking the traffic
+                                  based on ML models and behavioral analysis without
+                                  sending suspicious requests to SmartCaptcha. The
+                                  suspicious requests will be blocked).'
+                                type: string
+                            type: object
+                          type: array
+                        waf:
+                          description: Web Application Firewall (WAF) rule, see WAF
+                            rules. The structure is documented below.
+                          items:
+                            properties:
+                              condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
+                                items:
+                                  properties:
+                                    authority:
+                                      items:
+                                        properties:
+                                          authorities:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    headers:
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
+                                            type: string
+                                          value:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    httpMethod:
+                                      items:
+                                        properties:
+                                          httpMethods:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    requestUri:
+                                      items:
+                                        properties:
+                                          path:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          queries:
+                                            items:
+                                              properties:
+                                                key:
+                                                  type: string
+                                                value:
+                                                  items:
+                                                    properties:
+                                                      exactMatch:
+                                                        type: string
+                                                      exactNotMatch:
+                                                        type: string
+                                                      pireRegexMatch:
+                                                        type: string
+                                                      pireRegexNotMatch:
+                                                        type: string
+                                                      prefixMatch:
+                                                        type: string
+                                                      prefixNotMatch:
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    sourceIp:
+                                      items:
+                                        properties:
+                                          geoIpMatch:
+                                            items:
+                                              properties:
+                                                locations:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          geoIpNotMatch:
+                                            items:
+                                              properties:
+                                                locations:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesMatch:
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesNotMatch:
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              mode:
+                                description: 'Mode of protection. Possible values:
+                                  FULL (full protection means that the traffic will
+                                  be checked based on ML models and behavioral analysis,
+                                  with suspicious requests being sent to SmartCaptcha)
+                                  or API (API protection means checking the traffic
+                                  based on ML models and behavioral analysis without
+                                  sending suspicious requests to SmartCaptcha. The
+                                  suspicious requests will be blocked).'
+                                type: string
+                              wafProfileId:
+                                description: ID of WAF profile to use in this rule.
                                 type: string
                             type: object
                           type: array
@@ -527,15 +765,27 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  advancedRateLimiterProfileId:
+                    description: Advanced rate limiter profile ID to use with this
+                      security profile. Set empty to use default.
+                    type: string
                   captchaId:
+                    description: Captcha ID to use with this security profile. Set
+                      empty to use default.
                     type: string
                   cloudId:
+                    description: ID of the security profile.
                     type: string
                   defaultAction:
+                    description: 'Action to perform if none of rules matched. Possible
+                      values: ALLOW or DENY.'
                     type: string
                   description:
+                    description: Optional description of the security profile.
                     type: string
                   folderId:
+                    description: ID of the folder to create a profile in. If omitted,
+                      the provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -616,27 +866,47 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
+                    description: Labels as key:value pairs. Maximum of 64 per resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: Name of the security profile. The name is unique
+                      within the folder. 1-50 characters long.
                     type: string
                   securityRule:
+                    description: List of security rules. The structure is documented
+                      below.
                     items:
                       properties:
                         description:
+                          description: Optional description of the rule. 0-512 characters
+                            long.
                           type: string
                         dryRun:
+                          description: This mode allows you to test your security
+                            profile or a single rule.
                           type: boolean
                         name:
+                          description: Name of the rule. The name is unique within
+                            the security profile. 1-50 characters long.
                           type: string
                         priority:
+                          description: Determines the priority for checking the incoming
+                            traffic.
                           type: number
                         ruleCondition:
+                          description: Rule actions, see Rule actions. The structure
+                            is documented below.
                           items:
                             properties:
                               action:
+                                description: 'Action to perform if this rule matched.
+                                  Possible values: ALLOW or DENY.'
                                 type: string
                               condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
                                 items:
                                   properties:
                                     authority:
@@ -665,6 +935,9 @@ spec:
                                       items:
                                         properties:
                                           name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
                                             type: string
                                           value:
                                             items:
@@ -799,9 +1072,14 @@ spec:
                             type: object
                           type: array
                         smartProtection:
+                          description: Smart Protection rule, see Smart Protection
+                            rules. The structure is documented below.
                           items:
                             properties:
                               condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
                                 items:
                                   properties:
                                     authority:
@@ -830,6 +1108,9 @@ spec:
                                       items:
                                         properties:
                                           name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
                                             type: string
                                           value:
                                             items:
@@ -962,6 +1243,200 @@ spec:
                                   type: object
                                 type: array
                               mode:
+                                description: 'Mode of protection. Possible values:
+                                  FULL (full protection means that the traffic will
+                                  be checked based on ML models and behavioral analysis,
+                                  with suspicious requests being sent to SmartCaptcha)
+                                  or API (API protection means checking the traffic
+                                  based on ML models and behavioral analysis without
+                                  sending suspicious requests to SmartCaptcha. The
+                                  suspicious requests will be blocked).'
+                                type: string
+                            type: object
+                          type: array
+                        waf:
+                          description: Web Application Firewall (WAF) rule, see WAF
+                            rules. The structure is documented below.
+                          items:
+                            properties:
+                              condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
+                                items:
+                                  properties:
+                                    authority:
+                                      items:
+                                        properties:
+                                          authorities:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    headers:
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
+                                            type: string
+                                          value:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    httpMethod:
+                                      items:
+                                        properties:
+                                          httpMethods:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    requestUri:
+                                      items:
+                                        properties:
+                                          path:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          queries:
+                                            items:
+                                              properties:
+                                                key:
+                                                  type: string
+                                                value:
+                                                  items:
+                                                    properties:
+                                                      exactMatch:
+                                                        type: string
+                                                      exactNotMatch:
+                                                        type: string
+                                                      pireRegexMatch:
+                                                        type: string
+                                                      pireRegexNotMatch:
+                                                        type: string
+                                                      prefixMatch:
+                                                        type: string
+                                                      prefixNotMatch:
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    sourceIp:
+                                      items:
+                                        properties:
+                                          geoIpMatch:
+                                            items:
+                                              properties:
+                                                locations:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          geoIpNotMatch:
+                                            items:
+                                              properties:
+                                                locations:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesMatch:
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesNotMatch:
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              mode:
+                                description: 'Mode of protection. Possible values:
+                                  FULL (full protection means that the traffic will
+                                  be checked based on ML models and behavioral analysis,
+                                  with suspicious requests being sent to SmartCaptcha)
+                                  or API (API protection means checking the traffic
+                                  based on ML models and behavioral analysis without
+                                  sending suspicious requests to SmartCaptcha. The
+                                  suspicious requests will be blocked).'
+                                type: string
+                              wafProfileId:
+                                description: ID of WAF profile to use in this rule.
                                 type: string
                             type: object
                           type: array
@@ -1140,44 +1615,78 @@ spec:
             properties:
               atProvider:
                 properties:
+                  advancedRateLimiterProfileId:
+                    description: Advanced rate limiter profile ID to use with this
+                      security profile. Set empty to use default.
+                    type: string
                   captchaId:
+                    description: Captcha ID to use with this security profile. Set
+                      empty to use default.
                     type: string
                   cloudId:
+                    description: ID of the security profile.
                     type: string
                   createdAt:
+                    description: The Security Profile creation timestamp.
                     type: string
                   defaultAction:
+                    description: 'Action to perform if none of rules matched. Possible
+                      values: ALLOW or DENY.'
                     type: string
                   description:
+                    description: Optional description of the security profile.
                     type: string
                   folderId:
+                    description: ID of the folder to create a profile in. If omitted,
+                      the provider folder is used.
                     type: string
                   id:
+                    description: ID of the security profile.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
+                    description: Labels as key:value pairs. Maximum of 64 per resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: Name of the security profile. The name is unique
+                      within the folder. 1-50 characters long.
                     type: string
                   securityRule:
+                    description: List of security rules. The structure is documented
+                      below.
                     items:
                       properties:
                         description:
+                          description: Optional description of the rule. 0-512 characters
+                            long.
                           type: string
                         dryRun:
+                          description: This mode allows you to test your security
+                            profile or a single rule.
                           type: boolean
                         name:
+                          description: Name of the rule. The name is unique within
+                            the security profile. 1-50 characters long.
                           type: string
                         priority:
+                          description: Determines the priority for checking the incoming
+                            traffic.
                           type: number
                         ruleCondition:
+                          description: Rule actions, see Rule actions. The structure
+                            is documented below.
                           items:
                             properties:
                               action:
+                                description: 'Action to perform if this rule matched.
+                                  Possible values: ALLOW or DENY.'
                                 type: string
                               condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
                                 items:
                                   properties:
                                     authority:
@@ -1206,6 +1715,9 @@ spec:
                                       items:
                                         properties:
                                           name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
                                             type: string
                                           value:
                                             items:
@@ -1340,9 +1852,14 @@ spec:
                             type: object
                           type: array
                         smartProtection:
+                          description: Smart Protection rule, see Smart Protection
+                            rules. The structure is documented below.
                           items:
                             properties:
                               condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
                                 items:
                                   properties:
                                     authority:
@@ -1371,6 +1888,9 @@ spec:
                                       items:
                                         properties:
                                           name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
                                             type: string
                                           value:
                                             items:
@@ -1503,6 +2023,200 @@ spec:
                                   type: object
                                 type: array
                               mode:
+                                description: 'Mode of protection. Possible values:
+                                  FULL (full protection means that the traffic will
+                                  be checked based on ML models and behavioral analysis,
+                                  with suspicious requests being sent to SmartCaptcha)
+                                  or API (API protection means checking the traffic
+                                  based on ML models and behavioral analysis without
+                                  sending suspicious requests to SmartCaptcha. The
+                                  suspicious requests will be blocked).'
+                                type: string
+                            type: object
+                          type: array
+                        waf:
+                          description: Web Application Firewall (WAF) rule, see WAF
+                            rules. The structure is documented below.
+                          items:
+                            properties:
+                              condition:
+                                description: The condition for matching the rule.
+                                  You can find all possibilities of condition in gRPC
+                                  specs.
+                                items:
+                                  properties:
+                                    authority:
+                                      items:
+                                        properties:
+                                          authorities:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    headers:
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Name of the rule. The name
+                                              is unique within the security profile.
+                                              1-50 characters long.
+                                            type: string
+                                          value:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    httpMethod:
+                                      items:
+                                        properties:
+                                          httpMethods:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    requestUri:
+                                      items:
+                                        properties:
+                                          path:
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  type: string
+                                                exactNotMatch:
+                                                  type: string
+                                                pireRegexMatch:
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  type: string
+                                                prefixMatch:
+                                                  type: string
+                                                prefixNotMatch:
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          queries:
+                                            items:
+                                              properties:
+                                                key:
+                                                  type: string
+                                                value:
+                                                  items:
+                                                    properties:
+                                                      exactMatch:
+                                                        type: string
+                                                      exactNotMatch:
+                                                        type: string
+                                                      pireRegexMatch:
+                                                        type: string
+                                                      pireRegexNotMatch:
+                                                        type: string
+                                                      prefixMatch:
+                                                        type: string
+                                                      prefixNotMatch:
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    sourceIp:
+                                      items:
+                                        properties:
+                                          geoIpMatch:
+                                            items:
+                                              properties:
+                                                locations:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          geoIpNotMatch:
+                                            items:
+                                              properties:
+                                                locations:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesMatch:
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesNotMatch:
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              mode:
+                                description: 'Mode of protection. Possible values:
+                                  FULL (full protection means that the traffic will
+                                  be checked based on ML models and behavioral analysis,
+                                  with suspicious requests being sent to SmartCaptcha)
+                                  or API (API protection means checking the traffic
+                                  based on ML models and behavioral analysis without
+                                  sending suspicious requests to SmartCaptcha. The
+                                  suspicious requests will be blocked).'
+                                type: string
+                              wafProfileId:
+                                description: ID of WAF profile to use in this rule.
                                 type: string
                             type: object
                           type: array

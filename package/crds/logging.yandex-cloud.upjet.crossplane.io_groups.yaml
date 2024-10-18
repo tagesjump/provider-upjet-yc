@@ -79,9 +79,9 @@ spec:
                     description: A description for the Yandex Cloud Logging group.
                     type: string
                   folderId:
-                    description: |-
-                      ID of the folder that the Yandex Cloud Logging group belongs to.
-                      It will be deduced from provider configuration if not set explicitly.
+                    description: ID of the folder that the Yandex Cloud Logging group
+                      belongs to. It will be deduced from provider configuration if
+                      not set explicitly.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -193,9 +193,9 @@ spec:
                     description: A description for the Yandex Cloud Logging group.
                     type: string
                   folderId:
-                    description: |-
-                      ID of the folder that the Yandex Cloud Logging group belongs to.
-                      It will be deduced from provider configuration if not set explicitly.
+                    description: ID of the folder that the Yandex Cloud Logging group
+                      belongs to. It will be deduced from provider configuration if
+                      not set explicitly.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -473,9 +473,9 @@ spec:
                     description: A description for the Yandex Cloud Logging group.
                     type: string
                   folderId:
-                    description: |-
-                      ID of the folder that the Yandex Cloud Logging group belongs to.
-                      It will be deduced from provider configuration if not set explicitly.
+                    description: ID of the folder that the Yandex Cloud Logging group
+                      belongs to. It will be deduced from provider configuration if
+                      not set explicitly.
                     type: string
                   id:
                     description: The Yandex Cloud Logging group ID.

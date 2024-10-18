@@ -14,8 +14,7 @@ type ServiceAccountInitParameters struct {
 	// Description of the service account.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
+	// ID of the folder that the service account will be created in. Defaults to the provider folder configuration.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -34,8 +33,7 @@ type ServiceAccountObservation struct {
 	// Description of the service account.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
+	// ID of the folder that the service account will be created in. Defaults to the provider folder configuration.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -47,8 +45,7 @@ type ServiceAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
+	// ID of the folder that the service account will be created in. Defaults to the provider folder configuration.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`

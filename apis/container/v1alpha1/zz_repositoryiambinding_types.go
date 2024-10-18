@@ -11,8 +11,7 @@ import (
 
 type RepositoryIAMBindingInitParameters struct {
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String)
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
@@ -20,7 +19,7 @@ type RepositoryIAMBindingInitParameters struct {
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The Yandex Container Repository ID to apply a binding to.
+	// (String)
 	// +crossplane:generate:reference:type=Repository
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
@@ -32,7 +31,7 @@ type RepositoryIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryIDSelector *v1.Selector `json:"repositoryIdSelector,omitempty" tf:"-"`
 
-	// The role that should be applied. See roles.
+	// (String)
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// References to ServiceAccount in iam to populate members.
@@ -43,30 +42,32 @@ type RepositoryIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
+	// (Number)
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type RepositoryIAMBindingObservation struct {
+
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String)
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The Yandex Container Repository ID to apply a binding to.
+	// (String)
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String)
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number)
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type RepositoryIAMBindingParameters struct {
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String)
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
@@ -75,7 +76,7 @@ type RepositoryIAMBindingParameters struct {
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The Yandex Container Repository ID to apply a binding to.
+	// (String)
 	// +crossplane:generate:reference:type=Repository
 	// +kubebuilder:validation:Optional
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
@@ -88,7 +89,7 @@ type RepositoryIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryIDSelector *v1.Selector `json:"repositoryIdSelector,omitempty" tf:"-"`
 
-	// The role that should be applied. See roles.
+	// (String)
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -100,6 +101,7 @@ type RepositoryIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
+	// (Number)
 	// +kubebuilder:validation:Optional
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
@@ -131,7 +133,7 @@ type RepositoryIAMBindingStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// RepositoryIAMBinding is the Schema for the RepositoryIAMBindings API. Allows management of a single IAM binding for a
+// RepositoryIAMBinding is the Schema for the RepositoryIAMBindings API.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

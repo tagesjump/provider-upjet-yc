@@ -74,13 +74,11 @@ type MySQLUserInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// User's connection limits. The structure is documented below.
-	// If the attribute is not specified there will be no changes.
+	// User's connection limits. The structure is documented below. If the attribute is not specified there will be no changes.
 	ConnectionLimits []MySQLUserConnectionLimitsInitParameters `json:"connectionLimits,omitempty" tf:"connection_limits,omitempty"`
 
 	// List user's global permissions
-	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
-	// If the attribute is not specified there will be no changes.
+	// Allowed permissions: REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list. If the attribute is not specified there will be no changes.
 	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
@@ -101,13 +99,11 @@ type MySQLUserObservation struct {
 
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// User's connection limits. The structure is documented below.
-	// If the attribute is not specified there will be no changes.
+	// User's connection limits. The structure is documented below. If the attribute is not specified there will be no changes.
 	ConnectionLimits []MySQLUserConnectionLimitsObservation `json:"connectionLimits,omitempty" tf:"connection_limits,omitempty"`
 
 	// List user's global permissions
-	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
-	// If the attribute is not specified there will be no changes.
+	// Allowed permissions: REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list. If the attribute is not specified there will be no changes.
 	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
 
@@ -138,14 +134,12 @@ type MySQLUserParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterIDSelector *v1.Selector `json:"clusterIdSelector,omitempty" tf:"-"`
 
-	// User's connection limits. The structure is documented below.
-	// If the attribute is not specified there will be no changes.
+	// User's connection limits. The structure is documented below. If the attribute is not specified there will be no changes.
 	// +kubebuilder:validation:Optional
 	ConnectionLimits []MySQLUserConnectionLimitsParameters `json:"connectionLimits,omitempty" tf:"connection_limits,omitempty"`
 
 	// List user's global permissions
-	// Allowed permissions:  REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list.
-	// If the attribute is not specified there will be no changes.
+	// Allowed permissions: REPLICATION_CLIENT, REPLICATION_SLAVE, PROCESS for clear list use empty list. If the attribute is not specified there will be no changes.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	GlobalPermissions []*string `json:"globalPermissions,omitempty" tf:"global_permissions,omitempty"`
@@ -178,9 +172,7 @@ type MySQLUserPermissionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// List user's roles in the database.
-	// Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
-	// CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
+	// List user's roles in the database. Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES, CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
@@ -189,9 +181,7 @@ type MySQLUserPermissionObservation struct {
 	// The name of the database that the permission grants access to.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// List user's roles in the database.
-	// Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
-	// CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
+	// List user's roles in the database. Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES, CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
@@ -211,9 +201,7 @@ type MySQLUserPermissionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// List user's roles in the database.
-	// Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES,
-	// CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
+	// List user's roles in the database. Allowed roles: ALL,ALTER,ALTER_ROUTINE,CREATE,CREATE_ROUTINE,CREATE_TEMPORARY_TABLES, CREATE_VIEW,DELETE,DROP,EVENT,EXECUTE,INDEX,INSERT,LOCK_TABLES,SELECT,SHOW_VIEW,TRIGGER,UPDATE.
 	// +kubebuilder:validation:Optional
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }

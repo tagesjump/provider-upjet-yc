@@ -79,17 +79,16 @@ spec:
                       to.
                     type: string
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_compute_disk_placement_group_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_compute_disk_placement_group_iam_binding
+                      can be used per role.
                     type: string
                 type: object
               initProvider:
@@ -110,17 +109,16 @@ spec:
                       to.
                     type: string
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_compute_disk_placement_group_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_compute_disk_placement_group_iam_binding
+                      can be used per role.
                     type: string
                 type: object
               managementPolicies:
@@ -316,17 +314,16 @@ spec:
                   id:
                     type: string
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_compute_disk_placement_group_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_compute_disk_placement_group_iam_binding
+                      can be used per role.
                     type: string
                 type: object
               conditions:

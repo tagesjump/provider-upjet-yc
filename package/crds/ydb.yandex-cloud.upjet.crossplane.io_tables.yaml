@@ -80,9 +80,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   column:
-                    description: |-
-                      A list of column configuration options.
-                      The structure is documented below.
+                    description: A list of column configuration options. The structure
+                      is documented below.
                     items:
                       properties:
                         family:
@@ -92,8 +91,8 @@ spec:
                           description: Column name
                           type: string
                         notNull:
-                          description: "A column cannot have the NULL data type. (\tDefault:
-                            false\t)"
+                          description: 'A column cannot have the NULL data type. (
+                            Default: false )'
                           type: boolean
                         type:
                           description: Column data type. YQL data types are used.
@@ -180,9 +179,8 @@ spec:
                         type: object
                     type: object
                   family:
-                    description: |-
-                      A list of column group configuration options.
-                      The structure is documented below.
+                    description: A list of column group configuration options. The
+                      structure is documented below.
                     items:
                       properties:
                         compression:
@@ -202,9 +200,8 @@ spec:
                     description: Use the Bloom filter for the primary key
                     type: boolean
                   partitioningSettings:
-                    description: |-
-                      Table partiotioning settings
-                      The structure is documented below.
+                    description: Table partiotioning settings The structure is documented
+                      below.
                     items:
                       properties:
                         autoPartitioningByLoad:
@@ -242,8 +239,7 @@ spec:
                     description: Read replication settings
                     type: string
                   ttl:
-                    description: "ttl\t\tTTL settings\nThe structure is documented
-                      below."
+                    description: ttl TTL settings The structure is documented below.
                     items:
                       properties:
                         columnName:
@@ -277,9 +273,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   column:
-                    description: |-
-                      A list of column configuration options.
-                      The structure is documented below.
+                    description: A list of column configuration options. The structure
+                      is documented below.
                     items:
                       properties:
                         family:
@@ -289,8 +284,8 @@ spec:
                           description: Column name
                           type: string
                         notNull:
-                          description: "A column cannot have the NULL data type. (\tDefault:
-                            false\t)"
+                          description: 'A column cannot have the NULL data type. (
+                            Default: false )'
                           type: boolean
                         type:
                           description: Column data type. YQL data types are used.
@@ -377,9 +372,8 @@ spec:
                         type: object
                     type: object
                   family:
-                    description: |-
-                      A list of column group configuration options.
-                      The structure is documented below.
+                    description: A list of column group configuration options. The
+                      structure is documented below.
                     items:
                       properties:
                         compression:
@@ -399,9 +393,8 @@ spec:
                     description: Use the Bloom filter for the primary key
                     type: boolean
                   partitioningSettings:
-                    description: |-
-                      Table partiotioning settings
-                      The structure is documented below.
+                    description: Table partiotioning settings The structure is documented
+                      below.
                     items:
                       properties:
                         autoPartitioningByLoad:
@@ -439,8 +432,7 @@ spec:
                     description: Read replication settings
                     type: string
                   ttl:
-                    description: "ttl\t\tTTL settings\nThe structure is documented
-                      below."
+                    description: ttl TTL settings The structure is documented below.
                     items:
                       properties:
                         columnName:
@@ -646,9 +638,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   column:
-                    description: |-
-                      A list of column configuration options.
-                      The structure is documented below.
+                    description: A list of column configuration options. The structure
+                      is documented below.
                     items:
                       properties:
                         family:
@@ -658,8 +649,8 @@ spec:
                           description: Column name
                           type: string
                         notNull:
-                          description: "A column cannot have the NULL data type. (\tDefault:
-                            false\t)"
+                          description: 'A column cannot have the NULL data type. (
+                            Default: false )'
                           type: boolean
                         type:
                           description: Column data type. YQL data types are used.
@@ -670,9 +661,8 @@ spec:
                     description: Connection string for database.
                     type: string
                   family:
-                    description: |-
-                      A list of column group configuration options.
-                      The structure is documented below.
+                    description: A list of column group configuration options. The
+                      structure is documented below.
                     items:
                       properties:
                         compression:
@@ -694,9 +684,8 @@ spec:
                     description: Use the Bloom filter for the primary key
                     type: boolean
                   partitioningSettings:
-                    description: |-
-                      Table partiotioning settings
-                      The structure is documented below.
+                    description: Table partiotioning settings The structure is documented
+                      below.
                     items:
                       properties:
                         autoPartitioningByLoad:
@@ -734,8 +723,7 @@ spec:
                     description: Read replication settings
                     type: string
                   ttl:
-                    description: "ttl\t\tTTL settings\nThe structure is documented
-                      below."
+                    description: ttl TTL settings The structure is documented below.
                     items:
                       properties:
                         columnName:

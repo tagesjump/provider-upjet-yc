@@ -203,9 +203,8 @@ spec:
                       this page.'
                     type: string
                   regionId:
-                    description: |-
-                      ID of the region where the message queue is located at.
-                      The default is 'ru-central1'.
+                    description: ID of the region where the message queue is located
+                      at. The default is 'ru-central1'.
                     type: string
                   secretKeySecretRef:
                     description: The secret key to use when applying changes. If omitted,
@@ -375,9 +374,8 @@ spec:
                       this page.'
                     type: string
                   regionId:
-                    description: |-
-                      ID of the region where the message queue is located at.
-                      The default is 'ru-central1'.
+                    description: ID of the region where the message queue is located
+                      at. The default is 'ru-central1'.
                     type: string
                   secretKeySecretRef:
                     description: The secret key to use when applying changes. If omitted,
@@ -637,9 +635,8 @@ spec:
                       this page.'
                     type: string
                   regionId:
-                    description: |-
-                      ID of the region where the message queue is located at.
-                      The default is 'ru-central1'.
+                    description: ID of the region where the message queue is located
+                      at. The default is 'ru-central1'.
                     type: string
                   visibilityTimeoutSeconds:
                     description: 'Visibility timeout for messages in a queue, specified

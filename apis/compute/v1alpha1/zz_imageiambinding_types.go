@@ -14,13 +14,11 @@ type ImageIAMBindingInitParameters struct {
 	// ID of the image to attach the policy to.
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_image_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -30,13 +28,11 @@ type ImageIAMBindingObservation struct {
 	// ID of the image to attach the policy to.
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_image_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }
 
@@ -46,14 +42,12 @@ type ImageIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_image_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 }

@@ -17,15 +17,13 @@ type AddressInitParameters struct {
 	// Flag that protects the address from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// An optional description of this resource. Provide this property when
-	// you create the resource.
+	// An optional description of this resource. Provide this property when you create the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// spec of IP v4 address
 	ExternalIPv4Address []ExternalIPv4AddressInitParameters `json:"externalIpv4Address,omitempty" tf:"external_ipv4_address,omitempty"`
 
-	// ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -56,15 +54,13 @@ type AddressObservation struct {
 	// Flag that protects the address from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// An optional description of this resource. Provide this property when
-	// you create the resource.
+	// An optional description of this resource. Provide this property when you create the resource.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// spec of IP v4 address
 	ExternalIPv4Address []ExternalIPv4AddressObservation `json:"externalIpv4Address,omitempty" tf:"external_ipv4_address,omitempty"`
 
-	// ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -93,8 +89,7 @@ type AddressParameters struct {
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// An optional description of this resource. Provide this property when
-	// you create the resource.
+	// An optional description of this resource. Provide this property when you create the resource.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -102,8 +97,7 @@ type AddressParameters struct {
 	// +kubebuilder:validation:Optional
 	ExternalIPv4Address []ExternalIPv4AddressParameters `json:"externalIpv4Address,omitempty" tf:"external_ipv4_address,omitempty"`
 
-	// ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`

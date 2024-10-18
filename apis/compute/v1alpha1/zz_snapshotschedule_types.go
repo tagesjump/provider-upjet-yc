@@ -56,8 +56,7 @@ type SnapshotScheduleInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskIdsSelector *v1.Selector `json:"diskIdsSelector,omitempty" tf:"-"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -101,8 +100,7 @@ type SnapshotScheduleObservation struct {
 	// +listType=set
 	DiskIds []*string `json:"diskIds,omitempty" tf:"disk_ids,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -150,8 +148,7 @@ type SnapshotScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskIdsSelector *v1.Selector `json:"diskIdsSelector,omitempty" tf:"-"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`

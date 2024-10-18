@@ -75,9 +75,9 @@ spec:
               forProvider:
                 properties:
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
@@ -86,9 +86,8 @@ spec:
                     description: ID of the organization to attach the policy to.
                     type: string
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_organizationmanager_organization_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_organizationmanager_organization_iam_binding
+                      can be used per role.
                     type: string
                   sleepAfter:
                     type: number
@@ -107,9 +106,9 @@ spec:
                   autoscaler.
                 properties:
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
@@ -118,9 +117,8 @@ spec:
                     description: ID of the organization to attach the policy to.
                     type: string
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_organizationmanager_organization_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_organizationmanager_organization_iam_binding
+                      can be used per role.
                     type: string
                   sleepAfter:
                     type: number
@@ -314,9 +312,9 @@ spec:
                   id:
                     type: string
                   members:
-                    description: |-
-                      An array of identities that will be granted the privilege in the role.
-                      Each entry can have one of the following values:
+                    description: 'An array of identities that will be granted the
+                      privilege in the role. Each entry can have one of the following
+                      values:'
                     items:
                       type: string
                     type: array
@@ -325,9 +323,8 @@ spec:
                     description: ID of the organization to attach the policy to.
                     type: string
                   role:
-                    description: |-
-                      The role that should be assigned. Only one
-                      yandex_organizationmanager_organization_iam_binding can be used per role.
+                    description: The role that should be assigned. Only one yandex_organizationmanager_organization_iam_binding
+                      can be used per role.
                     type: string
                   sleepAfter:
                     type: number

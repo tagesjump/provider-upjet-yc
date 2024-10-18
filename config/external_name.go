@@ -12,7 +12,6 @@ import (
 // under the no-fork architecture for this provider.
 var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"yandex_airflow_cluster":                                  config.IdentifierFromProvider,
 	"yandex_api_gateway":                                      config.IdentifierFromProvider,
 	"yandex_backup_policy":                                    config.IdentifierFromProvider,
 	"yandex_backup_policy_bindings":                           config.IdentifierFromProvider,
@@ -124,7 +123,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_lockbox_secret_version":     config.IdentifierFromProvider,
 	"yandex_monitoring_dashboard":       config.IdentifierFromProvider,
 	"yandex_loadtesting_agent":          config.IdentifierFromProvider,
-	"yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
 	"yandex_audit_trails_trail":         config.IdentifierFromProvider,
 	// "yandex_lockbox_secret_version_hashed":         config.IdentifierFromProvider,
 	"yandex_sws_security_profile":             config.IdentifierFromProvider,
@@ -148,8 +146,10 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 // resources to be reconciled under the no-fork architecture for this
 // provider.
 var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName{
-	"yandex_mdb_mongodb_user":                         config.IdentifierFromProvider,
-	"yandex_mdb_mongodb_database":                     config.IdentifierFromProvider,
+	"yandex_mdb_mongodb_user":     config.IdentifierFromProvider,
+	"yandex_mdb_mongodb_database": config.IdentifierFromProvider,
+	// "yandex_mdb_opensearch_cluster":     config.IdentifierFromProvider,
+	// "yandex_airflow_cluster":                                  config.IdentifierFromProvider,
 	"yandex_compute_disk_placement_group_iam_binding": config.IdentifierFromProvider,
 	"yandex_compute_disk_iam_binding":                 config.IdentifierFromProvider,
 	"yandex_compute_image_iam_binding":                config.IdentifierFromProvider,

@@ -10,6 +10,8 @@ import (
 )
 
 type TopicConsumerInitParameters struct {
+
+	// Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Value type: boolean, default value: false.
 	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
@@ -24,6 +26,8 @@ type TopicConsumerInitParameters struct {
 }
 
 type TopicConsumerObservation struct {
+
+	// Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Value type: boolean, default value: false.
 	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
@@ -39,6 +43,7 @@ type TopicConsumerObservation struct {
 
 type TopicConsumerParameters struct {
 
+	// Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Value type: boolean, default value: false.
 	// +kubebuilder:validation:Optional
 	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
@@ -62,15 +67,27 @@ type TopicInitParameters struct {
 	Consumer []TopicConsumerInitParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
 	// YDB database endpoint. Types: string, required. Default value: "".
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/ydb/v1alpha1.DatabaseServerless
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
 	DatabaseEndpoint *string `json:"databaseEndpoint,omitempty" tf:"database_endpoint,omitempty"`
+
+	// Reference to a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointRef *v1.Reference `json:"databaseEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointSelector *v1.Selector `json:"databaseEndpointSelector,omitempty" tf:"-"`
 
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Resource metering mode (reserved_capacity - based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases. Value type: String.
 	MeteringMode *string `json:"meteringMode,omitempty" tf:"metering_mode,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Value type: integer, default value: 1024 (1MB).
 	PartitionWriteSpeedKbps *float64 `json:"partitionWriteSpeedKbps,omitempty" tf:"partition_write_speed_kbps,omitempty"`
 
 	// Number of partitions. Types: integer, optional. Default value: 2.
@@ -97,11 +114,13 @@ type TopicObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Resource metering mode (reserved_capacity - based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases. Value type: String.
 	MeteringMode *string `json:"meteringMode,omitempty" tf:"metering_mode,omitempty"`
 
 	// Topic name. Type: string, required. Default value: "".
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Value type: integer, default value: 1024 (1MB).
 	PartitionWriteSpeedKbps *float64 `json:"partitionWriteSpeedKbps,omitempty" tf:"partition_write_speed_kbps,omitempty"`
 
 	// Number of partitions. Types: integer, optional. Default value: 2.
@@ -123,12 +142,23 @@ type TopicParameters struct {
 	Consumer []TopicConsumerParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
 	// YDB database endpoint. Types: string, required. Default value: "".
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/ydb/v1alpha1.DatabaseServerless
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
 	// +kubebuilder:validation:Optional
 	DatabaseEndpoint *string `json:"databaseEndpoint,omitempty" tf:"database_endpoint,omitempty"`
+
+	// Reference to a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointRef *v1.Reference `json:"databaseEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointSelector *v1.Selector `json:"databaseEndpointSelector,omitempty" tf:"-"`
 
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// Resource metering mode (reserved_capacity - based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases. Value type: String.
 	// +kubebuilder:validation:Optional
 	MeteringMode *string `json:"meteringMode,omitempty" tf:"metering_mode,omitempty"`
 
@@ -136,6 +166,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Value type: integer, default value: 1024 (1MB).
 	// +kubebuilder:validation:Optional
 	PartitionWriteSpeedKbps *float64 `json:"partitionWriteSpeedKbps,omitempty" tf:"partition_write_speed_kbps,omitempty"`
 
@@ -191,7 +222,6 @@ type TopicStatus struct {
 type Topic struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.databaseEndpoint) || (has(self.initProvider) && has(self.initProvider.databaseEndpoint))",message="spec.forProvider.databaseEndpoint is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   TopicSpec   `json:"spec"`
 	Status TopicStatus `json:"status,omitempty"`

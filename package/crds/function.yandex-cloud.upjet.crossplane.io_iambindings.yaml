@@ -77,9 +77,8 @@ spec:
                     description: The Yandex Cloud Function ID to apply a binding to.
                     type: string
                   members:
-                    description: |-
-                      Identities that will be granted the privilege in role.
-                      Each entry can have one of the following values:
+                    description: 'Identities that will be granted the privilege in
+                      role. Each entry can have one of the following values:'
                     items:
                       type: string
                     type: array
@@ -107,9 +106,8 @@ spec:
                     description: The Yandex Cloud Function ID to apply a binding to.
                     type: string
                   members:
-                    description: |-
-                      Identities that will be granted the privilege in role.
-                      Each entry can have one of the following values:
+                    description: 'Identities that will be granted the privilege in
+                      role. Each entry can have one of the following values:'
                     items:
                       type: string
                     type: array
@@ -311,9 +309,8 @@ spec:
                   id:
                     type: string
                   members:
-                    description: |-
-                      Identities that will be granted the privilege in role.
-                      Each entry can have one of the following values:
+                    description: 'Identities that will be granted the privilege in
+                      role. Each entry can have one of the following values:'
                     items:
                       type: string
                     type: array

@@ -23,8 +23,7 @@ type FolderIAMPolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// The yandex_iam_policy data source that represents
-	// the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
+	// The yandex_iam_policy data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
 	PolicyData *string `json:"policyData,omitempty" tf:"policy_data,omitempty"`
 }
 
@@ -35,8 +34,7 @@ type FolderIAMPolicyObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The yandex_iam_policy data source that represents
-	// the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
+	// The yandex_iam_policy data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
 	PolicyData *string `json:"policyData,omitempty" tf:"policy_data,omitempty"`
 }
 
@@ -55,8 +53,7 @@ type FolderIAMPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// The yandex_iam_policy data source that represents
-	// the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
+	// The yandex_iam_policy data source that represents the IAM policy that will be applied to the folder. This policy overrides any existing policy applied to the folder.
 	// +kubebuilder:validation:Optional
 	PolicyData *string `json:"policyData,omitempty" tf:"policy_data,omitempty"`
 }

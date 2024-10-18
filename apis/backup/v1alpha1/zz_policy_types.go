@@ -9,10 +9,48 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackupSetsInitParameters struct {
+
+	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	ExecuteByInterval *float64 `json:"executeByInterval,omitempty" tf:"execute_by_interval,omitempty"`
+
+	// — Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	ExecuteByTime []ExecuteByTimeInitParameters `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
+
+	// — Type of the scheduling. Available values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type BackupSetsObservation struct {
+
+	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	ExecuteByInterval *float64 `json:"executeByInterval,omitempty" tf:"execute_by_interval,omitempty"`
+
+	// — Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	ExecuteByTime []ExecuteByTimeObservation `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
+
+	// — Type of the scheduling. Available values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type BackupSetsParameters struct {
+
+	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	// +kubebuilder:validation:Optional
+	ExecuteByInterval *float64 `json:"executeByInterval,omitempty" tf:"execute_by_interval,omitempty"`
+
+	// — Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	// +kubebuilder:validation:Optional
+	ExecuteByTime []ExecuteByTimeParameters `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
+
+	// — Type of the scheduling. Available values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ExecuteByTimeInitParameters struct {
 
-	// — If true, schedule will be applied on the last day of month.
-	// See day_type for available values.
+	// — If true, schedule will be applied on the last day of month. See day_type for available values.
 	IncludeLastDayOfMonth *bool `json:"includeLastDayOfMonth,omitempty" tf:"include_last_day_of_month,omitempty"`
 
 	// — List of days when schedule applies. Used in "MONTHLY" type.
@@ -36,8 +74,7 @@ type ExecuteByTimeInitParameters struct {
 
 type ExecuteByTimeObservation struct {
 
-	// — If true, schedule will be applied on the last day of month.
-	// See day_type for available values.
+	// — If true, schedule will be applied on the last day of month. See day_type for available values.
 	IncludeLastDayOfMonth *bool `json:"includeLastDayOfMonth,omitempty" tf:"include_last_day_of_month,omitempty"`
 
 	// — List of days when schedule applies. Used in "MONTHLY" type.
@@ -61,8 +98,7 @@ type ExecuteByTimeObservation struct {
 
 type ExecuteByTimeParameters struct {
 
-	// — If true, schedule will be applied on the last day of month.
-	// See day_type for available values.
+	// — If true, schedule will be applied on the last day of month. See day_type for available values.
 	// +kubebuilder:validation:Optional
 	IncludeLastDayOfMonth *bool `json:"includeLastDayOfMonth,omitempty" tf:"include_last_day_of_month,omitempty"`
 
@@ -96,12 +132,10 @@ type PolicyInitParameters struct {
 	// [Plan ID]-[Unique ID]a) — The name of generated archives.
 	ArchiveName *string `json:"archiveName,omitempty" tf:"archive_name,omitempty"`
 
-	// — Configuration of Changed Block Tracking.
-	// Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+	// — Configuration of Changed Block Tracking. Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
 	Cbt *string `json:"cbt,omitempty" tf:"cbt,omitempty"`
 
-	// — Archive compression level. Affects CPU.
-	// Available values: "NORMAL", "HIGH", "MAX", "OFF".
+	// — Archive compression level. Affects CPU. Available values: "NORMAL", "HIGH", "MAX", "OFF".
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	// — Enable flag
@@ -119,8 +153,7 @@ type PolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-	// Available values: "AUTO", "VERSION_11", "VERSION_12".
+	// — Format of the backup. It's strongly recommend to leave this option empty or "AUTO". Available values: "AUTO", "VERSION_11", "VERSION_12".
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// — If true, snapshots of multiple volumes will be taken simultaneously.
@@ -138,12 +171,10 @@ type PolicyInitParameters struct {
 	// — If true, a quiesced snapshot of the virtual machine will be taken.
 	QuiesceSnapshottingEnabled *bool `json:"quiesceSnapshottingEnabled,omitempty" tf:"quiesce_snapshotting_enabled,omitempty"`
 
-	// — Amount of reattempts that should be performed while trying to make backup at the host.
-	// This attribute consists of the following parameters:
+	// — Amount of reattempts that should be performed while trying to make backup at the host. This attribute consists of the following parameters:
 	Reattempts []ReattemptsInitParameters `json:"reattempts,omitempty" tf:"reattempts,omitempty"`
 
-	// — Retention policy for backups. Allows to setup backups lifecycle.
-	// This attribute consists of the following parameters:
+	// — Retention policy for backups. Allows to setup backups lifecycle. This attribute consists of the following parameters:
 	Retention []RetentionInitParameters `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// — Schedule settings for creating backups on the host.
@@ -155,12 +186,10 @@ type PolicyInitParameters struct {
 	// — determines the size to split backups. It's better to leave this option unchanged.
 	SplittingBytes *string `json:"splittingBytes,omitempty" tf:"splitting_bytes,omitempty"`
 
-	// (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-	// This attribute consists of the following parameters:
+	// (Requied) — Amount of reattempts that should be performed while trying to make snapshot. This attribute consists of the following parameters:
 	VMSnapshotReattempts []VMSnapshotReattemptsInitParameters `json:"vmSnapshotReattempts,omitempty" tf:"vm_snapshot_reattempts,omitempty"`
 
-	// — Settings for the volume shadow copy service.
-	// Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+	// — Settings for the volume shadow copy service. Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
 	VssProvider *string `json:"vssProvider,omitempty" tf:"vss_provider,omitempty"`
 }
 
@@ -169,12 +198,10 @@ type PolicyObservation struct {
 	// [Plan ID]-[Unique ID]a) — The name of generated archives.
 	ArchiveName *string `json:"archiveName,omitempty" tf:"archive_name,omitempty"`
 
-	// — Configuration of Changed Block Tracking.
-	// Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+	// — Configuration of Changed Block Tracking. Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
 	Cbt *string `json:"cbt,omitempty" tf:"cbt,omitempty"`
 
-	// — Archive compression level. Affects CPU.
-	// Available values: "NORMAL", "HIGH", "MAX", "OFF".
+	// — Archive compression level. Affects CPU. Available values: "NORMAL", "HIGH", "MAX", "OFF".
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
@@ -188,8 +215,7 @@ type PolicyObservation struct {
 	// — days
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-	// Available values: "AUTO", "VERSION_11", "VERSION_12".
+	// — Format of the backup. It's strongly recommend to leave this option empty or "AUTO". Available values: "AUTO", "VERSION_11", "VERSION_12".
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// — days
@@ -210,12 +236,10 @@ type PolicyObservation struct {
 	// — If true, a quiesced snapshot of the virtual machine will be taken.
 	QuiesceSnapshottingEnabled *bool `json:"quiesceSnapshottingEnabled,omitempty" tf:"quiesce_snapshotting_enabled,omitempty"`
 
-	// — Amount of reattempts that should be performed while trying to make backup at the host.
-	// This attribute consists of the following parameters:
+	// — Amount of reattempts that should be performed while trying to make backup at the host. This attribute consists of the following parameters:
 	Reattempts []ReattemptsObservation `json:"reattempts,omitempty" tf:"reattempts,omitempty"`
 
-	// — Retention policy for backups. Allows to setup backups lifecycle.
-	// This attribute consists of the following parameters:
+	// — Retention policy for backups. Allows to setup backups lifecycle. This attribute consists of the following parameters:
 	Retention []RetentionObservation `json:"retention,omitempty" tf:"retention,omitempty"`
 
 	// — Schedule settings for creating backups on the host.
@@ -229,12 +253,10 @@ type PolicyObservation struct {
 
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 
-	// (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-	// This attribute consists of the following parameters:
+	// (Requied) — Amount of reattempts that should be performed while trying to make snapshot. This attribute consists of the following parameters:
 	VMSnapshotReattempts []VMSnapshotReattemptsObservation `json:"vmSnapshotReattempts,omitempty" tf:"vm_snapshot_reattempts,omitempty"`
 
-	// — Settings for the volume shadow copy service.
-	// Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+	// — Settings for the volume shadow copy service. Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
 	VssProvider *string `json:"vssProvider,omitempty" tf:"vss_provider,omitempty"`
 }
 
@@ -244,13 +266,11 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ArchiveName *string `json:"archiveName,omitempty" tf:"archive_name,omitempty"`
 
-	// — Configuration of Changed Block Tracking.
-	// Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+	// — Configuration of Changed Block Tracking. Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
 	// +kubebuilder:validation:Optional
 	Cbt *string `json:"cbt,omitempty" tf:"cbt,omitempty"`
 
-	// — Archive compression level. Affects CPU.
-	// Available values: "NORMAL", "HIGH", "MAX", "OFF".
+	// — Archive compression level. Affects CPU. Available values: "NORMAL", "HIGH", "MAX", "OFF".
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
@@ -271,8 +291,7 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-	// Available values: "AUTO", "VERSION_11", "VERSION_12".
+	// — Format of the backup. It's strongly recommend to leave this option empty or "AUTO". Available values: "AUTO", "VERSION_11", "VERSION_12".
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
@@ -296,13 +315,11 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	QuiesceSnapshottingEnabled *bool `json:"quiesceSnapshottingEnabled,omitempty" tf:"quiesce_snapshotting_enabled,omitempty"`
 
-	// — Amount of reattempts that should be performed while trying to make backup at the host.
-	// This attribute consists of the following parameters:
+	// — Amount of reattempts that should be performed while trying to make backup at the host. This attribute consists of the following parameters:
 	// +kubebuilder:validation:Optional
 	Reattempts []ReattemptsParameters `json:"reattempts,omitempty" tf:"reattempts,omitempty"`
 
-	// — Retention policy for backups. Allows to setup backups lifecycle.
-	// This attribute consists of the following parameters:
+	// — Retention policy for backups. Allows to setup backups lifecycle. This attribute consists of the following parameters:
 	// +kubebuilder:validation:Optional
 	Retention []RetentionParameters `json:"retention,omitempty" tf:"retention,omitempty"`
 
@@ -318,13 +335,11 @@ type PolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	SplittingBytes *string `json:"splittingBytes,omitempty" tf:"splitting_bytes,omitempty"`
 
-	// (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-	// This attribute consists of the following parameters:
+	// (Requied) — Amount of reattempts that should be performed while trying to make snapshot. This attribute consists of the following parameters:
 	// +kubebuilder:validation:Optional
 	VMSnapshotReattempts []VMSnapshotReattemptsParameters `json:"vmSnapshotReattempts,omitempty" tf:"vm_snapshot_reattempts,omitempty"`
 
-	// — Settings for the volume shadow copy service.
-	// Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+	// — Settings for the volume shadow copy service. Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
 	// +kubebuilder:validation:Optional
 	VssProvider *string `json:"vssProvider,omitempty" tf:"vss_provider,omitempty"`
 }
@@ -436,93 +451,170 @@ type RulesParameters struct {
 	RepeatPeriod []*string `json:"repeatPeriod,omitempty" tf:"repeat_period,omitempty"`
 }
 
+type SchedulingExecuteByTimeInitParameters struct {
+
+	// — If true, schedule will be applied on the last day of month. See day_type for available values.
+	IncludeLastDayOfMonth *bool `json:"includeLastDayOfMonth,omitempty" tf:"include_last_day_of_month,omitempty"`
+
+	// — List of days when schedule applies. Used in "MONTHLY" type.
+	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
+
+	// — seconds
+	Months []*float64 `json:"months,omitempty" tf:"months,omitempty"`
+
+	// hours format), when the schedule applies.
+	RepeatAt []*string `json:"repeatAt,omitempty" tf:"repeat_at,omitempty"`
+
+	// — Frequency of backup repetition. See interval_type for available values.
+	RepeatEvery *string `json:"repeatEvery,omitempty" tf:"repeat_every,omitempty"`
+
+	// — Type of the scheduling. Available values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// — List of weekdays when the backup will be applied. Used in "WEEKLY" type.
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+}
+
+type SchedulingExecuteByTimeObservation struct {
+
+	// — If true, schedule will be applied on the last day of month. See day_type for available values.
+	IncludeLastDayOfMonth *bool `json:"includeLastDayOfMonth,omitempty" tf:"include_last_day_of_month,omitempty"`
+
+	// — List of days when schedule applies. Used in "MONTHLY" type.
+	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
+
+	// — seconds
+	Months []*float64 `json:"months,omitempty" tf:"months,omitempty"`
+
+	// hours format), when the schedule applies.
+	RepeatAt []*string `json:"repeatAt,omitempty" tf:"repeat_at,omitempty"`
+
+	// — Frequency of backup repetition. See interval_type for available values.
+	RepeatEvery *string `json:"repeatEvery,omitempty" tf:"repeat_every,omitempty"`
+
+	// — Type of the scheduling. Available values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// — List of weekdays when the backup will be applied. Used in "WEEKLY" type.
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+}
+
+type SchedulingExecuteByTimeParameters struct {
+
+	// — If true, schedule will be applied on the last day of month. See day_type for available values.
+	// +kubebuilder:validation:Optional
+	IncludeLastDayOfMonth *bool `json:"includeLastDayOfMonth,omitempty" tf:"include_last_day_of_month,omitempty"`
+
+	// — List of days when schedule applies. Used in "MONTHLY" type.
+	// +kubebuilder:validation:Optional
+	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
+
+	// — seconds
+	// +kubebuilder:validation:Optional
+	Months []*float64 `json:"months,omitempty" tf:"months,omitempty"`
+
+	// hours format), when the schedule applies.
+	// +kubebuilder:validation:Optional
+	RepeatAt []*string `json:"repeatAt,omitempty" tf:"repeat_at,omitempty"`
+
+	// — Frequency of backup repetition. See interval_type for available values.
+	// +kubebuilder:validation:Optional
+	RepeatEvery *string `json:"repeatEvery,omitempty" tf:"repeat_every,omitempty"`
+
+	// — Type of the scheduling. Available values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// — List of weekdays when the backup will be applied. Used in "WEEKLY" type.
+	// +kubebuilder:validation:Optional
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+}
+
 type SchedulingInitParameters struct {
+
+	// A list of schedules with backup sets that compose the whole scheme.
+	BackupSets []BackupSetsInitParameters `json:"backupSets,omitempty" tf:"backup_sets,omitempty"`
 
 	// — Enable flag
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-	// See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
 	ExecuteByInterval *float64 `json:"executeByInterval,omitempty" tf:"execute_by_interval,omitempty"`
 
 	// — Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time.
-	ExecuteByTime []ExecuteByTimeInitParameters `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
+	ExecuteByTime []SchedulingExecuteByTimeInitParameters `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
 
 	// — Maximum number of backup processes allowed to run in parallel. 0 for unlimited.
 	MaxParallelBackups *float64 `json:"maxParallelBackups,omitempty" tf:"max_parallel_backups,omitempty"`
 
-	// — Configuration of the random delay between the execution of parallel tasks.
-	// See interval_type for available values.
+	// — Configuration of the random delay between the execution of parallel tasks. See interval_type for available values.
 	RandomMaxDelay *string `json:"randomMaxDelay,omitempty" tf:"random_max_delay,omitempty"`
 
-	// — Scheme of the backups.
-	// Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+	// — Scheme of the backups. Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 
-	// — A day of week to start weekly backups.
-	// See day_type for available values.
+	// — A day of week to start weekly backups. See day_type for available values.
 	WeeklyBackupDay *string `json:"weeklyBackupDay,omitempty" tf:"weekly_backup_day,omitempty"`
 }
 
 type SchedulingObservation struct {
 
+	// A list of schedules with backup sets that compose the whole scheme.
+	BackupSets []BackupSetsObservation `json:"backupSets,omitempty" tf:"backup_sets,omitempty"`
+
 	// — Enable flag
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-	// See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
 	ExecuteByInterval *float64 `json:"executeByInterval,omitempty" tf:"execute_by_interval,omitempty"`
 
 	// — Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time.
-	ExecuteByTime []ExecuteByTimeObservation `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
+	ExecuteByTime []SchedulingExecuteByTimeObservation `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
 
 	// — Maximum number of backup processes allowed to run in parallel. 0 for unlimited.
 	MaxParallelBackups *float64 `json:"maxParallelBackups,omitempty" tf:"max_parallel_backups,omitempty"`
 
-	// — Configuration of the random delay between the execution of parallel tasks.
-	// See interval_type for available values.
+	// — Configuration of the random delay between the execution of parallel tasks. See interval_type for available values.
 	RandomMaxDelay *string `json:"randomMaxDelay,omitempty" tf:"random_max_delay,omitempty"`
 
-	// — Scheme of the backups.
-	// Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+	// — Scheme of the backups. Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 
-	// — A day of week to start weekly backups.
-	// See day_type for available values.
+	// — A day of week to start weekly backups. See day_type for available values.
 	WeeklyBackupDay *string `json:"weeklyBackupDay,omitempty" tf:"weekly_backup_day,omitempty"`
 }
 
 type SchedulingParameters struct {
 
+	// A list of schedules with backup sets that compose the whole scheme.
+	// +kubebuilder:validation:Optional
+	BackupSets []BackupSetsParameters `json:"backupSets,omitempty" tf:"backup_sets,omitempty"`
+
 	// — Enable flag
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-	// See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+	// — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
 	// +kubebuilder:validation:Optional
 	ExecuteByInterval *float64 `json:"executeByInterval,omitempty" tf:"execute_by_interval,omitempty"`
 
 	// — Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time.
 	// +kubebuilder:validation:Optional
-	ExecuteByTime []ExecuteByTimeParameters `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
+	ExecuteByTime []SchedulingExecuteByTimeParameters `json:"executeByTime,omitempty" tf:"execute_by_time,omitempty"`
 
 	// — Maximum number of backup processes allowed to run in parallel. 0 for unlimited.
 	// +kubebuilder:validation:Optional
 	MaxParallelBackups *float64 `json:"maxParallelBackups,omitempty" tf:"max_parallel_backups,omitempty"`
 
-	// — Configuration of the random delay between the execution of parallel tasks.
-	// See interval_type for available values.
+	// — Configuration of the random delay between the execution of parallel tasks. See interval_type for available values.
 	// +kubebuilder:validation:Optional
 	RandomMaxDelay *string `json:"randomMaxDelay,omitempty" tf:"random_max_delay,omitempty"`
 
-	// — Scheme of the backups.
-	// Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+	// — Scheme of the backups. Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
 	// +kubebuilder:validation:Optional
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 
-	// — A day of week to start weekly backups.
-	// See day_type for available values.
+	// — A day of week to start weekly backups. See day_type for available values.
 	// +kubebuilder:validation:Optional
 	WeeklyBackupDay *string `json:"weeklyBackupDay,omitempty" tf:"weekly_backup_day,omitempty"`
 }

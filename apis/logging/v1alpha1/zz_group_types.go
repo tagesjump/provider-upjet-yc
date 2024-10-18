@@ -15,8 +15,7 @@ type GroupInitParameters struct {
 	// A description for the Yandex Cloud Logging group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Logging group belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// ID of the folder that the Yandex Cloud Logging group belongs to. It will be deduced from provider configuration if not set explicitly.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -52,8 +51,7 @@ type GroupObservation struct {
 	// A description for the Yandex Cloud Logging group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Logging group belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// ID of the folder that the Yandex Cloud Logging group belongs to. It will be deduced from provider configuration if not set explicitly.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	// The Yandex Cloud Logging group ID.
@@ -82,8 +80,7 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Logging group belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// ID of the folder that the Yandex Cloud Logging group belongs to. It will be deduced from provider configuration if not set explicitly.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`

@@ -11,8 +11,7 @@ import (
 
 type OrganizationIAMMemberInitParameters struct {
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// The identity that will be granted the privilege that is specified in the role field. This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
 	// ID of the organization to attach a policy to.
@@ -27,8 +26,7 @@ type OrganizationIAMMemberInitParameters struct {
 type OrganizationIAMMemberObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// The identity that will be granted the privilege that is specified in the role field. This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
 	// ID of the organization to attach a policy to.
@@ -42,8 +40,7 @@ type OrganizationIAMMemberObservation struct {
 
 type OrganizationIAMMemberParameters struct {
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// The identity that will be granted the privilege that is specified in the role field. This field can have one of the following values:
 	// +kubebuilder:validation:Optional
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 

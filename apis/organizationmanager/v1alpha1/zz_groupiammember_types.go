@@ -23,8 +23,7 @@ type GroupIAMMemberInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// The identity that will be granted the privilege that is specified in the role field. This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
 	// The role that should be assigned.
@@ -40,8 +39,7 @@ type GroupIAMMemberObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// The identity that will be granted the privilege that is specified in the role field. This field can have one of the following values:
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
 	// The role that should be assigned.
@@ -65,8 +63,7 @@ type GroupIAMMemberParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.Selector `json:"groupIdSelector,omitempty" tf:"-"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// The identity that will be granted the privilege that is specified in the role field. This field can have one of the following values:
 	// +kubebuilder:validation:Optional
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 

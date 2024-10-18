@@ -196,11 +196,12 @@ spec:
                             type: string
                           type: array
                         digest:
-                          description: |-
-                            Digest of image that will be deployed as Yandex Cloud Serverless Container.
-                            If presented, should be equal to digest that will be resolved at server side by URL.
-                            Container will be updated on digest change even if image.0.url stays the same.
-                            If field not specified then its value will be computed.
+                          description: Digest of image that will be deployed as Yandex
+                            Cloud Serverless Container. If presented, should be equal
+                            to digest that will be resolved at server side by URL.
+                            Container will be updated on digest change even if image.0.url
+                            stays the same. If field not specified then its value
+                            will be computed.
                           type: string
                         environment:
                           additionalProperties:
@@ -251,49 +252,407 @@ spec:
                       Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
                       Container memory in megabytes, should be aligned to 128
                     type: number
+                  mounts:
+                    description: Mounts for Yandex Cloud Serverless Container
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: One of the available mount types. Disk available
+                            during the function execution time
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: Optional block size of the ephemeral
+                                  disk in KB
+                                type: number
+                              sizeGb:
+                                description: Size of the ephemeral disk in GB
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: Mount’s accessibility mode. Valid values are
+                            ro and rw
+                          type: string
+                        mountPointPath:
+                          description: Path inside the container to access the directory
+                            in which the bucket is mounted
+                          type: string
+                        objectStorage:
+                          description: One of the available mount types. Object storage
+                            as a mount
+                          items:
+                            properties:
+                              bucket:
+                                description: Name of the mounting bucket
+                                type: string
+                              bucketRef:
+                                description: Reference to a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketSelector:
+                                description: Selector for a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              prefix:
+                                description: Prefix within the bucket. If you leave
+                                  this field empty, the entire bucket will be mounted
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: Yandex Cloud Serverless Container name
                     type: string
+                  provisionPolicy:
+                    description: Provision policy. If specified the revision will
+                      have prepared instances
+                    items:
+                      properties:
+                        minInstances:
+                          description: Minimum number of prepared instances that are
+                            always ready to serve requests
+                          type: number
+                      type: object
+                    type: array
                   secrets:
                     description: Secrets for Yandex Cloud Serverless Container
                     items:
                       properties:
                         environmentVariable:
                           description: Container's environment variable in which secret's
-                            value will be stored.
+                            value will be stored
                           type: string
                         id:
-                          description: Secret's id.
+                          description: Secret's id
                           type: string
+                        idRef:
+                          description: Reference to a Secret in lockbox to populate
+                            id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a Secret in lockbox to populate
+                            id.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         key:
                           description: Secret's entries key which value will be stored
-                            in environment variable.
+                            in environment variable
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: Secret's version id
                           type: string
+                        versionIdRef:
+                          description: Reference to a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        versionIdSelector:
+                          description: Selector for a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   serviceAccountId:
                     description: Service account ID for Yandex Cloud Serverless Container
                     type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Serverless Container
+                    description: (DEPRECATED, use mounts.0.object_storage instead)
+                      Storage mounts for Yandex Cloud Serverless Container
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: Name of the mounting bucket
                           type: string
                         mountPointPath:
                           description: Path inside the container to access the directory
-                            in which the bucket is mounted.
+                            in which the bucket is mounted
                           type: string
                         prefix:
                           description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                            field empty, the entire bucket will be mounted
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: Mount the bucket in read-only mode
                           type: boolean
                       type: object
                     type: array
@@ -434,11 +793,12 @@ spec:
                             type: string
                           type: array
                         digest:
-                          description: |-
-                            Digest of image that will be deployed as Yandex Cloud Serverless Container.
-                            If presented, should be equal to digest that will be resolved at server side by URL.
-                            Container will be updated on digest change even if image.0.url stays the same.
-                            If field not specified then its value will be computed.
+                          description: Digest of image that will be deployed as Yandex
+                            Cloud Serverless Container. If presented, should be equal
+                            to digest that will be resolved at server side by URL.
+                            Container will be updated on digest change even if image.0.url
+                            stays the same. If field not specified then its value
+                            will be computed.
                           type: string
                         environment:
                           additionalProperties:
@@ -489,49 +849,407 @@ spec:
                       Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
                       Container memory in megabytes, should be aligned to 128
                     type: number
+                  mounts:
+                    description: Mounts for Yandex Cloud Serverless Container
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: One of the available mount types. Disk available
+                            during the function execution time
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: Optional block size of the ephemeral
+                                  disk in KB
+                                type: number
+                              sizeGb:
+                                description: Size of the ephemeral disk in GB
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: Mount’s accessibility mode. Valid values are
+                            ro and rw
+                          type: string
+                        mountPointPath:
+                          description: Path inside the container to access the directory
+                            in which the bucket is mounted
+                          type: string
+                        objectStorage:
+                          description: One of the available mount types. Object storage
+                            as a mount
+                          items:
+                            properties:
+                              bucket:
+                                description: Name of the mounting bucket
+                                type: string
+                              bucketRef:
+                                description: Reference to a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketSelector:
+                                description: Selector for a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              prefix:
+                                description: Prefix within the bucket. If you leave
+                                  this field empty, the entire bucket will be mounted
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: Yandex Cloud Serverless Container name
                     type: string
+                  provisionPolicy:
+                    description: Provision policy. If specified the revision will
+                      have prepared instances
+                    items:
+                      properties:
+                        minInstances:
+                          description: Minimum number of prepared instances that are
+                            always ready to serve requests
+                          type: number
+                      type: object
+                    type: array
                   secrets:
                     description: Secrets for Yandex Cloud Serverless Container
                     items:
                       properties:
                         environmentVariable:
                           description: Container's environment variable in which secret's
-                            value will be stored.
+                            value will be stored
                           type: string
                         id:
-                          description: Secret's id.
+                          description: Secret's id
                           type: string
+                        idRef:
+                          description: Reference to a Secret in lockbox to populate
+                            id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a Secret in lockbox to populate
+                            id.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         key:
                           description: Secret's entries key which value will be stored
-                            in environment variable.
+                            in environment variable
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: Secret's version id
                           type: string
+                        versionIdRef:
+                          description: Reference to a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        versionIdSelector:
+                          description: Selector for a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   serviceAccountId:
                     description: Service account ID for Yandex Cloud Serverless Container
                     type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Serverless Container
+                    description: (DEPRECATED, use mounts.0.object_storage instead)
+                      Storage mounts for Yandex Cloud Serverless Container
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: Name of the mounting bucket
                           type: string
                         mountPointPath:
                           description: Path inside the container to access the directory
-                            in which the bucket is mounted.
+                            in which the bucket is mounted
                           type: string
                         prefix:
                           description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                            field empty, the entire bucket will be mounted
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: Mount the bucket in read-only mode
                           type: boolean
                       type: object
                     type: array
@@ -755,7 +1473,7 @@ spec:
                     description: Folder ID for the Yandex Cloud Serverless Container
                     type: string
                   id:
-                    description: Secret's id.
+                    description: Secret's id
                     type: string
                   image:
                     description: Revision deployment image for Yandex Cloud Serverless
@@ -775,11 +1493,12 @@ spec:
                             type: string
                           type: array
                         digest:
-                          description: |-
-                            Digest of image that will be deployed as Yandex Cloud Serverless Container.
-                            If presented, should be equal to digest that will be resolved at server side by URL.
-                            Container will be updated on digest change even if image.0.url stays the same.
-                            If field not specified then its value will be computed.
+                          description: Digest of image that will be deployed as Yandex
+                            Cloud Serverless Container. If presented, should be equal
+                            to digest that will be resolved at server side by URL.
+                            Container will be updated on digest change even if image.0.url
+                            stays the same. If field not specified then its value
+                            will be computed.
                           type: string
                         environment:
                           additionalProperties:
@@ -830,9 +1549,62 @@ spec:
                       Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
                       Container memory in megabytes, should be aligned to 128
                     type: number
+                  mounts:
+                    description: Mounts for Yandex Cloud Serverless Container
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: One of the available mount types. Disk available
+                            during the function execution time
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: Optional block size of the ephemeral
+                                  disk in KB
+                                type: number
+                              sizeGb:
+                                description: Size of the ephemeral disk in GB
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: Mount’s accessibility mode. Valid values are
+                            ro and rw
+                          type: string
+                        mountPointPath:
+                          description: Path inside the container to access the directory
+                            in which the bucket is mounted
+                          type: string
+                        objectStorage:
+                          description: One of the available mount types. Object storage
+                            as a mount
+                          items:
+                            properties:
+                              bucket:
+                                description: Name of the mounting bucket
+                                type: string
+                              prefix:
+                                description: Prefix within the bucket. If you leave
+                                  this field empty, the entire bucket will be mounted
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: Yandex Cloud Serverless Container name
                     type: string
+                  provisionPolicy:
+                    description: Provision policy. If specified the revision will
+                      have prepared instances
+                    items:
+                      properties:
+                        minInstances:
+                          description: Minimum number of prepared instances that are
+                            always ready to serve requests
+                          type: number
+                      type: object
+                    type: array
                   revisionId:
                     description: Last revision ID of the Yandex Cloud Serverless Container
                     type: string
@@ -842,17 +1614,17 @@ spec:
                       properties:
                         environmentVariable:
                           description: Container's environment variable in which secret's
-                            value will be stored.
+                            value will be stored
                           type: string
                         id:
-                          description: Secret's id.
+                          description: Secret's id
                           type: string
                         key:
                           description: Secret's entries key which value will be stored
-                            in environment variable.
+                            in environment variable
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: Secret's version id
                           type: string
                       type: object
                     type: array
@@ -860,22 +1632,23 @@ spec:
                     description: Service account ID for Yandex Cloud Serverless Container
                     type: string
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Serverless Container
+                    description: (DEPRECATED, use mounts.0.object_storage instead)
+                      Storage mounts for Yandex Cloud Serverless Container
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: Name of the mounting bucket
                           type: string
                         mountPointPath:
                           description: Path inside the container to access the directory
-                            in which the bucket is mounted.
+                            in which the bucket is mounted
                           type: string
                         prefix:
                           description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                            field empty, the entire bucket will be mounted
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: Mount the bucket in read-only mode
                           type: boolean
                       type: object
                     type: array

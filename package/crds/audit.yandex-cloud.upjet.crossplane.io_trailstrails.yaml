@@ -98,29 +98,31 @@ spec:
                       properties:
                         eventFilters:
                           description: Structure describing filtering process for
-                            the service-specific data plane events
+                            the service-specific data plane events.
                           items:
                             properties:
                               categories:
-                                description: List of structures describing categories
-                                  of gathered data plane events
+                                description: blocks. With the introduction of included_events/excluded_events
+                                  you can configure filtering per each event type.
                                 items:
                                   properties:
                                     plane:
                                       description: 'Type of the event by its relation
                                         to the cloud resource model. Possible values:
-                                        CONTROL_PLANE/DATA_PLANE'
+                                        CONTROL_PLANE/DATA_PLANE.'
                                       type: string
                                     type:
                                       description: 'Type of the event by its operation
-                                        effect on the resource. Possible values: READ/WRITE'
+                                        effect on the resource. Possible values: READ/WRITE.'
                                       type: string
                                   type: object
                                 type: array
                               pathFilter:
-                                description: Structure describing filtering process
-                                  for default control plane events. If omitted, the
-                                  trail will not deliver this category
+                                description: with the appropriate resource_scope blocks.
+                                  You have to account that resource_scope does not
+                                  support specifying relations between resources,
+                                  so your configuration will simplify to only the
+                                  actual resources, that will be monitored.
                                 items:
                                   properties:
                                     anyFilter:
@@ -148,7 +150,7 @@ spec:
                                         properties:
                                           anyFilters:
                                             description: List of child resources from
-                                              which events will be gathered
+                                              which events will be gathered.
                                             items:
                                               properties:
                                                 resourceId:
@@ -173,14 +175,15 @@ spec:
                                 type: array
                               service:
                                 description: ID of the service which events will be
-                                  gathered
+                                  gathered.
                                 type: string
                             type: object
                           type: array
                         pathFilter:
-                          description: Structure describing filtering process for
-                            default control plane events. If omitted, the trail will
-                            not deliver this category
+                          description: block with the filtering_policy.management_events_filter.
+                            New API states management events filtration in a more
+                            clear way. The resources, that were specified, must migrate
+                            into the filtering_policy.management_events_filter.resource_scope
                           items:
                             properties:
                               anyFilter:
@@ -207,7 +210,7 @@ spec:
                                   properties:
                                     anyFilters:
                                       description: List of child resources from which
-                                        events will be gathered
+                                        events will be gathered.
                                       items:
                                         properties:
                                           resourceId:
@@ -219,6 +222,75 @@ spec:
                                             type: string
                                         type: object
                                       type: array
+                                    resourceId:
+                                      description: ID of the parent resource.
+                                      type: string
+                                    resourceType:
+                                      description: Resource type of the parent resource.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  filteringPolicy:
+                    description: Structure describing event filtering process for
+                      the trail. Mutually exclusive with filter. At least one of the
+                      management_events_filter or data_events_filter fields will be
+                      filled.
+                    items:
+                      properties:
+                        dataEventsFilter:
+                          description: Structure describing filtering process for
+                            the service-specific data events.
+                          items:
+                            properties:
+                              excludedEvents:
+                                description: A list of events that won't be gathered
+                                  by the trail from this service. New events will
+                                  be automatically gathered when this option is specified.
+                                  Mutually exclusive with included_events.
+                                items:
+                                  type: string
+                                type: array
+                              includedEvents:
+                                description: A list of events that will be gathered
+                                  by the trail from this service. New events won't
+                                  be gathered by default when this option is specified.
+                                  Mutually exclusive with excluded_events.
+                                items:
+                                  type: string
+                                type: array
+                              resourceScope:
+                                description: Structure describing that events will
+                                  be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: ID of the parent resource.
+                                      type: string
+                                    resourceType:
+                                      description: Resource type of the parent resource.
+                                      type: string
+                                  type: object
+                                type: array
+                              service:
+                                description: ID of the service which events will be
+                                  gathered.
+                                type: string
+                            type: object
+                          type: array
+                        managementEventsFilter:
+                          description: Structure describing filtering process for
+                            management events.
+                          items:
+                            properties:
+                              resourceScope:
+                                description: Structure describing that events will
+                                  be gathered from the specified resource.
+                                items:
+                                  properties:
                                     resourceId:
                                       description: ID of the parent resource.
                                       type: string
@@ -322,7 +394,7 @@ spec:
                     items:
                       properties:
                         logGroupId:
-                          description: ID of the destination Cloud Logging Group
+                          description: ID of the destination Cloud Logging Group.
                           type: string
                       type: object
                     type: array
@@ -339,12 +411,12 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: Name of the destination bucket
+                          description: Name of the destination bucket.
                           type: string
                         objectPrefix:
                           description: Additional prefix of the uploaded objects.
                             If not specified, objects will be uploaded with prefix
-                            equal to trail_id
+                            equal to trail_id.
                           type: string
                       type: object
                     type: array
@@ -387,29 +459,31 @@ spec:
                       properties:
                         eventFilters:
                           description: Structure describing filtering process for
-                            the service-specific data plane events
+                            the service-specific data plane events.
                           items:
                             properties:
                               categories:
-                                description: List of structures describing categories
-                                  of gathered data plane events
+                                description: blocks. With the introduction of included_events/excluded_events
+                                  you can configure filtering per each event type.
                                 items:
                                   properties:
                                     plane:
                                       description: 'Type of the event by its relation
                                         to the cloud resource model. Possible values:
-                                        CONTROL_PLANE/DATA_PLANE'
+                                        CONTROL_PLANE/DATA_PLANE.'
                                       type: string
                                     type:
                                       description: 'Type of the event by its operation
-                                        effect on the resource. Possible values: READ/WRITE'
+                                        effect on the resource. Possible values: READ/WRITE.'
                                       type: string
                                   type: object
                                 type: array
                               pathFilter:
-                                description: Structure describing filtering process
-                                  for default control plane events. If omitted, the
-                                  trail will not deliver this category
+                                description: with the appropriate resource_scope blocks.
+                                  You have to account that resource_scope does not
+                                  support specifying relations between resources,
+                                  so your configuration will simplify to only the
+                                  actual resources, that will be monitored.
                                 items:
                                   properties:
                                     anyFilter:
@@ -437,7 +511,7 @@ spec:
                                         properties:
                                           anyFilters:
                                             description: List of child resources from
-                                              which events will be gathered
+                                              which events will be gathered.
                                             items:
                                               properties:
                                                 resourceId:
@@ -462,14 +536,15 @@ spec:
                                 type: array
                               service:
                                 description: ID of the service which events will be
-                                  gathered
+                                  gathered.
                                 type: string
                             type: object
                           type: array
                         pathFilter:
-                          description: Structure describing filtering process for
-                            default control plane events. If omitted, the trail will
-                            not deliver this category
+                          description: block with the filtering_policy.management_events_filter.
+                            New API states management events filtration in a more
+                            clear way. The resources, that were specified, must migrate
+                            into the filtering_policy.management_events_filter.resource_scope
                           items:
                             properties:
                               anyFilter:
@@ -496,7 +571,7 @@ spec:
                                   properties:
                                     anyFilters:
                                       description: List of child resources from which
-                                        events will be gathered
+                                        events will be gathered.
                                       items:
                                         properties:
                                           resourceId:
@@ -508,6 +583,75 @@ spec:
                                             type: string
                                         type: object
                                       type: array
+                                    resourceId:
+                                      description: ID of the parent resource.
+                                      type: string
+                                    resourceType:
+                                      description: Resource type of the parent resource.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  filteringPolicy:
+                    description: Structure describing event filtering process for
+                      the trail. Mutually exclusive with filter. At least one of the
+                      management_events_filter or data_events_filter fields will be
+                      filled.
+                    items:
+                      properties:
+                        dataEventsFilter:
+                          description: Structure describing filtering process for
+                            the service-specific data events.
+                          items:
+                            properties:
+                              excludedEvents:
+                                description: A list of events that won't be gathered
+                                  by the trail from this service. New events will
+                                  be automatically gathered when this option is specified.
+                                  Mutually exclusive with included_events.
+                                items:
+                                  type: string
+                                type: array
+                              includedEvents:
+                                description: A list of events that will be gathered
+                                  by the trail from this service. New events won't
+                                  be gathered by default when this option is specified.
+                                  Mutually exclusive with excluded_events.
+                                items:
+                                  type: string
+                                type: array
+                              resourceScope:
+                                description: Structure describing that events will
+                                  be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: ID of the parent resource.
+                                      type: string
+                                    resourceType:
+                                      description: Resource type of the parent resource.
+                                      type: string
+                                  type: object
+                                type: array
+                              service:
+                                description: ID of the service which events will be
+                                  gathered.
+                                type: string
+                            type: object
+                          type: array
+                        managementEventsFilter:
+                          description: Structure describing filtering process for
+                            management events.
+                          items:
+                            properties:
+                              resourceScope:
+                                description: Structure describing that events will
+                                  be gathered from the specified resource.
+                                items:
+                                  properties:
                                     resourceId:
                                       description: ID of the parent resource.
                                       type: string
@@ -611,7 +755,7 @@ spec:
                     items:
                       properties:
                         logGroupId:
-                          description: ID of the destination Cloud Logging Group
+                          description: ID of the destination Cloud Logging Group.
                           type: string
                       type: object
                     type: array
@@ -628,12 +772,12 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: Name of the destination bucket
+                          description: Name of the destination bucket.
                           type: string
                         objectPrefix:
                           description: Additional prefix of the uploaded objects.
                             If not specified, objects will be uploaded with prefix
-                            equal to trail_id
+                            equal to trail_id.
                           type: string
                       type: object
                     type: array
@@ -806,10 +950,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.filter is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.filter)
-                || (has(self.initProvider) && has(self.initProvider.filter))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -848,29 +988,31 @@ spec:
                       properties:
                         eventFilters:
                           description: Structure describing filtering process for
-                            the service-specific data plane events
+                            the service-specific data plane events.
                           items:
                             properties:
                               categories:
-                                description: List of structures describing categories
-                                  of gathered data plane events
+                                description: blocks. With the introduction of included_events/excluded_events
+                                  you can configure filtering per each event type.
                                 items:
                                   properties:
                                     plane:
                                       description: 'Type of the event by its relation
                                         to the cloud resource model. Possible values:
-                                        CONTROL_PLANE/DATA_PLANE'
+                                        CONTROL_PLANE/DATA_PLANE.'
                                       type: string
                                     type:
                                       description: 'Type of the event by its operation
-                                        effect on the resource. Possible values: READ/WRITE'
+                                        effect on the resource. Possible values: READ/WRITE.'
                                       type: string
                                   type: object
                                 type: array
                               pathFilter:
-                                description: Structure describing filtering process
-                                  for default control plane events. If omitted, the
-                                  trail will not deliver this category
+                                description: with the appropriate resource_scope blocks.
+                                  You have to account that resource_scope does not
+                                  support specifying relations between resources,
+                                  so your configuration will simplify to only the
+                                  actual resources, that will be monitored.
                                 items:
                                   properties:
                                     anyFilter:
@@ -898,7 +1040,7 @@ spec:
                                         properties:
                                           anyFilters:
                                             description: List of child resources from
-                                              which events will be gathered
+                                              which events will be gathered.
                                             items:
                                               properties:
                                                 resourceId:
@@ -923,14 +1065,15 @@ spec:
                                 type: array
                               service:
                                 description: ID of the service which events will be
-                                  gathered
+                                  gathered.
                                 type: string
                             type: object
                           type: array
                         pathFilter:
-                          description: Structure describing filtering process for
-                            default control plane events. If omitted, the trail will
-                            not deliver this category
+                          description: block with the filtering_policy.management_events_filter.
+                            New API states management events filtration in a more
+                            clear way. The resources, that were specified, must migrate
+                            into the filtering_policy.management_events_filter.resource_scope
                           items:
                             properties:
                               anyFilter:
@@ -957,7 +1100,7 @@ spec:
                                   properties:
                                     anyFilters:
                                       description: List of child resources from which
-                                        events will be gathered
+                                        events will be gathered.
                                       items:
                                         properties:
                                           resourceId:
@@ -969,6 +1112,75 @@ spec:
                                             type: string
                                         type: object
                                       type: array
+                                    resourceId:
+                                      description: ID of the parent resource.
+                                      type: string
+                                    resourceType:
+                                      description: Resource type of the parent resource.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  filteringPolicy:
+                    description: Structure describing event filtering process for
+                      the trail. Mutually exclusive with filter. At least one of the
+                      management_events_filter or data_events_filter fields will be
+                      filled.
+                    items:
+                      properties:
+                        dataEventsFilter:
+                          description: Structure describing filtering process for
+                            the service-specific data events.
+                          items:
+                            properties:
+                              excludedEvents:
+                                description: A list of events that won't be gathered
+                                  by the trail from this service. New events will
+                                  be automatically gathered when this option is specified.
+                                  Mutually exclusive with included_events.
+                                items:
+                                  type: string
+                                type: array
+                              includedEvents:
+                                description: A list of events that will be gathered
+                                  by the trail from this service. New events won't
+                                  be gathered by default when this option is specified.
+                                  Mutually exclusive with excluded_events.
+                                items:
+                                  type: string
+                                type: array
+                              resourceScope:
+                                description: Structure describing that events will
+                                  be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: ID of the parent resource.
+                                      type: string
+                                    resourceType:
+                                      description: Resource type of the parent resource.
+                                      type: string
+                                  type: object
+                                type: array
+                              service:
+                                description: ID of the service which events will be
+                                  gathered.
+                                type: string
+                            type: object
+                          type: array
+                        managementEventsFilter:
+                          description: Structure describing filtering process for
+                            management events.
+                          items:
+                            properties:
+                              resourceScope:
+                                description: Structure describing that events will
+                                  be gathered from the specified resource.
+                                items:
+                                  properties:
                                     resourceId:
                                       description: ID of the parent resource.
                                       type: string
@@ -998,7 +1210,7 @@ spec:
                     items:
                       properties:
                         logGroupId:
-                          description: ID of the destination Cloud Logging Group
+                          description: ID of the destination Cloud Logging Group.
                           type: string
                       type: object
                     type: array
@@ -1018,12 +1230,12 @@ spec:
                     items:
                       properties:
                         bucketName:
-                          description: Name of the destination bucket
+                          description: Name of the destination bucket.
                           type: string
                         objectPrefix:
                           description: Additional prefix of the uploaded objects.
                             If not specified, objects will be uploaded with prefix
-                            equal to trail_id
+                            equal to trail_id.
                           type: string
                       type: object
                     type: array

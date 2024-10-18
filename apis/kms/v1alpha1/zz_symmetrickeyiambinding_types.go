@@ -11,8 +11,7 @@ import (
 
 type SymmetricKeyIAMBindingInitParameters struct {
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
@@ -49,8 +48,7 @@ type SymmetricKeyIAMBindingInitParameters struct {
 type SymmetricKeyIAMBindingObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
@@ -65,8 +63,7 @@ type SymmetricKeyIAMBindingObservation struct {
 
 type SymmetricKeyIAMBindingParameters struct {
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef

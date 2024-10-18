@@ -23,8 +23,7 @@ type AsymmetricEncryptionKeyIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AsymmetricEncryptionKeyIDSelector *v1.Selector `json:"asymmetricEncryptionKeyIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
@@ -53,8 +52,7 @@ type AsymmetricEncryptionKeyIAMBindingObservation struct {
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
@@ -79,8 +77,7 @@ type AsymmetricEncryptionKeyIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	AsymmetricEncryptionKeyIDSelector *v1.Selector `json:"asymmetricEncryptionKeyIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// Identities that will be granted the privilege in role. Each entry can have one of the following values:
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef

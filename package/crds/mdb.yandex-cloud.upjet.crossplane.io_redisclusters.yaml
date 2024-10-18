@@ -73,6 +73,21 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  access:
+                    description: Access policy to the Redis cluster. The structure
+                      is documented below.
+                    items:
+                      properties:
+                        dataLens:
+                          description: Allow access for DataLens. Can be either true
+                            or false.
+                          type: boolean
+                        webSql:
+                          description: Allow access for Web SQL. Can be either true
+                            or false.
+                          type: boolean
+                      type: object
+                    type: array
                   announceHostnames:
                     description: Announce fqdn instead of ip address.
                     type: boolean
@@ -82,14 +97,12 @@ spec:
                     items:
                       properties:
                         clientOutputBufferLimitNormal:
-                          description: |-
-                            Normal clients output buffer limits.
-                            See redis config file.
+                          description: Normal clients output buffer limits. See redis
+                            config file.
                           type: string
                         clientOutputBufferLimitPubsub:
-                          description: |-
-                            Pubsub clients output buffer limits.
-                            See redis config file.
+                          description: Pubsub clients output buffer limits. See redis
+                            config file.
                           type: string
                         databases:
                           description: Number of databases (changing requires redis-server
@@ -99,9 +112,9 @@ spec:
                           description: Redis maxmemory usage in percent
                           type: number
                         maxmemoryPolicy:
-                          description: |-
-                            Redis key eviction policy for a dataset that reaches maximum memory.
-                            Can be any of the listed in the official RedisDB documentation.
+                          description: Redis key eviction policy for a dataset that
+                            reaches maximum memory. Can be any of the listed in the
+                            official RedisDB documentation.
                           type: string
                         notifyKeyspaceEvents:
                           description: Select the events that Redis will notify among
@@ -140,20 +153,33 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Redis cluster.
                     type: string
+                  diskSizeAutoscaling:
+                    items:
+                      properties:
+                        diskSizeLimit:
+                          description: Limit of disk size after autoscaling (GiB).
+                          type: number
+                        emergencyUsageThreshold:
+                          description: Immediate autoscaling disk usage (percent).
+                          type: number
+                        plannedUsageThreshold:
+                          description: Maintenance window autoscaling disk usage (percent).
+                          type: number
+                      type: object
+                    type: array
                   environment:
                     description: Deployment environment of the Redis cluster. Can
                       be either PRESTABLE or PRODUCTION.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                    description: The ID of the folder that the resource belongs to.
+                      If it is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -248,9 +274,9 @@ spec:
                           description: The name of the shard to which the host belongs.
                           type: string
                         subnetId:
-                          description: |-
-                            The ID of the subnet, to which the host belongs. The subnet must
-                            be a part of the network to which the cluster belongs.
+                          description: The ID of the subnet, to which the host belongs.
+                            The subnet must be a part of the network to which the
+                            cluster belongs.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -327,9 +353,9 @@ spec:
                               type: object
                           type: object
                         zone:
-                          description: |-
-                            The availability zone where the Redis host will be created.
-                            For more information see the official documentation.
+                          description: The availability zone where the Redis host
+                            will be created. For more information see the official
+                            documentation.
                           type: string
                       type: object
                     type: array
@@ -546,9 +572,9 @@ spec:
                         type: object
                     type: object
                   sharded:
-                    description: |-
-                      Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
-                      If cluster is sharded - disabling is not allowed.
+                    description: Redis Cluster mode enabled/disabled. Enables sharding
+                      when cluster non-sharded. If cluster is sharded - disabling
+                      is not allowed.
                     type: boolean
                   tlsEnabled:
                     description: TLS support mode enabled/disabled.
@@ -567,6 +593,21 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  access:
+                    description: Access policy to the Redis cluster. The structure
+                      is documented below.
+                    items:
+                      properties:
+                        dataLens:
+                          description: Allow access for DataLens. Can be either true
+                            or false.
+                          type: boolean
+                        webSql:
+                          description: Allow access for Web SQL. Can be either true
+                            or false.
+                          type: boolean
+                      type: object
+                    type: array
                   announceHostnames:
                     description: Announce fqdn instead of ip address.
                     type: boolean
@@ -576,14 +617,12 @@ spec:
                     items:
                       properties:
                         clientOutputBufferLimitNormal:
-                          description: |-
-                            Normal clients output buffer limits.
-                            See redis config file.
+                          description: Normal clients output buffer limits. See redis
+                            config file.
                           type: string
                         clientOutputBufferLimitPubsub:
-                          description: |-
-                            Pubsub clients output buffer limits.
-                            See redis config file.
+                          description: Pubsub clients output buffer limits. See redis
+                            config file.
                           type: string
                         databases:
                           description: Number of databases (changing requires redis-server
@@ -593,9 +632,9 @@ spec:
                           description: Redis maxmemory usage in percent
                           type: number
                         maxmemoryPolicy:
-                          description: |-
-                            Redis key eviction policy for a dataset that reaches maximum memory.
-                            Can be any of the listed in the official RedisDB documentation.
+                          description: Redis key eviction policy for a dataset that
+                            reaches maximum memory. Can be any of the listed in the
+                            official RedisDB documentation.
                           type: string
                         notifyKeyspaceEvents:
                           description: Select the events that Redis will notify among
@@ -636,20 +675,33 @@ spec:
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Redis cluster.
                     type: string
+                  diskSizeAutoscaling:
+                    items:
+                      properties:
+                        diskSizeLimit:
+                          description: Limit of disk size after autoscaling (GiB).
+                          type: number
+                        emergencyUsageThreshold:
+                          description: Immediate autoscaling disk usage (percent).
+                          type: number
+                        plannedUsageThreshold:
+                          description: Maintenance window autoscaling disk usage (percent).
+                          type: number
+                      type: object
+                    type: array
                   environment:
                     description: Deployment environment of the Redis cluster. Can
                       be either PRESTABLE or PRODUCTION.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                    description: The ID of the folder that the resource belongs to.
+                      If it is not provided, the default provider folder is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -744,9 +796,9 @@ spec:
                           description: The name of the shard to which the host belongs.
                           type: string
                         subnetId:
-                          description: |-
-                            The ID of the subnet, to which the host belongs. The subnet must
-                            be a part of the network to which the cluster belongs.
+                          description: The ID of the subnet, to which the host belongs.
+                            The subnet must be a part of the network to which the
+                            cluster belongs.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -823,9 +875,9 @@ spec:
                               type: object
                           type: object
                         zone:
-                          description: |-
-                            The availability zone where the Redis host will be created.
-                            For more information see the official documentation.
+                          description: The availability zone where the Redis host
+                            will be created. For more information see the official
+                            documentation.
                           type: string
                       type: object
                     type: array
@@ -1042,9 +1094,9 @@ spec:
                         type: object
                     type: object
                   sharded:
-                    description: |-
-                      Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
-                      If cluster is sharded - disabling is not allowed.
+                    description: Redis Cluster mode enabled/disabled. Enables sharding
+                      when cluster non-sharded. If cluster is sharded - disabling
+                      is not allowed.
                     type: boolean
                   tlsEnabled:
                     description: TLS support mode enabled/disabled.
@@ -1243,6 +1295,21 @@ spec:
             properties:
               atProvider:
                 properties:
+                  access:
+                    description: Access policy to the Redis cluster. The structure
+                      is documented below.
+                    items:
+                      properties:
+                        dataLens:
+                          description: Allow access for DataLens. Can be either true
+                            or false.
+                          type: boolean
+                        webSql:
+                          description: Allow access for Web SQL. Can be either true
+                            or false.
+                          type: boolean
+                      type: object
+                    type: array
                   announceHostnames:
                     description: Announce fqdn instead of ip address.
                     type: boolean
@@ -1252,14 +1319,12 @@ spec:
                     items:
                       properties:
                         clientOutputBufferLimitNormal:
-                          description: |-
-                            Normal clients output buffer limits.
-                            See redis config file.
+                          description: Normal clients output buffer limits. See redis
+                            config file.
                           type: string
                         clientOutputBufferLimitPubsub:
-                          description: |-
-                            Pubsub clients output buffer limits.
-                            See redis config file.
+                          description: Pubsub clients output buffer limits. See redis
+                            config file.
                           type: string
                         databases:
                           description: Number of databases (changing requires redis-server
@@ -1269,9 +1334,9 @@ spec:
                           description: Redis maxmemory usage in percent
                           type: number
                         maxmemoryPolicy:
-                          description: |-
-                            Redis key eviction policy for a dataset that reaches maximum memory.
-                            Can be any of the listed in the official RedisDB documentation.
+                          description: Redis key eviction policy for a dataset that
+                            reaches maximum memory. Can be any of the listed in the
+                            official RedisDB documentation.
                           type: string
                         notifyKeyspaceEvents:
                           description: Select the events that Redis will notify among
@@ -1296,25 +1361,38 @@ spec:
                     description: Creation timestamp of the key.
                     type: string
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: Inhibits deletion of the cluster. Can be either true
+                      or false.
                     type: boolean
                   description:
                     description: Description of the Redis cluster.
                     type: string
+                  diskSizeAutoscaling:
+                    items:
+                      properties:
+                        diskSizeLimit:
+                          description: Limit of disk size after autoscaling (GiB).
+                          type: number
+                        emergencyUsageThreshold:
+                          description: Immediate autoscaling disk usage (percent).
+                          type: number
+                        plannedUsageThreshold:
+                          description: Maintenance window autoscaling disk usage (percent).
+                          type: number
+                      type: object
+                    type: array
                   environment:
                     description: Deployment environment of the Redis cluster. Can
                       be either PRESTABLE or PRODUCTION.
                     type: string
                   folderId:
-                    description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                    description: The ID of the folder that the resource belongs to.
+                      If it is not provided, the default provider folder is used.
                     type: string
                   health:
-                    description: |-
-                      Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN.
-                      For more information see health field of JSON representation in the official documentation.
+                    description: Aggregated health of the cluster. Can be either ALIVE,
+                      DEGRADED, DEAD or HEALTH_UNKNOWN. For more information see health
+                      field of JSON representation in the official documentation.
                     type: string
                   host:
                     description: A host of the Redis cluster. The structure is documented
@@ -1336,14 +1414,14 @@ spec:
                           description: The name of the shard to which the host belongs.
                           type: string
                         subnetId:
-                          description: |-
-                            The ID of the subnet, to which the host belongs. The subnet must
-                            be a part of the network to which the cluster belongs.
+                          description: The ID of the subnet, to which the host belongs.
+                            The subnet must be a part of the network to which the
+                            cluster belongs.
                           type: string
                         zone:
-                          description: |-
-                            The availability zone where the Redis host will be created.
-                            For more information see the official documentation.
+                          description: The availability zone where the Redis host
+                            will be created. For more information see the official
+                            documentation.
                           type: string
                       type: object
                     type: array
@@ -1410,14 +1488,15 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   sharded:
-                    description: |-
-                      Redis Cluster mode enabled/disabled. Enables sharding when cluster non-sharded.
-                      If cluster is sharded - disabling is not allowed.
+                    description: Redis Cluster mode enabled/disabled. Enables sharding
+                      when cluster non-sharded. If cluster is sharded - disabling
+                      is not allowed.
                     type: boolean
                   status:
-                    description: |-
-                      Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
-                      For more information see status field of JSON representation in the official documentation.
+                    description: Status of the cluster. Can be either CREATING, STARTING,
+                      RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
+                      For more information see status field of JSON representation
+                      in the official documentation.
                     type: string
                   tlsEnabled:
                     description: TLS support mode enabled/disabled.

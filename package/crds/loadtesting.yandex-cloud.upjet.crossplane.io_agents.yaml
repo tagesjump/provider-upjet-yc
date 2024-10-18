@@ -353,9 +353,9 @@ spec:
                               type: object
                           type: object
                         zoneId:
-                          description: |-
-                            The availability zone where the virtual machine will be created. If it is not provided,
-                            the default provider folder is used.
+                          description: The availability zone where the virtual machine
+                            will be created. If it is not provided, the default provider
+                            folder is used.
                           type: string
                       type: object
                     type: array
@@ -745,9 +745,9 @@ spec:
                               type: object
                           type: object
                         zoneId:
-                          description: |-
-                            The availability zone where the virtual machine will be created. If it is not provided,
-                            the default provider folder is used.
+                          description: The availability zone where the virtual machine
+                            will be created. If it is not provided, the default provider
+                            folder is used.
                           type: string
                       type: object
                     type: array
@@ -1073,6 +1073,14 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        computedLabels:
+                          additionalProperties:
+                            type: string
+                          description: (Computed) The set of labels key:value pairs
+                            assigned to this instance. This includes user custom labels
+                            and predefined items created by Yandex Cloud Load Testing.
+                          type: object
+                          x-kubernetes-map-type: granular
                         computedMetadata:
                           additionalProperties:
                             type: string
@@ -1170,9 +1178,9 @@ spec:
                             or loadtesting.externalAgent role in the folder.
                           type: string
                         zoneId:
-                          description: |-
-                            The availability zone where the virtual machine will be created. If it is not provided,
-                            the default provider folder is used.
+                          description: The availability zone where the virtual machine
+                            will be created. If it is not provided, the default provider
+                            folder is used.
                           type: string
                       type: object
                     type: array
