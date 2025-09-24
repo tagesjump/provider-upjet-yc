@@ -293,19 +293,19 @@ jobs:
           echo "cache=$(make go.cachedir)" >> $GITHUB_OUTPUT && \
           echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
-      - name: Cache the Go Build Cache
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
-        with:
-          path: ${{ steps.go_cache.outputs.cache }}
-          key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-build-publish-artifacts-
+      # - name: Cache the Go Build Cache
+      #   uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+      #   with:
+      #     path: ${{ steps.go_cache.outputs.cache }}
+      #     key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
+      #     restore-keys: ${{ runner.os }}-build-publish-artifacts-
 
-      - name: Cache Go Dependencies
-        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
-        with:
-          path: ${{ steps.go_cache.outputs.mod_cache }}
-          key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-pkg-
+      # - name: Cache Go Dependencies
+      #   uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
+      #   with:
+      #     path: ${{ steps.go_cache.outputs.mod_cache }}
+      #     key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
+      #     restore-keys: ${{ runner.os }}-pkg-
 
       - name: Vendor Dependencies
         run: make vendor vendor.check
