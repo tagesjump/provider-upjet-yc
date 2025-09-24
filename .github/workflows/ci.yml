@@ -86,14 +86,14 @@ jobs:
           echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-lint-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-lint-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
@@ -179,14 +179,14 @@ jobs:
           echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-unit-tests-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
@@ -230,14 +230,14 @@ jobs:
           echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-unit-tests-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-unit-tests-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
@@ -294,14 +294,14 @@ jobs:
           echo "mod_cache=$(make go.mod.cachedir)" >> $GITHUB_OUTPUT
 
       - name: Cache the Go Build Cache
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.cache }}
           key: ${{ runner.os }}-build-publish-artifacts-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-build-publish-artifacts-
 
       - name: Cache Go Dependencies
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4
         with:
           path: ${{ steps.go_cache.outputs.mod_cache }}
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
@@ -318,7 +318,7 @@ jobs:
           BUILD_ARGS: "--load"
 
       - name: Upload Artifacts to GitHub
-        uses: actions/upload-artifact@a8a3f3ad30e3422c9c7b888a15615d19a852ae32 # v3
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: output
           path: _output/**
