@@ -1,0 +1,37 @@
+apiVersion: compute.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SnapshotScheduleIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshotscheduleiambinding
+  labels:
+    testing.upbound.io/example-name: editor
+  name: editor
+  namespace: upbound-system
+spec:
+  forProvider:
+    members:
+    - userAccount:some_user_id
+    role: editor
+    snapshotScheduleId: ${data.yandex_compute_snapshot_schedule.schedule1.id}
+
+---
+
+apiVersion: compute.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SnapshotSchedule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshotscheduleiambinding
+  labels:
+    testing.upbound.io/example-name: schedule1
+  name: schedule1
+  namespace: upbound-system
+spec:
+  forProvider:
+    diskIdsRefs:
+    - name: example
+    - name: example
+    retentionPeriod: 12h
+    schedulePolicy:
+    - expression: 0 0 * * *
+    snapshotSpec:
+    - description: retention-snapshot

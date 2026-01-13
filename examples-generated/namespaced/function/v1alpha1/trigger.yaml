@@ -1,0 +1,17 @@
+apiVersion: function.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Trigger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/trigger
+  labels:
+    testing.upbound.io/example-name: my_trigger
+  name: my-trigger
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: any description
+    function:
+    - id: tf-test
+    name: some_name
+    timer:
+    - cronExpression: '* * * * ? *'

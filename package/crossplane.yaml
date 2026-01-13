@@ -17,3 +17,5 @@ metadata:
 
       For filing bugs, suggesting improvements, or requesting new features, please
       open an [issue](https://github.com/tagesjump/provider-upjet-yc/issues).
+  capabilities:
+    - SafeStart

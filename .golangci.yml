@@ -39,7 +39,7 @@ linters-settings:
   goimports:
     # put imports beginning with prefix after 3rd-party packages;
     # it's a comma-separated list of prefixes
-    local-prefixes: github.com/tagesjump/provider-upjet-yc,github.com/crossplane/upjet/pkg/config
+    local-prefixes: github.com/tagesjump/provider-upjet-yc,github.com/crossplane/upjet/v2/pkg/config
 
 
   gocyclo:

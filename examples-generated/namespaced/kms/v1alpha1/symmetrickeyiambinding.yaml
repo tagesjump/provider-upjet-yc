@@ -1,0 +1,35 @@
+apiVersion: kms.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SymmetricKeyIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/symmetrickeyiambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+  namespace: upbound-system
+spec:
+  forProvider:
+    role: viewer
+    serviceAccountRef:
+    - name: example
+    symmetricKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your-key
+
+---
+
+apiVersion: kms.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SymmetricKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/symmetrickeyiambinding
+  labels:
+    testing.upbound.io/example-name: your-key
+  name: your-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: symmetric-key-name

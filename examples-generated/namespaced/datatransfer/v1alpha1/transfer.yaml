@@ -1,0 +1,105 @@
+apiVersion: datatransfer.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Transfer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datatransfer/v1alpha1/transfer
+  labels:
+    testing.upbound.io/example-name: pgpg_transfer
+  name: pgpg-transfer
+  namespace: upbound-system
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: pgpg
+    runtime:
+    - ycRuntime:
+      - jobCount: 1
+        uploadShardParams:
+        - jobCount: 4
+          processCount: 1
+    sourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pg_source
+    targetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pg_target
+    transformation:
+    - transformers:
+      - one:
+          of:
+            transfomer:
+            - {}
+      - one:
+          of:
+            transfomers:
+            - {}
+    type: SNAPSHOT_AND_INCREMENT
+
+---
+
+apiVersion: datatransfer.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datatransfer/v1alpha1/transfer
+  labels:
+    testing.upbound.io/example-name: pg_source
+  name: pg-source
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: pg-test-source
+    settings:
+    - postgresSource:
+      - connection:
+        - onPremise:
+          - hosts:
+            - example.org
+            port: 5432
+        databaseSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        password:
+        - rawSecretRef:
+            key: example-key
+            name: example-secret
+        slotGigabyteLagLimit: 100
+        userSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datatransfer.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datatransfer/v1alpha1/transfer
+  labels:
+    testing.upbound.io/example-name: pg_target
+  name: pg-target
+  namespace: upbound-system
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: pg-test-target2
+    settings:
+    - postgresTarget:
+      - connection:
+        - mdbClusterIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+        databaseSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        password:
+        - rawSecretRef:
+            key: example-key
+            name: example-secret
+        userSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example

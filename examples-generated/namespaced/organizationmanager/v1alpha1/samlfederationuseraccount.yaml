@@ -1,0 +1,13 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SAMLFederationUserAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/samlfederationuseraccount
+  labels:
+    testing.upbound.io/example-name: account
+  name: account
+  namespace: upbound-system
+spec:
+  forProvider:
+    federationId: some_federation_id
+    nameId: example@example.org

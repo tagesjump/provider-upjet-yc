@@ -1,0 +1,24 @@
+apiVersion: compute.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SnapshotSchedule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/snapshotschedule
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    diskIdsRefs:
+    - name: example
+    - name: example
+    labels:
+      my-label: my-label-value
+    name: my-name
+    schedulePolicy:
+    - expression: 0 0 * * *
+    snapshotCount: 1
+    snapshotSpec:
+    - description: snapshot-description
+      labels:
+        snapshot-label: my-snapshot-label-value

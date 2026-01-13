@@ -1,0 +1,36 @@
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: RegistryIPPermission
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/registryippermission
+  labels:
+    testing.upbound.io/example-name: my_ip_permission
+  name: my-ip-permission
+  namespace: upbound-system
+spec:
+  forProvider:
+    pull:
+    - 10.1.0.0/16
+    - 10.5.0/16
+    push:
+    - 10.1.0.0/16
+    - 10.2.0.0/16
+    - 10.3.0.0/16
+    registryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my_registry
+
+---
+
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/registryippermission
+  labels:
+    testing.upbound.io/example-name: my_registry
+  name: my-registry
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: test-registry

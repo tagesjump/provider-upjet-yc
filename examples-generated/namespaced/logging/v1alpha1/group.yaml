@@ -1,0 +1,15 @@
+apiVersion: logging.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Group
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logging/v1alpha1/group
+  labels:
+    testing.upbound.io/example-name: group1
+  name: group1
+  namespace: upbound-system
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: yandex_resourcemanager_folder
+    name: test-logging-group
