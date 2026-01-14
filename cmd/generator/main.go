@@ -24,7 +24,8 @@ func main() {
 		panic(fmt.Sprintf("cannot calculate the absolute path with %s", rootDir))
 	}
 	p, err := config.GetProvider(true)
+	kingpin.FatalIfError(err, "Cannot initialize the cluster provider configuration")
 	n, err := config.GetProviderNamespaced(true)
-	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
+	kingpin.FatalIfError(err, "Cannot initialize the namespaced provider configuration")
 	pipeline.Run(p, n, absRootDir)
 }
