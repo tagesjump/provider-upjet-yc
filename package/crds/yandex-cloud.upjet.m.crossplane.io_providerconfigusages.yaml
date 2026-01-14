@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-  name: providerconfigusages.aws.upbound.io
+  name: providerconfigusages.yandex-cloud.upjet.m.crossplane.io
 spec:
-  group: aws.upbound.io
+  group: yandex-cloud.upjet.m.crossplane.io
   names:
     categories:
     - crossplane
