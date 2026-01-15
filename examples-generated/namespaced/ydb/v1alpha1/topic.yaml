@@ -1,0 +1,40 @@
+apiVersion: ydb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ydb/v1alpha1/topic
+  labels:
+    testing.upbound.io/example-name: topic
+  name: topic
+  namespace: upbound-system
+spec:
+  forProvider:
+    consumer:
+    - name: consumer-name
+      startingMessageTimestampMs: 0
+      supportedCodecs:
+      - raw
+      - gzip
+    databaseEndpoint: ${yandex_ydb_database_serverless.database_name.ydb_full_endpoint}
+    name: topic-test
+    partitionsCount: 1
+    retention_period_ms: 2000000
+    supportedCodecs:
+    - raw
+    - gzip
+
+---
+
+apiVersion: ydb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: DatabaseServerless
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ydb/v1alpha1/topic
+  labels:
+    testing.upbound.io/example-name: database_name
+  name: database-name
+  namespace: upbound-system
+spec:
+  forProvider:
+    locationId: ru-central1
+    name: database-name

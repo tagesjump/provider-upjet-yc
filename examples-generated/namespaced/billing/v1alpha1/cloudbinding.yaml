@@ -1,0 +1,13 @@
+apiVersion: billing.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: CloudBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: billing/v1alpha1/cloudbinding
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    billingAccountId: foo-ba-id
+    cloudId: foo-cloud-id

@@ -1,0 +1,27 @@
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repository
+  labels:
+    testing.upbound.io/example-name: my-repository
+  name: my-repository
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: ${yandex_container_registry.my-registry.id}/test-repository
+
+---
+
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repository
+  labels:
+    testing.upbound.io/example-name: my-registry
+  name: my-registry
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: test-registry

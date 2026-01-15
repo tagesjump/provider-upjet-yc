@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 
-	"github.com/crossplane/upjet/pkg/config"
-	"github.com/tagesjump/provider-upjet-yc/config/resourcemanager"
+	"github.com/crossplane/upjet/v2/pkg/config"
+	"github.com/tagesjump/provider-upjet-yc/config/cluster/resourcemanager"
 )
 
 // TerraformPluginSDKExternalNameConfigs contains all external name configurations

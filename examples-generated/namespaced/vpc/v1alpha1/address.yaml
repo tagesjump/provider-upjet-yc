@@ -1,0 +1,14 @@
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Address
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/address
+  labels:
+    testing.upbound.io/example-name: addr
+  name: addr
+  namespace: upbound-system
+spec:
+  forProvider:
+    externalIpv4Address:
+    - zoneId: ru-central1-a
+    name: exampleAddress

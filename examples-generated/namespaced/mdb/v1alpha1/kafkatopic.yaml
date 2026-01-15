@@ -1,0 +1,58 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: KafkaTopic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkatopic
+  labels:
+    testing.upbound.io/example-name: events
+  name: events
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    name: events
+    partitions: 4
+    replicationFactor: 1
+    topicConfig:
+    - cleanupPolicy: CLEANUP_POLICY_COMPACT
+      compressionType: COMPRESSION_TYPE_LZ4
+      deleteRetentionMs: 86400000
+      fileDeleteDelayMs: 60000
+      flushMessages: 128
+      flushMs: 1000
+      maxMessageBytes: 1048588
+      minCompactionLagMs: 0
+      minInsyncReplicas: 1
+      preallocate: true
+      retentionBytes: 10737418240
+      retentionMs: 604800000
+      segmentBytes: 268435456
+
+---
+
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: KafkaCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkatopic
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+    - kafka:
+      - resources:
+        - diskSize: 16
+          diskTypeId: network-hdd
+          resourcePresetId: s2.micro
+      version: "2.8"
+      zones:
+      - ru-central1-a
+    name: foo
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

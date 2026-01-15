@@ -1,0 +1,21 @@
+apiVersion: iot.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: CoreBroker
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/corebroker
+  labels:
+    testing.upbound.io/example-name: my_broker
+  name: my-broker
+  namespace: upbound-system
+spec:
+  forProvider:
+    certificates:
+    - public part of certificate1
+    - public part of certificate2
+    description: any description
+    labels:
+      my-label: my-label-value
+    logOptions:
+    - logGroupId: log-group-id
+      minLevel: ERROR
+    name: some_name
