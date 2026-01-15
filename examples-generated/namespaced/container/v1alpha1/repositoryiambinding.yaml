@@ -1,0 +1,50 @@
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: RepositoryIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repositoryiambinding
+  labels:
+    testing.upbound.io/example-name: puller
+  name: puller
+  namespace: upbound-system
+spec:
+  forProvider:
+    repositoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: repo-1
+    role: container-registry.images.puller
+    serviceAccountRef:
+    - name: example
+
+---
+
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repositoryiambinding
+  labels:
+    testing.upbound.io/example-name: your-registry
+  name: your-registry
+  namespace: upbound-system
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: registry-name
+
+---
+
+apiVersion: container.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Repository
+metadata:
+  annotations:
+    meta.upbound.io/example-id: container/v1alpha1/repositoryiambinding
+  labels:
+    testing.upbound.io/example-name: repo-1
+  name: repo-1
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: ${yandex_container_registry.your-registry.id}/repo-1

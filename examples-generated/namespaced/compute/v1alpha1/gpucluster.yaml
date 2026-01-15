@@ -1,0 +1,16 @@
+apiVersion: compute.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: GpuCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1alpha1/gpucluster
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+  namespace: upbound-system
+spec:
+  forProvider:
+    interconnectType: infiniband
+    labels:
+      environment: test
+    name: gpu-cluster-name
+    zone: ru-central1-a

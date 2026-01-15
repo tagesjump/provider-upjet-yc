@@ -1,6 +1,6 @@
 package features
 
-import "github.com/crossplane/crossplane-runtime/pkg/feature"
+import "github.com/crossplane/crossplane-runtime/v2/pkg/feature"
 
 // Feature flags.
 const (

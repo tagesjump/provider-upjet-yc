@@ -1,0 +1,129 @@
+apiVersion: monitoring.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Dashboard
+metadata:
+  annotations:
+    meta.upbound.io/example-id: monitoring/v1alpha1/dashboard
+  labels:
+    testing.upbound.io/example-name: my-dashboard
+  name: my-dashboard
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Description
+    labels:
+      a: b
+    name: local-id-resource
+    parametrization:
+    - parameters:
+      - custom:
+        - defaultValues:
+          - "1"
+          - "2"
+          multiselectable: true
+          values:
+          - "1"
+          - "2"
+          - "3"
+        description: param1 description
+        hidden: false
+        id: param1
+        title: title
+      - hidden: true
+        id: param2
+        labelValues:
+        - defaultValues:
+          - "1"
+          - "2"
+          labelKey: key
+          multiselectable: true
+          selectors: a=b
+      - hidden: true
+        id: param3
+        text:
+        - defaultValue: abc
+      selectors: a=b
+    title: My title
+    widgets:
+    - position:
+      - h: 1
+        w: 1
+        x: 4
+        "y": 4
+      text:
+      - text: text here
+    - chart:
+      - chartId: chart1id
+        description: chart description
+        displayLegend: true
+        freeze: FREEZE_DURATION_HOUR
+        nameHidingSettings:
+        - names:
+          - a
+          - b
+          positive: true
+        queries:
+        - downsampling:
+          - disabled: false
+            gapFilling: GAP_FILLING_NULL
+            gridAggregation: GRID_AGGREGATION_COUNT
+            maxPoints: 100
+          target:
+          - hidden: true
+            query: '{service=monitoring}'
+            textMode: true
+        seriesOverrides:
+        - name: name
+          settings:
+          - color: colorValue
+            growDown: true
+            name: series_overrides name
+            stackName: stack name
+            type: SERIES_VISUALIZATION_TYPE_LINE
+            yaxisPosition: YAXIS_POSITION_LEFT
+        title: title for chart
+        visualizationSettings:
+        - aggregation: SERIES_AGGREGATION_AVG
+          colorSchemeSettings:
+          - gradient:
+            - greenValue: "11"
+              redValue: "22"
+              violetValue: "33"
+              yellowValue: "44"
+          heatmapSettings:
+          - greenValue: "1"
+            redValue: "2"
+            violetValue: "3"
+            yellowValue: "4"
+          interpolate: INTERPOLATE_LEFT
+          normalize: true
+          showLabels: true
+          title: visualization_settings title
+          type: VISUALIZATION_TYPE_POINTS
+          yaxisSettings:
+          - left:
+            - max: "111"
+              min: "11"
+              precision: 3
+              title: yaxis_settings left title
+              type: YAXIS_TYPE_LOGARITHMIC
+              unitFormat: UNIT_CELSIUS
+            right:
+            - max: "22"
+              min: "2"
+              precision: 2
+              title: yaxis_settings right title
+              type: YAXIS_TYPE_LOGARITHMIC
+              unitFormat: UNIT_NONE
+      position:
+      - h: 100
+        w: 100
+        x: 6
+        "y": 6
+    - position:
+      - h: 1
+        w: 1
+        x: 1
+        "y": 1
+      title:
+      - size: TITLE_SIZE_XS
+        text: title here

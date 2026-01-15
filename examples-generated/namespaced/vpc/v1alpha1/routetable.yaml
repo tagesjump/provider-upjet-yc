@@ -1,0 +1,53 @@
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/routetable
+  labels:
+    testing.upbound.io/example-name: lab-rt-a
+  name: lab-rt-a
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lab-net
+    staticRoute:
+    - destinationPrefix: 10.2.0.0/16
+      nextHopAddress: 172.16.10.10
+    - destinationPrefix: 0.0.0.0/0
+      gatewayIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: egress-gateway
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Gateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/routetable
+  labels:
+    testing.upbound.io/example-name: egress-gateway
+  name: egress-gateway
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: egress-gateway
+    sharedEgressGateway:
+    - {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/routetable
+  labels:
+    testing.upbound.io/example-name: lab-net
+  name: lab-net
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: lab-network

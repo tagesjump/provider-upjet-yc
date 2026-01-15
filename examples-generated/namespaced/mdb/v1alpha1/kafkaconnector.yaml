@@ -1,0 +1,62 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: KafkaConnector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkaconnector
+  labels:
+    testing.upbound.io/example-name: connector
+  name: connector
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    connectorConfigMirrormaker:
+    - replicationFactor: 1
+      sourceCluster:
+      - alias: source
+        externalCluster:
+        - bootstrapServers: somebroker1:9091,somebroker2:9091
+          saslMechanism: SCRAM-SHA-512
+          saslPasswordSecretRef:
+            key: example-key
+            name: example-secret
+          saslUsername: someuser
+          securityProtocol: SASL_SSL
+      targetCluster:
+      - alias: target
+        thisCluster:
+        - {}
+      topics: data.*
+    name: replication
+    properties:
+      refresh.topics.enabled: "true"
+    tasksMax: 3
+
+---
+
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: KafkaCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/kafkaconnector
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+    - kafka:
+      - resources:
+        - diskSize: 16
+          diskTypeId: network-hdd
+          resourcePresetId: s2.micro
+      version: "2.8"
+      zones:
+      - ru-central1-a
+    name: foo
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

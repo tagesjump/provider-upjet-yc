@@ -1,0 +1,15 @@
+apiVersion: function.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: IAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: function/v1alpha1/iambinding
+  labels:
+    testing.upbound.io/example-name: function-iam
+  name: function-iam
+  namespace: upbound-system
+spec:
+  forProvider:
+    functionId: your-function-id
+    members:
+    - system:allUsers
+    role: serverless.functions.invoker

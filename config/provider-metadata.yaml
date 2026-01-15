@@ -2954,6 +2954,8 @@ resources:
                     }
                   ]
                 }
+              references:
+                settings.postgres_target.security_groups: list
         argumentDocs:
             auth.no_auth: '- Connection without authentication data.'
             auth.sasl: '- Authentication using sasl.'
@@ -3433,6 +3435,8 @@ resources:
                   "public": false,
                   "zone": "example.com."
                 }
+              references:
+                private_networks: yandex_vpc_network.foo.id
               dependencies:
                 yandex_dns_recordset.rs1: |-
                     {
@@ -6036,6 +6040,7 @@ resources:
                 }
               references:
                 network_id: yandex_vpc_network.foo.id
+                security_group_ids: yandex_vpc_security_group.test-sg-x.id
                 subnet_id: yandex_vpc_subnet.foo.id
               dependencies:
                 yandex_vpc_network.foo: '{}'
@@ -8780,6 +8785,7 @@ resources:
               references:
                 host.subnet_id: yandex_vpc_subnet.foo.id
                 network_id: yandex_vpc_network.foo.id
+                security_group_ids: yandex_vpc_security_group.test-sg-x.id
               dependencies:
                 yandex_vpc_network.foo: '{}'
                 yandex_vpc_security_group.test-sg-x: |-

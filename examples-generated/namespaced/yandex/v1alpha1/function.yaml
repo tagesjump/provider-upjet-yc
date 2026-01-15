@@ -1,0 +1,40 @@
+apiVersion: yandex.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Function
+metadata:
+  annotations:
+    meta.upbound.io/example-id: yandex/v1alpha1/function
+  labels:
+    testing.upbound.io/example-name: test-function
+  name: test-function
+  namespace: upbound-system
+spec:
+  forProvider:
+    asyncInvocation:
+    - retriesCount: "3"
+      services_account_id: ajeihp9qsfg2l6f838kk
+      ymqFailureTarget:
+      - arn: yrn:yc:ymq:ru-central1:b1glraqqa1i7tmh9hsfp:fail
+        serviceAccountId: ajeqr0pjpbrkovcqb76m
+      ymqSuccessTarget:
+      - arn: yrn:yc:ymq:ru-central1:b1glraqqa1i7tmh9hsfp:success
+        serviceAccountId: ajeqr0pjpbrkovcqb76m
+    content:
+    - zipFilename: function.zip
+    description: any description
+    entrypoint: main
+    executionTimeout: "10"
+    logOptions:
+    - logGroupId: e2392vo6d1bne2aeq9fr
+      minLevel: ERROR
+    memory: "128"
+    name: some_name
+    runtime: python37
+    secrets:
+    - environmentVariable: ENV_VARIABLE
+      id: ${yandex_lockbox_secret.secret.id}
+      key: secret-key
+      versionId: ${yandex_lockbox_secret_version.secret_version.id}
+    serviceAccountId: are1service2account3id
+    tags:
+    - my_tag
+    userHash: any_user_defined_string

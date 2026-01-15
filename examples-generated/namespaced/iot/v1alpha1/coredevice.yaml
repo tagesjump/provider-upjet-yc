@@ -1,0 +1,23 @@
+apiVersion: iot.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: CoreDevice
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iot/v1alpha1/coredevice
+  labels:
+    testing.upbound.io/example-name: my_device
+  name: my-device
+  namespace: upbound-system
+spec:
+  forProvider:
+    aliases:
+      some_alias1/subtopic: $devices/{id}/events/somesubtopic
+      some_alias2/subtopic: $devices/{id}/events/aaa/bbb
+    certificates:
+    - public part of certificate1
+    - public part of certificate2
+    description: any description
+    name: some_name
+    passwordsSecretRef:
+    - key: example-key
+      name: example-secret
+    registryId: are1sampleregistryid11
