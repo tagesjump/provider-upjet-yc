@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/event"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/providerconfig"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+
 	"github.com/crossplane/upjet/v2/pkg/controller"
 
 	"github.com/tagesjump/provider-upjet-yc/apis/cluster/v1beta1"

@@ -30,7 +30,6 @@ import (
 	"github.com/crossplane/crossplane-runtime/v2/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/customresourcesgate"
 	"github.com/crossplane/crossplane-runtime/v2/pkg/reconciler/managed"
-	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 	"github.com/pkg/errors"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	ctrl "sigs.k8s.io/controller-runtime"
@@ -39,6 +38,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/webhook"
+
+	tjcontroller "github.com/crossplane/upjet/v2/pkg/controller"
 
 	apisCluster "github.com/tagesjump/provider-upjet-yc/apis/cluster"
 	apisNamespaced "github.com/tagesjump/provider-upjet-yc/apis/namespaced"

@@ -8,9 +8,10 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/crossplane/upjet/v2/pkg/terraform"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
+	"github.com/crossplane/upjet/v2/pkg/terraform"
 
 	"github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/pkg/errors"

@@ -10,6 +10,7 @@ import (
 	"path/filepath"
 
 	"github.com/alecthomas/kingpin/v2"
+
 	"github.com/crossplane/upjet/v2/pkg/pipeline"
 	"github.com/tagesjump/provider-upjet-yc/config"
 )
