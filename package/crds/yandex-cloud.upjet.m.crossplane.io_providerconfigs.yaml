@@ -10,13 +10,13 @@ spec:
   names:
     categories:
     - crossplane
-    - providerconfig
-    - aws
+    - provider
+    - yandex-cloud
     kind: ProviderConfig
     listKind: ProviderConfigList
     plural: providerconfigs
     singular: providerconfig
-  scope: Cluster
+  scope: Namespaced
   versions:
   - additionalPrinterColumns:
     - jsonPath: .metadata.creationTimestamp
@@ -29,7 +29,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: A ProviderConfig configures the AWS provider.
+        description: A ProviderConfig configures a YandexCloud provider.
         properties:
           apiVersion:
             description: |-
@@ -57,7 +57,7 @@ spec:
                 items:
                   description: |-
                     AssumeRoleOptions define the options for assuming an IAM Role
-                    Fields are similar to the STS AssumeRoleOptions in the AWS SDK
+                    Fields are similar to the STS AssumeRoleOptions in the Yandex Cloud SDK
                   properties:
                     externalID:
                       description: ExternalID is the external ID used when assuming
@@ -280,7 +280,7 @@ spec:
               endpoint:
                 description: |-
                   Endpoint is where you can override the default endpoint configuration
-                  of AWS calls made by the provider.
+                  of Yandex Cloud calls made by the provider.
                 properties:
                   hostnameImmutable:
                     description: |-
@@ -308,10 +308,10 @@ spec:
                       will be used instead of Endpoint Discovery, or if the endpoint will be
                       used to perform Endpoint Discovery. That behavior is configured via the
                       API Client's Options.
-                      Note that this is effective only for resources that use AWS SDK v2.
+                      Note that this is effective only for resources that use Yandex Cloud SDK v2.
                     type: boolean
                   partitionId:
-                    description: The AWS partition the endpoint belongs to.
+                    description: The Yandex Cloud partition the endpoint belongs to.
                     type: string
                   services:
                     description: Specifies the list of services you want endpoint
@@ -342,7 +342,7 @@ spec:
                       If source is not provided when providing a custom endpoint, the SDK may not
                       perform required host mutations correctly. Source should be used along with
                       HostnameImmutable property as per the usage requirement.
-                      Note that this is effective only for resources that use AWS SDK v2.
+                      Note that this is effective only for resources that use Yandex Cloud SDK v2.
                     enum:
                     - ServiceMetadata
                     - Custom
@@ -377,7 +377,7 @@ spec:
                         type: object
                       static:
                         description: |-
-                          Static is the full URL you'd like the AWS SDK to use.
+                          Static is the full URL you'd like the Yandex Cloud SDK to use.
                           Recommended for using tools like localstack where a single host is exposed
                           for all services and regions.
                         type: string
@@ -405,23 +405,23 @@ spec:
               skip_credentials_validation:
                 description: |-
                   Whether to skip credentials validation via the STS API.
-                  This can be useful for testing and for AWS API implementations that do not have STS available.
+                  This can be useful for testing and for Yandex Cloud API implementations that do not have STS available.
                 type: boolean
               skip_metadata_api_check:
                 description: |-
-                  Whether to skip the AWS Metadata API check
-                  Useful for AWS API implementations that do not have a metadata API endpoint.
+                  Whether to skip the Yandex Cloud Metadata API check
+                  Useful for Yandex Cloud API implementations that do not have a metadata API endpoint.
                 type: boolean
               skip_region_validation:
                 description: |-
                   Whether to skip validation of provided region name.
-                  Useful for AWS-like implementations that use their own region names or to bypass the validation for
+                  Useful for Yandex Cloud-like implementations that use their own region names or to bypass the validation for
                   regions that aren't publicly available yet.
                 type: boolean
               skip_requesting_account_id:
                 description: |-
                   Whether to skip requesting the account ID.
-                  Useful for AWS API implementations that do not have the IAM, STS API, or metadata API
+                  Useful for Yandex Cloud API implementations that do not have the IAM, STS API, or metadata API
                 type: boolean
             required:
             - credentials
