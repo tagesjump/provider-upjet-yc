@@ -242,7 +242,7 @@ jobs:
         run: make local-deploy
 
   publish-artifacts:
-    runs-on: ubuntu-24.04
+    runs-on: self-hosted
     needs:
       - detect-noop
       - report-breaking-changes
