@@ -19,10 +19,10 @@ import (
 // Setup adds a controller that reconciles ProviderConfigs and
 // ClusterProviderConfigs by accounting for their current usage.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
-	if err := setupNamespacedProviderConfig(mgr, o); err != nil {
+	if err := setupClusterProviderConfig(mgr, o); err != nil {
 		return err
 	}
-	return setupClusterProviderConfig(mgr, o)
+	return setupNamespacedProviderConfig(mgr, o)
 }
 
 func setupNamespacedProviderConfig(mgr ctrl.Manager, o controller.Options) error {
