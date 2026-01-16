@@ -2,7 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-// Package v1beta1 contains the core resources of the aws jet provider.
+// Package v1beta1 contains the core resources of the Yandex Cloud jet provider.
 // +kubebuilder:object:generate=true
 // +groupName=yandex-cloud.upjet.crossplane.io
 // +versionName=v1beta1

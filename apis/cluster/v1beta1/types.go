@@ -18,33 +18,33 @@ type ProviderConfigSpec struct {
 	AssumeRoleChain []AssumeRoleOptions `json:"assumeRoleChain,omitempty"`
 
 	// Endpoint is where you can override the default endpoint configuration
-	// of AWS calls made by the provider.
+	// of Yandex Cloud calls made by the provider.
 	// +optional
 	Endpoint *EndpointConfig `json:"endpoint,omitempty"`
 	// Whether to skip credentials validation via the STS API.
-	// This can be useful for testing and for AWS API implementations that do not have STS available.
+	// This can be useful for testing and for Yandex Cloud API implementations that do not have STS available.
 	// +optional
 	SkipCredsValidation bool `json:"skip_credentials_validation,omitempty"`
 	// Whether to skip validation of provided region name.
-	// Useful for AWS-like implementations that use their own region names or to bypass the validation for
+	// Useful for aws-like implementations that use their own region names or to bypass the validation for
 	// regions that aren't publicly available yet.
 	// +optional
 	SkipRegionValidation bool `json:"skip_region_validation,omitempty"`
 	// Whether to enable the request to use path-style addressing, i.e., https://s3.amazonaws.com/BUCKET/KEY.
 	// +optional
 	S3UsePathStyle bool `json:"s3_use_path_style,omitempty"`
-	// Whether to skip the AWS Metadata API check
-	// Useful for AWS API implementations that do not have a metadata API endpoint.
+	// Whether to skip the Yandex Cloud Metadata API check
+	// Useful for Yandex Cloud API implementations that do not have a metadata API endpoint.
 	// +optional
 	SkipMetadataApiCheck bool `json:"skip_metadata_api_check,omitempty"`
 	// Whether to skip requesting the account ID.
-	// Useful for AWS API implementations that do not have the IAM, STS API, or metadata API
+	// Useful for Yandex Cloud API implementations that do not have the IAM, STS API, or metadata API
 	// +optional
 	SkipReqAccountId bool `json:"skip_requesting_account_id,omitempty"`
 }
 
 // AssumeRoleOptions define the options for assuming an IAM Role
-// Fields are similar to the STS AssumeRoleOptions in the AWS SDK
+// Fields are similar to the STS AssumeRoleOptions in the Yandex Cloud SDK
 type AssumeRoleOptions struct {
 	// AssumeRoleARN to assume with provider credentials
 	RoleARN *string `json:"roleARN,omitempty"`
@@ -69,7 +69,7 @@ type AssumeRoleOptions struct {
 }
 
 // AssumeRoleWithWebIdentityOptions define the options for assuming an IAM Role
-// Fields are similar to the STS WebIdentityRoleOptions in the AWS SDK
+// Fields are similar to the STS WebIdentityRoleOptions in the Yandex Cloud SDK
 type AssumeRoleWithWebIdentityOptions struct {
 	// AssumeRoleARN to assume with provider credentials
 	RoleARN *string `json:"roleARN,omitempty"`
@@ -111,7 +111,7 @@ type Upbound struct {
 	WebIdentity *AssumeRoleWithWebIdentityOptions `json:"webIdentity,omitempty"`
 }
 
-// EndpointConfig is used to configure the AWS client for a custom endpoint.
+// EndpointConfig is used to configure the Yandex Cloud client for a custom endpoint.
 type EndpointConfig struct {
 	// URL lets you configure the endpoint URL to be used in SDK calls.
 	URL URLConfig `json:"url"`
@@ -142,11 +142,11 @@ type EndpointConfig struct {
 	// will be used instead of Endpoint Discovery, or if the endpoint will be
 	// used to perform Endpoint Discovery. That behavior is configured via the
 	// API Client's Options.
-	// Note that this is effective only for resources that use AWS SDK v2.
+	// Note that this is effective only for resources that use Yandex Cloud SDK v2.
 	// +optional
 	HostnameImmutable *bool `json:"hostnameImmutable,omitempty"`
 
-	// The AWS partition the endpoint belongs to.
+	// The Yandex Cloud partition the endpoint belongs to.
 	// +optional
 	PartitionID *string `json:"partitionId,omitempty"`
 
@@ -171,13 +171,13 @@ type EndpointConfig struct {
 	// If source is not provided when providing a custom endpoint, the SDK may not
 	// perform required host mutations correctly. Source should be used along with
 	// HostnameImmutable property as per the usage requirement.
-	// Note that this is effective only for resources that use AWS SDK v2.
+	// Note that this is effective only for resources that use Yandex Cloud SDK v2.
 	// +optional
 	// +kubebuilder:validation:Enum=ServiceMetadata;Custom
 	Source *string `json:"source,omitempty"`
 }
 
-// URLConfig lets users configure the URL of the AWS SDK calls.
+// URLConfig lets users configure the URL of the Yandex Cloud SDK calls.
 type URLConfig struct {
 	// You can provide a static URL that will be used regardless of the service
 	// and region by choosing Static type. Alternatively, you can provide
@@ -186,7 +186,7 @@ type URLConfig struct {
 	// +kubebuilder:validation:Enum=Static;Dynamic;Auto
 	Type string `json:"type"`
 
-	// Static is the full URL you'd like the AWS SDK to use.
+	// Static is the full URL you'd like the Yandex Cloud SDK to use.
 	// Recommended for using tools like localstack where a single host is exposed
 	// for all services and regions.
 	// +optional
@@ -245,12 +245,12 @@ type ProviderConfigStatus struct {
 
 // +kubebuilder:object:root=true
 
-// A ProviderConfig configures the AWS provider.
+// A ProviderConfig configures the Yandex Cloud provider.
 // +kubebuilder:subresource:status
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:printcolumn:name="SOURCE",type="string",JSONPath=".spec.source",priority=1
 // +kubebuilder:resource:scope=Cluster
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,providerconfig,aws}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,providerconfig,yandex-cloud}
 // +kubebuilder:storageversion
 type ProviderConfig struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -276,7 +276,7 @@ type ProviderConfigList struct {
 // +kubebuilder:printcolumn:name="CONFIG-NAME",type="string",JSONPath=".providerConfigRef.name"
 // +kubebuilder:printcolumn:name="RESOURCE-KIND",type="string",JSONPath=".resourceRef.kind"
 // +kubebuilder:printcolumn:name="RESOURCE-NAME",type="string",JSONPath=".resourceRef.name"
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,providerconfig,aws}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,providerconfig,yandex-cloud}
 // +kubebuilder:storageversion
 type ProviderConfigUsage struct {
 	metav1.TypeMeta   `json:",inline"`

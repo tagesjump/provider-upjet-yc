@@ -4,19 +4,19 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.18.0
-  name: providerconfigs.yandex-cloud.upjet.crossplane.io
+  name: providerconfigs.yandex-cloud.upjet.m.crossplane.io
 spec:
-  group: yandex-cloud.upjet.crossplane.io
+  group: yandex-cloud.upjet.m.crossplane.io
   names:
     categories:
     - crossplane
-    - providerconfig
+    - provider
     - yandex-cloud
     kind: ProviderConfig
     listKind: ProviderConfigList
     plural: providerconfigs
     singular: providerconfig
-  scope: Cluster
+  scope: Namespaced
   versions:
   - additionalPrinterColumns:
     - jsonPath: .metadata.creationTimestamp
@@ -29,7 +29,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: A ProviderConfig configures the Yandex Cloud provider.
+        description: A ProviderConfig configures a YandexCloud provider.
         properties:
           apiVersion:
             description: |-
@@ -415,7 +415,7 @@ spec:
               skip_region_validation:
                 description: |-
                   Whether to skip validation of provided region name.
-                  Useful for aws-like implementations that use their own region names or to bypass the validation for
+                  Useful for Yandex Cloud-like implementations that use their own region names or to bypass the validation for
                   regions that aren't publicly available yet.
                 type: boolean
               skip_requesting_account_id:
