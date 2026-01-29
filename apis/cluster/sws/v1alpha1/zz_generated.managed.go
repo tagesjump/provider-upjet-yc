@@ -4,6 +4,56 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
+// GetCondition of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SecurityProfile.
 func (mg *SecurityProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -51,5 +101,55 @@ func (mg *SecurityProfile) SetProviderConfigReference(r *xpv1.Reference) {
 
 // SetWriteConnectionSecretToReference of this SecurityProfile.
 func (mg *SecurityProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WafProfile.
+func (mg *WafProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WafProfile.
+func (mg *WafProfile) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WafProfile.
+func (mg *WafProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WafProfile.
+func (mg *WafProfile) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WafProfile.
+func (mg *WafProfile) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WafProfile.
+func (mg *WafProfile) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WafProfile.
+func (mg *WafProfile) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WafProfile.
+func (mg *WafProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WafProfile.
+func (mg *WafProfile) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WafProfile.
+func (mg *WafProfile) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

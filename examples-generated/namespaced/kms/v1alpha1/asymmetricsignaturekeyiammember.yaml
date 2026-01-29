@@ -1,0 +1,29 @@
+apiVersion: kms.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: AsymmetricSignatureKeyIAMMember
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/asymmetricsignaturekeyiammember
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+  namespace: upbound-system
+spec:
+  forProvider:
+    asymmetric_signaturen_key_id: ${yandex_kms_asymmetric_signature_key.your-key.id}
+    member: userAccount:foo_user_id
+    role: viewer
+
+---
+
+apiVersion: kms.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: AsymmetricSignatureKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/asymmetricsignaturekeyiammember
+  labels:
+    testing.upbound.io/example-name: your-key
+  name: your-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: asymmetric-signature-key-name

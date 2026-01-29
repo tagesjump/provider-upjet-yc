@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: kubernetes/v1alpha1/cluster
   labels:
-    testing.upbound.io/example-name: zonal_cluster_resource_name
-  name: zonal-cluster-resource-name
+    testing.upbound.io/example-name: zonal_cluster
+  name: zonal-cluster
   namespace: upbound-system
 spec:
   forProvider:
@@ -29,16 +29,23 @@ spec:
         enabled: true
         eventsEnabled: true
         kubeApiserverEnabled: true
-        logGroupId: ${yandex_logging_group.log_group_resoruce_name.id}
+        logGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: log_group_resoruce_name
       publicIp: true
+      scalePolicy:
+      - autoScale:
+        - minResourcePresetId: s-c4-m16
       securityGroupIdsRefs:
       - name: security_group_name
-      version: "1.17"
+      version: "1.30"
       zonal:
       - subnetIdSelector:
           matchLabels:
             testing.upbound.io/example-name: subnet_resource_name
-        zone: ru-central1-a
+        zoneSelector:
+          matchLabels:
+            testing.upbound.io/example-name: subnet_resource_name
     name: name
     networkIdSelector:
       matchLabels:
@@ -51,3 +58,5 @@ spec:
     serviceAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: service_account_resource_name
+    workloadIdentityFederation:
+    - enabled: true

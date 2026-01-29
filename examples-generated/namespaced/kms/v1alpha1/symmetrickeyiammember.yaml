@@ -1,0 +1,31 @@
+apiVersion: kms.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SymmetricKeyIAMMember
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/symmetrickeyiammember
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+  namespace: upbound-system
+spec:
+  forProvider:
+    member: userAccount:foo_user_id
+    role: viewer
+    symmetricKeyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your-key
+
+---
+
+apiVersion: kms.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SymmetricKey
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kms/v1alpha1/symmetrickeyiammember
+  labels:
+    testing.upbound.io/example-name: your-key
+  name: your-key
+  namespace: upbound-system
+spec:
+  forProvider:
+    name: symmetric-key-name

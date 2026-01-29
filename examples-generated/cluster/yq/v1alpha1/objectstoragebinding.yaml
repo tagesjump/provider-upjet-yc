@@ -1,0 +1,23 @@
+apiVersion: yq.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: ObjectStorageBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: yq/v1alpha1/objectstoragebinding
+  labels:
+    testing.upbound.io/example-name: my_os_binding1
+  name: my-os-binding1
+spec:
+  forProvider:
+    column:
+    - name: ts
+      type: Timestamp
+    - name: message
+      type: Utf8
+    compression: gzip
+    connectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my_os_connection
+    description: Binding has been created from Terraform
+    format: json_each_row
+    name: tf-test-os-binding1
+    pathPattern: my_logs/

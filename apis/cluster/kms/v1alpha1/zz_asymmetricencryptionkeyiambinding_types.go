@@ -11,7 +11,8 @@ import (
 
 type AsymmetricEncryptionKeyIAMBindingInitParameters struct {
 
-	// The Yandex Key Management Service Asymmetric Encryption Key ID to apply a binding to.
+	// (String) The ID of the compute asymmetric_encryption_key to attach the policy to.
+	// The ID of the compute `asymmetric_encryption_key` to attach the policy to.
 	// +crossplane:generate:reference:type=AsymmetricEncryptionKey
 	AsymmetricEncryptionKeyID *string `json:"asymmetricEncryptionKeyId,omitempty" tf:"asymmetric_encryption_key_id,omitempty"`
 
@@ -23,8 +24,19 @@ type AsymmetricEncryptionKeyIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AsymmetricEncryptionKeyIDSelector *v1.Selector `json:"asymmetricEncryptionKeyIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/cluster/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
@@ -32,7 +44,8 @@ type AsymmetricEncryptionKeyIAMBindingInitParameters struct {
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String) The role that should be assigned. Only one yandex_kms_asymmetric_encryption_key_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_kms_asymmetric_encryption_key_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// References to ServiceAccount in iam to populate members.
@@ -43,30 +56,48 @@ type AsymmetricEncryptionKeyIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type AsymmetricEncryptionKeyIAMBindingObservation struct {
 
-	// The Yandex Key Management Service Asymmetric Encryption Key ID to apply a binding to.
+	// (String) The ID of the compute asymmetric_encryption_key to attach the policy to.
+	// The ID of the compute `asymmetric_encryption_key` to attach the policy to.
 	AsymmetricEncryptionKeyID *string `json:"asymmetricEncryptionKeyId,omitempty" tf:"asymmetric_encryption_key_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String) The role that should be assigned. Only one yandex_kms_asymmetric_encryption_key_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_kms_asymmetric_encryption_key_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type AsymmetricEncryptionKeyIAMBindingParameters struct {
 
-	// The Yandex Key Management Service Asymmetric Encryption Key ID to apply a binding to.
+	// (String) The ID of the compute asymmetric_encryption_key to attach the policy to.
+	// The ID of the compute `asymmetric_encryption_key` to attach the policy to.
 	// +crossplane:generate:reference:type=AsymmetricEncryptionKey
 	// +kubebuilder:validation:Optional
 	AsymmetricEncryptionKeyID *string `json:"asymmetricEncryptionKeyId,omitempty" tf:"asymmetric_encryption_key_id,omitempty"`
@@ -79,8 +110,19 @@ type AsymmetricEncryptionKeyIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	AsymmetricEncryptionKeyIDSelector *v1.Selector `json:"asymmetricEncryptionKeyIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/tagesjump/provider-upjet-yc/config/cluster/iam.ServiceAccountRefValue()
 	// +crossplane:generate:reference:refFieldName=ServiceAccountRef
@@ -89,7 +131,8 @@ type AsymmetricEncryptionKeyIAMBindingParameters struct {
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String) The role that should be assigned. Only one yandex_kms_asymmetric_encryption_key_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_kms_asymmetric_encryption_key_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
@@ -101,6 +144,8 @@ type AsymmetricEncryptionKeyIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountSelector *v1.Selector `json:"serviceAccountSelector,omitempty" tf:"-"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	// +kubebuilder:validation:Optional
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
@@ -132,7 +177,7 @@ type AsymmetricEncryptionKeyIAMBindingStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// AsymmetricEncryptionKeyIAMBinding is the Schema for the AsymmetricEncryptionKeyIAMBindings API. Allows management of a single IAM binding for a
+// AsymmetricEncryptionKeyIAMBinding is the Schema for the AsymmetricEncryptionKeyIAMBindings API. Allows management of a single IAM binding for a Key Management Service.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

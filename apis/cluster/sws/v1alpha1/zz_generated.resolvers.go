@@ -10,8 +10,96 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SecurityProfile.
 func (mg *SecurityProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WafProfile.
+func (mg *WafProfile) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse

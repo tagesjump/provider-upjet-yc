@@ -1,0 +1,57 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: IdpApplicationOauthApplicationAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpapplicationoauthapplicationassignment
+  labels:
+    testing.upbound.io/example-name: example_assignment
+  name: example-assignment
+spec:
+  forProvider:
+    applicationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_app
+    subjectId: your_subject_id
+
+---
+
+apiVersion: iam.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: OauthClient
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpapplicationoauthapplicationassignment
+  labels:
+    testing.upbound.io/example-name: example_client
+  name: example-client
+spec:
+  forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-oauth-client
+    scopes:
+    - iam
+
+---
+
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: IdpApplicationOauthApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpapplicationoauthapplicationassignment
+  labels:
+    testing.upbound.io/example-name: example_app
+  name: example-app
+spec:
+  forProvider:
+    clientGrant:
+      authorizedScopes:
+      - openid
+      - profile
+      - email
+      clientId: ${yandex_iam_oauth_client.example_client.id}
+    description: Example OAuth application
+    groupClaimsSettings:
+      groupDistributionType: ALL_GROUPS
+    name: example-oauth-app
+    organizationId: your_organization_id

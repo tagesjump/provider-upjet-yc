@@ -1,0 +1,19 @@
+apiVersion: cloudregistry.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudregistry/v1alpha1/registry
+  labels:
+    testing.upbound.io/example-name: default
+  name: default
+spec:
+  forProvider:
+    description: Some desctiption
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kind: DOCKER
+    labels:
+      my-label: my-label-value
+    name: test-registry
+    type: LOCAL

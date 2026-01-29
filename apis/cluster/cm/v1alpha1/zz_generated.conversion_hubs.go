@@ -4,3 +4,9 @@ package v1alpha1
 
 // Hub marks this type as a conversion hub.
 func (tr *Certificate) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *CertificateIAMBinding) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *CertificateIAMMember) Hub() {}

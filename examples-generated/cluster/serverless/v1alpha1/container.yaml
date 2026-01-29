@@ -18,10 +18,24 @@ spec:
     - logGroupId: e2392vo6d1bne2aeq9fr
       minLevel: ERROR
     memory: 256
+    mounts:
+    - ephemeralDisk:
+      - sizeGb: 5
+      mountPointPath: /mount/point
     name: some_name
+    provisionPolicy:
+    - minInstances: 1
+    runtime:
+    - type: task
     secrets:
     - environmentVariable: ENV_VARIABLE
-      id: ${yandex_lockbox_secret.secret.id}
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secret
       key: secret-key
-      versionId: ${yandex_lockbox_secret_version.secret_version.id}
-    serviceAccountId: are1service2account3id
+      versionIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secret_version
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

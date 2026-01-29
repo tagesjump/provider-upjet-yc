@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/mysqluser
   labels:
-    testing.upbound.io/example-name: john
-  name: john
+    testing.upbound.io/example-name: my_user
+  name: my-user
 spec:
   forProvider:
     authenticationPlugin: SHA256_PASSWORD
     clusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: my_cluster
     connectionLimits:
     - maxConnectionsPerHour: 30
       maxQuestionsPerHour: 10
@@ -45,8 +45,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/mysqluser
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
 spec:
   forProvider:
     config:
@@ -60,7 +60,7 @@ spec:
     - subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: foo
-      zone: ru-central1-a
+      zone: ru-central1-d
     name: test
     networkIdSelector:
       matchLabels:
@@ -96,4 +96,4 @@ spec:
         testing.upbound.io/example-name: foo
     v4CidrBlocks:
     - 10.5.0.0/24
-    zone: ru-central1-a
+    zone: ru-central1-d

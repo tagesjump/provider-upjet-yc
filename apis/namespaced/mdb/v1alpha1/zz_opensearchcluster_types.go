@@ -10,119 +10,168 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type AuthSettingsInitParameters struct {
+
+	// (Attributes) SAML authentication options. (see below for nested schema)
+	SAML *SAMLInitParameters `json:"saml,omitempty" tf:"saml,omitempty"`
+}
+
+type AuthSettingsObservation struct {
+
+	// (Attributes) SAML authentication options. (see below for nested schema)
+	SAML *SAMLObservation `json:"saml,omitempty" tf:"saml,omitempty"`
+}
+
+type AuthSettingsParameters struct {
+
+	// (Attributes) SAML authentication options. (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	SAML *SAMLParameters `json:"saml,omitempty" tf:"saml,omitempty"`
+}
+
 type DashboardsInitParameters struct {
 
-	// A set of named OpenSearch node group configurations. The structure is documented below.
+	// (Block List) (see below for nested schema)
 	NodeGroups []NodeGroupsInitParameters `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 }
 
 type DashboardsObservation struct {
 
-	// A set of named OpenSearch node group configurations. The structure is documented below.
+	// (Block List) (see below for nested schema)
 	NodeGroups []NodeGroupsObservation `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 }
 
 type DashboardsParameters struct {
 
-	// A set of named OpenSearch node group configurations. The structure is documented below.
+	// (Block List) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	NodeGroups []NodeGroupsParameters `json:"nodeGroups" tf:"node_groups,omitempty"`
+	NodeGroups []NodeGroupsParameters `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 }
 
-type HostsInitParameters struct {
+type NodeGroupsDiskSizeAutoscalingInitParameters struct {
+
+	// (Number) The overall maximum for disk size that limit all autoscaling iterations. See the documentation for details.
+	// The overall maximum for disk size that limit all autoscaling iterations. See the [documentation](https://yandex.cloud/en/docs/managed-opensearch/concepts/storage#auto-rescale) for details.
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+	// Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+	// Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
 }
 
-type HostsObservation struct {
+type NodeGroupsDiskSizeAutoscalingObservation struct {
 
-	// Sets whether the host should get a public IP address. Can be either true or false.
-	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+	// (Number) The overall maximum for disk size that limit all autoscaling iterations. See the documentation for details.
+	// The overall maximum for disk size that limit all autoscaling iterations. See the [documentation](https://yandex.cloud/en/docs/managed-opensearch/concepts/storage#auto-rescale) for details.
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
 
-	// The fully qualified domain name of the host.
-	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+	// (Number) Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+	// Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
 
-	// The roles of the deployed host. Can contain DATA and/or MANAGER roles. Will be empty for DASHBOARDS type.
-	// +listType=set
-	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
-
-	// The ID of the subnet, to which the host belongs. The subnet must
-	// be a part of the network to which the cluster belongs.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-
-	// The type of the deployed host. Can be either OPENSEARCH or DASHBOARDS.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The availability zone where the OpenSearch host will be created.
-	// For more information see the official documentation.
-	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+	// (Number) Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+	// Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
 }
 
-type HostsParameters struct {
+type NodeGroupsDiskSizeAutoscalingParameters struct {
+
+	// (Number) The overall maximum for disk size that limit all autoscaling iterations. See the documentation for details.
+	// The overall maximum for disk size that limit all autoscaling iterations. See the [documentation](https://yandex.cloud/en/docs/managed-opensearch/concepts/storage#auto-rescale) for details.
+	// +kubebuilder:validation:Optional
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+	// Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+	// +kubebuilder:validation:Optional
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+	// Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+	// +kubebuilder:validation:Optional
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
 }
 
 type NodeGroupsInitParameters struct {
 
-	// Sets whether the hosts should get a public IP address on creation.
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the hosts should get a public IP address.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Number) Number of hosts in this node group.
+	// Number of hosts in this node group.
 	HostsCount *float64 `json:"hostsCount,omitempty" tf:"hosts_count,omitempty"`
 
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Resources allocated to hosts of this OpenSearch node group. The structure is documented below.
-	Resources []NodeGroupsResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
-
-	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs. No other parameters should be changed simultaneously with this one, except zones_ids.
-	// +listType=set
+	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// (Set of String) A set of availability zones where hosts of node group may be allocated.
+	// A set of availability zones where hosts of node group may be allocated.
 	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
 type NodeGroupsObservation struct {
 
-	// Sets whether the hosts should get a public IP address on creation.
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the hosts should get a public IP address.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Number) Number of hosts in this node group.
+	// Number of hosts in this node group.
 	HostsCount *float64 `json:"hostsCount,omitempty" tf:"hosts_count,omitempty"`
 
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Resources allocated to hosts of this OpenSearch node group. The structure is documented below.
+	// (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+	// Resources allocated to hosts of this OpenSearch node group.
 	Resources []NodeGroupsResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs. No other parameters should be changed simultaneously with this one, except zones_ids.
-	// +listType=set
+	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// (Set of String) A set of availability zones where hosts of node group may be allocated.
+	// A set of availability zones where hosts of node group may be allocated.
 	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
 type NodeGroupsParameters struct {
 
-	// Sets whether the hosts should get a public IP address on creation.
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the hosts should get a public IP address.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Number) Number of hosts in this node group.
+	// Number of hosts in this node group.
 	// +kubebuilder:validation:Optional
 	HostsCount *float64 `json:"hostsCount" tf:"hosts_count,omitempty"`
 
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Resources allocated to hosts of this OpenSearch node group. The structure is documented below.
+	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// +kubebuilder:validation:Optional
-	Resources []NodeGroupsResourcesParameters `json:"resources" tf:"resources,omitempty"`
-
-	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs. No other parameters should be changed simultaneously with this one, except zones_ids.
-	// +kubebuilder:validation:Optional
-	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// (Set of String) A set of availability zones where hosts of node group may be allocated.
+	// A set of availability zones where hosts of node group may be allocated.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ZoneIds []*string `json:"zoneIds" tf:"zone_ids,omitempty"`
@@ -130,101 +179,222 @@ type NodeGroupsParameters struct {
 
 type NodeGroupsResourcesInitParameters struct {
 
+	// (Number) Volume of the storage available to a host, in bytes.
 	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// (String) Type of the storage of OpenSearch hosts.
 	// Type of the storage of OpenSearch hosts.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type NodeGroupsResourcesObservation struct {
 
+	// (Number) Volume of the storage available to a host, in bytes.
 	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// (String) Type of the storage of OpenSearch hosts.
 	// Type of the storage of OpenSearch hosts.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type NodeGroupsResourcesParameters struct {
 
+	// (Number) Volume of the storage available to a host, in bytes.
 	// Volume of the storage available to a host, in bytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
+	// (String) Type of the storage of OpenSearch hosts.
 	// Type of the storage of OpenSearch hosts.
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
+type OpensearchClusterConfigAccessInitParameters struct {
+
+	// (Boolean) Enable access to the Data Transfer service.
+	// Enable access to the [Data Transfer](https://yandex.cloud/docs/data-transfer) service.
+	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
+
+	// (Boolean) Enable access to the Cloud Functions service.
+	// Enable access to the [Cloud Functions](https://yandex.cloud/docs/functions) service.
+	Serverless *bool `json:"serverless,omitempty" tf:"serverless,omitempty"`
+}
+
+type OpensearchClusterConfigAccessObservation struct {
+
+	// (Boolean) Enable access to the Data Transfer service.
+	// Enable access to the [Data Transfer](https://yandex.cloud/docs/data-transfer) service.
+	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
+
+	// (Boolean) Enable access to the Cloud Functions service.
+	// Enable access to the [Cloud Functions](https://yandex.cloud/docs/functions) service.
+	Serverless *bool `json:"serverless,omitempty" tf:"serverless,omitempty"`
+}
+
+type OpensearchClusterConfigAccessParameters struct {
+
+	// (Boolean) Enable access to the Data Transfer service.
+	// Enable access to the [Data Transfer](https://yandex.cloud/docs/data-transfer) service.
+	// +kubebuilder:validation:Optional
+	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
+
+	// (Boolean) Enable access to the Cloud Functions service.
+	// Enable access to the [Cloud Functions](https://yandex.cloud/docs/functions) service.
+	// +kubebuilder:validation:Optional
+	Serverless *bool `json:"serverless,omitempty" tf:"serverless,omitempty"`
+}
+
 type OpensearchClusterConfigInitParameters struct {
 
+	// (Block, Optional) Enable access to the Yandex Cloud services. (see below for nested schema)
+	// Enable access to the Yandex Cloud services.
+	Access []OpensearchClusterConfigAccessInitParameters `json:"access,omitempty" tf:"access,omitempty"`
+
+	// (String, Sensitive) Password for admin user of OpenSearch.
 	// Password for admin user of OpenSearch.
 	AdminPasswordSecretRef v1.LocalSecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
-	// Configuration for Dashboards node groups. The structure is documented below.
-	Dashboards []DashboardsInitParameters `json:"dashboards,omitempty" tf:"dashboards,omitempty"`
-
-	// Configuration for OpenSearch node groups. The structure is documented below.
-	Opensearch []OpensearchInitParameters `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
-
+	// (String) Version of OpenSearch.
 	// Version of OpenSearch.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type OpensearchClusterConfigObservation struct {
 
-	// Configuration for Dashboards node groups. The structure is documented below.
+	// (Block, Optional) Enable access to the Yandex Cloud services. (see below for nested schema)
+	// Enable access to the Yandex Cloud services.
+	Access []OpensearchClusterConfigAccessObservation `json:"access,omitempty" tf:"access,omitempty"`
+
+	// (Block, Optional) Configuration for Dashboards node groups. (see below for nested schema)
+	// Configuration for Dashboards node groups.
 	Dashboards []DashboardsObservation `json:"dashboards,omitempty" tf:"dashboards,omitempty"`
 
-	// Configuration for OpenSearch node groups. The structure is documented below.
+	// (Block, Optional) Configuration for OpenSearch node groups. (see below for nested schema)
+	// Configuration for OpenSearch node groups.
 	Opensearch []OpensearchObservation `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
 
+	// (String) Version of OpenSearch.
 	// Version of OpenSearch.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type OpensearchClusterConfigParameters struct {
 
+	// (Block, Optional) Enable access to the Yandex Cloud services. (see below for nested schema)
+	// Enable access to the Yandex Cloud services.
+	// +kubebuilder:validation:Optional
+	Access []OpensearchClusterConfigAccessParameters `json:"access,omitempty" tf:"access,omitempty"`
+
+	// (String, Sensitive) Password for admin user of OpenSearch.
 	// Password for admin user of OpenSearch.
 	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef v1.LocalSecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
-	// Configuration for Dashboards node groups. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	Dashboards []DashboardsParameters `json:"dashboards,omitempty" tf:"dashboards,omitempty"`
-
-	// Configuration for OpenSearch node groups. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	Opensearch []OpensearchParameters `json:"opensearch" tf:"opensearch,omitempty"`
-
+	// (String) Version of OpenSearch.
 	// Version of OpenSearch.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type OpensearchClusterHostsInitParameters struct {
+
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the host should get a public IP address. Can be either `true` or `false`.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type OpensearchClusterHostsObservation struct {
+
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the host should get a public IP address. Can be either `true` or `false`.
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// (String) The fully qualified domain name of the host.
+	// The fully qualified domain name of the host.
+	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
+
+	// (String) Name of the node group.
+	// Name of the node group.
+	NodeGroup *string `json:"nodeGroup,omitempty" tf:"node_group,omitempty"`
+
+	// (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
+	// The roles of the deployed host. Can contain `DATA` and/or `MANAGER` roles. Will be empty for `DASHBOARDS` type.
+	// +listType=set
+	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+
+	// (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// (String)
+	// The type of the deployed host. Can be either `OPENSEARCH` or `DASHBOARDS`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// (String) The availability zone where the OpenSearch host will be created. For more information see the official documentation.
+	// The availability zone where the OpenSearch host will be created. For more information see [the official documentation](https://yandex.cloud/docs/overview/concepts/geo-scope).
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type OpensearchClusterHostsParameters struct {
+
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the host should get a public IP address. Can be either `true` or `false`.
+	// +kubebuilder:validation:Optional
+	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
+
+	// (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
 type OpensearchClusterInitParameters struct {
 
-	// Configuration of the OpenSearch cluster. The structure is documented below.
-	Config []OpensearchClusterConfigInitParameters `json:"config,omitempty" tf:"config,omitempty"`
+	// (Attributes) Authentication settings for Dashboards. (see below for nested schema)
+	AuthSettings *AuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (String) The ID of the OpenSearch cluster that the resource belongs to.
+	// The ID of the OpenSearch cluster that the resource belongs to.
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the OpenSearch cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION
+	// (String) ID of the KMS key for cluster disk encryption.
+	// ID of the KMS key for cluster disk encryption.
+	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
+
+	// (String) Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION. It is not possible to change this value after cluster creation.
+	// Deployment environment of the OpenSearch cluster. Can be either `PRESTABLE` or `PRODUCTION`. Default: `PRODUCTION`. **It is not possible to change this value after cluster creation**.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -236,16 +406,17 @@ type OpensearchClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the OpenSearch cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	MaintenanceWindow []OpensearchClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
-
-	// Name of the OpenSearch cluster. Provided by the client when the cluster is created.
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+	// Name of the OpenSearch cluster. The name must be unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the OpenSearch cluster belongs.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Network
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
@@ -257,7 +428,8 @@ type OpensearchClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkIDSelector *v1.NamespacedSelector `json:"networkIdSelector,omitempty" tf:"-"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.SecurityGroup
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -270,6 +442,7 @@ type OpensearchClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
+	// (String) ID of the service account authorized for this cluster.
 	// ID of the service account authorized for this cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/iam/v1alpha1.ServiceAccount
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
@@ -285,115 +458,153 @@ type OpensearchClusterInitParameters struct {
 
 type OpensearchClusterMaintenanceWindowInitParameters struct {
 
-	// Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// (String)
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
-	// Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+	// (Number)
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String)
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OpensearchClusterMaintenanceWindowObservation struct {
 
-	// Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// (String)
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
-	// Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+	// (Number)
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String)
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OpensearchClusterMaintenanceWindowParameters struct {
 
-	// Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// (String)
 	// +kubebuilder:validation:Optional
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
-	// Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+	// (Number)
 	// +kubebuilder:validation:Optional
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String)
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OpensearchClusterObservation struct {
 
-	// Configuration of the OpenSearch cluster. The structure is documented below.
+	// (Attributes) Authentication settings for Dashboards. (see below for nested schema)
+	AuthSettings *AuthSettingsObservation `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+
+	// (String) The ID of the OpenSearch cluster that the resource belongs to.
+	// The ID of the OpenSearch cluster that the resource belongs to.
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// (Block, Optional) Configuration of the OpenSearch cluster. (see below for nested schema)
+	// Configuration of the OpenSearch cluster.
 	Config []OpensearchClusterConfigObservation `json:"config,omitempty" tf:"config,omitempty"`
 
-	// Creation timestamp of the key.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the OpenSearch cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION
+	// (String) ID of the KMS key for cluster disk encryption.
+	// ID of the KMS key for cluster disk encryption.
+	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
+
+	// (String) Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION. It is not possible to change this value after cluster creation.
+	// Deployment environment of the OpenSearch cluster. Can be either `PRESTABLE` or `PRODUCTION`. Default: `PRODUCTION`. **It is not possible to change this value after cluster creation**.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN.
-	// For more information see health field of JSON representation in the official documentation.
+	// (String) Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN. For more information see health field of JSON representation in the official documentation.
+	// Aggregated health of the cluster. Can be either `ALIVE`, `DEGRADED`, `DEAD` or `HEALTH_UNKNOWN`. For more information see `health` field of JSON representation in [the official documentation](https://yandex.cloud/docs/managed-opensearch/api-ref/Cluster/).
 	Health *string `json:"health,omitempty" tf:"health,omitempty"`
 
-	// A hosts of the OpenSearch cluster. The structure is documented below.
-	Hosts []HostsObservation `json:"hosts,omitempty" tf:"hosts,omitempty"`
+	// (Attributes List) A hosts of the OpenSearch cluster. (see below for nested schema)
+	Hosts []OpensearchClusterHostsObservation `json:"hosts,omitempty" tf:"hosts,omitempty"`
 
+	// (String) The resource identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the OpenSearch cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Block, Optional) (see below for nested schema)
 	MaintenanceWindow []OpensearchClusterMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Name of the OpenSearch cluster. Provided by the client when the cluster is created.
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+	// Name of the OpenSearch cluster. The name must be unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the OpenSearch cluster belongs.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// (String) ID of the service account authorized for this cluster.
 	// ID of the service account authorized for this cluster.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
-	// For more information see status field of JSON representation in the official documentation.
+	// (String) Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN. For more information see status field of JSON representation in the official documentation.
+	// Status of the cluster. Can be either `CREATING`, `STARTING`, `RUNNING`, `UPDATING`, `STOPPING`, `STOPPED`, `ERROR` or `STATUS_UNKNOWN`. For more information see `status` field of JSON representation in [the official documentation](https://yandex.cloud/docs/managed-opensearch/api-ref/Cluster/).
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type OpensearchClusterParameters struct {
 
-	// Configuration of the OpenSearch cluster. The structure is documented below.
+	// (Attributes) Authentication settings for Dashboards. (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	Config []OpensearchClusterConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
+	AuthSettings *AuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (String) The ID of the OpenSearch cluster that the resource belongs to.
+	// The ID of the OpenSearch cluster that the resource belongs to.
+	// +kubebuilder:validation:Optional
+	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
+
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the OpenSearch cluster.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION
+	// (String) ID of the KMS key for cluster disk encryption.
+	// ID of the KMS key for cluster disk encryption.
+	// +kubebuilder:validation:Optional
+	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
+
+	// (String) Deployment environment of the OpenSearch cluster. Can be either PRESTABLE or PRODUCTION. Default: PRODUCTION. It is not possible to change this value after cluster creation.
+	// Deployment environment of the OpenSearch cluster. Can be either `PRESTABLE` or `PRODUCTION`. Default: `PRODUCTION`. **It is not possible to change this value after cluster creation**.
 	// +kubebuilder:validation:Optional
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -406,19 +617,19 @@ type OpensearchClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the OpenSearch cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	MaintenanceWindow []OpensearchClusterMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
-
-	// Name of the OpenSearch cluster. Provided by the client when the cluster is created.
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+	// Name of the OpenSearch cluster. The name must be unique within the folder.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the OpenSearch cluster belongs.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Network
 	// +kubebuilder:validation:Optional
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
@@ -431,7 +642,8 @@ type OpensearchClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkIDSelector *v1.NamespacedSelector `json:"networkIdSelector,omitempty" tf:"-"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -445,6 +657,7 @@ type OpensearchClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
+	// (String) ID of the service account authorized for this cluster.
 	// ID of the service account authorized for this cluster.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/iam/v1alpha1.ServiceAccount
 	// +kubebuilder:validation:Optional
@@ -461,9 +674,11 @@ type OpensearchClusterParameters struct {
 
 type OpensearchInitParameters struct {
 
-	// A set of named OpenSearch node group configurations. The structure is documented below.
+	// (Block List) (see below for nested schema)
+	// A set of named OpenSearch node group configurations.
 	NodeGroups []OpensearchNodeGroupsInitParameters `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 
+	// (Set of String) A set of requested OpenSearch plugins.
 	// A set of requested OpenSearch plugins.
 	// +listType=set
 	Plugins []*string `json:"plugins,omitempty" tf:"plugins,omitempty"`
@@ -471,24 +686,29 @@ type OpensearchInitParameters struct {
 
 type OpensearchNodeGroupsInitParameters struct {
 
-	// Sets whether the hosts should get a public IP address on creation.
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the hosts should get a public IP address.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Attributes) Node group disk size autoscaling settings. (see below for nested schema)
+	DiskSizeAutoscaling *NodeGroupsDiskSizeAutoscalingInitParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+
+	// (Number) Number of hosts in this node group.
+	// Number of hosts in this node group.
 	HostsCount *float64 `json:"hostsCount,omitempty" tf:"hosts_count,omitempty"`
 
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Resources allocated to hosts of this OpenSearch node group. The structure is documented below.
-	Resources []OpensearchNodeGroupsResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
-
-	// A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER]
+	// (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
+	// A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
 	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
-	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs. No other parameters should be changed simultaneously with this one, except zones_ids.
+	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
-	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in vpc to populate subnetIds.
@@ -499,61 +719,79 @@ type OpensearchNodeGroupsInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
+	// (Set of String) A set of availability zones where hosts of node group may be allocated.
+	// A set of availability zones where hosts of node group may be allocated.
 	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
 type OpensearchNodeGroupsObservation struct {
 
-	// Sets whether the hosts should get a public IP address on creation.
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the hosts should get a public IP address.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Attributes) Node group disk size autoscaling settings. (see below for nested schema)
+	DiskSizeAutoscaling *NodeGroupsDiskSizeAutoscalingObservation `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+
+	// (Number) Number of hosts in this node group.
+	// Number of hosts in this node group.
 	HostsCount *float64 `json:"hostsCount,omitempty" tf:"hosts_count,omitempty"`
 
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Resources allocated to hosts of this OpenSearch node group. The structure is documented below.
+	// (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+	// Resources allocated to hosts of this OpenSearch node group.
 	Resources []OpensearchNodeGroupsResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER]
+	// (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
+	// A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
 	// +listType=set
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 
-	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs. No other parameters should be changed simultaneously with this one, except zones_ids.
-	// +listType=set
+	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
+	// (Set of String) A set of availability zones where hosts of node group may be allocated.
+	// A set of availability zones where hosts of node group may be allocated.
 	// +listType=set
 	ZoneIds []*string `json:"zoneIds,omitempty" tf:"zone_ids,omitempty"`
 }
 
 type OpensearchNodeGroupsParameters struct {
 
-	// Sets whether the hosts should get a public IP address on creation.
+	// (Boolean) Sets whether the hosts should get a public IP address.
+	// Sets whether the hosts should get a public IP address.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Attributes) Node group disk size autoscaling settings. (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	DiskSizeAutoscaling *NodeGroupsDiskSizeAutoscalingParameters `json:"diskSizeAutoscaling,omitempty" tf:"disk_size_autoscaling,omitempty"`
+
+	// (Number) Number of hosts in this node group.
+	// Number of hosts in this node group.
 	// +kubebuilder:validation:Optional
 	HostsCount *float64 `json:"hostsCount" tf:"hosts_count,omitempty"`
 
+	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Resources allocated to hosts of this OpenSearch node group. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	Resources []OpensearchNodeGroupsResourcesParameters `json:"resources" tf:"resources,omitempty"`
-
-	// A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER]
+	// (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
+	// A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
+	Roles []*string `json:"roles" tf:"roles,omitempty"`
 
-	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs. No other parameters should be changed simultaneously with this one, except zones_ids.
+	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
-	// +listType=set
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
 
 	// References to Subnet in vpc to populate subnetIds.
@@ -564,6 +802,8 @@ type OpensearchNodeGroupsParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIdsSelector *v1.NamespacedSelector `json:"subnetIdsSelector,omitempty" tf:"-"`
 
+	// (Set of String) A set of availability zones where hosts of node group may be allocated.
+	// A set of availability zones where hosts of node group may be allocated.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ZoneIds []*string `json:"zoneIds" tf:"zone_ids,omitempty"`
@@ -571,45 +811,59 @@ type OpensearchNodeGroupsParameters struct {
 
 type OpensearchNodeGroupsResourcesInitParameters struct {
 
+	// (Number) Volume of the storage available to a host, in bytes.
 	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// (String) Type of the storage of OpenSearch hosts.
 	// Type of the storage of OpenSearch hosts.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type OpensearchNodeGroupsResourcesObservation struct {
 
+	// (Number) Volume of the storage available to a host, in bytes.
 	// Volume of the storage available to a host, in bytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// (String) Type of the storage of OpenSearch hosts.
 	// Type of the storage of OpenSearch hosts.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type OpensearchNodeGroupsResourcesParameters struct {
 
+	// (Number) Volume of the storage available to a host, in bytes.
 	// Volume of the storage available to a host, in bytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
+	// (String) Type of the storage of OpenSearch hosts.
 	// Type of the storage of OpenSearch hosts.
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
 type OpensearchObservation struct {
 
-	// A set of named OpenSearch node group configurations. The structure is documented below.
+	// (Block List) (see below for nested schema)
+	// A set of named OpenSearch node group configurations.
 	NodeGroups []OpensearchNodeGroupsObservation `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 
+	// (Set of String) A set of requested OpenSearch plugins.
 	// A set of requested OpenSearch plugins.
 	// +listType=set
 	Plugins []*string `json:"plugins,omitempty" tf:"plugins,omitempty"`
@@ -617,14 +871,116 @@ type OpensearchObservation struct {
 
 type OpensearchParameters struct {
 
-	// A set of named OpenSearch node group configurations. The structure is documented below.
+	// (Block List) (see below for nested schema)
+	// A set of named OpenSearch node group configurations.
 	// +kubebuilder:validation:Optional
-	NodeGroups []OpensearchNodeGroupsParameters `json:"nodeGroups" tf:"node_groups,omitempty"`
+	NodeGroups []OpensearchNodeGroupsParameters `json:"nodeGroups,omitempty" tf:"node_groups,omitempty"`
 
+	// (Set of String) A set of requested OpenSearch plugins.
 	// A set of requested OpenSearch plugins.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Plugins []*string `json:"plugins,omitempty" tf:"plugins,omitempty"`
+}
+
+type SAMLInitParameters struct {
+
+	// (String) Dashboards URL.
+	// Dashboards URL.
+	DashboardsURL *string `json:"dashboardsUrl,omitempty" tf:"dashboards_url,omitempty"`
+
+	// (Boolean) Enables SAML authentication.
+	// Enables SAML authentication.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// (String) ID of the SAML Identity Provider.
+	// ID of the SAML Identity Provider.
+	IdpEntityID *string `json:"idpEntityId,omitempty" tf:"idp_entity_id,omitempty"`
+
+	// (String) Metadata file content of the SAML Identity Provider. You can either put file content manually or use file function
+	// Metadata file content of the SAML Identity Provider. You can either put file content manually or use [`file` function](https://developer.hashicorp
+	IdpMetadataFileContent *string `json:"idpMetadataFileContent,omitempty" tf:"idp_metadata_file_content,omitempty"`
+
+	// (String) Roles key.
+	// Roles key.
+	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
+
+	// (String) Service provider entity ID.
+	// Service provider entity ID.
+	SpEntityID *string `json:"spEntityId,omitempty" tf:"sp_entity_id,omitempty"`
+
+	// (String) Subject key.
+	// Subject key.
+	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
+}
+
+type SAMLObservation struct {
+
+	// (String) Dashboards URL.
+	// Dashboards URL.
+	DashboardsURL *string `json:"dashboardsUrl,omitempty" tf:"dashboards_url,omitempty"`
+
+	// (Boolean) Enables SAML authentication.
+	// Enables SAML authentication.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// (String) ID of the SAML Identity Provider.
+	// ID of the SAML Identity Provider.
+	IdpEntityID *string `json:"idpEntityId,omitempty" tf:"idp_entity_id,omitempty"`
+
+	// (String) Metadata file content of the SAML Identity Provider. You can either put file content manually or use file function
+	// Metadata file content of the SAML Identity Provider. You can either put file content manually or use [`file` function](https://developer.hashicorp
+	IdpMetadataFileContent *string `json:"idpMetadataFileContent,omitempty" tf:"idp_metadata_file_content,omitempty"`
+
+	// (String) Roles key.
+	// Roles key.
+	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
+
+	// (String) Service provider entity ID.
+	// Service provider entity ID.
+	SpEntityID *string `json:"spEntityId,omitempty" tf:"sp_entity_id,omitempty"`
+
+	// (String) Subject key.
+	// Subject key.
+	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
+}
+
+type SAMLParameters struct {
+
+	// (String) Dashboards URL.
+	// Dashboards URL.
+	// +kubebuilder:validation:Optional
+	DashboardsURL *string `json:"dashboardsUrl" tf:"dashboards_url,omitempty"`
+
+	// (Boolean) Enables SAML authentication.
+	// Enables SAML authentication.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+
+	// (String) ID of the SAML Identity Provider.
+	// ID of the SAML Identity Provider.
+	// +kubebuilder:validation:Optional
+	IdpEntityID *string `json:"idpEntityId" tf:"idp_entity_id,omitempty"`
+
+	// (String) Metadata file content of the SAML Identity Provider. You can either put file content manually or use file function
+	// Metadata file content of the SAML Identity Provider. You can either put file content manually or use [`file` function](https://developer.hashicorp
+	// +kubebuilder:validation:Optional
+	IdpMetadataFileContent *string `json:"idpMetadataFileContent" tf:"idp_metadata_file_content,omitempty"`
+
+	// (String) Roles key.
+	// Roles key.
+	// +kubebuilder:validation:Optional
+	RolesKey *string `json:"rolesKey,omitempty" tf:"roles_key,omitempty"`
+
+	// (String) Service provider entity ID.
+	// Service provider entity ID.
+	// +kubebuilder:validation:Optional
+	SpEntityID *string `json:"spEntityId" tf:"sp_entity_id,omitempty"`
+
+	// (String) Subject key.
+	// Subject key.
+	// +kubebuilder:validation:Optional
+	SubjectKey *string `json:"subjectKey,omitempty" tf:"subject_key,omitempty"`
 }
 
 // OpensearchClusterSpec defines the desired state of OpensearchCluster
@@ -654,7 +1010,7 @@ type OpensearchClusterStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// OpensearchCluster is the Schema for the OpensearchClusters API. Manages a OpenSearch cluster within Yandex.Cloud.
+// OpensearchCluster is the Schema for the OpensearchClusters API. Manages a OpenSearch cluster within Yandex Cloud.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

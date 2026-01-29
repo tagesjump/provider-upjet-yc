@@ -8,7 +8,7 @@ metadata:
   name: my-scaling-policy
 spec:
   forProvider:
-    functionId: are1samplefunction11
+    functionId: d4e45**********pqvd3
     policy:
     - tag: $latest
       zoneInstancesLimit: 3

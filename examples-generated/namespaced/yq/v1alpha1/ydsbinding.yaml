@@ -1,0 +1,25 @@
+apiVersion: yq.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: YdsBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: yq/v1alpha1/ydsbinding
+  labels:
+    testing.upbound.io/example-name: my_yds_binding
+  name: my-yds-binding
+  namespace: upbound-system
+spec:
+  forProvider:
+    column:
+    - name: ts
+      type: Timestamp
+    - name: message
+      type: Utf8
+    connectionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my_yds_connection
+    description: Binding has been created from Terraform
+    format: csv_with_names
+    formatSetting:
+      data.datetime.format_name: POSIX
+    name: tf-test-os-binding
+    stream: my_stream

@@ -9,45 +9,82 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type AsyncInvocationInitParameters struct {
+
+	// (String) Service account which linked to the resource.
+	// Service account used for async invocation.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+}
+
+type AsyncInvocationObservation struct {
+
+	// (String) Service account which linked to the resource.
+	// Service account used for async invocation.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+}
+
+type AsyncInvocationParameters struct {
+
+	// (String) Service account which linked to the resource.
+	// Service account used for async invocation.
+	// +kubebuilder:validation:Optional
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+}
+
 type ConnectivityInitParameters struct {
 
-	// Network the revision will have access to
+	// (String) Network the revision will have access to.
+	// Network the revision will have access to.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 }
 
 type ConnectivityObservation struct {
 
-	// Network the revision will have access to
+	// (String) Network the revision will have access to.
+	// Network the revision will have access to.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 }
 
 type ConnectivityParameters struct {
 
-	// Network the revision will have access to
+	// (String) Network the revision will have access to.
+	// Network the revision will have access to.
 	// +kubebuilder:validation:Optional
 	NetworkID *string `json:"networkId" tf:"network_id,omitempty"`
 }
 
 type ContainerInitParameters struct {
 
-	// Concurrency of Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Serverless Container. (see below for nested schema)
+	// Config for asynchronous invocations of Yandex Cloud Serverless Container.
+	AsyncInvocation []AsyncInvocationInitParameters `json:"asyncInvocation,omitempty" tf:"async_invocation,omitempty"`
+
+	// (Number) Concurrency of Yandex Cloud Serverless Container.
+	// Concurrency of Yandex Cloud Serverless Container.
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 
-	// Network access. If specified the revision will be attached to specified network
+	// (Block List, Max: 1) Network access. If specified the revision will be attached to specified network. (see below for nested schema)
+	// Network access. If specified the revision will be attached to specified network.
 	Connectivity []ConnectivityInitParameters `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Core fraction (0...100) of the Yandex Cloud Serverless Container
+	// (Number) Core fraction (0...100) of the Yandex Cloud Serverless Container.
+	// Core fraction (**0...100**) of the Yandex Cloud Serverless Container.
 	CoreFraction *float64 `json:"coreFraction,omitempty" tf:"core_fraction,omitempty"`
 
+	// (Number) Cores (1+) of the Yandex Cloud Serverless Container.
+	// Cores (**1+**) of the Yandex Cloud Serverless Container.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
-	// Description of the Yandex Cloud Serverless Container
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container
+	// (String) Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container.
+	// Execution timeout in seconds (**duration format**) for Yandex Cloud Serverless Container.
 	ExecutionTimeout *string `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
 
-	// Folder ID for the Yandex Cloud Serverless Container
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -59,120 +96,204 @@ type ContainerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Revision deployment image for Yandex Cloud Serverless Container
+	// (Block List, Min: 1, Max: 1) Revision deployment image for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Revision deployment image for Yandex Cloud Serverless Container.
 	Image []ImageInitParameters `json:"image,omitempty" tf:"image,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Serverless Container
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging from Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Options for logging from Yandex Cloud Serverless Container. (see below for nested schema)
+	// Options for logging from Yandex Cloud Serverless Container.
 	LogOptions []LogOptionsInitParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
-	// Container memory in megabytes, should be aligned to 128
+	// (Number) Memory in megabytes (aligned to 128 MB).
+	// Memory in megabytes (**aligned to 128 MB**).
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Yandex Cloud Serverless Container name
+	// (Block List, Max: 1) Options set the access mode to revision's metadata endpoints. (see below for nested schema)
+	// Options set the access mode to revision's metadata endpoints.
+	MetadataOptions []MetadataOptionsInitParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
+	// (Block List) Mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Mounts for Yandex Cloud Serverless Container.
+	Mounts []MountsInitParameters `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Secrets for Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Provision policy. If specified the revision will have prepared instances. (see below for nested schema)
+	// Provision policy. If specified the revision will have prepared instances.
+	ProvisionPolicy []ProvisionPolicyInitParameters `json:"provisionPolicy,omitempty" tf:"provision_policy,omitempty"`
+
+	// (Block List, Max: 1) Runtime for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Runtime for Yandex Cloud Serverless Container.
+	Runtime []RuntimeInitParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// (Block List) Secrets for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Secrets for Yandex Cloud Serverless Container.
 	Secrets []SecretsInitParameters `json:"secrets,omitempty" tf:"secrets,omitempty"`
 
-	// Service account ID for Yandex Cloud Serverless Container
+	// (String) Service account which linked to the resource.
+	// [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/iam/v1alpha1.ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Serverless Container
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
+
+	// (Block List, Deprecated) (DEPRECATED, use mounts.object_storage instead) Storage mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+	// (**DEPRECATED**, use `mounts.object_storage` instead) Storage mounts for Yandex Cloud Serverless Container.
 	StorageMounts []StorageMountsInitParameters `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 }
 
 type ContainerObservation struct {
 
-	// Concurrency of Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Serverless Container. (see below for nested schema)
+	// Config for asynchronous invocations of Yandex Cloud Serverless Container.
+	AsyncInvocation []AsyncInvocationObservation `json:"asyncInvocation,omitempty" tf:"async_invocation,omitempty"`
+
+	// (Number) Concurrency of Yandex Cloud Serverless Container.
+	// Concurrency of Yandex Cloud Serverless Container.
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 
-	// Network access. If specified the revision will be attached to specified network
+	// (Block List, Max: 1) Network access. If specified the revision will be attached to specified network. (see below for nested schema)
+	// Network access. If specified the revision will be attached to specified network.
 	Connectivity []ConnectivityObservation `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Core fraction (0...100) of the Yandex Cloud Serverless Container
+	// (Number) Core fraction (0...100) of the Yandex Cloud Serverless Container.
+	// Core fraction (**0...100**) of the Yandex Cloud Serverless Container.
 	CoreFraction *float64 `json:"coreFraction,omitempty" tf:"core_fraction,omitempty"`
 
+	// (Number) Cores (1+) of the Yandex Cloud Serverless Container.
+	// Cores (**1+**) of the Yandex Cloud Serverless Container.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
-	// Creation timestamp of the Yandex Cloud Serverless Container
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the Yandex Cloud Serverless Container
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container
+	// (String) Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container.
+	// Execution timeout in seconds (**duration format**) for Yandex Cloud Serverless Container.
 	ExecutionTimeout *string `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
 
-	// Folder ID for the Yandex Cloud Serverless Container
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Secret's id.
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Revision deployment image for Yandex Cloud Serverless Container
+	// (Block List, Min: 1, Max: 1) Revision deployment image for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Revision deployment image for Yandex Cloud Serverless Container.
 	Image []ImageObservation `json:"image,omitempty" tf:"image,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Serverless Container
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging from Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Options for logging from Yandex Cloud Serverless Container. (see below for nested schema)
+	// Options for logging from Yandex Cloud Serverless Container.
 	LogOptions []LogOptionsObservation `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
-	// Container memory in megabytes, should be aligned to 128
+	// (Number) Memory in megabytes (aligned to 128 MB).
+	// Memory in megabytes (**aligned to 128 MB**).
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Yandex Cloud Serverless Container name
+	// (Block List, Max: 1) Options set the access mode to revision's metadata endpoints. (see below for nested schema)
+	// Options set the access mode to revision's metadata endpoints.
+	MetadataOptions []MetadataOptionsObservation `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
+	// (Block List) Mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Mounts for Yandex Cloud Serverless Container.
+	Mounts []MountsObservation `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Last revision ID of the Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Provision policy. If specified the revision will have prepared instances. (see below for nested schema)
+	// Provision policy. If specified the revision will have prepared instances.
+	ProvisionPolicy []ProvisionPolicyObservation `json:"provisionPolicy,omitempty" tf:"provision_policy,omitempty"`
+
+	// (String) Last revision ID of the Yandex Cloud Serverless Container.
+	// Last revision ID of the Yandex Cloud Serverless Container.
 	RevisionID *string `json:"revisionId,omitempty" tf:"revision_id,omitempty"`
 
-	// Secrets for Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Runtime for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Runtime for Yandex Cloud Serverless Container.
+	Runtime []RuntimeObservation `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// (Block List) Secrets for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Secrets for Yandex Cloud Serverless Container.
 	Secrets []SecretsObservation `json:"secrets,omitempty" tf:"secrets,omitempty"`
 
-	// Service account ID for Yandex Cloud Serverless Container
+	// (String) Service account which linked to the resource.
+	// [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Serverless Container
+	// (Block List, Deprecated) (DEPRECATED, use mounts.object_storage instead) Storage mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+	// (**DEPRECATED**, use `mounts.object_storage` instead) Storage mounts for Yandex Cloud Serverless Container.
 	StorageMounts []StorageMountsObservation `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 
-	// Invoke URL for the Yandex Cloud Serverless Container
+	// (String) Invoke URL for the Yandex Cloud Serverless Container.
+	// Invoke URL for the Yandex Cloud Serverless Container.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type ContainerParameters struct {
 
-	// Concurrency of Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Serverless Container. (see below for nested schema)
+	// Config for asynchronous invocations of Yandex Cloud Serverless Container.
+	// +kubebuilder:validation:Optional
+	AsyncInvocation []AsyncInvocationParameters `json:"asyncInvocation,omitempty" tf:"async_invocation,omitempty"`
+
+	// (Number) Concurrency of Yandex Cloud Serverless Container.
+	// Concurrency of Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
 
-	// Network access. If specified the revision will be attached to specified network
+	// (Block List, Max: 1) Network access. If specified the revision will be attached to specified network. (see below for nested schema)
+	// Network access. If specified the revision will be attached to specified network.
 	// +kubebuilder:validation:Optional
 	Connectivity []ConnectivityParameters `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Core fraction (0...100) of the Yandex Cloud Serverless Container
+	// (Number) Core fraction (0...100) of the Yandex Cloud Serverless Container.
+	// Core fraction (**0...100**) of the Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	CoreFraction *float64 `json:"coreFraction,omitempty" tf:"core_fraction,omitempty"`
 
+	// (Number) Cores (1+) of the Yandex Cloud Serverless Container.
+	// Cores (**1+**) of the Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
-	// Description of the Yandex Cloud Serverless Container
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container
+	// (String) Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container.
+	// Execution timeout in seconds (**duration format**) for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	ExecutionTimeout *string `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
 
-	// Folder ID for the Yandex Cloud Serverless Container
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -185,264 +306,616 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Revision deployment image for Yandex Cloud Serverless Container
+	// (Block List, Min: 1, Max: 1) Revision deployment image for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Revision deployment image for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	Image []ImageParameters `json:"image,omitempty" tf:"image,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Serverless Container
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging from Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Options for logging from Yandex Cloud Serverless Container. (see below for nested schema)
+	// Options for logging from Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	LogOptions []LogOptionsParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
-	// Container memory in megabytes, should be aligned to 128
+	// (Number) Memory in megabytes (aligned to 128 MB).
+	// Memory in megabytes (**aligned to 128 MB**).
 	// +kubebuilder:validation:Optional
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 
-	// Yandex Cloud Serverless Container name
+	// (Block List, Max: 1) Options set the access mode to revision's metadata endpoints. (see below for nested schema)
+	// Options set the access mode to revision's metadata endpoints.
+	// +kubebuilder:validation:Optional
+	MetadataOptions []MetadataOptionsParameters `json:"metadataOptions,omitempty" tf:"metadata_options,omitempty"`
+
+	// (Block List) Mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Mounts for Yandex Cloud Serverless Container.
+	// +kubebuilder:validation:Optional
+	Mounts []MountsParameters `json:"mounts,omitempty" tf:"mounts,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Secrets for Yandex Cloud Serverless Container
+	// (Block List, Max: 1) Provision policy. If specified the revision will have prepared instances. (see below for nested schema)
+	// Provision policy. If specified the revision will have prepared instances.
+	// +kubebuilder:validation:Optional
+	ProvisionPolicy []ProvisionPolicyParameters `json:"provisionPolicy,omitempty" tf:"provision_policy,omitempty"`
+
+	// (Block List, Max: 1) Runtime for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Runtime for Yandex Cloud Serverless Container.
+	// +kubebuilder:validation:Optional
+	Runtime []RuntimeParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
+
+	// (Block List) Secrets for Yandex Cloud Serverless Container. (see below for nested schema)
+	// Secrets for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	Secrets []SecretsParameters `json:"secrets,omitempty" tf:"secrets,omitempty"`
 
-	// Service account ID for Yandex Cloud Serverless Container
+	// (String) Service account which linked to the resource.
+	// [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/iam/v1alpha1.ServiceAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Storage mounts for Yandex Cloud Serverless Container
+	// Reference to a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDRef *v1.Reference `json:"serviceAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceAccount in iam to populate serviceAccountId.
+	// +kubebuilder:validation:Optional
+	ServiceAccountIDSelector *v1.Selector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
+
+	// (Block List, Deprecated) (DEPRECATED, use mounts.object_storage instead) Storage mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+	// (**DEPRECATED**, use `mounts.object_storage` instead) Storage mounts for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	StorageMounts []StorageMountsParameters `json:"storageMounts,omitempty" tf:"storage_mounts,omitempty"`
 }
 
+type EphemeralDiskInitParameters struct {
+
+	// (Number) Block size of the ephemeral disk in KB.
+	// Block size of the ephemeral disk in KB.
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// (Number) Size of the ephemeral disk in GB.
+	// Size of the ephemeral disk in GB.
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type EphemeralDiskObservation struct {
+
+	// (Number) Block size of the ephemeral disk in KB.
+	// Block size of the ephemeral disk in KB.
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// (Number) Size of the ephemeral disk in GB.
+	// Size of the ephemeral disk in GB.
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type EphemeralDiskParameters struct {
+
+	// (Number) Block size of the ephemeral disk in KB.
+	// Block size of the ephemeral disk in KB.
+	// +kubebuilder:validation:Optional
+	BlockSizeKb *float64 `json:"blockSizeKb,omitempty" tf:"block_size_kb,omitempty"`
+
+	// (Number) Size of the ephemeral disk in GB.
+	// Size of the ephemeral disk in GB.
+	// +kubebuilder:validation:Optional
+	SizeGb *float64 `json:"sizeGb" tf:"size_gb,omitempty"`
+}
+
 type ImageInitParameters struct {
 
-	// List of arguments for Yandex Cloud Serverless Container
+	// (List of String) List of arguments for Yandex Cloud Serverless Container.
+	// List of arguments for Yandex Cloud Serverless Container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// List of commands for Yandex Cloud Serverless Container
+	// (List of String) List of commands for Yandex Cloud Serverless Container.
+	// List of commands for Yandex Cloud Serverless Container.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Digest of image that will be deployed as Yandex Cloud Serverless Container.
-	// If presented, should be equal to digest that will be resolved at server side by URL.
-	// Container will be updated on digest change even if image.0.url stays the same.
-	// If field not specified then its value will be computed.
+	// (String) Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
+	// Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
-	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container
+	// Z, a-z).
+	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
 	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// Invoke URL for the Yandex Cloud Serverless Container
+	// (String) Invoke URL for the Yandex Cloud Serverless Container.
+	// URL of image that will be deployed as Yandex Cloud Serverless Container.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Working directory for Yandex Cloud Serverless Container
+	// (String) Working directory for Yandex Cloud Serverless Container.
+	// Working directory for Yandex Cloud Serverless Container.
 	WorkDir *string `json:"workDir,omitempty" tf:"work_dir,omitempty"`
 }
 
 type ImageObservation struct {
 
-	// List of arguments for Yandex Cloud Serverless Container
+	// (List of String) List of arguments for Yandex Cloud Serverless Container.
+	// List of arguments for Yandex Cloud Serverless Container.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// List of commands for Yandex Cloud Serverless Container
+	// (List of String) List of commands for Yandex Cloud Serverless Container.
+	// List of commands for Yandex Cloud Serverless Container.
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Digest of image that will be deployed as Yandex Cloud Serverless Container.
-	// If presented, should be equal to digest that will be resolved at server side by URL.
-	// Container will be updated on digest change even if image.0.url stays the same.
-	// If field not specified then its value will be computed.
+	// (String) Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
+	// Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
-	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container
+	// Z, a-z).
+	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
 	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// Invoke URL for the Yandex Cloud Serverless Container
+	// (String) Invoke URL for the Yandex Cloud Serverless Container.
+	// URL of image that will be deployed as Yandex Cloud Serverless Container.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
-	// Working directory for Yandex Cloud Serverless Container
+	// (String) Working directory for Yandex Cloud Serverless Container.
+	// Working directory for Yandex Cloud Serverless Container.
 	WorkDir *string `json:"workDir,omitempty" tf:"work_dir,omitempty"`
 }
 
 type ImageParameters struct {
 
-	// List of arguments for Yandex Cloud Serverless Container
+	// (List of String) List of arguments for Yandex Cloud Serverless Container.
+	// List of arguments for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
-	// List of commands for Yandex Cloud Serverless Container
+	// (List of String) List of commands for Yandex Cloud Serverless Container.
+	// List of commands for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	Command []*string `json:"command,omitempty" tf:"command,omitempty"`
 
-	// Digest of image that will be deployed as Yandex Cloud Serverless Container.
-	// If presented, should be equal to digest that will be resolved at server side by URL.
-	// Container will be updated on digest change even if image.0.url stays the same.
-	// If field not specified then its value will be computed.
+	// (String) Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
+	// Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
 	// +kubebuilder:validation:Optional
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
-	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container
+	// Z, a-z).
+	// A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// Invoke URL for the Yandex Cloud Serverless Container
+	// (String) Invoke URL for the Yandex Cloud Serverless Container.
+	// URL of image that will be deployed as Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	URL *string `json:"url" tf:"url,omitempty"`
 
-	// Working directory for Yandex Cloud Serverless Container
+	// (String) Working directory for Yandex Cloud Serverless Container.
+	// Working directory for Yandex Cloud Serverless Container.
 	// +kubebuilder:validation:Optional
 	WorkDir *string `json:"workDir,omitempty" tf:"work_dir,omitempty"`
 }
 
 type LogOptionsInitParameters struct {
 
-	// Is logging from container disabled
+	// (Boolean) Is logging from container disabled.
+	// Is logging from container disabled.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Log entries are written to default log group for specified folder
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) Log entries are written to specified log group.
+	// Log entries are written to specified log group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
 type LogOptionsObservation struct {
 
-	// Is logging from container disabled
+	// (Boolean) Is logging from container disabled.
+	// Is logging from container disabled.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Log entries are written to default log group for specified folder
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) Log entries are written to specified log group.
+	// Log entries are written to specified log group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
 type LogOptionsParameters struct {
 
-	// Is logging from container disabled
+	// (Boolean) Is logging from container disabled.
+	// Is logging from container disabled.
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Log entries are written to default log group for specified folder
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) Log entries are written to specified log group.
+	// Log entries are written to specified log group.
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	// +kubebuilder:validation:Optional
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
+type MetadataOptionsInitParameters struct {
+
+	// default, 1 - enabled, 2 - disabled.
+	// Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+	AwsV1HTTPEndpoint *float64 `json:"awsV1HttpEndpoint,omitempty" tf:"aws_v1_http_endpoint,omitempty"`
+
+	// default, 1 - enabled, 2 - disabled.
+	// Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+	GceHTTPEndpoint *float64 `json:"gceHttpEndpoint,omitempty" tf:"gce_http_endpoint,omitempty"`
+}
+
+type MetadataOptionsObservation struct {
+
+	// default, 1 - enabled, 2 - disabled.
+	// Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+	AwsV1HTTPEndpoint *float64 `json:"awsV1HttpEndpoint,omitempty" tf:"aws_v1_http_endpoint,omitempty"`
+
+	// default, 1 - enabled, 2 - disabled.
+	// Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+	GceHTTPEndpoint *float64 `json:"gceHttpEndpoint,omitempty" tf:"gce_http_endpoint,omitempty"`
+}
+
+type MetadataOptionsParameters struct {
+
+	// default, 1 - enabled, 2 - disabled.
+	// Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+	// +kubebuilder:validation:Optional
+	AwsV1HTTPEndpoint *float64 `json:"awsV1HttpEndpoint,omitempty" tf:"aws_v1_http_endpoint,omitempty"`
+
+	// default, 1 - enabled, 2 - disabled.
+	// Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+	// +kubebuilder:validation:Optional
+	GceHTTPEndpoint *float64 `json:"gceHttpEndpoint,omitempty" tf:"gce_http_endpoint,omitempty"`
+}
+
+type MountsInitParameters struct {
+
+	// (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+	// One of the available mount types. Disk available during the function execution time.
+	EphemeralDisk []EphemeralDiskInitParameters `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// (String) Mount’s accessibility mode. Valid values are ro and rw.
+	// Mount’s accessibility mode. Valid values are `ro` and `rw`.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// (String) Path inside the container to access the directory in which the target is mounted.
+	// Path inside the container to access the directory in which the target is mounted.
+	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
+
+	// (Block List, Max: 1) Available mount types. Object storage as a mount. (see below for nested schema)
+	// Available mount types. Object storage as a mount.
+	ObjectStorage []ObjectStorageInitParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type MountsObservation struct {
+
+	// (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+	// One of the available mount types. Disk available during the function execution time.
+	EphemeralDisk []EphemeralDiskObservation `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// (String) Mount’s accessibility mode. Valid values are ro and rw.
+	// Mount’s accessibility mode. Valid values are `ro` and `rw`.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// (String) Path inside the container to access the directory in which the target is mounted.
+	// Path inside the container to access the directory in which the target is mounted.
+	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
+
+	// (Block List, Max: 1) Available mount types. Object storage as a mount. (see below for nested schema)
+	// Available mount types. Object storage as a mount.
+	ObjectStorage []ObjectStorageObservation `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type MountsParameters struct {
+
+	// (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+	// One of the available mount types. Disk available during the function execution time.
+	// +kubebuilder:validation:Optional
+	EphemeralDisk []EphemeralDiskParameters `json:"ephemeralDisk,omitempty" tf:"ephemeral_disk,omitempty"`
+
+	// (String) Mount’s accessibility mode. Valid values are ro and rw.
+	// Mount’s accessibility mode. Valid values are `ro` and `rw`.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// (String) Path inside the container to access the directory in which the target is mounted.
+	// Path inside the container to access the directory in which the target is mounted.
+	// +kubebuilder:validation:Optional
+	MountPointPath *string `json:"mountPointPath" tf:"mount_point_path,omitempty"`
+
+	// (Block List, Max: 1) Available mount types. Object storage as a mount. (see below for nested schema)
+	// Available mount types. Object storage as a mount.
+	// +kubebuilder:validation:Optional
+	ObjectStorage []ObjectStorageParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
+}
+
+type ObjectStorageInitParameters struct {
+
+	// (String) Name of the mounting bucket.
+	// Name of the mounting bucket.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ObjectStorageObservation struct {
+
+	// (String) Name of the mounting bucket.
+	// Name of the mounting bucket.
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ObjectStorageParameters struct {
+
+	// (String) Name of the mounting bucket.
+	// Name of the mounting bucket.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/storage/v1alpha1.Bucket
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
+	// +kubebuilder:validation:Optional
+	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
+
+	// Reference to a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketRef *v1.Reference `json:"bucketRef,omitempty" tf:"-"`
+
+	// Selector for a Bucket in storage to populate bucket.
+	// +kubebuilder:validation:Optional
+	BucketSelector *v1.Selector `json:"bucketSelector,omitempty" tf:"-"`
+
+	// (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+}
+
+type ProvisionPolicyInitParameters struct {
+
+	// (Number) Minimum number of prepared instances that are always ready to serve requests.
+	// Minimum number of prepared instances that are always ready to serve requests.
+	MinInstances *float64 `json:"minInstances,omitempty" tf:"min_instances,omitempty"`
+}
+
+type ProvisionPolicyObservation struct {
+
+	// (Number) Minimum number of prepared instances that are always ready to serve requests.
+	// Minimum number of prepared instances that are always ready to serve requests.
+	MinInstances *float64 `json:"minInstances,omitempty" tf:"min_instances,omitempty"`
+}
+
+type ProvisionPolicyParameters struct {
+
+	// (Number) Minimum number of prepared instances that are always ready to serve requests.
+	// Minimum number of prepared instances that are always ready to serve requests.
+	// +kubebuilder:validation:Optional
+	MinInstances *float64 `json:"minInstances" tf:"min_instances,omitempty"`
+}
+
+type RuntimeInitParameters struct {
+
+	// (String) Type of the runtime for Yandex Cloud Serverless Container. Valid values are http and task.
+	// Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RuntimeObservation struct {
+
+	// (String) Type of the runtime for Yandex Cloud Serverless Container. Valid values are http and task.
+	// Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RuntimeParameters struct {
+
+	// (String) Type of the runtime for Yandex Cloud Serverless Container. Valid values are http and task.
+	// Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type SecretsInitParameters struct {
 
-	// Container's environment variable in which secret's value will be stored.
+	// Z, a-z).
+	// Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
 	EnvironmentVariable *string `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// (String) The ID of this resource.
+	// Secret's ID.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/lockbox/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Reference to a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// (String) Secret's entries key which value will be stored in environment variable.
 	// Secret's entries key which value will be stored in environment variable.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// (String) Secret's version ID.
+	// Secret's version ID.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/lockbox/v1alpha1.SecretVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+
+	// Reference to a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDRef *v1.Reference `json:"versionIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDSelector *v1.Selector `json:"versionIdSelector,omitempty" tf:"-"`
 }
 
 type SecretsObservation struct {
 
-	// Container's environment variable in which secret's value will be stored.
+	// Z, a-z).
+	// Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
 	EnvironmentVariable *string `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// (String) The ID of this resource.
+	// Secret's ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) Secret's entries key which value will be stored in environment variable.
 	// Secret's entries key which value will be stored in environment variable.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// (String) Secret's version ID.
+	// Secret's version ID.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type SecretsParameters struct {
 
-	// Container's environment variable in which secret's value will be stored.
+	// Z, a-z).
+	// Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
 	// +kubebuilder:validation:Optional
 	EnvironmentVariable *string `json:"environmentVariable" tf:"environment_variable,omitempty"`
 
-	// Secret's id.
+	// (String) The ID of this resource.
+	// Secret's ID.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/lockbox/v1alpha1.Secret
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Reference to a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Secret in lockbox to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
+
+	// (String) Secret's entries key which value will be stored in environment variable.
 	// Secret's entries key which value will be stored in environment variable.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// Secret's version id.
+	// (String) Secret's version ID.
+	// Secret's version ID.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/lockbox/v1alpha1.SecretVersion
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+
+	// Reference to a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDRef *v1.Reference `json:"versionIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecretVersion in lockbox to populate versionId.
+	// +kubebuilder:validation:Optional
+	VersionIDSelector *v1.Selector `json:"versionIdSelector,omitempty" tf:"-"`
 }
 
 type StorageMountsInitParameters struct {
 
+	// (String) Name of the mounting bucket.
 	// Name of the mounting bucket.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// (String) Path inside the container to access the directory in which the target is mounted.
 	// Path inside the container to access the directory in which the bucket is mounted.
 	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
 
+	// (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
 	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// only mode.
 	// Mount the bucket in read-only mode.
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type StorageMountsObservation struct {
 
+	// (String) Name of the mounting bucket.
 	// Name of the mounting bucket.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
+	// (String) Path inside the container to access the directory in which the target is mounted.
 	// Path inside the container to access the directory in which the bucket is mounted.
 	MountPointPath *string `json:"mountPointPath,omitempty" tf:"mount_point_path,omitempty"`
 
+	// (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
 	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// only mode.
 	// Mount the bucket in read-only mode.
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`
 }
 
 type StorageMountsParameters struct {
 
+	// (String) Name of the mounting bucket.
 	// Name of the mounting bucket.
 	// +kubebuilder:validation:Optional
 	Bucket *string `json:"bucket" tf:"bucket,omitempty"`
 
+	// (String) Path inside the container to access the directory in which the target is mounted.
 	// Path inside the container to access the directory in which the bucket is mounted.
 	// +kubebuilder:validation:Optional
 	MountPointPath *string `json:"mountPointPath" tf:"mount_point_path,omitempty"`
 
+	// (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
 	// Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// only mode.
 	// Mount the bucket in read-only mode.
 	// +kubebuilder:validation:Optional
 	ReadOnly *bool `json:"readOnly,omitempty" tf:"read_only,omitempty"`

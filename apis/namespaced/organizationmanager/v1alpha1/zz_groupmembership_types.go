@@ -12,6 +12,7 @@ import (
 
 type GroupMembershipInitParameters struct {
 
+	// (String) The Group to add/remove members to/from.
 	// The Group to add/remove members to/from.
 	// +crossplane:generate:reference:type=Group
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
@@ -24,6 +25,7 @@ type GroupMembershipInitParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.NamespacedSelector `json:"groupIdSelector,omitempty" tf:"-"`
 
+	// (Set of String) A set of members of the Group. Each member is represented by an id.
 	// A set of members of the Group. Each member is represented by an id.
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
@@ -31,11 +33,14 @@ type GroupMembershipInitParameters struct {
 
 type GroupMembershipObservation struct {
 
+	// (String) The Group to add/remove members to/from.
 	// The Group to add/remove members to/from.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Set of String) A set of members of the Group. Each member is represented by an id.
 	// A set of members of the Group. Each member is represented by an id.
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
@@ -43,6 +48,7 @@ type GroupMembershipObservation struct {
 
 type GroupMembershipParameters struct {
 
+	// (String) The Group to add/remove members to/from.
 	// The Group to add/remove members to/from.
 	// +crossplane:generate:reference:type=Group
 	// +kubebuilder:validation:Optional
@@ -56,6 +62,7 @@ type GroupMembershipParameters struct {
 	// +kubebuilder:validation:Optional
 	GroupIDSelector *v1.NamespacedSelector `json:"groupIdSelector,omitempty" tf:"-"`
 
+	// (Set of String) A set of members of the Group. Each member is represented by an id.
 	// A set of members of the Group. Each member is represented by an id.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -89,7 +96,7 @@ type GroupMembershipStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// GroupMembership is the Schema for the GroupMemberships API. Allows management of members of Yandex.Cloud Organization Manager Group.
+// GroupMembership is the Schema for the GroupMemberships API. Allows management of members of Yandex Cloud Organization Manager Group.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

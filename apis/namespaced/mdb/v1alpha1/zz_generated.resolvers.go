@@ -198,12 +198,11 @@ func (mg *ClickhouseCluster) ResolveReferences(ctx context.Context, c client.Rea
 	return nil
 }
 
-// ResolveReferences of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)
 
 	var rsp reference.NamespacedResolutionResponse
-	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
@@ -223,28 +222,9 @@ func (mg *ElasticsearchCluster) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Host); i3++ {
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Host[i3].SubnetID),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.ForProvider.Host[i3].SubnetIDRef,
-			Selector:     mg.Spec.ForProvider.Host[i3].SubnetIDSelector,
-			To: reference.To{
-				List:    &v1alpha11.SubnetList{},
-				Managed: &v1alpha11.Subnet{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Host[i3].SubnetID")
-		}
-		mg.Spec.ForProvider.Host[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Host[i3].SubnetIDRef = rsp.ResolvedReference
-
-	}
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkID),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Namespace:    mg.GetNamespace(),
 		Reference:    mg.Spec.ForProvider.NetworkIDRef,
 		Selector:     mg.Spec.ForProvider.NetworkIDSelector,
@@ -258,40 +238,6 @@ func (mg *ElasticsearchCluster) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NetworkIDRef = rsp.ResolvedReference
-
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.SecurityGroupIds),
-		Extract:       reference.ExternalName(),
-		Namespace:     mg.GetNamespace(),
-		References:    mg.Spec.ForProvider.SecurityGroupIdsRefs,
-		Selector:      mg.Spec.ForProvider.SecurityGroupIdsSelector,
-		To: reference.To{
-			List:    &v1alpha11.SecurityGroupList{},
-			Managed: &v1alpha11.SecurityGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.SecurityGroupIds")
-	}
-	mg.Spec.ForProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.ForProvider.SecurityGroupIdsRefs = mrsp.ResolvedReferences
-
-	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceAccountID),
-		Extract:      reference.ExternalName(),
-		Namespace:    mg.GetNamespace(),
-		Reference:    mg.Spec.ForProvider.ServiceAccountIDRef,
-		Selector:     mg.Spec.ForProvider.ServiceAccountIDSelector,
-		To: reference.To{
-			List:    &v1alpha12.ServiceAccountList{},
-			Managed: &v1alpha12.ServiceAccount{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceAccountID")
-	}
-	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
@@ -310,28 +256,9 @@ func (mg *ElasticsearchCluster) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Host); i3++ {
-		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Host[i3].SubnetID),
-			Extract:      reference.ExternalName(),
-			Namespace:    mg.GetNamespace(),
-			Reference:    mg.Spec.InitProvider.Host[i3].SubnetIDRef,
-			Selector:     mg.Spec.InitProvider.Host[i3].SubnetIDSelector,
-			To: reference.To{
-				List:    &v1alpha11.SubnetList{},
-				Managed: &v1alpha11.Subnet{},
-			},
-		})
-		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Host[i3].SubnetID")
-		}
-		mg.Spec.InitProvider.Host[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Host[i3].SubnetIDRef = rsp.ResolvedReference
-
-	}
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkID),
-		Extract:      reference.ExternalName(),
+		Extract:      resource.ExtractResourceID(),
 		Namespace:    mg.GetNamespace(),
 		Reference:    mg.Spec.InitProvider.NetworkIDRef,
 		Selector:     mg.Spec.InitProvider.NetworkIDSelector,
@@ -346,39 +273,132 @@ func (mg *ElasticsearchCluster) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.InitProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.NetworkIDRef = rsp.ResolvedReference
 
-	mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
-		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.SecurityGroupIds),
-		Extract:       reference.ExternalName(),
-		Namespace:     mg.GetNamespace(),
-		References:    mg.Spec.InitProvider.SecurityGroupIdsRefs,
-		Selector:      mg.Spec.InitProvider.SecurityGroupIdsSelector,
-		To: reference.To{
-			List:    &v1alpha11.SecurityGroupList{},
-			Managed: &v1alpha11.SecurityGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.SecurityGroupIds")
-	}
-	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
-	mg.Spec.InitProvider.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+	return nil
+}
+
+// ResolveReferences of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
 
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccountID),
-		Extract:      reference.ExternalName(),
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
 		Namespace:    mg.GetNamespace(),
-		Reference:    mg.Spec.InitProvider.ServiceAccountIDRef,
-		Selector:     mg.Spec.InitProvider.ServiceAccountIDSelector,
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
 		To: reference.To{
-			List:    &v1alpha12.ServiceAccountList{},
-			Managed: &v1alpha12.ServiceAccount{},
+			List:    &ClickhouseClusterList{},
+			Managed: &ClickhouseCluster{},
 		},
 	})
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccountID")
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
 	}
-	mg.Spec.InitProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ServiceAccountIDRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ClickhouseClusterList{},
+			Managed: &ClickhouseCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ClickhouseUser.
+func (mg *ClickhouseUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ClickhouseClusterList{},
+			Managed: &ClickhouseCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Permission); i3++ {
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Permission[i3].DatabaseName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.Permission[i3].DatabaseNameRef,
+			Selector:     mg.Spec.ForProvider.Permission[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &ClickhouseDatabaseList{},
+				Managed: &ClickhouseDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Permission[i3].DatabaseName")
+		}
+		mg.Spec.ForProvider.Permission[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Permission[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ClickhouseClusterList{},
+			Managed: &ClickhouseCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Permission); i3++ {
+		rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Permission[i3].DatabaseName),
+			Extract:      resource.ExtractParamPath("name", false),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.Permission[i3].DatabaseNameRef,
+			Selector:     mg.Spec.InitProvider.Permission[i3].DatabaseNameSelector,
+			To: reference.To{
+				List:    &ClickhouseDatabaseList{},
+				Managed: &ClickhouseDatabase{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Permission[i3].DatabaseName")
+		}
+		mg.Spec.InitProvider.Permission[i3].DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Permission[i3].DatabaseNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -526,6 +546,172 @@ func (mg *GreenplumCluster) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.NetworkIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkID")
+	}
+	mg.Spec.ForProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.NetworkIDRef,
+		Selector:     mg.Spec.InitProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkID")
+	}
+	mg.Spec.InitProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &GreenplumClusterList{},
+			Managed: &GreenplumCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &GreenplumClusterList{},
+			Managed: &GreenplumCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this GreenplumUser.
+func (mg *GreenplumUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &GreenplumClusterList{},
+			Managed: &GreenplumCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &GreenplumClusterList{},
+			Managed: &GreenplumCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1199,6 +1385,84 @@ func (mg *MySQLCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	return nil
 }
 
+// ResolveReferences of this MySQLClusterV2.
+func (mg *MySQLClusterV2) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.NetworkIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkID")
+	}
+	mg.Spec.ForProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.NetworkIDRef,
+		Selector:     mg.Spec.InitProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkID")
+	}
+	mg.Spec.InitProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MySQLDatabase.
 func (mg *MySQLDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPINamespacedResolver(c, mg)
@@ -1334,29 +1598,6 @@ func (mg *OpensearchCluster) ResolveReferences(ctx context.Context, c client.Rea
 	var mrsp reference.MultiNamespacedResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Config); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.Config[i3].Opensearch); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups); i5++ {
-				mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds),
-					Extract:       reference.ExternalName(),
-					Namespace:     mg.GetNamespace(),
-					References:    mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs,
-					Selector:      mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsSelector,
-					To: reference.To{
-						List:    &v1alpha11.SubnetList{},
-						Managed: &v1alpha11.Subnet{},
-					},
-				})
-				if err != nil {
-					return errors.Wrap(err, "mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds")
-				}
-				mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
-				mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs = mrsp.ResolvedReferences
-
-			}
-		}
-	}
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
 		Extract:      reference.ExternalName(),
@@ -1425,29 +1666,6 @@ func (mg *OpensearchCluster) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Config); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.Config[i3].Opensearch); i4++ {
-			for i5 := 0; i5 < len(mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups); i5++ {
-				mrsp, err = r.ResolveMultiple(ctx, reference.MultiNamespacedResolutionRequest{
-					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds),
-					Extract:       reference.ExternalName(),
-					Namespace:     mg.GetNamespace(),
-					References:    mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs,
-					Selector:      mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsSelector,
-					To: reference.To{
-						List:    &v1alpha11.SubnetList{},
-						Managed: &v1alpha11.Subnet{},
-					},
-				})
-				if err != nil {
-					return errors.Wrap(err, "mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds")
-				}
-				mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
-				mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs = mrsp.ResolvedReferences
-
-			}
-		}
-	}
 	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
 		Extract:      reference.ExternalName(),
@@ -1666,6 +1884,84 @@ func (mg *PostgresqlCluster) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.NetworkIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkID")
+	}
+	mg.Spec.ForProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.NetworkIDRef,
+		Selector:     mg.Spec.InitProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkID")
+	}
+	mg.Spec.InitProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1939,6 +2235,338 @@ func (mg *RedisCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.InitProvider.SecurityGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.SecurityGroupIdsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this RedisClusterV2.
+func (mg *RedisClusterV2) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.NetworkIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkID")
+	}
+	mg.Spec.ForProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.NetworkIDRef,
+		Selector:     mg.Spec.InitProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkID")
+	}
+	mg.Spec.InitProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this RedisUser.
+func (mg *RedisUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &RedisClusterV2List{},
+			Managed: &RedisClusterV2{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &RedisClusterV2List{},
+			Managed: &RedisClusterV2{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.FolderIDRef,
+		Selector:     mg.Spec.ForProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FolderID")
+	}
+	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.NetworkIDRef,
+		Selector:     mg.Spec.ForProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.NetworkID")
+	}
+	mg.Spec.ForProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.NetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
+		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.FolderIDRef,
+		Selector:     mg.Spec.InitProvider.FolderIDSelector,
+		To: reference.To{
+			List:    &v1alpha1.FolderList{},
+			Managed: &v1alpha1.Folder{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FolderID")
+	}
+	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.NetworkIDRef,
+		Selector:     mg.Spec.InitProvider.NetworkIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.NetworkList{},
+			Managed: &v1alpha11.Network{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkID")
+	}
+	mg.Spec.InitProvider.NetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ShardedPostgresqlClusterList{},
+			Managed: &ShardedPostgresqlCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ShardedPostgresqlClusterList{},
+			Managed: &ShardedPostgresqlCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ShardedPostgresqlClusterList{},
+			Managed: &ShardedPostgresqlCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ShardedPostgresqlClusterList{},
+			Managed: &ShardedPostgresqlCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPINamespacedResolver(c, mg)
+
+	var rsp reference.NamespacedResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ClusterIDRef,
+		Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ShardedPostgresqlClusterList{},
+			Managed: &ShardedPostgresqlCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.NamespacedResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ClusterID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ClusterIDRef,
+		Selector:     mg.Spec.InitProvider.ClusterIDSelector,
+		To: reference.To{
+			List:    &ShardedPostgresqlClusterList{},
+			Managed: &ShardedPostgresqlCluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ClusterID")
+	}
+	mg.Spec.InitProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ClusterIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -34,8 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Topic is the Schema for the Topics API. Get information about
-          a Yandex YDB Topics.
+        description: Topic is the Schema for the Topics API. Manage a YDB Topic.
         properties:
           apiVersion:
             description: |-
@@ -73,25 +72,64 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  autoPartitioningSettings:
+                    description: '(Block List, Max: 1) (see below for nested schema)'
+                    items:
+                      properties:
+                        autoPartitioningStrategy:
+                          description: |-
+                            (String) The auto partitioning strategy to use
+                            The auto partitioning strategy to use
+                          type: string
+                        autoPartitioningWriteSpeedStrategy:
+                          description: '(Block List, Max: 1) (see below for nested
+                            schema)'
+                          items:
+                            properties:
+                              downUtilizationPercent:
+                                description: |-
+                                  (Number) The down utilization percentage threshold
+                                  The down utilization percentage threshold
+                                type: number
+                              stabilizationWindow:
+                                description: |-
+                                  (Number) The stabilization window in seconds
+                                  The stabilization window in seconds
+                                type: number
+                              upUtilizationPercent:
+                                description: |-
+                                  (Number) The up utilization percentage threshold
+                                  The up utilization percentage threshold
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   consumer:
-                    description: 'Topic Readers. Types: array[consumer], optional.
-                      Default value: null.'
+                    description: |-
+                      (Block Set) Topic Readers. (see below for nested schema)
+                      Topic Readers.
                     items:
                       properties:
                         important:
+                          description: |-
+                            (Boolean) Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value false.
+                            Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value `false`.
                           type: boolean
                         name:
-                          description: 'Topic name. Type: string, required. Default
-                            value: "".'
+                          description: |-
+                            (String) Topic name.
+                            Reader's name.
                           type: string
                         startingMessageTimestampMs:
-                          description: 'Timestamp in UNIX timestamp format from which
-                            the reader will start reading data. Type: integer, optional.
-                            Default value: 0.'
+                          description: |-
+                            (Number) Timestamp in UNIX timestamp format from which the reader will start reading data. Default value 0.
+                            Timestamp in UNIX timestamp format from which the reader will start reading data. Default value `0`.
                           type: number
                         supportedCodecs:
-                          description: 'Supported data encodings. Types: array[string].
-                            Default value: ["gzip", "raw", "zstd"].'
+                          description: |-
+                            (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+                            Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
                           items:
                             type: string
                           type: array
@@ -99,30 +137,128 @@ spec:
                       type: object
                     type: array
                   databaseEndpoint:
-                    description: 'YDB database endpoint. Types: string, required.
-                      Default value: "".'
+                    description: |-
+                      (String) YDB database endpoint.
+                      YDB database endpoint.
                     type: string
+                  databaseEndpointRef:
+                    description: Reference to a DatabaseServerless in ydb to populate
+                      databaseEndpoint.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  databaseEndpointSelector:
+                    description: Selector for a DatabaseServerless in ydb to populate
+                      databaseEndpoint.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   description:
+                    description: |-
+                      (String) Topic description.
+                      Topic description.
                     type: string
+                  maxPartitionsCount:
+                    description: |-
+                      (Number) Number of max active partitions. Default value 1.
+                      Number of max active partitions. Default value `1`.
+                    type: number
                   meteringMode:
+                    description: |-
+                      based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases.
+                      Resource metering mode (`reserved_capacity` - based on the allocated resources or `request_units` - based on actual usage). This option applies to topics in serverless databases.
                     type: string
                   name:
-                    description: 'Topic name. Type: string, required. Default value:
-                      "".'
+                    description: |-
+                      (String) Topic name.
+                      Topic name.
                     type: string
                   partitionWriteSpeedKbps:
+                    description: |-
+                      (Number) Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: 1024 (1MB).
+                      Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: `1024 (1MB)`.
                     type: number
                   partitionsCount:
-                    description: 'Number of partitions. Types: integer, optional.
-                      Default value: 2.'
+                    description: |-
+                      (Number) Number of min partitions. Default value 1.
+                      Number of min partitions. Default value `1`.
                     type: number
                   retentionPeriodHours:
+                    description: |-
+                      (Number) Data retention time. Default value 86400000.
+                      Data retention time. Default value `86400000`.
                     type: number
                   retentionStorageMb:
+                    description: (Number)
                     type: number
                   supportedCodecs:
-                    description: 'Supported data encodings. Types: array[string].
-                      Default value: ["gzip", "raw", "zstd"].'
+                    description: |-
+                      (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+                      Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
                     items:
                       type: string
                     type: array
@@ -141,25 +277,64 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  autoPartitioningSettings:
+                    description: '(Block List, Max: 1) (see below for nested schema)'
+                    items:
+                      properties:
+                        autoPartitioningStrategy:
+                          description: |-
+                            (String) The auto partitioning strategy to use
+                            The auto partitioning strategy to use
+                          type: string
+                        autoPartitioningWriteSpeedStrategy:
+                          description: '(Block List, Max: 1) (see below for nested
+                            schema)'
+                          items:
+                            properties:
+                              downUtilizationPercent:
+                                description: |-
+                                  (Number) The down utilization percentage threshold
+                                  The down utilization percentage threshold
+                                type: number
+                              stabilizationWindow:
+                                description: |-
+                                  (Number) The stabilization window in seconds
+                                  The stabilization window in seconds
+                                type: number
+                              upUtilizationPercent:
+                                description: |-
+                                  (Number) The up utilization percentage threshold
+                                  The up utilization percentage threshold
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   consumer:
-                    description: 'Topic Readers. Types: array[consumer], optional.
-                      Default value: null.'
+                    description: |-
+                      (Block Set) Topic Readers. (see below for nested schema)
+                      Topic Readers.
                     items:
                       properties:
                         important:
+                          description: |-
+                            (Boolean) Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value false.
+                            Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value `false`.
                           type: boolean
                         name:
-                          description: 'Topic name. Type: string, required. Default
-                            value: "".'
+                          description: |-
+                            (String) Topic name.
+                            Reader's name.
                           type: string
                         startingMessageTimestampMs:
-                          description: 'Timestamp in UNIX timestamp format from which
-                            the reader will start reading data. Type: integer, optional.
-                            Default value: 0.'
+                          description: |-
+                            (Number) Timestamp in UNIX timestamp format from which the reader will start reading data. Default value 0.
+                            Timestamp in UNIX timestamp format from which the reader will start reading data. Default value `0`.
                           type: number
                         supportedCodecs:
-                          description: 'Supported data encodings. Types: array[string].
-                            Default value: ["gzip", "raw", "zstd"].'
+                          description: |-
+                            (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+                            Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
                           items:
                             type: string
                           type: array
@@ -167,30 +342,128 @@ spec:
                       type: object
                     type: array
                   databaseEndpoint:
-                    description: 'YDB database endpoint. Types: string, required.
-                      Default value: "".'
+                    description: |-
+                      (String) YDB database endpoint.
+                      YDB database endpoint.
                     type: string
+                  databaseEndpointRef:
+                    description: Reference to a DatabaseServerless in ydb to populate
+                      databaseEndpoint.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  databaseEndpointSelector:
+                    description: Selector for a DatabaseServerless in ydb to populate
+                      databaseEndpoint.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   description:
+                    description: |-
+                      (String) Topic description.
+                      Topic description.
                     type: string
+                  maxPartitionsCount:
+                    description: |-
+                      (Number) Number of max active partitions. Default value 1.
+                      Number of max active partitions. Default value `1`.
+                    type: number
                   meteringMode:
+                    description: |-
+                      based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases.
+                      Resource metering mode (`reserved_capacity` - based on the allocated resources or `request_units` - based on actual usage). This option applies to topics in serverless databases.
                     type: string
                   name:
-                    description: 'Topic name. Type: string, required. Default value:
-                      "".'
+                    description: |-
+                      (String) Topic name.
+                      Topic name.
                     type: string
                   partitionWriteSpeedKbps:
+                    description: |-
+                      (Number) Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: 1024 (1MB).
+                      Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: `1024 (1MB)`.
                     type: number
                   partitionsCount:
-                    description: 'Number of partitions. Types: integer, optional.
-                      Default value: 2.'
+                    description: |-
+                      (Number) Number of min partitions. Default value 1.
+                      Number of min partitions. Default value `1`.
                     type: number
                   retentionPeriodHours:
+                    description: |-
+                      (Number) Data retention time. Default value 86400000.
+                      Data retention time. Default value `86400000`.
                     type: number
                   retentionStorageMb:
+                    description: (Number)
                     type: number
                   supportedCodecs:
-                    description: 'Supported data encodings. Types: array[string].
-                      Default value: ["gzip", "raw", "zstd"].'
+                    description: |-
+                      (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+                      Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
                     items:
                       type: string
                     type: array
@@ -283,10 +556,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.databaseEndpoint is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.databaseEndpoint)
-                || (has(self.initProvider) && has(self.initProvider.databaseEndpoint))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -296,25 +565,64 @@ spec:
             properties:
               atProvider:
                 properties:
+                  autoPartitioningSettings:
+                    description: '(Block List, Max: 1) (see below for nested schema)'
+                    items:
+                      properties:
+                        autoPartitioningStrategy:
+                          description: |-
+                            (String) The auto partitioning strategy to use
+                            The auto partitioning strategy to use
+                          type: string
+                        autoPartitioningWriteSpeedStrategy:
+                          description: '(Block List, Max: 1) (see below for nested
+                            schema)'
+                          items:
+                            properties:
+                              downUtilizationPercent:
+                                description: |-
+                                  (Number) The down utilization percentage threshold
+                                  The down utilization percentage threshold
+                                type: number
+                              stabilizationWindow:
+                                description: |-
+                                  (Number) The stabilization window in seconds
+                                  The stabilization window in seconds
+                                type: number
+                              upUtilizationPercent:
+                                description: |-
+                                  (Number) The up utilization percentage threshold
+                                  The up utilization percentage threshold
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   consumer:
-                    description: 'Topic Readers. Types: array[consumer], optional.
-                      Default value: null.'
+                    description: |-
+                      (Block Set) Topic Readers. (see below for nested schema)
+                      Topic Readers.
                     items:
                       properties:
                         important:
+                          description: |-
+                            (Boolean) Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value false.
+                            Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value `false`.
                           type: boolean
                         name:
-                          description: 'Topic name. Type: string, required. Default
-                            value: "".'
+                          description: |-
+                            (String) Topic name.
+                            Reader's name.
                           type: string
                         startingMessageTimestampMs:
-                          description: 'Timestamp in UNIX timestamp format from which
-                            the reader will start reading data. Type: integer, optional.
-                            Default value: 0.'
+                          description: |-
+                            (Number) Timestamp in UNIX timestamp format from which the reader will start reading data. Default value 0.
+                            Timestamp in UNIX timestamp format from which the reader will start reading data. Default value `0`.
                           type: number
                         supportedCodecs:
-                          description: 'Supported data encodings. Types: array[string].
-                            Default value: ["gzip", "raw", "zstd"].'
+                          description: |-
+                            (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+                            Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
                           items:
                             type: string
                           type: array
@@ -322,32 +630,55 @@ spec:
                       type: object
                     type: array
                   databaseEndpoint:
-                    description: 'YDB database endpoint. Types: string, required.
-                      Default value: "".'
+                    description: |-
+                      (String) YDB database endpoint.
+                      YDB database endpoint.
                     type: string
                   description:
+                    description: |-
+                      (String) Topic description.
+                      Topic description.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
+                  maxPartitionsCount:
+                    description: |-
+                      (Number) Number of max active partitions. Default value 1.
+                      Number of max active partitions. Default value `1`.
+                    type: number
                   meteringMode:
+                    description: |-
+                      based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases.
+                      Resource metering mode (`reserved_capacity` - based on the allocated resources or `request_units` - based on actual usage). This option applies to topics in serverless databases.
                     type: string
                   name:
-                    description: 'Topic name. Type: string, required. Default value:
-                      "".'
+                    description: |-
+                      (String) Topic name.
+                      Topic name.
                     type: string
                   partitionWriteSpeedKbps:
+                    description: |-
+                      (Number) Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: 1024 (1MB).
+                      Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: `1024 (1MB)`.
                     type: number
                   partitionsCount:
-                    description: 'Number of partitions. Types: integer, optional.
-                      Default value: 2.'
+                    description: |-
+                      (Number) Number of min partitions. Default value 1.
+                      Number of min partitions. Default value `1`.
                     type: number
                   retentionPeriodHours:
+                    description: |-
+                      (Number) Data retention time. Default value 86400000.
+                      Data retention time. Default value `86400000`.
                     type: number
                   retentionStorageMb:
+                    description: (Number)
                     type: number
                   supportedCodecs:
-                    description: 'Supported data encodings. Types: array[string].
-                      Default value: ["gzip", "raw", "zstd"].'
+                    description: |-
+                      (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+                      Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
                     items:
                       type: string
                     type: array

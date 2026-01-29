@@ -9,10 +9,16 @@ func (tr *AsymmetricEncryptionKey) Hub() {}
 func (tr *AsymmetricEncryptionKeyIAMBinding) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *AsymmetricEncryptionKeyIAMMember) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *AsymmetricSignatureKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *AsymmetricSignatureKeyIAMBinding) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *AsymmetricSignatureKeyIAMMember) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SecretCiphertext) Hub() {}
@@ -22,3 +28,6 @@ func (tr *SymmetricKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SymmetricKeyIAMBinding) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *SymmetricKeyIAMMember) Hub() {}

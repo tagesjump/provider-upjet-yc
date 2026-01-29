@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpc/v1alpha1/securitygroup
   labels:
-    testing.upbound.io/example-name: group1
-  name: group1
+    testing.upbound.io/example-name: sg1
+  name: sg1
 spec:
   forProvider:
     description: description for my security group

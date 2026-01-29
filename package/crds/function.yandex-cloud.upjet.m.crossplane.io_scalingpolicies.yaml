@@ -60,24 +60,30 @@ spec:
               forProvider:
                 properties:
                   functionId:
-                    description: Yandex Cloud Function id used to define function
+                    description: |-
+                      (String) Yandex Cloud Function id used to define function.
+                      Yandex Cloud Function id used to define function.
                     type: string
                   policy:
-                    description: list definition for Yandex Cloud Function scaling
-                      policies
+                    description: |-
+                      (Block Set) List definition for Yandex Cloud Function scaling policies. (see below for nested schema)
+                      List definition for Yandex Cloud Function scaling policies.
                     items:
                       properties:
                         tag:
-                          description: Yandex.Cloud Function version tag for Yandex
-                            Cloud Function scaling policy
+                          description: |-
+                            (String) Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+                            Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
                           type: string
                         zoneInstancesLimit:
-                          description: max number of instances in one zone for Yandex.Cloud
-                            Function with tag
+                          description: |-
+                            (Number) Max number of instances in one zone for Yandex Cloud Function with tag.
+                            Max number of instances in one zone for Yandex Cloud Function with tag.
                           type: number
                         zoneRequestsLimit:
-                          description: max number of requests in one zone for Yandex.Cloud
-                            Function with tag
+                          description: |-
+                            (Number) Max number of requests in one zone for Yandex Cloud Function with tag.
+                            Max number of requests in one zone for Yandex Cloud Function with tag.
                           type: number
                       type: object
                     type: array
@@ -96,24 +102,30 @@ spec:
                   autoscaler.
                 properties:
                   functionId:
-                    description: Yandex Cloud Function id used to define function
+                    description: |-
+                      (String) Yandex Cloud Function id used to define function.
+                      Yandex Cloud Function id used to define function.
                     type: string
                   policy:
-                    description: list definition for Yandex Cloud Function scaling
-                      policies
+                    description: |-
+                      (Block Set) List definition for Yandex Cloud Function scaling policies. (see below for nested schema)
+                      List definition for Yandex Cloud Function scaling policies.
                     items:
                       properties:
                         tag:
-                          description: Yandex.Cloud Function version tag for Yandex
-                            Cloud Function scaling policy
+                          description: |-
+                            (String) Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+                            Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
                           type: string
                         zoneInstancesLimit:
-                          description: max number of instances in one zone for Yandex.Cloud
-                            Function with tag
+                          description: |-
+                            (Number) Max number of instances in one zone for Yandex Cloud Function with tag.
+                            Max number of instances in one zone for Yandex Cloud Function with tag.
                           type: number
                         zoneRequestsLimit:
-                          description: max number of requests in one zone for Yandex.Cloud
-                            Function with tag
+                          description: |-
+                            (Number) Max number of requests in one zone for Yandex Cloud Function with tag.
+                            Max number of requests in one zone for Yandex Cloud Function with tag.
                           type: number
                       type: object
                     type: array
@@ -187,26 +199,33 @@ spec:
               atProvider:
                 properties:
                   functionId:
-                    description: Yandex Cloud Function id used to define function
+                    description: |-
+                      (String) Yandex Cloud Function id used to define function.
+                      Yandex Cloud Function id used to define function.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   policy:
-                    description: list definition for Yandex Cloud Function scaling
-                      policies
+                    description: |-
+                      (Block Set) List definition for Yandex Cloud Function scaling policies. (see below for nested schema)
+                      List definition for Yandex Cloud Function scaling policies.
                     items:
                       properties:
                         tag:
-                          description: Yandex.Cloud Function version tag for Yandex
-                            Cloud Function scaling policy
+                          description: |-
+                            (String) Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+                            Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
                           type: string
                         zoneInstancesLimit:
-                          description: max number of instances in one zone for Yandex.Cloud
-                            Function with tag
+                          description: |-
+                            (Number) Max number of instances in one zone for Yandex Cloud Function with tag.
+                            Max number of instances in one zone for Yandex Cloud Function with tag.
                           type: number
                         zoneRequestsLimit:
-                          description: max number of requests in one zone for Yandex.Cloud
-                            Function with tag
+                          description: |-
+                            (Number) Max number of requests in one zone for Yandex Cloud Function with tag.
+                            Max number of requests in one zone for Yandex Cloud Function with tag.
                           type: number
                       type: object
                     type: array

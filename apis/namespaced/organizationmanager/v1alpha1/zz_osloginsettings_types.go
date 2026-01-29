@@ -12,87 +12,107 @@ import (
 
 type OsLoginSettingsInitParameters struct {
 
+	// (String) The organization to manage it's OsLogin Settings.
 	// The organization to manage it's OsLogin Settings.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The structure is documented below.
+	// (Block List, Max: 1) SSH Certificate settings. (see below for nested schema)
+	// SSH Certificate settings.
 	SSHCertificateSettings []SSHCertificateSettingsInitParameters `json:"sshCertificateSettings,omitempty" tf:"ssh_certificate_settings,omitempty"`
 
-	// The structure is documented below.
+	// (Block List, Max: 1) Users SSH key settings. (see below for nested schema)
+	// Users SSH key settings.
 	UserSSHKeySettings []UserSSHKeySettingsInitParameters `json:"userSshKeySettings,omitempty" tf:"user_ssh_key_settings,omitempty"`
 }
 
 type OsLoginSettingsObservation struct {
+
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) The organization to manage it's OsLogin Settings.
 	// The organization to manage it's OsLogin Settings.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The structure is documented below.
+	// (Block List, Max: 1) SSH Certificate settings. (see below for nested schema)
+	// SSH Certificate settings.
 	SSHCertificateSettings []SSHCertificateSettingsObservation `json:"sshCertificateSettings,omitempty" tf:"ssh_certificate_settings,omitempty"`
 
-	// The structure is documented below.
+	// (Block List, Max: 1) Users SSH key settings. (see below for nested schema)
+	// Users SSH key settings.
 	UserSSHKeySettings []UserSSHKeySettingsObservation `json:"userSshKeySettings,omitempty" tf:"user_ssh_key_settings,omitempty"`
 }
 
 type OsLoginSettingsParameters struct {
 
+	// (String) The organization to manage it's OsLogin Settings.
 	// The organization to manage it's OsLogin Settings.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// The structure is documented below.
+	// (Block List, Max: 1) SSH Certificate settings. (see below for nested schema)
+	// SSH Certificate settings.
 	// +kubebuilder:validation:Optional
 	SSHCertificateSettings []SSHCertificateSettingsParameters `json:"sshCertificateSettings,omitempty" tf:"ssh_certificate_settings,omitempty"`
 
-	// The structure is documented below.
+	// (Block List, Max: 1) Users SSH key settings. (see below for nested schema)
+	// Users SSH key settings.
 	// +kubebuilder:validation:Optional
 	UserSSHKeySettings []UserSSHKeySettingsParameters `json:"userSshKeySettings,omitempty" tf:"user_ssh_key_settings,omitempty"`
 }
 
 type SSHCertificateSettingsInitParameters struct {
 
-	// Enables or disables usage of ssh certificates signed by trusted CA.
+	// (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+	// Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type SSHCertificateSettingsObservation struct {
 
-	// Enables or disables usage of ssh certificates signed by trusted CA.
+	// (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+	// Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type SSHCertificateSettingsParameters struct {
 
-	// Enables or disables usage of ssh certificates signed by trusted CA.
+	// (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+	// Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type UserSSHKeySettingsInitParameters struct {
 
+	// (Boolean) If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
 	// If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
 	AllowManageOwnKeys *bool `json:"allowManageOwnKeys,omitempty" tf:"allow_manage_own_keys,omitempty"`
 
+	// (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
 	// Enables or disables usage of ssh keys assigned to a specific subject.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type UserSSHKeySettingsObservation struct {
 
+	// (Boolean) If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
 	// If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
 	AllowManageOwnKeys *bool `json:"allowManageOwnKeys,omitempty" tf:"allow_manage_own_keys,omitempty"`
 
+	// (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
 	// Enables or disables usage of ssh keys assigned to a specific subject.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type UserSSHKeySettingsParameters struct {
 
+	// (Boolean) If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
 	// If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
 	// +kubebuilder:validation:Optional
 	AllowManageOwnKeys *bool `json:"allowManageOwnKeys,omitempty" tf:"allow_manage_own_keys,omitempty"`
 
+	// (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
 	// Enables or disables usage of ssh keys assigned to a specific subject.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -125,7 +145,7 @@ type OsLoginSettingsStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// OsLoginSettings is the Schema for the OsLoginSettingss API. Allows management of OsLogin Settings within an existing Yandex.Cloud Organization.
+// OsLoginSettings is the Schema for the OsLoginSettingss API. Allows management of OsLogin Settings within an existing Yandex Cloud Organization.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

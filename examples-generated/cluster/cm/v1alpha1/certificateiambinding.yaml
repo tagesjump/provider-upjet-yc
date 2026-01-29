@@ -1,0 +1,34 @@
+apiVersion: cm.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: CertificateIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cm/v1alpha1/certificateiambinding
+  labels:
+    testing.upbound.io/example-name: viewer_binding
+  name: viewer-binding
+spec:
+  forProvider:
+    certificateIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your-certificate
+    members:
+    - userAccount:foo_user_id
+    role: viewer
+
+---
+
+apiVersion: cm.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cm/v1alpha1/certificateiambinding
+  labels:
+    testing.upbound.io/example-name: your-certificate
+  name: your-certificate
+spec:
+  forProvider:
+    domains:
+    - example.com
+    managed:
+    - challengeType: DNS_CNAME
+    name: certificate-name

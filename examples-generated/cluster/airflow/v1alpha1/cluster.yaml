@@ -1,0 +1,46 @@
+apiVersion: airflow.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: airflow/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: my_airflow_cluster
+  name: my-airflow-cluster
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    airflowConfig:
+      api:
+        auth_backends: airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session
+    codeSync:
+      s3:
+        bucket: bucket-for-airflow-dags
+    lockboxSecretsBackend:
+      enabled: true
+    logging:
+      enabled: true
+      folderId: ${var.folder_id}
+      minLevel: INFO
+    name: airflow-created-with-terraform
+    pipPackages:
+    - dbt
+    scheduler:
+      count: 1
+      resourcePresetId: c1-m4
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: for-airflow
+    subnetIdsRefs:
+    - name: a
+    - name: b
+    - name: d
+    webserver:
+      count: 1
+      resourcePresetId: c1-m4
+    worker:
+      maxCount: 2
+      minCount: 1
+      resourcePresetId: c1-m4

@@ -4,6 +4,24 @@ package v1alpha1
 
 import resource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 
+// GetItems of this OauthClientList.
+func (l *OauthClientList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this OauthClientSecretList.
+func (l *OauthClientSecretList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ServiceAccountAPIKeyList.
 func (l *ServiceAccountAPIKeyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -60,6 +78,33 @@ func (l *ServiceAccountList) GetItems() []resource.Managed {
 
 // GetItems of this ServiceAccountStaticAccessKeyList.
 func (l *ServiceAccountStaticAccessKeyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkloadIdentityFederatedCredentialList.
+func (l *WorkloadIdentityFederatedCredentialList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkloadIdentityOidcFederationIAMBindingList.
+func (l *WorkloadIdentityOidcFederationIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this WorkloadIdentityOidcFederationList.
+func (l *WorkloadIdentityOidcFederationList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

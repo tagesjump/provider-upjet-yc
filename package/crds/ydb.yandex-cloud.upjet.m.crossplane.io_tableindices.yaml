@@ -34,7 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: TableIndex is the Schema for the TableIndexs API. <no value>
+        description: TableIndex is the Schema for the TableIndexs API. Manage a YDB
+          Table Index.
         properties:
           apiVersion:
             description: |-
@@ -59,22 +60,29 @@ spec:
               forProvider:
                 properties:
                   columns:
+                    description: (List of String)
                     items:
                       type: string
                     type: array
                   connectionString:
+                    description: (String)
                     type: string
                   cover:
+                    description: (List of String)
                     items:
                       type: string
                     type: array
                   name:
+                    description: (String)
                     type: string
                   tableId:
+                    description: (String)
                     type: string
                   tablePath:
+                    description: (String)
                     type: string
                   type:
+                    description: (String)
                     type: string
                 type: object
               initProvider:
@@ -91,22 +99,29 @@ spec:
                   autoscaler.
                 properties:
                   columns:
+                    description: (List of String)
                     items:
                       type: string
                     type: array
                   connectionString:
+                    description: (String)
                     type: string
                   cover:
+                    description: (List of String)
                     items:
                       type: string
                     type: array
                   name:
+                    description: (String)
                     type: string
                   tableId:
+                    description: (String)
                     type: string
                   tablePath:
+                    description: (String)
                     type: string
                   type:
+                    description: (String)
                     type: string
                 type: object
               managementPolicies:
@@ -186,24 +201,32 @@ spec:
               atProvider:
                 properties:
                   columns:
+                    description: (List of String)
                     items:
                       type: string
                     type: array
                   connectionString:
+                    description: (String)
                     type: string
                   cover:
+                    description: (List of String)
                     items:
                       type: string
                     type: array
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   name:
+                    description: (String)
                     type: string
                   tableId:
+                    description: (String)
                     type: string
                   tablePath:
+                    description: (String)
                     type: string
                   type:
+                    description: (String)
                     type: string
                 type: object
               conditions:

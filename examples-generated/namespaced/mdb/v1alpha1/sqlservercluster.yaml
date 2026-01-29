@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/sqlservercluster
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
   namespace: upbound-system
 spec:
   forProvider:

@@ -62,32 +62,43 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
-                    description: A map of table attributes.
+                    description: |-
+                      (Map of String) A map of table attributes.
+                      A map of table attributes.
                     type: object
                     x-kubernetes-map-type: granular
                   column:
                     description: |-
+                      (Block Set, Min: 1) A list of column configuration options. (see below for nested schema)
                       A list of column configuration options.
-                      The structure is documented below.
                     items:
                       properties:
                         family:
-                          description: Column group
+                          description: |-
+                            (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+                            Column group.
                           type: string
                         name:
-                          description: Column name
+                          description: |-
+                            (String) Column name.
+                            Column name.
                           type: string
                         notNull:
-                          description: "A column cannot have the NULL data type. (\tDefault:
-                            false\t)"
+                          description: |-
+                            (Boolean) A column cannot have the NULL data type. Default: false.
+                            A column cannot have the NULL data type. Default: `false`.
                           type: boolean
                         type:
-                          description: Column data type. YQL data types are used.
+                          description: |-
+                            (String) Column data type. YQL data types are used.
+                            Column data type. YQL data types are used.
                           type: string
                       type: object
                     type: array
                   connectionString:
-                    description: Connection string for database.
+                    description: |-
+                      (String) Connection string for database.
+                      Connection string for database.
                     type: string
                   connectionStringRef:
                     description: Reference to a DatabaseServerless in ydb to populate
@@ -173,78 +184,116 @@ spec:
                     type: object
                   family:
                     description: |-
-                      A list of column group configuration options.
-                      The structure is documented below.
+                      (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+                      A list of column group configuration options. The `family` block may be used to group columns into [families](https://ydb.tech/en/docs/yql/reference/syntax/create_table#column-family) to set shared parameters for them.
                     items:
                       properties:
                         compression:
-                          description: 'Data codec (acceptable values: off, lz4).'
+                          description: |-
+                            (String) Data codec (acceptable values: off, lz4).
+                            Data codec (acceptable values: off, lz4).
                           type: string
                         data:
-                          description: 'Type of storage device for column data in
-                            this group (acceptable values: ssd, rot (from HDD spindle
-                            rotation)).'
+                          description: |-
+                            (String) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
+                            Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
                           type: string
                         name:
-                          description: Column family name
+                          description: |-
+                            (String) Column name.
+                            Column family name.
                           type: string
                       type: object
                     type: array
                   keyBloomFilter:
-                    description: Use the Bloom filter for the primary key
+                    description: |-
+                      (Boolean) Use the Bloom filter for the primary key.
+                      Use the Bloom filter for the primary key.
                     type: boolean
                   partitioningSettings:
                     description: |-
-                      Table partiotioning settings
-                      The structure is documented below.
+                      (Block List, Max: 1) Table partitioning settings. (see below for nested schema)
+                      Table partitioning settings.
                     items:
                       properties:
                         autoPartitioningByLoad:
+                          description: (Boolean)
                           type: boolean
                         autoPartitioningBySizeEnabled:
+                          description: (Boolean)
                           type: boolean
                         autoPartitioningMaxPartitionsCount:
+                          description: (Number)
                           type: number
                         autoPartitioningMinPartitionsCount:
+                          description: (Number)
                           type: number
                         autoPartitioningPartitionSizeMb:
+                          description: (Number)
                           type: number
                         partitionAtKeys:
+                          description: (Block List) (see below for nested schema)
                           items:
                             properties:
                               keys:
+                                description: (List of String)
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
+                        partitionBy:
+                          description: |-
+                            (List of String) Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+                            Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+                          items:
+                            type: string
+                          type: array
                         uniformPartitions:
+                          description: (Number)
                           type: number
                       type: object
                     type: array
                   path:
-                    description: Table path.
+                    description: |-
+                      (String) Table path.
+                      Table path.
                     type: string
                   primaryKey:
-                    description: A list of table columns to be uased as primary key.
+                    description: |-
+                      (List of String) A list of table columns to be used as primary key.
+                      A list of table columns to be used as primary key.
                     items:
                       type: string
                     type: array
                   readReplicasSettings:
-                    description: Read replication settings
+                    description: |-
+                      (String) Read replication settings.
+                      Read replication settings.
+                    type: string
+                  store:
+                    description: |-
+                      oriented tables. Omit for row-oriented tables (default).
+                      Table storage type. Set to `column` for column-oriented tables. Omit for row-oriented tables (default).
                     type: string
                   ttl:
-                    description: "ttl\t\tTTL settings\nThe structure is documented
-                      below."
+                    description: |-
+                      to-live for rows. (see below for nested schema)
+                      The `TTL` block supports allow you to create a special column type, [TTL column](https://ydb.tech/en/docs/concepts/ttl), whose values determine the time-to-live for rows.
                     items:
                       properties:
                         columnName:
-                          description: Column name for TTL
+                          description: |-
+                            (String) Column name for TTL.
+                            Column name for TTL.
                           type: string
                         expireInterval:
-                          description: Interval in the ISO 8601 format
+                          description: |-
+                            (String) Interval in the ISO 8601 format.
+                            Interval in the ISO 8601 format.
                           type: string
                         unit:
+                          description: (String)
                           type: string
                       type: object
                     type: array
@@ -265,32 +314,43 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
-                    description: A map of table attributes.
+                    description: |-
+                      (Map of String) A map of table attributes.
+                      A map of table attributes.
                     type: object
                     x-kubernetes-map-type: granular
                   column:
                     description: |-
+                      (Block Set, Min: 1) A list of column configuration options. (see below for nested schema)
                       A list of column configuration options.
-                      The structure is documented below.
                     items:
                       properties:
                         family:
-                          description: Column group
+                          description: |-
+                            (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+                            Column group.
                           type: string
                         name:
-                          description: Column name
+                          description: |-
+                            (String) Column name.
+                            Column name.
                           type: string
                         notNull:
-                          description: "A column cannot have the NULL data type. (\tDefault:
-                            false\t)"
+                          description: |-
+                            (Boolean) A column cannot have the NULL data type. Default: false.
+                            A column cannot have the NULL data type. Default: `false`.
                           type: boolean
                         type:
-                          description: Column data type. YQL data types are used.
+                          description: |-
+                            (String) Column data type. YQL data types are used.
+                            Column data type. YQL data types are used.
                           type: string
                       type: object
                     type: array
                   connectionString:
-                    description: Connection string for database.
+                    description: |-
+                      (String) Connection string for database.
+                      Connection string for database.
                     type: string
                   connectionStringRef:
                     description: Reference to a DatabaseServerless in ydb to populate
@@ -376,78 +436,116 @@ spec:
                     type: object
                   family:
                     description: |-
-                      A list of column group configuration options.
-                      The structure is documented below.
+                      (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+                      A list of column group configuration options. The `family` block may be used to group columns into [families](https://ydb.tech/en/docs/yql/reference/syntax/create_table#column-family) to set shared parameters for them.
                     items:
                       properties:
                         compression:
-                          description: 'Data codec (acceptable values: off, lz4).'
+                          description: |-
+                            (String) Data codec (acceptable values: off, lz4).
+                            Data codec (acceptable values: off, lz4).
                           type: string
                         data:
-                          description: 'Type of storage device for column data in
-                            this group (acceptable values: ssd, rot (from HDD spindle
-                            rotation)).'
+                          description: |-
+                            (String) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
+                            Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
                           type: string
                         name:
-                          description: Column family name
+                          description: |-
+                            (String) Column name.
+                            Column family name.
                           type: string
                       type: object
                     type: array
                   keyBloomFilter:
-                    description: Use the Bloom filter for the primary key
+                    description: |-
+                      (Boolean) Use the Bloom filter for the primary key.
+                      Use the Bloom filter for the primary key.
                     type: boolean
                   partitioningSettings:
                     description: |-
-                      Table partiotioning settings
-                      The structure is documented below.
+                      (Block List, Max: 1) Table partitioning settings. (see below for nested schema)
+                      Table partitioning settings.
                     items:
                       properties:
                         autoPartitioningByLoad:
+                          description: (Boolean)
                           type: boolean
                         autoPartitioningBySizeEnabled:
+                          description: (Boolean)
                           type: boolean
                         autoPartitioningMaxPartitionsCount:
+                          description: (Number)
                           type: number
                         autoPartitioningMinPartitionsCount:
+                          description: (Number)
                           type: number
                         autoPartitioningPartitionSizeMb:
+                          description: (Number)
                           type: number
                         partitionAtKeys:
+                          description: (Block List) (see below for nested schema)
                           items:
                             properties:
                               keys:
+                                description: (List of String)
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
+                        partitionBy:
+                          description: |-
+                            (List of String) Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+                            Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+                          items:
+                            type: string
+                          type: array
                         uniformPartitions:
+                          description: (Number)
                           type: number
                       type: object
                     type: array
                   path:
-                    description: Table path.
+                    description: |-
+                      (String) Table path.
+                      Table path.
                     type: string
                   primaryKey:
-                    description: A list of table columns to be uased as primary key.
+                    description: |-
+                      (List of String) A list of table columns to be used as primary key.
+                      A list of table columns to be used as primary key.
                     items:
                       type: string
                     type: array
                   readReplicasSettings:
-                    description: Read replication settings
+                    description: |-
+                      (String) Read replication settings.
+                      Read replication settings.
+                    type: string
+                  store:
+                    description: |-
+                      oriented tables. Omit for row-oriented tables (default).
+                      Table storage type. Set to `column` for column-oriented tables. Omit for row-oriented tables (default).
                     type: string
                   ttl:
-                    description: "ttl\t\tTTL settings\nThe structure is documented
-                      below."
+                    description: |-
+                      to-live for rows. (see below for nested schema)
+                      The `TTL` block supports allow you to create a special column type, [TTL column](https://ydb.tech/en/docs/concepts/ttl), whose values determine the time-to-live for rows.
                     items:
                       properties:
                         columnName:
-                          description: Column name for TTL
+                          description: |-
+                            (String) Column name for TTL.
+                            Column name for TTL.
                           type: string
                         expireInterval:
-                          description: Interval in the ISO 8601 format
+                          description: |-
+                            (String) Interval in the ISO 8601 format.
+                            Interval in the ISO 8601 format.
                           type: string
                         unit:
+                          description: (String)
                           type: string
                       type: object
                     type: array
@@ -531,109 +629,159 @@ spec:
                   attributes:
                     additionalProperties:
                       type: string
-                    description: A map of table attributes.
+                    description: |-
+                      (Map of String) A map of table attributes.
+                      A map of table attributes.
                     type: object
                     x-kubernetes-map-type: granular
                   column:
                     description: |-
+                      (Block Set, Min: 1) A list of column configuration options. (see below for nested schema)
                       A list of column configuration options.
-                      The structure is documented below.
                     items:
                       properties:
                         family:
-                          description: Column group
+                          description: |-
+                            (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+                            Column group.
                           type: string
                         name:
-                          description: Column name
+                          description: |-
+                            (String) Column name.
+                            Column name.
                           type: string
                         notNull:
-                          description: "A column cannot have the NULL data type. (\tDefault:
-                            false\t)"
+                          description: |-
+                            (Boolean) A column cannot have the NULL data type. Default: false.
+                            A column cannot have the NULL data type. Default: `false`.
                           type: boolean
                         type:
-                          description: Column data type. YQL data types are used.
+                          description: |-
+                            (String) Column data type. YQL data types are used.
+                            Column data type. YQL data types are used.
                           type: string
                       type: object
                     type: array
                   connectionString:
-                    description: Connection string for database.
+                    description: |-
+                      (String) Connection string for database.
+                      Connection string for database.
                     type: string
                   family:
                     description: |-
-                      A list of column group configuration options.
-                      The structure is documented below.
+                      (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+                      A list of column group configuration options. The `family` block may be used to group columns into [families](https://ydb.tech/en/docs/yql/reference/syntax/create_table#column-family) to set shared parameters for them.
                     items:
                       properties:
                         compression:
-                          description: 'Data codec (acceptable values: off, lz4).'
+                          description: |-
+                            (String) Data codec (acceptable values: off, lz4).
+                            Data codec (acceptable values: off, lz4).
                           type: string
                         data:
-                          description: 'Type of storage device for column data in
-                            this group (acceptable values: ssd, rot (from HDD spindle
-                            rotation)).'
+                          description: |-
+                            (String) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
+                            Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
                           type: string
                         name:
-                          description: Column family name
+                          description: |-
+                            (String) Column name.
+                            Column family name.
                           type: string
                       type: object
                     type: array
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   keyBloomFilter:
-                    description: Use the Bloom filter for the primary key
+                    description: |-
+                      (Boolean) Use the Bloom filter for the primary key.
+                      Use the Bloom filter for the primary key.
                     type: boolean
                   partitioningSettings:
                     description: |-
-                      Table partiotioning settings
-                      The structure is documented below.
+                      (Block List, Max: 1) Table partitioning settings. (see below for nested schema)
+                      Table partitioning settings.
                     items:
                       properties:
                         autoPartitioningByLoad:
+                          description: (Boolean)
                           type: boolean
                         autoPartitioningBySizeEnabled:
+                          description: (Boolean)
                           type: boolean
                         autoPartitioningMaxPartitionsCount:
+                          description: (Number)
                           type: number
                         autoPartitioningMinPartitionsCount:
+                          description: (Number)
                           type: number
                         autoPartitioningPartitionSizeMb:
+                          description: (Number)
                           type: number
                         partitionAtKeys:
+                          description: (Block List) (see below for nested schema)
                           items:
                             properties:
                               keys:
+                                description: (List of String)
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
+                        partitionBy:
+                          description: |-
+                            (List of String) Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+                            Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+                          items:
+                            type: string
+                          type: array
                         uniformPartitions:
+                          description: (Number)
                           type: number
                       type: object
                     type: array
                   path:
-                    description: Table path.
+                    description: |-
+                      (String) Table path.
+                      Table path.
                     type: string
                   primaryKey:
-                    description: A list of table columns to be uased as primary key.
+                    description: |-
+                      (List of String) A list of table columns to be used as primary key.
+                      A list of table columns to be used as primary key.
                     items:
                       type: string
                     type: array
                   readReplicasSettings:
-                    description: Read replication settings
+                    description: |-
+                      (String) Read replication settings.
+                      Read replication settings.
+                    type: string
+                  store:
+                    description: |-
+                      oriented tables. Omit for row-oriented tables (default).
+                      Table storage type. Set to `column` for column-oriented tables. Omit for row-oriented tables (default).
                     type: string
                   ttl:
-                    description: "ttl\t\tTTL settings\nThe structure is documented
-                      below."
+                    description: |-
+                      to-live for rows. (see below for nested schema)
+                      The `TTL` block supports allow you to create a special column type, [TTL column](https://ydb.tech/en/docs/concepts/ttl), whose values determine the time-to-live for rows.
                     items:
                       properties:
                         columnName:
-                          description: Column name for TTL
+                          description: |-
+                            (String) Column name for TTL.
+                            Column name for TTL.
                           type: string
                         expireInterval:
-                          description: Interval in the ISO 8601 format
+                          description: |-
+                            (String) Interval in the ISO 8601 format.
+                            Interval in the ISO 8601 format.
                           type: string
                         unit:
+                          description: (String)
                           type: string
                       type: object
                     type: array

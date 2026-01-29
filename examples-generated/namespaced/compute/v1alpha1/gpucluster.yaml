@@ -9,7 +9,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    interconnectType: infiniband
+    interconnectType: INFINIBAND
     labels:
       environment: test
     name: gpu-cluster-name

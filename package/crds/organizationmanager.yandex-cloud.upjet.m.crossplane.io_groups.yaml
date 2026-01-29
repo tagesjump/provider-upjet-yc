@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Group is the Schema for the Groups API. Allows management of
-          a single Group within an existing Yandex.Cloud Organization.
+          a single Group within an existing Yandex Cloud Organization.
         properties:
           apiVersion:
             description: |-
@@ -60,13 +60,26 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: The description of the Group.
+                    description: |-
+                      (String) Description of the group.
+                      Description of the group.
+                    type: string
+                  groupId:
+                    description: |-
+                      (String) ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
+                      ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
                     type: string
                   name:
-                    description: The name of the Group.
+                    description: |-
+                      (String) Name of the group.
+                      Name of the group.
                     type: string
                   organizationId:
-                    description: The organization to attach this Group to.
+                    description: |-
+                      (String) ID of the organization that the group belongs to.
+                      ID of the organization that the group belongs to.
                     type: string
                 type: object
               initProvider:
@@ -83,13 +96,26 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: The description of the Group.
+                    description: |-
+                      (String) Description of the group.
+                      Description of the group.
+                    type: string
+                  groupId:
+                    description: |-
+                      (String) ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
+                      ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
                     type: string
                   name:
-                    description: The name of the Group.
+                    description: |-
+                      (String) Name of the group.
+                      Name of the group.
                     type: string
                   organizationId:
-                    description: The organization to attach this Group to.
+                    description: |-
+                      (String) ID of the organization that the group belongs to.
+                      ID of the organization that the group belongs to.
                     type: string
                 type: object
               managementPolicies:
@@ -165,18 +191,36 @@ spec:
               atProvider:
                 properties:
                   createdAt:
-                    description: (Computed) The SAML Federation creation timestamp.
+                    description: |-
+                      (String) Creation timestamp.
+                      Creation timestamp.
                     type: string
                   description:
-                    description: The description of the Group.
+                    description: |-
+                      (String) Description of the group.
+                      Description of the group.
+                    type: string
+                  groupId:
+                    description: |-
+                      (String) ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
+                      ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
                     type: string
                   id:
+                    description: |-
+                      (String) ID of the Group resource to return.
+                      To get the group ID, use a [GroupService.List] request.
                     type: string
                   name:
-                    description: The name of the Group.
+                    description: |-
+                      (String) Name of the group.
+                      Name of the group.
                     type: string
                   organizationId:
-                    description: The organization to attach this Group to.
+                    description: |-
+                      (String) ID of the organization that the group belongs to.
+                      ID of the organization that the group belongs to.
                     type: string
                 type: object
               conditions:

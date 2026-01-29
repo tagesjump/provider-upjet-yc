@@ -11,31 +11,38 @@ import (
 
 type CloudBindingInitParameters struct {
 
-	// ID of billing account to bind cloud to.
+	// (String) The ID of billing account to bind cloud to.
+	// The ID of billing account to bind cloud to.
 	BillingAccountID *string `json:"billingAccountId,omitempty" tf:"billing_account_id,omitempty"`
 
-	// ID of cloud to bind.
+	// (String) Service Instance ID.
+	// Service Instance ID.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 }
 
 type CloudBindingObservation struct {
 
-	// ID of billing account to bind cloud to.
+	// (String) The ID of billing account to bind cloud to.
+	// The ID of billing account to bind cloud to.
 	BillingAccountID *string `json:"billingAccountId,omitempty" tf:"billing_account_id,omitempty"`
 
-	// ID of cloud to bind.
+	// (String) Service Instance ID.
+	// Service Instance ID.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
+	// (String) The resource identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type CloudBindingParameters struct {
 
-	// ID of billing account to bind cloud to.
+	// (String) The ID of billing account to bind cloud to.
+	// The ID of billing account to bind cloud to.
 	// +kubebuilder:validation:Optional
 	BillingAccountID *string `json:"billingAccountId,omitempty" tf:"billing_account_id,omitempty"`
 
-	// ID of cloud to bind.
+	// (String) Service Instance ID.
+	// Service Instance ID.
 	// +kubebuilder:validation:Optional
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 }

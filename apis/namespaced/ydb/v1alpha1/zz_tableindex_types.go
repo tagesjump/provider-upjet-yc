@@ -11,59 +11,83 @@ import (
 )
 
 type TableIndexInitParameters struct {
+
+	// (List of String)
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
+	// (String)
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// (List of String)
 	Cover []*string `json:"cover,omitempty" tf:"cover,omitempty"`
 
+	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String)
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
+	// (String)
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
+	// (String)
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TableIndexObservation struct {
+
+	// (List of String)
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
+	// (String)
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// (List of String)
 	Cover []*string `json:"cover,omitempty" tf:"cover,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String)
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String)
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
+	// (String)
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
+	// (String)
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TableIndexParameters struct {
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
 	Cover []*string `json:"cover,omitempty" tf:"cover,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -95,7 +119,7 @@ type TableIndexStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// TableIndex is the Schema for the TableIndexs API. <no value>
+// TableIndex is the Schema for the TableIndexs API. Manage a YDB Table Index.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

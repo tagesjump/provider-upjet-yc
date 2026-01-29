@@ -1,0 +1,17 @@
+apiVersion: sws.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: WafProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sws/v1alpha1/wafprofile
+  labels:
+    testing.upbound.io/example-name: empty
+  name: empty
+spec:
+  forProvider:
+    coreRuleSet:
+    - inboundAnomalyScore: 2
+      paranoiaLevel: 1
+      ruleSet:
+      - name: OWASP Core Ruleset
+        version: 4.0.0
+    name: waf-profile-dummy

@@ -104,6 +104,56 @@ func (mg *AsymmetricEncryptionKeyIAMBinding) SetWriteConnectionSecretToReference
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this AsymmetricSignatureKey.
 func (mg *AsymmetricSignatureKey) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -201,6 +251,56 @@ func (mg *AsymmetricSignatureKeyIAMBinding) SetProviderConfigReference(r *xpv1.R
 
 // SetWriteConnectionSecretToReference of this AsymmetricSignatureKeyIAMBinding.
 func (mg *AsymmetricSignatureKeyIAMBinding) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AsymmetricSignatureKeyIAMMember.
+func (mg *AsymmetricSignatureKeyIAMMember) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -351,5 +451,55 @@ func (mg *SymmetricKeyIAMBinding) SetProviderConfigReference(r *xpv1.Reference) 
 
 // SetWriteConnectionSecretToReference of this SymmetricKeyIAMBinding.
 func (mg *SymmetricKeyIAMBinding) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

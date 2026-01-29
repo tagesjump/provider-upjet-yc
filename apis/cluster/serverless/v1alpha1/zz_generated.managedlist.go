@@ -21,3 +21,30 @@ func (l *ContainerList) GetItems() []resource.Managed {
 	}
 	return items
 }
+
+// GetItems of this EventrouterBusList.
+func (l *EventrouterBusList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EventrouterConnectorList.
+func (l *EventrouterConnectorList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this EventrouterRuleList.
+func (l *EventrouterRuleList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}

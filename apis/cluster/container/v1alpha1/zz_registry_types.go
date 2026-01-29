@@ -11,7 +11,8 @@ import (
 
 type RegistryInitParameters struct {
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// (String) ID of the folder that the registry belongs to.
+	// ID of the folder that the registry belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -23,38 +24,59 @@ type RegistryInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the registry.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A name of the registry.
+	// (String) Name of the registry.
+	// Name of the registry.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the Registry resource to return.
+	// ID of the Registry resource to return.
+	//
+	// To get the registry ID use a [RegistryService.List] request.
+	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type RegistryObservation struct {
 
-	// Creation timestamp of the registry.
+	// (String) Output only. Creation timestamp in RFC3339 text format.
+	// Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// (String) ID of the folder that the registry belongs to.
+	// ID of the folder that the registry belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) ID of the Registry resource to return.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the registry.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A name of the registry.
+	// (String) Name of the registry.
+	// Name of the registry.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Status of the registry.
+	// (String) ID of the Registry resource to return.
+	// ID of the Registry resource to return.
+	//
+	// To get the registry ID use a [RegistryService.List] request.
+	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
+
+	// (String) Output only. Status of the registry.
+	// Output only. Status of the registry.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RegistryParameters struct {
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// (String) ID of the folder that the registry belongs to.
+	// ID of the folder that the registry belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -67,14 +89,23 @@ type RegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the registry.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as `key:value` pairs. Maximum of 64 per resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A name of the registry.
+	// (String) Name of the registry.
+	// Name of the registry.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the Registry resource to return.
+	// ID of the Registry resource to return.
+	//
+	// To get the registry ID use a [RegistryService.List] request.
+	// +kubebuilder:validation:Optional
+	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 // RegistrySpec defines the desired state of Registry

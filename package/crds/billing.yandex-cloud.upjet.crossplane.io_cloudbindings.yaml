@@ -74,10 +74,14 @@ spec:
               forProvider:
                 properties:
                   billingAccountId:
-                    description: ID of billing account to bind cloud to.
+                    description: |-
+                      (String) The ID of billing account to bind cloud to.
+                      The ID of billing account to bind cloud to.
                     type: string
                   cloudId:
-                    description: ID of cloud to bind.
+                    description: |-
+                      (String) Service Instance ID.
+                      Service Instance ID.
                     type: string
                 type: object
               initProvider:
@@ -94,10 +98,14 @@ spec:
                   autoscaler.
                 properties:
                   billingAccountId:
-                    description: ID of billing account to bind cloud to.
+                    description: |-
+                      (String) The ID of billing account to bind cloud to.
+                      The ID of billing account to bind cloud to.
                     type: string
                   cloudId:
-                    description: ID of cloud to bind.
+                    description: |-
+                      (String) Service Instance ID.
+                      Service Instance ID.
                     type: string
                 type: object
               managementPolicies:
@@ -201,12 +209,17 @@ spec:
               atProvider:
                 properties:
                   billingAccountId:
-                    description: ID of billing account to bind cloud to.
+                    description: |-
+                      (String) The ID of billing account to bind cloud to.
+                      The ID of billing account to bind cloud to.
                     type: string
                   cloudId:
-                    description: ID of cloud to bind.
+                    description: |-
+                      (String) Service Instance ID.
+                      Service Instance ID.
                     type: string
                   id:
+                    description: (String) The resource identifier.
                     type: string
                 type: object
               conditions:

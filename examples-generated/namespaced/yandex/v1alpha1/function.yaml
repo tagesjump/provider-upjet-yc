@@ -11,30 +11,40 @@ spec:
   forProvider:
     asyncInvocation:
     - retriesCount: "3"
-      services_account_id: ajeihp9qsfg2l6f838kk
+      serviceAccountId: ajeih**********838kk
       ymqFailureTarget:
-      - arn: yrn:yc:ymq:ru-central1:b1glraqqa1i7tmh9hsfp:fail
-        serviceAccountId: ajeqr0pjpbrkovcqb76m
+      - arn: yrn:yc:ymq:ru-central1:b1glr**********9hsfp:fail
+        serviceAccountId: ajeqr**********qb76m
       ymqSuccessTarget:
-      - arn: yrn:yc:ymq:ru-central1:b1glraqqa1i7tmh9hsfp:success
-        serviceAccountId: ajeqr0pjpbrkovcqb76m
+      - arn: yrn:yc:ymq:ru-central1:b1glr**********9hsfp:success
+        serviceAccountId: ajeqr**********qb76m
     content:
     - zipFilename: function.zip
     description: any description
     entrypoint: main
     executionTimeout: "10"
     logOptions:
-    - logGroupId: e2392vo6d1bne2aeq9fr
+    - logGroupId: e2392**********eq9fr
       minLevel: ERROR
     memory: "128"
+    mounts:
+    - ephemeralDisk:
+      - sizeGb: 32
+      name: mnt
     name: some_name
     runtime: python37
     secrets:
     - environmentVariable: ENV_VARIABLE
-      id: ${yandex_lockbox_secret.secret.id}
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secret
       key: secret-key
-      versionId: ${yandex_lockbox_secret_version.secret_version.id}
-    serviceAccountId: are1service2account3id
+      versionIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: secret_version
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     tags:
     - my_tag
     userHash: any_user_defined_string

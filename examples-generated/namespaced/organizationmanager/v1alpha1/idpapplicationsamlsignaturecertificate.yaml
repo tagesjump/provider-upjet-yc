@@ -1,0 +1,14 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: IdpApplicationSAMLSignatureCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpapplicationsamlsignaturecertificate
+  labels:
+    testing.upbound.io/example-name: example_certificate
+  name: example-certificate
+  namespace: upbound-system
+spec:
+  forProvider:
+    applicationId: some_application_id
+    description: Example signature certificate for SAML application
+    name: example-signature-certificate

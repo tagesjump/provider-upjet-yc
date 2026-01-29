@@ -12,13 +12,16 @@ import (
 
 type AgentInitParameters struct {
 
-	// The template for creating new compute instance running load testing agent. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) The template for creating new compute instance running load testing agent. (see below for nested schema)
+	// The template for creating new compute instance running load testing agent.
 	ComputeInstance []ComputeInstanceInitParameters `json:"computeInstance,omitempty" tf:"compute_instance,omitempty"`
 
-	// A description of the load testing agent.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resources belong to.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -30,48 +33,69 @@ type AgentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the agent.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the load testing agent. Must be unique within folder.
+	// (Block List, Max: 1) The logging settings of the load testing agent. (see below for nested schema)
+	// The logging settings of the load testing agent.
+	LogSettings []LogSettingsInitParameters `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type AgentObservation struct {
 
-	// The template for creating new compute instance running load testing agent. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) The template for creating new compute instance running load testing agent. (see below for nested schema)
+	// The template for creating new compute instance running load testing agent.
 	ComputeInstance []ComputeInstanceObservation `json:"computeInstance,omitempty" tf:"compute_instance,omitempty"`
 
+	// (String) Compute Instance ID.
+	// Compute Instance ID.
 	ComputeInstanceID *string `json:"computeInstanceId,omitempty" tf:"compute_instance_id,omitempty"`
 
-	// A description of the load testing agent.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resources belong to.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the agent.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the load testing agent. Must be unique within folder.
+	// (Block List, Max: 1) The logging settings of the load testing agent. (see below for nested schema)
+	// The logging settings of the load testing agent.
+	LogSettings []LogSettingsObservation `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type AgentParameters struct {
 
-	// The template for creating new compute instance running load testing agent. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) The template for creating new compute instance running load testing agent. (see below for nested schema)
+	// The template for creating new compute instance running load testing agent.
 	// +kubebuilder:validation:Optional
 	ComputeInstance []ComputeInstanceParameters `json:"computeInstance,omitempty" tf:"compute_instance,omitempty"`
 
-	// A description of the load testing agent.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resources belong to.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -84,81 +108,105 @@ type AgentParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the agent.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the load testing agent. Must be unique within folder.
+	// (Block List, Max: 1) The logging settings of the load testing agent. (see below for nested schema)
+	// The logging settings of the load testing agent.
+	// +kubebuilder:validation:Optional
+	LogSettings []LogSettingsParameters `json:"logSettings,omitempty" tf:"log_settings,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type BootDiskInitParameters struct {
 
+	// deleted when the instance is deleted. The default value is true.
 	// Whether the disk is auto-deleted when the instance is deleted. The default value is true.
 	AutoDelete *bool `json:"autoDelete,omitempty" tf:"auto_delete,omitempty"`
 
-	// This value can be used to reference the device under /dev/disk/by-id/.
+	// id/.
+	// This value can be used to reference the device under `/dev/disk/by-id/`.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// Parameters for creating a disk alongside the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Parameters for creating a disk alongside the instance. (see below for nested schema)
+	// Parameters for creating a disk alongside the instance.
 	InitializeParams []InitializeParamsInitParameters `json:"initializeParams,omitempty" tf:"initialize_params,omitempty"`
 }
 
 type BootDiskObservation struct {
 
+	// deleted when the instance is deleted. The default value is true.
 	// Whether the disk is auto-deleted when the instance is deleted. The default value is true.
 	AutoDelete *bool `json:"autoDelete,omitempty" tf:"auto_delete,omitempty"`
 
-	// This value can be used to reference the device under /dev/disk/by-id/.
+	// id/.
+	// This value can be used to reference the device under `/dev/disk/by-id/`.
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// (Computed) The ID of created disk.
+	// (String) The ID of created disk.
+	// The ID of created disk.
 	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
 
-	// Parameters for creating a disk alongside the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Parameters for creating a disk alongside the instance. (see below for nested schema)
+	// Parameters for creating a disk alongside the instance.
 	InitializeParams []InitializeParamsObservation `json:"initializeParams,omitempty" tf:"initialize_params,omitempty"`
 }
 
 type BootDiskParameters struct {
 
+	// deleted when the instance is deleted. The default value is true.
 	// Whether the disk is auto-deleted when the instance is deleted. The default value is true.
 	// +kubebuilder:validation:Optional
 	AutoDelete *bool `json:"autoDelete,omitempty" tf:"auto_delete,omitempty"`
 
-	// This value can be used to reference the device under /dev/disk/by-id/.
+	// id/.
+	// This value can be used to reference the device under `/dev/disk/by-id/`.
 	// +kubebuilder:validation:Optional
 	DeviceName *string `json:"deviceName,omitempty" tf:"device_name,omitempty"`
 
-	// Parameters for creating a disk alongside the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Parameters for creating a disk alongside the instance. (see below for nested schema)
+	// Parameters for creating a disk alongside the instance.
 	// +kubebuilder:validation:Optional
 	InitializeParams []InitializeParamsParameters `json:"initializeParams" tf:"initialize_params,omitempty"`
 }
 
 type ComputeInstanceInitParameters struct {
 
-	// Boot disk specifications for the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Boot disk specifications for the instance. (see below for nested schema)
+	// Boot disk specifications for the instance.
 	BootDisk []BootDiskInitParameters `json:"bootDisk,omitempty" tf:"boot_disk,omitempty"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
 	// A set of key/value label pairs to assign to the instance.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Map of String) A set of metadata key/value pairs to make available from within the instance.
 	// A set of metadata key/value pairs to make available from within the instance.
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
+	// (Block List, Min: 1) Network specifications for the instance. This can be used multiple times for adding multiple interfaces. (see below for nested schema)
+	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces.
 	NetworkInterface []NetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// The Compute platform of virtual machine. If it is not provided, the standard-v2 platform will be used.
+	// (String) The Compute platform for virtual machine.
+	// The Compute platform for virtual machine.
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
-	// Compute resource specifications for the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Compute resource specifications for the instance. (see below for nested schema)
+	// Compute resource specifications for the instance.
 	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// (String) The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// The ID of the service account authorized for this load testing agent. Service account should have `loadtesting.generatorClient` or `loadtesting.externalAgent` role in the folder.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.SecurityGroup
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
@@ -170,74 +218,94 @@ type ComputeInstanceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v1.NamespacedSelector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
-	// The availability zone where the virtual machine will be created. If it is not provided,
-	// the default provider folder is used.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type ComputeInstanceObservation struct {
 
-	// Boot disk specifications for the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Boot disk specifications for the instance. (see below for nested schema)
+	// Boot disk specifications for the instance.
 	BootDisk []BootDiskObservation `json:"bootDisk,omitempty" tf:"boot_disk,omitempty"`
 
-	// (Computed) The set of metadata key:value pairs assigned to this instance. This includes user custom metadata, and predefined items created by Yandex Cloud Load Testing.
+	// (Map of String) The set of labels key:value pairs assigned to this instance. This includes user custom labels and predefined items created by Yandex Cloud Load Testing.
+	// The set of labels `key:value` pairs assigned to this instance. This includes user custom `labels` and predefined items created by Yandex Cloud Load Testing.
+	// +mapType=granular
+	ComputedLabels map[string]*string `json:"computedLabels,omitempty" tf:"computed_labels,omitempty"`
+
+	// (Map of String) The set of metadata key:value pairs assigned to this instance. This includes user custom metadata, and predefined items created by Yandex Cloud Load Testing.
+	// The set of metadata `key:value` pairs assigned to this instance. This includes user custom `metadata`, and predefined items created by Yandex Cloud Load Testing.
 	// +mapType=granular
 	ComputedMetadata map[string]*string `json:"computedMetadata,omitempty" tf:"computed_metadata,omitempty"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
 	// A set of key/value label pairs to assign to the instance.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Map of String) A set of metadata key/value pairs to make available from within the instance.
 	// A set of metadata key/value pairs to make available from within the instance.
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
+	// (Block List, Min: 1) Network specifications for the instance. This can be used multiple times for adding multiple interfaces. (see below for nested schema)
+	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces.
 	NetworkInterface []NetworkInterfaceObservation `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
 
-	// The Compute platform of virtual machine. If it is not provided, the standard-v2 platform will be used.
+	// (String) The Compute platform for virtual machine.
+	// The Compute platform for virtual machine.
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
-	// Compute resource specifications for the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Compute resource specifications for the instance. (see below for nested schema)
+	// Compute resource specifications for the instance.
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// (String) The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// The ID of the service account authorized for this load testing agent. Service account should have `loadtesting.generatorClient` or `loadtesting.externalAgent` role in the folder.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// The availability zone where the virtual machine will be created. If it is not provided,
-	// the default provider folder is used.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type ComputeInstanceParameters struct {
 
-	// Boot disk specifications for the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Boot disk specifications for the instance. (see below for nested schema)
+	// Boot disk specifications for the instance.
 	// +kubebuilder:validation:Optional
 	BootDisk []BootDiskParameters `json:"bootDisk" tf:"boot_disk,omitempty"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
 	// A set of key/value label pairs to assign to the instance.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Map of String) A set of metadata key/value pairs to make available from within the instance.
 	// A set of metadata key/value pairs to make available from within the instance.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces. The structure is documented below.
+	// (Block List, Min: 1) Network specifications for the instance. This can be used multiple times for adding multiple interfaces. (see below for nested schema)
+	// Network specifications for the instance. This can be used multiple times for adding multiple interfaces.
 	// +kubebuilder:validation:Optional
 	NetworkInterface []NetworkInterfaceParameters `json:"networkInterface" tf:"network_interface,omitempty"`
 
-	// The Compute platform of virtual machine. If it is not provided, the standard-v2 platform will be used.
+	// (String) The Compute platform for virtual machine.
+	// The Compute platform for virtual machine.
 	// +kubebuilder:validation:Optional
 	PlatformID *string `json:"platformId,omitempty" tf:"platform_id,omitempty"`
 
-	// Compute resource specifications for the instance. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Compute resource specifications for the instance. (see below for nested schema)
+	// Compute resource specifications for the instance.
 	// +kubebuilder:validation:Optional
 	Resources []ResourcesParameters `json:"resources" tf:"resources,omitempty"`
 
-	// The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// (String) The ID of the service account authorized for this load testing agent. Service account should have loadtesting.generatorClient or loadtesting.externalAgent role in the folder.
+	// The ID of the service account authorized for this load testing agent. Service account should have `loadtesting.generatorClient` or `loadtesting.externalAgent` role in the folder.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
@@ -250,95 +318,140 @@ type ComputeInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v1.NamespacedSelector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
-	// The availability zone where the virtual machine will be created. If it is not provided,
-	// the default provider folder is used.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type InitializeParamsInitParameters struct {
 
+	// (Number) Block size of the disk, specified in bytes.
 	// Block size of the disk, specified in bytes.
 	BlockSize *float64 `json:"blockSize,omitempty" tf:"block_size,omitempty"`
 
+	// (String) The resource description.
 	// A description of the boot disk.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the load testing agent. Must be unique within folder.
+	// (String) The resource name.
+	// A name of the boot disk.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) The size of the disk in GB. Defaults to 15 GB.
 	// The size of the disk in GB. Defaults to 15 GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// (String) The disk type.
 	// The disk type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type InitializeParamsObservation struct {
 
+	// (Number) Block size of the disk, specified in bytes.
 	// Block size of the disk, specified in bytes.
 	BlockSize *float64 `json:"blockSize,omitempty" tf:"block_size,omitempty"`
 
+	// (String) The resource description.
 	// A description of the boot disk.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the load testing agent. Must be unique within folder.
+	// (String) The resource name.
+	// A name of the boot disk.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) The size of the disk in GB. Defaults to 15 GB.
 	// The size of the disk in GB. Defaults to 15 GB.
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// (String) The disk type.
 	// The disk type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type InitializeParamsParameters struct {
 
+	// (Number) Block size of the disk, specified in bytes.
 	// Block size of the disk, specified in bytes.
 	// +kubebuilder:validation:Optional
 	BlockSize *float64 `json:"blockSize,omitempty" tf:"block_size,omitempty"`
 
+	// (String) The resource description.
 	// A description of the boot disk.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the load testing agent. Must be unique within folder.
+	// (String) The resource name.
+	// A name of the boot disk.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) The size of the disk in GB. Defaults to 15 GB.
 	// The size of the disk in GB. Defaults to 15 GB.
 	// +kubebuilder:validation:Optional
 	Size *float64 `json:"size,omitempty" tf:"size,omitempty"`
 
+	// (String) The disk type.
 	// The disk type.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type LogSettingsInitParameters struct {
+
+	// (String) The ID of cloud logging group to which the load testing agent sends logs.
+	// The ID of cloud logging group to which the load testing agent sends logs.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+}
+
+type LogSettingsObservation struct {
+
+	// (String) The ID of cloud logging group to which the load testing agent sends logs.
+	// The ID of cloud logging group to which the load testing agent sends logs.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+}
+
+type LogSettingsParameters struct {
+
+	// (String) The ID of cloud logging group to which the load testing agent sends logs.
+	// The ID of cloud logging group to which the load testing agent sends logs.
+	// +kubebuilder:validation:Optional
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+}
+
 type NetworkInterfaceInitParameters struct {
 
+	// (String) Manual set static IP address.
 	// Manual set static IP address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// (Boolean) Flag for allocating IPv4 address for the network interface.
 	// Flag for allocating IPv4 address for the network interface.
 	IPv4 *bool `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
 
+	// (Boolean) Flag for allocating IPv6 address for the network interface.
 	// Flag for allocating IPv6 address for the network interface.
 	IPv6 *bool `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
+	// (String) Manual set static IPv6 address.
 	// Manual set static IPv6 address.
 	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
+	// (Boolean) Flag for using NAT.
 	// Flag for using NAT.
 	NAT *bool `json:"nat,omitempty" tf:"nat,omitempty"`
 
+	// (String) A public address that can be used to access the internet over NAT.
 	// A public address that can be used to access the internet over NAT.
 	NATIPAddress *string `json:"natIpAddress,omitempty" tf:"nat_ip_address,omitempty"`
 
+	// (Set of String) Security group ids for network interface.
 	// Security group ids for network interface.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// (String) The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
 	// The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -354,69 +467,88 @@ type NetworkInterfaceInitParameters struct {
 
 type NetworkInterfaceObservation struct {
 
+	// (String) Manual set static IP address.
 	// Manual set static IP address.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// (Boolean) Flag for allocating IPv4 address for the network interface.
 	// Flag for allocating IPv4 address for the network interface.
 	IPv4 *bool `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
 
+	// (Boolean) Flag for allocating IPv6 address for the network interface.
 	// Flag for allocating IPv6 address for the network interface.
 	IPv6 *bool `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
+	// (String) Manual set static IPv6 address.
 	// Manual set static IPv6 address.
 	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
+	// (Number)
 	Index *float64 `json:"index,omitempty" tf:"index,omitempty"`
 
+	// (String)
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
 
+	// (Boolean) Flag for using NAT.
 	// Flag for using NAT.
 	NAT *bool `json:"nat,omitempty" tf:"nat,omitempty"`
 
+	// (String) A public address that can be used to access the internet over NAT.
 	// A public address that can be used to access the internet over NAT.
 	NATIPAddress *string `json:"natIpAddress,omitempty" tf:"nat_ip_address,omitempty"`
 
+	// (String)
 	NATIPVersion *string `json:"natIpVersion,omitempty" tf:"nat_ip_version,omitempty"`
 
+	// (Set of String) Security group ids for network interface.
 	// Security group ids for network interface.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// (String) The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
 	// The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type NetworkInterfaceParameters struct {
 
+	// (String) Manual set static IP address.
 	// Manual set static IP address.
 	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
+	// (Boolean) Flag for allocating IPv4 address for the network interface.
 	// Flag for allocating IPv4 address for the network interface.
 	// +kubebuilder:validation:Optional
 	IPv4 *bool `json:"ipv4,omitempty" tf:"ipv4,omitempty"`
 
+	// (Boolean) Flag for allocating IPv6 address for the network interface.
 	// Flag for allocating IPv6 address for the network interface.
 	// +kubebuilder:validation:Optional
 	IPv6 *bool `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
+	// (String) Manual set static IPv6 address.
 	// Manual set static IPv6 address.
 	// +kubebuilder:validation:Optional
 	IPv6Address *string `json:"ipv6Address,omitempty" tf:"ipv6_address,omitempty"`
 
+	// (Boolean) Flag for using NAT.
 	// Flag for using NAT.
 	// +kubebuilder:validation:Optional
 	NAT *bool `json:"nat,omitempty" tf:"nat,omitempty"`
 
+	// (String) A public address that can be used to access the internet over NAT.
 	// A public address that can be used to access the internet over NAT.
 	// +kubebuilder:validation:Optional
 	NATIPAddress *string `json:"natIpAddress,omitempty" tf:"nat_ip_address,omitempty"`
 
+	// (Set of String) Security group ids for network interface.
 	// Security group ids for network interface.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// (String) The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
 	// The ID of the subnet to attach this interface to. The subnet must reside in the same zone where this instance was created.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
@@ -433,38 +565,47 @@ type NetworkInterfaceParameters struct {
 
 type ResourcesInitParameters struct {
 
+	// (Number) If provided, specifies baseline core performance as a percent.
 	// If provided, specifies baseline core performance as a percent.
 	CoreFraction *float64 `json:"coreFraction,omitempty" tf:"core_fraction,omitempty"`
 
+	// (Number) The number of CPU cores for the instance. Defaults to 2 cores.
 	// The number of CPU cores for the instance. Defaults to 2 cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
+	// (Number) The memory size in GB. Defaults to 2 GB.
 	// The memory size in GB. Defaults to 2 GB.
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 type ResourcesObservation struct {
 
+	// (Number) If provided, specifies baseline core performance as a percent.
 	// If provided, specifies baseline core performance as a percent.
 	CoreFraction *float64 `json:"coreFraction,omitempty" tf:"core_fraction,omitempty"`
 
+	// (Number) The number of CPU cores for the instance. Defaults to 2 cores.
 	// The number of CPU cores for the instance. Defaults to 2 cores.
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
+	// (Number) The memory size in GB. Defaults to 2 GB.
 	// The memory size in GB. Defaults to 2 GB.
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 type ResourcesParameters struct {
 
+	// (Number) If provided, specifies baseline core performance as a percent.
 	// If provided, specifies baseline core performance as a percent.
 	// +kubebuilder:validation:Optional
 	CoreFraction *float64 `json:"coreFraction,omitempty" tf:"core_fraction,omitempty"`
 
+	// (Number) The number of CPU cores for the instance. Defaults to 2 cores.
 	// The number of CPU cores for the instance. Defaults to 2 cores.
 	// +kubebuilder:validation:Optional
 	Cores *float64 `json:"cores,omitempty" tf:"cores,omitempty"`
 
+	// (Number) The memory size in GB. Defaults to 2 GB.
 	// The memory size in GB. Defaults to 2 GB.
 	// +kubebuilder:validation:Optional
 	Memory *float64 `json:"memory,omitempty" tf:"memory,omitempty"`

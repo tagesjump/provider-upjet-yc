@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha11 "github.com/tagesjump/provider-upjet-yc/apis/cluster/iam/v1alpha1"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1"
@@ -131,6 +132,50 @@ func (mg *AsymmetricEncryptionKeyIAMBinding) ResolveReferences(ctx context.Conte
 	}
 	mg.Spec.InitProvider.Members = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.ServiceAccountRef = mrsp.ResolvedReferences
+
+	return nil
+}
+
+// ResolveReferences of this AsymmetricEncryptionKeyIAMMember.
+func (mg *AsymmetricEncryptionKeyIAMMember) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AsymmetricEncryptionKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.AsymmetricEncryptionKeyIDRef,
+		Selector:     mg.Spec.ForProvider.AsymmetricEncryptionKeyIDSelector,
+		To: reference.To{
+			List:    &AsymmetricEncryptionKeyList{},
+			Managed: &AsymmetricEncryptionKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AsymmetricEncryptionKeyID")
+	}
+	mg.Spec.ForProvider.AsymmetricEncryptionKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AsymmetricEncryptionKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AsymmetricEncryptionKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.AsymmetricEncryptionKeyIDRef,
+		Selector:     mg.Spec.InitProvider.AsymmetricEncryptionKeyIDSelector,
+		To: reference.To{
+			List:    &AsymmetricEncryptionKeyList{},
+			Managed: &AsymmetricEncryptionKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AsymmetricEncryptionKeyID")
+	}
+	mg.Spec.InitProvider.AsymmetricEncryptionKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AsymmetricEncryptionKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -408,6 +453,50 @@ func (mg *SymmetricKeyIAMBinding) ResolveReferences(ctx context.Context, c clien
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SymmetricKeyID),
 		Extract:      reference.ExternalName(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.SymmetricKeyIDRef,
+		Selector:     mg.Spec.InitProvider.SymmetricKeyIDSelector,
+		To: reference.To{
+			List:    &SymmetricKeyList{},
+			Managed: &SymmetricKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SymmetricKeyID")
+	}
+	mg.Spec.InitProvider.SymmetricKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SymmetricKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this SymmetricKeyIAMMember.
+func (mg *SymmetricKeyIAMMember) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SymmetricKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.SymmetricKeyIDRef,
+		Selector:     mg.Spec.ForProvider.SymmetricKeyIDSelector,
+		To: reference.To{
+			List:    &SymmetricKeyList{},
+			Managed: &SymmetricKey{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SymmetricKeyID")
+	}
+	mg.Spec.ForProvider.SymmetricKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SymmetricKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SymmetricKeyID),
+		Extract:      resource.ExtractResourceID(),
 		Namespace:    mg.GetNamespace(),
 		Reference:    mg.Spec.InitProvider.SymmetricKeyIDRef,
 		Selector:     mg.Spec.InitProvider.SymmetricKeyIDSelector,

@@ -13,8 +13,26 @@ func (l *ClickhouseClusterList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ElasticsearchClusterList.
-func (l *ElasticsearchClusterList) GetItems() []resource.Managed {
+// GetItems of this ClickhouseClusterV2List.
+func (l *ClickhouseClusterV2List) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ClickhouseDatabaseList.
+func (l *ClickhouseDatabaseList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ClickhouseUserList.
+func (l *ClickhouseUserList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -24,6 +42,33 @@ func (l *ElasticsearchClusterList) GetItems() []resource.Managed {
 
 // GetItems of this GreenplumClusterList.
 func (l *GreenplumClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this GreenplumClusterV2List.
+func (l *GreenplumClusterV2List) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this GreenplumResourceGroupList.
+func (l *GreenplumResourceGroupList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this GreenplumUserList.
+func (l *GreenplumUserList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -103,6 +148,15 @@ func (l *MySQLClusterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this MySQLClusterV2List.
+func (l *MySQLClusterV2List) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this MySQLDatabaseList.
 func (l *MySQLDatabaseList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -139,6 +193,15 @@ func (l *PostgresqlClusterList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PostgresqlClusterV2List.
+func (l *PostgresqlClusterV2List) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PostgresqlDatabaseList.
 func (l *PostgresqlDatabaseList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -159,6 +222,60 @@ func (l *PostgresqlUserList) GetItems() []resource.Managed {
 
 // GetItems of this RedisClusterList.
 func (l *RedisClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RedisClusterV2List.
+func (l *RedisClusterV2List) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this RedisUserList.
+func (l *RedisUserList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ShardedPostgresqlClusterList.
+func (l *ShardedPostgresqlClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ShardedPostgresqlDatabaseList.
+func (l *ShardedPostgresqlDatabaseList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ShardedPostgresqlShardList.
+func (l *ShardedPostgresqlShardList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this ShardedPostgresqlUserList.
+func (l *ShardedPostgresqlUserList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

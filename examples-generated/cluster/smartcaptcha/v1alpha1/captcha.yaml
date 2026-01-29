@@ -1,0 +1,18 @@
+apiVersion: smartcaptcha.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Captcha
+metadata:
+  annotations:
+    meta.upbound.io/example-id: smartcaptcha/v1alpha1/captcha
+  labels:
+    testing.upbound.io/example-name: demo-captcha-simple
+  name: demo-captcha-simple
+spec:
+  forProvider:
+    allowedSites:
+    - example.com
+    - example.ru
+    challengeType: IMAGE_TEXT
+    complexity: HARD
+    deletionProtection: true
+    name: demo-captcha-simple
+    preCheckType: SLIDER

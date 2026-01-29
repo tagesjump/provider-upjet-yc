@@ -1,0 +1,1768 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: redisclusterv2s.mdb.yandex-cloud.upjet.crossplane.io
+spec:
+  group: mdb.yandex-cloud.upjet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - yandex-cloud
+    kind: RedisClusterV2
+    listKind: RedisClusterV2List
+    plural: redisclusterv2s
+    singular: redisclusterv2
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: RedisClusterV2 is the Schema for the RedisClusterV2s API. Manages
+          a Redis cluster within Yandex Cloud.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: RedisClusterV2Spec defines the desired state of RedisClusterV2
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  access:
+                    description: (Attributes) Access policy to the Redis cluster.
+                      (see below for nested schema)
+                    properties:
+                      dataLens:
+                        description: |-
+                          (Boolean) Allow access for Yandex DataLens. Can be either true or false.
+                          Allow access for Yandex DataLens. Can be either true or false.
+                        type: boolean
+                      webSql:
+                        description: |-
+                          (Boolean) Allow access for SQL queries in the management console. Can be either true or false.
+                          Allow access for SQL queries in the management console. Can be either true or false.
+                        type: boolean
+                    type: object
+                  announceHostnames:
+                    description: |-
+                      (Boolean) Announce fqdn instead of ip address. Can be either true or false.
+                      Announce fqdn instead of ip address. Can be either true or false.
+                    type: boolean
+                  authSentinel:
+                    description: |-
+                      (Boolean) Allows to use ACL users to auth in sentinel
+                      Allows to use ACL users to auth in sentinel
+                    type: boolean
+                  config:
+                    description: (Attributes) Configuration of the Redis cluster.
+                      (see below for nested schema)
+                    properties:
+                      allowDataLoss:
+                        description: |-
+                          (Boolean) Allows some data to be lost in favor of faster switchover/restart. Can be either true or false.
+                          Allows some data to be lost in favor of faster switchover/restart. Can be either true or false.
+                        type: boolean
+                      backupRetainPeriodDays:
+                        description: |-
+                          (Number) Retain period of automatically created backup in days.
+                          Retain period of automatically created backup in days.
+                        type: number
+                      backupWindowStart:
+                        description: (Attributes) Time to start the daily backup,
+                          in the UTC timezone. (see below for nested schema)
+                        properties:
+                          hours:
+                            description: |-
+                              (Number) The hour at which backup will be started.
+                              The hour at which backup will be started.
+                            type: number
+                          minutes:
+                            description: |-
+                              (Number) The minute at which backup will be started.
+                              The minute at which backup will be started.
+                            type: number
+                        type: object
+                      clientOutputBufferLimitNormal:
+                        description: |-
+                          (String) Redis connection output buffers limits for clients.
+                          Redis connection output buffers limits for clients.
+                        type: string
+                      clientOutputBufferLimitPubsub:
+                        description: |-
+                          (String) Redis connection output buffers limits for pubsub operations.
+                          Redis connection output buffers limits for pubsub operations.
+                        type: string
+                      clusterAllowPubsubshardWhenDown:
+                        description: |-
+                          (Boolean) Permits Pub/Sub shard operations when cluster is down. Can be either true or false.
+                          Permits Pub/Sub shard operations when cluster is down. Can be either true or false.
+                        type: boolean
+                      clusterAllowReadsWhenDown:
+                        description: |-
+                          (Boolean) Allows read operations when cluster is down. Can be either true or false.
+                          Allows read operations when cluster is down. Can be either true or false.
+                        type: boolean
+                      clusterRequireFullCoverage:
+                        description: |-
+                          (Boolean) Controls whether all hash slots must be covered by nodes. Can be either true or false.
+                          Controls whether all hash slots must be covered by nodes. Can be either true or false.
+                        type: boolean
+                      databases:
+                        description: |-
+                          server process.
+                          Number of database buckets on a single redis-server process.
+                        type: number
+                      ioThreadsAllowed:
+                        description: |-
+                          threads. Can be either true or false.
+                          Allow redis to use io-threads. Can be either true or false.
+                        type: boolean
+                      lfuDecayTime:
+                        description: |-
+                          (Number) The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+                          The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+                        type: number
+                      lfuLogFactor:
+                        description: |-
+                          (Number) Determines how the frequency counter represents key hits.
+                          Determines how the frequency counter represents key hits.
+                        type: number
+                      luaTimeLimit:
+                        description: |-
+                          disabled mechanism.
+                          Maximum time in milliseconds for Lua scripts, 0 - disabled mechanism.
+                        type: number
+                      maxmemoryPercent:
+                        description: |-
+                          (Number) Redis maxmemory percent
+                          Redis maxmemory percent
+                        type: number
+                      maxmemoryPolicy:
+                        description: |-
+                          (String) Redis key eviction policy for a dataset that reaches maximum memory, available to the host.
+                          Redis key eviction policy for a dataset that reaches maximum memory, available to the host.
+                        type: string
+                      notifyKeyspaceEvents:
+                        description: |-
+                          (String) String setting for pub\sub functionality.
+                          String setting for pub\sub functionality.
+                        type: string
+                      passwordSecretRef:
+                        description: |-
+                          (String, Sensitive) Authentication password.
+                          Authentication password.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      replBacklogSizePercent:
+                        description: |-
+                          (Number) Replication backlog size as a percentage of flavor maxmemory.
+                          Replication backlog size as a percentage of flavor maxmemory.
+                        type: number
+                      slowlogLogSlowerThan:
+                        description: |-
+                          (Number) Threshold for logging slow requests to server in microseconds (log only slower than it).
+                          Threshold for logging slow requests to server in microseconds (log only slower than it).
+                        type: number
+                      slowlogMaxLen:
+                        description: |-
+                          (Number) Max slow requests number to log.
+                          Max slow requests number to log.
+                        type: number
+                      timeout:
+                        description: |-
+                          (Number) Time that Redis keeps the connection open while the client is idle.
+                          Time that Redis keeps the connection open while the client is idle.
+                        type: number
+                      turnBeforeSwitchover:
+                        description: |-
+                          (Boolean) Allows to turn before switchover in RDSync. Can be either true or false.
+                          Allows to turn before switchover in RDSync. Can be either true or false.
+                        type: boolean
+                      useLuajit:
+                        description: |-
+                          (Boolean) Use JIT for lua scripts and functions. Can be either true or false.
+                          Use JIT for lua scripts and functions. Can be either true or false.
+                        type: boolean
+                      version:
+                        description: |-
+                          (String) Redis version.
+                          Redis version.
+                        type: string
+                      zsetMaxListpackEntries:
+                        description: |-
+                          efficient listpack to CPU-efficient hash table and skiplist
+                          Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist
+                        type: number
+                    type: object
+                  deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  diskEncryptionKeyId:
+                    description: |-
+                      (String) ID of the symmetric encryption key used to encrypt the disk of the cluster.
+                      ID of the symmetric encryption key used to encrypt the disk of the cluster.
+                    type: string
+                  diskSizeAutoscaling:
+                    description: (Attributes) Disk size autoscaling settings. (see
+                      below for nested schema)
+                    properties:
+                      diskSizeLimit:
+                        description: |-
+                          (Number) Limit of disk size after autoscaling (GiB).
+                          Limit of disk size after autoscaling (GiB).
+                        type: number
+                      emergencyUsageThreshold:
+                        description: |-
+                          (Number) Immediate autoscaling disk usage (percent).
+                          Immediate autoscaling disk usage (percent).
+                        type: number
+                      plannedUsageThreshold:
+                        description: |-
+                          (Number) Maintenance window autoscaling disk usage (percent).
+                          Maintenance window autoscaling disk usage (percent).
+                        type: number
+                    type: object
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the Redis cluster.
+                      Deployment environment of the Redis cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  hosts:
+                    additionalProperties:
+                      properties:
+                        assignPublicIp:
+                          description: |-
+                            (Boolean) Assign a public IP address to the host. Can be either true or false.
+                            Assign a public IP address to the host. Can be either true or false.
+                          type: boolean
+                        replicaPriority:
+                          description: |-
+                            (Number) A replica with a low priority number is considered better for promotion.
+                            A replica with a low priority number is considered better for promotion.
+                          type: number
+                        shardName:
+                          description: |-
+                            (String) Shard Name of the host in the cluster.
+                            Shard Name of the host in the cluster.
+                          type: string
+                        subnetId:
+                          description: |-
+                            (String) ID of the subnet where the host is located.
+                            ID of the subnet where the host is located.
+                          type: string
+                        zone:
+                          description: |-
+                            (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                            The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+                          type: string
+                      type: object
+                    description: (Attributes Map) A hosts of the Redis cluster as
+                      label:host_info pairs. (see below for nested schema)
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  maintenanceWindow:
+                    description: (Attributes) Maintenance window settings of the Redis
+                      cluster. (see below for nested schema)
+                    properties:
+                      day:
+                        description: |-
+                          (String) Day of week for maintenance window if window type is weekly.
+                          Day of week for maintenance window if window type is weekly.
+                        type: string
+                      hour:
+                        description: |-
+                          24) for maintenance window if window type is weekly.
+                          Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+                        type: number
+                      type:
+                        description: |-
+                          (String) Type of maintenance window.
+                          Type of maintenance window.
+                        type: string
+                    type: object
+                  modules:
+                    description: (Attributes) Valkey modules. (see below for nested
+                      schema)
+                    properties:
+                      valkeyBloom:
+                        description: (Attributes) Valkey bloom module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey bloom module.
+                            type: boolean
+                        type: object
+                      valkeyJson:
+                        description: (Attributes) Valkey json module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey json module.
+                            type: boolean
+                        type: object
+                      valkeySearch:
+                        description: (Attributes) Valkey search module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey search module.
+                            type: boolean
+                          readerThreads:
+                            description: |-
+                              (Number) Number of reader threads.
+                              Number of reader threads.
+                            type: number
+                          writerThreads:
+                            description: |-
+                              (Number) Number of writer threads.
+                              Number of writer threads.
+                            type: number
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  networkId:
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
+                    type: string
+                  networkIdRef:
+                    description: Reference to a Network in vpc to populate networkId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  networkIdSelector:
+                    description: Selector for a Network in vpc to populate networkId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  persistenceMode:
+                    description: |-
+                      (String) Persistence mode.
+                      Persistence mode.
+                    type: string
+                  resources:
+                    description: (Attributes) Resources allocated to hosts of the
+                      Redis cluster. (see below for nested schema)
+                    properties:
+                      diskSize:
+                        description: |-
+                          (Number) Volume of the storage available to a host, in gigabytes.
+                          Volume of the storage available to a host, in gigabytes.
+                        type: number
+                      diskTypeId:
+                        description: |-
+                          (String) ID of the disk type that determines the disk performance characteristics.
+                          ID of the disk type that determines the disk performance characteristics.
+                        type: string
+                      resourcePresetId:
+                        description: |-
+                          (String) ID of the resource preset that determines the number of CPU cores and memory size for the host.
+                          ID of the resource preset that determines the number of CPU cores and memory size for the host.
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  sharded:
+                    description: |-
+                      (Boolean) Redis sharded mode. Can be either true or false.
+                      Redis sharded mode. Can be either true or false.
+                    type: boolean
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  tlsEnabled:
+                    description: |-
+                      (Boolean) TLS port and functionality. Can be either true or false.
+                      TLS port and functionality. Can be either true or false.
+                    type: boolean
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  access:
+                    description: (Attributes) Access policy to the Redis cluster.
+                      (see below for nested schema)
+                    properties:
+                      dataLens:
+                        description: |-
+                          (Boolean) Allow access for Yandex DataLens. Can be either true or false.
+                          Allow access for Yandex DataLens. Can be either true or false.
+                        type: boolean
+                      webSql:
+                        description: |-
+                          (Boolean) Allow access for SQL queries in the management console. Can be either true or false.
+                          Allow access for SQL queries in the management console. Can be either true or false.
+                        type: boolean
+                    type: object
+                  announceHostnames:
+                    description: |-
+                      (Boolean) Announce fqdn instead of ip address. Can be either true or false.
+                      Announce fqdn instead of ip address. Can be either true or false.
+                    type: boolean
+                  authSentinel:
+                    description: |-
+                      (Boolean) Allows to use ACL users to auth in sentinel
+                      Allows to use ACL users to auth in sentinel
+                    type: boolean
+                  config:
+                    description: (Attributes) Configuration of the Redis cluster.
+                      (see below for nested schema)
+                    properties:
+                      allowDataLoss:
+                        description: |-
+                          (Boolean) Allows some data to be lost in favor of faster switchover/restart. Can be either true or false.
+                          Allows some data to be lost in favor of faster switchover/restart. Can be either true or false.
+                        type: boolean
+                      backupRetainPeriodDays:
+                        description: |-
+                          (Number) Retain period of automatically created backup in days.
+                          Retain period of automatically created backup in days.
+                        type: number
+                      backupWindowStart:
+                        description: (Attributes) Time to start the daily backup,
+                          in the UTC timezone. (see below for nested schema)
+                        properties:
+                          hours:
+                            description: |-
+                              (Number) The hour at which backup will be started.
+                              The hour at which backup will be started.
+                            type: number
+                          minutes:
+                            description: |-
+                              (Number) The minute at which backup will be started.
+                              The minute at which backup will be started.
+                            type: number
+                        type: object
+                      clientOutputBufferLimitNormal:
+                        description: |-
+                          (String) Redis connection output buffers limits for clients.
+                          Redis connection output buffers limits for clients.
+                        type: string
+                      clientOutputBufferLimitPubsub:
+                        description: |-
+                          (String) Redis connection output buffers limits for pubsub operations.
+                          Redis connection output buffers limits for pubsub operations.
+                        type: string
+                      clusterAllowPubsubshardWhenDown:
+                        description: |-
+                          (Boolean) Permits Pub/Sub shard operations when cluster is down. Can be either true or false.
+                          Permits Pub/Sub shard operations when cluster is down. Can be either true or false.
+                        type: boolean
+                      clusterAllowReadsWhenDown:
+                        description: |-
+                          (Boolean) Allows read operations when cluster is down. Can be either true or false.
+                          Allows read operations when cluster is down. Can be either true or false.
+                        type: boolean
+                      clusterRequireFullCoverage:
+                        description: |-
+                          (Boolean) Controls whether all hash slots must be covered by nodes. Can be either true or false.
+                          Controls whether all hash slots must be covered by nodes. Can be either true or false.
+                        type: boolean
+                      databases:
+                        description: |-
+                          server process.
+                          Number of database buckets on a single redis-server process.
+                        type: number
+                      ioThreadsAllowed:
+                        description: |-
+                          threads. Can be either true or false.
+                          Allow redis to use io-threads. Can be either true or false.
+                        type: boolean
+                      lfuDecayTime:
+                        description: |-
+                          (Number) The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+                          The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+                        type: number
+                      lfuLogFactor:
+                        description: |-
+                          (Number) Determines how the frequency counter represents key hits.
+                          Determines how the frequency counter represents key hits.
+                        type: number
+                      luaTimeLimit:
+                        description: |-
+                          disabled mechanism.
+                          Maximum time in milliseconds for Lua scripts, 0 - disabled mechanism.
+                        type: number
+                      maxmemoryPercent:
+                        description: |-
+                          (Number) Redis maxmemory percent
+                          Redis maxmemory percent
+                        type: number
+                      maxmemoryPolicy:
+                        description: |-
+                          (String) Redis key eviction policy for a dataset that reaches maximum memory, available to the host.
+                          Redis key eviction policy for a dataset that reaches maximum memory, available to the host.
+                        type: string
+                      notifyKeyspaceEvents:
+                        description: |-
+                          (String) String setting for pub\sub functionality.
+                          String setting for pub\sub functionality.
+                        type: string
+                      passwordSecretRef:
+                        description: |-
+                          (String, Sensitive) Authentication password.
+                          Authentication password.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      replBacklogSizePercent:
+                        description: |-
+                          (Number) Replication backlog size as a percentage of flavor maxmemory.
+                          Replication backlog size as a percentage of flavor maxmemory.
+                        type: number
+                      slowlogLogSlowerThan:
+                        description: |-
+                          (Number) Threshold for logging slow requests to server in microseconds (log only slower than it).
+                          Threshold for logging slow requests to server in microseconds (log only slower than it).
+                        type: number
+                      slowlogMaxLen:
+                        description: |-
+                          (Number) Max slow requests number to log.
+                          Max slow requests number to log.
+                        type: number
+                      timeout:
+                        description: |-
+                          (Number) Time that Redis keeps the connection open while the client is idle.
+                          Time that Redis keeps the connection open while the client is idle.
+                        type: number
+                      turnBeforeSwitchover:
+                        description: |-
+                          (Boolean) Allows to turn before switchover in RDSync. Can be either true or false.
+                          Allows to turn before switchover in RDSync. Can be either true or false.
+                        type: boolean
+                      useLuajit:
+                        description: |-
+                          (Boolean) Use JIT for lua scripts and functions. Can be either true or false.
+                          Use JIT for lua scripts and functions. Can be either true or false.
+                        type: boolean
+                      version:
+                        description: |-
+                          (String) Redis version.
+                          Redis version.
+                        type: string
+                      zsetMaxListpackEntries:
+                        description: |-
+                          efficient listpack to CPU-efficient hash table and skiplist
+                          Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist
+                        type: number
+                    required:
+                    - passwordSecretRef
+                    type: object
+                  deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  diskEncryptionKeyId:
+                    description: |-
+                      (String) ID of the symmetric encryption key used to encrypt the disk of the cluster.
+                      ID of the symmetric encryption key used to encrypt the disk of the cluster.
+                    type: string
+                  diskSizeAutoscaling:
+                    description: (Attributes) Disk size autoscaling settings. (see
+                      below for nested schema)
+                    properties:
+                      diskSizeLimit:
+                        description: |-
+                          (Number) Limit of disk size after autoscaling (GiB).
+                          Limit of disk size after autoscaling (GiB).
+                        type: number
+                      emergencyUsageThreshold:
+                        description: |-
+                          (Number) Immediate autoscaling disk usage (percent).
+                          Immediate autoscaling disk usage (percent).
+                        type: number
+                      plannedUsageThreshold:
+                        description: |-
+                          (Number) Maintenance window autoscaling disk usage (percent).
+                          Maintenance window autoscaling disk usage (percent).
+                        type: number
+                    type: object
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the Redis cluster.
+                      Deployment environment of the Redis cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  hosts:
+                    additionalProperties:
+                      properties:
+                        assignPublicIp:
+                          description: |-
+                            (Boolean) Assign a public IP address to the host. Can be either true or false.
+                            Assign a public IP address to the host. Can be either true or false.
+                          type: boolean
+                        replicaPriority:
+                          description: |-
+                            (Number) A replica with a low priority number is considered better for promotion.
+                            A replica with a low priority number is considered better for promotion.
+                          type: number
+                        shardName:
+                          description: |-
+                            (String) Shard Name of the host in the cluster.
+                            Shard Name of the host in the cluster.
+                          type: string
+                        subnetId:
+                          description: |-
+                            (String) ID of the subnet where the host is located.
+                            ID of the subnet where the host is located.
+                          type: string
+                        zone:
+                          description: |-
+                            (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                            The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+                          type: string
+                      type: object
+                    description: (Attributes Map) A hosts of the Redis cluster as
+                      label:host_info pairs. (see below for nested schema)
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  maintenanceWindow:
+                    description: (Attributes) Maintenance window settings of the Redis
+                      cluster. (see below for nested schema)
+                    properties:
+                      day:
+                        description: |-
+                          (String) Day of week for maintenance window if window type is weekly.
+                          Day of week for maintenance window if window type is weekly.
+                        type: string
+                      hour:
+                        description: |-
+                          24) for maintenance window if window type is weekly.
+                          Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+                        type: number
+                      type:
+                        description: |-
+                          (String) Type of maintenance window.
+                          Type of maintenance window.
+                        type: string
+                    type: object
+                  modules:
+                    description: (Attributes) Valkey modules. (see below for nested
+                      schema)
+                    properties:
+                      valkeyBloom:
+                        description: (Attributes) Valkey bloom module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey bloom module.
+                            type: boolean
+                        type: object
+                      valkeyJson:
+                        description: (Attributes) Valkey json module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey json module.
+                            type: boolean
+                        type: object
+                      valkeySearch:
+                        description: (Attributes) Valkey search module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey search module.
+                            type: boolean
+                          readerThreads:
+                            description: |-
+                              (Number) Number of reader threads.
+                              Number of reader threads.
+                            type: number
+                          writerThreads:
+                            description: |-
+                              (Number) Number of writer threads.
+                              Number of writer threads.
+                            type: number
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  networkId:
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
+                    type: string
+                  networkIdRef:
+                    description: Reference to a Network in vpc to populate networkId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  networkIdSelector:
+                    description: Selector for a Network in vpc to populate networkId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  persistenceMode:
+                    description: |-
+                      (String) Persistence mode.
+                      Persistence mode.
+                    type: string
+                  resources:
+                    description: (Attributes) Resources allocated to hosts of the
+                      Redis cluster. (see below for nested schema)
+                    properties:
+                      diskSize:
+                        description: |-
+                          (Number) Volume of the storage available to a host, in gigabytes.
+                          Volume of the storage available to a host, in gigabytes.
+                        type: number
+                      diskTypeId:
+                        description: |-
+                          (String) ID of the disk type that determines the disk performance characteristics.
+                          ID of the disk type that determines the disk performance characteristics.
+                        type: string
+                      resourcePresetId:
+                        description: |-
+                          (String) ID of the resource preset that determines the number of CPU cores and memory size for the host.
+                          ID of the resource preset that determines the number of CPU cores and memory size for the host.
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  sharded:
+                    description: |-
+                      (Boolean) Redis sharded mode. Can be either true or false.
+                      Redis sharded mode. Can be either true or false.
+                    type: boolean
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  tlsEnabled:
+                    description: |-
+                      (Boolean) TLS port and functionality. Can be either true or false.
+                      TLS port and functionality. Can be either true or false.
+                    type: boolean
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.config is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.config)
+                || (has(self.initProvider) && has(self.initProvider.config))'
+            - message: spec.forProvider.environment is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.environment)
+                || (has(self.initProvider) && has(self.initProvider.environment))'
+            - message: spec.forProvider.hosts is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hosts)
+                || (has(self.initProvider) && has(self.initProvider.hosts))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.resources is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resources)
+                || (has(self.initProvider) && has(self.initProvider.resources))'
+          status:
+            description: RedisClusterV2Status defines the observed state of RedisClusterV2.
+            properties:
+              atProvider:
+                properties:
+                  access:
+                    description: (Attributes) Access policy to the Redis cluster.
+                      (see below for nested schema)
+                    properties:
+                      dataLens:
+                        description: |-
+                          (Boolean) Allow access for Yandex DataLens. Can be either true or false.
+                          Allow access for Yandex DataLens. Can be either true or false.
+                        type: boolean
+                      webSql:
+                        description: |-
+                          (Boolean) Allow access for SQL queries in the management console. Can be either true or false.
+                          Allow access for SQL queries in the management console. Can be either true or false.
+                        type: boolean
+                    type: object
+                  announceHostnames:
+                    description: |-
+                      (Boolean) Announce fqdn instead of ip address. Can be either true or false.
+                      Announce fqdn instead of ip address. Can be either true or false.
+                    type: boolean
+                  authSentinel:
+                    description: |-
+                      (Boolean) Allows to use ACL users to auth in sentinel
+                      Allows to use ACL users to auth in sentinel
+                    type: boolean
+                  clusterId:
+                    description: |-
+                      (String) ID of the Redis cluster. This ID is assigned by MDB at creation time.
+                      ID of the Redis cluster. This ID is assigned by MDB at creation time.
+                    type: string
+                  config:
+                    description: (Attributes) Configuration of the Redis cluster.
+                      (see below for nested schema)
+                    properties:
+                      allowDataLoss:
+                        description: |-
+                          (Boolean) Allows some data to be lost in favor of faster switchover/restart. Can be either true or false.
+                          Allows some data to be lost in favor of faster switchover/restart. Can be either true or false.
+                        type: boolean
+                      backupRetainPeriodDays:
+                        description: |-
+                          (Number) Retain period of automatically created backup in days.
+                          Retain period of automatically created backup in days.
+                        type: number
+                      backupWindowStart:
+                        description: (Attributes) Time to start the daily backup,
+                          in the UTC timezone. (see below for nested schema)
+                        properties:
+                          hours:
+                            description: |-
+                              (Number) The hour at which backup will be started.
+                              The hour at which backup will be started.
+                            type: number
+                          minutes:
+                            description: |-
+                              (Number) The minute at which backup will be started.
+                              The minute at which backup will be started.
+                            type: number
+                        type: object
+                      clientOutputBufferLimitNormal:
+                        description: |-
+                          (String) Redis connection output buffers limits for clients.
+                          Redis connection output buffers limits for clients.
+                        type: string
+                      clientOutputBufferLimitPubsub:
+                        description: |-
+                          (String) Redis connection output buffers limits for pubsub operations.
+                          Redis connection output buffers limits for pubsub operations.
+                        type: string
+                      clusterAllowPubsubshardWhenDown:
+                        description: |-
+                          (Boolean) Permits Pub/Sub shard operations when cluster is down. Can be either true or false.
+                          Permits Pub/Sub shard operations when cluster is down. Can be either true or false.
+                        type: boolean
+                      clusterAllowReadsWhenDown:
+                        description: |-
+                          (Boolean) Allows read operations when cluster is down. Can be either true or false.
+                          Allows read operations when cluster is down. Can be either true or false.
+                        type: boolean
+                      clusterRequireFullCoverage:
+                        description: |-
+                          (Boolean) Controls whether all hash slots must be covered by nodes. Can be either true or false.
+                          Controls whether all hash slots must be covered by nodes. Can be either true or false.
+                        type: boolean
+                      databases:
+                        description: |-
+                          server process.
+                          Number of database buckets on a single redis-server process.
+                        type: number
+                      ioThreadsAllowed:
+                        description: |-
+                          threads. Can be either true or false.
+                          Allow redis to use io-threads. Can be either true or false.
+                        type: boolean
+                      lfuDecayTime:
+                        description: |-
+                          (Number) The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+                          The time, in minutes, that must elapse in order for the key counter to be divided by two (or decremented if it has a value less <= 10).
+                        type: number
+                      lfuLogFactor:
+                        description: |-
+                          (Number) Determines how the frequency counter represents key hits.
+                          Determines how the frequency counter represents key hits.
+                        type: number
+                      luaTimeLimit:
+                        description: |-
+                          disabled mechanism.
+                          Maximum time in milliseconds for Lua scripts, 0 - disabled mechanism.
+                        type: number
+                      maxmemoryPercent:
+                        description: |-
+                          (Number) Redis maxmemory percent
+                          Redis maxmemory percent
+                        type: number
+                      maxmemoryPolicy:
+                        description: |-
+                          (String) Redis key eviction policy for a dataset that reaches maximum memory, available to the host.
+                          Redis key eviction policy for a dataset that reaches maximum memory, available to the host.
+                        type: string
+                      notifyKeyspaceEvents:
+                        description: |-
+                          (String) String setting for pub\sub functionality.
+                          String setting for pub\sub functionality.
+                        type: string
+                      replBacklogSizePercent:
+                        description: |-
+                          (Number) Replication backlog size as a percentage of flavor maxmemory.
+                          Replication backlog size as a percentage of flavor maxmemory.
+                        type: number
+                      slowlogLogSlowerThan:
+                        description: |-
+                          (Number) Threshold for logging slow requests to server in microseconds (log only slower than it).
+                          Threshold for logging slow requests to server in microseconds (log only slower than it).
+                        type: number
+                      slowlogMaxLen:
+                        description: |-
+                          (Number) Max slow requests number to log.
+                          Max slow requests number to log.
+                        type: number
+                      timeout:
+                        description: |-
+                          (Number) Time that Redis keeps the connection open while the client is idle.
+                          Time that Redis keeps the connection open while the client is idle.
+                        type: number
+                      turnBeforeSwitchover:
+                        description: |-
+                          (Boolean) Allows to turn before switchover in RDSync. Can be either true or false.
+                          Allows to turn before switchover in RDSync. Can be either true or false.
+                        type: boolean
+                      useLuajit:
+                        description: |-
+                          (Boolean) Use JIT for lua scripts and functions. Can be either true or false.
+                          Use JIT for lua scripts and functions. Can be either true or false.
+                        type: boolean
+                      version:
+                        description: |-
+                          (String) Redis version.
+                          Redis version.
+                        type: string
+                      zsetMaxListpackEntries:
+                        description: |-
+                          efficient listpack to CPU-efficient hash table and skiplist
+                          Controls max number of entries in zset before conversion from memory-efficient listpack to CPU-efficient hash table and skiplist
+                        type: number
+                    type: object
+                  createdAt:
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
+                    type: string
+                  deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  diskEncryptionKeyId:
+                    description: |-
+                      (String) ID of the symmetric encryption key used to encrypt the disk of the cluster.
+                      ID of the symmetric encryption key used to encrypt the disk of the cluster.
+                    type: string
+                  diskSizeAutoscaling:
+                    description: (Attributes) Disk size autoscaling settings. (see
+                      below for nested schema)
+                    properties:
+                      diskSizeLimit:
+                        description: |-
+                          (Number) Limit of disk size after autoscaling (GiB).
+                          Limit of disk size after autoscaling (GiB).
+                        type: number
+                      emergencyUsageThreshold:
+                        description: |-
+                          (Number) Immediate autoscaling disk usage (percent).
+                          Immediate autoscaling disk usage (percent).
+                        type: number
+                      plannedUsageThreshold:
+                        description: |-
+                          (Number) Maintenance window autoscaling disk usage (percent).
+                          Maintenance window autoscaling disk usage (percent).
+                        type: number
+                    type: object
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the Redis cluster.
+                      Deployment environment of the Redis cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                    type: string
+                  hosts:
+                    additionalProperties:
+                      properties:
+                        assignPublicIp:
+                          description: |-
+                            (Boolean) Assign a public IP address to the host. Can be either true or false.
+                            Assign a public IP address to the host. Can be either true or false.
+                          type: boolean
+                        fqdn:
+                          description: |-
+                            (String) Fully Qualified Domain Name. In other words, hostname.
+                            Fully Qualified Domain Name. In other words, hostname.
+                          type: string
+                        replicaPriority:
+                          description: |-
+                            (Number) A replica with a low priority number is considered better for promotion.
+                            A replica with a low priority number is considered better for promotion.
+                          type: number
+                        shardName:
+                          description: |-
+                            (String) Shard Name of the host in the cluster.
+                            Shard Name of the host in the cluster.
+                          type: string
+                        subnetId:
+                          description: |-
+                            (String) ID of the subnet where the host is located.
+                            ID of the subnet where the host is located.
+                          type: string
+                        zone:
+                          description: |-
+                            (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                            The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
+                          type: string
+                      type: object
+                    description: (Attributes Map) A hosts of the Redis cluster as
+                      label:host_info pairs. (see below for nested schema)
+                    type: object
+                  id:
+                    description: (String) The resource identifier.
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  maintenanceWindow:
+                    description: (Attributes) Maintenance window settings of the Redis
+                      cluster. (see below for nested schema)
+                    properties:
+                      day:
+                        description: |-
+                          (String) Day of week for maintenance window if window type is weekly.
+                          Day of week for maintenance window if window type is weekly.
+                        type: string
+                      hour:
+                        description: |-
+                          24) for maintenance window if window type is weekly.
+                          Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
+                        type: number
+                      type:
+                        description: |-
+                          (String) Type of maintenance window.
+                          Type of maintenance window.
+                        type: string
+                    type: object
+                  modules:
+                    description: (Attributes) Valkey modules. (see below for nested
+                      schema)
+                    properties:
+                      valkeyBloom:
+                        description: (Attributes) Valkey bloom module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey bloom module.
+                            type: boolean
+                        type: object
+                      valkeyJson:
+                        description: (Attributes) Valkey json module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey json module.
+                            type: boolean
+                        type: object
+                      valkeySearch:
+                        description: (Attributes) Valkey search module settings. (see
+                          below for nested schema)
+                        properties:
+                          enabled:
+                            description: |-
+                              (Boolean) Enable Valkey bloom module.
+                              Enable Valkey search module.
+                            type: boolean
+                          readerThreads:
+                            description: |-
+                              (Number) Number of reader threads.
+                              Number of reader threads.
+                            type: number
+                          writerThreads:
+                            description: |-
+                              (Number) Number of writer threads.
+                              Number of writer threads.
+                            type: number
+                        type: object
+                    type: object
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  networkId:
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
+                    type: string
+                  persistenceMode:
+                    description: |-
+                      (String) Persistence mode.
+                      Persistence mode.
+                    type: string
+                  resources:
+                    description: (Attributes) Resources allocated to hosts of the
+                      Redis cluster. (see below for nested schema)
+                    properties:
+                      diskSize:
+                        description: |-
+                          (Number) Volume of the storage available to a host, in gigabytes.
+                          Volume of the storage available to a host, in gigabytes.
+                        type: number
+                      diskTypeId:
+                        description: |-
+                          (String) ID of the disk type that determines the disk performance characteristics.
+                          ID of the disk type that determines the disk performance characteristics.
+                        type: string
+                      resourcePresetId:
+                        description: |-
+                          (String) ID of the resource preset that determines the number of CPU cores and memory size for the host.
+                          ID of the resource preset that determines the number of CPU cores and memory size for the host.
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  sharded:
+                    description: |-
+                      (Boolean) Redis sharded mode. Can be either true or false.
+                      Redis sharded mode. Can be either true or false.
+                    type: boolean
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  tlsEnabled:
+                    description: |-
+                      (Boolean) TLS port and functionality. Can be either true or false.
+                      TLS port and functionality. Can be either true or false.
+                    type: boolean
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

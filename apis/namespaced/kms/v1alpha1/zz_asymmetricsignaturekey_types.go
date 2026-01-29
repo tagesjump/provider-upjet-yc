@@ -11,13 +11,23 @@ import (
 )
 
 type AsymmetricSignatureKeyInitParameters struct {
+
+	// (String) ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
+	// ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
+	AsymmetricSignatureKeyID *string `json:"asymmetricSignatureKeyId,omitempty" tf:"asymmetric_signature_key_id,omitempty"`
+
+	// (Boolean) Flag that inhibits deletion of the key
+	// Flag that inhibits deletion of the key
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// An optional description of the key.
+	// (String) Description of the key.
+	// Description of the key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// (String) ID of the folder that the key belongs to.
+	// ID of the folder that the key belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -29,58 +39,91 @@ type AsymmetricSignatureKeyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the key.
+	// (Map of String) Custom labels for the key as key:value pairs. Maximum 64 per key.
+	// Custom labels for the key as `key:value` pairs. Maximum 64 per key.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (String) Name of the key.
 	// Name of the key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Signature algorithm to be used with a new key. The default value is RSA_2048_SIGN_PSS_SHA_256.
+	// (String) Signature Algorithm ID.
+	// Signature Algorithm ID.
 	SignatureAlgorithm *string `json:"signatureAlgorithm,omitempty" tf:"signature_algorithm,omitempty"`
+
+	// (String) Current status of the key.
+	// Current status of the key.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type AsymmetricSignatureKeyObservation struct {
 
-	// Creation timestamp of the key.
+	// (String) ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
+	// ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
+	AsymmetricSignatureKeyID *string `json:"asymmetricSignatureKeyId,omitempty" tf:"asymmetric_signature_key_id,omitempty"`
+
+	// (String) Time when the key was created.
+	// Time when the key was created.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// (Boolean) Flag that inhibits deletion of the key
+	// Flag that inhibits deletion of the key
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// An optional description of the key.
+	// (String) Description of the key.
+	// Description of the key.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// (String) ID of the folder that the key belongs to.
+	// ID of the folder that the key belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the key.
+	// (Map of String) Custom labels for the key as key:value pairs. Maximum 64 per key.
+	// Custom labels for the key as `key:value` pairs. Maximum 64 per key.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (String) Name of the key.
 	// Name of the key.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Signature algorithm to be used with a new key. The default value is RSA_2048_SIGN_PSS_SHA_256.
+	// (String) Signature Algorithm ID.
+	// Signature Algorithm ID.
 	SignatureAlgorithm *string `json:"signatureAlgorithm,omitempty" tf:"signature_algorithm,omitempty"`
 
-	// The status of the key.
+	// (String) Current status of the key.
+	// Current status of the key.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type AsymmetricSignatureKeyParameters struct {
 
+	// (String) ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
+	// ID of the asymmetric KMS key to return.
+	// To get the ID of an asymmetric KMS key use a [AsymmetricSignatureKeyService.List] request.
+	// +kubebuilder:validation:Optional
+	AsymmetricSignatureKeyID *string `json:"asymmetricSignatureKeyId,omitempty" tf:"asymmetric_signature_key_id,omitempty"`
+
+	// (Boolean) Flag that inhibits deletion of the key
+	// Flag that inhibits deletion of the key
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// An optional description of the key.
+	// (String) Description of the key.
+	// Description of the key.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// (String) ID of the folder that the key belongs to.
+	// ID of the folder that the key belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -93,18 +136,26 @@ type AsymmetricSignatureKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the key.
+	// (Map of String) Custom labels for the key as key:value pairs. Maximum 64 per key.
+	// Custom labels for the key as `key:value` pairs. Maximum 64 per key.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (String) Name of the key.
 	// Name of the key.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Signature algorithm to be used with a new key. The default value is RSA_2048_SIGN_PSS_SHA_256.
+	// (String) Signature Algorithm ID.
+	// Signature Algorithm ID.
 	// +kubebuilder:validation:Optional
 	SignatureAlgorithm *string `json:"signatureAlgorithm,omitempty" tf:"signature_algorithm,omitempty"`
+
+	// (String) Current status of the key.
+	// Current status of the key.
+	// +kubebuilder:validation:Optional
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 // AsymmetricSignatureKeySpec defines the desired state of AsymmetricSignatureKey

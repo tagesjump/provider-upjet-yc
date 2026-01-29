@@ -21,170 +21,185 @@ type AutomaticParameters struct {
 
 type ChartInitParameters struct {
 
+	// (String) Chart ID.
 	// Chart ID.
-	// Chart ID
 	ChartID *string `json:"chartId,omitempty" tf:"chart_id,omitempty"`
 
-	// Parameter description.
-	// Chart description in dashboard (not enabled in UI)
+	// (String) The resource description.
+	// Chart description in dashboard (not enabled in UI).
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Boolean) Enable legend under chart.
 	// Enable legend under chart.
-	// Enable legend under chart
 	DisplayLegend *bool `json:"displayLegend,omitempty" tf:"display_legend,omitempty"`
 
+	// (String) Fixed time interval for chart. Values:
 	// Fixed time interval for chart. Values:
-	// Fixed time interval for chart
+	// - FREEZE_DURATION_HOUR: Last hour.
+	// - FREEZE_DURATION_DAY: Last day = last 24 hours.
+	// - FREEZE_DURATION_WEEK: Last 7 days.
+	// - FREEZE_DURATION_MONTH: Last 31 days.
 	Freeze *string `json:"freeze,omitempty" tf:"freeze,omitempty"`
 
-	// Names settings.
+	// (Block List) Name hiding settings (see below for nested schema)
 	// Name hiding settings
 	NameHidingSettings []NameHidingSettingsInitParameters `json:"nameHidingSettings,omitempty" tf:"name_hiding_settings,omitempty"`
 
+	// (Block List) Queries settings. (see below for nested schema)
 	// Queries settings.
-	// Queries
 	Queries []QueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
 
+	// (Block List) Time series settings. (see below for nested schema)
 	// Time series settings.
 	SeriesOverrides []SeriesOverridesInitParameters `json:"seriesOverrides,omitempty" tf:"series_overrides,omitempty"`
 
-	// Title or empty.
-	// Chart widget title
+	// (String) Dashboard title.
+	// Chart widget title.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
+	// (Block List) Visualization settings. (see below for nested schema)
 	// Visualization settings.
-	// Visualization settings
 	VisualizationSettings []VisualizationSettingsInitParameters `json:"visualizationSettings,omitempty" tf:"visualization_settings,omitempty"`
 }
 
 type ChartObservation struct {
 
+	// (String) Chart ID.
 	// Chart ID.
-	// Chart ID
 	ChartID *string `json:"chartId,omitempty" tf:"chart_id,omitempty"`
 
-	// Parameter description.
-	// Chart description in dashboard (not enabled in UI)
+	// (String) The resource description.
+	// Chart description in dashboard (not enabled in UI).
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Boolean) Enable legend under chart.
 	// Enable legend under chart.
-	// Enable legend under chart
 	DisplayLegend *bool `json:"displayLegend,omitempty" tf:"display_legend,omitempty"`
 
+	// (String) Fixed time interval for chart. Values:
 	// Fixed time interval for chart. Values:
-	// Fixed time interval for chart
+	// - FREEZE_DURATION_HOUR: Last hour.
+	// - FREEZE_DURATION_DAY: Last day = last 24 hours.
+	// - FREEZE_DURATION_WEEK: Last 7 days.
+	// - FREEZE_DURATION_MONTH: Last 31 days.
 	Freeze *string `json:"freeze,omitempty" tf:"freeze,omitempty"`
 
-	// Names settings.
+	// (Block List) Name hiding settings (see below for nested schema)
 	// Name hiding settings
 	NameHidingSettings []NameHidingSettingsObservation `json:"nameHidingSettings,omitempty" tf:"name_hiding_settings,omitempty"`
 
+	// (Block List) Queries settings. (see below for nested schema)
 	// Queries settings.
-	// Queries
 	Queries []QueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
 
+	// (Block List) Time series settings. (see below for nested schema)
 	// Time series settings.
 	SeriesOverrides []SeriesOverridesObservation `json:"seriesOverrides,omitempty" tf:"series_overrides,omitempty"`
 
-	// Title or empty.
-	// Chart widget title
+	// (String) Dashboard title.
+	// Chart widget title.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
+	// (Block List) Visualization settings. (see below for nested schema)
 	// Visualization settings.
-	// Visualization settings
 	VisualizationSettings []VisualizationSettingsObservation `json:"visualizationSettings,omitempty" tf:"visualization_settings,omitempty"`
 }
 
 type ChartParameters struct {
 
+	// (String) Chart ID.
 	// Chart ID.
-	// Chart ID
 	// +kubebuilder:validation:Optional
 	ChartID *string `json:"chartId,omitempty" tf:"chart_id,omitempty"`
 
-	// Parameter description.
-	// Chart description in dashboard (not enabled in UI)
+	// (String) The resource description.
+	// Chart description in dashboard (not enabled in UI).
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Boolean) Enable legend under chart.
 	// Enable legend under chart.
-	// Enable legend under chart
 	// +kubebuilder:validation:Optional
 	DisplayLegend *bool `json:"displayLegend,omitempty" tf:"display_legend,omitempty"`
 
+	// (String) Fixed time interval for chart. Values:
 	// Fixed time interval for chart. Values:
-	// Fixed time interval for chart
+	// - FREEZE_DURATION_HOUR: Last hour.
+	// - FREEZE_DURATION_DAY: Last day = last 24 hours.
+	// - FREEZE_DURATION_WEEK: Last 7 days.
+	// - FREEZE_DURATION_MONTH: Last 31 days.
 	// +kubebuilder:validation:Optional
 	Freeze *string `json:"freeze,omitempty" tf:"freeze,omitempty"`
 
-	// Names settings.
+	// (Block List) Name hiding settings (see below for nested schema)
 	// Name hiding settings
 	// +kubebuilder:validation:Optional
 	NameHidingSettings []NameHidingSettingsParameters `json:"nameHidingSettings,omitempty" tf:"name_hiding_settings,omitempty"`
 
+	// (Block List) Queries settings. (see below for nested schema)
 	// Queries settings.
-	// Queries
 	// +kubebuilder:validation:Optional
 	Queries []QueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
 
+	// (Block List) Time series settings. (see below for nested schema)
 	// Time series settings.
 	// +kubebuilder:validation:Optional
 	SeriesOverrides []SeriesOverridesParameters `json:"seriesOverrides,omitempty" tf:"series_overrides,omitempty"`
 
-	// Title or empty.
-	// Chart widget title
+	// (String) Dashboard title.
+	// Chart widget title.
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
+	// (Block List) Visualization settings. (see below for nested schema)
 	// Visualization settings.
-	// Visualization settings
 	// +kubebuilder:validation:Optional
 	VisualizationSettings []VisualizationSettingsParameters `json:"visualizationSettings,omitempty" tf:"visualization_settings,omitempty"`
 }
 
 type ColorSchemeSettingsInitParameters struct {
 
-	// Automatic color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Automatic color scheme (see below for nested schema)
 	// Automatic color scheme
 	Automatic []AutomaticInitParameters `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// Gradient color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Gradient color scheme (see below for nested schema)
 	// Gradient color scheme
 	Gradient []GradientInitParameters `json:"gradient,omitempty" tf:"gradient,omitempty"`
 
-	// Standard color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Standard color scheme (see below for nested schema)
 	// Standard color scheme
 	Standard []StandardInitParameters `json:"standard,omitempty" tf:"standard,omitempty"`
 }
 
 type ColorSchemeSettingsObservation struct {
 
-	// Automatic color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Automatic color scheme (see below for nested schema)
 	// Automatic color scheme
 	Automatic []AutomaticParameters `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// Gradient color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Gradient color scheme (see below for nested schema)
 	// Gradient color scheme
 	Gradient []GradientObservation `json:"gradient,omitempty" tf:"gradient,omitempty"`
 
-	// Standard color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Standard color scheme (see below for nested schema)
 	// Standard color scheme
 	Standard []StandardParameters `json:"standard,omitempty" tf:"standard,omitempty"`
 }
 
 type ColorSchemeSettingsParameters struct {
 
-	// Automatic color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Automatic color scheme (see below for nested schema)
 	// Automatic color scheme
 	// +kubebuilder:validation:Optional
 	Automatic []AutomaticParameters `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
-	// Gradient color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Gradient color scheme (see below for nested schema)
 	// Gradient color scheme
 	// +kubebuilder:validation:Optional
 	Gradient []GradientParameters `json:"gradient,omitempty" tf:"gradient,omitempty"`
 
-	// Standard color scheme. Oneof: automatic, standard or gradient.
+	// (Block List) Standard color scheme (see below for nested schema)
 	// Standard color scheme
 	// +kubebuilder:validation:Optional
 	Standard []StandardParameters `json:"standard,omitempty" tf:"standard,omitempty"`
@@ -192,60 +207,60 @@ type ColorSchemeSettingsParameters struct {
 
 type CustomInitParameters struct {
 
+	// (List of String) Default value.
 	// Default value.
-	// Default value
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
 
+	// (Boolean) Specifies the multiselectable values of parameter.
 	// Specifies the multiselectable values of parameter.
-	// Specifies the multiselectable values of parameter
 	Multiselectable *bool `json:"multiselectable,omitempty" tf:"multiselectable,omitempty"`
 
+	// (List of String) Parameter values.
 	// Parameter values.
-	// Parameter values
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type CustomObservation struct {
 
+	// (List of String) Default value.
 	// Default value.
-	// Default value
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
 
+	// (Boolean) Specifies the multiselectable values of parameter.
 	// Specifies the multiselectable values of parameter.
-	// Specifies the multiselectable values of parameter
 	Multiselectable *bool `json:"multiselectable,omitempty" tf:"multiselectable,omitempty"`
 
+	// (List of String) Parameter values.
 	// Parameter values.
-	// Parameter values
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type CustomParameters struct {
 
+	// (List of String) Default value.
 	// Default value.
-	// Default value
 	// +kubebuilder:validation:Optional
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
 
+	// (Boolean) Specifies the multiselectable values of parameter.
 	// Specifies the multiselectable values of parameter.
-	// Specifies the multiselectable values of parameter
 	// +kubebuilder:validation:Optional
 	Multiselectable *bool `json:"multiselectable,omitempty" tf:"multiselectable,omitempty"`
 
+	// (List of String) Parameter values.
 	// Parameter values.
-	// Parameter values
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type DashboardInitParameters struct {
 
-	// Dashboard description.
-	// Dashboard description
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
-	// Folder ID
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -257,75 +272,76 @@ type DashboardInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Dashboard.
-	// Dashboard labels
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of the Dashboard.
-	// Dashboard name, used as local identifier in folder_id
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Dashboard parametrization
-	// Dashboard parametrization
+	// (Block List) Dashboard parametrization. (see below for nested schema)
+	// Dashboard parametrization.
 	Parametrization []ParametrizationInitParameters `json:"parametrization,omitempty" tf:"parametrization,omitempty"`
 
+	// (String) Dashboard title.
 	// Dashboard title.
-	// Dashboard title
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Widgets
-	// Widgets
+	// (Block List) Widgets. (see below for nested schema)
+	// Widgets.
 	Widgets []WidgetsInitParameters `json:"widgets,omitempty" tf:"widgets,omitempty"`
 }
 
 type DashboardObservation struct {
 
-	// Dashboard ID
+	// (String) Dashboard ID.
+	// Dashboard ID.
 	DashboardID *string `json:"dashboardId,omitempty" tf:"dashboard_id,omitempty"`
 
-	// Dashboard description.
-	// Dashboard description
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
-	// Folder ID
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Parameter identifier
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Dashboard.
-	// Dashboard labels
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of the Dashboard.
-	// Dashboard name, used as local identifier in folder_id
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Dashboard parametrization
-	// Dashboard parametrization
+	// (Block List) Dashboard parametrization. (see below for nested schema)
+	// Dashboard parametrization.
 	Parametrization []ParametrizationObservation `json:"parametrization,omitempty" tf:"parametrization,omitempty"`
 
+	// (String) Dashboard title.
 	// Dashboard title.
-	// Dashboard title
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Widgets
-	// Widgets
+	// (Block List) Widgets. (see below for nested schema)
+	// Widgets.
 	Widgets []WidgetsObservation `json:"widgets,omitempty" tf:"widgets,omitempty"`
 }
 
 type DashboardParameters struct {
 
-	// Dashboard description.
-	// Dashboard description
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
-	// Folder ID
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -338,102 +354,102 @@ type DashboardParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Dashboard.
-	// Dashboard labels
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of the Dashboard.
-	// Dashboard name, used as local identifier in folder_id
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Dashboard parametrization
-	// Dashboard parametrization
+	// (Block List) Dashboard parametrization. (see below for nested schema)
+	// Dashboard parametrization.
 	// +kubebuilder:validation:Optional
 	Parametrization []ParametrizationParameters `json:"parametrization,omitempty" tf:"parametrization,omitempty"`
 
+	// (String) Dashboard title.
 	// Dashboard title.
-	// Dashboard title
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Widgets
-	// Widgets
+	// (Block List) Widgets. (see below for nested schema)
+	// Widgets.
 	// +kubebuilder:validation:Optional
 	Widgets []WidgetsParameters `json:"widgets,omitempty" tf:"widgets,omitempty"`
 }
 
 type DownsamplingInitParameters struct {
 
-	// Disable downsampling.
+	// (Boolean) Disable downsampling
 	// Disable downsampling
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Parameters for filling gaps in data.
+	// (String) Parameters for filling gaps in data
 	// Parameters for filling gaps in data
 	GapFilling *string `json:"gapFilling,omitempty" tf:"gap_filling,omitempty"`
 
-	// Function that is used for downsampling.
+	// (String) Function that is used for downsampling
 	// Function that is used for downsampling
 	GridAggregation *string `json:"gridAggregation,omitempty" tf:"grid_aggregation,omitempty"`
 
-	// Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+	// (Number) Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
 	// Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
 	GridInterval *float64 `json:"gridInterval,omitempty" tf:"grid_interval,omitempty"`
 
-	// Maximum number of points to be returned.
+	// (Number) Maximum number of points to be returned
 	// Maximum number of points to be returned
 	MaxPoints *float64 `json:"maxPoints,omitempty" tf:"max_points,omitempty"`
 }
 
 type DownsamplingObservation struct {
 
-	// Disable downsampling.
+	// (Boolean) Disable downsampling
 	// Disable downsampling
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Parameters for filling gaps in data.
+	// (String) Parameters for filling gaps in data
 	// Parameters for filling gaps in data
 	GapFilling *string `json:"gapFilling,omitempty" tf:"gap_filling,omitempty"`
 
-	// Function that is used for downsampling.
+	// (String) Function that is used for downsampling
 	// Function that is used for downsampling
 	GridAggregation *string `json:"gridAggregation,omitempty" tf:"grid_aggregation,omitempty"`
 
-	// Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+	// (Number) Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
 	// Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
 	GridInterval *float64 `json:"gridInterval,omitempty" tf:"grid_interval,omitempty"`
 
-	// Maximum number of points to be returned.
+	// (Number) Maximum number of points to be returned
 	// Maximum number of points to be returned
 	MaxPoints *float64 `json:"maxPoints,omitempty" tf:"max_points,omitempty"`
 }
 
 type DownsamplingParameters struct {
 
-	// Disable downsampling.
+	// (Boolean) Disable downsampling
 	// Disable downsampling
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Parameters for filling gaps in data.
+	// (String) Parameters for filling gaps in data
 	// Parameters for filling gaps in data
 	// +kubebuilder:validation:Optional
 	GapFilling *string `json:"gapFilling,omitempty" tf:"gap_filling,omitempty"`
 
-	// Function that is used for downsampling.
+	// (String) Function that is used for downsampling
 	// Function that is used for downsampling
 	// +kubebuilder:validation:Optional
 	GridAggregation *string `json:"gridAggregation,omitempty" tf:"grid_aggregation,omitempty"`
 
-	// Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+	// (Number) Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
 	// Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
 	// +kubebuilder:validation:Optional
 	GridInterval *float64 `json:"gridInterval,omitempty" tf:"grid_interval,omitempty"`
 
-	// Maximum number of points to be returned.
+	// (Number) Maximum number of points to be returned
 	// Maximum number of points to be returned
 	// +kubebuilder:validation:Optional
 	MaxPoints *float64 `json:"maxPoints,omitempty" tf:"max_points,omitempty"`
@@ -441,60 +457,60 @@ type DownsamplingParameters struct {
 
 type GradientInitParameters struct {
 
-	// Gradient green value.
+	// (String) Gradient green value
 	// Gradient green value
 	GreenValue *string `json:"greenValue,omitempty" tf:"green_value,omitempty"`
 
-	// Gradient red value.
+	// (String) Gradient red value
 	// Gradient red value
 	RedValue *string `json:"redValue,omitempty" tf:"red_value,omitempty"`
 
-	// Gradient violet value.
+	// (String) Gradient violet_value
 	// Gradient violet_value
 	VioletValue *string `json:"violetValue,omitempty" tf:"violet_value,omitempty"`
 
-	// Gradient yellow value.
+	// (String) Gradient yellow value
 	// Gradient yellow value
 	YellowValue *string `json:"yellowValue,omitempty" tf:"yellow_value,omitempty"`
 }
 
 type GradientObservation struct {
 
-	// Gradient green value.
+	// (String) Gradient green value
 	// Gradient green value
 	GreenValue *string `json:"greenValue,omitempty" tf:"green_value,omitempty"`
 
-	// Gradient red value.
+	// (String) Gradient red value
 	// Gradient red value
 	RedValue *string `json:"redValue,omitempty" tf:"red_value,omitempty"`
 
-	// Gradient violet value.
+	// (String) Gradient violet_value
 	// Gradient violet_value
 	VioletValue *string `json:"violetValue,omitempty" tf:"violet_value,omitempty"`
 
-	// Gradient yellow value.
+	// (String) Gradient yellow value
 	// Gradient yellow value
 	YellowValue *string `json:"yellowValue,omitempty" tf:"yellow_value,omitempty"`
 }
 
 type GradientParameters struct {
 
-	// Gradient green value.
+	// (String) Gradient green value
 	// Gradient green value
 	// +kubebuilder:validation:Optional
 	GreenValue *string `json:"greenValue,omitempty" tf:"green_value,omitempty"`
 
-	// Gradient red value.
+	// (String) Gradient red value
 	// Gradient red value
 	// +kubebuilder:validation:Optional
 	RedValue *string `json:"redValue,omitempty" tf:"red_value,omitempty"`
 
-	// Gradient violet value.
+	// (String) Gradient violet_value
 	// Gradient violet_value
 	// +kubebuilder:validation:Optional
 	VioletValue *string `json:"violetValue,omitempty" tf:"violet_value,omitempty"`
 
-	// Gradient yellow value.
+	// (String) Gradient yellow value
 	// Gradient yellow value
 	// +kubebuilder:validation:Optional
 	YellowValue *string `json:"yellowValue,omitempty" tf:"yellow_value,omitempty"`
@@ -502,60 +518,60 @@ type GradientParameters struct {
 
 type HeatmapSettingsInitParameters struct {
 
-	// Gradient green value.
+	// (String) Gradient green value
 	// Heatmap green value
 	GreenValue *string `json:"greenValue,omitempty" tf:"green_value,omitempty"`
 
-	// Gradient red value.
+	// (String) Gradient red value
 	// Heatmap red value
 	RedValue *string `json:"redValue,omitempty" tf:"red_value,omitempty"`
 
-	// Gradient violet value.
+	// (String) Gradient violet_value
 	// Heatmap violet_value
 	VioletValue *string `json:"violetValue,omitempty" tf:"violet_value,omitempty"`
 
-	// Gradient yellow value.
+	// (String) Gradient yellow value
 	// Heatmap yellow value
 	YellowValue *string `json:"yellowValue,omitempty" tf:"yellow_value,omitempty"`
 }
 
 type HeatmapSettingsObservation struct {
 
-	// Gradient green value.
+	// (String) Gradient green value
 	// Heatmap green value
 	GreenValue *string `json:"greenValue,omitempty" tf:"green_value,omitempty"`
 
-	// Gradient red value.
+	// (String) Gradient red value
 	// Heatmap red value
 	RedValue *string `json:"redValue,omitempty" tf:"red_value,omitempty"`
 
-	// Gradient violet value.
+	// (String) Gradient violet_value
 	// Heatmap violet_value
 	VioletValue *string `json:"violetValue,omitempty" tf:"violet_value,omitempty"`
 
-	// Gradient yellow value.
+	// (String) Gradient yellow value
 	// Heatmap yellow value
 	YellowValue *string `json:"yellowValue,omitempty" tf:"yellow_value,omitempty"`
 }
 
 type HeatmapSettingsParameters struct {
 
-	// Gradient green value.
+	// (String) Gradient green value
 	// Heatmap green value
 	// +kubebuilder:validation:Optional
 	GreenValue *string `json:"greenValue,omitempty" tf:"green_value,omitempty"`
 
-	// Gradient red value.
+	// (String) Gradient red value
 	// Heatmap red value
 	// +kubebuilder:validation:Optional
 	RedValue *string `json:"redValue,omitempty" tf:"red_value,omitempty"`
 
-	// Gradient violet value.
+	// (String) Gradient violet_value
 	// Heatmap violet_value
 	// +kubebuilder:validation:Optional
 	VioletValue *string `json:"violetValue,omitempty" tf:"violet_value,omitempty"`
 
-	// Gradient yellow value.
+	// (String) Gradient yellow value
 	// Heatmap yellow value
 	// +kubebuilder:validation:Optional
 	YellowValue *string `json:"yellowValue,omitempty" tf:"yellow_value,omitempty"`
@@ -563,12 +579,12 @@ type HeatmapSettingsParameters struct {
 
 type LabelValuesInitParameters struct {
 
+	// (List of String) Default value.
 	// Default value.
-	// Default value
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
 
-	// Labels folder ID.
-	// Folder ID
+	// id is used.
+	// Folder ID.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -580,51 +596,51 @@ type LabelValuesInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (String) Label key to list label values.
 	// Label key to list label values.
-	// Required. Label key to list label values
 	LabelKey *string `json:"labelKey,omitempty" tf:"label_key,omitempty"`
 
+	// (Boolean) Specifies the multiselectable values of parameter.
 	// Specifies the multiselectable values of parameter.
-	// Specifies the multiselectable values of parameter
 	Multiselectable *bool `json:"multiselectable,omitempty" tf:"multiselectable,omitempty"`
 
-	// dashboard predefined parameters selector.
-	// Required. Selectors to select metric label values
+	// (String) Dashboard predefined parameters selector.
+	// Selectors to select metric label values.
 	Selectors *string `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type LabelValuesObservation struct {
 
+	// (List of String) Default value.
 	// Default value.
-	// Default value
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
 
-	// Labels folder ID.
-	// Folder ID
+	// id is used.
+	// Folder ID.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) Label key to list label values.
 	// Label key to list label values.
-	// Required. Label key to list label values
 	LabelKey *string `json:"labelKey,omitempty" tf:"label_key,omitempty"`
 
+	// (Boolean) Specifies the multiselectable values of parameter.
 	// Specifies the multiselectable values of parameter.
-	// Specifies the multiselectable values of parameter
 	Multiselectable *bool `json:"multiselectable,omitempty" tf:"multiselectable,omitempty"`
 
-	// dashboard predefined parameters selector.
-	// Required. Selectors to select metric label values
+	// (String) Dashboard predefined parameters selector.
+	// Selectors to select metric label values.
 	Selectors *string `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type LabelValuesParameters struct {
 
+	// (List of String) Default value.
 	// Default value.
-	// Default value
 	// +kubebuilder:validation:Optional
 	DefaultValues []*string `json:"defaultValues,omitempty" tf:"default_values,omitempty"`
 
-	// Labels folder ID.
-	// Folder ID
+	// id is used.
+	// Folder ID.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -637,104 +653,104 @@ type LabelValuesParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (String) Label key to list label values.
 	// Label key to list label values.
-	// Required. Label key to list label values
 	// +kubebuilder:validation:Optional
 	LabelKey *string `json:"labelKey" tf:"label_key,omitempty"`
 
+	// (Boolean) Specifies the multiselectable values of parameter.
 	// Specifies the multiselectable values of parameter.
-	// Specifies the multiselectable values of parameter
 	// +kubebuilder:validation:Optional
 	Multiselectable *bool `json:"multiselectable,omitempty" tf:"multiselectable,omitempty"`
 
-	// dashboard predefined parameters selector.
-	// Required. Selectors to select metric label values
+	// (String) Dashboard predefined parameters selector.
+	// Selectors to select metric label values.
 	// +kubebuilder:validation:Optional
 	Selectors *string `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type LeftInitParameters struct {
 
-	// Max value in extended number format or empty.
+	// (String) Max value in extended number format or empty
 	// Max value in extended number format or empty
 	Max *string `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Min value in extended number format or empty.
+	// (String) Min value in extended number format or empty
 	// Min value in extended number format or empty
 	Min *string `json:"min,omitempty" tf:"min,omitempty"`
 
-	// Tick value precision (null as default, 0-7 in other cases).
+	// 7 in other cases)
 	// Tick value precision (null as default, 0-7 in other cases)
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Title or empty
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Unit format. Values:
+	// (String) Unit format
 	// Unit format
 	UnitFormat *string `json:"unitFormat,omitempty" tf:"unit_format,omitempty"`
 }
 
 type LeftObservation struct {
 
-	// Max value in extended number format or empty.
+	// (String) Max value in extended number format or empty
 	// Max value in extended number format or empty
 	Max *string `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Min value in extended number format or empty.
+	// (String) Min value in extended number format or empty
 	// Min value in extended number format or empty
 	Min *string `json:"min,omitempty" tf:"min,omitempty"`
 
-	// Tick value precision (null as default, 0-7 in other cases).
+	// 7 in other cases)
 	// Tick value precision (null as default, 0-7 in other cases)
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Title or empty
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Unit format. Values:
+	// (String) Unit format
 	// Unit format
 	UnitFormat *string `json:"unitFormat,omitempty" tf:"unit_format,omitempty"`
 }
 
 type LeftParameters struct {
 
-	// Max value in extended number format or empty.
+	// (String) Max value in extended number format or empty
 	// Max value in extended number format or empty
 	// +kubebuilder:validation:Optional
 	Max *string `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Min value in extended number format or empty.
+	// (String) Min value in extended number format or empty
 	// Min value in extended number format or empty
 	// +kubebuilder:validation:Optional
 	Min *string `json:"min,omitempty" tf:"min,omitempty"`
 
-	// Tick value precision (null as default, 0-7 in other cases).
+	// 7 in other cases)
 	// Tick value precision (null as default, 0-7 in other cases)
 	// +kubebuilder:validation:Optional
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Title or empty
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Unit format. Values:
+	// (String) Unit format
 	// Unit format
 	// +kubebuilder:validation:Optional
 	UnitFormat *string `json:"unitFormat,omitempty" tf:"unit_format,omitempty"`
@@ -742,31 +758,31 @@ type LeftParameters struct {
 
 type NameHidingSettingsInitParameters struct {
 
-	// Series name.
+	// (List of String)
 	Names []*string `json:"names,omitempty" tf:"names,omitempty"`
 
-	// True if we want to show concrete series names only, false if we want to hide concrete series names.
+	// (Boolean) True if we want to show concrete series names only, false if we want to hide concrete series names
 	// True if we want to show concrete series names only, false if we want to hide concrete series names
 	Positive *bool `json:"positive,omitempty" tf:"positive,omitempty"`
 }
 
 type NameHidingSettingsObservation struct {
 
-	// Series name.
+	// (List of String)
 	Names []*string `json:"names,omitempty" tf:"names,omitempty"`
 
-	// True if we want to show concrete series names only, false if we want to hide concrete series names.
+	// (Boolean) True if we want to show concrete series names only, false if we want to hide concrete series names
 	// True if we want to show concrete series names only, false if we want to hide concrete series names
 	Positive *bool `json:"positive,omitempty" tf:"positive,omitempty"`
 }
 
 type NameHidingSettingsParameters struct {
 
-	// Series name.
+	// (List of String)
 	// +kubebuilder:validation:Optional
 	Names []*string `json:"names,omitempty" tf:"names,omitempty"`
 
-	// True if we want to show concrete series names only, false if we want to hide concrete series names.
+	// (Boolean) True if we want to show concrete series names only, false if we want to hide concrete series names
 	// True if we want to show concrete series names only, false if we want to hide concrete series names
 	// +kubebuilder:validation:Optional
 	Positive *bool `json:"positive,omitempty" tf:"positive,omitempty"`
@@ -774,230 +790,230 @@ type NameHidingSettingsParameters struct {
 
 type ParametersInitParameters struct {
 
+	// (Block List) Custom values parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Custom values parameter. Oneof: label_values, custom, text.
-	// Custom parameter
 	Custom []CustomInitParameters `json:"custom,omitempty" tf:"custom,omitempty"`
 
+	// (String) The resource description.
 	// Parameter description.
-	// Parameter description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// UI-visibility.
+	// visibility
 	// UI-visibility
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// Parameter identifier
-	// Parameter identifier
+	// (String) The ID of this resource.
+	// Parameter identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Block List) Label values parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Label values parameter. Oneof: label_values, custom, text.
-	// Label values parameter
 	LabelValues []LabelValuesInitParameters `json:"labelValues,omitempty" tf:"label_values,omitempty"`
 
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Text parameter. Oneof: label_values, custom, text.
-	// Text parameter
 	Text []TextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 
+	// (String) Dashboard title.
 	// UI-visible title of the parameter.
-	// UI-visible title of the parameter
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type ParametersObservation struct {
 
+	// (Block List) Custom values parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Custom values parameter. Oneof: label_values, custom, text.
-	// Custom parameter
 	Custom []CustomObservation `json:"custom,omitempty" tf:"custom,omitempty"`
 
+	// (String) The resource description.
 	// Parameter description.
-	// Parameter description
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// UI-visibility.
+	// visibility
 	// UI-visibility
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// Parameter identifier
-	// Parameter identifier
+	// (String) The ID of this resource.
+	// Parameter identifier.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Block List) Label values parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Label values parameter. Oneof: label_values, custom, text.
-	// Label values parameter
 	LabelValues []LabelValuesObservation `json:"labelValues,omitempty" tf:"label_values,omitempty"`
 
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Text parameter. Oneof: label_values, custom, text.
-	// Text parameter
 	Text []TextObservation `json:"text,omitempty" tf:"text,omitempty"`
 
+	// (String) Dashboard title.
 	// UI-visible title of the parameter.
-	// UI-visible title of the parameter
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type ParametersParameters struct {
 
+	// (Block List) Custom values parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Custom values parameter. Oneof: label_values, custom, text.
-	// Custom parameter
 	// +kubebuilder:validation:Optional
 	Custom []CustomParameters `json:"custom,omitempty" tf:"custom,omitempty"`
 
+	// (String) The resource description.
 	// Parameter description.
-	// Parameter description
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// UI-visibility.
+	// visibility
 	// UI-visibility
 	// +kubebuilder:validation:Optional
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// Parameter identifier
-	// Parameter identifier
+	// (String) The ID of this resource.
+	// Parameter identifier.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
+	// (Block List) Label values parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Label values parameter. Oneof: label_values, custom, text.
-	// Label values parameter
 	// +kubebuilder:validation:Optional
 	LabelValues []LabelValuesParameters `json:"labelValues,omitempty" tf:"label_values,omitempty"`
 
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
 	// Text parameter. Oneof: label_values, custom, text.
-	// Text parameter
 	// +kubebuilder:validation:Optional
 	Text []TextParameters `json:"text,omitempty" tf:"text,omitempty"`
 
+	// (String) Dashboard title.
 	// UI-visible title of the parameter.
-	// UI-visible title of the parameter
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type ParametrizationInitParameters struct {
 
-	// parameters list.
-	// Dashboard parameter
+	// (Block List) Dashboard parameters. (see below for nested schema)
+	// Dashboard parameters.
 	Parameters []ParametersInitParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// dashboard predefined parameters selector.
-	// Predefined selectors
+	// (String) Dashboard predefined parameters selector.
+	// Dashboard predefined parameters selector.
 	Selectors *string `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type ParametrizationObservation struct {
 
-	// parameters list.
-	// Dashboard parameter
+	// (Block List) Dashboard parameters. (see below for nested schema)
+	// Dashboard parameters.
 	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// dashboard predefined parameters selector.
-	// Predefined selectors
+	// (String) Dashboard predefined parameters selector.
+	// Dashboard predefined parameters selector.
 	Selectors *string `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type ParametrizationParameters struct {
 
-	// parameters list.
-	// Dashboard parameter
+	// (Block List) Dashboard parameters. (see below for nested schema)
+	// Dashboard parameters.
 	// +kubebuilder:validation:Optional
 	Parameters []ParametersParameters `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
-	// dashboard predefined parameters selector.
-	// Predefined selectors
+	// (String) Dashboard predefined parameters selector.
+	// Dashboard predefined parameters selector.
 	// +kubebuilder:validation:Optional
 	Selectors *string `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type PositionInitParameters struct {
 
+	// (Number) Height.
 	// Height.
-	// Required. Height
 	H *float64 `json:"h,omitempty" tf:"h,omitempty"`
 
-	// Width.
-	// Required. Weight
+	// (Number) Weight.
+	// Weight.
 	W *float64 `json:"w,omitempty" tf:"w,omitempty"`
 
+	// axis top-left corner coordinate.
 	// X-axis top-left corner coordinate.
-	// Required. X-axis top-left corner coordinate
 	X *float64 `json:"x,omitempty" tf:"x,omitempty"`
 
+	// axis top-left corner coordinate.
 	// Y-axis top-left corner coordinate.
-	// Required. Y-axis top-left corner coordinate
 	Y *float64 `json:"y,omitempty" tf:"y,omitempty"`
 }
 
 type PositionObservation struct {
 
+	// (Number) Height.
 	// Height.
-	// Required. Height
 	H *float64 `json:"h,omitempty" tf:"h,omitempty"`
 
-	// Width.
-	// Required. Weight
+	// (Number) Weight.
+	// Weight.
 	W *float64 `json:"w,omitempty" tf:"w,omitempty"`
 
+	// axis top-left corner coordinate.
 	// X-axis top-left corner coordinate.
-	// Required. X-axis top-left corner coordinate
 	X *float64 `json:"x,omitempty" tf:"x,omitempty"`
 
+	// axis top-left corner coordinate.
 	// Y-axis top-left corner coordinate.
-	// Required. Y-axis top-left corner coordinate
 	Y *float64 `json:"y,omitempty" tf:"y,omitempty"`
 }
 
 type PositionParameters struct {
 
+	// (Number) Height.
 	// Height.
-	// Required. Height
 	// +kubebuilder:validation:Optional
 	H *float64 `json:"h,omitempty" tf:"h,omitempty"`
 
-	// Width.
-	// Required. Weight
+	// (Number) Weight.
+	// Weight.
 	// +kubebuilder:validation:Optional
 	W *float64 `json:"w,omitempty" tf:"w,omitempty"`
 
+	// axis top-left corner coordinate.
 	// X-axis top-left corner coordinate.
-	// Required. X-axis top-left corner coordinate
 	// +kubebuilder:validation:Optional
 	X *float64 `json:"x,omitempty" tf:"x,omitempty"`
 
+	// axis top-left corner coordinate.
 	// Y-axis top-left corner coordinate.
-	// Required. Y-axis top-left corner coordinate
 	// +kubebuilder:validation:Optional
 	Y *float64 `json:"y,omitempty" tf:"y,omitempty"`
 }
 
 type QueriesInitParameters struct {
 
-	// Downsamplang settings.
+	// (Block List) Downsampling settings (see below for nested schema)
 	// Downsampling settings
 	Downsampling []DownsamplingInitParameters `json:"downsampling,omitempty" tf:"downsampling,omitempty"`
 
-	// Query targets.
+	// (Block List) Downsampling settings (see below for nested schema)
 	// Downsampling settings
 	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type QueriesObservation struct {
 
-	// Downsamplang settings.
+	// (Block List) Downsampling settings (see below for nested schema)
 	// Downsampling settings
 	Downsampling []DownsamplingObservation `json:"downsampling,omitempty" tf:"downsampling,omitempty"`
 
-	// Query targets.
+	// (Block List) Downsampling settings (see below for nested schema)
 	// Downsampling settings
 	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type QueriesParameters struct {
 
-	// Downsamplang settings.
+	// (Block List) Downsampling settings (see below for nested schema)
 	// Downsampling settings
 	// +kubebuilder:validation:Optional
 	Downsampling []DownsamplingParameters `json:"downsampling,omitempty" tf:"downsampling,omitempty"`
 
-	// Query targets.
+	// (Block List) Downsampling settings (see below for nested schema)
 	// Downsampling settings
 	// +kubebuilder:validation:Optional
 	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
@@ -1005,86 +1021,86 @@ type QueriesParameters struct {
 
 type RightInitParameters struct {
 
-	// Max value in extended number format or empty.
+	// (String) Max value in extended number format or empty
 	// Max value in extended number format or empty
 	Max *string `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Min value in extended number format or empty.
+	// (String) Min value in extended number format or empty
 	// Min value in extended number format or empty
 	Min *string `json:"min,omitempty" tf:"min,omitempty"`
 
-	// Tick value precision (null as default, 0-7 in other cases).
+	// 7 in other cases)
 	// Tick value precision (null as default, 0-7 in other cases)
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Title or empty
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Unit format. Values:
+	// (String) Unit format
 	// Unit format
 	UnitFormat *string `json:"unitFormat,omitempty" tf:"unit_format,omitempty"`
 }
 
 type RightObservation struct {
 
-	// Max value in extended number format or empty.
+	// (String) Max value in extended number format or empty
 	// Max value in extended number format or empty
 	Max *string `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Min value in extended number format or empty.
+	// (String) Min value in extended number format or empty
 	// Min value in extended number format or empty
 	Min *string `json:"min,omitempty" tf:"min,omitempty"`
 
-	// Tick value precision (null as default, 0-7 in other cases).
+	// 7 in other cases)
 	// Tick value precision (null as default, 0-7 in other cases)
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Title or empty
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Unit format. Values:
+	// (String) Unit format
 	// Unit format
 	UnitFormat *string `json:"unitFormat,omitempty" tf:"unit_format,omitempty"`
 }
 
 type RightParameters struct {
 
-	// Max value in extended number format or empty.
+	// (String) Max value in extended number format or empty
 	// Max value in extended number format or empty
 	// +kubebuilder:validation:Optional
 	Max *string `json:"max,omitempty" tf:"max,omitempty"`
 
-	// Min value in extended number format or empty.
+	// (String) Min value in extended number format or empty
 	// Min value in extended number format or empty
 	// +kubebuilder:validation:Optional
 	Min *string `json:"min,omitempty" tf:"min,omitempty"`
 
-	// Tick value precision (null as default, 0-7 in other cases).
+	// 7 in other cases)
 	// Tick value precision (null as default, 0-7 in other cases)
 	// +kubebuilder:validation:Optional
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Title or empty
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Unit format. Values:
+	// (String) Unit format
 	// Unit format
 	// +kubebuilder:validation:Optional
 	UnitFormat *string `json:"unitFormat,omitempty" tf:"unit_format,omitempty"`
@@ -1092,47 +1108,47 @@ type RightParameters struct {
 
 type SeriesOverridesInitParameters struct {
 
-	// Series name or empty.
+	// (String) The resource name.
 	// Series name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Override settings.
+	// (Block List) Override settings (see below for nested schema)
 	// Override settings
 	Settings []SettingsInitParameters `json:"settings,omitempty" tf:"settings,omitempty"`
 
-	// Series index. Oneof: name or target_index.
+	// (String) Target index
 	// Target index
 	TargetIndex *string `json:"targetIndex,omitempty" tf:"target_index,omitempty"`
 }
 
 type SeriesOverridesObservation struct {
 
-	// Series name or empty.
+	// (String) The resource name.
 	// Series name
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Override settings.
+	// (Block List) Override settings (see below for nested schema)
 	// Override settings
 	Settings []SettingsObservation `json:"settings,omitempty" tf:"settings,omitempty"`
 
-	// Series index. Oneof: name or target_index.
+	// (String) Target index
 	// Target index
 	TargetIndex *string `json:"targetIndex,omitempty" tf:"target_index,omitempty"`
 }
 
 type SeriesOverridesParameters struct {
 
-	// Series name or empty.
+	// (String) The resource name.
 	// Series name
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Override settings.
+	// (Block List) Override settings (see below for nested schema)
 	// Override settings
 	// +kubebuilder:validation:Optional
 	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
 
-	// Series index. Oneof: name or target_index.
+	// (String) Target index
 	// Target index
 	// +kubebuilder:validation:Optional
 	TargetIndex *string `json:"targetIndex,omitempty" tf:"target_index,omitempty"`
@@ -1140,86 +1156,86 @@ type SeriesOverridesParameters struct {
 
 type SettingsInitParameters struct {
 
-	// Series color or empty.
+	// (String) Series color or empty
 	// Series color or empty
 	Color *string `json:"color,omitempty" tf:"color,omitempty"`
 
-	// Stack grow down.
+	// (Boolean) Stack grow down
 	// Stack grow down
 	GrowDown *bool `json:"growDown,omitempty" tf:"grow_down,omitempty"`
 
-	// Series name or empty.
+	// (String) The resource name.
 	// Series name or empty
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Stack name or empty.
+	// (String) Stack name or empty
 	// Stack name or empty
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Yaxis position.
+	// (String) Yaxis position
 	// Yaxis position
 	YaxisPosition *string `json:"yaxisPosition,omitempty" tf:"yaxis_position,omitempty"`
 }
 
 type SettingsObservation struct {
 
-	// Series color or empty.
+	// (String) Series color or empty
 	// Series color or empty
 	Color *string `json:"color,omitempty" tf:"color,omitempty"`
 
-	// Stack grow down.
+	// (Boolean) Stack grow down
 	// Stack grow down
 	GrowDown *bool `json:"growDown,omitempty" tf:"grow_down,omitempty"`
 
-	// Series name or empty.
+	// (String) The resource name.
 	// Series name or empty
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Stack name or empty.
+	// (String) Stack name or empty
 	// Stack name or empty
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Yaxis position.
+	// (String) Yaxis position
 	// Yaxis position
 	YaxisPosition *string `json:"yaxisPosition,omitempty" tf:"yaxis_position,omitempty"`
 }
 
 type SettingsParameters struct {
 
-	// Series color or empty.
+	// (String) Series color or empty
 	// Series color or empty
 	// +kubebuilder:validation:Optional
 	Color *string `json:"color,omitempty" tf:"color,omitempty"`
 
-	// Stack grow down.
+	// (Boolean) Stack grow down
 	// Stack grow down
 	// +kubebuilder:validation:Optional
 	GrowDown *bool `json:"growDown,omitempty" tf:"grow_down,omitempty"`
 
-	// Series name or empty.
+	// (String) The resource name.
 	// Series name or empty
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Stack name or empty.
+	// (String) Stack name or empty
 	// Stack name or empty
 	// +kubebuilder:validation:Optional
 	StackName *string `json:"stackName,omitempty" tf:"stack_name,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Yaxis position.
+	// (String) Yaxis position
 	// Yaxis position
 	// +kubebuilder:validation:Optional
 	YaxisPosition *string `json:"yaxisPosition,omitempty" tf:"yaxis_position,omitempty"`
@@ -1236,47 +1252,47 @@ type StandardParameters struct {
 
 type TargetInitParameters struct {
 
-	// Checks that target is visible or invisible.
+	// visibility
 	// Checks that target is visible or invisible
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// Query.
+	// (String) Required. Query
 	// Required. Query
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// Text mode enabled.
+	// (Boolean) Text mode
 	// Text mode
 	TextMode *bool `json:"textMode,omitempty" tf:"text_mode,omitempty"`
 }
 
 type TargetObservation struct {
 
-	// Checks that target is visible or invisible.
+	// visibility
 	// Checks that target is visible or invisible
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// Query.
+	// (String) Required. Query
 	// Required. Query
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// Text mode enabled.
+	// (Boolean) Text mode
 	// Text mode
 	TextMode *bool `json:"textMode,omitempty" tf:"text_mode,omitempty"`
 }
 
 type TargetParameters struct {
 
-	// Checks that target is visible or invisible.
+	// visibility
 	// Checks that target is visible or invisible
 	// +kubebuilder:validation:Optional
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// Query.
+	// (String) Required. Query
 	// Required. Query
 	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// Text mode enabled.
+	// (Boolean) Text mode
 	// Text mode
 	// +kubebuilder:validation:Optional
 	TextMode *bool `json:"textMode,omitempty" tf:"text_mode,omitempty"`
@@ -1284,182 +1300,200 @@ type TargetParameters struct {
 
 type TextInitParameters struct {
 
+	// (String) Default value.
 	// Default value.
-	// Default value
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 }
 
 type TextObservation struct {
 
+	// (String) Default value.
 	// Default value.
-	// Default value
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 }
 
 type TextParameters struct {
 
+	// (String) Default value.
 	// Default value.
-	// Default value
 	// +kubebuilder:validation:Optional
 	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
 }
 
 type TitleInitParameters struct {
 
+	// (String) Title size.
 	// Title size. Values:
-	// Title size
+	// Title size.
+	// Title size. Values:
+	// - TITLE_SIZE_XS: Extra small size.
+	// - TITLE_SIZE_S: Small size.
+	// - TITLE_SIZE_M: Middle size.
+	// - TITLE_SIZE_L: Large size.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Title text
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Title text.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TitleObservation struct {
 
+	// (String) Title size.
 	// Title size. Values:
-	// Title size
+	// Title size.
+	// Title size. Values:
+	// - TITLE_SIZE_XS: Extra small size.
+	// - TITLE_SIZE_S: Small size.
+	// - TITLE_SIZE_M: Middle size.
+	// - TITLE_SIZE_L: Large size.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Title text
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Title text.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TitleParameters struct {
 
+	// (String) Title size.
 	// Title size. Values:
-	// Title size
+	// Title size.
+	// Title size. Values:
+	// - TITLE_SIZE_XS: Extra small size.
+	// - TITLE_SIZE_S: Small size.
+	// - TITLE_SIZE_M: Middle size.
+	// - TITLE_SIZE_L: Large size.
 	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Title text
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Title text.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text" tf:"text,omitempty"`
 }
 
 type VisualizationSettingsInitParameters struct {
 
-	// Aggregation. Values:
+	// (String) Aggregation
 	// Aggregation
 	Aggregation *string `json:"aggregation,omitempty" tf:"aggregation,omitempty"`
 
-	// Color settings.
+	// (Block List) Color scheme settings (see below for nested schema)
 	// Color scheme settings
 	ColorSchemeSettings []ColorSchemeSettingsInitParameters `json:"colorSchemeSettings,omitempty" tf:"color_scheme_settings,omitempty"`
 
-	// Heatmap settings.
+	// (Block List) Heatmap settings (see below for nested schema)
 	// Heatmap settings
 	HeatmapSettings []HeatmapSettingsInitParameters `json:"heatmapSettings,omitempty" tf:"heatmap_settings,omitempty"`
 
-	// Interpolate values. Values:
+	// (String) Interpolate
 	// Interpolate
 	Interpolate *string `json:"interpolate,omitempty" tf:"interpolate,omitempty"`
 
-	// Normalize values.
+	// (Boolean) Normalize
 	// Normalize
 	Normalize *bool `json:"normalize,omitempty" tf:"normalize,omitempty"`
 
-	// Show chart labels.
+	// (Boolean) Show chart labels
 	// Show chart labels
 	ShowLabels *bool `json:"showLabels,omitempty" tf:"show_labels,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Inside chart title
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Visualization type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Y axis settings.
+	// (Block List) Y axis settings (see below for nested schema)
 	// Y axis settings
 	YaxisSettings []YaxisSettingsInitParameters `json:"yaxisSettings,omitempty" tf:"yaxis_settings,omitempty"`
 }
 
 type VisualizationSettingsObservation struct {
 
-	// Aggregation. Values:
+	// (String) Aggregation
 	// Aggregation
 	Aggregation *string `json:"aggregation,omitempty" tf:"aggregation,omitempty"`
 
-	// Color settings.
+	// (Block List) Color scheme settings (see below for nested schema)
 	// Color scheme settings
 	ColorSchemeSettings []ColorSchemeSettingsObservation `json:"colorSchemeSettings,omitempty" tf:"color_scheme_settings,omitempty"`
 
-	// Heatmap settings.
+	// (Block List) Heatmap settings (see below for nested schema)
 	// Heatmap settings
 	HeatmapSettings []HeatmapSettingsObservation `json:"heatmapSettings,omitempty" tf:"heatmap_settings,omitempty"`
 
-	// Interpolate values. Values:
+	// (String) Interpolate
 	// Interpolate
 	Interpolate *string `json:"interpolate,omitempty" tf:"interpolate,omitempty"`
 
-	// Normalize values.
+	// (Boolean) Normalize
 	// Normalize
 	Normalize *bool `json:"normalize,omitempty" tf:"normalize,omitempty"`
 
-	// Show chart labels.
+	// (Boolean) Show chart labels
 	// Show chart labels
 	ShowLabels *bool `json:"showLabels,omitempty" tf:"show_labels,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Inside chart title
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Visualization type
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Y axis settings.
+	// (Block List) Y axis settings (see below for nested schema)
 	// Y axis settings
 	YaxisSettings []YaxisSettingsObservation `json:"yaxisSettings,omitempty" tf:"yaxis_settings,omitempty"`
 }
 
 type VisualizationSettingsParameters struct {
 
-	// Aggregation. Values:
+	// (String) Aggregation
 	// Aggregation
 	// +kubebuilder:validation:Optional
 	Aggregation *string `json:"aggregation,omitempty" tf:"aggregation,omitempty"`
 
-	// Color settings.
+	// (Block List) Color scheme settings (see below for nested schema)
 	// Color scheme settings
 	// +kubebuilder:validation:Optional
 	ColorSchemeSettings []ColorSchemeSettingsParameters `json:"colorSchemeSettings,omitempty" tf:"color_scheme_settings,omitempty"`
 
-	// Heatmap settings.
+	// (Block List) Heatmap settings (see below for nested schema)
 	// Heatmap settings
 	// +kubebuilder:validation:Optional
 	HeatmapSettings []HeatmapSettingsParameters `json:"heatmapSettings,omitempty" tf:"heatmap_settings,omitempty"`
 
-	// Interpolate values. Values:
+	// (String) Interpolate
 	// Interpolate
 	// +kubebuilder:validation:Optional
 	Interpolate *string `json:"interpolate,omitempty" tf:"interpolate,omitempty"`
 
-	// Normalize values.
+	// (Boolean) Normalize
 	// Normalize
 	// +kubebuilder:validation:Optional
 	Normalize *bool `json:"normalize,omitempty" tf:"normalize,omitempty"`
 
-	// Show chart labels.
+	// (Boolean) Show chart labels
 	// Show chart labels
 	// +kubebuilder:validation:Optional
 	ShowLabels *bool `json:"showLabels,omitempty" tf:"show_labels,omitempty"`
 
-	// Title or empty.
+	// (String) Dashboard title.
 	// Inside chart title
 	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
-	// Type. Values:
+	// (String) Type
 	// Visualization type
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Y axis settings.
+	// (Block List) Y axis settings (see below for nested schema)
 	// Y axis settings
 	// +kubebuilder:validation:Optional
 	YaxisSettings []YaxisSettingsParameters `json:"yaxisSettings,omitempty" tf:"yaxis_settings,omitempty"`
@@ -1467,117 +1501,117 @@ type VisualizationSettingsParameters struct {
 
 type WidgetsInitParameters struct {
 
-	// Chart widget settings. Oneof: text, title or chart.
-	// Chart widget
+	// (Block List) Chart widget settings. (see below for nested schema)
+	// Chart widget settings.
 	Chart []ChartInitParameters `json:"chart,omitempty" tf:"chart,omitempty"`
 
-	// Widget position.
-	// Required. Widget layout position
+	// (Block List) Widget layout position. (see below for nested schema)
+	// Widget layout position.
 	Position []PositionInitParameters `json:"position,omitempty" tf:"position,omitempty"`
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Text widget
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Text widget settings.
 	Text []WidgetsTextInitParameters `json:"text,omitempty" tf:"text,omitempty"`
 
-	// Title widget settings. Oneof: text, title or chart.
-	// Title widget
+	// (String) Dashboard title.
+	// Title widget settings.
 	Title []TitleInitParameters `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type WidgetsObservation struct {
 
-	// Chart widget settings. Oneof: text, title or chart.
-	// Chart widget
+	// (Block List) Chart widget settings. (see below for nested schema)
+	// Chart widget settings.
 	Chart []ChartObservation `json:"chart,omitempty" tf:"chart,omitempty"`
 
-	// Widget position.
-	// Required. Widget layout position
+	// (Block List) Widget layout position. (see below for nested schema)
+	// Widget layout position.
 	Position []PositionObservation `json:"position,omitempty" tf:"position,omitempty"`
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Text widget
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Text widget settings.
 	Text []WidgetsTextObservation `json:"text,omitempty" tf:"text,omitempty"`
 
-	// Title widget settings. Oneof: text, title or chart.
-	// Title widget
+	// (String) Dashboard title.
+	// Title widget settings.
 	Title []TitleObservation `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type WidgetsParameters struct {
 
-	// Chart widget settings. Oneof: text, title or chart.
-	// Chart widget
+	// (Block List) Chart widget settings. (see below for nested schema)
+	// Chart widget settings.
 	// +kubebuilder:validation:Optional
 	Chart []ChartParameters `json:"chart,omitempty" tf:"chart,omitempty"`
 
-	// Widget position.
-	// Required. Widget layout position
+	// (Block List) Widget layout position. (see below for nested schema)
+	// Widget layout position.
 	// +kubebuilder:validation:Optional
 	Position []PositionParameters `json:"position,omitempty" tf:"position,omitempty"`
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Text widget
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Text widget settings.
 	// +kubebuilder:validation:Optional
 	Text []WidgetsTextParameters `json:"text,omitempty" tf:"text,omitempty"`
 
-	// Title widget settings. Oneof: text, title or chart.
-	// Title widget
+	// (String) Dashboard title.
+	// Title widget settings.
 	// +kubebuilder:validation:Optional
 	Title []TitleParameters `json:"title,omitempty" tf:"title,omitempty"`
 }
 
 type WidgetsTextInitParameters struct {
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Text
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Widget text.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type WidgetsTextObservation struct {
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Text
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Widget text.
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type WidgetsTextParameters struct {
 
-	// Text widget settings. Oneof: text, title or chart.
-	// Text
+	// (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+	// Widget text.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type YaxisSettingsInitParameters struct {
 
-	// Left yaxis config.
+	// (Block List) Left Y axis settings (see below for nested schema)
 	// Left Y axis settings
 	Left []LeftInitParameters `json:"left,omitempty" tf:"left,omitempty"`
 
-	// Right yaxis config.
+	// (Block List) Right Y axis settings (see below for nested schema)
 	// Right Y axis settings
 	Right []RightInitParameters `json:"right,omitempty" tf:"right,omitempty"`
 }
 
 type YaxisSettingsObservation struct {
 
-	// Left yaxis config.
+	// (Block List) Left Y axis settings (see below for nested schema)
 	// Left Y axis settings
 	Left []LeftObservation `json:"left,omitempty" tf:"left,omitempty"`
 
-	// Right yaxis config.
+	// (Block List) Right Y axis settings (see below for nested schema)
 	// Right Y axis settings
 	Right []RightObservation `json:"right,omitempty" tf:"right,omitempty"`
 }
 
 type YaxisSettingsParameters struct {
 
-	// Left yaxis config.
+	// (Block List) Left Y axis settings (see below for nested schema)
 	// Left Y axis settings
 	// +kubebuilder:validation:Optional
 	Left []LeftParameters `json:"left,omitempty" tf:"left,omitempty"`
 
-	// Right yaxis config.
+	// (Block List) Right Y axis settings (see below for nested schema)
 	// Right Y axis settings
 	// +kubebuilder:validation:Optional
 	Right []RightParameters `json:"right,omitempty" tf:"right,omitempty"`
@@ -1610,7 +1644,7 @@ type DashboardStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Dashboard is the Schema for the Dashboards API. Allows management of a Yandex.Cloud Monitoring Dashboard.
+// Dashboard is the Schema for the Dashboards API. Allows management of a Yandex Cloud Monitoring Dashboard.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

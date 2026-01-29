@@ -1,0 +1,28 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: IdpUserpool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpuserpool
+  labels:
+    testing.upbound.io/example-name: example_userpool
+  name: example-userpool
+  namespace: upbound-system
+spec:
+  forProvider:
+    defaultSubdomain: example-subdomain
+    description: Description example
+    labels:
+      example-label: example-label-value
+    name: example-userpool
+    organizationId: your_organization_id
+    passwordQualityPolicy:
+      allowSimilar: true
+      fixed:
+        digitsRequired: true
+        lowersRequired: true
+        minLength: 8
+        uppersRequired: true
+      matchLength: 4
+      maxLength: 128
+    userSettings:
+      allowEditSelfLogin: true

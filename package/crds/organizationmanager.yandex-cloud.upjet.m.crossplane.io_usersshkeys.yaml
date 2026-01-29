@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: UserSSHKey is the Schema for the UserSSHKeys API. Allows management
-          of User Ssh Keys within an existing Yandex.Cloud Organization and Subject.
+          of User SSH Keys within an existing Yandex Cloud Organization and Subject.
         properties:
           apiVersion:
             description: |-
@@ -60,20 +60,44 @@ spec:
               forProvider:
                 properties:
                   data:
-                    description: Data of the user ssh key.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   expiresAt:
-                    description: User ssh key will be no longer valid after expiration
-                      timestamp.
+                    description: |-
+                      (String) Used for temporary keys, if empty the key doesn't expire
+                      Used for temporary keys, if empty the key doesn't expire
                     type: string
                   name:
-                    description: Name of the user ssh key.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   organizationId:
-                    description: Organization that the user ssh key belongs to.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   subjectId:
-                    description: Subject that the user ssh key belongs to.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                    type: string
+                  userSshKeyId:
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
                     type: string
                 type: object
               initProvider:
@@ -90,20 +114,44 @@ spec:
                   autoscaler.
                 properties:
                   data:
-                    description: Data of the user ssh key.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   expiresAt:
-                    description: User ssh key will be no longer valid after expiration
-                      timestamp.
+                    description: |-
+                      (String) Used for temporary keys, if empty the key doesn't expire
+                      Used for temporary keys, if empty the key doesn't expire
                     type: string
                   name:
-                    description: Name of the user ssh key.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   organizationId:
-                    description: Organization that the user ssh key belongs to.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   subjectId:
-                    description: Subject that the user ssh key belongs to.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                    type: string
+                  userSshKeyId:
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
                     type: string
                 type: object
               managementPolicies:
@@ -183,26 +231,63 @@ spec:
               atProvider:
                 properties:
                   createdAt:
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   data:
-                    description: Data of the user ssh key.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   expiresAt:
-                    description: User ssh key will be no longer valid after expiration
-                      timestamp.
+                    description: |-
+                      (String) Used for temporary keys, if empty the key doesn't expire
+                      Used for temporary keys, if empty the key doesn't expire
                     type: string
                   fingerprint:
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   id:
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
                     type: string
                   name:
-                    description: Name of the user ssh key.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   organizationId:
-                    description: Organization that the user ssh key belongs to.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
                     type: string
                   subjectId:
-                    description: Subject that the user ssh key belongs to.
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+                    type: string
+                  userSshKeyId:
+                    description: |-
+                      (String) package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+                      package: yandex.cloud.organizationmanager.v1
+                      filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
                     type: string
                 type: object
               conditions:

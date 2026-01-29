@@ -73,15 +73,25 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  cloudId:
+                    description: |-
+                      (String) Log group cloud ID.
+                      Log group cloud ID.
+                    type: string
                   dataStream:
+                    description: |-
+                      (String) Data stream name
+                      Data stream name
                     type: string
                   description:
-                    description: A description for the Yandex Cloud Logging group.
+                    description: |-
+                      (String) Log group description.
+                      Log group description.
                     type: string
                   folderId:
                     description: |-
-                      ID of the folder that the Yandex Cloud Logging group belongs to.
-                      It will be deduced from provider configuration if not set explicitly.
+                      (String) Log group folder ID.
+                      Log group folder ID.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -162,16 +172,29 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Logging group.
+                    description: |-
+                      (Map of String) Log group labels.
+                      Log group labels.
                     type: object
                     x-kubernetes-map-type: granular
+                  logGroupId:
+                    description: |-
+                      (String) ID of the log group to return.
+                      ID of the log group to return.
+
+                      To get a log group ID make a [LogGroupService.List] request.
+                    type: string
                   name:
-                    description: Name for the Yandex Cloud Logging group.
+                    description: |-
+                      (String) Log group name.
+                      Log group name.
                     type: string
                   retentionPeriod:
-                    description: Log entries retention period for the Yandex Cloud
-                      Logging group.
+                    description: |-
+                      (String) Log group entry retention period.
+                      Log group entry retention period.
+
+                      Entries will be present in group during this period.
                     type: string
                 type: object
               initProvider:
@@ -187,15 +210,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  cloudId:
+                    description: |-
+                      (String) Log group cloud ID.
+                      Log group cloud ID.
+                    type: string
                   dataStream:
+                    description: |-
+                      (String) Data stream name
+                      Data stream name
                     type: string
                   description:
-                    description: A description for the Yandex Cloud Logging group.
+                    description: |-
+                      (String) Log group description.
+                      Log group description.
                     type: string
                   folderId:
                     description: |-
-                      ID of the folder that the Yandex Cloud Logging group belongs to.
-                      It will be deduced from provider configuration if not set explicitly.
+                      (String) Log group folder ID.
+                      Log group folder ID.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -276,16 +309,29 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Logging group.
+                    description: |-
+                      (Map of String) Log group labels.
+                      Log group labels.
                     type: object
                     x-kubernetes-map-type: granular
+                  logGroupId:
+                    description: |-
+                      (String) ID of the log group to return.
+                      ID of the log group to return.
+
+                      To get a log group ID make a [LogGroupService.List] request.
+                    type: string
                   name:
-                    description: Name for the Yandex Cloud Logging group.
+                    description: |-
+                      (String) Log group name.
+                      Log group name.
                     type: string
                   retentionPeriod:
-                    description: Log entries retention period for the Yandex Cloud
-                      Logging group.
+                    description: |-
+                      (String) Log group entry retention period.
+                      Log group entry retention period.
+
+                      Entries will be present in group during this period.
                     type: string
                 type: object
               managementPolicies:
@@ -380,41 +426,64 @@ spec:
               atProvider:
                 properties:
                   cloudId:
-                    description: ID of the cloud that the Yandex Cloud Logging group
-                      belong to.
+                    description: |-
+                      (String) Log group cloud ID.
+                      Log group cloud ID.
                     type: string
                   createdAt:
-                    description: The Yandex Cloud Logging group creation timestamp.
+                    description: |-
+                      (String) Log group creation time.
+                      Log group creation time.
                     type: string
                   dataStream:
+                    description: |-
+                      (String) Data stream name
+                      Data stream name
                     type: string
                   description:
-                    description: A description for the Yandex Cloud Logging group.
+                    description: |-
+                      (String) Log group description.
+                      Log group description.
                     type: string
                   folderId:
                     description: |-
-                      ID of the folder that the Yandex Cloud Logging group belongs to.
-                      It will be deduced from provider configuration if not set explicitly.
+                      (String) Log group folder ID.
+                      Log group folder ID.
                     type: string
                   id:
-                    description: The Yandex Cloud Logging group ID.
+                    description: (String) ID of the log group to return.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Logging group.
+                    description: |-
+                      (Map of String) Log group labels.
+                      Log group labels.
                     type: object
                     x-kubernetes-map-type: granular
+                  logGroupId:
+                    description: |-
+                      (String) ID of the log group to return.
+                      ID of the log group to return.
+
+                      To get a log group ID make a [LogGroupService.List] request.
+                    type: string
                   name:
-                    description: Name for the Yandex Cloud Logging group.
+                    description: |-
+                      (String) Log group name.
+                      Log group name.
                     type: string
                   retentionPeriod:
-                    description: Log entries retention period for the Yandex Cloud
-                      Logging group.
+                    description: |-
+                      (String) Log group entry retention period.
+                      Log group entry retention period.
+
+                      Entries will be present in group during this period.
                     type: string
                   status:
-                    description: The Yandex Cloud Logging group status.
+                    description: |-
+                      (String) Status of the log group.
+                      Status of the log group.
                     type: string
                 type: object
               conditions:

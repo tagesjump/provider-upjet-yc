@@ -27,4 +27,4 @@ spec:
     path: test_dir/test_table_3_col
     primaryKey:
     - a
-    - b”]
+    - b

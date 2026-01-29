@@ -12,143 +12,201 @@ import (
 
 type ConsumerInitParameters struct {
 
-	// : Changefeed name.
+	// (Boolean)
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
+
+	// (String) Changefeed name.
+	// Consumer name. It is used in the SDK or CLI to [read data](https://ydb.tech/en/docs/best_practices/cdc#read) from the topic.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data
+	// (Number) Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
+	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
-	// Supported data encodings
-	// +listType=set
+	// (List of String) Supported data encodings.
+	// Supported data encodings.
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type ConsumerObservation struct {
 
-	// : Changefeed name.
+	// (Boolean)
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
+
+	// (String) Changefeed name.
+	// Consumer name. It is used in the SDK or CLI to [read data](https://ydb.tech/en/docs/best_practices/cdc#read) from the topic.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data
+	// (Number) Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
+	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
-	// Supported data encodings
-	// +listType=set
+	// (List of String) Supported data encodings.
+	// Supported data encodings.
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type ConsumerParameters struct {
 
-	// : Changefeed name.
+	// (Boolean)
+	// +kubebuilder:validation:Optional
+	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
+
+	// (String) Changefeed name.
+	// Consumer name. It is used in the SDK or CLI to [read data](https://ydb.tech/en/docs/best_practices/cdc#read) from the topic.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data
+	// (Number) Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
+	// Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
 	// +kubebuilder:validation:Optional
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
-	// Supported data encodings
+	// (List of String) Supported data encodings.
+	// Supported data encodings.
 	// +kubebuilder:validation:Optional
-	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type TableChangefeedInitParameters struct {
 
-	// Connection string, conflicts with table_id
+	// (String) Connection string, conflicts with table_id.
+	// Connection string, conflicts with `table_id`.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// Changefeed consumers - named entities for reading data from the topic.
+	// named entities for reading data from the topic. (see below for nested schema)
+	// Changefeed [consumers](https://ydb.tech/en/docs/concepts/topic#consumer) - named entities for reading data from the topic.
 	Consumer []ConsumerInitParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
-	// : Changefeed format. Only JSON format is available.
+	// (String) Changefeed format.
+	// Changefeed format.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// : Changefeed operating mode. The available changefeed operating modes are presented in the documentation.
+	// (String) Changefeed mode.
+	// [Changefeed mode](https://ydb.tech/en/docs/yql/reference/syntax/alter_table#changefeed-options).
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// : Changefeed name.
+	// (String) Changefeed name.
+	// Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Time of data retention in the topic, ISO 8601 format
+	// (String) Time of data retention in the topic, ISO 8601 format.
+	// Time of data retention in the topic, [ISO 8601](https://ru.wikipedia.org/wiki/ISO_8601) format.
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// : ID of the table for which we create the changefeed.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/ydb/v1alpha1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
-	// Table path
+	// Reference to a Table in ydb to populate tableId.
+	// +kubebuilder:validation:Optional
+	TableIDRef *v1.NamespacedReference `json:"tableIdRef,omitempty" tf:"-"`
+
+	// Selector for a Table in ydb to populate tableId.
+	// +kubebuilder:validation:Optional
+	TableIDSelector *v1.NamespacedSelector `json:"tableIdSelector,omitempty" tf:"-"`
+
+	// (String) Table path.
+	// Table path.
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
-	// Use virtual timestamps
+	// (Boolean) Use virtual timestamps.
+	// Use [virtual timestamps](https://ydb.tech/en/docs/concepts/cdc#virtual-timestamps).
 	VirtualTimestamps *bool `json:"virtualTimestamps,omitempty" tf:"virtual_timestamps,omitempty"`
 }
 
 type TableChangefeedObservation struct {
 
-	// Connection string, conflicts with table_id
+	// (String) Connection string, conflicts with table_id.
+	// Connection string, conflicts with `table_id`.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// Changefeed consumers - named entities for reading data from the topic.
+	// named entities for reading data from the topic. (see below for nested schema)
+	// Changefeed [consumers](https://ydb.tech/en/docs/concepts/topic#consumer) - named entities for reading data from the topic.
 	Consumer []ConsumerObservation `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
-	// : Changefeed format. Only JSON format is available.
+	// (String) Changefeed format.
+	// Changefeed format.
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// : Changefeed operating mode. The available changefeed operating modes are presented in the documentation.
+	// (String) Changefeed mode.
+	// [Changefeed mode](https://ydb.tech/en/docs/yql/reference/syntax/alter_table#changefeed-options).
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// : Changefeed name.
+	// (String) Changefeed name.
+	// Changefeed name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Time of data retention in the topic, ISO 8601 format
+	// (String) Time of data retention in the topic, ISO 8601 format.
+	// Time of data retention in the topic, [ISO 8601](https://ru.wikipedia.org/wiki/ISO_8601) format.
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// : ID of the table for which we create the changefeed.
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
-	// Table path
+	// (String) Table path.
+	// Table path.
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
-	// Use virtual timestamps
+	// (Boolean) Use virtual timestamps.
+	// Use [virtual timestamps](https://ydb.tech/en/docs/concepts/cdc#virtual-timestamps).
 	VirtualTimestamps *bool `json:"virtualTimestamps,omitempty" tf:"virtual_timestamps,omitempty"`
 }
 
 type TableChangefeedParameters struct {
 
-	// Connection string, conflicts with table_id
+	// (String) Connection string, conflicts with table_id.
+	// Connection string, conflicts with `table_id`.
 	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// Changefeed consumers - named entities for reading data from the topic.
+	// named entities for reading data from the topic. (see below for nested schema)
+	// Changefeed [consumers](https://ydb.tech/en/docs/concepts/topic#consumer) - named entities for reading data from the topic.
 	// +kubebuilder:validation:Optional
 	Consumer []ConsumerParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
-	// : Changefeed format. Only JSON format is available.
+	// (String) Changefeed format.
+	// Changefeed format.
 	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
-	// : Changefeed operating mode. The available changefeed operating modes are presented in the documentation.
+	// (String) Changefeed mode.
+	// [Changefeed mode](https://ydb.tech/en/docs/yql/reference/syntax/alter_table#changefeed-options).
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// : Changefeed name.
+	// (String) Changefeed name.
+	// Changefeed name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Time of data retention in the topic, ISO 8601 format
+	// (String) Time of data retention in the topic, ISO 8601 format.
+	// Time of data retention in the topic, [ISO 8601](https://ru.wikipedia.org/wiki/ISO_8601) format.
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// : ID of the table for which we create the changefeed.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/ydb/v1alpha1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TableID *string `json:"tableId,omitempty" tf:"table_id,omitempty"`
 
-	// Table path
+	// Reference to a Table in ydb to populate tableId.
+	// +kubebuilder:validation:Optional
+	TableIDRef *v1.NamespacedReference `json:"tableIdRef,omitempty" tf:"-"`
+
+	// Selector for a Table in ydb to populate tableId.
+	// +kubebuilder:validation:Optional
+	TableIDSelector *v1.NamespacedSelector `json:"tableIdSelector,omitempty" tf:"-"`
+
+	// (String) Table path.
+	// Table path.
 	// +kubebuilder:validation:Optional
 	TablePath *string `json:"tablePath,omitempty" tf:"table_path,omitempty"`
 
-	// Use virtual timestamps
+	// (Boolean) Use virtual timestamps.
+	// Use [virtual timestamps](https://ydb.tech/en/docs/concepts/cdc#virtual-timestamps).
 	// +kubebuilder:validation:Optional
 	VirtualTimestamps *bool `json:"virtualTimestamps,omitempty" tf:"virtual_timestamps,omitempty"`
 }

@@ -73,34 +73,61 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  asyncInvocation:
+                    description: |-
+                      (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Serverless Container. (see below for nested schema)
+                      Config for asynchronous invocations of Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        serviceAccountId:
+                          description: |-
+                            (String) Service account which linked to the resource.
+                            Service account used for async invocation.
+                          type: string
+                      type: object
+                    type: array
                   concurrency:
-                    description: Concurrency of Yandex Cloud Serverless Container
+                    description: |-
+                      (Number) Concurrency of Yandex Cloud Serverless Container.
+                      Concurrency of Yandex Cloud Serverless Container.
                     type: number
                   connectivity:
-                    description: Network access. If specified the revision will be
-                      attached to specified network
+                    description: |-
+                      (Block List, Max: 1) Network access. If specified the revision will be attached to specified network. (see below for nested schema)
+                      Network access. If specified the revision will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the revision will have access to
+                          description: |-
+                            (String) Network the revision will have access to.
+                            Network the revision will have access to.
                           type: string
                       type: object
                     type: array
                   coreFraction:
-                    description: Core fraction (0...100) of the Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Number) Core fraction (0...100) of the Yandex Cloud Serverless Container.
+                      Core fraction (**0...100**) of the Yandex Cloud Serverless Container.
                     type: number
                   cores:
+                    description: |-
+                      (Number) Cores (1+) of the Yandex Cloud Serverless Container.
+                      Cores (**1+**) of the Yandex Cloud Serverless Container.
                     type: number
                   description:
-                    description: Description of the Yandex Cloud Serverless Container
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   executionTimeout:
-                    description: Execution timeout in seconds (duration format) for
-                      Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container.
+                      Execution timeout in seconds (**duration format**) for Yandex Cloud Serverless Container.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud Serverless Container
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -179,121 +206,556 @@ spec:
                         type: object
                     type: object
                   image:
-                    description: Revision deployment image for Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Revision deployment image for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Revision deployment image for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         args:
-                          description: List of arguments for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (List of String) List of arguments for Yandex Cloud Serverless Container.
+                            List of arguments for Yandex Cloud Serverless Container.
                           items:
                             type: string
                           type: array
                         command:
-                          description: List of commands for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (List of String) List of commands for Yandex Cloud Serverless Container.
+                            List of commands for Yandex Cloud Serverless Container.
                           items:
                             type: string
                           type: array
                         digest:
                           description: |-
-                            Digest of image that will be deployed as Yandex Cloud Serverless Container.
-                            If presented, should be equal to digest that will be resolved at server side by URL.
-                            Container will be updated on digest change even if image.0.url stays the same.
-                            If field not specified then its value will be computed.
+                            (String) Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
+                            Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: A set of key/value environment variable pairs
-                            for Yandex Cloud Serverless Container
+                          description: |-
+                            Z, a-z).
+                            A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
                           type: object
                           x-kubernetes-map-type: granular
                         url:
-                          description: Invoke URL for the Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (String) Invoke URL for the Yandex Cloud Serverless Container.
+                            URL of image that will be deployed as Yandex Cloud Serverless Container.
                           type: string
                         workDir:
-                          description: Working directory for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (String) Working directory for Yandex Cloud Serverless Container.
+                            Working directory for Yandex Cloud Serverless Container.
                           type: string
                       type: object
                     type: array
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Serverless Container
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud Serverless Container. (see below for nested schema)
+                      Options for logging from Yandex Cloud Serverless Container.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from container disabled
+                          description: |-
+                            (Boolean) Is logging from container disabled.
+                            Is logging from container disabled.
                           type: boolean
                         folderId:
-                          description: Log entries are written to default log group
-                            for specified folder
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   memory:
                     description: |-
-                      Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
-                      Container memory in megabytes, should be aligned to 128
+                      (Number) Memory in megabytes (aligned to 128 MB).
+                      Memory in megabytes (**aligned to 128 MB**).
                     type: number
-                  name:
-                    description: Yandex Cloud Serverless Container name
-                    type: string
-                  secrets:
-                    description: Secrets for Yandex Cloud Serverless Container
+                  metadataOptions:
+                    description: |-
+                      (Block List, Max: 1) Options set the access mode to revision's metadata endpoints. (see below for nested schema)
+                      Options set the access mode to revision's metadata endpoints.
                     items:
                       properties:
-                        environmentVariable:
-                          description: Container's environment variable in which secret's
-                            value will be stored.
+                        awsV1HttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+                          type: number
+                        gceHttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+                          type: number
+                      type: object
+                    type: array
+                  mounts:
+                    description: |-
+                      (Block List) Mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Mounts for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+                            One of the available mount types. Disk available during the function execution time.
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: |-
+                                  (Number) Block size of the ephemeral disk in KB.
+                                  Block size of the ephemeral disk in KB.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of the ephemeral disk in GB.
+                                  Size of the ephemeral disk in GB.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: |-
+                            (String) Mount’s accessibility mode. Valid values are ro and rw.
+                            Mount’s accessibility mode. Valid values are `ro` and `rw`.
                           type: string
-                        id:
-                          description: Secret's id.
+                        mountPointPath:
+                          description: |-
+                            (String) Path inside the container to access the directory in which the target is mounted.
+                            Path inside the container to access the directory in which the target is mounted.
                           type: string
-                        key:
-                          description: Secret's entries key which value will be stored
-                            in environment variable.
-                          type: string
-                        versionId:
-                          description: Secret's version id.
+                        objectStorage:
+                          description: |-
+                            (Block List, Max: 1) Available mount types. Object storage as a mount. (see below for nested schema)
+                            Available mount types. Object storage as a mount.
+                          items:
+                            properties:
+                              bucket:
+                                description: |-
+                                  (String) Name of the mounting bucket.
+                                  Name of the mounting bucket.
+                                type: string
+                              bucketRef:
+                                description: Reference to a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketSelector:
+                                description: Selector for a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              prefix:
+                                description: |-
+                                  (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                  Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  provisionPolicy:
+                    description: |-
+                      (Block List, Max: 1) Provision policy. If specified the revision will have prepared instances. (see below for nested schema)
+                      Provision policy. If specified the revision will have prepared instances.
+                    items:
+                      properties:
+                        minInstances:
+                          description: |-
+                            (Number) Minimum number of prepared instances that are always ready to serve requests.
+                            Minimum number of prepared instances that are always ready to serve requests.
+                          type: number
+                      type: object
+                    type: array
+                  runtime:
+                    description: |-
+                      (Block List, Max: 1) Runtime for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Runtime for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        type:
+                          description: |-
+                            (String) Type of the runtime for Yandex Cloud Serverless Container. Valid values are http and task.
+                            Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
                           type: string
                       type: object
                     type: array
+                  secrets:
+                    description: |-
+                      (Block List) Secrets for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Secrets for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        environmentVariable:
+                          description: |-
+                            Z, a-z).
+                            Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
+                          type: string
+                        id:
+                          description: |-
+                            (String) The ID of this resource.
+                            Secret's ID.
+                          type: string
+                        idRef:
+                          description: Reference to a Secret in lockbox to populate
+                            id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a Secret in lockbox to populate
+                            id.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        key:
+                          description: |-
+                            (String) Secret's entries key which value will be stored in environment variable.
+                            Secret's entries key which value will be stored in environment variable.
+                          type: string
+                        versionId:
+                          description: |-
+                            (String) Secret's version ID.
+                            Secret's version ID.
+                          type: string
+                        versionIdRef:
+                          description: Reference to a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        versionIdSelector:
+                          description: Selector for a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   serviceAccountId:
-                    description: Service account ID for Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Serverless Container
+                    description: |-
+                      (Block List, Deprecated) (DEPRECATED, use mounts.object_storage instead) Storage mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+                      (**DEPRECATED**, use `mounts.object_storage` instead) Storage mounts for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: |-
+                            (String) Name of the mounting bucket.
+                            Name of the mounting bucket.
                           type: string
                         mountPointPath:
-                          description: Path inside the container to access the directory
-                            in which the bucket is mounted.
+                          description: |-
+                            (String) Path inside the container to access the directory in which the target is mounted.
+                            Path inside the container to access the directory in which the bucket is mounted.
                           type: string
                         prefix:
-                          description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                          description: |-
+                            (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                            Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: |-
+                            only mode.
+                            Mount the bucket in read-only mode.
                           type: boolean
                       type: object
                     type: array
@@ -311,34 +773,61 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  asyncInvocation:
+                    description: |-
+                      (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Serverless Container. (see below for nested schema)
+                      Config for asynchronous invocations of Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        serviceAccountId:
+                          description: |-
+                            (String) Service account which linked to the resource.
+                            Service account used for async invocation.
+                          type: string
+                      type: object
+                    type: array
                   concurrency:
-                    description: Concurrency of Yandex Cloud Serverless Container
+                    description: |-
+                      (Number) Concurrency of Yandex Cloud Serverless Container.
+                      Concurrency of Yandex Cloud Serverless Container.
                     type: number
                   connectivity:
-                    description: Network access. If specified the revision will be
-                      attached to specified network
+                    description: |-
+                      (Block List, Max: 1) Network access. If specified the revision will be attached to specified network. (see below for nested schema)
+                      Network access. If specified the revision will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the revision will have access to
+                          description: |-
+                            (String) Network the revision will have access to.
+                            Network the revision will have access to.
                           type: string
                       type: object
                     type: array
                   coreFraction:
-                    description: Core fraction (0...100) of the Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Number) Core fraction (0...100) of the Yandex Cloud Serverless Container.
+                      Core fraction (**0...100**) of the Yandex Cloud Serverless Container.
                     type: number
                   cores:
+                    description: |-
+                      (Number) Cores (1+) of the Yandex Cloud Serverless Container.
+                      Cores (**1+**) of the Yandex Cloud Serverless Container.
                     type: number
                   description:
-                    description: Description of the Yandex Cloud Serverless Container
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   executionTimeout:
-                    description: Execution timeout in seconds (duration format) for
-                      Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container.
+                      Execution timeout in seconds (**duration format**) for Yandex Cloud Serverless Container.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud Serverless Container
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -417,121 +906,556 @@ spec:
                         type: object
                     type: object
                   image:
-                    description: Revision deployment image for Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Revision deployment image for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Revision deployment image for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         args:
-                          description: List of arguments for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (List of String) List of arguments for Yandex Cloud Serverless Container.
+                            List of arguments for Yandex Cloud Serverless Container.
                           items:
                             type: string
                           type: array
                         command:
-                          description: List of commands for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (List of String) List of commands for Yandex Cloud Serverless Container.
+                            List of commands for Yandex Cloud Serverless Container.
                           items:
                             type: string
                           type: array
                         digest:
                           description: |-
-                            Digest of image that will be deployed as Yandex Cloud Serverless Container.
-                            If presented, should be equal to digest that will be resolved at server side by URL.
-                            Container will be updated on digest change even if image.0.url stays the same.
-                            If field not specified then its value will be computed.
+                            (String) Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
+                            Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: A set of key/value environment variable pairs
-                            for Yandex Cloud Serverless Container
+                          description: |-
+                            Z, a-z).
+                            A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
                           type: object
                           x-kubernetes-map-type: granular
                         url:
-                          description: Invoke URL for the Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (String) Invoke URL for the Yandex Cloud Serverless Container.
+                            URL of image that will be deployed as Yandex Cloud Serverless Container.
                           type: string
                         workDir:
-                          description: Working directory for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (String) Working directory for Yandex Cloud Serverless Container.
+                            Working directory for Yandex Cloud Serverless Container.
                           type: string
                       type: object
                     type: array
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Serverless Container
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud Serverless Container. (see below for nested schema)
+                      Options for logging from Yandex Cloud Serverless Container.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from container disabled
+                          description: |-
+                            (Boolean) Is logging from container disabled.
+                            Is logging from container disabled.
                           type: boolean
                         folderId:
-                          description: Log entries are written to default log group
-                            for specified folder
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   memory:
                     description: |-
-                      Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
-                      Container memory in megabytes, should be aligned to 128
+                      (Number) Memory in megabytes (aligned to 128 MB).
+                      Memory in megabytes (**aligned to 128 MB**).
                     type: number
-                  name:
-                    description: Yandex Cloud Serverless Container name
-                    type: string
-                  secrets:
-                    description: Secrets for Yandex Cloud Serverless Container
+                  metadataOptions:
+                    description: |-
+                      (Block List, Max: 1) Options set the access mode to revision's metadata endpoints. (see below for nested schema)
+                      Options set the access mode to revision's metadata endpoints.
                     items:
                       properties:
-                        environmentVariable:
-                          description: Container's environment variable in which secret's
-                            value will be stored.
+                        awsV1HttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+                          type: number
+                        gceHttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+                          type: number
+                      type: object
+                    type: array
+                  mounts:
+                    description: |-
+                      (Block List) Mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Mounts for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+                            One of the available mount types. Disk available during the function execution time.
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: |-
+                                  (Number) Block size of the ephemeral disk in KB.
+                                  Block size of the ephemeral disk in KB.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of the ephemeral disk in GB.
+                                  Size of the ephemeral disk in GB.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: |-
+                            (String) Mount’s accessibility mode. Valid values are ro and rw.
+                            Mount’s accessibility mode. Valid values are `ro` and `rw`.
                           type: string
-                        id:
-                          description: Secret's id.
+                        mountPointPath:
+                          description: |-
+                            (String) Path inside the container to access the directory in which the target is mounted.
+                            Path inside the container to access the directory in which the target is mounted.
                           type: string
-                        key:
-                          description: Secret's entries key which value will be stored
-                            in environment variable.
-                          type: string
-                        versionId:
-                          description: Secret's version id.
+                        objectStorage:
+                          description: |-
+                            (Block List, Max: 1) Available mount types. Object storage as a mount. (see below for nested schema)
+                            Available mount types. Object storage as a mount.
+                          items:
+                            properties:
+                              bucket:
+                                description: |-
+                                  (String) Name of the mounting bucket.
+                                  Name of the mounting bucket.
+                                type: string
+                              bucketRef:
+                                description: Reference to a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketSelector:
+                                description: Selector for a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              prefix:
+                                description: |-
+                                  (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                  Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  provisionPolicy:
+                    description: |-
+                      (Block List, Max: 1) Provision policy. If specified the revision will have prepared instances. (see below for nested schema)
+                      Provision policy. If specified the revision will have prepared instances.
+                    items:
+                      properties:
+                        minInstances:
+                          description: |-
+                            (Number) Minimum number of prepared instances that are always ready to serve requests.
+                            Minimum number of prepared instances that are always ready to serve requests.
+                          type: number
+                      type: object
+                    type: array
+                  runtime:
+                    description: |-
+                      (Block List, Max: 1) Runtime for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Runtime for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        type:
+                          description: |-
+                            (String) Type of the runtime for Yandex Cloud Serverless Container. Valid values are http and task.
+                            Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
                           type: string
                       type: object
                     type: array
+                  secrets:
+                    description: |-
+                      (Block List) Secrets for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Secrets for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        environmentVariable:
+                          description: |-
+                            Z, a-z).
+                            Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
+                          type: string
+                        id:
+                          description: |-
+                            (String) The ID of this resource.
+                            Secret's ID.
+                          type: string
+                        idRef:
+                          description: Reference to a Secret in lockbox to populate
+                            id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a Secret in lockbox to populate
+                            id.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        key:
+                          description: |-
+                            (String) Secret's entries key which value will be stored in environment variable.
+                            Secret's entries key which value will be stored in environment variable.
+                          type: string
+                        versionId:
+                          description: |-
+                            (String) Secret's version ID.
+                            Secret's version ID.
+                          type: string
+                        versionIdRef:
+                          description: Reference to a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        versionIdSelector:
+                          description: Selector for a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                      type: object
+                    type: array
                   serviceAccountId:
-                    description: Service account ID for Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Serverless Container
+                    description: |-
+                      (Block List, Deprecated) (DEPRECATED, use mounts.object_storage instead) Storage mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+                      (**DEPRECATED**, use `mounts.object_storage` instead) Storage mounts for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: |-
+                            (String) Name of the mounting bucket.
+                            Name of the mounting bucket.
                           type: string
                         mountPointPath:
-                          description: Path inside the container to access the directory
-                            in which the bucket is mounted.
+                          description: |-
+                            (String) Path inside the container to access the directory in which the target is mounted.
+                            Path inside the container to access the directory in which the bucket is mounted.
                           type: string
                         prefix:
-                          description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                          description: |-
+                            (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                            Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: |-
+                            only mode.
+                            Mount the bucket in read-only mode.
                           type: boolean
                       type: object
                     type: array
@@ -640,166 +1564,329 @@ spec:
             properties:
               atProvider:
                 properties:
+                  asyncInvocation:
+                    description: |-
+                      (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Serverless Container. (see below for nested schema)
+                      Config for asynchronous invocations of Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        serviceAccountId:
+                          description: |-
+                            (String) Service account which linked to the resource.
+                            Service account used for async invocation.
+                          type: string
+                      type: object
+                    type: array
                   concurrency:
-                    description: Concurrency of Yandex Cloud Serverless Container
+                    description: |-
+                      (Number) Concurrency of Yandex Cloud Serverless Container.
+                      Concurrency of Yandex Cloud Serverless Container.
                     type: number
                   connectivity:
-                    description: Network access. If specified the revision will be
-                      attached to specified network
+                    description: |-
+                      (Block List, Max: 1) Network access. If specified the revision will be attached to specified network. (see below for nested schema)
+                      Network access. If specified the revision will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the revision will have access to
+                          description: |-
+                            (String) Network the revision will have access to.
+                            Network the revision will have access to.
                           type: string
                       type: object
                     type: array
                   coreFraction:
-                    description: Core fraction (0...100) of the Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Number) Core fraction (0...100) of the Yandex Cloud Serverless Container.
+                      Core fraction (**0...100**) of the Yandex Cloud Serverless Container.
                     type: number
                   cores:
+                    description: |-
+                      (Number) Cores (1+) of the Yandex Cloud Serverless Container.
+                      Cores (**1+**) of the Yandex Cloud Serverless Container.
                     type: number
                   createdAt:
-                    description: Creation timestamp of the Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   description:
-                    description: Description of the Yandex Cloud Serverless Container
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   executionTimeout:
-                    description: Execution timeout in seconds (duration format) for
-                      Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Execution timeout in seconds (duration format) for Yandex Cloud Serverless Container.
+                      Execution timeout in seconds (**duration format**) for Yandex Cloud Serverless Container.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud Serverless Container
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
-                    description: Secret's id.
+                    description: (String) The ID of this resource.
                     type: string
                   image:
-                    description: Revision deployment image for Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Revision deployment image for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Revision deployment image for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         args:
-                          description: List of arguments for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (List of String) List of arguments for Yandex Cloud Serverless Container.
+                            List of arguments for Yandex Cloud Serverless Container.
                           items:
                             type: string
                           type: array
                         command:
-                          description: List of commands for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (List of String) List of commands for Yandex Cloud Serverless Container.
+                            List of commands for Yandex Cloud Serverless Container.
                           items:
                             type: string
                           type: array
                         digest:
                           description: |-
-                            Digest of image that will be deployed as Yandex Cloud Serverless Container.
-                            If presented, should be equal to digest that will be resolved at server side by URL.
-                            Container will be updated on digest change even if image.0.url stays the same.
-                            If field not specified then its value will be computed.
+                            (String) Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if image.0.url stays the same. If field not specified then its value will be computed.
+                            Digest of image that will be deployed as Yandex Cloud Serverless Container. If presented, should be equal to digest that will be resolved at server side by URL. Container will be updated on digest change even if `image.0.url` stays the same. If field not specified then its value will be computed.
                           type: string
                         environment:
                           additionalProperties:
                             type: string
-                          description: A set of key/value environment variable pairs
-                            for Yandex Cloud Serverless Container
+                          description: |-
+                            Z, a-z).
+                            A set of key/value environment variable pairs for Yandex Cloud Serverless Container. Each key must begin with a letter (A-Z, a-z).
                           type: object
                           x-kubernetes-map-type: granular
                         url:
-                          description: Invoke URL for the Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (String) Invoke URL for the Yandex Cloud Serverless Container.
+                            URL of image that will be deployed as Yandex Cloud Serverless Container.
                           type: string
                         workDir:
-                          description: Working directory for Yandex Cloud Serverless
-                            Container
+                          description: |-
+                            (String) Working directory for Yandex Cloud Serverless Container.
+                            Working directory for Yandex Cloud Serverless Container.
                           type: string
                       type: object
                     type: array
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Serverless Container
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud Serverless
-                      Container
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud Serverless Container. (see below for nested schema)
+                      Options for logging from Yandex Cloud Serverless Container.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from container disabled
+                          description: |-
+                            (Boolean) Is logging from container disabled.
+                            Is logging from container disabled.
                           type: boolean
                         folderId:
-                          description: Log entries are written to default log group
-                            for specified folder
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   memory:
                     description: |-
-                      Memory in megabytes (aligned to 128MB) for Yandex Cloud Serverless Container
-                      Container memory in megabytes, should be aligned to 128
+                      (Number) Memory in megabytes (aligned to 128 MB).
+                      Memory in megabytes (**aligned to 128 MB**).
                     type: number
+                  metadataOptions:
+                    description: |-
+                      (Block List, Max: 1) Options set the access mode to revision's metadata endpoints. (see below for nested schema)
+                      Options set the access mode to revision's metadata endpoints.
+                    items:
+                      properties:
+                        awsV1HttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+                          type: number
+                        gceHttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+                          type: number
+                      type: object
+                    type: array
+                  mounts:
+                    description: |-
+                      (Block List) Mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Mounts for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+                            One of the available mount types. Disk available during the function execution time.
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: |-
+                                  (Number) Block size of the ephemeral disk in KB.
+                                  Block size of the ephemeral disk in KB.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of the ephemeral disk in GB.
+                                  Size of the ephemeral disk in GB.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: |-
+                            (String) Mount’s accessibility mode. Valid values are ro and rw.
+                            Mount’s accessibility mode. Valid values are `ro` and `rw`.
+                          type: string
+                        mountPointPath:
+                          description: |-
+                            (String) Path inside the container to access the directory in which the target is mounted.
+                            Path inside the container to access the directory in which the target is mounted.
+                          type: string
+                        objectStorage:
+                          description: |-
+                            (Block List, Max: 1) Available mount types. Object storage as a mount. (see below for nested schema)
+                            Available mount types. Object storage as a mount.
+                          items:
+                            properties:
+                              bucket:
+                                description: |-
+                                  (String) Name of the mounting bucket.
+                                  Name of the mounting bucket.
+                                type: string
+                              prefix:
+                                description: |-
+                                  (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                  Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
-                    description: Yandex Cloud Serverless Container name
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
+                  provisionPolicy:
+                    description: |-
+                      (Block List, Max: 1) Provision policy. If specified the revision will have prepared instances. (see below for nested schema)
+                      Provision policy. If specified the revision will have prepared instances.
+                    items:
+                      properties:
+                        minInstances:
+                          description: |-
+                            (Number) Minimum number of prepared instances that are always ready to serve requests.
+                            Minimum number of prepared instances that are always ready to serve requests.
+                          type: number
+                      type: object
+                    type: array
                   revisionId:
-                    description: Last revision ID of the Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Last revision ID of the Yandex Cloud Serverless Container.
+                      Last revision ID of the Yandex Cloud Serverless Container.
                     type: string
+                  runtime:
+                    description: |-
+                      (Block List, Max: 1) Runtime for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Runtime for Yandex Cloud Serverless Container.
+                    items:
+                      properties:
+                        type:
+                          description: |-
+                            (String) Type of the runtime for Yandex Cloud Serverless Container. Valid values are http and task.
+                            Type of the runtime for Yandex Cloud Serverless Container. Valid values are `http` and `task`.
+                          type: string
+                      type: object
+                    type: array
                   secrets:
-                    description: Secrets for Yandex Cloud Serverless Container
+                    description: |-
+                      (Block List) Secrets for Yandex Cloud Serverless Container. (see below for nested schema)
+                      Secrets for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         environmentVariable:
-                          description: Container's environment variable in which secret's
-                            value will be stored.
+                          description: |-
+                            Z, a-z).
+                            Container's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
                           type: string
                         id:
-                          description: Secret's id.
+                          description: |-
+                            (String) The ID of this resource.
+                            Secret's ID.
                           type: string
                         key:
-                          description: Secret's entries key which value will be stored
-                            in environment variable.
+                          description: |-
+                            (String) Secret's entries key which value will be stored in environment variable.
+                            Secret's entries key which value will be stored in environment variable.
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: |-
+                            (String) Secret's version ID.
+                            Secret's version ID.
                           type: string
                       type: object
                     type: array
                   serviceAccountId:
-                    description: Service account ID for Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Serverless Container
+                    description: |-
+                      (Block List, Deprecated) (DEPRECATED, use mounts.object_storage instead) Storage mounts for Yandex Cloud Serverless Container. (see below for nested schema)
+                      (**DEPRECATED**, use `mounts.object_storage` instead) Storage mounts for Yandex Cloud Serverless Container.
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: |-
+                            (String) Name of the mounting bucket.
+                            Name of the mounting bucket.
                           type: string
                         mountPointPath:
-                          description: Path inside the container to access the directory
-                            in which the bucket is mounted.
+                          description: |-
+                            (String) Path inside the container to access the directory in which the target is mounted.
+                            Path inside the container to access the directory in which the bucket is mounted.
                           type: string
                         prefix:
-                          description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                          description: |-
+                            (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                            Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: |-
+                            only mode.
+                            Mount the bucket in read-only mode.
                           type: boolean
                       type: object
                     type: array
                   url:
-                    description: Invoke URL for the Yandex Cloud Serverless Container
+                    description: |-
+                      (String) Invoke URL for the Yandex Cloud Serverless Container.
+                      Invoke URL for the Yandex Cloud Serverless Container.
                     type: string
                 type: object
               conditions:

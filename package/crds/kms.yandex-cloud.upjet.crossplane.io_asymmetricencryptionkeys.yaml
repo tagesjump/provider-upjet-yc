@@ -75,19 +75,32 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  asymmetricEncryptionKeyId:
+                    description: |-
+                      (String) ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
+                      ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
+                    type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) Flag that inhibits deletion of the key
+                      Flag that inhibits deletion of the key
                     type: boolean
                   description:
-                    description: An optional description of the key.
+                    description: |-
+                      (String) Description of the key.
+                      Description of the key.
                     type: string
                   encryptionAlgorithm:
-                    description: Encryption algorithm to be used with a new key. The
-                      default value is RSA_2048_ENC_OAEP_SHA_256.
+                    description: |-
+                      (String) Asymmetric Encryption Algorithm ID.
+                      Asymmetric Encryption Algorithm ID.
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      (String) ID of the folder that the key belongs to.
+                      ID of the folder that the key belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -168,11 +181,20 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the key.
+                    description: |-
+                      (Map of String) Custom labels for the key as key:value pairs. Maximum 64 per key.
+                      Custom labels for the key as `key:value` pairs. Maximum 64 per key.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the key.
+                    description: |-
+                      (String) Name of the key.
+                      Name of the key.
+                    type: string
+                  status:
+                    description: |-
+                      (String) Current status of the key.
+                      Current status of the key.
                     type: string
                 type: object
               initProvider:
@@ -188,19 +210,32 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  asymmetricEncryptionKeyId:
+                    description: |-
+                      (String) ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
+                      ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
+                    type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) Flag that inhibits deletion of the key
+                      Flag that inhibits deletion of the key
                     type: boolean
                   description:
-                    description: An optional description of the key.
+                    description: |-
+                      (String) Description of the key.
+                      Description of the key.
                     type: string
                   encryptionAlgorithm:
-                    description: Encryption algorithm to be used with a new key. The
-                      default value is RSA_2048_ENC_OAEP_SHA_256.
+                    description: |-
+                      (String) Asymmetric Encryption Algorithm ID.
+                      Asymmetric Encryption Algorithm ID.
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      (String) ID of the folder that the key belongs to.
+                      ID of the folder that the key belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -281,11 +316,20 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the key.
+                    description: |-
+                      (Map of String) Custom labels for the key as key:value pairs. Maximum 64 per key.
+                      Custom labels for the key as `key:value` pairs. Maximum 64 per key.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the key.
+                    description: |-
+                      (String) Name of the key.
+                      Name of the key.
+                    type: string
+                  status:
+                    description: |-
+                      (String) Current status of the key.
+                      Current status of the key.
                     type: string
                 type: object
               managementPolicies:
@@ -380,36 +424,60 @@ spec:
             properties:
               atProvider:
                 properties:
+                  asymmetricEncryptionKeyId:
+                    description: |-
+                      (String) ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
+                      ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
+                    type: string
                   createdAt:
-                    description: Creation timestamp of the key.
+                    description: |-
+                      (String) Time when the key was created.
+                      Time when the key was created.
                     type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) Flag that inhibits deletion of the key
+                      Flag that inhibits deletion of the key
                     type: boolean
                   description:
-                    description: An optional description of the key.
+                    description: |-
+                      (String) Description of the key.
+                      Description of the key.
                     type: string
                   encryptionAlgorithm:
-                    description: Encryption algorithm to be used with a new key. The
-                      default value is RSA_2048_ENC_OAEP_SHA_256.
+                    description: |-
+                      (String) Asymmetric Encryption Algorithm ID.
+                      Asymmetric Encryption Algorithm ID.
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      (String) ID of the folder that the key belongs to.
+                      ID of the folder that the key belongs to.
                     type: string
                   id:
+                    description: |-
+                      (String) ID of the asymmetric KMS key to return.
+                      To get the ID of an asymmetric KMS key use a [AsymmetricEncryptionKeyService.List] request.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the key.
+                    description: |-
+                      (Map of String) Custom labels for the key as key:value pairs. Maximum 64 per key.
+                      Custom labels for the key as `key:value` pairs. Maximum 64 per key.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the key.
+                    description: |-
+                      (String) Name of the key.
+                      Name of the key.
                     type: string
                   status:
-                    description: The status of the key.
+                    description: |-
+                      (String) Current status of the key.
+                      Current status of the key.
                     type: string
                 type: object
               conditions:

@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: organizationmanager/v1alpha1/group
   labels:
-    testing.upbound.io/example-name: group
-  name: group
+    testing.upbound.io/example-name: my_group
+  name: my-group
 spec:
   forProvider:
     description: My new Group

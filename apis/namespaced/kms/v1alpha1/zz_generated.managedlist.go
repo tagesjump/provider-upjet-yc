@@ -13,6 +13,15 @@ func (l *AsymmetricEncryptionKeyIAMBindingList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this AsymmetricEncryptionKeyIAMMemberList.
+func (l *AsymmetricEncryptionKeyIAMMemberList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this AsymmetricEncryptionKeyList.
 func (l *AsymmetricEncryptionKeyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -24,6 +33,15 @@ func (l *AsymmetricEncryptionKeyList) GetItems() []resource.Managed {
 
 // GetItems of this AsymmetricSignatureKeyIAMBindingList.
 func (l *AsymmetricSignatureKeyIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this AsymmetricSignatureKeyIAMMemberList.
+func (l *AsymmetricSignatureKeyIAMMemberList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -51,6 +69,15 @@ func (l *SecretCiphertextList) GetItems() []resource.Managed {
 
 // GetItems of this SymmetricKeyIAMBindingList.
 func (l *SymmetricKeyIAMBindingList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this SymmetricKeyIAMMemberList.
+func (l *SymmetricKeyIAMMemberList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]

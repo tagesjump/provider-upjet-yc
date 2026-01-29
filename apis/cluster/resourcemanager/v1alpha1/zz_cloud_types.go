@@ -11,57 +11,164 @@ import (
 
 type CloudInitParameters struct {
 
-	// A description of the Cloud.
+	// (String) ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
+	// ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// 256 characters long.
+	// Description of the cloud. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A set of key/value label pairs to assign to the Cloud.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Cloud.
+	// 63 characters long.
+	// Name of the cloud. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Yandex.Cloud Organization that the cloud belongs to. If value is omitted, the default provider Organization ID is used.
+	// (String) ID of the organization that the cloud belongs to.
+	// ID of the organization that the cloud belongs to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// (Attributes) (see below for nested schema)
+	Timeouts *TimeoutsInitParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
 }
 
 type CloudObservation struct {
+
+	// (String) ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
+	// ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// (String) Creation timestamp.
+	// Creation timestamp.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// A description of the Cloud.
+	// 256 characters long.
+	// Description of the cloud. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Cloud.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Cloud.
+	// 63 characters long.
+	// Name of the cloud. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Yandex.Cloud Organization that the cloud belongs to. If value is omitted, the default provider Organization ID is used.
+	// (String) ID of the organization that the cloud belongs to.
+	// ID of the organization that the cloud belongs to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// (Attributes) (see below for nested schema)
+	Timeouts *TimeoutsObservation `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
 }
 
 type CloudParameters struct {
 
-	// A description of the Cloud.
+	// (String) ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
+	// ID of the Cloud resource to return.
+	// To get the cloud ID, use a [CloudService.List] request.
+	// +kubebuilder:validation:Optional
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// 256 characters long.
+	// Description of the cloud. 0-256 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A set of key/value label pairs to assign to the Cloud.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Cloud.
+	// 63 characters long.
+	// Name of the cloud. 3-63 characters long.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Yandex.Cloud Organization that the cloud belongs to. If value is omitted, the default provider Organization ID is used.
+	// (String) ID of the organization that the cloud belongs to.
+	// ID of the organization that the cloud belongs to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
+
+	// (Attributes) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Timeouts *TimeoutsParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+}
+
+type TimeoutsInitParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type TimeoutsObservation struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type TimeoutsParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// +kubebuilder:validation:Optional
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// +kubebuilder:validation:Optional
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
 }
 
 // CloudSpec defines the desired state of Cloud
@@ -100,8 +207,9 @@ type CloudStatus struct {
 type Cloud struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CloudSpec   `json:"spec"`
-	Status            CloudStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   CloudSpec   `json:"spec"`
+	Status CloudStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

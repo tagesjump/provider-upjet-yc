@@ -10,16 +10,131 @@ import (
 	v2 "github.com/crossplane/crossplane-runtime/v2/apis/common/v2"
 )
 
+type PasswordPayloadSpecificationInitParameters struct {
+
+	// (String) String of punctuation characters to exclude from the default. Requires include_punctuation = true. Default is empty.
+	// String of punctuation characters to exclude from the default. Requires `include_punctuation = true`. Default is empty.
+	ExcludedPunctuation *string `json:"excludedPunctuation,omitempty" tf:"excluded_punctuation,omitempty"`
+
+	// (Boolean) Use digits in the generated password. Default is true.
+	// Use digits in the generated password. Default is true.
+	IncludeDigits *bool `json:"includeDigits,omitempty" tf:"include_digits,omitempty"`
+
+	// (Boolean) Use lowercase letters in the generated password. Default is true.
+	// Use lowercase letters in the generated password. Default is true.
+	IncludeLowercase *bool `json:"includeLowercase,omitempty" tf:"include_lowercase,omitempty"`
+
+	// ./:;<=>?@[\]^_{|}~`) in the generated password. Default is true.
+	// Use punctuations (`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`) in the generated password. Default is true.
+	IncludePunctuation *bool `json:"includePunctuation,omitempty" tf:"include_punctuation,omitempty"`
+
+	// (Boolean) Use capital letters in the generated password. Default is true.
+	// Use capital letters in the generated password. Default is true.
+	IncludeUppercase *bool `json:"includeUppercase,omitempty" tf:"include_uppercase,omitempty"`
+
+	// (String) String of specific punctuation characters to use. Requires include_punctuation = true. Default is empty.
+	// String of specific punctuation characters to use. Requires `include_punctuation = true`. Default is empty.
+	IncludedPunctuation *string `json:"includedPunctuation,omitempty" tf:"included_punctuation,omitempty"`
+
+	// (Number) Length of generated password. Default is 36.
+	// Length of generated password. Default is `36`.
+	Length *float64 `json:"length,omitempty" tf:"length,omitempty"`
+
+	// (String) The key with which the generated password will be placed in the secret version.
+	// The key with which the generated password will be placed in the secret version.
+	PasswordKey *string `json:"passwordKey,omitempty" tf:"password_key,omitempty"`
+}
+
+type PasswordPayloadSpecificationObservation struct {
+
+	// (String) String of punctuation characters to exclude from the default. Requires include_punctuation = true. Default is empty.
+	// String of punctuation characters to exclude from the default. Requires `include_punctuation = true`. Default is empty.
+	ExcludedPunctuation *string `json:"excludedPunctuation,omitempty" tf:"excluded_punctuation,omitempty"`
+
+	// (Boolean) Use digits in the generated password. Default is true.
+	// Use digits in the generated password. Default is true.
+	IncludeDigits *bool `json:"includeDigits,omitempty" tf:"include_digits,omitempty"`
+
+	// (Boolean) Use lowercase letters in the generated password. Default is true.
+	// Use lowercase letters in the generated password. Default is true.
+	IncludeLowercase *bool `json:"includeLowercase,omitempty" tf:"include_lowercase,omitempty"`
+
+	// ./:;<=>?@[\]^_{|}~`) in the generated password. Default is true.
+	// Use punctuations (`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`) in the generated password. Default is true.
+	IncludePunctuation *bool `json:"includePunctuation,omitempty" tf:"include_punctuation,omitempty"`
+
+	// (Boolean) Use capital letters in the generated password. Default is true.
+	// Use capital letters in the generated password. Default is true.
+	IncludeUppercase *bool `json:"includeUppercase,omitempty" tf:"include_uppercase,omitempty"`
+
+	// (String) String of specific punctuation characters to use. Requires include_punctuation = true. Default is empty.
+	// String of specific punctuation characters to use. Requires `include_punctuation = true`. Default is empty.
+	IncludedPunctuation *string `json:"includedPunctuation,omitempty" tf:"included_punctuation,omitempty"`
+
+	// (Number) Length of generated password. Default is 36.
+	// Length of generated password. Default is `36`.
+	Length *float64 `json:"length,omitempty" tf:"length,omitempty"`
+
+	// (String) The key with which the generated password will be placed in the secret version.
+	// The key with which the generated password will be placed in the secret version.
+	PasswordKey *string `json:"passwordKey,omitempty" tf:"password_key,omitempty"`
+}
+
+type PasswordPayloadSpecificationParameters struct {
+
+	// (String) String of punctuation characters to exclude from the default. Requires include_punctuation = true. Default is empty.
+	// String of punctuation characters to exclude from the default. Requires `include_punctuation = true`. Default is empty.
+	// +kubebuilder:validation:Optional
+	ExcludedPunctuation *string `json:"excludedPunctuation,omitempty" tf:"excluded_punctuation,omitempty"`
+
+	// (Boolean) Use digits in the generated password. Default is true.
+	// Use digits in the generated password. Default is true.
+	// +kubebuilder:validation:Optional
+	IncludeDigits *bool `json:"includeDigits,omitempty" tf:"include_digits,omitempty"`
+
+	// (Boolean) Use lowercase letters in the generated password. Default is true.
+	// Use lowercase letters in the generated password. Default is true.
+	// +kubebuilder:validation:Optional
+	IncludeLowercase *bool `json:"includeLowercase,omitempty" tf:"include_lowercase,omitempty"`
+
+	// ./:;<=>?@[\]^_{|}~`) in the generated password. Default is true.
+	// Use punctuations (`!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~`) in the generated password. Default is true.
+	// +kubebuilder:validation:Optional
+	IncludePunctuation *bool `json:"includePunctuation,omitempty" tf:"include_punctuation,omitempty"`
+
+	// (Boolean) Use capital letters in the generated password. Default is true.
+	// Use capital letters in the generated password. Default is true.
+	// +kubebuilder:validation:Optional
+	IncludeUppercase *bool `json:"includeUppercase,omitempty" tf:"include_uppercase,omitempty"`
+
+	// (String) String of specific punctuation characters to use. Requires include_punctuation = true. Default is empty.
+	// String of specific punctuation characters to use. Requires `include_punctuation = true`. Default is empty.
+	// +kubebuilder:validation:Optional
+	IncludedPunctuation *string `json:"includedPunctuation,omitempty" tf:"included_punctuation,omitempty"`
+
+	// (Number) Length of generated password. Default is 36.
+	// Length of generated password. Default is `36`.
+	// +kubebuilder:validation:Optional
+	Length *float64 `json:"length,omitempty" tf:"length,omitempty"`
+
+	// (String) The key with which the generated password will be placed in the secret version.
+	// The key with which the generated password will be placed in the secret version.
+	// +kubebuilder:validation:Optional
+	PasswordKey *string `json:"passwordKey" tf:"password_key,omitempty"`
+}
+
 type SecretInitParameters struct {
 
-	// Whether the Yandex Cloud Lockbox secret is protected from deletion.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A description for the Yandex Cloud Lockbox secret.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Lockbox secret belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -31,6 +146,7 @@ type SecretInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (String) The KMS key used to encrypt the Yandex Cloud Lockbox secret.
 	// The KMS key used to encrypt the Yandex Cloud Lockbox secret.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/kms/v1alpha1.SymmetricKey
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
@@ -43,57 +159,77 @@ type SecretInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Lockbox secret.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name for the Yandex Cloud Lockbox secret.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Max: 1) Payload specification for password generation. (see below for nested schema)
+	// Payload specification for password generation.
+	PasswordPayloadSpecification []PasswordPayloadSpecificationInitParameters `json:"passwordPayloadSpecification,omitempty" tf:"password_payload_specification,omitempty"`
 }
 
 type SecretObservation struct {
 
-	// The Yandex Cloud Lockbox secret creation timestamp.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Whether the Yandex Cloud Lockbox secret is protected from deletion.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A description for the Yandex Cloud Lockbox secret.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Lockbox secret belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) The KMS key used to encrypt the Yandex Cloud Lockbox secret.
 	// The KMS key used to encrypt the Yandex Cloud Lockbox secret.
 	KMSKeyID *string `json:"kmsKeyId,omitempty" tf:"kms_key_id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Lockbox secret.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name for the Yandex Cloud Lockbox secret.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Block List, Max: 1) Payload specification for password generation. (see below for nested schema)
+	// Payload specification for password generation.
+	PasswordPayloadSpecification []PasswordPayloadSpecificationObservation `json:"passwordPayloadSpecification,omitempty" tf:"password_payload_specification,omitempty"`
+
+	// (String) The Yandex Cloud Lockbox secret status.
 	// The Yandex Cloud Lockbox secret status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type SecretParameters struct {
 
-	// Whether the Yandex Cloud Lockbox secret is protected from deletion.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// A description for the Yandex Cloud Lockbox secret.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Lockbox secret belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -106,6 +242,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (String) The KMS key used to encrypt the Yandex Cloud Lockbox secret.
 	// The KMS key used to encrypt the Yandex Cloud Lockbox secret.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/kms/v1alpha1.SymmetricKey
 	// +kubebuilder:validation:Optional
@@ -119,14 +256,21 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	KMSKeyIDSelector *v1.NamespacedSelector `json:"kmsKeyIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Lockbox secret.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name for the Yandex Cloud Lockbox secret.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Max: 1) Payload specification for password generation. (see below for nested schema)
+	// Payload specification for password generation.
+	// +kubebuilder:validation:Optional
+	PasswordPayloadSpecification []PasswordPayloadSpecificationParameters `json:"passwordPayloadSpecification,omitempty" tf:"password_payload_specification,omitempty"`
 }
 
 // SecretSpec defines the desired state of Secret

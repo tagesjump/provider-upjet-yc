@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: alb/v1alpha1/loadbalancer
   labels:
-    testing.upbound.io/example-name: test-balancer
-  name: test-balancer
+    testing.upbound.io/example-name: my_alb
+  name: my-alb
   namespace: upbound-system
 spec:
   forProvider:

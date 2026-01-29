@@ -11,13 +11,21 @@ import (
 )
 
 type GroupInitParameters struct {
+
+	// (String) Log group cloud ID.
+	// Log group cloud ID.
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// (String) Data stream name
+	// Data stream name
 	DataStream *string `json:"dataStream,omitempty" tf:"data_stream,omitempty"`
 
-	// A description for the Yandex Cloud Logging group.
+	// (String) Log group description.
+	// Log group description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Logging group belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// (String) Log group folder ID.
+	// Log group folder ID.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -29,62 +37,98 @@ type GroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Logging group.
+	// (Map of String) Log group labels.
+	// Log group labels.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name for the Yandex Cloud Logging group.
+	// (String) ID of the log group to return.
+	// ID of the log group to return.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (String) Log group name.
+	// Log group name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Log entries retention period for the Yandex Cloud Logging group.
+	// (String) Log group entry retention period.
+	// Log group entry retention period.
+	//
+	// Entries will be present in group during this period.
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }
 
 type GroupObservation struct {
 
-	// ID of the cloud that the Yandex Cloud Logging group belong to.
+	// (String) Log group cloud ID.
+	// Log group cloud ID.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
-	// The Yandex Cloud Logging group creation timestamp.
+	// (String) Log group creation time.
+	// Log group creation time.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// (String) Data stream name
+	// Data stream name
 	DataStream *string `json:"dataStream,omitempty" tf:"data_stream,omitempty"`
 
-	// A description for the Yandex Cloud Logging group.
+	// (String) Log group description.
+	// Log group description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Logging group belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// (String) Log group folder ID.
+	// Log group folder ID.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// The Yandex Cloud Logging group ID.
+	// (String) ID of the log group to return.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Logging group.
+	// (Map of String) Log group labels.
+	// Log group labels.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name for the Yandex Cloud Logging group.
+	// (String) ID of the log group to return.
+	// ID of the log group to return.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (String) Log group name.
+	// Log group name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Log entries retention period for the Yandex Cloud Logging group.
+	// (String) Log group entry retention period.
+	// Log group entry retention period.
+	//
+	// Entries will be present in group during this period.
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 
-	// The Yandex Cloud Logging group status.
+	// (String) Status of the log group.
+	// Status of the log group.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type GroupParameters struct {
 
+	// (String) Log group cloud ID.
+	// Log group cloud ID.
+	// +kubebuilder:validation:Optional
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// (String) Data stream name
+	// Data stream name
 	// +kubebuilder:validation:Optional
 	DataStream *string `json:"dataStream,omitempty" tf:"data_stream,omitempty"`
 
-	// A description for the Yandex Cloud Logging group.
+	// (String) Log group description.
+	// Log group description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the Yandex Cloud Logging group belongs to.
-	// It will be deduced from provider configuration if not set explicitly.
+	// (String) Log group folder ID.
+	// Log group folder ID.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -97,16 +141,28 @@ type GroupParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Logging group.
+	// (Map of String) Log group labels.
+	// Log group labels.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name for the Yandex Cloud Logging group.
+	// (String) ID of the log group to return.
+	// ID of the log group to return.
+	//
+	// To get a log group ID make a [LogGroupService.List] request.
+	// +kubebuilder:validation:Optional
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (String) Log group name.
+	// Log group name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Log entries retention period for the Yandex Cloud Logging group.
+	// (String) Log group entry retention period.
+	// Log group entry retention period.
+	//
+	// Entries will be present in group during this period.
 	// +kubebuilder:validation:Optional
 	RetentionPeriod *string `json:"retentionPeriod,omitempty" tf:"retention_period,omitempty"`
 }

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MongodbUser is the Schema for the MongodbUsers API. Manages a
-          MongoDB user within Yandex.Cloud.
+          MongoDB User within Yandex Cloud.
         properties:
           apiVersion:
             description: |-
@@ -60,6 +60,9 @@ spec:
               forProvider:
                 properties:
                   clusterId:
+                    description: |-
+                      (String) The ID of the cluster to which user belongs to.
+                      The ID of the cluster to which user belongs to.
                     type: string
                   clusterIdRef:
                     description: Reference to a MongodbCluster to populate clusterId.
@@ -142,10 +145,14 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the user.
+                    description: |-
+                      (String) The name of the user.
+                      The name of the user.
                     type: string
                   passwordSecretRef:
-                    description: The password of the user.
+                    description: |-
+                      (String, Sensitive) The password of the user.
+                      The password of the user.
                     properties:
                       key:
                         type: string
@@ -157,23 +164,45 @@ spec:
                     - name
                     type: object
                   permission:
-                    description: Set of permissions granted to the user. The structure
-                      is documented below.
+                    description: |-
+                      (Block Set) Set of permissions granted to the user. (see below for nested schema)
+                      Set of permissions granted to the user.
                     items:
                       properties:
                         databaseName:
-                          description: The name of the database that the permission
-                            grants access to.
+                          description: |-
+                            (String) The name of the database that the permission grants access to.
+                            The name of the database that the permission grants access to.
                           type: string
                         roles:
-                          description: List of strings. The roles of the user in this
-                            database. For more information see the official documentation.
+                          description: |-
+                            (Set of String) The roles of the user in this database. For more information see the official documentation.
+                            The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                 type: object
               initProvider:
                 description: |-
@@ -189,6 +218,9 @@ spec:
                   autoscaler.
                 properties:
                   clusterId:
+                    description: |-
+                      (String) The ID of the cluster to which user belongs to.
+                      The ID of the cluster to which user belongs to.
                     type: string
                   clusterIdRef:
                     description: Reference to a MongodbCluster to populate clusterId.
@@ -271,10 +303,14 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the user.
+                    description: |-
+                      (String) The name of the user.
+                      The name of the user.
                     type: string
                   passwordSecretRef:
-                    description: The password of the user.
+                    description: |-
+                      (String, Sensitive) The password of the user.
+                      The password of the user.
                     properties:
                       key:
                         type: string
@@ -286,23 +322,45 @@ spec:
                     - name
                     type: object
                   permission:
-                    description: Set of permissions granted to the user. The structure
-                      is documented below.
+                    description: |-
+                      (Block Set) Set of permissions granted to the user. (see below for nested schema)
+                      Set of permissions granted to the user.
                     items:
                       properties:
                         databaseName:
-                          description: The name of the database that the permission
-                            grants access to.
+                          description: |-
+                            (String) The name of the database that the permission grants access to.
+                            The name of the database that the permission grants access to.
                           type: string
                         roles:
-                          description: List of strings. The roles of the user in this
-                            database. For more information see the official documentation.
+                          description: |-
+                            (Set of String) The roles of the user in this database. For more information see the official documentation.
+                            The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                 required:
                 - passwordSecretRef
                 type: object
@@ -378,30 +436,58 @@ spec:
               atProvider:
                 properties:
                   clusterId:
+                    description: |-
+                      (String) The ID of the cluster to which user belongs to.
+                      The ID of the cluster to which user belongs to.
                     type: string
                   id:
+                    description: (String) The resource identifier.
                     type: string
                   name:
-                    description: The name of the user.
+                    description: |-
+                      (String) The name of the user.
+                      The name of the user.
                     type: string
                   permission:
-                    description: Set of permissions granted to the user. The structure
-                      is documented below.
+                    description: |-
+                      (Block Set) Set of permissions granted to the user. (see below for nested schema)
+                      Set of permissions granted to the user.
                     items:
                       properties:
                         databaseName:
-                          description: The name of the database that the permission
-                            grants access to.
+                          description: |-
+                            (String) The name of the database that the permission grants access to.
+                            The name of the database that the permission grants access to.
                           type: string
                         roles:
-                          description: List of strings. The roles of the user in this
-                            database. For more information see the official documentation.
+                          description: |-
+                            (Set of String) The roles of the user in this database. For more information see the official documentation.
+                            The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

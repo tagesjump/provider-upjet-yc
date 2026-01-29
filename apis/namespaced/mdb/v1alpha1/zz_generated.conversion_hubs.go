@@ -6,10 +6,25 @@ package v1alpha1
 func (tr *ClickhouseCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ElasticsearchCluster) Hub() {}
+func (tr *ClickhouseClusterV2) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ClickhouseDatabase) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ClickhouseUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *GreenplumCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *GreenplumClusterV2) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *GreenplumResourceGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *GreenplumUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *KafkaCluster) Hub() {}
@@ -36,6 +51,9 @@ func (tr *MongodbUser) Hub() {}
 func (tr *MySQLCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MySQLClusterV2) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *MySQLDatabase) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -48,6 +66,9 @@ func (tr *OpensearchCluster) Hub() {}
 func (tr *PostgresqlCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PostgresqlClusterV2) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *PostgresqlDatabase) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -55,6 +76,24 @@ func (tr *PostgresqlUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *RedisCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *RedisClusterV2) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *RedisUser) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ShardedPostgresqlCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ShardedPostgresqlDatabase) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ShardedPostgresqlShard) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ShardedPostgresqlUser) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SqlserverCluster) Hub() {}

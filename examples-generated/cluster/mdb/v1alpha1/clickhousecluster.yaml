@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/clickhousecluster
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
 spec:
   forProvider:
     clickhouse:
@@ -64,7 +64,8 @@ spec:
         maxPartitionSizeToDrop: 53687091200
         maxTableSizeToDrop: 53687091200
         mergeTree:
-        - maxBytesToMergeAtMinSpaceInPool: 1048576
+        - maxBytesToMergeAtMaxSpaceInPool: 161061273600
+          maxBytesToMergeAtMinSpaceInPool: 1048576
           maxReplicatedMergesInQueue: 16
           numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge: 8
           partsToDelayInsert: 150

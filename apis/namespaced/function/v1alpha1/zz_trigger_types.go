@@ -12,402 +12,498 @@ import (
 
 type ContainerInitParameters struct {
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
+	// Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Path for Yandex.Cloud Serverless Container for Yandex Cloud Functions Trigger
+	// (String) Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Retry attempts for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	RetryAttempts *string `json:"retryAttempts,omitempty" tf:"retry_attempts,omitempty"`
 
-	// Retry interval in seconds for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	RetryInterval *string `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type ContainerObservation struct {
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
+	// Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Path for Yandex.Cloud Serverless Container for Yandex Cloud Functions Trigger
+	// (String) Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Retry attempts for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	RetryAttempts *string `json:"retryAttempts,omitempty" tf:"retry_attempts,omitempty"`
 
-	// Retry interval in seconds for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	RetryInterval *string `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type ContainerParameters struct {
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
+	// Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
-	// Path for Yandex.Cloud Serverless Container for Yandex Cloud Functions Trigger
+	// (String) Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Retry attempts for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	RetryAttempts *string `json:"retryAttempts,omitempty" tf:"retry_attempts,omitempty"`
 
-	// Retry interval in seconds for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	RetryInterval *string `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type ContainerRegistryInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Boolean flag for setting create image event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create image event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
 	CreateImage *bool `json:"createImage,omitempty" tf:"create_image,omitempty"`
 
-	// Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
 	CreateImageTag *bool `json:"createImageTag,omitempty" tf:"create_image_tag,omitempty"`
 
-	// Boolean flag for setting delete image event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete image event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
 	DeleteImage *bool `json:"deleteImage,omitempty" tf:"delete_image,omitempty"`
 
-	// Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
 	DeleteImageTag *bool `json:"deleteImageTag,omitempty" tf:"delete_image_tag,omitempty"`
 
-	// Image name filter setting for Yandex Cloud Functions Trigger
+	// (String) Image name filter setting for Yandex Cloud Functions Trigger.
+	// Image name filter setting for Yandex Cloud Functions Trigger.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	// IoT Registry ID for Yandex Cloud Functions Trigger
+	// (String) Container Registry ID for Yandex Cloud Functions Trigger.
+	// Container Registry ID for Yandex Cloud Functions Trigger.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
-	// Tag for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+	// Image tag filter setting for Yandex Cloud Functions Trigger.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type ContainerRegistryObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Boolean flag for setting create image event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create image event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
 	CreateImage *bool `json:"createImage,omitempty" tf:"create_image,omitempty"`
 
-	// Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
 	CreateImageTag *bool `json:"createImageTag,omitempty" tf:"create_image_tag,omitempty"`
 
-	// Boolean flag for setting delete image event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete image event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
 	DeleteImage *bool `json:"deleteImage,omitempty" tf:"delete_image,omitempty"`
 
-	// Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
 	DeleteImageTag *bool `json:"deleteImageTag,omitempty" tf:"delete_image_tag,omitempty"`
 
-	// Image name filter setting for Yandex Cloud Functions Trigger
+	// (String) Image name filter setting for Yandex Cloud Functions Trigger.
+	// Image name filter setting for Yandex Cloud Functions Trigger.
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	// IoT Registry ID for Yandex Cloud Functions Trigger
+	// (String) Container Registry ID for Yandex Cloud Functions Trigger.
+	// Container Registry ID for Yandex Cloud Functions Trigger.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
-	// Tag for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+	// Image tag filter setting for Yandex Cloud Functions Trigger.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type ContainerRegistryParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Boolean flag for setting create image event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create image event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	CreateImage *bool `json:"createImage,omitempty" tf:"create_image,omitempty"`
 
-	// Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	CreateImageTag *bool `json:"createImageTag,omitempty" tf:"create_image_tag,omitempty"`
 
-	// Boolean flag for setting delete image event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete image event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	DeleteImage *bool `json:"deleteImage,omitempty" tf:"delete_image,omitempty"`
 
-	// Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	DeleteImageTag *bool `json:"deleteImageTag,omitempty" tf:"delete_image_tag,omitempty"`
 
-	// Image name filter setting for Yandex Cloud Functions Trigger
+	// (String) Image name filter setting for Yandex Cloud Functions Trigger.
+	// Image name filter setting for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
-	// IoT Registry ID for Yandex Cloud Functions Trigger
+	// (String) Container Registry ID for Yandex Cloud Functions Trigger.
+	// Container Registry ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	RegistryID *string `json:"registryId" tf:"registry_id,omitempty"`
 
-	// Tag for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+	// Image tag filter setting for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type DataStreamsInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Stream database for Yandex Cloud Functions Trigger
+	// (String) Stream database for Yandex Cloud Functions Trigger.
+	// Stream database for Yandex Cloud Functions Trigger.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID to access data stream for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Stream name for Yandex Cloud Functions Trigger
+	// (String) Stream name for Yandex Cloud Functions Trigger.
+	// Stream name for Yandex Cloud Functions Trigger.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type DataStreamsObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Stream database for Yandex Cloud Functions Trigger
+	// (String) Stream database for Yandex Cloud Functions Trigger.
+	// Stream database for Yandex Cloud Functions Trigger.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID to access data stream for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Stream name for Yandex Cloud Functions Trigger
+	// (String) Stream name for Yandex Cloud Functions Trigger.
+	// Stream name for Yandex Cloud Functions Trigger.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
 type DataStreamsParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Stream database for Yandex Cloud Functions Trigger
+	// (String) Stream database for Yandex Cloud Functions Trigger.
+	// Stream database for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Database *string `json:"database" tf:"database,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID to access data stream for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId" tf:"service_account_id,omitempty"`
 
-	// Stream name for Yandex Cloud Functions Trigger
+	// (String) Stream name for Yandex Cloud Functions Trigger.
+	// Stream name for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
 }
 
 type DlqInitParameters struct {
 
-	// Message Queue ID for Yandex Cloud Functions Trigger
+	// (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+	// ID of Dead Letter Queue for Trigger (Queue ARN).
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type DlqObservation struct {
 
-	// Message Queue ID for Yandex Cloud Functions Trigger
+	// (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+	// ID of Dead Letter Queue for Trigger (Queue ARN).
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type DlqParameters struct {
 
-	// Message Queue ID for Yandex Cloud Functions Trigger
+	// (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+	// ID of Dead Letter Queue for Trigger (Queue ARN).
 	// +kubebuilder:validation:Optional
 	QueueID *string `json:"queueId" tf:"queue_id,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId" tf:"service_account_id,omitempty"`
 }
 
 type FunctionInitParameters struct {
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
+	// Yandex Cloud Function ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Retry attempts for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	RetryAttempts *string `json:"retryAttempts,omitempty" tf:"retry_attempts,omitempty"`
 
-	// Retry interval in seconds for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	RetryInterval *string `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID for Yandex Cloud Function.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Tag for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+	// Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type FunctionObservation struct {
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
+	// Yandex Cloud Function ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Retry attempts for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	RetryAttempts *string `json:"retryAttempts,omitempty" tf:"retry_attempts,omitempty"`
 
-	// Retry interval in seconds for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	RetryInterval *string `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID for Yandex Cloud Function.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Tag for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+	// Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type FunctionParameters struct {
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
+	// Yandex Cloud Function ID.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
-	// Retry attempts for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	RetryAttempts *string `json:"retryAttempts,omitempty" tf:"retry_attempts,omitempty"`
 
-	// Retry interval in seconds for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	RetryInterval *string `json:"retryInterval,omitempty" tf:"retry_interval,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID for Yandex Cloud Function.
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Tag for Yandex.Cloud Function for Yandex Cloud Functions Trigger
+	// (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+	// Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 }
 
 type IotInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// IoT Device ID for Yandex Cloud Functions Trigger
+	// (String) IoT Device ID for Yandex Cloud Functions Trigger.
+	// IoT Device ID for Yandex Cloud Functions Trigger.
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// IoT Registry ID for Yandex Cloud Functions Trigger
+	// (String) Container Registry ID for Yandex Cloud Functions Trigger.
+	// IoT Registry ID for Yandex Cloud Functions Trigger.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
-	// IoT Topic for Yandex Cloud Functions Trigger
+	// (String) IoT Topic for Yandex Cloud Functions Trigger.
+	// IoT Topic for Yandex Cloud Functions Trigger.
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type IotObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// IoT Device ID for Yandex Cloud Functions Trigger
+	// (String) IoT Device ID for Yandex Cloud Functions Trigger.
+	// IoT Device ID for Yandex Cloud Functions Trigger.
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// IoT Registry ID for Yandex Cloud Functions Trigger
+	// (String) Container Registry ID for Yandex Cloud Functions Trigger.
+	// IoT Registry ID for Yandex Cloud Functions Trigger.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 
-	// IoT Topic for Yandex Cloud Functions Trigger
+	// (String) IoT Topic for Yandex Cloud Functions Trigger.
+	// IoT Topic for Yandex Cloud Functions Trigger.
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type IotParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// IoT Device ID for Yandex Cloud Functions Trigger
+	// (String) IoT Device ID for Yandex Cloud Functions Trigger.
+	// IoT Device ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	DeviceID *string `json:"deviceId,omitempty" tf:"device_id,omitempty"`
 
-	// IoT Registry ID for Yandex Cloud Functions Trigger
+	// (String) Container Registry ID for Yandex Cloud Functions Trigger.
+	// IoT Registry ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	RegistryID *string `json:"registryId" tf:"registry_id,omitempty"`
 
-	// IoT Topic for Yandex Cloud Functions Trigger
+	// (String) IoT Topic for Yandex Cloud Functions Trigger.
+	// IoT Topic for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type LogGroupInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
+	// (Set of String)
 	// +listType=set
 	LogGroupIds []*string `json:"logGroupIds,omitempty" tf:"log_group_ids,omitempty"`
 }
 
 type LogGroupObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
+	// (Set of String)
 	// +listType=set
 	LogGroupIds []*string `json:"logGroupIds,omitempty" tf:"log_group_ids,omitempty"`
 }
 
 type LogGroupParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
+	// (Set of String)
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	LogGroupIds []*string `json:"logGroupIds" tf:"log_group_ids,omitempty"`
@@ -415,90 +511,111 @@ type LogGroupParameters struct {
 
 type LoggingInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Logging group ID for Yandex Cloud Functions Trigger
+	// (String) Logging group ID for Yandex Cloud Functions Trigger.
+	// Logging group ID for Yandex Cloud Functions Trigger.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
-	// Logging level filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Logging level filter setting for Yandex Cloud Functions Trigger.
+	// Logging level filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	Levels []*string `json:"levels,omitempty" tf:"levels,omitempty"`
 
-	// Resource ID filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Resource ID filter setting for Yandex Cloud Functions Trigger.
+	// Resource ID filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
 
-	// Resource type filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Resource type filter setting for Yandex Cloud Functions Trigger.
+	// Resource type filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
-	// Logging stream name filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Logging stream name filter setting for Yandex Cloud Functions Trigger.
+	// Logging stream name filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	StreamNames []*string `json:"streamNames,omitempty" tf:"stream_names,omitempty"`
 }
 
 type LoggingObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Logging group ID for Yandex Cloud Functions Trigger
+	// (String) Logging group ID for Yandex Cloud Functions Trigger.
+	// Logging group ID for Yandex Cloud Functions Trigger.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
-	// Logging level filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Logging level filter setting for Yandex Cloud Functions Trigger.
+	// Logging level filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	Levels []*string `json:"levels,omitempty" tf:"levels,omitempty"`
 
-	// Resource ID filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Resource ID filter setting for Yandex Cloud Functions Trigger.
+	// Resource ID filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
 
-	// Resource type filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Resource type filter setting for Yandex Cloud Functions Trigger.
+	// Resource type filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
-	// Logging stream name filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Logging stream name filter setting for Yandex Cloud Functions Trigger.
+	// Logging stream name filter setting for Yandex Cloud Functions Trigger.
 	// +listType=set
 	StreamNames []*string `json:"streamNames,omitempty" tf:"stream_names,omitempty"`
 }
 
 type LoggingParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Logging group ID for Yandex Cloud Functions Trigger
+	// (String) Logging group ID for Yandex Cloud Functions Trigger.
+	// Logging group ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
 
-	// Logging level filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Logging level filter setting for Yandex Cloud Functions Trigger.
+	// Logging level filter setting for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Levels []*string `json:"levels,omitempty" tf:"levels,omitempty"`
 
-	// Resource ID filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Resource ID filter setting for Yandex Cloud Functions Trigger.
+	// Resource ID filter setting for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
 
-	// Resource type filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Resource type filter setting for Yandex Cloud Functions Trigger.
+	// Resource type filter setting for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
-	// Logging stream name filter setting for Yandex Cloud Functions Trigger
+	// (Set of String) Logging stream name filter setting for Yandex Cloud Functions Trigger.
+	// Logging stream name filter setting for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	StreamNames []*string `json:"streamNames,omitempty" tf:"stream_names,omitempty"`
@@ -506,246 +623,311 @@ type LoggingParameters struct {
 
 type MailInitParameters struct {
 
-	// Object Storage Bucket ID for Yandex Cloud Functions Trigger
+	// (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+	// Object Storage Bucket ID for Yandex Cloud Functions Trigger.
 	AttachmentsBucketID *string `json:"attachmentsBucketId,omitempty" tf:"attachments_bucket_id,omitempty"`
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID to access object storage for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type MailObservation struct {
 
-	// Object Storage Bucket ID for Yandex Cloud Functions Trigger
+	// (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+	// Object Storage Bucket ID for Yandex Cloud Functions Trigger.
 	AttachmentsBucketID *string `json:"attachmentsBucketId,omitempty" tf:"attachments_bucket_id,omitempty"`
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID to access object storage for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type MailParameters struct {
 
-	// Object Storage Bucket ID for Yandex Cloud Functions Trigger
+	// (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+	// Object Storage Bucket ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	AttachmentsBucketID *string `json:"attachmentsBucketId,omitempty" tf:"attachments_bucket_id,omitempty"`
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Service account ID to access object storage for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type MessageQueueInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Message Queue ID for Yandex Cloud Functions Trigger
+	// (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+	// Message Queue ID for Yandex Cloud Functions Trigger.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Message Queue Service Account ID for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Visibility timeout for Yandex Cloud Functions Trigger
+	// (String) Visibility timeout for Yandex Cloud Functions Trigger.
+	// Visibility timeout for Yandex Cloud Functions Trigger.
 	VisibilityTimeout *string `json:"visibilityTimeout,omitempty" tf:"visibility_timeout,omitempty"`
 }
 
 type MessageQueueObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Message Queue ID for Yandex Cloud Functions Trigger
+	// (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+	// Message Queue ID for Yandex Cloud Functions Trigger.
 	QueueID *string `json:"queueId,omitempty" tf:"queue_id,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Message Queue Service Account ID for Yandex Cloud Functions Trigger.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
-	// Visibility timeout for Yandex Cloud Functions Trigger
+	// (String) Visibility timeout for Yandex Cloud Functions Trigger.
+	// Visibility timeout for Yandex Cloud Functions Trigger.
 	VisibilityTimeout *string `json:"visibilityTimeout,omitempty" tf:"visibility_timeout,omitempty"`
 }
 
 type MessageQueueParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Message Queue ID for Yandex Cloud Functions Trigger
+	// (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+	// Message Queue ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	QueueID *string `json:"queueId" tf:"queue_id,omitempty"`
 
-	// Message Queue Service Account ID for Yandex Cloud Functions Trigger
+	// (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+	// Message Queue Service Account ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	ServiceAccountID *string `json:"serviceAccountId" tf:"service_account_id,omitempty"`
 
-	// Visibility timeout for Yandex Cloud Functions Trigger
+	// (String) Visibility timeout for Yandex Cloud Functions Trigger.
+	// Visibility timeout for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	VisibilityTimeout *string `json:"visibilityTimeout,omitempty" tf:"visibility_timeout,omitempty"`
 }
 
 type ObjectStorageInitParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Object Storage Bucket ID for Yandex Cloud Functions Trigger
+	// (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+	// Object Storage Bucket ID for Yandex Cloud Functions Trigger.
 	BucketID *string `json:"bucketId,omitempty" tf:"bucket_id,omitempty"`
 
-	// Boolean flag for setting create event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
 	Create *bool `json:"create,omitempty" tf:"create,omitempty"`
 
-	// Boolean flag for setting delete event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
 	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
 
-	// Prefix for Object Storage for Yandex Cloud Functions Trigger
+	// (String) Prefix for Object Storage for Yandex Cloud Functions Trigger.
+	// Prefix for Object Storage for Yandex Cloud Functions Trigger.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Suffix for Object Storage for Yandex Cloud Functions Trigger
+	// (String) Suffix for Object Storage for Yandex Cloud Functions Trigger.
+	// Suffix for Object Storage for Yandex Cloud Functions Trigger.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 
-	// Boolean flag for setting update event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting update event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
 	Update *bool `json:"update,omitempty" tf:"update,omitempty"`
 }
 
 type ObjectStorageObservation struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Object Storage Bucket ID for Yandex Cloud Functions Trigger
+	// (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+	// Object Storage Bucket ID for Yandex Cloud Functions Trigger.
 	BucketID *string `json:"bucketId,omitempty" tf:"bucket_id,omitempty"`
 
-	// Boolean flag for setting create event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
 	Create *bool `json:"create,omitempty" tf:"create,omitempty"`
 
-	// Boolean flag for setting delete event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
 	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
 
-	// Prefix for Object Storage for Yandex Cloud Functions Trigger
+	// (String) Prefix for Object Storage for Yandex Cloud Functions Trigger.
+	// Prefix for Object Storage for Yandex Cloud Functions Trigger.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Suffix for Object Storage for Yandex Cloud Functions Trigger
+	// (String) Suffix for Object Storage for Yandex Cloud Functions Trigger.
+	// Suffix for Object Storage for Yandex Cloud Functions Trigger.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 
-	// Boolean flag for setting update event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting update event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
 	Update *bool `json:"update,omitempty" tf:"update,omitempty"`
 }
 
 type ObjectStorageParameters struct {
 
-	// Batch Duration in seconds for Yandex Cloud Functions Trigger
+	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
-	// Batch Size for Yandex Cloud Functions Trigger
+	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
-	// Object Storage Bucket ID for Yandex Cloud Functions Trigger
+	// (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+	// Object Storage Bucket ID for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BucketID *string `json:"bucketId" tf:"bucket_id,omitempty"`
 
-	// Boolean flag for setting create event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting create event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Create *bool `json:"create,omitempty" tf:"create,omitempty"`
 
-	// Boolean flag for setting delete event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting delete event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
 
-	// Prefix for Object Storage for Yandex Cloud Functions Trigger
+	// (String) Prefix for Object Storage for Yandex Cloud Functions Trigger.
+	// Prefix for Object Storage for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
-	// Suffix for Object Storage for Yandex Cloud Functions Trigger
+	// (String) Suffix for Object Storage for Yandex Cloud Functions Trigger.
+	// Suffix for Object Storage for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 
-	// Boolean flag for setting update event for Yandex Cloud Functions Trigger
+	// (Boolean) Boolean flag for setting update event for Yandex Cloud Functions Trigger.
+	// Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Update *bool `json:"update,omitempty" tf:"update,omitempty"`
 }
 
 type TimerInitParameters struct {
 
-	// Cron expression for timer for Yandex Cloud Functions Trigger
+	// (String) Cron expression for timer for Yandex Cloud Functions Trigger.
+	// Cron expression for timer for Yandex Cloud Functions Trigger.
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 
-	// Payload to be passed to function
+	// (String) Payload to be passed to function.
+	// Payload to be passed to function.
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type TimerObservation struct {
 
-	// Cron expression for timer for Yandex Cloud Functions Trigger
+	// (String) Cron expression for timer for Yandex Cloud Functions Trigger.
+	// Cron expression for timer for Yandex Cloud Functions Trigger.
 	CronExpression *string `json:"cronExpression,omitempty" tf:"cron_expression,omitempty"`
 
-	// Payload to be passed to function
+	// (String) Payload to be passed to function.
+	// Payload to be passed to function.
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type TimerParameters struct {
 
-	// Cron expression for timer for Yandex Cloud Functions Trigger
+	// (String) Cron expression for timer for Yandex Cloud Functions Trigger.
+	// Cron expression for timer for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	CronExpression *string `json:"cronExpression" tf:"cron_expression,omitempty"`
 
-	// Payload to be passed to function
+	// (String) Payload to be passed to function.
+	// Payload to be passed to function.
 	// +kubebuilder:validation:Optional
 	Payload *string `json:"payload,omitempty" tf:"payload,omitempty"`
 }
 
 type TriggerInitParameters struct {
+
+	// (Block List, Max: 1) Yandex Cloud Serverless Container settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// [Yandex Cloud Serverless Container](https://yandex.cloud/docs/serverless-containers/concepts/container) settings definition for Yandex Cloud Functions Trigger.
 	Container []ContainerInitParameters `json:"container,omitempty" tf:"container,omitempty"`
 
-	// Container Registry settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Container Registry settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Container Registry](https://yandex.cloud/docs/functions/concepts/trigger/cr-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	ContainerRegistry []ContainerRegistryInitParameters `json:"containerRegistry,omitempty" tf:"container_registry,omitempty"`
 
-	// Data Streams settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Data Streams settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Data Streams](https://yandex.cloud/docs/functions/concepts/trigger/data-streams-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	DataStreams []DataStreamsInitParameters `json:"dataStreams,omitempty" tf:"data_streams,omitempty"`
 
-	// Description of the Yandex Cloud Functions Trigger
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Dead Letter Queue settings definition for Yandex Cloud Functions Trigger
+	// (Block List, Max: 1) Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger.
 	Dlq []DlqInitParameters `json:"dlq,omitempty" tf:"dlq,omitempty"`
 
-	// Folder ID for the Yandex Cloud Functions Trigger
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -757,114 +939,150 @@ type TriggerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Yandex.Cloud Function settings definition for Yandex Cloud Functions Trigger
+	// (Block List, Max: 1) Yandex Cloud Function settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// [Yandex Cloud Function](https://yandex.cloud/docs/functions/concepts/function) settings definition for Yandex Cloud Functions Trigger.
 	Function []FunctionInitParameters `json:"function,omitempty" tf:"function,omitempty"`
 
-	// IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue or object_storage or timer can be defined.
+	// (Block List, Max: 1) IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue. (see below for nested schema)
+	// [IoT](https://yandex.cloud/docs/functions/concepts/trigger/iot-core-trigger) settings definition for Yandex Cloud Functions Trigger, if present. Only one section `iot` or `message_queue`.
 	Iot []IotInitParameters `json:"iot,omitempty" tf:"iot,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Functions Trigger
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Block List, Max: 1) (see below for nested schema)
 	LogGroup []LogGroupInitParameters `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
-	// Logging settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Logging](https://yandex.cloud/docs/functions/concepts/trigger/cloud-logging-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	Logging []LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// Logging settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Mail settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Mail](https://yandex.cloud/docs/functions/concepts/trigger/mail-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	Mail []MailInitParameters `json:"mail,omitempty" tf:"mail,omitempty"`
 
-	// Message Queue settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Message Queue settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Message Queue](https://yandex.cloud/docs/functions/concepts/trigger/ymq-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	MessageQueue []MessageQueueInitParameters `json:"messageQueue,omitempty" tf:"message_queue,omitempty"`
 
-	// Yandex Cloud Functions Trigger name used to define trigger
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Object Storage settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Object Storage settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Object Storage](https://yandex.cloud/docs/functions/concepts/trigger/os-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	ObjectStorage []ObjectStorageInitParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
 
-	// Timer settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Timer settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Timer](https://yandex.cloud/docs/functions/concepts/trigger/timer) settings definition for Yandex Cloud Functions Trigger, if present.
 	Timer []TimerInitParameters `json:"timer,omitempty" tf:"timer,omitempty"`
 }
 
 type TriggerObservation struct {
+
+	// (Block List, Max: 1) Yandex Cloud Serverless Container settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// [Yandex Cloud Serverless Container](https://yandex.cloud/docs/serverless-containers/concepts/container) settings definition for Yandex Cloud Functions Trigger.
 	Container []ContainerObservation `json:"container,omitempty" tf:"container,omitempty"`
 
-	// Container Registry settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Container Registry settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Container Registry](https://yandex.cloud/docs/functions/concepts/trigger/cr-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	ContainerRegistry []ContainerRegistryObservation `json:"containerRegistry,omitempty" tf:"container_registry,omitempty"`
 
-	// Creation timestamp of the Yandex Cloud Functions Trigger
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Data Streams settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Data Streams settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Data Streams](https://yandex.cloud/docs/functions/concepts/trigger/data-streams-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	DataStreams []DataStreamsObservation `json:"dataStreams,omitempty" tf:"data_streams,omitempty"`
 
-	// Description of the Yandex Cloud Functions Trigger
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Dead Letter Queue settings definition for Yandex Cloud Functions Trigger
+	// (Block List, Max: 1) Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger.
 	Dlq []DlqObservation `json:"dlq,omitempty" tf:"dlq,omitempty"`
 
-	// Folder ID for the Yandex Cloud Functions Trigger
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Yandex.Cloud Function settings definition for Yandex Cloud Functions Trigger
+	// (Block List, Max: 1) Yandex Cloud Function settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// [Yandex Cloud Function](https://yandex.cloud/docs/functions/concepts/function) settings definition for Yandex Cloud Functions Trigger.
 	Function []FunctionObservation `json:"function,omitempty" tf:"function,omitempty"`
 
-	// Yandex.Cloud Function ID for Yandex Cloud Functions Trigger
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue or object_storage or timer can be defined.
+	// (Block List, Max: 1) IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue. (see below for nested schema)
+	// [IoT](https://yandex.cloud/docs/functions/concepts/trigger/iot-core-trigger) settings definition for Yandex Cloud Functions Trigger, if present. Only one section `iot` or `message_queue`.
 	Iot []IotObservation `json:"iot,omitempty" tf:"iot,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Functions Trigger
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Block List, Max: 1) (see below for nested schema)
 	LogGroup []LogGroupObservation `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
-	// Logging settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Logging](https://yandex.cloud/docs/functions/concepts/trigger/cloud-logging-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// Logging settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Mail settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Mail](https://yandex.cloud/docs/functions/concepts/trigger/mail-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	Mail []MailObservation `json:"mail,omitempty" tf:"mail,omitempty"`
 
-	// Message Queue settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Message Queue settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Message Queue](https://yandex.cloud/docs/functions/concepts/trigger/ymq-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	MessageQueue []MessageQueueObservation `json:"messageQueue,omitempty" tf:"message_queue,omitempty"`
 
-	// Yandex Cloud Functions Trigger name used to define trigger
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Object Storage settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Object Storage settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Object Storage](https://yandex.cloud/docs/functions/concepts/trigger/os-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	ObjectStorage []ObjectStorageObservation `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
 
-	// Timer settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Timer settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Timer](https://yandex.cloud/docs/functions/concepts/trigger/timer) settings definition for Yandex Cloud Functions Trigger, if present.
 	Timer []TimerObservation `json:"timer,omitempty" tf:"timer,omitempty"`
 }
 
 type TriggerParameters struct {
 
+	// (Block List, Max: 1) Yandex Cloud Serverless Container settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// [Yandex Cloud Serverless Container](https://yandex.cloud/docs/serverless-containers/concepts/container) settings definition for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Container []ContainerParameters `json:"container,omitempty" tf:"container,omitempty"`
 
-	// Container Registry settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Container Registry settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Container Registry](https://yandex.cloud/docs/functions/concepts/trigger/cr-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	ContainerRegistry []ContainerRegistryParameters `json:"containerRegistry,omitempty" tf:"container_registry,omitempty"`
 
-	// Data Streams settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Data Streams settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Data Streams](https://yandex.cloud/docs/functions/concepts/trigger/data-streams-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	DataStreams []DataStreamsParameters `json:"dataStreams,omitempty" tf:"data_streams,omitempty"`
 
-	// Description of the Yandex Cloud Functions Trigger
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Dead Letter Queue settings definition for Yandex Cloud Functions Trigger
+	// (Block List, Max: 1) Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Dlq []DlqParameters `json:"dlq,omitempty" tf:"dlq,omitempty"`
 
-	// Folder ID for the Yandex Cloud Functions Trigger
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -877,43 +1095,53 @@ type TriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Yandex.Cloud Function settings definition for Yandex Cloud Functions Trigger
+	// (Block List, Max: 1) Yandex Cloud Function settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+	// [Yandex Cloud Function](https://yandex.cloud/docs/functions/concepts/function) settings definition for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	Function []FunctionParameters `json:"function,omitempty" tf:"function,omitempty"`
 
-	// IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue or object_storage or timer can be defined.
+	// (Block List, Max: 1) IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue. (see below for nested schema)
+	// [IoT](https://yandex.cloud/docs/functions/concepts/trigger/iot-core-trigger) settings definition for Yandex Cloud Functions Trigger, if present. Only one section `iot` or `message_queue`.
 	// +kubebuilder:validation:Optional
 	Iot []IotParameters `json:"iot,omitempty" tf:"iot,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud Functions Trigger
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Block List, Max: 1) (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	LogGroup []LogGroupParameters `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
-	// Logging settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Logging](https://yandex.cloud/docs/functions/concepts/trigger/cloud-logging-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
 
-	// Logging settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Mail settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Mail](https://yandex.cloud/docs/functions/concepts/trigger/mail-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	Mail []MailParameters `json:"mail,omitempty" tf:"mail,omitempty"`
 
-	// Message Queue settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Message Queue settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Message Queue](https://yandex.cloud/docs/functions/concepts/trigger/ymq-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	MessageQueue []MessageQueueParameters `json:"messageQueue,omitempty" tf:"message_queue,omitempty"`
 
-	// Yandex Cloud Functions Trigger name used to define trigger
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Object Storage settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Object Storage settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Object Storage](https://yandex.cloud/docs/functions/concepts/trigger/os-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	ObjectStorage []ObjectStorageParameters `json:"objectStorage,omitempty" tf:"object_storage,omitempty"`
 
-	// Timer settings definition for Yandex Cloud Functions Trigger, if present
+	// (Block List, Max: 1) Timer settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+	// [Timer](https://yandex.cloud/docs/functions/concepts/trigger/timer) settings definition for Yandex Cloud Functions Trigger, if present.
 	// +kubebuilder:validation:Optional
 	Timer []TimerParameters `json:"timer,omitempty" tf:"timer,omitempty"`
 }

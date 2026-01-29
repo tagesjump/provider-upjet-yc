@@ -5,7 +5,9 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
+	v1alpha11 "github.com/tagesjump/provider-upjet-yc/apis/cluster/compute/v1alpha1"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -50,6 +52,50 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PolicyBindings.
+func (mg *PolicyBindings) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.InstanceIDRef,
+		Selector:     mg.Spec.ForProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.InstanceList{},
+			Managed: &v1alpha11.Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.InstanceID")
+	}
+	mg.Spec.ForProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.InstanceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InstanceID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.InstanceIDRef,
+		Selector:     mg.Spec.InitProvider.InstanceIDSelector,
+		To: reference.To{
+			List:    &v1alpha11.InstanceList{},
+			Managed: &v1alpha11.Instance{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InstanceID")
+	}
+	mg.Spec.InitProvider.InstanceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InstanceIDRef = rsp.ResolvedReference
 
 	return nil
 }

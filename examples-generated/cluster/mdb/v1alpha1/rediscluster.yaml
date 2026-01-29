@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/rediscluster
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
 spec:
   forProvider:
     config:
@@ -19,7 +19,7 @@ spec:
     - subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: foo
-      zone: ru-central1-a
+      zone: ru-central1-d
     maintenanceWindow:
     - type: ANYTIME
     name: test
@@ -60,4 +60,4 @@ spec:
         testing.upbound.io/example-name: foo
     v4CidrBlocks:
     - 10.5.0.0/24
-    zone: ru-central1-a
+    zone: ru-central1-d

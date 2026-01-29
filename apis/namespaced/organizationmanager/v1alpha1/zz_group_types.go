@@ -12,44 +12,75 @@ import (
 
 type GroupInitParameters struct {
 
-	// The description of the Group.
+	// (String) Description of the group.
+	// Description of the group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the Group.
+	// (String) ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
+	// ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// (String) Name of the group.
+	// Name of the group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization to attach this Group to.
+	// (String) ID of the organization that the group belongs to.
+	// ID of the organization that the group belongs to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
 type GroupObservation struct {
 
-	// (Computed) The SAML Federation creation timestamp.
+	// (String) Creation timestamp.
+	// Creation timestamp.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// The description of the Group.
+	// (String) Description of the group.
+	// Description of the group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
+	// ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// (String) ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The name of the Group.
+	// (String) Name of the group.
+	// Name of the group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization to attach this Group to.
+	// (String) ID of the organization that the group belongs to.
+	// ID of the organization that the group belongs to.
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
 
 type GroupParameters struct {
 
-	// The description of the Group.
+	// (String) Description of the group.
+	// Description of the group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The name of the Group.
+	// (String) ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
+	// ID of the Group resource to return.
+	// To get the group ID, use a [GroupService.List] request.
+	// +kubebuilder:validation:Optional
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// (String) Name of the group.
+	// Name of the group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The organization to attach this Group to.
+	// (String) ID of the organization that the group belongs to.
+	// ID of the organization that the group belongs to.
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 }
@@ -81,7 +112,7 @@ type GroupStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Group is the Schema for the Groups API. Allows management of a single Group within an existing Yandex.Cloud Organization.
+// Group is the Schema for the Groups API. Allows management of a single Group within an existing Yandex Cloud Organization.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

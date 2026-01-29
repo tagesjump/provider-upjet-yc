@@ -4,34 +4,11 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/opensearchcluster
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
 spec:
   forProvider:
-    config:
-    - adminPasswordSecretRef:
-        key: example-key
-        name: example-secret
-        namespace: upbound-system
-      opensearch:
-      - nodeGroups:
-        - assignPublicIp: true
-          hostsCount: 1
-          name: group0
-          resources:
-          - diskSize: 10737418240
-            diskTypeId: network-ssd
-            resourcePresetId: s2.micro
-          roles:
-          - data
-          - manager
-          subnetIdsRefs:
-          - name: foo
-          zoneIds:
-          - ru-central1-a
     environment: PRESTABLE
-    maintenanceWindow:
-    - type: ANYTIME
     name: test
     networkIdSelector:
       matchLabels:
@@ -67,4 +44,4 @@ spec:
         testing.upbound.io/example-name: foo
     v4CidrBlocks:
     - 10.5.0.0/24
-    zone: ru-central1-a
+    zone: ru-central1-d

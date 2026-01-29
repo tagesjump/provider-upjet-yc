@@ -1,0 +1,137 @@
+apiVersion: mdb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: ClickhouseClusterV2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhouseclusterv2
+  labels:
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
+spec:
+  forProvider:
+    clickhouse:
+      config:
+        backgroundPoolSize: 16
+        backgroundSchedulePoolSize: 16
+        compression:
+        - method: LZ4
+          minPartSize: 1024
+          minPartSizeRatio: 0.5
+        - method: ZSTD
+          minPartSize: 2048
+          minPartSizeRatio: 0.7
+        geobaseUri: ""
+        graphiteRollup:
+        - name: rollup1
+          patterns:
+          - function: func1
+            regexp: abc
+            retention:
+            - age: 1000
+              precision: 3
+        - name: rollup2
+          patterns:
+          - function: func2
+            retention:
+            - age: 2000
+              precision: 5
+        kafka:
+          saslMechanism: SASL_MECHANISM_GSSAPI
+          saslPasswordSecretRef:
+            key: example-key
+            name: example-secret
+            namespace: upbound-system
+          saslUsername: user1
+          securityProtocol: SECURITY_PROTOCOL_PLAINTEXT
+        keepAliveTimeout: 3000
+        logLevel: TRACE
+        maxConcurrentQueries: 50
+        maxConnections: 100
+        maxPartitionSizeToDrop: 53687091200
+        maxTableSizeToDrop: 53687091200
+        mergeTree:
+          maxBytesToMergeAtMaxSpaceInPool: 161061273600
+          maxBytesToMergeAtMinSpaceInPool: 1048576
+          maxReplicatedMergesInQueue: 16
+          numberOfFreeEntriesInPoolToLowerMaxSizeOfMerge: 8
+          partsToDelayInsert: 150
+          partsToThrowInsert: 300
+          replicatedDeduplicationWindow: 100
+          replicatedDeduplicationWindowSeconds: 604800
+        metricLogEnabled: true
+        metricLogRetentionSize: 536870912
+        metricLogRetentionTime: 2592000
+        partLogRetentionSize: 536870912
+        partLogRetentionTime: 2592000
+        queryLogRetentionSize: 1073741824
+        queryLogRetentionTime: 2592000
+        queryThreadLogEnabled: true
+        queryThreadLogRetentionSize: 536870912
+        queryThreadLogRetentionTime: 2592000
+        rabbitmq:
+          passwordSecretRef:
+            key: example-key
+            name: example-secret
+            namespace: upbound-system
+          username: rabbit_user
+        textLogEnabled: true
+        textLogLevel: TRACE
+        textLogRetentionSize: 536870912
+        textLogRetentionTime: 2592000
+        timezone: UTC
+        traceLogEnabled: true
+        traceLogRetentionSize: 536870912
+        traceLogRetentionTime: 2592000
+        uncompressedCacheSize: 8589934592
+      resources:
+        diskSize: 32
+        diskTypeId: network-ssd
+        resourcePresetId: s2.micro
+    cloudStorage:
+      enabled: false
+    environment: PRESTABLE
+    formatSchema:
+    - name: test_schema
+      type: FORMAT_SCHEMA_TYPE_CAPNPROTO
+      uri: https://storage.yandexcloud.net/ch-data/schema.proto
+    hosts:
+      h1:
+        subnet_id: ${yandex_vpc_subnet.foo.id}
+        type: CLICKHOUSE
+        zone: ru-central1-a
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    serviceAccountId: your_service_account_id
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhouseclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhouseclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-a

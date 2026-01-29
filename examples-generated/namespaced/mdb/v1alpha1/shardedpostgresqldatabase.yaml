@@ -1,0 +1,83 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: ShardedPostgresqlDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/shardedpostgresqldatabase
+  labels:
+    testing.upbound.io/example-name: my_db
+  name: my-db
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my_cluster
+    name: testdb
+
+---
+
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: ShardedPostgresqlCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/shardedpostgresqldatabase
+  labels:
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+      shardedPostgresqlConfig:
+        common:
+          console_password: P@ssw0rd
+        router:
+          resources:
+            diskSize: 32
+            diskTypeId: network-ssd
+            resourcePresetId: s2.micro
+    environment: PRESTABLE
+    hosts:
+      router1:
+        assign_public_ip: false
+        subnet_id: ${yandex_vpc_subnet.foo.id}
+        type: ROUTER
+        zone: ru-central1-a
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/shardedpostgresqldatabase
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/shardedpostgresqldatabase
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-d

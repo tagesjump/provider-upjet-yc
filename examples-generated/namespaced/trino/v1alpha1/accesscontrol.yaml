@@ -1,0 +1,29 @@
+apiVersion: trino.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: AccessControl
+metadata:
+  annotations:
+    meta.upbound.io/example-id: trino/v1alpha1/accesscontrol
+  labels:
+    testing.upbound.io/example-name: trino_access_control
+  name: trino-access-control
+  namespace: upbound-system
+spec:
+  forProvider:
+    catalogs:
+    - catalog:
+        ids:
+        - ${yandex_trino_catalog.iceberg.id}
+        - ${yandex_trino_catalog.postgres.id}
+      description: Catalog access rule
+      groups:
+      - <iam_group_id>
+      permission: ALL
+      users:
+      - <iam_user_id>
+    - catalog:
+        nameRegexp: prod_.*
+      permission: NONE
+    - permission: READ_ONLY
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: trino

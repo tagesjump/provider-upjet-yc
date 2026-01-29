@@ -1,0 +1,105 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: GreenplumClusterV2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumclusterv2
+  labels:
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    cloudStorage:
+      enable: true
+    clusterConfig:
+      assign_public_ip: true
+      backup_window_start:
+        hours: 1
+        minutes: 30
+    config:
+      zoneId: ru-central1-a
+    description: test greenplum cluster
+    environment: PRESTABLE
+    masterConfig:
+      resources:
+        diskSize: 10
+        diskTypeId: network-ssd
+        resourcePresetId: s2.small
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    segmentConfig:
+      resources:
+        diskSize: 10
+        diskTypeId: network-ssd
+        resourcePresetId: s2.small
+    segmentHostCount: 2
+    segmentInHost: 1
+    userName: test-user
+    userPassword: test-user-password
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumclusterv2
+  labels:
+    testing.upbound.io/example-name: test-sg-x
+  name: test-sg-x
+  namespace: upbound-system
+spec:
+  forProvider:
+    egress:
+    - description: Allow outgoing traffic to members of the same security group
+      fromPort: 0
+      protocol: ANY
+      toPort: 65535
+      v4CidrBlocks:
+      - 0.0.0.0/0
+    ingress:
+    - description: Allow incoming traffic from members of the same security group
+      fromPort: 0
+      protocol: ANY
+      toPort: 65535
+      v4CidrBlocks:
+      - 0.0.0.0/0
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/greenplumclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-a

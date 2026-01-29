@@ -4,6 +4,46 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
+// GetCondition of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this AdvancedRateLimiterProfile.
+func (mg *AdvancedRateLimiterProfile) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this SecurityProfile.
 func (mg *SecurityProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -41,5 +81,45 @@ func (mg *SecurityProfile) SetProviderConfigReference(r *xpv1.ProviderConfigRefe
 
 // SetWriteConnectionSecretToReference of this SecurityProfile.
 func (mg *SecurityProfile) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WafProfile.
+func (mg *WafProfile) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetManagementPolicies of this WafProfile.
+func (mg *WafProfile) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WafProfile.
+func (mg *WafProfile) GetProviderConfigReference() *xpv1.ProviderConfigReference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WafProfile.
+func (mg *WafProfile) GetWriteConnectionSecretToReference() *xpv1.LocalSecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WafProfile.
+func (mg *WafProfile) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetManagementPolicies of this WafProfile.
+func (mg *WafProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WafProfile.
+func (mg *WafProfile) SetProviderConfigReference(r *xpv1.ProviderConfigReference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WafProfile.
+func (mg *WafProfile) SetWriteConnectionSecretToReference(r *xpv1.LocalSecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

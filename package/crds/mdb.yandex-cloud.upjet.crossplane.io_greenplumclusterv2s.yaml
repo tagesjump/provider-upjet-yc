@@ -1,0 +1,2837 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: greenplumclusterv2s.mdb.yandex-cloud.upjet.crossplane.io
+spec:
+  group: mdb.yandex-cloud.upjet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - yandex-cloud
+    kind: GreenplumClusterV2
+    listKind: GreenplumClusterV2List
+    plural: greenplumclusterv2s
+    singular: greenplumclusterv2
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: GreenplumClusterV2 is the Schema for the GreenplumClusterV2s
+          API. Manages a Greenplum cluster within Yandex Cloud.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: GreenplumClusterV2Spec defines the desired state of GreenplumClusterV2
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  cloudStorage:
+                    description: (Attributes) Cloud storage settings (see below for
+                      nested schema)
+                    properties:
+                      enable:
+                        description: |-
+                          (Boolean) enable Cloud Storage for cluster
+                          enable Cloud Storage for cluster
+                        type: boolean
+                    type: object
+                  clusterConfig:
+                    description: (Attributes) Greenplum® and Odyssey® configuration.
+                      (see below for nested schema)
+                    properties:
+                      backgroundActivities:
+                        description: (Attributes) Managed Greenplum® background tasks
+                          configuration. (see below for nested schema)
+                        properties:
+                          analyzeAndVacuum:
+                            description: (Attributes) Configuration for ANALYZE and
+                              VACUUM operations. (see below for nested schema)
+                            properties:
+                              analyzeTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+                                  Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+                                type: number
+                              start:
+                                description: (Attributes) Time when analyze will start
+                                  (see below for nested schema)
+                                properties:
+                                  hours:
+                                    description: |-
+                                      (Number) hours
+                                      hours
+                                    type: number
+                                  minutes:
+                                    description: |-
+                                      (Number) minutes
+                                      minutes
+                                    type: number
+                                type: object
+                              vacuumTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+                                  Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+                                type: number
+                            type: object
+                          queryKillerScripts:
+                            description: (Attributes) Configuration for long running
+                              queries killer. (see below for nested schema)
+                            properties:
+                              idle:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries that are in idle
+                                  state. (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                              idleInTransaction:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries that are in idle
+                                  in transaction state. (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                              longRunning:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries (in any state).
+                                  (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                            type: object
+                          tableSizes:
+                            description: (Attributes) Enables scripts that collects
+                              tables sizes to *_sizes tables in mdb_toolkit schema.
+                              (see below for nested schema)
+                            properties:
+                              starts:
+                                description: (Attributes Set) Time when start "table_sizes"
+                                  script (see below for nested schema)
+                                items:
+                                  properties:
+                                    hours:
+                                      description: |-
+                                        (Number) hours
+                                        hours
+                                      type: number
+                                    minutes:
+                                      description: |-
+                                        (Number) minutes
+                                        minutes
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
+                      greenplumConfig:
+                        description: |-
+                          (Attributes) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster_service.proto (see below for nested schema)
+                        properties:
+                          gpAddColumnInheritsTableSetting:
+                            description: |-
+                              Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+                              https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+                            type: boolean
+                          gpAutostatsMode:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_mode
+                              Specifies the mode for triggering automatic statistics collection after DML.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_mode
+                            type: string
+                          gpAutostatsOnChangeThreshold:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_on_change_threshold
+                              Specifies the threshold for automatic statistics collection when gp_autostats_mode is set to on_change.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_on_change_threshold
+                            type: number
+                          gpCachedSegworkersThreshold:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_cached_segworkers_threshold
+                              Define amount of working processes in segment, that keeping in warm cash after end of query for usage again in next queries.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_cached_segworkers_threshold
+                            type: number
+                          gpEnableGlobalDeadlockDetector:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_enable_global_deadlock_detector
+                              Controls whether the Greenplum Database Global Deadlock Detector is enabled to manage concurrent UPDATE and DELETE operations on heap tables to improve performance. See Inserting, Updating, and Deleting Datain the Greenplum Database Administrator Guide. The default is off, the Global Deadlock Detector is deactivated.
+                              If the Global Deadlock Detector is deactivated (the default), Greenplum Database runs concurrent update and delete operations on a heap table serially.
+                              If the Global Deadlock Detector is enabled, concurrent updates are permitted and the Global Deadlock Detector determines when a deadlock exists, and breaks the deadlock by cancelling one or more backend processes associated with the youngest transaction(s) involved.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_enable_global_deadlock_detector
+                            type: boolean
+                          gpEnableZstdMemoryAccounting:
+                            description: |-
+                              (Boolean) Forces ZSTD lib use Greenplum memory allocation system.
+                              Forces ZSTD lib use Greenplum memory allocation system.
+                            type: boolean
+                          gpGlobalDeadlockDetectorPeriod:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_global_deadlock_detector_period
+                              Specifies the executing interval (in seconds) of the global deadlock detector background worker process.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_global_deadlock_detector_period
+                            type: number
+                          gpMaxPlanSize:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_plan_size
+                              Specifies the total maximum uncompressed size of a query execution plan multiplied by the number of Motion operators (slices) in the plan.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_plan_size
+                            type: number
+                          gpMaxSlices:
+                            description: |-
+                              processes for one query in one segment.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_slices
+                              Max amount of slice-processes for one query in one segment.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_slices
+                            type: number
+                          gpResourceGroupMemoryLimit:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_resource_group_memory_limit
+                              Identifies the maximum percentage of system memory resources to allocate to resource groups on each Greenplum Database segment node.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_resource_group_memory_limit
+                            type: number
+                          gpVmemProtectSegworkerCacheLimit:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_vmem_protect_segworker_cache_limit
+                              Set memory limit (in MB) for working process. If a query executor process consumes more than this configured amount, then the process will not be cached for use in subsequent queries after the process completes.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_vmem_protect_segworker_cache_limit
+                            type: number
+                          gpWorkfileCompression:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+                              Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+                            type: boolean
+                          gpWorkfileLimitFilesPerQuery:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+                              Default value is 10000
+                              Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
+                              Spill files are created when executing a query that requires more memory than it is allocated.
+                              The current query is terminated when the limit is exceeded.
+                              Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+                              Default value is 10000
+                            type: number
+                          gpWorkfileLimitPerQuery:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+                              Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
+                              The default value is 0, which means a limit is not enforced.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+                            type: number
+                          gpWorkfileLimitPerSegment:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+                              Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
+                              The default value is 0, which means a limit is not enforced.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+                            type: number
+                          idleInTransactionSessionTimeout:
+                            description: |-
+                              config-client#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT
+                              Max time (in ms) which session can idle in open transaction
+                              https://postgrespro.ru/docs/postgrespro/current/runtime-config-client#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT
+                            type: number
+                          lockTimeout:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#lock_timeout
+                              Max time (in ms) which query will wait lock free on object
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#lock_timeout
+                            type: number
+                          logStatement:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#log_statement
+                              Default value is ddl
+                              Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
+                              MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
+                              PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
+                              Default value is ddl
+                            type: string
+                          maxConnections:
+                            description: |-
+                              (Number) Maximum number of inbound connections on master segment
+                              Maximum number of inbound connections on master segment
+                            type: number
+                          maxPreparedTransactions:
+                            description: |-
+                              config-resource.html
+                              Sets the maximum number of transactions that can be in the "prepared" state simultaneously
+                              https://www.postgresql.org/docs/9.6/runtime-config-resource.html
+                            type: number
+                          maxSlotWalKeepSize:
+                            description: |-
+                              config-replication.html
+                              Specify the maximum size of WAL files that replication slots are allowed to retain in the pg_wal directory at checkpoint time.
+                              https://www.postgresql.org/docs/current/runtime-config-replication.html
+                            type: number
+                          maxStatementMem:
+                            description: |-
+                              of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
+                              Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
+                              (seghost_physical_memory) / (average_number_concurrent_queries)
+                              When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
+                              https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
+                              Default value is 2097152000 (2000MB)
+                              Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
+                              Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
+                              (seghost_physical_memory) / (average_number_concurrent_queries)
+                              When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
+                              https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
+                              Default value is 2097152000 (2000MB)
+                            type: number
+                          runawayDetectorActivationPercent:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#runaway_detector_activation_percent
+                              Percent of utilized Greenplum Database vmem that triggers the termination of queries.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#runaway_detector_activation_percent
+                            type: number
+                        type: object
+                      pool:
+                        description: (Attributes) Odyssey® pool settings. (see below
+                          for nested schema)
+                        properties:
+                          clientIdleTimeout:
+                            description: |-
+                              (Number) Client pool idle timeout, in seconds.
+                              Client pool idle timeout, in seconds.
+
+                              Drop stale client connection after this much seconds of idleness, which is not in transaction.
+
+                              Set to zero to disable.
+                            type: number
+                          idleInTransactionTimeout:
+                            description: |-
+                              (Number) Client pool idle in transaction timeout, in seconds.
+                              Client pool idle in transaction timeout, in seconds.
+
+                              Drop client connection in transaction after this much seconds of idleness.
+
+                              Set to zero to disable.
+                            type: number
+                          mode:
+                            description: |-
+                              (String) Route server pool mode.
+                              Route server pool mode.
+                            type: string
+                          size:
+                            description: |-
+                              (Number) The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+                              The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+
+                              Set to zero to disable the limit.
+                            type: number
+                        type: object
+                      pxfConfig:
+                        description: |-
+                          (Attributes) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto (see below for nested schema)
+                        properties:
+                          connectionTimeout:
+                            description: |-
+                              (Number) Timeout for connection to the Apache Tomcat® server when making read requests.
+                              Timeout for connection to the Apache Tomcat® server when making read requests.
+
+                              Specify values in seconds.
+                            type: number
+                          maxThreads:
+                            description: |-
+                              (Number) Maximum number of the Apache Tomcat® threads.
+                              Maximum number of the Apache Tomcat® threads.
+
+                              To prevent situations when requests get stuck or fail due to running out of memory or malfunctioning of the Java garbage collector, specify the number of the Apache Tomcat® threads. Learn more about adjusting the number of threads in the [VMware Greenplum® Platform Extension Framework](https://docs.vmware.com/en/VMware-Greenplum-Platform-Extension-Framework/6.9/greenplum-platform-extension-framework/cfg_mem.html) documentation.
+                            type: number
+                          poolAllowCoreThreadTimeout:
+                            description: |-
+                              (Boolean) Determines whether the timeout for core streaming threads is permitted.
+                              Determines whether the timeout for core streaming threads is permitted.
+                            type: boolean
+                          poolCoreSize:
+                            description: |-
+                              (Number) Number of core streaming threads per pool.
+                              Number of core streaming threads per pool.
+                            type: number
+                          poolMaxSize:
+                            description: |-
+                              (Number) Maximum allowed number of core streaming threads.
+                              Maximum allowed number of core streaming threads.
+                            type: number
+                          poolQueueCapacity:
+                            description: |-
+                              (Number) Maximum number of requests you can add to a pool queue for core streaming threads.
+                              Maximum number of requests you can add to a pool queue for core streaming threads.
+
+                              If `0`, no pool queue is generated.
+                            type: number
+                          uploadTimeout:
+                            description: |-
+                              (Number) Timeout for connection to the Apache Tomcat® server when making write requests.
+                              Timeout for connection to the Apache Tomcat® server when making write requests.
+
+                              Specify the values in seconds.
+                            type: number
+                          xms:
+                            description: |-
+                              (Number) Maximum size, in megabytes, of the JVM heap for the PXF daemon.
+                              Maximum size, in megabytes, of the JVM heap for the PXF daemon.
+                            type: number
+                          xmx:
+                            description: |-
+                              (Number) Initial size, in megabytes, of the JVM heap for the PXF daemon.
+                              Initial size, in megabytes, of the JVM heap for the PXF daemon.
+                            type: number
+                        type: object
+                    type: object
+                  config:
+                    description: (Attributes) Greenplum® cluster configuration. (see
+                      below for nested schema)
+                    properties:
+                      access:
+                        description: (Attributes) Access policy for external services.
+                          (see below for nested schema)
+                        properties:
+                          dataLens:
+                            description: |-
+                              (Boolean) Allows data export from the cluster to DataLens.
+                              Allows data export from the cluster to DataLens.
+                            type: boolean
+                          dataTransfer:
+                            description: |-
+                              (Boolean) Allows access for DataTransfer.
+                              Allows access for DataTransfer.
+                            type: boolean
+                          webSql:
+                            description: |-
+                              (Boolean) Allows SQL queries to the cluster databases from the management console.
+                              Allows SQL queries to the cluster databases from the management console.
+                            type: boolean
+                          yandexQuery:
+                            description: |-
+                              (Boolean) Allow access for YandexQuery.
+                              Allow access for YandexQuery.
+                            type: boolean
+                        type: object
+                      assignPublicIp:
+                        description: |-
+                          (Boolean) Determines whether the cluster has a public IP address.
+                          Determines whether the cluster has a public IP address.
+
+                          After the cluster has been created, this setting cannot be changed.
+                        type: boolean
+                      backupRetainPeriodDays:
+                        description: |-
+                          (Number) Retention policy of automated backups.
+                          Retention policy of automated backups.
+                        type: number
+                      backupWindowStart:
+                        description: |-
+                          (String) Time to start the daily backup, in the UTC timezone.
+                          Time to start the daily backup, in the UTC timezone.
+                        type: string
+                      subnetId:
+                        description: |-
+                          (String) ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+                          ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+                        type: string
+                      version:
+                        description: |-
+                          (String) Version of the Greenplum® server software.
+                          Version of the Greenplum® server software.
+                        type: string
+                      zoneId:
+                        description: |-
+                          (String) ID of the availability zone the cluster belongs to.
+                          To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+                          ID of the availability zone the cluster belongs to.
+                          To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+                        type: string
+                    type: object
+                  deletionProtection:
+                    description: |-
+                      (Boolean) Determines whether the cluster is protected from being deleted.
+                      Determines whether the cluster is protected from being deleted.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) Description of the Greenplum® cluster.
+                      Description of the Greenplum® cluster.
+                    type: string
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the Greenplum® cluster.
+                      Deployment environment of the Greenplum® cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      (String) ID of the folder that the Greenplum® cluster belongs to.
+                      ID of the folder that the Greenplum® cluster belongs to.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  hostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the cluster.
+                      Host groups hosting VMs of the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) Custom labels for the Greenplum® cluster as key:value pairs. Maximum 64 labels per resource.
+                      Custom labels for the Greenplum® cluster as `key:value` pairs. Maximum 64 labels per resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  logging:
+                    description: (Attributes) Cloud logging configuration (see below
+                      for nested schema)
+                    properties:
+                      commandCenterEnabled:
+                        description: |-
+                          (Boolean) send Yandex Command Center logs
+                          send Yandex Command Center logs
+                        type: boolean
+                      enabled:
+                        description: |-
+                          (Boolean) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: boolean
+                      folderId:
+                        description: |-
+                          (String) ID of the folder that the Greenplum® cluster belongs to.
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: string
+                      greenplumEnabled:
+                        description: |-
+                          (Boolean) send Greenplum logs
+                          send Greenplum logs
+                        type: boolean
+                      logGroupId:
+                        description: |-
+                          (String) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: string
+                      poolerEnabled:
+                        description: |-
+                          (Boolean) send Pooler logs
+                          send Pooler logs
+                        type: boolean
+                    type: object
+                  maintenanceWindow:
+                    description: (Attributes) A Greenplum® cluster maintenance window.
+                      Should be defined by either one of the two options. (see below
+                      for nested schema)
+                    properties:
+                      anytime:
+                        description: time maintenance window. (see below for nested
+                          schema)
+                        type: object
+                      weeklyMaintenanceWindow:
+                        description: (Attributes) A weekly maintenance window. (see
+                          below for nested schema)
+                        properties:
+                          day:
+                            description: |-
+                              (String) Day of the week.
+                              Day of the week.
+                            type: string
+                          hour:
+                            description: |-
+                              (Number) Hour of the day in the UTC timezone.
+                              Hour of the day in the UTC timezone.
+                            type: number
+                        type: object
+                    type: object
+                  masterConfig:
+                    description: (Attributes) Configuration of the Greenplum® master
+                      subcluster. (see below for nested schema)
+                    properties:
+                      resources:
+                        description: (Attributes) Computational resources allocated
+                          to Greenplum® master subcluster hosts. (see below for nested
+                          schema)
+                        properties:
+                          diskSize:
+                            description: |-
+                              (Number) Volume of the storage used by the host, in bytes.
+                              Volume of the storage used by the host, in bytes.
+                            type: number
+                          diskTypeId:
+                            description: |-
+                              hdd, network-ssd or local-ssd.
+                              Type of the storage used by the host: `network-hdd`, `network-ssd` or `local-ssd`.
+                            type: string
+                          resourcePresetId:
+                            description: |-
+                              (String) ID of the preset for computational resources allocated to a host.
+                              ID of the preset for computational resources allocated to a host.
+
+                              Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
+                            type: string
+                        type: object
+                    type: object
+                  masterHostCount:
+                    description: |-
+                      (Number) Number of hosts in the master subcluster.
+                      Number of hosts in the master subcluster.
+                    type: number
+                  masterHostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the master subcluster.
+                      Host groups hosting VMs of the master subcluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  name:
+                    description: |-
+                      (String) Name of the Greenplum® cluster.
+                      The name is unique within the folder.
+                      Name of the Greenplum® cluster.
+                      The name is unique within the folder.
+                    type: string
+                  networkId:
+                    description: |-
+                      (String) ID of the cloud network that the cluster belongs to.
+                      ID of the cloud network that the cluster belongs to.
+                    type: string
+                  networkIdRef:
+                    description: Reference to a Network in vpc to populate networkId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  networkIdSelector:
+                    description: Selector for a Network in vpc to populate networkId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  restore:
+                    description: (Attributes) The cluster will be created from the
+                      specified backup. (see below for nested schema)
+                    properties:
+                      backupId:
+                        description: |-
+                          (String) ID of the backup to create a cluster from.
+                          ID of the backup to create a cluster from.
+                        type: string
+                      restoreOnly:
+                        description: |-
+                          (Set of String) List of databases and tables to restore
+                          List of databases and tables to restore
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      time:
+                        description: |-
+                          01-02T15:04:05 - UTC). When not set, current time is used.
+                          Timestamp of the moment to which the Greenplum cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) User security groups.
+                      User security groups.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  segmentConfig:
+                    description: (Attributes) Configuration of the Greenplum® segment
+                      subcluster. (see below for nested schema)
+                    properties:
+                      resources:
+                        description: (Attributes) Computational resources allocated
+                          to Greenplum® master subcluster hosts. (see below for nested
+                          schema)
+                        properties:
+                          diskSize:
+                            description: |-
+                              (Number) Volume of the storage used by the host, in bytes.
+                              Volume of the storage used by the host, in bytes.
+                            type: number
+                          diskTypeId:
+                            description: |-
+                              hdd, network-ssd or local-ssd.
+                              Type of the storage used by the host: `network-hdd`, `network-ssd` or `local-ssd`.
+                            type: string
+                          resourcePresetId:
+                            description: |-
+                              (String) ID of the preset for computational resources allocated to a host.
+                              ID of the preset for computational resources allocated to a host.
+
+                              Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
+                            type: string
+                        type: object
+                    type: object
+                  segmentHostCount:
+                    description: |-
+                      (Number) Number of hosts in the segment subcluster.
+                      Number of hosts in the segment subcluster.
+                    type: number
+                  segmentHostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the segment subcluster.
+                      Host groups hosting VMs of the segment subcluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  segmentInHost:
+                    description: |-
+                      (Number) Number of segments per host.
+                      Number of segments per host.
+                    type: number
+                  serviceAccountId:
+                    description: |-
+                      (String) Service account that will be used to access a Yandex Cloud resources
+                      Service account that will be used to access a Yandex Cloud resources
+                    type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  userName:
+                    description: |-
+                      (String) Owner user name.
+                      Owner user name.
+                    type: string
+                  userPassword:
+                    description: |-
+                      (String) Owner user password.
+                      Owner user password.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  cloudStorage:
+                    description: (Attributes) Cloud storage settings (see below for
+                      nested schema)
+                    properties:
+                      enable:
+                        description: |-
+                          (Boolean) enable Cloud Storage for cluster
+                          enable Cloud Storage for cluster
+                        type: boolean
+                    type: object
+                  clusterConfig:
+                    description: (Attributes) Greenplum® and Odyssey® configuration.
+                      (see below for nested schema)
+                    properties:
+                      backgroundActivities:
+                        description: (Attributes) Managed Greenplum® background tasks
+                          configuration. (see below for nested schema)
+                        properties:
+                          analyzeAndVacuum:
+                            description: (Attributes) Configuration for ANALYZE and
+                              VACUUM operations. (see below for nested schema)
+                            properties:
+                              analyzeTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+                                  Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+                                type: number
+                              start:
+                                description: (Attributes) Time when analyze will start
+                                  (see below for nested schema)
+                                properties:
+                                  hours:
+                                    description: |-
+                                      (Number) hours
+                                      hours
+                                    type: number
+                                  minutes:
+                                    description: |-
+                                      (Number) minutes
+                                      minutes
+                                    type: number
+                                type: object
+                              vacuumTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+                                  Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+                                type: number
+                            type: object
+                          queryKillerScripts:
+                            description: (Attributes) Configuration for long running
+                              queries killer. (see below for nested schema)
+                            properties:
+                              idle:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries that are in idle
+                                  state. (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                              idleInTransaction:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries that are in idle
+                                  in transaction state. (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                              longRunning:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries (in any state).
+                                  (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                            type: object
+                          tableSizes:
+                            description: (Attributes) Enables scripts that collects
+                              tables sizes to *_sizes tables in mdb_toolkit schema.
+                              (see below for nested schema)
+                            properties:
+                              starts:
+                                description: (Attributes Set) Time when start "table_sizes"
+                                  script (see below for nested schema)
+                                items:
+                                  properties:
+                                    hours:
+                                      description: |-
+                                        (Number) hours
+                                        hours
+                                      type: number
+                                    minutes:
+                                      description: |-
+                                        (Number) minutes
+                                        minutes
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
+                      greenplumConfig:
+                        description: |-
+                          (Attributes) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster_service.proto (see below for nested schema)
+                        properties:
+                          gpAddColumnInheritsTableSetting:
+                            description: |-
+                              Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+                              https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+                            type: boolean
+                          gpAutostatsMode:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_mode
+                              Specifies the mode for triggering automatic statistics collection after DML.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_mode
+                            type: string
+                          gpAutostatsOnChangeThreshold:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_on_change_threshold
+                              Specifies the threshold for automatic statistics collection when gp_autostats_mode is set to on_change.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_on_change_threshold
+                            type: number
+                          gpCachedSegworkersThreshold:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_cached_segworkers_threshold
+                              Define amount of working processes in segment, that keeping in warm cash after end of query for usage again in next queries.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_cached_segworkers_threshold
+                            type: number
+                          gpEnableGlobalDeadlockDetector:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_enable_global_deadlock_detector
+                              Controls whether the Greenplum Database Global Deadlock Detector is enabled to manage concurrent UPDATE and DELETE operations on heap tables to improve performance. See Inserting, Updating, and Deleting Datain the Greenplum Database Administrator Guide. The default is off, the Global Deadlock Detector is deactivated.
+                              If the Global Deadlock Detector is deactivated (the default), Greenplum Database runs concurrent update and delete operations on a heap table serially.
+                              If the Global Deadlock Detector is enabled, concurrent updates are permitted and the Global Deadlock Detector determines when a deadlock exists, and breaks the deadlock by cancelling one or more backend processes associated with the youngest transaction(s) involved.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_enable_global_deadlock_detector
+                            type: boolean
+                          gpEnableZstdMemoryAccounting:
+                            description: |-
+                              (Boolean) Forces ZSTD lib use Greenplum memory allocation system.
+                              Forces ZSTD lib use Greenplum memory allocation system.
+                            type: boolean
+                          gpGlobalDeadlockDetectorPeriod:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_global_deadlock_detector_period
+                              Specifies the executing interval (in seconds) of the global deadlock detector background worker process.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_global_deadlock_detector_period
+                            type: number
+                          gpMaxPlanSize:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_plan_size
+                              Specifies the total maximum uncompressed size of a query execution plan multiplied by the number of Motion operators (slices) in the plan.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_plan_size
+                            type: number
+                          gpMaxSlices:
+                            description: |-
+                              processes for one query in one segment.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_slices
+                              Max amount of slice-processes for one query in one segment.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_slices
+                            type: number
+                          gpResourceGroupMemoryLimit:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_resource_group_memory_limit
+                              Identifies the maximum percentage of system memory resources to allocate to resource groups on each Greenplum Database segment node.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_resource_group_memory_limit
+                            type: number
+                          gpVmemProtectSegworkerCacheLimit:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_vmem_protect_segworker_cache_limit
+                              Set memory limit (in MB) for working process. If a query executor process consumes more than this configured amount, then the process will not be cached for use in subsequent queries after the process completes.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_vmem_protect_segworker_cache_limit
+                            type: number
+                          gpWorkfileCompression:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+                              Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+                            type: boolean
+                          gpWorkfileLimitFilesPerQuery:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+                              Default value is 10000
+                              Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
+                              Spill files are created when executing a query that requires more memory than it is allocated.
+                              The current query is terminated when the limit is exceeded.
+                              Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+                              Default value is 10000
+                            type: number
+                          gpWorkfileLimitPerQuery:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+                              Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
+                              The default value is 0, which means a limit is not enforced.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+                            type: number
+                          gpWorkfileLimitPerSegment:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+                              Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
+                              The default value is 0, which means a limit is not enforced.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+                            type: number
+                          idleInTransactionSessionTimeout:
+                            description: |-
+                              config-client#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT
+                              Max time (in ms) which session can idle in open transaction
+                              https://postgrespro.ru/docs/postgrespro/current/runtime-config-client#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT
+                            type: number
+                          lockTimeout:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#lock_timeout
+                              Max time (in ms) which query will wait lock free on object
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#lock_timeout
+                            type: number
+                          logStatement:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#log_statement
+                              Default value is ddl
+                              Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
+                              MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
+                              PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
+                              Default value is ddl
+                            type: string
+                          maxConnections:
+                            description: |-
+                              (Number) Maximum number of inbound connections on master segment
+                              Maximum number of inbound connections on master segment
+                            type: number
+                          maxPreparedTransactions:
+                            description: |-
+                              config-resource.html
+                              Sets the maximum number of transactions that can be in the "prepared" state simultaneously
+                              https://www.postgresql.org/docs/9.6/runtime-config-resource.html
+                            type: number
+                          maxSlotWalKeepSize:
+                            description: |-
+                              config-replication.html
+                              Specify the maximum size of WAL files that replication slots are allowed to retain in the pg_wal directory at checkpoint time.
+                              https://www.postgresql.org/docs/current/runtime-config-replication.html
+                            type: number
+                          maxStatementMem:
+                            description: |-
+                              of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
+                              Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
+                              (seghost_physical_memory) / (average_number_concurrent_queries)
+                              When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
+                              https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
+                              Default value is 2097152000 (2000MB)
+                              Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
+                              Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
+                              (seghost_physical_memory) / (average_number_concurrent_queries)
+                              When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
+                              https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
+                              Default value is 2097152000 (2000MB)
+                            type: number
+                          runawayDetectorActivationPercent:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#runaway_detector_activation_percent
+                              Percent of utilized Greenplum Database vmem that triggers the termination of queries.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#runaway_detector_activation_percent
+                            type: number
+                        type: object
+                      pool:
+                        description: (Attributes) Odyssey® pool settings. (see below
+                          for nested schema)
+                        properties:
+                          clientIdleTimeout:
+                            description: |-
+                              (Number) Client pool idle timeout, in seconds.
+                              Client pool idle timeout, in seconds.
+
+                              Drop stale client connection after this much seconds of idleness, which is not in transaction.
+
+                              Set to zero to disable.
+                            type: number
+                          idleInTransactionTimeout:
+                            description: |-
+                              (Number) Client pool idle in transaction timeout, in seconds.
+                              Client pool idle in transaction timeout, in seconds.
+
+                              Drop client connection in transaction after this much seconds of idleness.
+
+                              Set to zero to disable.
+                            type: number
+                          mode:
+                            description: |-
+                              (String) Route server pool mode.
+                              Route server pool mode.
+                            type: string
+                          size:
+                            description: |-
+                              (Number) The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+                              The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+
+                              Set to zero to disable the limit.
+                            type: number
+                        type: object
+                      pxfConfig:
+                        description: |-
+                          (Attributes) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto (see below for nested schema)
+                        properties:
+                          connectionTimeout:
+                            description: |-
+                              (Number) Timeout for connection to the Apache Tomcat® server when making read requests.
+                              Timeout for connection to the Apache Tomcat® server when making read requests.
+
+                              Specify values in seconds.
+                            type: number
+                          maxThreads:
+                            description: |-
+                              (Number) Maximum number of the Apache Tomcat® threads.
+                              Maximum number of the Apache Tomcat® threads.
+
+                              To prevent situations when requests get stuck or fail due to running out of memory or malfunctioning of the Java garbage collector, specify the number of the Apache Tomcat® threads. Learn more about adjusting the number of threads in the [VMware Greenplum® Platform Extension Framework](https://docs.vmware.com/en/VMware-Greenplum-Platform-Extension-Framework/6.9/greenplum-platform-extension-framework/cfg_mem.html) documentation.
+                            type: number
+                          poolAllowCoreThreadTimeout:
+                            description: |-
+                              (Boolean) Determines whether the timeout for core streaming threads is permitted.
+                              Determines whether the timeout for core streaming threads is permitted.
+                            type: boolean
+                          poolCoreSize:
+                            description: |-
+                              (Number) Number of core streaming threads per pool.
+                              Number of core streaming threads per pool.
+                            type: number
+                          poolMaxSize:
+                            description: |-
+                              (Number) Maximum allowed number of core streaming threads.
+                              Maximum allowed number of core streaming threads.
+                            type: number
+                          poolQueueCapacity:
+                            description: |-
+                              (Number) Maximum number of requests you can add to a pool queue for core streaming threads.
+                              Maximum number of requests you can add to a pool queue for core streaming threads.
+
+                              If `0`, no pool queue is generated.
+                            type: number
+                          uploadTimeout:
+                            description: |-
+                              (Number) Timeout for connection to the Apache Tomcat® server when making write requests.
+                              Timeout for connection to the Apache Tomcat® server when making write requests.
+
+                              Specify the values in seconds.
+                            type: number
+                          xms:
+                            description: |-
+                              (Number) Maximum size, in megabytes, of the JVM heap for the PXF daemon.
+                              Maximum size, in megabytes, of the JVM heap for the PXF daemon.
+                            type: number
+                          xmx:
+                            description: |-
+                              (Number) Initial size, in megabytes, of the JVM heap for the PXF daemon.
+                              Initial size, in megabytes, of the JVM heap for the PXF daemon.
+                            type: number
+                        type: object
+                    type: object
+                  config:
+                    description: (Attributes) Greenplum® cluster configuration. (see
+                      below for nested schema)
+                    properties:
+                      access:
+                        description: (Attributes) Access policy for external services.
+                          (see below for nested schema)
+                        properties:
+                          dataLens:
+                            description: |-
+                              (Boolean) Allows data export from the cluster to DataLens.
+                              Allows data export from the cluster to DataLens.
+                            type: boolean
+                          dataTransfer:
+                            description: |-
+                              (Boolean) Allows access for DataTransfer.
+                              Allows access for DataTransfer.
+                            type: boolean
+                          webSql:
+                            description: |-
+                              (Boolean) Allows SQL queries to the cluster databases from the management console.
+                              Allows SQL queries to the cluster databases from the management console.
+                            type: boolean
+                          yandexQuery:
+                            description: |-
+                              (Boolean) Allow access for YandexQuery.
+                              Allow access for YandexQuery.
+                            type: boolean
+                        type: object
+                      assignPublicIp:
+                        description: |-
+                          (Boolean) Determines whether the cluster has a public IP address.
+                          Determines whether the cluster has a public IP address.
+
+                          After the cluster has been created, this setting cannot be changed.
+                        type: boolean
+                      backupRetainPeriodDays:
+                        description: |-
+                          (Number) Retention policy of automated backups.
+                          Retention policy of automated backups.
+                        type: number
+                      backupWindowStart:
+                        description: |-
+                          (String) Time to start the daily backup, in the UTC timezone.
+                          Time to start the daily backup, in the UTC timezone.
+                        type: string
+                      subnetId:
+                        description: |-
+                          (String) ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+                          ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+                        type: string
+                      version:
+                        description: |-
+                          (String) Version of the Greenplum® server software.
+                          Version of the Greenplum® server software.
+                        type: string
+                      zoneId:
+                        description: |-
+                          (String) ID of the availability zone the cluster belongs to.
+                          To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+                          ID of the availability zone the cluster belongs to.
+                          To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+                        type: string
+                    type: object
+                  deletionProtection:
+                    description: |-
+                      (Boolean) Determines whether the cluster is protected from being deleted.
+                      Determines whether the cluster is protected from being deleted.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) Description of the Greenplum® cluster.
+                      Description of the Greenplum® cluster.
+                    type: string
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the Greenplum® cluster.
+                      Deployment environment of the Greenplum® cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      (String) ID of the folder that the Greenplum® cluster belongs to.
+                      ID of the folder that the Greenplum® cluster belongs to.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  hostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the cluster.
+                      Host groups hosting VMs of the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) Custom labels for the Greenplum® cluster as key:value pairs. Maximum 64 labels per resource.
+                      Custom labels for the Greenplum® cluster as `key:value` pairs. Maximum 64 labels per resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  logging:
+                    description: (Attributes) Cloud logging configuration (see below
+                      for nested schema)
+                    properties:
+                      commandCenterEnabled:
+                        description: |-
+                          (Boolean) send Yandex Command Center logs
+                          send Yandex Command Center logs
+                        type: boolean
+                      enabled:
+                        description: |-
+                          (Boolean) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: boolean
+                      folderId:
+                        description: |-
+                          (String) ID of the folder that the Greenplum® cluster belongs to.
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: string
+                      greenplumEnabled:
+                        description: |-
+                          (Boolean) send Greenplum logs
+                          send Greenplum logs
+                        type: boolean
+                      logGroupId:
+                        description: |-
+                          (String) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: string
+                      poolerEnabled:
+                        description: |-
+                          (Boolean) send Pooler logs
+                          send Pooler logs
+                        type: boolean
+                    type: object
+                  maintenanceWindow:
+                    description: (Attributes) A Greenplum® cluster maintenance window.
+                      Should be defined by either one of the two options. (see below
+                      for nested schema)
+                    properties:
+                      anytime:
+                        description: time maintenance window. (see below for nested
+                          schema)
+                        type: object
+                      weeklyMaintenanceWindow:
+                        description: (Attributes) A weekly maintenance window. (see
+                          below for nested schema)
+                        properties:
+                          day:
+                            description: |-
+                              (String) Day of the week.
+                              Day of the week.
+                            type: string
+                          hour:
+                            description: |-
+                              (Number) Hour of the day in the UTC timezone.
+                              Hour of the day in the UTC timezone.
+                            type: number
+                        type: object
+                    type: object
+                  masterConfig:
+                    description: (Attributes) Configuration of the Greenplum® master
+                      subcluster. (see below for nested schema)
+                    properties:
+                      resources:
+                        description: (Attributes) Computational resources allocated
+                          to Greenplum® master subcluster hosts. (see below for nested
+                          schema)
+                        properties:
+                          diskSize:
+                            description: |-
+                              (Number) Volume of the storage used by the host, in bytes.
+                              Volume of the storage used by the host, in bytes.
+                            type: number
+                          diskTypeId:
+                            description: |-
+                              hdd, network-ssd or local-ssd.
+                              Type of the storage used by the host: `network-hdd`, `network-ssd` or `local-ssd`.
+                            type: string
+                          resourcePresetId:
+                            description: |-
+                              (String) ID of the preset for computational resources allocated to a host.
+                              ID of the preset for computational resources allocated to a host.
+
+                              Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
+                            type: string
+                        type: object
+                    type: object
+                  masterHostCount:
+                    description: |-
+                      (Number) Number of hosts in the master subcluster.
+                      Number of hosts in the master subcluster.
+                    type: number
+                  masterHostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the master subcluster.
+                      Host groups hosting VMs of the master subcluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  name:
+                    description: |-
+                      (String) Name of the Greenplum® cluster.
+                      The name is unique within the folder.
+                      Name of the Greenplum® cluster.
+                      The name is unique within the folder.
+                    type: string
+                  networkId:
+                    description: |-
+                      (String) ID of the cloud network that the cluster belongs to.
+                      ID of the cloud network that the cluster belongs to.
+                    type: string
+                  networkIdRef:
+                    description: Reference to a Network in vpc to populate networkId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  networkIdSelector:
+                    description: Selector for a Network in vpc to populate networkId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  restore:
+                    description: (Attributes) The cluster will be created from the
+                      specified backup. (see below for nested schema)
+                    properties:
+                      backupId:
+                        description: |-
+                          (String) ID of the backup to create a cluster from.
+                          ID of the backup to create a cluster from.
+                        type: string
+                      restoreOnly:
+                        description: |-
+                          (Set of String) List of databases and tables to restore
+                          List of databases and tables to restore
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      time:
+                        description: |-
+                          01-02T15:04:05 - UTC). When not set, current time is used.
+                          Timestamp of the moment to which the Greenplum cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) User security groups.
+                      User security groups.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  segmentConfig:
+                    description: (Attributes) Configuration of the Greenplum® segment
+                      subcluster. (see below for nested schema)
+                    properties:
+                      resources:
+                        description: (Attributes) Computational resources allocated
+                          to Greenplum® master subcluster hosts. (see below for nested
+                          schema)
+                        properties:
+                          diskSize:
+                            description: |-
+                              (Number) Volume of the storage used by the host, in bytes.
+                              Volume of the storage used by the host, in bytes.
+                            type: number
+                          diskTypeId:
+                            description: |-
+                              hdd, network-ssd or local-ssd.
+                              Type of the storage used by the host: `network-hdd`, `network-ssd` or `local-ssd`.
+                            type: string
+                          resourcePresetId:
+                            description: |-
+                              (String) ID of the preset for computational resources allocated to a host.
+                              ID of the preset for computational resources allocated to a host.
+
+                              Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
+                            type: string
+                        type: object
+                    type: object
+                  segmentHostCount:
+                    description: |-
+                      (Number) Number of hosts in the segment subcluster.
+                      Number of hosts in the segment subcluster.
+                    type: number
+                  segmentHostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the segment subcluster.
+                      Host groups hosting VMs of the segment subcluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  segmentInHost:
+                    description: |-
+                      (Number) Number of segments per host.
+                      Number of segments per host.
+                    type: number
+                  serviceAccountId:
+                    description: |-
+                      (String) Service account that will be used to access a Yandex Cloud resources
+                      Service account that will be used to access a Yandex Cloud resources
+                    type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  userName:
+                    description: |-
+                      (String) Owner user name.
+                      Owner user name.
+                    type: string
+                  userPassword:
+                    description: |-
+                      (String) Owner user password.
+                      Owner user password.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.config is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.config)
+                || (has(self.initProvider) && has(self.initProvider.config))'
+            - message: spec.forProvider.environment is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.environment)
+                || (has(self.initProvider) && has(self.initProvider.environment))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.userName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userName)
+                || (has(self.initProvider) && has(self.initProvider.userName))'
+            - message: spec.forProvider.userPassword is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.userPassword)
+                || (has(self.initProvider) && has(self.initProvider.userPassword))'
+          status:
+            description: GreenplumClusterV2Status defines the observed state of GreenplumClusterV2.
+            properties:
+              atProvider:
+                properties:
+                  cloudStorage:
+                    description: (Attributes) Cloud storage settings (see below for
+                      nested schema)
+                    properties:
+                      enable:
+                        description: |-
+                          (Boolean) enable Cloud Storage for cluster
+                          enable Cloud Storage for cluster
+                        type: boolean
+                    type: object
+                  clusterConfig:
+                    description: (Attributes) Greenplum® and Odyssey® configuration.
+                      (see below for nested schema)
+                    properties:
+                      backgroundActivities:
+                        description: (Attributes) Managed Greenplum® background tasks
+                          configuration. (see below for nested schema)
+                        properties:
+                          analyzeAndVacuum:
+                            description: (Attributes) Configuration for ANALYZE and
+                              VACUUM operations. (see below for nested schema)
+                            properties:
+                              analyzeTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+                                  Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+                                type: number
+                              start:
+                                description: (Attributes) Time when analyze will start
+                                  (see below for nested schema)
+                                properties:
+                                  hours:
+                                    description: |-
+                                      (Number) hours
+                                      hours
+                                    type: number
+                                  minutes:
+                                    description: |-
+                                      (Number) minutes
+                                      minutes
+                                    type: number
+                                type: object
+                              vacuumTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+                                  Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+                                type: number
+                            type: object
+                          queryKillerScripts:
+                            description: (Attributes) Configuration for long running
+                              queries killer. (see below for nested schema)
+                            properties:
+                              idle:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries that are in idle
+                                  state. (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                              idleInTransaction:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries that are in idle
+                                  in transaction state. (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                              longRunning:
+                                description: (Attributes) Configuration of script
+                                  that kills long running queries (in any state).
+                                  (see below for nested schema)
+                                properties:
+                                  enable:
+                                    description: |-
+                                      (Boolean) enable Cloud Storage for cluster
+                                      Use query killer or not
+                                    type: boolean
+                                  ignoreUsers:
+                                    description: |-
+                                      (Set of String) Ignore these users when considering queries to terminate
+                                      Ignore these users when considering queries to terminate
+                                    items:
+                                      type: string
+                                    type: array
+                                    x-kubernetes-list-type: set
+                                  maxAge:
+                                    description: |-
+                                      (Number) Maximum duration for this type of queries (in seconds).
+                                      Maximum duration for this type of queries (in seconds).
+                                    type: number
+                                type: object
+                            type: object
+                          tableSizes:
+                            description: (Attributes) Enables scripts that collects
+                              tables sizes to *_sizes tables in mdb_toolkit schema.
+                              (see below for nested schema)
+                            properties:
+                              starts:
+                                description: (Attributes Set) Time when start "table_sizes"
+                                  script (see below for nested schema)
+                                items:
+                                  properties:
+                                    hours:
+                                      description: |-
+                                        (Number) hours
+                                        hours
+                                      type: number
+                                    minutes:
+                                      description: |-
+                                        (Number) minutes
+                                        minutes
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                        type: object
+                      greenplumConfig:
+                        description: |-
+                          (Attributes) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster_service.proto (see below for nested schema)
+                        properties:
+                          gpAddColumnInheritsTableSetting:
+                            description: |-
+                              Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+                              https://docs.vmware.com/en/VMware-Tanzu-Greenplum/6/greenplum-database/GUID-ref_guide-config_params-guc-list.html#gp_add_column_inherits_table_setting
+                            type: boolean
+                          gpAutostatsMode:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_mode
+                              Specifies the mode for triggering automatic statistics collection after DML.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_mode
+                            type: string
+                          gpAutostatsOnChangeThreshold:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_on_change_threshold
+                              Specifies the threshold for automatic statistics collection when gp_autostats_mode is set to on_change.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_autostats_on_change_threshold
+                            type: number
+                          gpCachedSegworkersThreshold:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_cached_segworkers_threshold
+                              Define amount of working processes in segment, that keeping in warm cash after end of query for usage again in next queries.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_cached_segworkers_threshold
+                            type: number
+                          gpEnableGlobalDeadlockDetector:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_enable_global_deadlock_detector
+                              Controls whether the Greenplum Database Global Deadlock Detector is enabled to manage concurrent UPDATE and DELETE operations on heap tables to improve performance. See Inserting, Updating, and Deleting Datain the Greenplum Database Administrator Guide. The default is off, the Global Deadlock Detector is deactivated.
+                              If the Global Deadlock Detector is deactivated (the default), Greenplum Database runs concurrent update and delete operations on a heap table serially.
+                              If the Global Deadlock Detector is enabled, concurrent updates are permitted and the Global Deadlock Detector determines when a deadlock exists, and breaks the deadlock by cancelling one or more backend processes associated with the youngest transaction(s) involved.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_enable_global_deadlock_detector
+                            type: boolean
+                          gpEnableZstdMemoryAccounting:
+                            description: |-
+                              (Boolean) Forces ZSTD lib use Greenplum memory allocation system.
+                              Forces ZSTD lib use Greenplum memory allocation system.
+                            type: boolean
+                          gpGlobalDeadlockDetectorPeriod:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_global_deadlock_detector_period
+                              Specifies the executing interval (in seconds) of the global deadlock detector background worker process.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_global_deadlock_detector_period
+                            type: number
+                          gpMaxPlanSize:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_plan_size
+                              Specifies the total maximum uncompressed size of a query execution plan multiplied by the number of Motion operators (slices) in the plan.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_plan_size
+                            type: number
+                          gpMaxSlices:
+                            description: |-
+                              processes for one query in one segment.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_slices
+                              Max amount of slice-processes for one query in one segment.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_max_slices
+                            type: number
+                          gpResourceGroupMemoryLimit:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_resource_group_memory_limit
+                              Identifies the maximum percentage of system memory resources to allocate to resource groups on each Greenplum Database segment node.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_resource_group_memory_limit
+                            type: number
+                          gpVmemProtectSegworkerCacheLimit:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_vmem_protect_segworker_cache_limit
+                              Set memory limit (in MB) for working process. If a query executor process consumes more than this configured amount, then the process will not be cached for use in subsequent queries after the process completes.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#gp_vmem_protect_segworker_cache_limit
+                            type: number
+                          gpWorkfileCompression:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+                              Specifies whether the temporary files created, when a hash aggregation or hash join operation spills to disk, are compressed.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_compression
+                            type: boolean
+                          gpWorkfileLimitFilesPerQuery:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+                              Default value is 10000
+                              Sets the maximum number of temporary spill files (also known as workfiles) allowed per query per segment.
+                              Spill files are created when executing a query that requires more memory than it is allocated.
+                              The current query is terminated when the limit is exceeded.
+                              Set the value to 0 (zero) to allow an unlimited number of spill files. master session reload
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_files_per_query
+                              Default value is 10000
+                            type: number
+                          gpWorkfileLimitPerQuery:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+                              Sets the maximum disk size an individual query is allowed to use for creating temporary spill files at each segment.
+                              The default value is 0, which means a limit is not enforced.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_query
+                            type: number
+                          gpWorkfileLimitPerSegment:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+                              Sets the maximum total disk size that all running queries are allowed to use for creating temporary spill files at each segment.
+                              The default value is 0, which means a limit is not enforced.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#gp_workfile_limit_per_segment
+                            type: number
+                          idleInTransactionSessionTimeout:
+                            description: |-
+                              config-client#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT
+                              Max time (in ms) which session can idle in open transaction
+                              https://postgrespro.ru/docs/postgrespro/current/runtime-config-client#GUC-IDLE-IN-TRANSACTION-SESSION-TIMEOUT
+                            type: number
+                          lockTimeout:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#lock_timeout
+                              Max time (in ms) which query will wait lock free on object
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#lock_timeout
+                            type: number
+                          logStatement:
+                            description: |-
+                              5/ref_guide/config_params/guc-list.html#log_statement
+                              Default value is ddl
+                              Controls which SQL statements are logged. DDL logs all data definition commands like CREATE, ALTER, and DROP commands.
+                              MOD logs all DDL statements, plus INSERT, UPDATE, DELETE, TRUNCATE, and COPY FROM.
+                              PREPARE and EXPLAIN ANALYZE statements are also logged if their contained command is of an appropriate type.
+                              https://docs.greenplum.org/6-5/ref_guide/config_params/guc-list.html#log_statement
+                              Default value is ddl
+                            type: string
+                          maxConnections:
+                            description: |-
+                              (Number) Maximum number of inbound connections on master segment
+                              Maximum number of inbound connections on master segment
+                            type: number
+                          maxPreparedTransactions:
+                            description: |-
+                              config-resource.html
+                              Sets the maximum number of transactions that can be in the "prepared" state simultaneously
+                              https://www.postgresql.org/docs/9.6/runtime-config-resource.html
+                            type: number
+                          maxSlotWalKeepSize:
+                            description: |-
+                              config-replication.html
+                              Specify the maximum size of WAL files that replication slots are allowed to retain in the pg_wal directory at checkpoint time.
+                              https://www.postgresql.org/docs/current/runtime-config-replication.html
+                            type: number
+                          maxStatementMem:
+                            description: |-
+                              of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
+                              Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
+                              (seghost_physical_memory) / (average_number_concurrent_queries)
+                              When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
+                              https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
+                              Default value is 2097152000 (2000MB)
+                              Sets the maximum memory limit for a query. Helps avoid out-of-memory errors on a segment host during query processing as a result of setting statement_mem too high.
+                              Taking into account the configuration of a single segment host, calculate max_statement_mem as follows:
+                              (seghost_physical_memory) / (average_number_concurrent_queries)
+                              When changing both max_statement_mem and statement_mem, max_statement_mem must be changed first, or listed first in the postgresql.conf file.
+                              https://greenplum.docs.pivotal.io/6-19/ref_guide/config_params/guc-list.html#max_statement_mem
+                              Default value is 2097152000 (2000MB)
+                            type: number
+                          runawayDetectorActivationPercent:
+                            description: |-
+                              tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#runaway_detector_activation_percent
+                              Percent of utilized Greenplum Database vmem that triggers the termination of queries.
+                              https://techdocs.broadcom.com/us/en/vmware-tanzu/data-solutions/tanzu-greenplum/6/greenplum-database/ref_guide-config_params-guc-list.html#runaway_detector_activation_percent
+                            type: number
+                        type: object
+                      pool:
+                        description: (Attributes) Odyssey® pool settings. (see below
+                          for nested schema)
+                        properties:
+                          clientIdleTimeout:
+                            description: |-
+                              (Number) Client pool idle timeout, in seconds.
+                              Client pool idle timeout, in seconds.
+
+                              Drop stale client connection after this much seconds of idleness, which is not in transaction.
+
+                              Set to zero to disable.
+                            type: number
+                          idleInTransactionTimeout:
+                            description: |-
+                              (Number) Client pool idle in transaction timeout, in seconds.
+                              Client pool idle in transaction timeout, in seconds.
+
+                              Drop client connection in transaction after this much seconds of idleness.
+
+                              Set to zero to disable.
+                            type: number
+                          mode:
+                            description: |-
+                              (String) Route server pool mode.
+                              Route server pool mode.
+                            type: string
+                          size:
+                            description: |-
+                              (Number) The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+                              The number of servers in the server pool. Clients are placed in a wait queue when all servers are busy.
+
+                              Set to zero to disable the limit.
+                            type: number
+                        type: object
+                      pxfConfig:
+                        description: |-
+                          (Attributes) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto (see below for nested schema)
+                        properties:
+                          connectionTimeout:
+                            description: |-
+                              (Number) Timeout for connection to the Apache Tomcat® server when making read requests.
+                              Timeout for connection to the Apache Tomcat® server when making read requests.
+
+                              Specify values in seconds.
+                            type: number
+                          maxThreads:
+                            description: |-
+                              (Number) Maximum number of the Apache Tomcat® threads.
+                              Maximum number of the Apache Tomcat® threads.
+
+                              To prevent situations when requests get stuck or fail due to running out of memory or malfunctioning of the Java garbage collector, specify the number of the Apache Tomcat® threads. Learn more about adjusting the number of threads in the [VMware Greenplum® Platform Extension Framework](https://docs.vmware.com/en/VMware-Greenplum-Platform-Extension-Framework/6.9/greenplum-platform-extension-framework/cfg_mem.html) documentation.
+                            type: number
+                          poolAllowCoreThreadTimeout:
+                            description: |-
+                              (Boolean) Determines whether the timeout for core streaming threads is permitted.
+                              Determines whether the timeout for core streaming threads is permitted.
+                            type: boolean
+                          poolCoreSize:
+                            description: |-
+                              (Number) Number of core streaming threads per pool.
+                              Number of core streaming threads per pool.
+                            type: number
+                          poolMaxSize:
+                            description: |-
+                              (Number) Maximum allowed number of core streaming threads.
+                              Maximum allowed number of core streaming threads.
+                            type: number
+                          poolQueueCapacity:
+                            description: |-
+                              (Number) Maximum number of requests you can add to a pool queue for core streaming threads.
+                              Maximum number of requests you can add to a pool queue for core streaming threads.
+
+                              If `0`, no pool queue is generated.
+                            type: number
+                          uploadTimeout:
+                            description: |-
+                              (Number) Timeout for connection to the Apache Tomcat® server when making write requests.
+                              Timeout for connection to the Apache Tomcat® server when making write requests.
+
+                              Specify the values in seconds.
+                            type: number
+                          xms:
+                            description: |-
+                              (Number) Maximum size, in megabytes, of the JVM heap for the PXF daemon.
+                              Maximum size, in megabytes, of the JVM heap for the PXF daemon.
+                            type: number
+                          xmx:
+                            description: |-
+                              (Number) Initial size, in megabytes, of the JVM heap for the PXF daemon.
+                              Initial size, in megabytes, of the JVM heap for the PXF daemon.
+                            type: number
+                        type: object
+                    type: object
+                  config:
+                    description: (Attributes) Greenplum® cluster configuration. (see
+                      below for nested schema)
+                    properties:
+                      access:
+                        description: (Attributes) Access policy for external services.
+                          (see below for nested schema)
+                        properties:
+                          dataLens:
+                            description: |-
+                              (Boolean) Allows data export from the cluster to DataLens.
+                              Allows data export from the cluster to DataLens.
+                            type: boolean
+                          dataTransfer:
+                            description: |-
+                              (Boolean) Allows access for DataTransfer.
+                              Allows access for DataTransfer.
+                            type: boolean
+                          webSql:
+                            description: |-
+                              (Boolean) Allows SQL queries to the cluster databases from the management console.
+                              Allows SQL queries to the cluster databases from the management console.
+                            type: boolean
+                          yandexQuery:
+                            description: |-
+                              (Boolean) Allow access for YandexQuery.
+                              Allow access for YandexQuery.
+                            type: boolean
+                        type: object
+                      assignPublicIp:
+                        description: |-
+                          (Boolean) Determines whether the cluster has a public IP address.
+                          Determines whether the cluster has a public IP address.
+
+                          After the cluster has been created, this setting cannot be changed.
+                        type: boolean
+                      backupRetainPeriodDays:
+                        description: |-
+                          (Number) Retention policy of automated backups.
+                          Retention policy of automated backups.
+                        type: number
+                      backupWindowStart:
+                        description: |-
+                          (String) Time to start the daily backup, in the UTC timezone.
+                          Time to start the daily backup, in the UTC timezone.
+                        type: string
+                      subnetId:
+                        description: |-
+                          (String) ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+                          ID of the subnet the cluster belongs to. This subnet should be a part of the cloud network the cluster belongs to (see [Cluster.network_id]).
+                        type: string
+                      version:
+                        description: |-
+                          (String) Version of the Greenplum® server software.
+                          Version of the Greenplum® server software.
+                        type: string
+                      zoneId:
+                        description: |-
+                          (String) ID of the availability zone the cluster belongs to.
+                          To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+                          ID of the availability zone the cluster belongs to.
+                          To get a list of available zones, use the [yandex.cloud.compute.v1.ZoneService.List] request.
+                        type: string
+                    type: object
+                  createdAt:
+                    description: |-
+                      (String) Time when the cluster was created.
+                      Time when the cluster was created.
+                    type: string
+                  deletionProtection:
+                    description: |-
+                      (Boolean) Determines whether the cluster is protected from being deleted.
+                      Determines whether the cluster is protected from being deleted.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) Description of the Greenplum® cluster.
+                      Description of the Greenplum® cluster.
+                    type: string
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the Greenplum® cluster.
+                      Deployment environment of the Greenplum® cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      (String) ID of the folder that the Greenplum® cluster belongs to.
+                      ID of the folder that the Greenplum® cluster belongs to.
+                    type: string
+                  hostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the cluster.
+                      Host groups hosting VMs of the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  id:
+                    description: (String) ID of the Greenplum® cluster resource to
+                      return.
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) Custom labels for the Greenplum® cluster as key:value pairs. Maximum 64 labels per resource.
+                      Custom labels for the Greenplum® cluster as `key:value` pairs. Maximum 64 labels per resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  logging:
+                    description: (Attributes) Cloud logging configuration (see below
+                      for nested schema)
+                    properties:
+                      commandCenterEnabled:
+                        description: |-
+                          (Boolean) send Yandex Command Center logs
+                          send Yandex Command Center logs
+                        type: boolean
+                      enabled:
+                        description: |-
+                          (Boolean) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: boolean
+                      folderId:
+                        description: |-
+                          (String) ID of the folder that the Greenplum® cluster belongs to.
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: string
+                      greenplumEnabled:
+                        description: |-
+                          (Boolean) send Greenplum logs
+                          send Greenplum logs
+                        type: boolean
+                      logGroupId:
+                        description: |-
+                          (String) package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                          package: yandex.cloud.mdb.greenplum.v1
+                          filename: yandex/cloud/mdb/greenplum/v1/cluster.proto
+                        type: string
+                      poolerEnabled:
+                        description: |-
+                          (Boolean) send Pooler logs
+                          send Pooler logs
+                        type: boolean
+                    type: object
+                  maintenanceWindow:
+                    description: (Attributes) A Greenplum® cluster maintenance window.
+                      Should be defined by either one of the two options. (see below
+                      for nested schema)
+                    properties:
+                      anytime:
+                        description: time maintenance window. (see below for nested
+                          schema)
+                        type: object
+                      weeklyMaintenanceWindow:
+                        description: (Attributes) A weekly maintenance window. (see
+                          below for nested schema)
+                        properties:
+                          day:
+                            description: |-
+                              (String) Day of the week.
+                              Day of the week.
+                            type: string
+                          hour:
+                            description: |-
+                              (Number) Hour of the day in the UTC timezone.
+                              Hour of the day in the UTC timezone.
+                            type: number
+                        type: object
+                    type: object
+                  masterConfig:
+                    description: (Attributes) Configuration of the Greenplum® master
+                      subcluster. (see below for nested schema)
+                    properties:
+                      resources:
+                        description: (Attributes) Computational resources allocated
+                          to Greenplum® master subcluster hosts. (see below for nested
+                          schema)
+                        properties:
+                          diskSize:
+                            description: |-
+                              (Number) Volume of the storage used by the host, in bytes.
+                              Volume of the storage used by the host, in bytes.
+                            type: number
+                          diskTypeId:
+                            description: |-
+                              hdd, network-ssd or local-ssd.
+                              Type of the storage used by the host: `network-hdd`, `network-ssd` or `local-ssd`.
+                            type: string
+                          resourcePresetId:
+                            description: |-
+                              (String) ID of the preset for computational resources allocated to a host.
+                              ID of the preset for computational resources allocated to a host.
+
+                              Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
+                            type: string
+                        type: object
+                    type: object
+                  masterHostCount:
+                    description: |-
+                      (Number) Number of hosts in the master subcluster.
+                      Number of hosts in the master subcluster.
+                    type: number
+                  masterHostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the master subcluster.
+                      Host groups hosting VMs of the master subcluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  monitoring:
+                    description: (Attributes Set) Description of monitoring systems
+                      relevant to the Greenplum® cluster. (see below for nested schema)
+                    items:
+                      properties:
+                        description:
+                          description: |-
+                            (String) Description of the Greenplum® cluster.
+                            Description of the monitoring system.
+                          type: string
+                        link:
+                          description: |-
+                            (String) Link to the monitoring system charts for the Greenplum® cluster.
+                            Link to the monitoring system charts for the Greenplum® cluster.
+                          type: string
+                        name:
+                          description: |-
+                            (String) Name of the Greenplum® cluster.
+                            The name is unique within the folder.
+                            Name of the monitoring system.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: |-
+                      (String) Name of the Greenplum® cluster.
+                      The name is unique within the folder.
+                      Name of the Greenplum® cluster.
+                      The name is unique within the folder.
+                    type: string
+                  networkId:
+                    description: |-
+                      (String) ID of the cloud network that the cluster belongs to.
+                      ID of the cloud network that the cluster belongs to.
+                    type: string
+                  plannedOperation:
+                    description: (Attributes) Maintenance operation planned at nearest
+                      [maintenance_window]. (see below for nested schema)
+                    properties:
+                      delayedUntil:
+                        description: |-
+                          (String) Delay time for the maintenance operation.
+                          Delay time for the maintenance operation.
+                        type: string
+                      info:
+                        description: |-
+                          (String) The description of the operation.
+                          The description of the operation.
+                        type: string
+                    type: object
+                  restore:
+                    description: (Attributes) The cluster will be created from the
+                      specified backup. (see below for nested schema)
+                    properties:
+                      backupId:
+                        description: |-
+                          (String) ID of the backup to create a cluster from.
+                          ID of the backup to create a cluster from.
+                        type: string
+                      restoreOnly:
+                        description: |-
+                          (Set of String) List of databases and tables to restore
+                          List of databases and tables to restore
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      time:
+                        description: |-
+                          01-02T15:04:05 - UTC). When not set, current time is used.
+                          Timestamp of the moment to which the Greenplum cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) User security groups.
+                      User security groups.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  segmentConfig:
+                    description: (Attributes) Configuration of the Greenplum® segment
+                      subcluster. (see below for nested schema)
+                    properties:
+                      resources:
+                        description: (Attributes) Computational resources allocated
+                          to Greenplum® master subcluster hosts. (see below for nested
+                          schema)
+                        properties:
+                          diskSize:
+                            description: |-
+                              (Number) Volume of the storage used by the host, in bytes.
+                              Volume of the storage used by the host, in bytes.
+                            type: number
+                          diskTypeId:
+                            description: |-
+                              hdd, network-ssd or local-ssd.
+                              Type of the storage used by the host: `network-hdd`, `network-ssd` or `local-ssd`.
+                            type: string
+                          resourcePresetId:
+                            description: |-
+                              (String) ID of the preset for computational resources allocated to a host.
+                              ID of the preset for computational resources allocated to a host.
+
+                              Available presets are listed in the [documentation](/docs/managed-greenplum/concepts/instance-types).
+                            type: string
+                        type: object
+                    type: object
+                  segmentHostCount:
+                    description: |-
+                      (Number) Number of hosts in the segment subcluster.
+                      Number of hosts in the segment subcluster.
+                    type: number
+                  segmentHostGroupIds:
+                    description: |-
+                      (Set of String) Host groups hosting VMs of the segment subcluster.
+                      Host groups hosting VMs of the segment subcluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  segmentInHost:
+                    description: |-
+                      (Number) Number of segments per host.
+                      Number of segments per host.
+                    type: number
+                  serviceAccountId:
+                    description: |-
+                      (String) Service account that will be used to access a Yandex Cloud resources
+                      Service account that will be used to access a Yandex Cloud resources
+                    type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  userName:
+                    description: |-
+                      (String) Owner user name.
+                      Owner user name.
+                    type: string
+                  userPassword:
+                    description: |-
+                      (String) Owner user password.
+                      Owner user password.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

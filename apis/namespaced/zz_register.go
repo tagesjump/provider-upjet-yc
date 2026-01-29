@@ -6,19 +6,25 @@ package namespaced
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/namespaced/alb/v1alpha1"
+	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/namespaced/airflow/v1alpha1"
+	v1alpha1alb "github.com/tagesjump/provider-upjet-yc/apis/namespaced/alb/v1alpha1"
 	v1alpha1api "github.com/tagesjump/provider-upjet-yc/apis/namespaced/api/v1alpha1"
 	v1alpha1audit "github.com/tagesjump/provider-upjet-yc/apis/namespaced/audit/v1alpha1"
 	v1alpha1backup "github.com/tagesjump/provider-upjet-yc/apis/namespaced/backup/v1alpha1"
 	v1alpha1billing "github.com/tagesjump/provider-upjet-yc/apis/namespaced/billing/v1alpha1"
 	v1alpha1cdn "github.com/tagesjump/provider-upjet-yc/apis/namespaced/cdn/v1alpha1"
+	v1alpha1cloud "github.com/tagesjump/provider-upjet-yc/apis/namespaced/cloud/v1alpha1"
+	v1alpha1cloudregistry "github.com/tagesjump/provider-upjet-yc/apis/namespaced/cloudregistry/v1alpha1"
 	v1alpha1cm "github.com/tagesjump/provider-upjet-yc/apis/namespaced/cm/v1alpha1"
 	v1alpha1compute "github.com/tagesjump/provider-upjet-yc/apis/namespaced/compute/v1alpha1"
+	v1alpha1connectionmanager "github.com/tagesjump/provider-upjet-yc/apis/namespaced/connectionmanager/v1alpha1"
 	v1alpha1container "github.com/tagesjump/provider-upjet-yc/apis/namespaced/container/v1alpha1"
 	v1alpha1dataproc "github.com/tagesjump/provider-upjet-yc/apis/namespaced/dataproc/v1alpha1"
+	v1alpha1datasphere "github.com/tagesjump/provider-upjet-yc/apis/namespaced/datasphere/v1alpha1"
 	v1alpha1datatransfer "github.com/tagesjump/provider-upjet-yc/apis/namespaced/datatransfer/v1alpha1"
 	v1alpha1dns "github.com/tagesjump/provider-upjet-yc/apis/namespaced/dns/v1alpha1"
 	v1alpha1function "github.com/tagesjump/provider-upjet-yc/apis/namespaced/function/v1alpha1"
+	v1alpha1gitlab "github.com/tagesjump/provider-upjet-yc/apis/namespaced/gitlab/v1alpha1"
 	v1alpha1iam "github.com/tagesjump/provider-upjet-yc/apis/namespaced/iam/v1alpha1"
 	v1alpha1iot "github.com/tagesjump/provider-upjet-yc/apis/namespaced/iot/v1alpha1"
 	v1alpha1kms "github.com/tagesjump/provider-upjet-yc/apis/namespaced/kms/v1alpha1"
@@ -29,36 +35,47 @@ import (
 	v1alpha1logging "github.com/tagesjump/provider-upjet-yc/apis/namespaced/logging/v1alpha1"
 	v1alpha1mdb "github.com/tagesjump/provider-upjet-yc/apis/namespaced/mdb/v1alpha1"
 	v1alpha1message "github.com/tagesjump/provider-upjet-yc/apis/namespaced/message/v1alpha1"
+	v1alpha1metastore "github.com/tagesjump/provider-upjet-yc/apis/namespaced/metastore/v1alpha1"
 	v1alpha1monitoring "github.com/tagesjump/provider-upjet-yc/apis/namespaced/monitoring/v1alpha1"
 	v1alpha1organizationmanager "github.com/tagesjump/provider-upjet-yc/apis/namespaced/organizationmanager/v1alpha1"
 	v1alpha1resourcemanager "github.com/tagesjump/provider-upjet-yc/apis/namespaced/resourcemanager/v1alpha1"
 	v1alpha1serverless "github.com/tagesjump/provider-upjet-yc/apis/namespaced/serverless/v1alpha1"
 	v1alpha1smartcaptcha "github.com/tagesjump/provider-upjet-yc/apis/namespaced/smartcaptcha/v1alpha1"
+	v1alpha1spark "github.com/tagesjump/provider-upjet-yc/apis/namespaced/spark/v1alpha1"
 	v1alpha1storage "github.com/tagesjump/provider-upjet-yc/apis/namespaced/storage/v1alpha1"
 	v1alpha1sws "github.com/tagesjump/provider-upjet-yc/apis/namespaced/sws/v1alpha1"
+	v1alpha1trino "github.com/tagesjump/provider-upjet-yc/apis/namespaced/trino/v1alpha1"
 	v1alpha1namespaced "github.com/tagesjump/provider-upjet-yc/apis/namespaced/v1alpha1"
 	v1beta1 "github.com/tagesjump/provider-upjet-yc/apis/namespaced/v1beta1"
 	v1alpha1vpc "github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1"
 	v1alpha1yandex "github.com/tagesjump/provider-upjet-yc/apis/namespaced/yandex/v1alpha1"
 	v1alpha1ydb "github.com/tagesjump/provider-upjet-yc/apis/namespaced/ydb/v1alpha1"
+	v1alpha1yq "github.com/tagesjump/provider-upjet-yc/apis/namespaced/yq/v1alpha1"
+	v1alpha1ytsaurus "github.com/tagesjump/provider-upjet-yc/apis/namespaced/ytsaurus/v1alpha1"
 )
 
 func init() {
 	// Register the types with the Scheme so the components can map objects to GroupVersionKinds and back
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
+		v1alpha1alb.SchemeBuilder.AddToScheme,
 		v1alpha1api.SchemeBuilder.AddToScheme,
 		v1alpha1audit.SchemeBuilder.AddToScheme,
 		v1alpha1backup.SchemeBuilder.AddToScheme,
 		v1alpha1billing.SchemeBuilder.AddToScheme,
 		v1alpha1cdn.SchemeBuilder.AddToScheme,
+		v1alpha1cloud.SchemeBuilder.AddToScheme,
+		v1alpha1cloudregistry.SchemeBuilder.AddToScheme,
 		v1alpha1cm.SchemeBuilder.AddToScheme,
 		v1alpha1compute.SchemeBuilder.AddToScheme,
+		v1alpha1connectionmanager.SchemeBuilder.AddToScheme,
 		v1alpha1container.SchemeBuilder.AddToScheme,
 		v1alpha1dataproc.SchemeBuilder.AddToScheme,
+		v1alpha1datasphere.SchemeBuilder.AddToScheme,
 		v1alpha1datatransfer.SchemeBuilder.AddToScheme,
 		v1alpha1dns.SchemeBuilder.AddToScheme,
 		v1alpha1function.SchemeBuilder.AddToScheme,
+		v1alpha1gitlab.SchemeBuilder.AddToScheme,
 		v1alpha1iam.SchemeBuilder.AddToScheme,
 		v1alpha1iot.SchemeBuilder.AddToScheme,
 		v1alpha1kms.SchemeBuilder.AddToScheme,
@@ -69,18 +86,23 @@ func init() {
 		v1alpha1logging.SchemeBuilder.AddToScheme,
 		v1alpha1mdb.SchemeBuilder.AddToScheme,
 		v1alpha1message.SchemeBuilder.AddToScheme,
+		v1alpha1metastore.SchemeBuilder.AddToScheme,
 		v1alpha1monitoring.SchemeBuilder.AddToScheme,
 		v1alpha1organizationmanager.SchemeBuilder.AddToScheme,
 		v1alpha1resourcemanager.SchemeBuilder.AddToScheme,
 		v1alpha1serverless.SchemeBuilder.AddToScheme,
 		v1alpha1smartcaptcha.SchemeBuilder.AddToScheme,
+		v1alpha1spark.SchemeBuilder.AddToScheme,
 		v1alpha1storage.SchemeBuilder.AddToScheme,
 		v1alpha1sws.SchemeBuilder.AddToScheme,
+		v1alpha1trino.SchemeBuilder.AddToScheme,
 		v1alpha1namespaced.SchemeBuilder.AddToScheme,
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1alpha1vpc.SchemeBuilder.AddToScheme,
 		v1alpha1yandex.SchemeBuilder.AddToScheme,
 		v1alpha1ydb.SchemeBuilder.AddToScheme,
+		v1alpha1yq.SchemeBuilder.AddToScheme,
+		v1alpha1ytsaurus.SchemeBuilder.AddToScheme,
 	)
 }
 

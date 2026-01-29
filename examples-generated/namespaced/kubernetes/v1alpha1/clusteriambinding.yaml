@@ -1,0 +1,18 @@
+apiVersion: kubernetes.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: ClusterIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kubernetes/v1alpha1/clusteriambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my_cluster
+    members:
+    - userAccount:my_user_account_id
+    - serviceAccount:my_service_account_id
+    role: viewer

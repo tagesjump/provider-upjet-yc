@@ -1,0 +1,17 @@
+apiVersion: datasphere.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Community
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/community
+  labels:
+    testing.upbound.io/example-name: my-community
+  name: my-community
+  namespace: upbound-system
+spec:
+  forProvider:
+    billingAccountId: example-organization-id
+    description: Description of community
+    labels:
+      foo: bar
+    name: example-datasphere-community
+    organizationId: example-organization-id

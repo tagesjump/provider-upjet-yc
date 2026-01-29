@@ -60,88 +60,117 @@ spec:
               forProvider:
                 properties:
                   asyncInvocation:
-                    description: Config for asynchronous invocations of Yandex Cloud
-                      Function.
+                    description: |-
+                      (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Function. (see below for nested schema)
+                      Config for asynchronous invocations of Yandex Cloud Function.
                     items:
                       properties:
                         retriesCount:
-                          description: Maximum number of retries for async invocation
+                          description: |-
+                            (Number) Maximum number of retries for async invocation.
+                            Maximum number of retries for async invocation.
                           type: number
                         serviceAccountId:
-                          description: Service account used for async invocation
+                          description: |-
+                            (String) Service account which linked to the resource.
+                            Service account used for async invocation.
                           type: string
                         ymqFailureTarget:
-                          description: Target for unsuccessful async invocation
+                          description: |-
+                            (Block List, Max: 1) Target for unsuccessful async invocation. (see below for nested schema)
+                            Target for unsuccessful async invocation.
                           items:
                             properties:
                               arn:
-                                description: YMQ ARN
+                                description: |-
+                                  (String) YMQ ARN.
+                                  YMQ ARN.
                                 type: string
                               serviceAccountId:
-                                description: Service account ID for Yandex Cloud Function
+                                description: |-
+                                  (String) Service account which linked to the resource.
+                                  Service account used for writing result to queue.
                                 type: string
                             type: object
                           type: array
                         ymqSuccessTarget:
-                          description: Target for successful async invocation
+                          description: |-
+                            (Block List, Max: 1) Target for successful async invocation. (see below for nested schema)
+                            Target for successful async invocation.
                           items:
                             properties:
                               arn:
-                                description: YMQ ARN
+                                description: |-
+                                  (String) YMQ ARN.
+                                  YMQ ARN.
                                 type: string
                               serviceAccountId:
-                                description: Service account used for writing result
-                                  to queue
+                                description: |-
+                                  (String) Service account which linked to the resource.
+                                  Service account used for writing result to queue.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   concurrency:
-                    description: The maximum number of requests processed by a function
-                      instance at the same time.
+                    description: |-
+                      (Number) The maximum number of requests processed by a function instance at the same time.
+                      The maximum number of requests processed by a function instance at the same time.
                     type: number
                   connectivity:
-                    description: Function version connectivity. If specified the version
-                      will be attached to specified network.
+                    description: |-
+                      (Block List, Max: 1) Function version connectivity. If specified the version will be attached to specified network. (see below for nested schema)
+                      Function version connectivity. If specified the version will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the version will have access to. It's
-                            essential to specify network with subnets in all availability
-                            zones.
+                          description: |-
+                            (String) Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+                            Network the version will have access to. It's essential to specify network with subnets in all availability zones.
                           type: string
                       type: object
                     type: array
                   content:
-                    description: Version deployment content for Yandex Cloud Function
-                      code. Can be only one package or content section. Either package
-                      or content section must be specified.
+                    description: |-
+                      (Block List, Max: 1) Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified. (see below for nested schema)
+                      Version deployment content for Yandex Cloud Function code. Can be only one `package` or `content` section. Either `package` or `content` section must be specified.
                     items:
                       properties:
                         zipFilename:
-                          description: Filename to zip archive for the version.
+                          description: |-
+                            (String) Filename to zip archive for the version.
+                            Filename to zip archive for the version.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud Function
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   entrypoint:
-                    description: Entrypoint for Yandex Cloud Function
+                    description: |-
+                      (String) Entrypoint for Yandex Cloud Function.
+                      Entrypoint for Yandex Cloud Function.
                     type: string
                   environment:
                     additionalProperties:
                       type: string
-                    description: A set of key/value environment variables for Yandex
-                      Cloud Function
+                    description: |-
+                      Z, a-z).
+                      A set of key/value environment variables for Yandex Cloud Function. Each key must begin with a letter (A-Z, a-z).
                     type: object
                     x-kubernetes-map-type: granular
                   executionTimeout:
-                    description: Execution timeout in seconds for Yandex Cloud Function
+                    description: |-
+                      (String) Execution timeout in seconds for Yandex Cloud Function.
+                      Execution timeout in seconds for Yandex Cloud Function.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud Function
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -228,115 +257,555 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Function
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud Function.
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud Function. (see below for nested schema)
+                      Options for logging from Yandex Cloud Function.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from function disabled
+                          description: |-
+                            (Boolean) Is logging from function disabled.
+                            Is logging from function disabled.
                           type: boolean
                         folderId:
-                          description: Folder ID for the Yandex Cloud Function
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   memory:
-                    description: Memory in megabytes (aligned to 128MB) for Yandex
-                      Cloud Function
+                    description: |-
+                      (Number) Memory in megabytes (aligned to 128MB) for Yandex Cloud Function.
+                      Memory in megabytes (**aligned to 128MB**) for Yandex Cloud Function.
                     type: number
+                  metadataOptions:
+                    description: |-
+                      (Block List, Max: 1) Options set the access mode to function's metadata endpoints. (see below for nested schema)
+                      Options set the access mode to function's metadata endpoints.
+                    items:
+                      properties:
+                        awsV1HttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+                          type: number
+                        gceHttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+                          type: number
+                      type: object
+                    type: array
+                  mounts:
+                    description: |-
+                      (Block List) Mounts for Yandex Cloud Function. (see below for nested schema)
+                      Mounts for Yandex Cloud Function.
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+                            One of the available mount types. Disk available during the function execution time.
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: |-
+                                  (Number) Optional block size of the ephemeral disk in KB.
+                                  Optional block size of the ephemeral disk in KB.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of the ephemeral disk in GB.
+                                  Size of the ephemeral disk in GB.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: |-
+                            (String) Mount’s accessibility mode. Valid values are ro and rw.
+                            Mount’s accessibility mode. Valid values are `ro` and `rw`.
+                          type: string
+                        name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the mount point. The directory where the target is mounted will be accessible at the `/function/storage/<mounts.0.name>` path.
+                          type: string
+                        objectStorage:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Object storage as a mount. (see below for nested schema)
+                            One of the available mount types. Object storage as a mount.
+                          items:
+                            properties:
+                              bucket:
+                                description: |-
+                                  (String) Name of the mounting bucket.
+                                  Name of the mounting bucket.
+                                type: string
+                              bucketRef:
+                                description: Reference to a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketSelector:
+                                description: Selector for a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              prefix:
+                                description: |-
+                                  (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                  Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
-                    description: Yandex Cloud Function name used to define trigger
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   package:
-                    description: Version deployment package for Yandex Cloud Function
-                      code. Can be only one package or content section. Either package
-                      or content section must be specified.
+                    description: |-
+                      (Block List, Max: 1) Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified. (see below for nested schema)
+                      Version deployment package for Yandex Cloud Function code. Can be only one `package` or `content` section. Either `package` or `content` section must be specified.
                     items:
                       properties:
                         bucketName:
-                          description: Name of the bucket that stores the code for
-                            the version.
+                          description: |-
+                            (String) Name of the bucket that stores the code for the version.
+                            Name of the bucket that stores the code for the version.
                           type: string
                         objectName:
-                          description: Name of the object in the bucket that stores
-                            the code for the version.
+                          description: |-
+                            (String) Name of the object in the bucket that stores the code for the version.
+                            Name of the object in the bucket that stores the code for the version.
                           type: string
                         sha256:
-                          description: SHA256 hash of the version deployment package.
+                          description: |-
+                            (String) SHA256 hash of the version deployment package.
+                            SHA256 hash of the version deployment package.
                           type: string
                       type: object
                     type: array
                   runtime:
-                    description: Runtime for Yandex Cloud Function
+                    description: |-
+                      (String) Runtime for Yandex Cloud Function.
+                      Runtime for Yandex Cloud Function.
                     type: string
                   secrets:
-                    description: Secrets for Yandex Cloud Function.
+                    description: |-
+                      (Block List) Secrets for Yandex Cloud Function. (see below for nested schema)
+                      Secrets for Yandex Cloud Function.
                     items:
                       properties:
                         environmentVariable:
-                          description: Function's environment variable in which secret's
-                            value will be stored.
+                          description: |-
+                            Z, a-z).
+                            Function's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
                           type: string
                         id:
-                          description: Secret's id.
+                          description: |-
+                            (String) The ID of this resource.
+                            Secret's ID.
                           type: string
+                        idRef:
+                          description: Reference to a Secret in lockbox to populate
+                            id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            namespace:
+                              description: Namespace of the referenced object
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a Secret in lockbox to populate
+                            id.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         key:
-                          description: Secret's entries key which value will be stored
-                            in environment variable.
+                          description: |-
+                            (String) Secret's entries key which value will be stored in environment variable.
+                            Secret's entries key which value will be stored in environment variable.
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: |-
+                            (String) Secret's version ID.
+                            Secret's version ID.
                           type: string
+                        versionIdRef:
+                          description: Reference to a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            namespace:
+                              description: Namespace of the referenced object
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        versionIdSelector:
+                          description: Selector for a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   serviceAccountId:
-                    description: Service account ID for Yandex Cloud Function
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Function.
+                    description: |-
+                      > object_storage instead). Storage mounts for Yandex Cloud Function. (see below for nested schema)
+                      (**DEPRECATED**, use `mounts -> object_storage` instead). Storage mounts for Yandex Cloud Function.
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: |-
+                            (String) Name of the mounting bucket.
+                            Name of the mounting bucket.
                           type: string
                         mountPointName:
-                          description: Name of the mount point. The directory where
-                            the bucket is mounted will be accessible at the /function/storage/<mount_point>
-                            path.
+                          description: |-
+                            (String) Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.
+                            Name of the mount point. The directory where the bucket is mounted will be accessible at the `/function/storage/<mount_point>` path.
                           type: string
                         prefix:
-                          description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                          description: |-
+                            (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                            Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: |-
+                            only mode.
+                            Mount the bucket in read-only mode.
                           type: boolean
                       type: object
                     type: array
                   tags:
-                    description: Tags for Yandex Cloud Function. Tag "$latest" isn't
-                      returned.
+                    description: |-
+                      (Set of String) Tags for Yandex Cloud Function. Tag $latest isn't returned.
+                      Tags for Yandex Cloud Function. Tag `$latest` isn't returned.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   tmpfsSize:
-                    description: Tmpfs size for Yandex Cloud Function.
+                    description: |-
+                      (Number) Tmpfs size for Yandex Cloud Function.
+                      Tmpfs size for Yandex Cloud Function.
                     type: number
                   userHash:
-                    description: User-defined string for current function version.
-                      User must change this string any times when function changed.
-                      Function will be updated when hash is changed.
+                    description: |-
+                      defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
+                      User-defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
                     type: string
                 type: object
               initProvider:
@@ -353,88 +822,117 @@ spec:
                   autoscaler.
                 properties:
                   asyncInvocation:
-                    description: Config for asynchronous invocations of Yandex Cloud
-                      Function.
+                    description: |-
+                      (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Function. (see below for nested schema)
+                      Config for asynchronous invocations of Yandex Cloud Function.
                     items:
                       properties:
                         retriesCount:
-                          description: Maximum number of retries for async invocation
+                          description: |-
+                            (Number) Maximum number of retries for async invocation.
+                            Maximum number of retries for async invocation.
                           type: number
                         serviceAccountId:
-                          description: Service account used for async invocation
+                          description: |-
+                            (String) Service account which linked to the resource.
+                            Service account used for async invocation.
                           type: string
                         ymqFailureTarget:
-                          description: Target for unsuccessful async invocation
+                          description: |-
+                            (Block List, Max: 1) Target for unsuccessful async invocation. (see below for nested schema)
+                            Target for unsuccessful async invocation.
                           items:
                             properties:
                               arn:
-                                description: YMQ ARN
+                                description: |-
+                                  (String) YMQ ARN.
+                                  YMQ ARN.
                                 type: string
                               serviceAccountId:
-                                description: Service account ID for Yandex Cloud Function
+                                description: |-
+                                  (String) Service account which linked to the resource.
+                                  Service account used for writing result to queue.
                                 type: string
                             type: object
                           type: array
                         ymqSuccessTarget:
-                          description: Target for successful async invocation
+                          description: |-
+                            (Block List, Max: 1) Target for successful async invocation. (see below for nested schema)
+                            Target for successful async invocation.
                           items:
                             properties:
                               arn:
-                                description: YMQ ARN
+                                description: |-
+                                  (String) YMQ ARN.
+                                  YMQ ARN.
                                 type: string
                               serviceAccountId:
-                                description: Service account used for writing result
-                                  to queue
+                                description: |-
+                                  (String) Service account which linked to the resource.
+                                  Service account used for writing result to queue.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   concurrency:
-                    description: The maximum number of requests processed by a function
-                      instance at the same time.
+                    description: |-
+                      (Number) The maximum number of requests processed by a function instance at the same time.
+                      The maximum number of requests processed by a function instance at the same time.
                     type: number
                   connectivity:
-                    description: Function version connectivity. If specified the version
-                      will be attached to specified network.
+                    description: |-
+                      (Block List, Max: 1) Function version connectivity. If specified the version will be attached to specified network. (see below for nested schema)
+                      Function version connectivity. If specified the version will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the version will have access to. It's
-                            essential to specify network with subnets in all availability
-                            zones.
+                          description: |-
+                            (String) Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+                            Network the version will have access to. It's essential to specify network with subnets in all availability zones.
                           type: string
                       type: object
                     type: array
                   content:
-                    description: Version deployment content for Yandex Cloud Function
-                      code. Can be only one package or content section. Either package
-                      or content section must be specified.
+                    description: |-
+                      (Block List, Max: 1) Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified. (see below for nested schema)
+                      Version deployment content for Yandex Cloud Function code. Can be only one `package` or `content` section. Either `package` or `content` section must be specified.
                     items:
                       properties:
                         zipFilename:
-                          description: Filename to zip archive for the version.
+                          description: |-
+                            (String) Filename to zip archive for the version.
+                            Filename to zip archive for the version.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud Function
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   entrypoint:
-                    description: Entrypoint for Yandex Cloud Function
+                    description: |-
+                      (String) Entrypoint for Yandex Cloud Function.
+                      Entrypoint for Yandex Cloud Function.
                     type: string
                   environment:
                     additionalProperties:
                       type: string
-                    description: A set of key/value environment variables for Yandex
-                      Cloud Function
+                    description: |-
+                      Z, a-z).
+                      A set of key/value environment variables for Yandex Cloud Function. Each key must begin with a letter (A-Z, a-z).
                     type: object
                     x-kubernetes-map-type: granular
                   executionTimeout:
-                    description: Execution timeout in seconds for Yandex Cloud Function
+                    description: |-
+                      (String) Execution timeout in seconds for Yandex Cloud Function.
+                      Execution timeout in seconds for Yandex Cloud Function.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud Function
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -521,115 +1019,555 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Function
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud Function.
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud Function. (see below for nested schema)
+                      Options for logging from Yandex Cloud Function.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from function disabled
+                          description: |-
+                            (Boolean) Is logging from function disabled.
+                            Is logging from function disabled.
                           type: boolean
                         folderId:
-                          description: Folder ID for the Yandex Cloud Function
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   memory:
-                    description: Memory in megabytes (aligned to 128MB) for Yandex
-                      Cloud Function
+                    description: |-
+                      (Number) Memory in megabytes (aligned to 128MB) for Yandex Cloud Function.
+                      Memory in megabytes (**aligned to 128MB**) for Yandex Cloud Function.
                     type: number
+                  metadataOptions:
+                    description: |-
+                      (Block List, Max: 1) Options set the access mode to function's metadata endpoints. (see below for nested schema)
+                      Options set the access mode to function's metadata endpoints.
+                    items:
+                      properties:
+                        awsV1HttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+                          type: number
+                        gceHttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+                          type: number
+                      type: object
+                    type: array
+                  mounts:
+                    description: |-
+                      (Block List) Mounts for Yandex Cloud Function. (see below for nested schema)
+                      Mounts for Yandex Cloud Function.
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+                            One of the available mount types. Disk available during the function execution time.
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: |-
+                                  (Number) Optional block size of the ephemeral disk in KB.
+                                  Optional block size of the ephemeral disk in KB.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of the ephemeral disk in GB.
+                                  Size of the ephemeral disk in GB.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: |-
+                            (String) Mount’s accessibility mode. Valid values are ro and rw.
+                            Mount’s accessibility mode. Valid values are `ro` and `rw`.
+                          type: string
+                        name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the mount point. The directory where the target is mounted will be accessible at the `/function/storage/<mounts.0.name>` path.
+                          type: string
+                        objectStorage:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Object storage as a mount. (see below for nested schema)
+                            One of the available mount types. Object storage as a mount.
+                          items:
+                            properties:
+                              bucket:
+                                description: |-
+                                  (String) Name of the mounting bucket.
+                                  Name of the mounting bucket.
+                                type: string
+                              bucketRef:
+                                description: Reference to a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the referenced object
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              bucketSelector:
+                                description: Selector for a Bucket in storage to populate
+                                  bucket.
+                                properties:
+                                  matchControllerRef:
+                                    description: |-
+                                      MatchControllerRef ensures an object with the same controller reference
+                                      as the selecting object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  namespace:
+                                    description: Namespace for the selector
+                                    type: string
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: |-
+                                          Resolution specifies whether resolution of this reference is required.
+                                          The default is 'Required', which means the reconcile will fail if the
+                                          reference cannot be resolved. 'Optional' means this reference will be
+                                          a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: |-
+                                          Resolve specifies when this reference should be resolved. The default
+                                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                                          the corresponding field is not present. Use 'Always' to resolve the
+                                          reference on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              prefix:
+                                description: |-
+                                  (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                  Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
-                    description: Yandex Cloud Function name used to define trigger
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   package:
-                    description: Version deployment package for Yandex Cloud Function
-                      code. Can be only one package or content section. Either package
-                      or content section must be specified.
+                    description: |-
+                      (Block List, Max: 1) Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified. (see below for nested schema)
+                      Version deployment package for Yandex Cloud Function code. Can be only one `package` or `content` section. Either `package` or `content` section must be specified.
                     items:
                       properties:
                         bucketName:
-                          description: Name of the bucket that stores the code for
-                            the version.
+                          description: |-
+                            (String) Name of the bucket that stores the code for the version.
+                            Name of the bucket that stores the code for the version.
                           type: string
                         objectName:
-                          description: Name of the object in the bucket that stores
-                            the code for the version.
+                          description: |-
+                            (String) Name of the object in the bucket that stores the code for the version.
+                            Name of the object in the bucket that stores the code for the version.
                           type: string
                         sha256:
-                          description: SHA256 hash of the version deployment package.
+                          description: |-
+                            (String) SHA256 hash of the version deployment package.
+                            SHA256 hash of the version deployment package.
                           type: string
                       type: object
                     type: array
                   runtime:
-                    description: Runtime for Yandex Cloud Function
+                    description: |-
+                      (String) Runtime for Yandex Cloud Function.
+                      Runtime for Yandex Cloud Function.
                     type: string
                   secrets:
-                    description: Secrets for Yandex Cloud Function.
+                    description: |-
+                      (Block List) Secrets for Yandex Cloud Function. (see below for nested schema)
+                      Secrets for Yandex Cloud Function.
                     items:
                       properties:
                         environmentVariable:
-                          description: Function's environment variable in which secret's
-                            value will be stored.
+                          description: |-
+                            Z, a-z).
+                            Function's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
                           type: string
                         id:
-                          description: Secret's id.
+                          description: |-
+                            (String) The ID of this resource.
+                            Secret's ID.
                           type: string
+                        idRef:
+                          description: Reference to a Secret in lockbox to populate
+                            id.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            namespace:
+                              description: Namespace of the referenced object
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        idSelector:
+                          description: Selector for a Secret in lockbox to populate
+                            id.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         key:
-                          description: Secret's entries key which value will be stored
-                            in environment variable.
+                          description: |-
+                            (String) Secret's entries key which value will be stored in environment variable.
+                            Secret's entries key which value will be stored in environment variable.
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: |-
+                            (String) Secret's version ID.
+                            Secret's version ID.
                           type: string
+                        versionIdRef:
+                          description: Reference to a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            namespace:
+                              description: Namespace of the referenced object
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        versionIdSelector:
+                          description: Selector for a SecretVersion in lockbox to
+                            populate versionId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            namespace:
+                              description: Namespace for the selector
+                              type: string
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   serviceAccountId:
-                    description: Service account ID for Yandex Cloud Function
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Function.
+                    description: |-
+                      > object_storage instead). Storage mounts for Yandex Cloud Function. (see below for nested schema)
+                      (**DEPRECATED**, use `mounts -> object_storage` instead). Storage mounts for Yandex Cloud Function.
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: |-
+                            (String) Name of the mounting bucket.
+                            Name of the mounting bucket.
                           type: string
                         mountPointName:
-                          description: Name of the mount point. The directory where
-                            the bucket is mounted will be accessible at the /function/storage/<mount_point>
-                            path.
+                          description: |-
+                            (String) Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.
+                            Name of the mount point. The directory where the bucket is mounted will be accessible at the `/function/storage/<mount_point>` path.
                           type: string
                         prefix:
-                          description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                          description: |-
+                            (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                            Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: |-
+                            only mode.
+                            Mount the bucket in read-only mode.
                           type: boolean
                       type: object
                     type: array
                   tags:
-                    description: Tags for Yandex Cloud Function. Tag "$latest" isn't
-                      returned.
+                    description: |-
+                      (Set of String) Tags for Yandex Cloud Function. Tag $latest isn't returned.
+                      Tags for Yandex Cloud Function. Tag `$latest` isn't returned.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   tmpfsSize:
-                    description: Tmpfs size for Yandex Cloud Function.
+                    description: |-
+                      (Number) Tmpfs size for Yandex Cloud Function.
+                      Tmpfs size for Yandex Cloud Function.
                     type: number
                   userHash:
-                    description: User-defined string for current function version.
-                      User must change this string any times when function changed.
-                      Function will be updated when hash is changed.
+                    description: |-
+                      defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
+                      User-defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
                     type: string
                 type: object
               managementPolicies:
@@ -717,216 +1655,358 @@ spec:
               atProvider:
                 properties:
                   asyncInvocation:
-                    description: Config for asynchronous invocations of Yandex Cloud
-                      Function.
+                    description: |-
+                      (Block List, Max: 1) Config for asynchronous invocations of Yandex Cloud Function. (see below for nested schema)
+                      Config for asynchronous invocations of Yandex Cloud Function.
                     items:
                       properties:
                         retriesCount:
-                          description: Maximum number of retries for async invocation
+                          description: |-
+                            (Number) Maximum number of retries for async invocation.
+                            Maximum number of retries for async invocation.
                           type: number
                         serviceAccountId:
-                          description: Service account used for async invocation
+                          description: |-
+                            (String) Service account which linked to the resource.
+                            Service account used for async invocation.
                           type: string
                         ymqFailureTarget:
-                          description: Target for unsuccessful async invocation
+                          description: |-
+                            (Block List, Max: 1) Target for unsuccessful async invocation. (see below for nested schema)
+                            Target for unsuccessful async invocation.
                           items:
                             properties:
                               arn:
-                                description: YMQ ARN
+                                description: |-
+                                  (String) YMQ ARN.
+                                  YMQ ARN.
                                 type: string
                               serviceAccountId:
-                                description: Service account ID for Yandex Cloud Function
+                                description: |-
+                                  (String) Service account which linked to the resource.
+                                  Service account used for writing result to queue.
                                 type: string
                             type: object
                           type: array
                         ymqSuccessTarget:
-                          description: Target for successful async invocation
+                          description: |-
+                            (Block List, Max: 1) Target for successful async invocation. (see below for nested schema)
+                            Target for successful async invocation.
                           items:
                             properties:
                               arn:
-                                description: YMQ ARN
+                                description: |-
+                                  (String) YMQ ARN.
+                                  YMQ ARN.
                                 type: string
                               serviceAccountId:
-                                description: Service account used for writing result
-                                  to queue
+                                description: |-
+                                  (String) Service account which linked to the resource.
+                                  Service account used for writing result to queue.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   concurrency:
-                    description: The maximum number of requests processed by a function
-                      instance at the same time.
+                    description: |-
+                      (Number) The maximum number of requests processed by a function instance at the same time.
+                      The maximum number of requests processed by a function instance at the same time.
                     type: number
                   connectivity:
-                    description: Function version connectivity. If specified the version
-                      will be attached to specified network.
+                    description: |-
+                      (Block List, Max: 1) Function version connectivity. If specified the version will be attached to specified network. (see below for nested schema)
+                      Function version connectivity. If specified the version will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the version will have access to. It's
-                            essential to specify network with subnets in all availability
-                            zones.
+                          description: |-
+                            (String) Network the version will have access to. It's essential to specify network with subnets in all availability zones.
+                            Network the version will have access to. It's essential to specify network with subnets in all availability zones.
                           type: string
                       type: object
                     type: array
                   content:
-                    description: Version deployment content for Yandex Cloud Function
-                      code. Can be only one package or content section. Either package
-                      or content section must be specified.
+                    description: |-
+                      (Block List, Max: 1) Version deployment content for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified. (see below for nested schema)
+                      Version deployment content for Yandex Cloud Function code. Can be only one `package` or `content` section. Either `package` or `content` section must be specified.
                     items:
                       properties:
                         zipFilename:
-                          description: Filename to zip archive for the version.
+                          description: |-
+                            (String) Filename to zip archive for the version.
+                            Filename to zip archive for the version.
                           type: string
                       type: object
                     type: array
                   createdAt:
-                    description: Creation timestamp of the Yandex Cloud Function.
+                    description: (String)
                     type: string
                   description:
-                    description: Description of the Yandex Cloud Function
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   entrypoint:
-                    description: Entrypoint for Yandex Cloud Function
+                    description: |-
+                      (String) Entrypoint for Yandex Cloud Function.
+                      Entrypoint for Yandex Cloud Function.
                     type: string
                   environment:
                     additionalProperties:
                       type: string
-                    description: A set of key/value environment variables for Yandex
-                      Cloud Function
+                    description: |-
+                      Z, a-z).
+                      A set of key/value environment variables for Yandex Cloud Function. Each key must begin with a letter (A-Z, a-z).
                     type: object
                     x-kubernetes-map-type: granular
                   executionTimeout:
-                    description: Execution timeout in seconds for Yandex Cloud Function
+                    description: |-
+                      (String) Execution timeout in seconds for Yandex Cloud Function.
+                      Execution timeout in seconds for Yandex Cloud Function.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud Function
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
-                    description: Secret's id.
+                    description: (String) The ID of this resource.
                     type: string
                   imageSize:
-                    description: Image size for Yandex Cloud Function.
+                    description: |-
+                      (Number) Image size for Yandex Cloud Function.
+                      Image size for Yandex Cloud Function.
                     type: number
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Function
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud Function.
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud Function. (see below for nested schema)
+                      Options for logging from Yandex Cloud Function.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from function disabled
+                          description: |-
+                            (Boolean) Is logging from function disabled.
+                            Is logging from function disabled.
                           type: boolean
                         folderId:
-                          description: Folder ID for the Yandex Cloud Function
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
-                  loggroupId:
-                    description: Loggroup ID size for Yandex Cloud Function.
-                    type: string
                   memory:
-                    description: Memory in megabytes (aligned to 128MB) for Yandex
-                      Cloud Function
+                    description: |-
+                      (Number) Memory in megabytes (aligned to 128MB) for Yandex Cloud Function.
+                      Memory in megabytes (**aligned to 128MB**) for Yandex Cloud Function.
                     type: number
+                  metadataOptions:
+                    description: |-
+                      (Block List, Max: 1) Options set the access mode to function's metadata endpoints. (see below for nested schema)
+                      Options set the access mode to function's metadata endpoints.
+                    items:
+                      properties:
+                        awsV1HttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to AWS flavored metadata (IMDSv1). Values: `0` - default, `1` - enabled, `2` - disabled.
+                          type: number
+                        gceHttpEndpoint:
+                          description: |-
+                            default, 1 - enabled, 2 - disabled.
+                            Enables access to GCE flavored metadata. Values: `0`- default, `1` - enabled, `2` - disabled.
+                          type: number
+                      type: object
+                    type: array
+                  mounts:
+                    description: |-
+                      (Block List) Mounts for Yandex Cloud Function. (see below for nested schema)
+                      Mounts for Yandex Cloud Function.
+                    items:
+                      properties:
+                        ephemeralDisk:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Disk available during the function execution time. (see below for nested schema)
+                            One of the available mount types. Disk available during the function execution time.
+                          items:
+                            properties:
+                              blockSizeKb:
+                                description: |-
+                                  (Number) Optional block size of the ephemeral disk in KB.
+                                  Optional block size of the ephemeral disk in KB.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of the ephemeral disk in GB.
+                                  Size of the ephemeral disk in GB.
+                                type: number
+                            type: object
+                          type: array
+                        mode:
+                          description: |-
+                            (String) Mount’s accessibility mode. Valid values are ro and rw.
+                            Mount’s accessibility mode. Valid values are `ro` and `rw`.
+                          type: string
+                        name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the mount point. The directory where the target is mounted will be accessible at the `/function/storage/<mounts.0.name>` path.
+                          type: string
+                        objectStorage:
+                          description: |-
+                            (Block List, Max: 1) One of the available mount types. Object storage as a mount. (see below for nested schema)
+                            One of the available mount types. Object storage as a mount.
+                          items:
+                            properties:
+                              bucket:
+                                description: |-
+                                  (String) Name of the mounting bucket.
+                                  Name of the mounting bucket.
+                                type: string
+                              prefix:
+                                description: |-
+                                  (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                  Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   name:
-                    description: Yandex Cloud Function name used to define trigger
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   package:
-                    description: Version deployment package for Yandex Cloud Function
-                      code. Can be only one package or content section. Either package
-                      or content section must be specified.
+                    description: |-
+                      (Block List, Max: 1) Version deployment package for Yandex Cloud Function code. Can be only one package or content section. Either package or content section must be specified. (see below for nested schema)
+                      Version deployment package for Yandex Cloud Function code. Can be only one `package` or `content` section. Either `package` or `content` section must be specified.
                     items:
                       properties:
                         bucketName:
-                          description: Name of the bucket that stores the code for
-                            the version.
+                          description: |-
+                            (String) Name of the bucket that stores the code for the version.
+                            Name of the bucket that stores the code for the version.
                           type: string
                         objectName:
-                          description: Name of the object in the bucket that stores
-                            the code for the version.
+                          description: |-
+                            (String) Name of the object in the bucket that stores the code for the version.
+                            Name of the object in the bucket that stores the code for the version.
                           type: string
                         sha256:
-                          description: SHA256 hash of the version deployment package.
+                          description: |-
+                            (String) SHA256 hash of the version deployment package.
+                            SHA256 hash of the version deployment package.
                           type: string
                       type: object
                     type: array
                   runtime:
-                    description: Runtime for Yandex Cloud Function
+                    description: |-
+                      (String) Runtime for Yandex Cloud Function.
+                      Runtime for Yandex Cloud Function.
                     type: string
                   secrets:
-                    description: Secrets for Yandex Cloud Function.
+                    description: |-
+                      (Block List) Secrets for Yandex Cloud Function. (see below for nested schema)
+                      Secrets for Yandex Cloud Function.
                     items:
                       properties:
                         environmentVariable:
-                          description: Function's environment variable in which secret's
-                            value will be stored.
+                          description: |-
+                            Z, a-z).
+                            Function's environment variable in which secret's value will be stored. Must begin with a letter (A-Z, a-z).
                           type: string
                         id:
-                          description: Secret's id.
+                          description: |-
+                            (String) The ID of this resource.
+                            Secret's ID.
                           type: string
                         key:
-                          description: Secret's entries key which value will be stored
-                            in environment variable.
+                          description: |-
+                            (String) Secret's entries key which value will be stored in environment variable.
+                            Secret's entries key which value will be stored in environment variable.
                           type: string
                         versionId:
-                          description: Secret's version id.
+                          description: |-
+                            (String) Secret's version ID.
+                            Secret's version ID.
                           type: string
                       type: object
                     type: array
                   serviceAccountId:
-                    description: Service account ID for Yandex Cloud Function
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
                   storageMounts:
-                    description: Storage mounts for Yandex Cloud Function.
+                    description: |-
+                      > object_storage instead). Storage mounts for Yandex Cloud Function. (see below for nested schema)
+                      (**DEPRECATED**, use `mounts -> object_storage` instead). Storage mounts for Yandex Cloud Function.
                     items:
                       properties:
                         bucket:
-                          description: Name of the mounting bucket.
+                          description: |-
+                            (String) Name of the mounting bucket.
+                            Name of the mounting bucket.
                           type: string
                         mountPointName:
-                          description: Name of the mount point. The directory where
-                            the bucket is mounted will be accessible at the /function/storage/<mount_point>
-                            path.
+                          description: |-
+                            (String) Name of the mount point. The directory where the bucket is mounted will be accessible at the /function/storage/<mount_point> path.
+                            Name of the mount point. The directory where the bucket is mounted will be accessible at the `/function/storage/<mount_point>` path.
                           type: string
                         prefix:
-                          description: Prefix within the bucket. If you leave this
-                            field empty, the entire bucket will be mounted.
+                          description: |-
+                            (String) Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
+                            Prefix within the bucket. If you leave this field empty, the entire bucket will be mounted.
                           type: string
                         readOnly:
-                          description: Mount the bucket in read-only mode.
+                          description: |-
+                            only mode.
+                            Mount the bucket in read-only mode.
                           type: boolean
                       type: object
                     type: array
                   tags:
-                    description: Tags for Yandex Cloud Function. Tag "$latest" isn't
-                      returned.
+                    description: |-
+                      (Set of String) Tags for Yandex Cloud Function. Tag $latest isn't returned.
+                      Tags for Yandex Cloud Function. Tag `$latest` isn't returned.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   tmpfsSize:
-                    description: Tmpfs size for Yandex Cloud Function.
+                    description: |-
+                      (Number) Tmpfs size for Yandex Cloud Function.
+                      Tmpfs size for Yandex Cloud Function.
                     type: number
                   userHash:
-                    description: User-defined string for current function version.
-                      User must change this string any times when function changed.
-                      Function will be updated when hash is changed.
+                    description: |-
+                      defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
+                      User-defined string for current function version. User must change this string any times when function changed. Function will be updated when hash is changed.
                     type: string
                   version:
-                    description: Version for Yandex Cloud Function.
+                    description: |-
+                      (String) Version of Yandex Cloud Function.
+                      Version of Yandex Cloud Function.
                     type: string
                 type: object
               conditions:

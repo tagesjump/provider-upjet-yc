@@ -1,0 +1,14 @@
+apiVersion: iam.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: WorkloadIdentityOidcFederationIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: iam/v1alpha1/workloadidentityoidcfederationiambinding
+  labels:
+    testing.upbound.io/example-name: viewer
+  name: viewer
+spec:
+  forProvider:
+    federationId: example_federation_id
+    members:
+    - userAccount:foo_user_id
+    role: viewer

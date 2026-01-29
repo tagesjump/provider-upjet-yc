@@ -12,10 +12,18 @@ import (
 
 type DiskPlacementGroupInitParameters struct {
 
-	// A description of the Disk Placement Group.
+	// (String) Description of the placement group.
+	// Description of the placement group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// (String) ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	DiskPlacementGroupID *string `json:"diskPlacementGroupId,omitempty" tf:"disk_placement_group_id,omitempty"`
+
+	// (String) ID of the folder that the placement group belongs to.
+	// ID of the folder that the placement group belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -27,49 +35,82 @@ type DiskPlacementGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Disk Placement Group.
+	// (Map of String) Resource labels as key:value pairs.
+	// Resource labels as `key:value` pairs.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Disk Placement Group.
+	// (String) Name of the placement group.
+	// The name is unique within the folder.
+	// Name of the placement group.
+	// The name is unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the zone where the Disk Placement Group resides.
+	// (String) ID of the availability zone where the placement group resides.
+	// ID of the availability zone where the placement group resides.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type DiskPlacementGroupObservation struct {
+
+	// (String) Creation timestamp in RFC3339 text format.
+	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// A description of the Disk Placement Group.
+	// (String) Description of the placement group.
+	// Description of the placement group.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// (String) ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	DiskPlacementGroupID *string `json:"diskPlacementGroupId,omitempty" tf:"disk_placement_group_id,omitempty"`
+
+	// (String) ID of the folder that the placement group belongs to.
+	// ID of the folder that the placement group belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Disk Placement Group.
+	// (Map of String) Resource labels as key:value pairs.
+	// Resource labels as `key:value` pairs.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Disk Placement Group.
+	// (String) Name of the placement group.
+	// The name is unique within the folder.
+	// Name of the placement group.
+	// The name is unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Status of the Disk Placement Group.
+	// (String) Current status of the placement group
+	// Current status of the placement group
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// ID of the zone where the Disk Placement Group resides.
+	// (String) ID of the availability zone where the placement group resides.
+	// ID of the availability zone where the placement group resides.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type DiskPlacementGroupParameters struct {
 
-	// A description of the Disk Placement Group.
+	// (String) Description of the placement group.
+	// Description of the placement group.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// (String) ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// ID of the placement group to return.
+	// To get the placement group ID, use [DiskPlacementGroupService.List] request.
+	// +kubebuilder:validation:Optional
+	DiskPlacementGroupID *string `json:"diskPlacementGroupId,omitempty" tf:"disk_placement_group_id,omitempty"`
+
+	// (String) ID of the folder that the placement group belongs to.
+	// ID of the folder that the placement group belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -82,16 +123,21 @@ type DiskPlacementGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Disk Placement Group.
+	// (Map of String) Resource labels as key:value pairs.
+	// Resource labels as `key:value` pairs.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Disk Placement Group.
+	// (String) Name of the placement group.
+	// The name is unique within the folder.
+	// Name of the placement group.
+	// The name is unique within the folder.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the zone where the Disk Placement Group resides.
+	// (String) ID of the availability zone where the placement group resides.
+	// ID of the availability zone where the placement group resides.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }

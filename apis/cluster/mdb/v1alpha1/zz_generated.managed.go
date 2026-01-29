@@ -54,53 +54,153 @@ func (mg *ClickhouseCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetWriteConnectionSecretToReference of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetWriteConnectionSecretToReference of this ElasticsearchCluster.
-func (mg *ElasticsearchCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this ClickhouseClusterV2.
+func (mg *ClickhouseClusterV2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ClickhouseDatabase.
+func (mg *ClickhouseDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ClickhouseUser.
+func (mg *ClickhouseUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ClickhouseUser.
+func (mg *ClickhouseUser) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ClickhouseUser.
+func (mg *ClickhouseUser) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ClickhouseUser.
+func (mg *ClickhouseUser) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ClickhouseUser.
+func (mg *ClickhouseUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ClickhouseUser.
+func (mg *ClickhouseUser) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ClickhouseUser.
+func (mg *ClickhouseUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ClickhouseUser.
+func (mg *ClickhouseUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ClickhouseUser.
+func (mg *ClickhouseUser) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ClickhouseUser.
+func (mg *ClickhouseUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -151,6 +251,156 @@ func (mg *GreenplumCluster) SetProviderConfigReference(r *xpv1.Reference) {
 
 // SetWriteConnectionSecretToReference of this GreenplumCluster.
 func (mg *GreenplumCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this GreenplumClusterV2.
+func (mg *GreenplumClusterV2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this GreenplumResourceGroup.
+func (mg *GreenplumResourceGroup) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this GreenplumUser.
+func (mg *GreenplumUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this GreenplumUser.
+func (mg *GreenplumUser) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this GreenplumUser.
+func (mg *GreenplumUser) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this GreenplumUser.
+func (mg *GreenplumUser) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this GreenplumUser.
+func (mg *GreenplumUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this GreenplumUser.
+func (mg *GreenplumUser) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this GreenplumUser.
+func (mg *GreenplumUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this GreenplumUser.
+func (mg *GreenplumUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this GreenplumUser.
+func (mg *GreenplumUser) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this GreenplumUser.
+func (mg *GreenplumUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
@@ -554,6 +804,56 @@ func (mg *MySQLCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretRefere
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MySQLClusterV2.
+func (mg *MySQLClusterV2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MySQLClusterV2.
+func (mg *MySQLClusterV2) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this MySQLClusterV2.
+func (mg *MySQLClusterV2) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this MySQLClusterV2.
+func (mg *MySQLClusterV2) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this MySQLClusterV2.
+func (mg *MySQLClusterV2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MySQLClusterV2.
+func (mg *MySQLClusterV2) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MySQLClusterV2.
+func (mg *MySQLClusterV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this MySQLClusterV2.
+func (mg *MySQLClusterV2) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this MySQLClusterV2.
+func (mg *MySQLClusterV2) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this MySQLClusterV2.
+func (mg *MySQLClusterV2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MySQLDatabase.
 func (mg *MySQLDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -754,6 +1054,56 @@ func (mg *PostgresqlCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this PostgresqlClusterV2.
+func (mg *PostgresqlClusterV2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PostgresqlDatabase.
 func (mg *PostgresqlDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -901,6 +1251,306 @@ func (mg *RedisCluster) SetProviderConfigReference(r *xpv1.Reference) {
 
 // SetWriteConnectionSecretToReference of this RedisCluster.
 func (mg *RedisCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this RedisClusterV2.
+func (mg *RedisClusterV2) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this RedisClusterV2.
+func (mg *RedisClusterV2) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this RedisClusterV2.
+func (mg *RedisClusterV2) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this RedisClusterV2.
+func (mg *RedisClusterV2) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this RedisClusterV2.
+func (mg *RedisClusterV2) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this RedisClusterV2.
+func (mg *RedisClusterV2) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this RedisClusterV2.
+func (mg *RedisClusterV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this RedisClusterV2.
+func (mg *RedisClusterV2) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this RedisClusterV2.
+func (mg *RedisClusterV2) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this RedisClusterV2.
+func (mg *RedisClusterV2) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this RedisUser.
+func (mg *RedisUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this RedisUser.
+func (mg *RedisUser) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this RedisUser.
+func (mg *RedisUser) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this RedisUser.
+func (mg *RedisUser) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this RedisUser.
+func (mg *RedisUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this RedisUser.
+func (mg *RedisUser) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this RedisUser.
+func (mg *RedisUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this RedisUser.
+func (mg *RedisUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this RedisUser.
+func (mg *RedisUser) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this RedisUser.
+func (mg *RedisUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ShardedPostgresqlCluster.
+func (mg *ShardedPostgresqlCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ShardedPostgresqlDatabase.
+func (mg *ShardedPostgresqlDatabase) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ShardedPostgresqlShard.
+func (mg *ShardedPostgresqlShard) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this ShardedPostgresqlUser.
+func (mg *ShardedPostgresqlUser) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 

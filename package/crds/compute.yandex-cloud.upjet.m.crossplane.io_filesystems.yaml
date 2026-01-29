@@ -61,16 +61,26 @@ spec:
               forProvider:
                 properties:
                   blockSize:
-                    description: Block size of the filesystem, specified in bytes.
+                    description: |-
+                      (Number) Block size used for the filesystem, specified in bytes.
+                      Block size used for the filesystem, specified in bytes.
                     type: number
                   description:
-                    description: Description of the filesystem. Provide this property
-                      when you create a resource.
+                    description: |-
+                      (String) Description of the filesystem.
+                      Description of the filesystem.
+                    type: string
+                  filesystemId:
+                    description: |-
+                      (String) ID of the filesystem to return.
+                      ID of the filesystem to return.
+
+                      To get the filesystem ID, make a [FilesystemService.List] request.
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the filesystem belongs to. If it is not provided, the default
-                      provider folder is used.
+                      (String) ID of the folder that the filesystem belongs to.
+                      ID of the folder that the filesystem belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -158,23 +168,35 @@ spec:
                     additionalProperties:
                       type: string
                     description: |-
-                      Labels to assign to this filesystem. A list of key/value pairs. For details about the concept,
-                      see documentation.
+                      (Map of String) Filesystem labels as key:value pairs.
+                      For details about the concept, see documentation.
+                      Filesystem labels as `key:value` pairs.
+                      For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the filesystem. Provide this property when
-                      you create a resource.
+                    description: |-
+                      (String) Name of the filesystem. The name is unique within the folder.
+                      Name of the filesystem. The name is unique within the folder.
                     type: string
                   size:
-                    description: Size of the filesystem, specified in GB.
+                    description: |-
+                      (Number) Size of the filesystem, specified in bytes.
+                      Size of the filesystem, specified in bytes.
                     type: number
                   type:
-                    description: Type of filesystem to create. Type network-hdd is
-                      set by default.
+                    description: |-
+                      (String) ID of the filesystem type.
+                      ID of the filesystem type.
+
+                      To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
                     type: string
                   zone:
-                    description: Availability zone where the filesystem will reside.
+                    description: |-
+                      (String) ID of the availability zone where the filesystem resides.
+                      ID of the availability zone where the filesystem resides.
+
+                      A filesystem can be attached only to instances residing in the same availability zone.
                     type: string
                 type: object
               initProvider:
@@ -191,16 +213,26 @@ spec:
                   autoscaler.
                 properties:
                   blockSize:
-                    description: Block size of the filesystem, specified in bytes.
+                    description: |-
+                      (Number) Block size used for the filesystem, specified in bytes.
+                      Block size used for the filesystem, specified in bytes.
                     type: number
                   description:
-                    description: Description of the filesystem. Provide this property
-                      when you create a resource.
+                    description: |-
+                      (String) Description of the filesystem.
+                      Description of the filesystem.
+                    type: string
+                  filesystemId:
+                    description: |-
+                      (String) ID of the filesystem to return.
+                      ID of the filesystem to return.
+
+                      To get the filesystem ID, make a [FilesystemService.List] request.
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the filesystem belongs to. If it is not provided, the default
-                      provider folder is used.
+                      (String) ID of the folder that the filesystem belongs to.
+                      ID of the folder that the filesystem belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -288,23 +320,35 @@ spec:
                     additionalProperties:
                       type: string
                     description: |-
-                      Labels to assign to this filesystem. A list of key/value pairs. For details about the concept,
-                      see documentation.
+                      (Map of String) Filesystem labels as key:value pairs.
+                      For details about the concept, see documentation.
+                      Filesystem labels as `key:value` pairs.
+                      For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the filesystem. Provide this property when
-                      you create a resource.
+                    description: |-
+                      (String) Name of the filesystem. The name is unique within the folder.
+                      Name of the filesystem. The name is unique within the folder.
                     type: string
                   size:
-                    description: Size of the filesystem, specified in GB.
+                    description: |-
+                      (Number) Size of the filesystem, specified in bytes.
+                      Size of the filesystem, specified in bytes.
                     type: number
                   type:
-                    description: Type of filesystem to create. Type network-hdd is
-                      set by default.
+                    description: |-
+                      (String) ID of the filesystem type.
+                      ID of the filesystem type.
+
+                      To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
                     type: string
                   zone:
-                    description: Availability zone where the filesystem will reside.
+                    description: |-
+                      (String) ID of the availability zone where the filesystem resides.
+                      ID of the availability zone where the filesystem resides.
+
+                      A filesystem can be attached only to instances residing in the same availability zone.
                     type: string
                 type: object
               managementPolicies:
@@ -371,46 +415,73 @@ spec:
               atProvider:
                 properties:
                   blockSize:
-                    description: Block size of the filesystem, specified in bytes.
+                    description: |-
+                      (Number) Block size used for the filesystem, specified in bytes.
+                      Block size used for the filesystem, specified in bytes.
                     type: number
                   createdAt:
-                    description: Creation timestamp of the filesystem.
+                    description: |-
+                      (String) Creation timestamp.
+                      Creation timestamp.
                     type: string
                   description:
-                    description: Description of the filesystem. Provide this property
-                      when you create a resource.
+                    description: |-
+                      (String) Description of the filesystem.
+                      Description of the filesystem.
+                    type: string
+                  filesystemId:
+                    description: |-
+                      (String) ID of the filesystem to return.
+                      ID of the filesystem to return.
+
+                      To get the filesystem ID, make a [FilesystemService.List] request.
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the filesystem belongs to. If it is not provided, the default
-                      provider folder is used.
+                      (String) ID of the folder that the filesystem belongs to.
+                      ID of the folder that the filesystem belongs to.
                     type: string
                   id:
+                    description: (String) ID of the filesystem to return.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
                     description: |-
-                      Labels to assign to this filesystem. A list of key/value pairs. For details about the concept,
-                      see documentation.
+                      (Map of String) Filesystem labels as key:value pairs.
+                      For details about the concept, see documentation.
+                      Filesystem labels as `key:value` pairs.
+                      For details about the concept, see [documentation](/docs/overview/concepts/services#labels).
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the filesystem. Provide this property when
-                      you create a resource.
+                    description: |-
+                      (String) Name of the filesystem. The name is unique within the folder.
+                      Name of the filesystem. The name is unique within the folder.
                     type: string
                   size:
-                    description: Size of the filesystem, specified in GB.
+                    description: |-
+                      (Number) Size of the filesystem, specified in bytes.
+                      Size of the filesystem, specified in bytes.
                     type: number
                   status:
-                    description: The status of the filesystem.
+                    description: |-
+                      (String) Current status of the filesystem.
+                      Current status of the filesystem.
                     type: string
                   type:
-                    description: Type of filesystem to create. Type network-hdd is
-                      set by default.
+                    description: |-
+                      (String) ID of the filesystem type.
+                      ID of the filesystem type.
+
+                      To get a list of available filesystem types, make a [yandex.cloud.compute.v1.DiskTypeService.List] request.
                     type: string
                   zone:
-                    description: Availability zone where the filesystem will reside.
+                    description: |-
+                      (String) ID of the availability zone where the filesystem resides.
+                      ID of the availability zone where the filesystem resides.
+
+                      A filesystem can be attached only to instances residing in the same availability zone.
                     type: string
                 type: object
               conditions:

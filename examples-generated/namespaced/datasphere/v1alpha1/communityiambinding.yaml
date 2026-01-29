@@ -1,0 +1,37 @@
+apiVersion: datasphere.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: CommunityIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/communityiambinding
+  labels:
+    testing.upbound.io/example-name: community-iam
+  name: community-iam
+  namespace: upbound-system
+spec:
+  forProvider:
+    communityIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my-community
+    members:
+    - system:allUsers
+    role: datasphere.communities.developer
+
+---
+
+apiVersion: datasphere.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Community
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/communityiambinding
+  labels:
+    testing.upbound.io/example-name: my-community
+  name: my-community
+  namespace: upbound-system
+spec:
+  forProvider:
+    billingAccountId: example-organization-id
+    description: Description of community
+    labels:
+      foo: bar
+    name: example-datasphere-community
+    organizationId: example-organization-id

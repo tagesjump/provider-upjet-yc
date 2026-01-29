@@ -9,48 +9,145 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type AutoPartitioningSettingsInitParameters struct {
+
+	// (String) The auto partitioning strategy to use
+	// The auto partitioning strategy to use
+	AutoPartitioningStrategy *string `json:"autoPartitioningStrategy,omitempty" tf:"auto_partitioning_strategy,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	AutoPartitioningWriteSpeedStrategy []AutoPartitioningWriteSpeedStrategyInitParameters `json:"autoPartitioningWriteSpeedStrategy,omitempty" tf:"auto_partitioning_write_speed_strategy,omitempty"`
+}
+
+type AutoPartitioningSettingsObservation struct {
+
+	// (String) The auto partitioning strategy to use
+	// The auto partitioning strategy to use
+	AutoPartitioningStrategy *string `json:"autoPartitioningStrategy,omitempty" tf:"auto_partitioning_strategy,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	AutoPartitioningWriteSpeedStrategy []AutoPartitioningWriteSpeedStrategyObservation `json:"autoPartitioningWriteSpeedStrategy,omitempty" tf:"auto_partitioning_write_speed_strategy,omitempty"`
+}
+
+type AutoPartitioningSettingsParameters struct {
+
+	// (String) The auto partitioning strategy to use
+	// The auto partitioning strategy to use
+	// +kubebuilder:validation:Optional
+	AutoPartitioningStrategy *string `json:"autoPartitioningStrategy,omitempty" tf:"auto_partitioning_strategy,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	AutoPartitioningWriteSpeedStrategy []AutoPartitioningWriteSpeedStrategyParameters `json:"autoPartitioningWriteSpeedStrategy,omitempty" tf:"auto_partitioning_write_speed_strategy,omitempty"`
+}
+
+type AutoPartitioningWriteSpeedStrategyInitParameters struct {
+
+	// (Number) The down utilization percentage threshold
+	// The down utilization percentage threshold
+	DownUtilizationPercent *float64 `json:"downUtilizationPercent,omitempty" tf:"down_utilization_percent,omitempty"`
+
+	// (Number) The stabilization window in seconds
+	// The stabilization window in seconds
+	StabilizationWindow *float64 `json:"stabilizationWindow,omitempty" tf:"stabilization_window,omitempty"`
+
+	// (Number) The up utilization percentage threshold
+	// The up utilization percentage threshold
+	UpUtilizationPercent *float64 `json:"upUtilizationPercent,omitempty" tf:"up_utilization_percent,omitempty"`
+}
+
+type AutoPartitioningWriteSpeedStrategyObservation struct {
+
+	// (Number) The down utilization percentage threshold
+	// The down utilization percentage threshold
+	DownUtilizationPercent *float64 `json:"downUtilizationPercent,omitempty" tf:"down_utilization_percent,omitempty"`
+
+	// (Number) The stabilization window in seconds
+	// The stabilization window in seconds
+	StabilizationWindow *float64 `json:"stabilizationWindow,omitempty" tf:"stabilization_window,omitempty"`
+
+	// (Number) The up utilization percentage threshold
+	// The up utilization percentage threshold
+	UpUtilizationPercent *float64 `json:"upUtilizationPercent,omitempty" tf:"up_utilization_percent,omitempty"`
+}
+
+type AutoPartitioningWriteSpeedStrategyParameters struct {
+
+	// (Number) The down utilization percentage threshold
+	// The down utilization percentage threshold
+	// +kubebuilder:validation:Optional
+	DownUtilizationPercent *float64 `json:"downUtilizationPercent,omitempty" tf:"down_utilization_percent,omitempty"`
+
+	// (Number) The stabilization window in seconds
+	// The stabilization window in seconds
+	// +kubebuilder:validation:Optional
+	StabilizationWindow *float64 `json:"stabilizationWindow,omitempty" tf:"stabilization_window,omitempty"`
+
+	// (Number) The up utilization percentage threshold
+	// The up utilization percentage threshold
+	// +kubebuilder:validation:Optional
+	UpUtilizationPercent *float64 `json:"upUtilizationPercent,omitempty" tf:"up_utilization_percent,omitempty"`
+}
+
 type TopicConsumerInitParameters struct {
+
+	// (Boolean) Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value false.
+	// Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value `false`.
 	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
-	// Topic name. Type: string, required. Default value: "".
+	// (String) Topic name.
+	// Reader's name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Timestamp in UNIX timestamp format from which the reader will start reading data. Type: integer, optional. Default value: 0.
+	// (Number) Timestamp in UNIX timestamp format from which the reader will start reading data. Default value 0.
+	// Timestamp in UNIX timestamp format from which the reader will start reading data. Default value `0`.
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
-	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+	// Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
 	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type TopicConsumerObservation struct {
+
+	// (Boolean) Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value false.
+	// Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value `false`.
 	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
-	// Topic name. Type: string, required. Default value: "".
+	// (String) Topic name.
+	// Reader's name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Timestamp in UNIX timestamp format from which the reader will start reading data. Type: integer, optional. Default value: 0.
+	// (Number) Timestamp in UNIX timestamp format from which the reader will start reading data. Default value 0.
+	// Timestamp in UNIX timestamp format from which the reader will start reading data. Default value `0`.
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
-	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+	// Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
 	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type TopicConsumerParameters struct {
 
+	// (Boolean) Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value false.
+	// Defines an important consumer. No data will be deleted from the topic until all the important consumers read them. Default value `false`.
 	// +kubebuilder:validation:Optional
 	Important *bool `json:"important,omitempty" tf:"important,omitempty"`
 
-	// Topic name. Type: string, required. Default value: "".
+	// (String) Topic name.
+	// Reader's name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Timestamp in UNIX timestamp format from which the reader will start reading data. Type: integer, optional. Default value: 0.
+	// (Number) Timestamp in UNIX timestamp format from which the reader will start reading data. Default value 0.
+	// Timestamp in UNIX timestamp format from which the reader will start reading data. Default value `0`.
 	// +kubebuilder:validation:Optional
 	StartingMessageTimestampMs *float64 `json:"startingMessageTimestampMs,omitempty" tf:"starting_message_timestamp_ms,omitempty"`
 
-	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+	// Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
@@ -58,98 +155,184 @@ type TopicConsumerParameters struct {
 
 type TopicInitParameters struct {
 
-	// Topic Readers. Types: array[consumer], optional. Default value: null.
+	// (Block List, Max: 1) (see below for nested schema)
+	AutoPartitioningSettings []AutoPartitioningSettingsInitParameters `json:"autoPartitioningSettings,omitempty" tf:"auto_partitioning_settings,omitempty"`
+
+	// (Block Set) Topic Readers. (see below for nested schema)
+	// Topic Readers.
 	Consumer []TopicConsumerInitParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
-	// YDB database endpoint. Types: string, required. Default value: "".
+	// (String) YDB database endpoint.
+	// YDB database endpoint.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/ydb/v1alpha1.DatabaseServerless
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
 	DatabaseEndpoint *string `json:"databaseEndpoint,omitempty" tf:"database_endpoint,omitempty"`
 
+	// Reference to a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointRef *v1.Reference `json:"databaseEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointSelector *v1.Selector `json:"databaseEndpointSelector,omitempty" tf:"-"`
+
+	// (String) Topic description.
+	// Topic description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Number) Number of max active partitions. Default value 1.
+	// Number of max active partitions. Default value `1`.
+	MaxPartitionsCount *float64 `json:"maxPartitionsCount,omitempty" tf:"max_partitions_count,omitempty"`
+
+	// based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases.
+	// Resource metering mode (`reserved_capacity` - based on the allocated resources or `request_units` - based on actual usage). This option applies to topics in serverless databases.
 	MeteringMode *string `json:"meteringMode,omitempty" tf:"metering_mode,omitempty"`
 
-	// Topic name. Type: string, required. Default value: "".
+	// (String) Topic name.
+	// Topic name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: 1024 (1MB).
+	// Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: `1024 (1MB)`.
 	PartitionWriteSpeedKbps *float64 `json:"partitionWriteSpeedKbps,omitempty" tf:"partition_write_speed_kbps,omitempty"`
 
-	// Number of partitions. Types: integer, optional. Default value: 2.
+	// (Number) Number of min partitions. Default value 1.
+	// Number of min partitions. Default value `1`.
 	PartitionsCount *float64 `json:"partitionsCount,omitempty" tf:"partitions_count,omitempty"`
 
+	// (Number) Data retention time. Default value 86400000.
+	// Data retention time. Default value `86400000`.
 	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
 
+	// (Number)
 	RetentionStorageMb *float64 `json:"retentionStorageMb,omitempty" tf:"retention_storage_mb,omitempty"`
 
-	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+	// Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
 	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type TopicObservation struct {
 
-	// Topic Readers. Types: array[consumer], optional. Default value: null.
+	// (Block List, Max: 1) (see below for nested schema)
+	AutoPartitioningSettings []AutoPartitioningSettingsObservation `json:"autoPartitioningSettings,omitempty" tf:"auto_partitioning_settings,omitempty"`
+
+	// (Block Set) Topic Readers. (see below for nested schema)
+	// Topic Readers.
 	Consumer []TopicConsumerObservation `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
-	// YDB database endpoint. Types: string, required. Default value: "".
+	// (String) YDB database endpoint.
+	// YDB database endpoint.
 	DatabaseEndpoint *string `json:"databaseEndpoint,omitempty" tf:"database_endpoint,omitempty"`
 
+	// (String) Topic description.
+	// Topic description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Number) Number of max active partitions. Default value 1.
+	// Number of max active partitions. Default value `1`.
+	MaxPartitionsCount *float64 `json:"maxPartitionsCount,omitempty" tf:"max_partitions_count,omitempty"`
+
+	// based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases.
+	// Resource metering mode (`reserved_capacity` - based on the allocated resources or `request_units` - based on actual usage). This option applies to topics in serverless databases.
 	MeteringMode *string `json:"meteringMode,omitempty" tf:"metering_mode,omitempty"`
 
-	// Topic name. Type: string, required. Default value: "".
+	// (String) Topic name.
+	// Topic name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: 1024 (1MB).
+	// Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: `1024 (1MB)`.
 	PartitionWriteSpeedKbps *float64 `json:"partitionWriteSpeedKbps,omitempty" tf:"partition_write_speed_kbps,omitempty"`
 
-	// Number of partitions. Types: integer, optional. Default value: 2.
+	// (Number) Number of min partitions. Default value 1.
+	// Number of min partitions. Default value `1`.
 	PartitionsCount *float64 `json:"partitionsCount,omitempty" tf:"partitions_count,omitempty"`
 
+	// (Number) Data retention time. Default value 86400000.
+	// Data retention time. Default value `86400000`.
 	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
 
+	// (Number)
 	RetentionStorageMb *float64 `json:"retentionStorageMb,omitempty" tf:"retention_storage_mb,omitempty"`
 
-	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+	// Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
 	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
 }
 
 type TopicParameters struct {
 
-	// Topic Readers. Types: array[consumer], optional. Default value: null.
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	AutoPartitioningSettings []AutoPartitioningSettingsParameters `json:"autoPartitioningSettings,omitempty" tf:"auto_partitioning_settings,omitempty"`
+
+	// (Block Set) Topic Readers. (see below for nested schema)
+	// Topic Readers.
 	// +kubebuilder:validation:Optional
 	Consumer []TopicConsumerParameters `json:"consumer,omitempty" tf:"consumer,omitempty"`
 
-	// YDB database endpoint. Types: string, required. Default value: "".
+	// (String) YDB database endpoint.
+	// YDB database endpoint.
+	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/ydb/v1alpha1.DatabaseServerless
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
 	// +kubebuilder:validation:Optional
 	DatabaseEndpoint *string `json:"databaseEndpoint,omitempty" tf:"database_endpoint,omitempty"`
 
+	// Reference to a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointRef *v1.Reference `json:"databaseEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a DatabaseServerless in ydb to populate databaseEndpoint.
+	// +kubebuilder:validation:Optional
+	DatabaseEndpointSelector *v1.Selector `json:"databaseEndpointSelector,omitempty" tf:"-"`
+
+	// (String) Topic description.
+	// Topic description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Number) Number of max active partitions. Default value 1.
+	// Number of max active partitions. Default value `1`.
+	// +kubebuilder:validation:Optional
+	MaxPartitionsCount *float64 `json:"maxPartitionsCount,omitempty" tf:"max_partitions_count,omitempty"`
+
+	// based on the allocated resources or request_units - based on actual usage). This option applies to topics in serverless databases.
+	// Resource metering mode (`reserved_capacity` - based on the allocated resources or `request_units` - based on actual usage). This option applies to topics in serverless databases.
 	// +kubebuilder:validation:Optional
 	MeteringMode *string `json:"meteringMode,omitempty" tf:"metering_mode,omitempty"`
 
-	// Topic name. Type: string, required. Default value: "".
+	// (String) Topic name.
+	// Topic name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: 1024 (1MB).
+	// Maximum allowed write speed per partition. If a write speed for a given partition exceeds this value, the write speed will be capped. Default value: `1024 (1MB)`.
 	// +kubebuilder:validation:Optional
 	PartitionWriteSpeedKbps *float64 `json:"partitionWriteSpeedKbps,omitempty" tf:"partition_write_speed_kbps,omitempty"`
 
-	// Number of partitions. Types: integer, optional. Default value: 2.
+	// (Number) Number of min partitions. Default value 1.
+	// Number of min partitions. Default value `1`.
 	// +kubebuilder:validation:Optional
 	PartitionsCount *float64 `json:"partitionsCount,omitempty" tf:"partitions_count,omitempty"`
 
+	// (Number) Data retention time. Default value 86400000.
+	// Data retention time. Default value `86400000`.
 	// +kubebuilder:validation:Optional
 	RetentionPeriodHours *float64 `json:"retentionPeriodHours,omitempty" tf:"retention_period_hours,omitempty"`
 
+	// (Number)
 	// +kubebuilder:validation:Optional
 	RetentionStorageMb *float64 `json:"retentionStorageMb,omitempty" tf:"retention_storage_mb,omitempty"`
 
-	// Supported data encodings. Types: array[string]. Default value: ["gzip", "raw", "zstd"].
+	// (Set of String) Supported data encodings. Can be one of gzip, raw or zstd.
+	// Supported data encodings. Can be one of `gzip`, `raw` or `zstd`.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SupportedCodecs []*string `json:"supportedCodecs,omitempty" tf:"supported_codecs,omitempty"`
@@ -182,7 +365,7 @@ type TopicStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Topic is the Schema for the Topics API. Get information about a Yandex YDB Topics.
+// Topic is the Schema for the Topics API. Manage a YDB Topic.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -191,7 +374,6 @@ type TopicStatus struct {
 type Topic struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.databaseEndpoint) || (has(self.initProvider) && has(self.initProvider.databaseEndpoint))",message="spec.forProvider.databaseEndpoint is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   TopicSpec   `json:"spec"`
 	Status TopicStatus `json:"status,omitempty"`

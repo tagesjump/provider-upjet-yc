@@ -1,0 +1,15 @@
+apiVersion: storage.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: BucketIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1alpha1/bucketiambinding
+  labels:
+    testing.upbound.io/example-name: bucket-iam
+  name: bucket-iam
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucket: your-bucket-name
+    members:
+    - system:allUsers
+    role: storage.admin

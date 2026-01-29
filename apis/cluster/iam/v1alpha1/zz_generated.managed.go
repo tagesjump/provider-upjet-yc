@@ -4,6 +4,106 @@ package v1alpha1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 
+// GetCondition of this OauthClient.
+func (mg *OauthClient) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this OauthClient.
+func (mg *OauthClient) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this OauthClient.
+func (mg *OauthClient) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this OauthClient.
+func (mg *OauthClient) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this OauthClient.
+func (mg *OauthClient) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this OauthClient.
+func (mg *OauthClient) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this OauthClient.
+func (mg *OauthClient) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this OauthClient.
+func (mg *OauthClient) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this OauthClient.
+func (mg *OauthClient) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this OauthClient.
+func (mg *OauthClient) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this OauthClientSecret.
+func (mg *OauthClientSecret) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this OauthClientSecret.
+func (mg *OauthClientSecret) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this OauthClientSecret.
+func (mg *OauthClientSecret) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this OauthClientSecret.
+func (mg *OauthClientSecret) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this OauthClientSecret.
+func (mg *OauthClientSecret) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this OauthClientSecret.
+func (mg *OauthClientSecret) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this OauthClientSecret.
+func (mg *OauthClientSecret) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this OauthClientSecret.
+func (mg *OauthClientSecret) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this OauthClientSecret.
+func (mg *OauthClientSecret) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this OauthClientSecret.
+func (mg *OauthClientSecret) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this ServiceAccount.
 func (mg *ServiceAccount) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
@@ -351,5 +451,155 @@ func (mg *ServiceAccountStaticAccessKey) SetProviderConfigReference(r *xpv1.Refe
 
 // SetWriteConnectionSecretToReference of this ServiceAccountStaticAccessKey.
 func (mg *ServiceAccountStaticAccessKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkloadIdentityFederatedCredential.
+func (mg *WorkloadIdentityFederatedCredential) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkloadIdentityOidcFederation.
+func (mg *WorkloadIdentityOidcFederation) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetWriteConnectionSecretToReference of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkloadIdentityOidcFederationIAMBinding.
+func (mg *WorkloadIdentityOidcFederationIAMBinding) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

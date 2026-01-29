@@ -1,0 +1,17 @@
+apiVersion: yq.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: ObjectStorageConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: yq/v1alpha1/objectstorageconnection
+  labels:
+    testing.upbound.io/example-name: my_os_connection
+  name: my-os-connection
+  namespace: upbound-system
+spec:
+  forProvider:
+    bucket: some-public-bucket
+    description: Connection has been created from Terraform
+    name: tf-test-os-connection
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: for-yq

@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: alb/v1alpha1/virtualhost
   labels:
-    testing.upbound.io/example-name: my-virtual-host
-  name: my-virtual-host
+    testing.upbound.io/example-name: my-vhost
+  name: my-vhost
   namespace: upbound-system
 spec:
   forProvider:

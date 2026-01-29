@@ -27,7 +27,4 @@ metadata:
   name: your-key
 spec:
   forProvider:
-    folderIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
     name: symmetric-key-name

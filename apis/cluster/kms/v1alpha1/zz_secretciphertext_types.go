@@ -11,9 +11,11 @@ import (
 
 type SecretCiphertextInitParameters struct {
 
-	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest
+	// (String) Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest.
+	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the `SymmetricDecryptRequest`.
 	AadContext *string `json:"aadContext,omitempty" tf:"aad_context,omitempty"`
 
+	// (String) ID of the symmetric KMS key to use for encryption.
 	// ID of the symmetric KMS key to use for encryption.
 	// +crossplane:generate:reference:type=SymmetricKey
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
@@ -26,31 +28,37 @@ type SecretCiphertextInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
+	// (String, Sensitive) Plaintext to be encrypted.
 	// Plaintext to be encrypted.
 	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`
 }
 
 type SecretCiphertextObservation struct {
 
-	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest
+	// (String) Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest.
+	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the `SymmetricDecryptRequest`.
 	AadContext *string `json:"aadContext,omitempty" tf:"aad_context,omitempty"`
 
-	// Resulting ciphertext, encoded with "standard" base64 alphabet as defined in RFC 4648 section 4
+	// (String) Resulting CipherText, encoded with standard base64 alphabet as defined in RFC 4648 section 4.
+	// Resulting CipherText, encoded with `standard` base64 alphabet as defined in RFC 4648 section 4.
 	Ciphertext *string `json:"ciphertext,omitempty" tf:"ciphertext,omitempty"`
 
-	// an identifier for the resource with format {{key_id}}/{{ciphertext}}
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) ID of the symmetric KMS key to use for encryption.
 	// ID of the symmetric KMS key to use for encryption.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 }
 
 type SecretCiphertextParameters struct {
 
-	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest
+	// (String) Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the SymmetricDecryptRequest.
+	// Additional authenticated data (AAD context), optional. If specified, this data will be required for decryption with the `SymmetricDecryptRequest`.
 	// +kubebuilder:validation:Optional
 	AadContext *string `json:"aadContext,omitempty" tf:"aad_context,omitempty"`
 
+	// (String) ID of the symmetric KMS key to use for encryption.
 	// ID of the symmetric KMS key to use for encryption.
 	// +crossplane:generate:reference:type=SymmetricKey
 	// +kubebuilder:validation:Optional
@@ -64,6 +72,7 @@ type SecretCiphertextParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
 
+	// (String, Sensitive) Plaintext to be encrypted.
 	// Plaintext to be encrypted.
 	// +kubebuilder:validation:Optional
 	PlaintextSecretRef v1.SecretKeySelector `json:"plaintextSecretRef" tf:"-"`

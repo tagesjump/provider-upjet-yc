@@ -9,292 +9,487 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type EdgeCacheSettingsCodesInitParameters struct {
+
+	// (Map of Number) Caching time for a response with specific codes. These settings have a higher priority than the value field. Response code (304, 404 for example). Use any to specify caching time for all response codes.
+	// Caching time for a response with specific codes. These settings have a higher priority than the `value` field. Response code (`304`, `404` for example). Use `any` to specify caching time for all response codes.
+	// +mapType=granular
+	CustomValues map[string]*float64 `json:"customValues,omitempty" tf:"custom_values,omitempty"`
+
+	// (Number) Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use 0 disable to caching. Use custom_values field to specify a custom caching time for a response with specific codes.
+	// Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use `0` disable to caching. Use `custom_values` field to specify a custom caching time for a response with specific codes.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type EdgeCacheSettingsCodesObservation struct {
+
+	// (Map of Number) Caching time for a response with specific codes. These settings have a higher priority than the value field. Response code (304, 404 for example). Use any to specify caching time for all response codes.
+	// Caching time for a response with specific codes. These settings have a higher priority than the `value` field. Response code (`304`, `404` for example). Use `any` to specify caching time for all response codes.
+	// +mapType=granular
+	CustomValues map[string]*float64 `json:"customValues,omitempty" tf:"custom_values,omitempty"`
+
+	// (Number) Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use 0 disable to caching. Use custom_values field to specify a custom caching time for a response with specific codes.
+	// Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use `0` disable to caching. Use `custom_values` field to specify a custom caching time for a response with specific codes.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type EdgeCacheSettingsCodesParameters struct {
+
+	// (Map of Number) Caching time for a response with specific codes. These settings have a higher priority than the value field. Response code (304, 404 for example). Use any to specify caching time for all response codes.
+	// Caching time for a response with specific codes. These settings have a higher priority than the `value` field. Response code (`304`, `404` for example). Use `any` to specify caching time for all response codes.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	CustomValues map[string]*float64 `json:"customValues,omitempty" tf:"custom_values,omitempty"`
+
+	// (Number) Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use 0 disable to caching. Use custom_values field to specify a custom caching time for a response with specific codes.
+	// Caching time for a response with codes 200, 206, 301, 302. Responses with codes 4xx, 5xx will not be cached. Use `0` disable to caching. Use `custom_values` field to specify a custom caching time for a response with specific codes.
+	// +kubebuilder:validation:Optional
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type IPAddressACLInitParameters struct {
 
-	// the list of specified IP addresses to be allowed or denied depending on acl policy type.
+	// (List of String) The list of specified IP addresses to be allowed or denied depending on acl policy type.
+	// The list of specified IP addresses to be allowed or denied depending on acl policy type.
 	ExceptedValues []*string `json:"exceptedValues,omitempty" tf:"excepted_values,omitempty"`
 
-	// the policy type for ip_address_acl option, one of "allow" or "deny" values.
+	// (String) The policy type for ACL. One of allow or deny values.
+	// The policy type for ACL. One of `allow` or `deny` values.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type IPAddressACLObservation struct {
 
-	// the list of specified IP addresses to be allowed or denied depending on acl policy type.
+	// (List of String) The list of specified IP addresses to be allowed or denied depending on acl policy type.
+	// The list of specified IP addresses to be allowed or denied depending on acl policy type.
 	ExceptedValues []*string `json:"exceptedValues,omitempty" tf:"excepted_values,omitempty"`
 
-	// the policy type for ip_address_acl option, one of "allow" or "deny" values.
+	// (String) The policy type for ACL. One of allow or deny values.
+	// The policy type for ACL. One of `allow` or `deny` values.
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type IPAddressACLParameters struct {
 
-	// the list of specified IP addresses to be allowed or denied depending on acl policy type.
+	// (List of String) The list of specified IP addresses to be allowed or denied depending on acl policy type.
+	// The list of specified IP addresses to be allowed or denied depending on acl policy type.
 	// +kubebuilder:validation:Optional
 	ExceptedValues []*string `json:"exceptedValues,omitempty" tf:"excepted_values,omitempty"`
 
-	// the policy type for ip_address_acl option, one of "allow" or "deny" values.
+	// (String) The policy type for ACL. One of allow or deny values.
+	// The policy type for ACL. One of `allow` or `deny` values.
 	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 
 type OptionsInitParameters struct {
 
+	// (List of String) HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
 	// HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
 	AllowedHTTPMethods []*string `json:"allowedHttpMethods,omitempty" tf:"allowed_http_methods,omitempty"`
 
-	// set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+	// users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+	// Set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
 	BrowserCacheSettings *float64 `json:"browserCacheSettings,omitempty" tf:"browser_cache_settings,omitempty"`
 
-	// list HTTP headers that must be included in responses to clients.
+	// (List of String, Deprecated) List HTTP headers that must be included in responses to clients.
+	// List HTTP headers that must be included in responses to clients.
 	CacheHTTPHeaders []*string `json:"cacheHttpHeaders,omitempty" tf:"cache_http_headers,omitempty"`
 
-	// parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+	// (List of String) Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+	// Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
 	Cors []*string `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// custom value for the Host header. Your server must be able to process requests with the chosen header.
+	// (String) Custom value for the Host header. Your server must be able to process requests with the chosen header.
+	// Custom value for the Host header. Your server must be able to process requests with the chosen header.
 	CustomHostHeader *string `json:"customHostHeader,omitempty" tf:"custom_host_header,omitempty"`
 
-	// wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS. Read-only.
+	// (String) Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
+	// Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
 	CustomServerName *string `json:"customServerName,omitempty" tf:"custom_server_name,omitempty"`
 
-	// setup a cache status.
+	// (Boolean, Deprecated) Setup a cache status.
+	// Setup a cache status.
 	DisableCache *bool `json:"disableCache,omitempty" tf:"disable_cache,omitempty"`
 
-	// disabling proxy force ranges.
+	// (Boolean) Disabling proxy force ranges.
+	// Disabling proxy force ranges.
 	DisableProxyForceRanges *bool `json:"disableProxyForceRanges,omitempty" tf:"disable_proxy_force_ranges,omitempty"`
 
-	// content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+	// (Number) Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+	// Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
 	EdgeCacheSettings *float64 `json:"edgeCacheSettings,omitempty" tf:"edge_cache_settings,omitempty"`
 
-	// enable access limiting by IP addresses, option available only with setting secure_key.
+	// (Block List, Max: 1) Set the cache expiration time for CDN servers (see below for nested schema)
+	// Set the cache expiration time for CDN servers
+	EdgeCacheSettingsCodes []EdgeCacheSettingsCodesInitParameters `json:"edgeCacheSettingsCodes,omitempty" tf:"edge_cache_settings_codes,omitempty"`
+
+	// (Boolean) Enable access limiting by IP addresses, option available only with setting secure_key.
+	// Enable access limiting by IP addresses, option available only with setting secure_key.
 	EnableIPURLSigning *bool `json:"enableIpUrlSigning,omitempty" tf:"enable_ip_url_signing,omitempty"`
 
-	// option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+	// (Boolean) Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+	// Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
 	FetchedCompressed *bool `json:"fetchedCompressed,omitempty" tf:"fetched_compressed,omitempty"`
 
-	// choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+	// (Boolean) Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+	// Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
 	ForwardHostHeader *bool `json:"forwardHostHeader,omitempty" tf:"forward_host_header,omitempty"`
 
+	// (Boolean) GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
 	// GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
 	GzipOn *bool `json:"gzipOn,omitempty" tf:"gzip_on,omitempty"`
 
+	// (Block List, Max: 1) IP address access control list. The list of specified IP addresses to be allowed or denied depending on acl policy type. (see below for nested schema)
+	// IP address access control list. The list of specified IP addresses to be allowed or denied depending on acl policy type.
 	IPAddressACL []IPAddressACLInitParameters `json:"ipAddressAcl,omitempty" tf:"ip_address_acl,omitempty"`
 
-	// set for ignoring cookie.
+	// (Boolean) Set for ignoring cookie.
+	// Set for ignoring cookie.
 	IgnoreCookie *bool `json:"ignoreCookie,omitempty" tf:"ignore_cookie,omitempty"`
 
-	// files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+	// (Boolean) Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+	// Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
 	IgnoreQueryParams *bool `json:"ignoreQueryParams,omitempty" tf:"ignore_query_params,omitempty"`
 
-	// allows caching for GET, HEAD and POST requests.
+	// (Boolean) Allows caching for GET, HEAD and POST requests.
+	// Allows caching for GET, HEAD and POST requests.
 	ProxyCacheMethodsSet *bool `json:"proxyCacheMethodsSet,omitempty" tf:"proxy_cache_methods_set,omitempty"`
 
-	// files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+	// (List of String) Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+	// Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
 	QueryParamsBlacklist []*string `json:"queryParamsBlacklist,omitempty" tf:"query_params_blacklist,omitempty"`
 
-	// files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+	// (List of String) Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+	// Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
 	QueryParamsWhitelist []*string `json:"queryParamsWhitelist,omitempty" tf:"query_params_whitelist,omitempty"`
 
-	// set up a redirect from HTTPS to HTTP.
+	// (Boolean) Set up a redirect from HTTPS to HTTP.
+	// Set up a redirect from HTTPS to HTTP.
 	RedirectHTTPSToHTTP *bool `json:"redirectHttpsToHttp,omitempty" tf:"redirect_https_to_http,omitempty"`
 
-	// set up a redirect from HTTP to HTTPS.
+	// (Boolean) Set up a redirect from HTTP to HTTPS.
+	// Set up a redirect from HTTP to HTTPS.
 	RedirectHTTPToHTTPS *bool `json:"redirectHttpToHttps,omitempty" tf:"redirect_http_to_https,omitempty"`
 
-	// set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+	// Stops processing of the current set of ngx_http_rewrite_module directives and starts a search for a new location matching changed URI.
+	// BREAK - Stops processing of the current set of the Rewrite option.
+	// REDIRECT - Returns a temporary redirect with the 302 code; It is used when a replacement string does not start with "http://", "https://", or "$scheme"
+	// PERMANENT - Returns a permanent redirect with the 301 code.
+	// Defines flag for the Rewrite option (default: `BREAK`).
+	// `LAST` - Stops processing of the current set of ngx_http_rewrite_module directives and starts a search for a new location matching changed URI.
+	// `BREAK` - Stops processing of the current set of the Rewrite option.
+	// `REDIRECT` - Returns a temporary redirect with the 302 code; It is used when a replacement string does not start with "http://", "https://", or "$scheme"
+	// `PERMANENT` - Returns a permanent redirect with the 301 code.
+	RewriteFlag *string `json:"rewriteFlag,omitempty" tf:"rewrite_flag,omitempty"`
+
+	// (String) An option for changing or redirecting query paths. The value must have the following format: <source path> <destination path>, where both paths are regular expressions which use at least one group. E.g., /foo/(.*) /bar/$1.
+	// An option for changing or redirecting query paths. The value must have the following format: `<source path> <destination path>`, where both paths are regular expressions which use at least one group. E.g., `/foo/(.*) /bar/$1`.
+	RewritePattern *string `json:"rewritePattern,omitempty" tf:"rewrite_pattern,omitempty"`
+
+	// (String) Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+	// Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
 	SecureKey *string `json:"secureKey,omitempty" tf:"secure_key,omitempty"`
 
-	// files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+	// (Boolean) Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+	// Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
 	Slice *bool `json:"slice,omitempty" tf:"slice,omitempty"`
 
-	// set up custom headers that CDN servers will send in requests to origins.
+	// (List of String) List of errors which instruct CDN servers to serve stale content to clients. Possible values: error, http_403, http_404, http_429, http_500, http_502, http_503, http_504, invalid_header, timeout, updating.
+	// List of errors which instruct CDN servers to serve stale content to clients. Possible values: `error`, `http_403`, `http_404`, `http_429`, `http_500`, `http_502`, `http_503`, `http_504`, `invalid_header`, `timeout`, `updating`.
+	Stale []*string `json:"stale,omitempty" tf:"stale,omitempty"`
+
+	// (Map of String) Set up custom headers that CDN servers will send in requests to origins.
+	// Set up custom headers that CDN servers will send in requests to origins.
 	// +mapType=granular
 	StaticRequestHeaders map[string]*string `json:"staticRequestHeaders,omitempty" tf:"static_request_headers,omitempty"`
 
-	// set up custom headers that CDN servers will send in response to clients.
+	// (Map of String) Set up a static response header. The header name must be lowercase.
+	// Set up a static response header. The header name must be lowercase.
 	// +mapType=granular
 	StaticResponseHeaders map[string]*string `json:"staticResponseHeaders,omitempty" tf:"static_response_headers,omitempty"`
 }
 
 type OptionsObservation struct {
 
+	// (List of String) HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
 	// HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
 	AllowedHTTPMethods []*string `json:"allowedHttpMethods,omitempty" tf:"allowed_http_methods,omitempty"`
 
-	// set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+	// users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+	// Set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
 	BrowserCacheSettings *float64 `json:"browserCacheSettings,omitempty" tf:"browser_cache_settings,omitempty"`
 
-	// list HTTP headers that must be included in responses to clients.
+	// (List of String, Deprecated) List HTTP headers that must be included in responses to clients.
+	// List HTTP headers that must be included in responses to clients.
 	CacheHTTPHeaders []*string `json:"cacheHttpHeaders,omitempty" tf:"cache_http_headers,omitempty"`
 
-	// parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+	// (List of String) Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+	// Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
 	Cors []*string `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// custom value for the Host header. Your server must be able to process requests with the chosen header.
+	// (String) Custom value for the Host header. Your server must be able to process requests with the chosen header.
+	// Custom value for the Host header. Your server must be able to process requests with the chosen header.
 	CustomHostHeader *string `json:"customHostHeader,omitempty" tf:"custom_host_header,omitempty"`
 
-	// wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS. Read-only.
+	// (String) Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
+	// Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
 	CustomServerName *string `json:"customServerName,omitempty" tf:"custom_server_name,omitempty"`
 
-	// setup a cache status.
+	// (Boolean, Deprecated) Setup a cache status.
+	// Setup a cache status.
 	DisableCache *bool `json:"disableCache,omitempty" tf:"disable_cache,omitempty"`
 
-	// disabling proxy force ranges.
+	// (Boolean) Disabling proxy force ranges.
+	// Disabling proxy force ranges.
 	DisableProxyForceRanges *bool `json:"disableProxyForceRanges,omitempty" tf:"disable_proxy_force_ranges,omitempty"`
 
-	// content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+	// (Number) Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+	// Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
 	EdgeCacheSettings *float64 `json:"edgeCacheSettings,omitempty" tf:"edge_cache_settings,omitempty"`
 
-	// enable access limiting by IP addresses, option available only with setting secure_key.
+	// (Block List, Max: 1) Set the cache expiration time for CDN servers (see below for nested schema)
+	// Set the cache expiration time for CDN servers
+	EdgeCacheSettingsCodes []EdgeCacheSettingsCodesObservation `json:"edgeCacheSettingsCodes,omitempty" tf:"edge_cache_settings_codes,omitempty"`
+
+	// (Boolean) Enable access limiting by IP addresses, option available only with setting secure_key.
+	// Enable access limiting by IP addresses, option available only with setting secure_key.
 	EnableIPURLSigning *bool `json:"enableIpUrlSigning,omitempty" tf:"enable_ip_url_signing,omitempty"`
 
-	// option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+	// (Boolean) Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+	// Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
 	FetchedCompressed *bool `json:"fetchedCompressed,omitempty" tf:"fetched_compressed,omitempty"`
 
-	// choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+	// (Boolean) Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+	// Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
 	ForwardHostHeader *bool `json:"forwardHostHeader,omitempty" tf:"forward_host_header,omitempty"`
 
+	// (Boolean) GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
 	// GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
 	GzipOn *bool `json:"gzipOn,omitempty" tf:"gzip_on,omitempty"`
 
+	// (Block List, Max: 1) IP address access control list. The list of specified IP addresses to be allowed or denied depending on acl policy type. (see below for nested schema)
+	// IP address access control list. The list of specified IP addresses to be allowed or denied depending on acl policy type.
 	IPAddressACL []IPAddressACLObservation `json:"ipAddressAcl,omitempty" tf:"ip_address_acl,omitempty"`
 
-	// set for ignoring cookie.
+	// (Boolean) Set for ignoring cookie.
+	// Set for ignoring cookie.
 	IgnoreCookie *bool `json:"ignoreCookie,omitempty" tf:"ignore_cookie,omitempty"`
 
-	// files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+	// (Boolean) Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+	// Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
 	IgnoreQueryParams *bool `json:"ignoreQueryParams,omitempty" tf:"ignore_query_params,omitempty"`
 
-	// allows caching for GET, HEAD and POST requests.
+	// (Boolean) Allows caching for GET, HEAD and POST requests.
+	// Allows caching for GET, HEAD and POST requests.
 	ProxyCacheMethodsSet *bool `json:"proxyCacheMethodsSet,omitempty" tf:"proxy_cache_methods_set,omitempty"`
 
-	// files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+	// (List of String) Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+	// Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
 	QueryParamsBlacklist []*string `json:"queryParamsBlacklist,omitempty" tf:"query_params_blacklist,omitempty"`
 
-	// files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+	// (List of String) Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+	// Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
 	QueryParamsWhitelist []*string `json:"queryParamsWhitelist,omitempty" tf:"query_params_whitelist,omitempty"`
 
-	// set up a redirect from HTTPS to HTTP.
+	// (Boolean) Set up a redirect from HTTPS to HTTP.
+	// Set up a redirect from HTTPS to HTTP.
 	RedirectHTTPSToHTTP *bool `json:"redirectHttpsToHttp,omitempty" tf:"redirect_https_to_http,omitempty"`
 
-	// set up a redirect from HTTP to HTTPS.
+	// (Boolean) Set up a redirect from HTTP to HTTPS.
+	// Set up a redirect from HTTP to HTTPS.
 	RedirectHTTPToHTTPS *bool `json:"redirectHttpToHttps,omitempty" tf:"redirect_http_to_https,omitempty"`
 
-	// set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+	// Stops processing of the current set of ngx_http_rewrite_module directives and starts a search for a new location matching changed URI.
+	// BREAK - Stops processing of the current set of the Rewrite option.
+	// REDIRECT - Returns a temporary redirect with the 302 code; It is used when a replacement string does not start with "http://", "https://", or "$scheme"
+	// PERMANENT - Returns a permanent redirect with the 301 code.
+	// Defines flag for the Rewrite option (default: `BREAK`).
+	// `LAST` - Stops processing of the current set of ngx_http_rewrite_module directives and starts a search for a new location matching changed URI.
+	// `BREAK` - Stops processing of the current set of the Rewrite option.
+	// `REDIRECT` - Returns a temporary redirect with the 302 code; It is used when a replacement string does not start with "http://", "https://", or "$scheme"
+	// `PERMANENT` - Returns a permanent redirect with the 301 code.
+	RewriteFlag *string `json:"rewriteFlag,omitempty" tf:"rewrite_flag,omitempty"`
+
+	// (String) An option for changing or redirecting query paths. The value must have the following format: <source path> <destination path>, where both paths are regular expressions which use at least one group. E.g., /foo/(.*) /bar/$1.
+	// An option for changing or redirecting query paths. The value must have the following format: `<source path> <destination path>`, where both paths are regular expressions which use at least one group. E.g., `/foo/(.*) /bar/$1`.
+	RewritePattern *string `json:"rewritePattern,omitempty" tf:"rewrite_pattern,omitempty"`
+
+	// (String) Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+	// Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
 	SecureKey *string `json:"secureKey,omitempty" tf:"secure_key,omitempty"`
 
-	// files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+	// (Boolean) Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+	// Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
 	Slice *bool `json:"slice,omitempty" tf:"slice,omitempty"`
 
-	// set up custom headers that CDN servers will send in requests to origins.
+	// (List of String) List of errors which instruct CDN servers to serve stale content to clients. Possible values: error, http_403, http_404, http_429, http_500, http_502, http_503, http_504, invalid_header, timeout, updating.
+	// List of errors which instruct CDN servers to serve stale content to clients. Possible values: `error`, `http_403`, `http_404`, `http_429`, `http_500`, `http_502`, `http_503`, `http_504`, `invalid_header`, `timeout`, `updating`.
+	Stale []*string `json:"stale,omitempty" tf:"stale,omitempty"`
+
+	// (Map of String) Set up custom headers that CDN servers will send in requests to origins.
+	// Set up custom headers that CDN servers will send in requests to origins.
 	// +mapType=granular
 	StaticRequestHeaders map[string]*string `json:"staticRequestHeaders,omitempty" tf:"static_request_headers,omitempty"`
 
-	// set up custom headers that CDN servers will send in response to clients.
+	// (Map of String) Set up a static response header. The header name must be lowercase.
+	// Set up a static response header. The header name must be lowercase.
 	// +mapType=granular
 	StaticResponseHeaders map[string]*string `json:"staticResponseHeaders,omitempty" tf:"static_response_headers,omitempty"`
 }
 
 type OptionsParameters struct {
 
+	// (List of String) HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
 	// HTTP methods for your CDN content. By default the following methods are allowed: GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS. In case some methods are not allowed to the user, they will get the 405 (Method Not Allowed) response. If the method is not supported, the user gets the 501 (Not Implemented) response.
 	// +kubebuilder:validation:Optional
 	AllowedHTTPMethods []*string `json:"allowedHttpMethods,omitempty" tf:"allowed_http_methods,omitempty"`
 
-	// set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+	// users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
+	// Set up a cache period for the end-users browser. Content will be cached due to origin settings. If there are no cache settings on your origin, the content will not be cached. The list of HTTP response codes that can be cached in browsers: 200, 201, 204, 206, 301, 302, 303, 304, 307, 308. Other response codes will not be cached. The default value is 4 days.
 	// +kubebuilder:validation:Optional
 	BrowserCacheSettings *float64 `json:"browserCacheSettings,omitempty" tf:"browser_cache_settings,omitempty"`
 
-	// list HTTP headers that must be included in responses to clients.
+	// (List of String, Deprecated) List HTTP headers that must be included in responses to clients.
+	// List HTTP headers that must be included in responses to clients.
 	// +kubebuilder:validation:Optional
 	CacheHTTPHeaders []*string `json:"cacheHttpHeaders,omitempty" tf:"cache_http_headers,omitempty"`
 
-	// parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+	// (List of String) Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
+	// Parameter that lets browsers get access to selected resources from a domain different to a domain from which the request is received.
 	// +kubebuilder:validation:Optional
 	Cors []*string `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// custom value for the Host header. Your server must be able to process requests with the chosen header.
+	// (String) Custom value for the Host header. Your server must be able to process requests with the chosen header.
+	// Custom value for the Host header. Your server must be able to process requests with the chosen header.
 	// +kubebuilder:validation:Optional
 	CustomHostHeader *string `json:"customHostHeader,omitempty" tf:"custom_host_header,omitempty"`
 
-	// wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS. Read-only.
+	// (String) Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
+	// Wildcard additional CNAME. If a resource has a wildcard additional CNAME, you can use your own certificate for content delivery via HTTPS.
 	// +kubebuilder:validation:Optional
 	CustomServerName *string `json:"customServerName,omitempty" tf:"custom_server_name,omitempty"`
 
-	// setup a cache status.
+	// (Boolean, Deprecated) Setup a cache status.
+	// Setup a cache status.
 	// +kubebuilder:validation:Optional
 	DisableCache *bool `json:"disableCache,omitempty" tf:"disable_cache,omitempty"`
 
-	// disabling proxy force ranges.
+	// (Boolean) Disabling proxy force ranges.
+	// Disabling proxy force ranges.
 	// +kubebuilder:validation:Optional
 	DisableProxyForceRanges *bool `json:"disableProxyForceRanges,omitempty" tf:"disable_proxy_force_ranges,omitempty"`
 
-	// content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+	// (Number) Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
+	// Content will be cached according to origin cache settings. The value applies for a response with codes 200, 201, 204, 206, 301, 302, 303, 304, 307, 308 if an origin server does not have caching HTTP headers. Responses with other codes will not be cached.
 	// +kubebuilder:validation:Optional
 	EdgeCacheSettings *float64 `json:"edgeCacheSettings,omitempty" tf:"edge_cache_settings,omitempty"`
 
-	// enable access limiting by IP addresses, option available only with setting secure_key.
+	// (Block List, Max: 1) Set the cache expiration time for CDN servers (see below for nested schema)
+	// Set the cache expiration time for CDN servers
+	// +kubebuilder:validation:Optional
+	EdgeCacheSettingsCodes []EdgeCacheSettingsCodesParameters `json:"edgeCacheSettingsCodes,omitempty" tf:"edge_cache_settings_codes,omitempty"`
+
+	// (Boolean) Enable access limiting by IP addresses, option available only with setting secure_key.
+	// Enable access limiting by IP addresses, option available only with setting secure_key.
 	// +kubebuilder:validation:Optional
 	EnableIPURLSigning *bool `json:"enableIpUrlSigning,omitempty" tf:"enable_ip_url_signing,omitempty"`
 
-	// option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+	// (Boolean) Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
+	// Option helps you to reduce the bandwidth between origin and CDN servers. Also, content delivery speed becomes higher because of reducing the time for compressing files in a CDN.
 	// +kubebuilder:validation:Optional
 	FetchedCompressed *bool `json:"fetchedCompressed,omitempty" tf:"fetched_compressed,omitempty"`
 
-	// choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+	// (Boolean) Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
+	// Choose the Forward Host header option if is important to send in the request to the Origin the same Host header as was sent in the request to CDN server.
 	// +kubebuilder:validation:Optional
 	ForwardHostHeader *bool `json:"forwardHostHeader,omitempty" tf:"forward_host_header,omitempty"`
 
+	// (Boolean) GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
 	// GZip compression at CDN servers reduces file size by 70% and can be as high as 90%.
 	// +kubebuilder:validation:Optional
 	GzipOn *bool `json:"gzipOn,omitempty" tf:"gzip_on,omitempty"`
 
+	// (Block List, Max: 1) IP address access control list. The list of specified IP addresses to be allowed or denied depending on acl policy type. (see below for nested schema)
+	// IP address access control list. The list of specified IP addresses to be allowed or denied depending on acl policy type.
 	// +kubebuilder:validation:Optional
 	IPAddressACL []IPAddressACLParameters `json:"ipAddressAcl,omitempty" tf:"ip_address_acl,omitempty"`
 
-	// set for ignoring cookie.
+	// (Boolean) Set for ignoring cookie.
+	// Set for ignoring cookie.
 	// +kubebuilder:validation:Optional
 	IgnoreCookie *bool `json:"ignoreCookie,omitempty" tf:"ignore_cookie,omitempty"`
 
-	// files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+	// (Boolean) Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
+	// Files with different query parameters are cached as objects with the same key regardless of the parameter value. selected by default.
 	// +kubebuilder:validation:Optional
 	IgnoreQueryParams *bool `json:"ignoreQueryParams,omitempty" tf:"ignore_query_params,omitempty"`
 
-	// allows caching for GET, HEAD and POST requests.
+	// (Boolean) Allows caching for GET, HEAD and POST requests.
+	// Allows caching for GET, HEAD and POST requests.
 	// +kubebuilder:validation:Optional
 	ProxyCacheMethodsSet *bool `json:"proxyCacheMethodsSet,omitempty" tf:"proxy_cache_methods_set,omitempty"`
 
-	// files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+	// (List of String) Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
+	// Files with the specified query parameters are cached as objects with the same key, files with other parameters are cached as objects with different keys.
 	// +kubebuilder:validation:Optional
 	QueryParamsBlacklist []*string `json:"queryParamsBlacklist,omitempty" tf:"query_params_blacklist,omitempty"`
 
-	// files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+	// (List of String) Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
+	// Files with the specified query parameters are cached as objects with different keys, files with other parameters are cached as objects with the same key.
 	// +kubebuilder:validation:Optional
 	QueryParamsWhitelist []*string `json:"queryParamsWhitelist,omitempty" tf:"query_params_whitelist,omitempty"`
 
-	// set up a redirect from HTTPS to HTTP.
+	// (Boolean) Set up a redirect from HTTPS to HTTP.
+	// Set up a redirect from HTTPS to HTTP.
 	// +kubebuilder:validation:Optional
 	RedirectHTTPSToHTTP *bool `json:"redirectHttpsToHttp,omitempty" tf:"redirect_https_to_http,omitempty"`
 
-	// set up a redirect from HTTP to HTTPS.
+	// (Boolean) Set up a redirect from HTTP to HTTPS.
+	// Set up a redirect from HTTP to HTTPS.
 	// +kubebuilder:validation:Optional
 	RedirectHTTPToHTTPS *bool `json:"redirectHttpToHttps,omitempty" tf:"redirect_http_to_https,omitempty"`
 
-	// set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+	// Stops processing of the current set of ngx_http_rewrite_module directives and starts a search for a new location matching changed URI.
+	// BREAK - Stops processing of the current set of the Rewrite option.
+	// REDIRECT - Returns a temporary redirect with the 302 code; It is used when a replacement string does not start with "http://", "https://", or "$scheme"
+	// PERMANENT - Returns a permanent redirect with the 301 code.
+	// Defines flag for the Rewrite option (default: `BREAK`).
+	// `LAST` - Stops processing of the current set of ngx_http_rewrite_module directives and starts a search for a new location matching changed URI.
+	// `BREAK` - Stops processing of the current set of the Rewrite option.
+	// `REDIRECT` - Returns a temporary redirect with the 302 code; It is used when a replacement string does not start with "http://", "https://", or "$scheme"
+	// `PERMANENT` - Returns a permanent redirect with the 301 code.
+	// +kubebuilder:validation:Optional
+	RewriteFlag *string `json:"rewriteFlag,omitempty" tf:"rewrite_flag,omitempty"`
+
+	// (String) An option for changing or redirecting query paths. The value must have the following format: <source path> <destination path>, where both paths are regular expressions which use at least one group. E.g., /foo/(.*) /bar/$1.
+	// An option for changing or redirecting query paths. The value must have the following format: `<source path> <destination path>`, where both paths are regular expressions which use at least one group. E.g., `/foo/(.*) /bar/$1`.
+	// +kubebuilder:validation:Optional
+	RewritePattern *string `json:"rewritePattern,omitempty" tf:"rewrite_pattern,omitempty"`
+
+	// (String) Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
+	// Set secure key for url encoding to protect contect and limit access by IP addresses and time limits.
 	// +kubebuilder:validation:Optional
 	SecureKey *string `json:"secureKey,omitempty" tf:"secure_key,omitempty"`
 
-	// files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+	// (Boolean) Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
+	// Files larger than 10 MB will be requested and cached in parts (no larger than 10 MB each part). It reduces time to first byte. The origin must support HTTP Range requests.
 	// +kubebuilder:validation:Optional
 	Slice *bool `json:"slice,omitempty" tf:"slice,omitempty"`
 
-	// set up custom headers that CDN servers will send in requests to origins.
+	// (List of String) List of errors which instruct CDN servers to serve stale content to clients. Possible values: error, http_403, http_404, http_429, http_500, http_502, http_503, http_504, invalid_header, timeout, updating.
+	// List of errors which instruct CDN servers to serve stale content to clients. Possible values: `error`, `http_403`, `http_404`, `http_429`, `http_500`, `http_502`, `http_503`, `http_504`, `invalid_header`, `timeout`, `updating`.
+	// +kubebuilder:validation:Optional
+	Stale []*string `json:"stale,omitempty" tf:"stale,omitempty"`
+
+	// (Map of String) Set up custom headers that CDN servers will send in requests to origins.
+	// Set up custom headers that CDN servers will send in requests to origins.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	StaticRequestHeaders map[string]*string `json:"staticRequestHeaders,omitempty" tf:"static_request_headers,omitempty"`
 
-	// set up custom headers that CDN servers will send in response to clients.
+	// (Map of String) Set up a static response header. The header name must be lowercase.
+	// Set up a static response header. The header name must be lowercase.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	StaticResponseHeaders map[string]*string `json:"staticResponseHeaders,omitempty" tf:"static_response_headers,omitempty"`
@@ -302,12 +497,16 @@ type OptionsParameters struct {
 
 type ResourceInitParameters struct {
 
-	// Flag to create Resource either in active or disabled state. True - the content from CDN is available to clients.
+	// the content from CDN is available to clients.
+	// Flag to create Resource either in active or disabled state. `True` - the content from CDN is available to clients.
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
+	// (String) CDN endpoint CNAME, must be unique among resources.
 	// CDN endpoint CNAME, must be unique among resources.
 	Cname *string `json:"cname,omitempty" tf:"cname,omitempty"`
 
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -319,12 +518,20 @@ type ResourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (Block List, Max: 1) CDN Resource settings and options to tune CDN edge behavior. (see below for nested schema)
 	// CDN Resource settings and options to tune CDN edge behavior.
 	Options []OptionsInitParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// (String) The ID of a specific origin group.
+	// The ID of a specific origin group.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/cdn/v1alpha1.OriginGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
-	OriginGroupID *float64 `json:"originGroupId,omitempty" tf:"origin_group_id,omitempty"`
+	OriginGroupID *string `json:"originGroupId,omitempty" tf:"origin_group_id,omitempty"`
 
 	// Reference to a OriginGroup in cdn to populate originGroupId.
 	// +kubebuilder:validation:Optional
@@ -334,67 +541,120 @@ type ResourceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginGroupIDSelector *v1.Selector `json:"originGroupIdSelector,omitempty" tf:"-"`
 
+	// (String) The name of a specific origin group.
+	// The name of a specific origin group.
 	OriginGroupName *string `json:"originGroupName,omitempty" tf:"origin_group_name,omitempty"`
 
+	// (String) Protocol of origin resource. http or https.
+	// Protocol of origin resource. `http` or `https`.
 	OriginProtocol *string `json:"originProtocol,omitempty" tf:"origin_protocol,omitempty"`
 
+	// (String) CDN provider is a content delivery service provider. Possible values: "ourcdn" (default) or "gcore"
+	// CDN provider is a content delivery service provider. Possible values: "ourcdn" (default) or "gcore"
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// (Block Set, Max: 1) SSL certificate of CDN resource. (see below for nested schema)
 	// SSL certificate of CDN resource.
 	SSLCertificate []SSLCertificateInitParameters `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty"`
 
-	// list of secondary hostname strings.
+	// (Set of String) List of secondary hostname strings.
+	// List of secondary hostname strings.
 	// +listType=set
 	SecondaryHostnames []*string `json:"secondaryHostnames,omitempty" tf:"secondary_hostnames,omitempty"`
 
+	// shielding
+	// Shielding is a Cloud CDN feature that helps reduce the load on content origins from CDN servers.
+	// Specify location id to enable shielding. See https://yandex.cloud/en/docs/cdn/operations/resources/enable-shielding
+	Shielding *string `json:"shielding,omitempty" tf:"shielding,omitempty"`
+
+	// (String) Last update timestamp. Computed value for read and update operations.
+	// Last update timestamp. Computed value for read and update operations.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ResourceObservation struct {
 
-	// Flag to create Resource either in active or disabled state. True - the content from CDN is available to clients.
+	// the content from CDN is available to clients.
+	// Flag to create Resource either in active or disabled state. `True` - the content from CDN is available to clients.
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
+	// (String) CDN endpoint CNAME, must be unique among resources.
 	// CDN endpoint CNAME, must be unique among resources.
 	Cname *string `json:"cname,omitempty" tf:"cname,omitempty"`
 
-	// Creation timestamp of the IoT Core Device
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (Block List, Max: 1) CDN Resource settings and options to tune CDN edge behavior. (see below for nested schema)
 	// CDN Resource settings and options to tune CDN edge behavior.
 	Options []OptionsObservation `json:"options,omitempty" tf:"options,omitempty"`
 
-	OriginGroupID *float64 `json:"originGroupId,omitempty" tf:"origin_group_id,omitempty"`
+	// (String) The ID of a specific origin group.
+	// The ID of a specific origin group.
+	OriginGroupID *string `json:"originGroupId,omitempty" tf:"origin_group_id,omitempty"`
 
+	// (String) The name of a specific origin group.
+	// The name of a specific origin group.
 	OriginGroupName *string `json:"originGroupName,omitempty" tf:"origin_group_name,omitempty"`
 
+	// (String) Protocol of origin resource. http or https.
+	// Protocol of origin resource. `http` or `https`.
 	OriginProtocol *string `json:"originProtocol,omitempty" tf:"origin_protocol,omitempty"`
 
-	// provider CNAME of CDN resource, computed value for read and update operations.
+	// (String) Provider CNAME of CDN resource, computed value for read and update operations.
+	// Provider CNAME of CDN resource, computed value for read and update operations.
 	ProviderCname *string `json:"providerCname,omitempty" tf:"provider_cname,omitempty"`
 
+	// (String) CDN provider is a content delivery service provider. Possible values: "ourcdn" (default) or "gcore"
+	// CDN provider is a content delivery service provider. Possible values: "ourcdn" (default) or "gcore"
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// (Block Set, Max: 1) SSL certificate of CDN resource. (see below for nested schema)
 	// SSL certificate of CDN resource.
 	SSLCertificate []SSLCertificateObservation `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty"`
 
-	// list of secondary hostname strings.
+	// (Set of String) List of secondary hostname strings.
+	// List of secondary hostname strings.
 	// +listType=set
 	SecondaryHostnames []*string `json:"secondaryHostnames,omitempty" tf:"secondary_hostnames,omitempty"`
 
+	// shielding
+	// Shielding is a Cloud CDN feature that helps reduce the load on content origins from CDN servers.
+	// Specify location id to enable shielding. See https://yandex.cloud/en/docs/cdn/operations/resources/enable-shielding
+	Shielding *string `json:"shielding,omitempty" tf:"shielding,omitempty"`
+
+	// (String) Last update timestamp. Computed value for read and update operations.
+	// Last update timestamp. Computed value for read and update operations.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ResourceParameters struct {
 
-	// Flag to create Resource either in active or disabled state. True - the content from CDN is available to clients.
+	// the content from CDN is available to clients.
+	// Flag to create Resource either in active or disabled state. `True` - the content from CDN is available to clients.
 	// +kubebuilder:validation:Optional
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
+	// (String) CDN endpoint CNAME, must be unique among resources.
 	// CDN endpoint CNAME, must be unique among resources.
 	// +kubebuilder:validation:Optional
 	Cname *string `json:"cname,omitempty" tf:"cname,omitempty"`
 
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -407,14 +667,23 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (Block List, Max: 1) CDN Resource settings and options to tune CDN edge behavior. (see below for nested schema)
 	// CDN Resource settings and options to tune CDN edge behavior.
 	// +kubebuilder:validation:Optional
 	Options []OptionsParameters `json:"options,omitempty" tf:"options,omitempty"`
 
+	// (String) The ID of a specific origin group.
+	// The ID of a specific origin group.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/cdn/v1alpha1.OriginGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	OriginGroupID *float64 `json:"originGroupId,omitempty" tf:"origin_group_id,omitempty"`
+	OriginGroupID *string `json:"originGroupId,omitempty" tf:"origin_group_id,omitempty"`
 
 	// Reference to a OriginGroup in cdn to populate originGroupId.
 	// +kubebuilder:validation:Optional
@@ -424,44 +693,79 @@ type ResourceParameters struct {
 	// +kubebuilder:validation:Optional
 	OriginGroupIDSelector *v1.Selector `json:"originGroupIdSelector,omitempty" tf:"-"`
 
+	// (String) The name of a specific origin group.
+	// The name of a specific origin group.
 	// +kubebuilder:validation:Optional
 	OriginGroupName *string `json:"originGroupName,omitempty" tf:"origin_group_name,omitempty"`
 
+	// (String) Protocol of origin resource. http or https.
+	// Protocol of origin resource. `http` or `https`.
 	// +kubebuilder:validation:Optional
 	OriginProtocol *string `json:"originProtocol,omitempty" tf:"origin_protocol,omitempty"`
 
+	// (String) CDN provider is a content delivery service provider. Possible values: "ourcdn" (default) or "gcore"
+	// CDN provider is a content delivery service provider. Possible values: "ourcdn" (default) or "gcore"
+	// +kubebuilder:validation:Optional
+	ProviderType *string `json:"providerType,omitempty" tf:"provider_type,omitempty"`
+
+	// (Block Set, Max: 1) SSL certificate of CDN resource. (see below for nested schema)
 	// SSL certificate of CDN resource.
 	// +kubebuilder:validation:Optional
 	SSLCertificate []SSLCertificateParameters `json:"sslCertificate,omitempty" tf:"ssl_certificate,omitempty"`
 
-	// list of secondary hostname strings.
+	// (Set of String) List of secondary hostname strings.
+	// List of secondary hostname strings.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecondaryHostnames []*string `json:"secondaryHostnames,omitempty" tf:"secondary_hostnames,omitempty"`
 
+	// shielding
+	// Shielding is a Cloud CDN feature that helps reduce the load on content origins from CDN servers.
+	// Specify location id to enable shielding. See https://yandex.cloud/en/docs/cdn/operations/resources/enable-shielding
+	// +kubebuilder:validation:Optional
+	Shielding *string `json:"shielding,omitempty" tf:"shielding,omitempty"`
+
+	// (String) Last update timestamp. Computed value for read and update operations.
+	// Last update timestamp. Computed value for read and update operations.
 	// +kubebuilder:validation:Optional
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type SSLCertificateInitParameters struct {
+
+	// (String) Certificate Manager ID.
+	// Certificate Manager ID.
 	CertificateManagerID *string `json:"certificateManagerId,omitempty" tf:"certificate_manager_id,omitempty"`
 
+	// (String) SSL certificate type.
+	// SSL certificate type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SSLCertificateObservation struct {
+
+	// (String) Certificate Manager ID.
+	// Certificate Manager ID.
 	CertificateManagerID *string `json:"certificateManagerId,omitempty" tf:"certificate_manager_id,omitempty"`
 
+	// (String) SSL certificate status.
+	// SSL certificate status.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// (String) SSL certificate type.
+	// SSL certificate type.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SSLCertificateParameters struct {
 
+	// (String) Certificate Manager ID.
+	// Certificate Manager ID.
 	// +kubebuilder:validation:Optional
 	CertificateManagerID *string `json:"certificateManagerId,omitempty" tf:"certificate_manager_id,omitempty"`
 
+	// (String) SSL certificate type.
+	// SSL certificate type.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -493,7 +797,7 @@ type ResourceStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Resource is the Schema for the Resources API. Allows management of a Yandex.Cloud CDN Resource.
+// Resource is the Schema for the Resources API. Allows management of a Yandex Cloud CDN Resource.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -502,8 +806,9 @@ type ResourceStatus struct {
 type Resource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceSpec   `json:"spec"`
-	Status            ResourceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.cname) || (has(self.initProvider) && has(self.initProvider.cname))",message="spec.forProvider.cname is a required parameter"
+	Spec   ResourceSpec   `json:"spec"`
+	Status ResourceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

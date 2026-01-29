@@ -1,0 +1,18 @@
+apiVersion: ydb.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: TableChangefeed
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ydb/v1alpha1/tablechangefeed
+  labels:
+    testing.upbound.io/example-name: ydb_changefeed
+  name: ydb-changefeed
+spec:
+  forProvider:
+    consumer:
+    - name: test_consumer
+    format: JSON
+    mode: NEW_IMAGE
+    name: changefeed
+    tableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test_table_2

@@ -8,7 +8,7 @@ metadata:
   name: default
 spec:
   forProvider:
-    interconnectType: infiniband
+    interconnectType: INFINIBAND
     labels:
       environment: test
     name: gpu-cluster-name

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Policy is the Schema for the Policys API. Allows management of
-          Yandex.Cloud Backup Policy.
+          Yandex Cloud Backup Policy.
         properties:
           apiVersion:
             description: |-
@@ -60,24 +60,51 @@ spec:
               forProvider:
                 properties:
                   archiveName:
-                    description: '[Plan ID]-[Unique ID]a) — The name of generated
-                      archives.'
+                    description: |-
+                      [Plan ID]-[Unique ID]a.
+                      The name of generated archives. Default `[Machine Name]-[Plan ID]-[Unique ID]a`.
                     type: string
                   cbt:
                     description: |-
-                      — Configuration of Changed Block Tracking.
-                      Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+                      (String) Configuration of Changed Block Tracking. Available values are: USE_IF_ENABLED, ENABLED_AND_USE, DO_NOT_USE. Default DO_NOT_USE.
+                      Configuration of Changed Block Tracking. Available values are: `USE_IF_ENABLED`, `ENABLED_AND_USE`, `DO_NOT_USE`. Default `DO_NOT_USE`.
                     type: string
                   compression:
                     description: |-
-                      — Archive compression level. Affects CPU.
-                      Available values: "NORMAL", "HIGH", "MAX", "OFF".
+                      (String) Archive compression level. Affects CPU. Available values: NORMAL, HIGH, MAX, OFF. Default: NORMAL.
+                      Archive compression level. Affects CPU. Available values: `NORMAL`, `HIGH`, `MAX`, `OFF`. Default: `NORMAL`.
                     type: string
                   fastBackupEnabled:
-                    description: — Enable flag
+                    description: |-
+                      (Boolean) If true, determines whether a file has changed by the file size and timestamp. Otherwise, the entire file contents are compared to those stored in the backup.
+                      If true, determines whether a file has changed by the file size and timestamp. Otherwise, the entire file contents are compared to those stored in the backup.
                     type: boolean
+                  fileFilters:
+                    description: |-
+                      (Block List, Max: 1) File filters to specify masks of files to backup or to exclude of backuping. (see below for nested schema)
+                      File filters to specify masks of files to backup or to exclude of backuping.
+                    items:
+                      properties:
+                        exclusionMasks:
+                          description: |-
+                            (List of String) Do not backup files that match the following criteria.
+                            Do not backup files that match the following criteria.
+                          items:
+                            type: string
+                          type: array
+                        inclusionMasks:
+                          description: |-
+                            (List of String) Backup only files that match the following criteria.
+                            Backup only files that match the following criteria.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   folderId:
-                    description: — days
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -163,72 +190,93 @@ spec:
                     type: object
                   format:
                     description: |-
-                      — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-                      Available values: "AUTO", "VERSION_11", "VERSION_12".
+                      (String) Format of the backup. It's strongly recommend to leave this option empty or AUTO. Available values: AUTO, VERSION_11, VERSION_12.
+                      Format of the backup. It's strongly recommend to leave this option empty or `AUTO`. Available values: `AUTO`, `VERSION_11`, `VERSION_12`.
                     type: string
+                  lvmSnapshottingEnabled:
+                    description: |-
+                      (Boolean) LVM will be used to create the volume snapshot. If LVM fails to create a snapshot (for example, because there is not enough free space), the software will create the snapshot itself.
+                      LVM will be used to create the volume snapshot. If LVM fails to create a snapshot (for example, because there is not enough free space), the software will create the snapshot itself.
+                    type: boolean
                   multiVolumeSnapshottingEnabled:
-                    description: — If true, snapshots of multiple volumes will be
-                      taken simultaneously.
+                    description: |-
+                      (Boolean) If true, snapshots of multiple volumes will be taken simultaneously. Default true.
+                      If true, snapshots of multiple volumes will be taken simultaneously. Default `true`.
                     type: boolean
                   name:
-                    description: — Name of the policy
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   performanceWindowEnabled:
-                    description: — Time windows for performance limitations of backup.
+                    description: |-
+                      (Boolean) Time windows for performance limitations of backup. Default false.
+                      Time windows for performance limitations of backup. Default `false`.
                     type: boolean
                   preserveFileSecuritySettings:
-                    description: — Preserves file security settings. It's better to
-                      set this option to true.
+                    description: |-
+                      (Boolean, Deprecated) If true, a quiesced snapshot of the virtual machine will be taken. Default true.
+                      If true, a quiesced snapshot of the virtual machine will be taken. Default `true`.
                     type: boolean
                   quiesceSnapshottingEnabled:
-                    description: — If true, a quiesced snapshot of the virtual machine
-                      will be taken.
+                    description: |-
+                      (Boolean, Deprecated) If true, a quiesced snapshot of the virtual machine will be taken. Default true.
+                      If true, a quiesced snapshot of the virtual machine will be taken. Default `true`.
                     type: boolean
                   reattempts:
                     description: |-
-                      — Amount of reattempts that should be performed while trying to make backup at the host.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Amount of reattempts that should be performed while trying to make backup at the host. (see below for nested schema)
+                      Amount of reattempts that should be performed while trying to make backup at the host.
                     items:
                       properties:
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enable flag. Default `true`.
                           type: boolean
                         interval:
-                          description: — Retry interval. See interval_type for available
-                            values
+                          description: |-
+                            (String) Retry interval. See interval_type for available values. Default: 5m.
+                            Retry interval. See `interval_type` for available values. Default: `5m`.
                           type: string
                         maxAttempts:
-                          description: — Maximum number of attempts before throwing
-                            an error
+                          description: |-
+                            (Number) Maximum number of attempts before throwing an error. Default 5.
+                            Maximum number of attempts before throwing an error. Default `5`.
                           type: number
                       type: object
                     type: array
                   retention:
                     description: |-
-                      — Retention policy for backups. Allows to setup backups lifecycle.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Retention policy for backups. Allows to setup backups lifecycle. (see below for nested schema)
+                      Retention policy for backups. Allows to setup backups lifecycle.
                     items:
                       properties:
                         afterBackup:
-                          description: — Defines whether retention rule applies after
-                            creating backup or before.
+                          description: |-
+                            (Boolean) Defines whether retention rule applies after creating backup or before.
+                            Defines whether retention rule applies after creating backup or before.
                           type: boolean
                         rules:
-                          description: — seconds
+                          description: |-
+                            (Block Set) A list of retention rules. (see below for nested schema)
+                            A list of retention rules.
                           items:
                             properties:
                               maxAge:
-                                description: (Conflicts with max_count) — Deletes
-                                  backups that older than max_age. Exactly one of
-                                  max_count or max_age should be set.
+                                description: |-
+                                  (String) Deletes backups that older than max_age. Exactly one of max_count or max_age should be set.
+                                  Deletes backups that older than `max_age`. Exactly one of `max_count` or `max_age` should be set.
                                 type: string
                               maxCount:
-                                description: (Conflicts with max_age) — Deletes backups
-                                  if it's count exceeds max_count. Exactly one of
-                                  max_count or max_age should be set.
+                                description: |-
+                                  (Number) Deletes backups if it's count exceeds max_count. Exactly one of max_count or max_age should be set.
+                                  Deletes backups if it's count exceeds `max_count`. Exactly one of `max_count` or `max_age` should be set.
                                 type: number
                               repeatPeriod:
-                                description: — days
+                                description: |-
+                                  (List of String) Possible types: REPEATE_PERIOD_UNSPECIFIED, HOURLY, DAILY, WEEKLY, MONTHLY. Specifies repeat period of the backupset.
+                                  Possible types: `REPEATE_PERIOD_UNSPECIFIED`, `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`. Specifies repeat period of the backupset.
                                 items:
                                   type: string
                                 type: array
@@ -237,112 +285,220 @@ spec:
                       type: object
                     type: array
                   scheduling:
-                    description: — Schedule settings for creating backups on the host.
+                    description: |-
+                      (Block Set, Min: 1, Max: 1) Schedule settings for creating backups on the host. (see below for nested schema)
+                      Schedule settings for creating backups on the host.
                     items:
                       properties:
+                        backupSets:
+                          description: |-
+                            (Block Set) A list of schedules with backup sets that compose the whole scheme. (see below for nested schema)
+                            A list of schedules with backup sets that compose the whole scheme.
+                          items:
+                            properties:
+                              executeByInterval:
+                                description: |-
+                                  (Number, Deprecated) Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                                  Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `interval_type` for available values. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
+                                type: number
+                              executeByTime:
+                                description: |-
+                                  (Block Set, Deprecated) Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time. (see below for nested schema)
+                                  Perform backup periodically at specific time. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
+                                items:
+                                  properties:
+                                    includeLastDayOfMonth:
+                                      description: |-
+                                        (Boolean) If true, schedule will be applied on the last day of month. See day_type for available values. Default false.
+                                        If true, schedule will be applied on the last day of month. See `day_type` for available values. Default `false`.
+                                      type: boolean
+                                    monthdays:
+                                      description: |-
+                                        (List of Number) List of days when schedule applies. Used in MONTHLY type.
+                                        List of days when schedule applies. Used in `MONTHLY` type.
+                                      items:
+                                        type: number
+                                      type: array
+                                    months:
+                                      description: |-
+                                        (List of Number) Set of values. Allowed values form 1 to 12.
+                                        Set of values. Allowed values form 1 to 12.
+                                      items:
+                                        type: number
+                                      type: array
+                                    repeatAt:
+                                      description: |-
+                                        hours format), when the schedule applies.
+                                        List of time in format `HH:MM` (24-hours format), when the schedule applies.
+                                      items:
+                                        type: string
+                                      type: array
+                                    repeatEvery:
+                                      description: |-
+                                        (String) Frequency of backup repetition. See interval_type for available values.
+                                        Frequency of backup repetition. See `interval_type` for available values.
+                                      type: string
+                                    runLater:
+                                      description: |-
+                                        (Boolean) If true and if the machine is off, launch missed tasks on boot up. Default false.
+                                        If true and if the machine is off, launch missed tasks on boot up. Default `false`.
+                                      type: boolean
+                                    type:
+                                      description: |-
+                                        (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                        Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
+                                      type: string
+                                    weekdays:
+                                      description: |-
+                                        (List of String) List of weekdays when the backup will be applied. Used in WEEKLY type.
+                                        List of weekdays when the backup will be applied. Used in `WEEKLY` type.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: |-
+                                  (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                  BackupSet type. See `backup_set_type` for available values. Default `TYPE_AUTO`.
+                                type: string
+                            type: object
+                          type: array
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enables or disables scheduling. Default `true`.
                           type: boolean
                         executeByInterval:
                           description: |-
-                            — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-                            See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                            (Number, Deprecated) Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                            Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `interval_type` for available values. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
                           type: number
                         executeByTime:
-                          description: '— Perform backup periodically at specific
-                            time. Exactly on of options should be set: execute_by_interval
-                            or execute_by_time.'
+                          description: |-
+                            (Block Set, Deprecated) Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time. (see below for nested schema)
+                            Perform backup periodically at specific time. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
                           items:
                             properties:
                               includeLastDayOfMonth:
                                 description: |-
-                                  — If true, schedule will be applied on the last day of month.
-                                  See day_type for available values.
+                                  (Boolean) If true, schedule will be applied on the last day of month. See day_type for available values. Default false.
+                                  If true, schedule will be applied on the last day of month. See `day_type` for available values. Default `false`.
                                 type: boolean
                               monthdays:
-                                description: — List of days when schedule applies.
-                                  Used in "MONTHLY" type.
+                                description: |-
+                                  (List of Number) List of days when schedule applies. Used in MONTHLY type.
+                                  List of days when schedule applies. Used in `MONTHLY` type.
                                 items:
                                   type: number
                                 type: array
                               months:
-                                description: — seconds
+                                description: |-
+                                  (List of Number) Set of values. Allowed values form 1 to 12.
+                                  Set of values. Allowed values form 1 to 12.
                                 items:
                                   type: number
                                 type: array
                               repeatAt:
-                                description: hours format), when the schedule applies.
+                                description: |-
+                                  hours format), when the schedule applies.
+                                  List of time in format `HH:MM` (24-hours format), when the schedule applies.
                                 items:
                                   type: string
                                 type: array
                               repeatEvery:
-                                description: — Frequency of backup repetition. See
-                                  interval_type for available values.
+                                description: |-
+                                  (String) Frequency of backup repetition. See interval_type for available values.
+                                  Frequency of backup repetition. See `interval_type` for available values.
                                 type: string
+                              runLater:
+                                description: |-
+                                  (Boolean) If true and if the machine is off, launch missed tasks on boot up. Default false.
+                                  If true and if the machine is off, launch missed tasks on boot up. Default `false`.
+                                type: boolean
                               type:
-                                description: '— Type of the scheduling. Available
-                                  values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                description: |-
+                                  (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                  Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
                                 type: string
                               weekdays:
-                                description: — List of weekdays when the backup will
-                                  be applied. Used in "WEEKLY" type.
+                                description: |-
+                                  (List of String) List of weekdays when the backup will be applied. Used in WEEKLY type.
+                                  List of weekdays when the backup will be applied. Used in `WEEKLY` type.
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         maxParallelBackups:
-                          description: — Maximum number of backup processes allowed
-                            to run in parallel. 0 for unlimited.
+                          description: |-
+                            (Number) Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default 0.
+                            Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default `0`.
                           type: number
                         randomMaxDelay:
                           description: |-
-                            — Configuration of the random delay between the execution of parallel tasks.
-                            See interval_type for available values.
+                            (String) Configuration of the random delay between the execution of parallel tasks. See interval_type for available values. Default 30m.
+                            Configuration of the random delay between the execution of parallel tasks. See `interval_type` for available values. Default `30m`.
                           type: string
                         scheme:
                           description: |-
-                            — Scheme of the backups.
-                            Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+                            (String) Scheme of the backups. Available values are: ALWAYS_INCREMENTAL, ALWAYS_FULL, WEEKLY_FULL_DAILY_INCREMENTAL, WEEKLY_INCREMENTAL. Default ALWAYS_INCREMENTAL.
+                            Scheme of the backups. Available values are: `ALWAYS_INCREMENTAL`, `ALWAYS_FULL`, `WEEKLY_FULL_DAILY_INCREMENTAL`, `WEEKLY_INCREMENTAL`. Default `ALWAYS_INCREMENTAL`.
                           type: string
                         weeklyBackupDay:
                           description: |-
-                            — A day of week to start weekly backups.
-                            See day_type for available values.
+                            (String) A day of week to start weekly backups. See day_type for available values. Default MONDAY.
+                            A day of week to start weekly backups. See `day_type` for available values. Default `MONDAY`.
                           type: string
                       type: object
                     type: array
+                  sectorBySector:
+                    description: |-
+                      by-sector backup of a disk or volume creates a backup copy of all sectors of the disk or volume, including those that do not contain data. Therefore, the size of such a backup copy will be equal to the size of the original disk or volume.
+                      A sector-by-sector backup of a disk or volume creates a backup copy of all sectors of the disk or volume, including those that do not contain data. Therefore, the size of such a backup copy will be equal to the size of the original disk or volume.
+                    type: boolean
                   silentModeEnabled:
-                    description: — if true, a user interaction will be avoided when
-                      possible.
+                    description: |-
+                      (Boolean) If true, a user interaction will be avoided when possible. Default true.
+                      If true, a user interaction will be avoided when possible. Default `true`.
                     type: boolean
                   splittingBytes:
-                    description: — determines the size to split backups. It's better
-                      to leave this option unchanged.
+                    description: |-
+                      (String) Determines the size to split backups. It's better to leave this option unchanged. Default 9223372036854775807.
+                      Determines the size to split backups. It's better to leave this option unchanged. Default `9223372036854775807`.
                     type: string
+                  validationEnabled:
+                    description: |-
+                      consuming process, even with incremental or differential backups of small amounts of data. This is because not only the data physically contained in the backup copy is verified, but all data restored when it is selected. This option requires access to previously created backup copies.
+                      Validation is a time-consuming process, even with incremental or differential backups of small amounts of data. This is because not only the data physically contained in the backup copy is verified, but all data restored when it is selected. This option requires access to previously created backup copies.
+                    type: boolean
                   vmSnapshotReattempts:
                     description: |-
-                      (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Amount of reattempts that should be performed while trying to make snapshot. (see below for nested schema)
+                      Amount of reattempts that should be performed while trying to make snapshot.
                     items:
                       properties:
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enable flag. Default `true`.
                           type: boolean
                         interval:
-                          description: — Retry interval. See interval_type for available
-                            values
+                          description: |-
+                            (String) Retry interval. See interval_type for available values. Default: 5m.
+                            Retry interval. See `interval_type` for available values. Default: `5m`.
                           type: string
                         maxAttempts:
-                          description: — Maximum number of attempts before throwing
-                            an error
+                          description: |-
+                            (Number) Maximum number of attempts before throwing an error. Default 5.
+                            Maximum number of attempts before throwing an error. Default `5`.
                           type: number
                       type: object
                     type: array
                   vssProvider:
                     description: |-
-                      — Settings for the volume shadow copy service.
-                      Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+                      (String) Settings for the volume shadow copy service. Available values are: NATIVE, TARGET_SYSTEM_DEFINED. Default NATIVE.
+                      Settings for the volume shadow copy service. Available values are: `NATIVE`, `TARGET_SYSTEM_DEFINED`. Default `NATIVE`.
                     type: string
                 type: object
               initProvider:
@@ -359,24 +515,51 @@ spec:
                   autoscaler.
                 properties:
                   archiveName:
-                    description: '[Plan ID]-[Unique ID]a) — The name of generated
-                      archives.'
+                    description: |-
+                      [Plan ID]-[Unique ID]a.
+                      The name of generated archives. Default `[Machine Name]-[Plan ID]-[Unique ID]a`.
                     type: string
                   cbt:
                     description: |-
-                      — Configuration of Changed Block Tracking.
-                      Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+                      (String) Configuration of Changed Block Tracking. Available values are: USE_IF_ENABLED, ENABLED_AND_USE, DO_NOT_USE. Default DO_NOT_USE.
+                      Configuration of Changed Block Tracking. Available values are: `USE_IF_ENABLED`, `ENABLED_AND_USE`, `DO_NOT_USE`. Default `DO_NOT_USE`.
                     type: string
                   compression:
                     description: |-
-                      — Archive compression level. Affects CPU.
-                      Available values: "NORMAL", "HIGH", "MAX", "OFF".
+                      (String) Archive compression level. Affects CPU. Available values: NORMAL, HIGH, MAX, OFF. Default: NORMAL.
+                      Archive compression level. Affects CPU. Available values: `NORMAL`, `HIGH`, `MAX`, `OFF`. Default: `NORMAL`.
                     type: string
                   fastBackupEnabled:
-                    description: — Enable flag
+                    description: |-
+                      (Boolean) If true, determines whether a file has changed by the file size and timestamp. Otherwise, the entire file contents are compared to those stored in the backup.
+                      If true, determines whether a file has changed by the file size and timestamp. Otherwise, the entire file contents are compared to those stored in the backup.
                     type: boolean
+                  fileFilters:
+                    description: |-
+                      (Block List, Max: 1) File filters to specify masks of files to backup or to exclude of backuping. (see below for nested schema)
+                      File filters to specify masks of files to backup or to exclude of backuping.
+                    items:
+                      properties:
+                        exclusionMasks:
+                          description: |-
+                            (List of String) Do not backup files that match the following criteria.
+                            Do not backup files that match the following criteria.
+                          items:
+                            type: string
+                          type: array
+                        inclusionMasks:
+                          description: |-
+                            (List of String) Backup only files that match the following criteria.
+                            Backup only files that match the following criteria.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   folderId:
-                    description: — days
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -462,72 +645,93 @@ spec:
                     type: object
                   format:
                     description: |-
-                      — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-                      Available values: "AUTO", "VERSION_11", "VERSION_12".
+                      (String) Format of the backup. It's strongly recommend to leave this option empty or AUTO. Available values: AUTO, VERSION_11, VERSION_12.
+                      Format of the backup. It's strongly recommend to leave this option empty or `AUTO`. Available values: `AUTO`, `VERSION_11`, `VERSION_12`.
                     type: string
+                  lvmSnapshottingEnabled:
+                    description: |-
+                      (Boolean) LVM will be used to create the volume snapshot. If LVM fails to create a snapshot (for example, because there is not enough free space), the software will create the snapshot itself.
+                      LVM will be used to create the volume snapshot. If LVM fails to create a snapshot (for example, because there is not enough free space), the software will create the snapshot itself.
+                    type: boolean
                   multiVolumeSnapshottingEnabled:
-                    description: — If true, snapshots of multiple volumes will be
-                      taken simultaneously.
+                    description: |-
+                      (Boolean) If true, snapshots of multiple volumes will be taken simultaneously. Default true.
+                      If true, snapshots of multiple volumes will be taken simultaneously. Default `true`.
                     type: boolean
                   name:
-                    description: — Name of the policy
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   performanceWindowEnabled:
-                    description: — Time windows for performance limitations of backup.
+                    description: |-
+                      (Boolean) Time windows for performance limitations of backup. Default false.
+                      Time windows for performance limitations of backup. Default `false`.
                     type: boolean
                   preserveFileSecuritySettings:
-                    description: — Preserves file security settings. It's better to
-                      set this option to true.
+                    description: |-
+                      (Boolean, Deprecated) If true, a quiesced snapshot of the virtual machine will be taken. Default true.
+                      If true, a quiesced snapshot of the virtual machine will be taken. Default `true`.
                     type: boolean
                   quiesceSnapshottingEnabled:
-                    description: — If true, a quiesced snapshot of the virtual machine
-                      will be taken.
+                    description: |-
+                      (Boolean, Deprecated) If true, a quiesced snapshot of the virtual machine will be taken. Default true.
+                      If true, a quiesced snapshot of the virtual machine will be taken. Default `true`.
                     type: boolean
                   reattempts:
                     description: |-
-                      — Amount of reattempts that should be performed while trying to make backup at the host.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Amount of reattempts that should be performed while trying to make backup at the host. (see below for nested schema)
+                      Amount of reattempts that should be performed while trying to make backup at the host.
                     items:
                       properties:
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enable flag. Default `true`.
                           type: boolean
                         interval:
-                          description: — Retry interval. See interval_type for available
-                            values
+                          description: |-
+                            (String) Retry interval. See interval_type for available values. Default: 5m.
+                            Retry interval. See `interval_type` for available values. Default: `5m`.
                           type: string
                         maxAttempts:
-                          description: — Maximum number of attempts before throwing
-                            an error
+                          description: |-
+                            (Number) Maximum number of attempts before throwing an error. Default 5.
+                            Maximum number of attempts before throwing an error. Default `5`.
                           type: number
                       type: object
                     type: array
                   retention:
                     description: |-
-                      — Retention policy for backups. Allows to setup backups lifecycle.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Retention policy for backups. Allows to setup backups lifecycle. (see below for nested schema)
+                      Retention policy for backups. Allows to setup backups lifecycle.
                     items:
                       properties:
                         afterBackup:
-                          description: — Defines whether retention rule applies after
-                            creating backup or before.
+                          description: |-
+                            (Boolean) Defines whether retention rule applies after creating backup or before.
+                            Defines whether retention rule applies after creating backup or before.
                           type: boolean
                         rules:
-                          description: — seconds
+                          description: |-
+                            (Block Set) A list of retention rules. (see below for nested schema)
+                            A list of retention rules.
                           items:
                             properties:
                               maxAge:
-                                description: (Conflicts with max_count) — Deletes
-                                  backups that older than max_age. Exactly one of
-                                  max_count or max_age should be set.
+                                description: |-
+                                  (String) Deletes backups that older than max_age. Exactly one of max_count or max_age should be set.
+                                  Deletes backups that older than `max_age`. Exactly one of `max_count` or `max_age` should be set.
                                 type: string
                               maxCount:
-                                description: (Conflicts with max_age) — Deletes backups
-                                  if it's count exceeds max_count. Exactly one of
-                                  max_count or max_age should be set.
+                                description: |-
+                                  (Number) Deletes backups if it's count exceeds max_count. Exactly one of max_count or max_age should be set.
+                                  Deletes backups if it's count exceeds `max_count`. Exactly one of `max_count` or `max_age` should be set.
                                 type: number
                               repeatPeriod:
-                                description: — days
+                                description: |-
+                                  (List of String) Possible types: REPEATE_PERIOD_UNSPECIFIED, HOURLY, DAILY, WEEKLY, MONTHLY. Specifies repeat period of the backupset.
+                                  Possible types: `REPEATE_PERIOD_UNSPECIFIED`, `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`. Specifies repeat period of the backupset.
                                 items:
                                   type: string
                                 type: array
@@ -536,112 +740,220 @@ spec:
                       type: object
                     type: array
                   scheduling:
-                    description: — Schedule settings for creating backups on the host.
+                    description: |-
+                      (Block Set, Min: 1, Max: 1) Schedule settings for creating backups on the host. (see below for nested schema)
+                      Schedule settings for creating backups on the host.
                     items:
                       properties:
+                        backupSets:
+                          description: |-
+                            (Block Set) A list of schedules with backup sets that compose the whole scheme. (see below for nested schema)
+                            A list of schedules with backup sets that compose the whole scheme.
+                          items:
+                            properties:
+                              executeByInterval:
+                                description: |-
+                                  (Number, Deprecated) Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                                  Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `interval_type` for available values. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
+                                type: number
+                              executeByTime:
+                                description: |-
+                                  (Block Set, Deprecated) Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time. (see below for nested schema)
+                                  Perform backup periodically at specific time. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
+                                items:
+                                  properties:
+                                    includeLastDayOfMonth:
+                                      description: |-
+                                        (Boolean) If true, schedule will be applied on the last day of month. See day_type for available values. Default false.
+                                        If true, schedule will be applied on the last day of month. See `day_type` for available values. Default `false`.
+                                      type: boolean
+                                    monthdays:
+                                      description: |-
+                                        (List of Number) List of days when schedule applies. Used in MONTHLY type.
+                                        List of days when schedule applies. Used in `MONTHLY` type.
+                                      items:
+                                        type: number
+                                      type: array
+                                    months:
+                                      description: |-
+                                        (List of Number) Set of values. Allowed values form 1 to 12.
+                                        Set of values. Allowed values form 1 to 12.
+                                      items:
+                                        type: number
+                                      type: array
+                                    repeatAt:
+                                      description: |-
+                                        hours format), when the schedule applies.
+                                        List of time in format `HH:MM` (24-hours format), when the schedule applies.
+                                      items:
+                                        type: string
+                                      type: array
+                                    repeatEvery:
+                                      description: |-
+                                        (String) Frequency of backup repetition. See interval_type for available values.
+                                        Frequency of backup repetition. See `interval_type` for available values.
+                                      type: string
+                                    runLater:
+                                      description: |-
+                                        (Boolean) If true and if the machine is off, launch missed tasks on boot up. Default false.
+                                        If true and if the machine is off, launch missed tasks on boot up. Default `false`.
+                                      type: boolean
+                                    type:
+                                      description: |-
+                                        (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                        Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
+                                      type: string
+                                    weekdays:
+                                      description: |-
+                                        (List of String) List of weekdays when the backup will be applied. Used in WEEKLY type.
+                                        List of weekdays when the backup will be applied. Used in `WEEKLY` type.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: |-
+                                  (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                  BackupSet type. See `backup_set_type` for available values. Default `TYPE_AUTO`.
+                                type: string
+                            type: object
+                          type: array
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enables or disables scheduling. Default `true`.
                           type: boolean
                         executeByInterval:
                           description: |-
-                            — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-                            See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                            (Number, Deprecated) Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                            Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `interval_type` for available values. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
                           type: number
                         executeByTime:
-                          description: '— Perform backup periodically at specific
-                            time. Exactly on of options should be set: execute_by_interval
-                            or execute_by_time.'
+                          description: |-
+                            (Block Set, Deprecated) Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time. (see below for nested schema)
+                            Perform backup periodically at specific time. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
                           items:
                             properties:
                               includeLastDayOfMonth:
                                 description: |-
-                                  — If true, schedule will be applied on the last day of month.
-                                  See day_type for available values.
+                                  (Boolean) If true, schedule will be applied on the last day of month. See day_type for available values. Default false.
+                                  If true, schedule will be applied on the last day of month. See `day_type` for available values. Default `false`.
                                 type: boolean
                               monthdays:
-                                description: — List of days when schedule applies.
-                                  Used in "MONTHLY" type.
+                                description: |-
+                                  (List of Number) List of days when schedule applies. Used in MONTHLY type.
+                                  List of days when schedule applies. Used in `MONTHLY` type.
                                 items:
                                   type: number
                                 type: array
                               months:
-                                description: — seconds
+                                description: |-
+                                  (List of Number) Set of values. Allowed values form 1 to 12.
+                                  Set of values. Allowed values form 1 to 12.
                                 items:
                                   type: number
                                 type: array
                               repeatAt:
-                                description: hours format), when the schedule applies.
+                                description: |-
+                                  hours format), when the schedule applies.
+                                  List of time in format `HH:MM` (24-hours format), when the schedule applies.
                                 items:
                                   type: string
                                 type: array
                               repeatEvery:
-                                description: — Frequency of backup repetition. See
-                                  interval_type for available values.
+                                description: |-
+                                  (String) Frequency of backup repetition. See interval_type for available values.
+                                  Frequency of backup repetition. See `interval_type` for available values.
                                 type: string
+                              runLater:
+                                description: |-
+                                  (Boolean) If true and if the machine is off, launch missed tasks on boot up. Default false.
+                                  If true and if the machine is off, launch missed tasks on boot up. Default `false`.
+                                type: boolean
                               type:
-                                description: '— Type of the scheduling. Available
-                                  values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                description: |-
+                                  (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                  Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
                                 type: string
                               weekdays:
-                                description: — List of weekdays when the backup will
-                                  be applied. Used in "WEEKLY" type.
+                                description: |-
+                                  (List of String) List of weekdays when the backup will be applied. Used in WEEKLY type.
+                                  List of weekdays when the backup will be applied. Used in `WEEKLY` type.
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         maxParallelBackups:
-                          description: — Maximum number of backup processes allowed
-                            to run in parallel. 0 for unlimited.
+                          description: |-
+                            (Number) Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default 0.
+                            Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default `0`.
                           type: number
                         randomMaxDelay:
                           description: |-
-                            — Configuration of the random delay between the execution of parallel tasks.
-                            See interval_type for available values.
+                            (String) Configuration of the random delay between the execution of parallel tasks. See interval_type for available values. Default 30m.
+                            Configuration of the random delay between the execution of parallel tasks. See `interval_type` for available values. Default `30m`.
                           type: string
                         scheme:
                           description: |-
-                            — Scheme of the backups.
-                            Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+                            (String) Scheme of the backups. Available values are: ALWAYS_INCREMENTAL, ALWAYS_FULL, WEEKLY_FULL_DAILY_INCREMENTAL, WEEKLY_INCREMENTAL. Default ALWAYS_INCREMENTAL.
+                            Scheme of the backups. Available values are: `ALWAYS_INCREMENTAL`, `ALWAYS_FULL`, `WEEKLY_FULL_DAILY_INCREMENTAL`, `WEEKLY_INCREMENTAL`. Default `ALWAYS_INCREMENTAL`.
                           type: string
                         weeklyBackupDay:
                           description: |-
-                            — A day of week to start weekly backups.
-                            See day_type for available values.
+                            (String) A day of week to start weekly backups. See day_type for available values. Default MONDAY.
+                            A day of week to start weekly backups. See `day_type` for available values. Default `MONDAY`.
                           type: string
                       type: object
                     type: array
+                  sectorBySector:
+                    description: |-
+                      by-sector backup of a disk or volume creates a backup copy of all sectors of the disk or volume, including those that do not contain data. Therefore, the size of such a backup copy will be equal to the size of the original disk or volume.
+                      A sector-by-sector backup of a disk or volume creates a backup copy of all sectors of the disk or volume, including those that do not contain data. Therefore, the size of such a backup copy will be equal to the size of the original disk or volume.
+                    type: boolean
                   silentModeEnabled:
-                    description: — if true, a user interaction will be avoided when
-                      possible.
+                    description: |-
+                      (Boolean) If true, a user interaction will be avoided when possible. Default true.
+                      If true, a user interaction will be avoided when possible. Default `true`.
                     type: boolean
                   splittingBytes:
-                    description: — determines the size to split backups. It's better
-                      to leave this option unchanged.
+                    description: |-
+                      (String) Determines the size to split backups. It's better to leave this option unchanged. Default 9223372036854775807.
+                      Determines the size to split backups. It's better to leave this option unchanged. Default `9223372036854775807`.
                     type: string
+                  validationEnabled:
+                    description: |-
+                      consuming process, even with incremental or differential backups of small amounts of data. This is because not only the data physically contained in the backup copy is verified, but all data restored when it is selected. This option requires access to previously created backup copies.
+                      Validation is a time-consuming process, even with incremental or differential backups of small amounts of data. This is because not only the data physically contained in the backup copy is verified, but all data restored when it is selected. This option requires access to previously created backup copies.
+                    type: boolean
                   vmSnapshotReattempts:
                     description: |-
-                      (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Amount of reattempts that should be performed while trying to make snapshot. (see below for nested schema)
+                      Amount of reattempts that should be performed while trying to make snapshot.
                     items:
                       properties:
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enable flag. Default `true`.
                           type: boolean
                         interval:
-                          description: — Retry interval. See interval_type for available
-                            values
+                          description: |-
+                            (String) Retry interval. See interval_type for available values. Default: 5m.
+                            Retry interval. See `interval_type` for available values. Default: `5m`.
                           type: string
                         maxAttempts:
-                          description: — Maximum number of attempts before throwing
-                            an error
+                          description: |-
+                            (Number) Maximum number of attempts before throwing an error. Default 5.
+                            Maximum number of attempts before throwing an error. Default `5`.
                           type: number
                       type: object
                     type: array
                   vssProvider:
                     description: |-
-                      — Settings for the volume shadow copy service.
-                      Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+                      (String) Settings for the volume shadow copy service. Available values are: NATIVE, TARGET_SYSTEM_DEFINED. Default NATIVE.
+                      Settings for the volume shadow copy service. Available values are: `NATIVE`, `TARGET_SYSTEM_DEFINED`. Default `NATIVE`.
                     type: string
                 type: object
               managementPolicies:
@@ -729,101 +1041,154 @@ spec:
               atProvider:
                 properties:
                   archiveName:
-                    description: '[Plan ID]-[Unique ID]a) — The name of generated
-                      archives.'
+                    description: |-
+                      [Plan ID]-[Unique ID]a.
+                      The name of generated archives. Default `[Machine Name]-[Plan ID]-[Unique ID]a`.
                     type: string
                   cbt:
                     description: |-
-                      — Configuration of Changed Block Tracking.
-                      Available values are: "USE_IF_ENABLED", "ENABLED_AND_USE", "DO_NOT_USE".
+                      (String) Configuration of Changed Block Tracking. Available values are: USE_IF_ENABLED, ENABLED_AND_USE, DO_NOT_USE. Default DO_NOT_USE.
+                      Configuration of Changed Block Tracking. Available values are: `USE_IF_ENABLED`, `ENABLED_AND_USE`, `DO_NOT_USE`. Default `DO_NOT_USE`.
                     type: string
                   compression:
                     description: |-
-                      — Archive compression level. Affects CPU.
-                      Available values: "NORMAL", "HIGH", "MAX", "OFF".
+                      (String) Archive compression level. Affects CPU. Available values: NORMAL, HIGH, MAX, OFF. Default: NORMAL.
+                      Archive compression level. Affects CPU. Available values: `NORMAL`, `HIGH`, `MAX`, `OFF`. Default: `NORMAL`.
                     type: string
                   createdAt:
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   enabled:
-                    description: — Enable flag
+                    description: |-
+                      (Boolean) If this field is true, it means that the policy is enabled.
+                      If this field is true, it means that the policy is enabled.
                     type: boolean
                   fastBackupEnabled:
-                    description: — Enable flag
+                    description: |-
+                      (Boolean) If true, determines whether a file has changed by the file size and timestamp. Otherwise, the entire file contents are compared to those stored in the backup.
+                      If true, determines whether a file has changed by the file size and timestamp. Otherwise, the entire file contents are compared to those stored in the backup.
                     type: boolean
+                  fileFilters:
+                    description: |-
+                      (Block List, Max: 1) File filters to specify masks of files to backup or to exclude of backuping. (see below for nested schema)
+                      File filters to specify masks of files to backup or to exclude of backuping.
+                    items:
+                      properties:
+                        exclusionMasks:
+                          description: |-
+                            (List of String) Do not backup files that match the following criteria.
+                            Do not backup files that match the following criteria.
+                          items:
+                            type: string
+                          type: array
+                        inclusionMasks:
+                          description: |-
+                            (List of String) Backup only files that match the following criteria.
+                            Backup only files that match the following criteria.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   folderId:
-                    description: — days
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   format:
                     description: |-
-                      — Format of the backup. It's strongly recommend to leave this option empty or "AUTO".
-                      Available values: "AUTO", "VERSION_11", "VERSION_12".
+                      (String) Format of the backup. It's strongly recommend to leave this option empty or AUTO. Available values: AUTO, VERSION_11, VERSION_12.
+                      Format of the backup. It's strongly recommend to leave this option empty or `AUTO`. Available values: `AUTO`, `VERSION_11`, `VERSION_12`.
                     type: string
                   id:
-                    description: — days
+                    description: (String) The ID of this resource.
                     type: string
+                  lvmSnapshottingEnabled:
+                    description: |-
+                      (Boolean) LVM will be used to create the volume snapshot. If LVM fails to create a snapshot (for example, because there is not enough free space), the software will create the snapshot itself.
+                      LVM will be used to create the volume snapshot. If LVM fails to create a snapshot (for example, because there is not enough free space), the software will create the snapshot itself.
+                    type: boolean
                   multiVolumeSnapshottingEnabled:
-                    description: — If true, snapshots of multiple volumes will be
-                      taken simultaneously.
+                    description: |-
+                      (Boolean) If true, snapshots of multiple volumes will be taken simultaneously. Default true.
+                      If true, snapshots of multiple volumes will be taken simultaneously. Default `true`.
                     type: boolean
                   name:
-                    description: — Name of the policy
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   performanceWindowEnabled:
-                    description: — Time windows for performance limitations of backup.
+                    description: |-
+                      (Boolean) Time windows for performance limitations of backup. Default false.
+                      Time windows for performance limitations of backup. Default `false`.
                     type: boolean
                   preserveFileSecuritySettings:
-                    description: — Preserves file security settings. It's better to
-                      set this option to true.
+                    description: |-
+                      (Boolean, Deprecated) If true, a quiesced snapshot of the virtual machine will be taken. Default true.
+                      If true, a quiesced snapshot of the virtual machine will be taken. Default `true`.
                     type: boolean
                   quiesceSnapshottingEnabled:
-                    description: — If true, a quiesced snapshot of the virtual machine
-                      will be taken.
+                    description: |-
+                      (Boolean, Deprecated) If true, a quiesced snapshot of the virtual machine will be taken. Default true.
+                      If true, a quiesced snapshot of the virtual machine will be taken. Default `true`.
                     type: boolean
                   reattempts:
                     description: |-
-                      — Amount of reattempts that should be performed while trying to make backup at the host.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Amount of reattempts that should be performed while trying to make backup at the host. (see below for nested schema)
+                      Amount of reattempts that should be performed while trying to make backup at the host.
                     items:
                       properties:
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enable flag. Default `true`.
                           type: boolean
                         interval:
-                          description: — Retry interval. See interval_type for available
-                            values
+                          description: |-
+                            (String) Retry interval. See interval_type for available values. Default: 5m.
+                            Retry interval. See `interval_type` for available values. Default: `5m`.
                           type: string
                         maxAttempts:
-                          description: — Maximum number of attempts before throwing
-                            an error
+                          description: |-
+                            (Number) Maximum number of attempts before throwing an error. Default 5.
+                            Maximum number of attempts before throwing an error. Default `5`.
                           type: number
                       type: object
                     type: array
                   retention:
                     description: |-
-                      — Retention policy for backups. Allows to setup backups lifecycle.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Retention policy for backups. Allows to setup backups lifecycle. (see below for nested schema)
+                      Retention policy for backups. Allows to setup backups lifecycle.
                     items:
                       properties:
                         afterBackup:
-                          description: — Defines whether retention rule applies after
-                            creating backup or before.
+                          description: |-
+                            (Boolean) Defines whether retention rule applies after creating backup or before.
+                            Defines whether retention rule applies after creating backup or before.
                           type: boolean
                         rules:
-                          description: — seconds
+                          description: |-
+                            (Block Set) A list of retention rules. (see below for nested schema)
+                            A list of retention rules.
                           items:
                             properties:
                               maxAge:
-                                description: (Conflicts with max_count) — Deletes
-                                  backups that older than max_age. Exactly one of
-                                  max_count or max_age should be set.
+                                description: |-
+                                  (String) Deletes backups that older than max_age. Exactly one of max_count or max_age should be set.
+                                  Deletes backups that older than `max_age`. Exactly one of `max_count` or `max_age` should be set.
                                 type: string
                               maxCount:
-                                description: (Conflicts with max_age) — Deletes backups
-                                  if it's count exceeds max_count. Exactly one of
-                                  max_count or max_age should be set.
+                                description: |-
+                                  (Number) Deletes backups if it's count exceeds max_count. Exactly one of max_count or max_age should be set.
+                                  Deletes backups if it's count exceeds `max_count`. Exactly one of `max_count` or `max_age` should be set.
                                 type: number
                               repeatPeriod:
-                                description: — days
+                                description: |-
+                                  (List of String) Possible types: REPEATE_PERIOD_UNSPECIFIED, HOURLY, DAILY, WEEKLY, MONTHLY. Specifies repeat period of the backupset.
+                                  Possible types: `REPEATE_PERIOD_UNSPECIFIED`, `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`. Specifies repeat period of the backupset.
                                 items:
                                   type: string
                                 type: array
@@ -832,114 +1197,225 @@ spec:
                       type: object
                     type: array
                   scheduling:
-                    description: — Schedule settings for creating backups on the host.
+                    description: |-
+                      (Block Set, Min: 1, Max: 1) Schedule settings for creating backups on the host. (see below for nested schema)
+                      Schedule settings for creating backups on the host.
                     items:
                       properties:
+                        backupSets:
+                          description: |-
+                            (Block Set) A list of schedules with backup sets that compose the whole scheme. (see below for nested schema)
+                            A list of schedules with backup sets that compose the whole scheme.
+                          items:
+                            properties:
+                              executeByInterval:
+                                description: |-
+                                  (Number, Deprecated) Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                                  Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `interval_type` for available values. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
+                                type: number
+                              executeByTime:
+                                description: |-
+                                  (Block Set, Deprecated) Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time. (see below for nested schema)
+                                  Perform backup periodically at specific time. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
+                                items:
+                                  properties:
+                                    includeLastDayOfMonth:
+                                      description: |-
+                                        (Boolean) If true, schedule will be applied on the last day of month. See day_type for available values. Default false.
+                                        If true, schedule will be applied on the last day of month. See `day_type` for available values. Default `false`.
+                                      type: boolean
+                                    monthdays:
+                                      description: |-
+                                        (List of Number) List of days when schedule applies. Used in MONTHLY type.
+                                        List of days when schedule applies. Used in `MONTHLY` type.
+                                      items:
+                                        type: number
+                                      type: array
+                                    months:
+                                      description: |-
+                                        (List of Number) Set of values. Allowed values form 1 to 12.
+                                        Set of values. Allowed values form 1 to 12.
+                                      items:
+                                        type: number
+                                      type: array
+                                    repeatAt:
+                                      description: |-
+                                        hours format), when the schedule applies.
+                                        List of time in format `HH:MM` (24-hours format), when the schedule applies.
+                                      items:
+                                        type: string
+                                      type: array
+                                    repeatEvery:
+                                      description: |-
+                                        (String) Frequency of backup repetition. See interval_type for available values.
+                                        Frequency of backup repetition. See `interval_type` for available values.
+                                      type: string
+                                    runLater:
+                                      description: |-
+                                        (Boolean) If true and if the machine is off, launch missed tasks on boot up. Default false.
+                                        If true and if the machine is off, launch missed tasks on boot up. Default `false`.
+                                      type: boolean
+                                    type:
+                                      description: |-
+                                        (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                        Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
+                                      type: string
+                                    weekdays:
+                                      description: |-
+                                        (List of String) List of weekdays when the backup will be applied. Used in WEEKLY type.
+                                        List of weekdays when the backup will be applied. Used in `WEEKLY` type.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              type:
+                                description: |-
+                                  (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                  BackupSet type. See `backup_set_type` for available values. Default `TYPE_AUTO`.
+                                type: string
+                            type: object
+                          type: array
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enables or disables scheduling. Default `true`.
                           type: boolean
                         executeByInterval:
                           description: |-
-                            — Perform backup by interval, since last backup of the host. Maximum value is: 9999 days.
-                            See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                            (Number, Deprecated) Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See interval_type for available values. Exactly on of options should be set: execute_by_interval or execute_by_time.
+                            Perform backup by interval, since last backup of the host. Maximum value is: 9999 days. See `interval_type` for available values. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
                           type: number
                         executeByTime:
-                          description: '— Perform backup periodically at specific
-                            time. Exactly on of options should be set: execute_by_interval
-                            or execute_by_time.'
+                          description: |-
+                            (Block Set, Deprecated) Perform backup periodically at specific time. Exactly on of options should be set: execute_by_interval or execute_by_time. (see below for nested schema)
+                            Perform backup periodically at specific time. Exactly on of options should be set: `execute_by_interval` or `execute_by_time`.
                           items:
                             properties:
                               includeLastDayOfMonth:
                                 description: |-
-                                  — If true, schedule will be applied on the last day of month.
-                                  See day_type for available values.
+                                  (Boolean) If true, schedule will be applied on the last day of month. See day_type for available values. Default false.
+                                  If true, schedule will be applied on the last day of month. See `day_type` for available values. Default `false`.
                                 type: boolean
                               monthdays:
-                                description: — List of days when schedule applies.
-                                  Used in "MONTHLY" type.
+                                description: |-
+                                  (List of Number) List of days when schedule applies. Used in MONTHLY type.
+                                  List of days when schedule applies. Used in `MONTHLY` type.
                                 items:
                                   type: number
                                 type: array
                               months:
-                                description: — seconds
+                                description: |-
+                                  (List of Number) Set of values. Allowed values form 1 to 12.
+                                  Set of values. Allowed values form 1 to 12.
                                 items:
                                   type: number
                                 type: array
                               repeatAt:
-                                description: hours format), when the schedule applies.
+                                description: |-
+                                  hours format), when the schedule applies.
+                                  List of time in format `HH:MM` (24-hours format), when the schedule applies.
                                 items:
                                   type: string
                                 type: array
                               repeatEvery:
-                                description: — Frequency of backup repetition. See
-                                  interval_type for available values.
+                                description: |-
+                                  (String) Frequency of backup repetition. See interval_type for available values.
+                                  Frequency of backup repetition. See `interval_type` for available values.
                                 type: string
+                              runLater:
+                                description: |-
+                                  (Boolean) If true and if the machine is off, launch missed tasks on boot up. Default false.
+                                  If true and if the machine is off, launch missed tasks on boot up. Default `false`.
+                                type: boolean
                               type:
-                                description: '— Type of the scheduling. Available
-                                  values are: "HOURLY", "DAILY", "WEEKLY", "MONTHLY".'
+                                description: |-
+                                  (String) BackupSet type. See backup_set_type for available values. Default TYPE_AUTO.
+                                  Type of the scheduling. Available values are: `HOURLY`, `DAILY`, `WEEKLY`, `MONTHLY`.
                                 type: string
                               weekdays:
-                                description: — List of weekdays when the backup will
-                                  be applied. Used in "WEEKLY" type.
+                                description: |-
+                                  (List of String) List of weekdays when the backup will be applied. Used in WEEKLY type.
+                                  List of weekdays when the backup will be applied. Used in `WEEKLY` type.
                                 items:
                                   type: string
                                 type: array
                             type: object
                           type: array
                         maxParallelBackups:
-                          description: — Maximum number of backup processes allowed
-                            to run in parallel. 0 for unlimited.
+                          description: |-
+                            (Number) Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default 0.
+                            Maximum number of backup processes allowed to run in parallel. 0 for unlimited. Default `0`.
                           type: number
                         randomMaxDelay:
                           description: |-
-                            — Configuration of the random delay between the execution of parallel tasks.
-                            See interval_type for available values.
+                            (String) Configuration of the random delay between the execution of parallel tasks. See interval_type for available values. Default 30m.
+                            Configuration of the random delay between the execution of parallel tasks. See `interval_type` for available values. Default `30m`.
                           type: string
                         scheme:
                           description: |-
-                            — Scheme of the backups.
-                            Available values are: "ALWAYS_INCREMENTAL", "ALWAYS_FULL", "WEEKLY_FULL_DAILY_INCREMENTAL", 'WEEKLY_INCREMENTAL".
+                            (String) Scheme of the backups. Available values are: ALWAYS_INCREMENTAL, ALWAYS_FULL, WEEKLY_FULL_DAILY_INCREMENTAL, WEEKLY_INCREMENTAL. Default ALWAYS_INCREMENTAL.
+                            Scheme of the backups. Available values are: `ALWAYS_INCREMENTAL`, `ALWAYS_FULL`, `WEEKLY_FULL_DAILY_INCREMENTAL`, `WEEKLY_INCREMENTAL`. Default `ALWAYS_INCREMENTAL`.
                           type: string
                         weeklyBackupDay:
                           description: |-
-                            — A day of week to start weekly backups.
-                            See day_type for available values.
+                            (String) A day of week to start weekly backups. See day_type for available values. Default MONDAY.
+                            A day of week to start weekly backups. See `day_type` for available values. Default `MONDAY`.
                           type: string
                       type: object
                     type: array
+                  sectorBySector:
+                    description: |-
+                      by-sector backup of a disk or volume creates a backup copy of all sectors of the disk or volume, including those that do not contain data. Therefore, the size of such a backup copy will be equal to the size of the original disk or volume.
+                      A sector-by-sector backup of a disk or volume creates a backup copy of all sectors of the disk or volume, including those that do not contain data. Therefore, the size of such a backup copy will be equal to the size of the original disk or volume.
+                    type: boolean
                   silentModeEnabled:
-                    description: — if true, a user interaction will be avoided when
-                      possible.
+                    description: |-
+                      (Boolean) If true, a user interaction will be avoided when possible. Default true.
+                      If true, a user interaction will be avoided when possible. Default `true`.
                     type: boolean
                   splittingBytes:
-                    description: — determines the size to split backups. It's better
-                      to leave this option unchanged.
+                    description: |-
+                      (String) Determines the size to split backups. It's better to leave this option unchanged. Default 9223372036854775807.
+                      Determines the size to split backups. It's better to leave this option unchanged. Default `9223372036854775807`.
                     type: string
                   updatedAt:
+                    description: |-
+                      (String) The update timestamp of the resource.
+                      The update timestamp of the resource.
                     type: string
+                  validationEnabled:
+                    description: |-
+                      consuming process, even with incremental or differential backups of small amounts of data. This is because not only the data physically contained in the backup copy is verified, but all data restored when it is selected. This option requires access to previously created backup copies.
+                      Validation is a time-consuming process, even with incremental or differential backups of small amounts of data. This is because not only the data physically contained in the backup copy is verified, but all data restored when it is selected. This option requires access to previously created backup copies.
+                    type: boolean
                   vmSnapshotReattempts:
                     description: |-
-                      (Requied) — Amount of reattempts that should be performed while trying to make snapshot.
-                      This attribute consists of the following parameters:
+                      (Block Set, Min: 1, Max: 1) Amount of reattempts that should be performed while trying to make snapshot. (see below for nested schema)
+                      Amount of reattempts that should be performed while trying to make snapshot.
                     items:
                       properties:
                         enabled:
-                          description: — Enable flag
+                          description: |-
+                            (Boolean) If this field is true, it means that the policy is enabled.
+                            Enable flag. Default `true`.
                           type: boolean
                         interval:
-                          description: — Retry interval. See interval_type for available
-                            values
+                          description: |-
+                            (String) Retry interval. See interval_type for available values. Default: 5m.
+                            Retry interval. See `interval_type` for available values. Default: `5m`.
                           type: string
                         maxAttempts:
-                          description: — Maximum number of attempts before throwing
-                            an error
+                          description: |-
+                            (Number) Maximum number of attempts before throwing an error. Default 5.
+                            Maximum number of attempts before throwing an error. Default `5`.
                           type: number
                       type: object
                     type: array
                   vssProvider:
                     description: |-
-                      — Settings for the volume shadow copy service.
-                      Available values are: "NATIVE", "TARGET_SYSTEM_DEFINED"
+                      (String) Settings for the volume shadow copy service. Available values are: NATIVE, TARGET_SYSTEM_DEFINED. Default NATIVE.
+                      Settings for the volume shadow copy service. Available values are: `NATIVE`, `TARGET_SYSTEM_DEFINED`. Default `NATIVE`.
                     type: string
                 type: object
               conditions:

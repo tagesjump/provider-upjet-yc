@@ -74,156 +74,281 @@ spec:
               forProvider:
                 properties:
                   dataStreamDestination:
-                    description: Structure describing destination data stream of the
-                      trail. Mutually exclusive with logging_destination and storage_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination data stream of the trail. Mutually exclusive with logging_destination and storage_destination. (see below for nested schema)
+                      Structure describing destination data stream of the trail. Mutually exclusive with `logging_destination` and `storage_destination`.
                     items:
                       properties:
+                        codec:
+                          description: |-
+                            (String) Codec for compressing events. Allowed values: RAW, GZIP, ZSTD. Default: RAW
+                            Codec for compressing events. Allowed values: RAW, GZIP, ZSTD. Default: RAW
+                          type: string
                         databaseId:
-                          description: ID of the YDB hosting the destination data
-                            stream.
+                          description: |-
+                            (String) ID of the YDB hosting the destination data stream.
+                            ID of the [YDB](https://yandex.cloud/docs/ydb/concepts/resources) hosting the destination data stream.
                           type: string
                         streamName:
-                          description: Name of the YDS stream belonging to the specified
-                            YDB.
+                          description: |-
+                            (String) Name of the YDS stream belonging to the specified YDB.
+                            Name of the [YDS stream](https://yandex.cloud/docs/data-streams/concepts/glossary#stream-concepts) belonging to the specified YDB.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the trail.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   filter:
-                    description: Structure describing event filtering process for
-                      the trail.
+                    description: |-
+                      (Block List, Max: 1, Deprecated) Structure is deprecated. Use filtering_policy instead. (see below for nested schema)
+                      Structure is deprecated. Use `filtering_policy` instead.
                     items:
                       properties:
                         eventFilters:
-                          description: Structure describing filtering process for
-                            the service-specific data plane events
+                          description: |-
+                            (Block List) Deprecated. (see below for nested schema)
+                            Deprecated.
                           items:
                             properties:
                               categories:
-                                description: List of structures describing categories
-                                  of gathered data plane events
+                                description: |-
+                                  blocks. With the introduction of included_events/excluded_events you can configure filtering per each event type.
+                                  Deprecated.
                                 items:
                                   properties:
                                     plane:
-                                      description: 'Type of the event by its relation
-                                        to the cloud resource model. Possible values:
-                                        CONTROL_PLANE/DATA_PLANE'
+                                      description: |-
+                                        (String) Deprecated.
+                                        Deprecated.
                                       type: string
                                     type:
-                                      description: 'Type of the event by its operation
-                                        effect on the resource. Possible values: READ/WRITE'
+                                      description: |-
+                                        (String) Deprecated.
+                                        Deprecated.
                                       type: string
                                   type: object
                                 type: array
                               pathFilter:
-                                description: Structure describing filtering process
-                                  for default control plane events. If omitted, the
-                                  trail will not deliver this category
+                                description: |-
+                                  with the appropriate resource_scope blocks. You have to account that resource_scope does not support specifying relations between resources, so your configuration will simplify to only the actual resources, that will be monitored.
+                                  Deprecated.
                                 items:
                                   properties:
                                     anyFilter:
-                                      description: Structure describing that events
-                                        will be gathered from all cloud resources
-                                        that belong to the parent resource. Mutually
-                                        exclusive with some_filter.
+                                      description: |-
+                                        (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Resource ID.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Resource type.
                                             type: string
                                         type: object
                                       type: array
                                     someFilter:
-                                      description: Structure describing that events
-                                        will be gathered from some of the cloud resources
-                                        that belong to the parent resource. Mutually
-                                        exclusive with any_filter.
+                                      description: |-
+                                        (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           anyFilters:
-                                            description: List of child resources from
-                                              which events will be gathered
+                                            description: |-
+                                              (Block List, Min: 1) Deprecated. (see below for nested schema)
+                                              Deprecated.
                                             items:
                                               properties:
                                                 resourceId:
-                                                  description: ID of the parent resource.
+                                                  description: |-
+                                                    (String) Resource ID.
+                                                    Resource ID.
                                                   type: string
                                                 resourceType:
-                                                  description: Resource type of the
-                                                    parent resource.
+                                                  description: |-
+                                                    (String) Resource type.
+                                                    Resource type.
                                                   type: string
                                               type: object
                                             type: array
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Deprecated.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Deprecated.
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               service:
-                                description: ID of the service which events will be
-                                  gathered
+                                description: |-
+                                  (String) Deprecated.
+                                  Deprecated.
                                 type: string
                             type: object
                           type: array
                         pathFilter:
-                          description: Structure describing filtering process for
-                            default control plane events. If omitted, the trail will
-                            not deliver this category
+                          description: |-
+                            block with the filtering_policy.management_events_filter. New API states management events filtration in a more clear way. The resources, that were specified, must migrate into the filtering_policy.management_events_filter.resource_scope.
+                            Deprecated.
                           items:
                             properties:
                               anyFilter:
-                                description: Structure describing that events will
-                                  be gathered from all cloud resources that belong
-                                  to the parent resource. Mutually exclusive with
-                                  some_filter.
+                                description: |-
+                                  (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                  Deprecated.
                                 items:
                                   properties:
                                     resourceId:
-                                      description: ID of the parent resource.
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
                                       type: string
                                     resourceType:
-                                      description: Resource type of the parent resource.
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
                                       type: string
                                   type: object
                                 type: array
                               someFilter:
-                                description: Structure describing that events will
-                                  be gathered from some of the cloud resources that
-                                  belong to the parent resource. Mutually exclusive
-                                  with any_filter.
+                                description: |-
+                                  (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                  Deprecated.
                                 items:
                                   properties:
                                     anyFilters:
-                                      description: List of child resources from which
-                                        events will be gathered
+                                      description: |-
+                                        (Block List, Min: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Resource ID.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Resource type.
                                             type: string
                                         type: object
                                       type: array
                                     resourceId:
-                                      description: ID of the parent resource.
+                                      description: |-
+                                        (String) Resource ID.
+                                        Deprecated.
                                       type: string
                                     resourceType:
-                                      description: Resource type of the parent resource.
+                                      description: |-
+                                        (String) Resource type.
+                                        Deprecated.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  filteringPolicy:
+                    description: |-
+                      (Block List, Max: 1) Structure describing event filtering process for the trail. Mutually exclusive with filter. At least one of the management_events_filter or data_events_filter fields will be filled. (see below for nested schema)
+                      Structure describing event filtering process for the trail. Mutually exclusive with `filter`. At least one of the `management_events_filter` or `data_events_filter` fields will be filled.
+                    items:
+                      properties:
+                        dataEventsFilter:
+                          description: |-
+                            specific data events. (see below for nested schema)
+                            Structure describing filtering process for the service-specific data events.
+                          items:
+                            properties:
+                              dnsFilter:
+                                description: |-
+                                  (Block List, Max: 1) Specific filter for DNS service. (see below for nested schema)
+                                  Specific filter for DNS service.
+                                items:
+                                  properties:
+                                    includeNonrecursiveQueries:
+                                      description: |-
+                                        (Boolean) All types of queries will be delivered.
+                                        All types of queries will be delivered.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              excludedEvents:
+                                description: |-
+                                  (List of String) A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with included_events.
+                                  A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with `included_events`.
+                                items:
+                                  type: string
+                                type: array
+                              includedEvents:
+                                description: |-
+                                  (List of String) A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with excluded_events.
+                                  A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with `excluded_events`.
+                                items:
+                                  type: string
+                                type: array
+                              resourceScope:
+                                description: |-
+                                  (Block List, Min: 1) Structure describing that events will be gathered from the specified resource. (see below for nested schema)
+                                  Structure describing that events will be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
+                                      type: string
+                                    resourceType:
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
+                                      type: string
+                                  type: object
+                                type: array
+                              service:
+                                description: |-
+                                  (String) Deprecated.
+                                  ID of the service which events will be gathered.
+                                type: string
+                            type: object
+                          type: array
+                        managementEventsFilter:
+                          description: |-
+                            (Block List, Max: 1) Structure describing filtering process for management events. (see below for nested schema)
+                            Structure describing filtering process for management events.
+                          items:
+                            properties:
+                              resourceScope:
+                                description: |-
+                                  (Block List, Min: 1) Structure describing that events will be gathered from the specified resource. (see below for nested schema)
+                                  Structure describing that events will be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
+                                      type: string
+                                    resourceType:
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
                                       type: string
                                   type: object
                                 type: array
@@ -232,7 +357,9 @@ spec:
                       type: object
                     type: array
                   folderId:
-                    description: ID of the folder to which the trail belongs.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -313,38 +440,49 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Labels defined by the user.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   loggingDestination:
-                    description: Structure describing destination log group of the
-                      trail. Mutually exclusive with storage_destination and data_stream_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination log group of the trail. Mutually exclusive with storage_destination and data_stream_destination. (see below for nested schema)
+                      Structure describing destination log group of the trail. Mutually exclusive with `storage_destination` and `data_stream_destination`.
                     items:
                       properties:
                         logGroupId:
-                          description: ID of the destination Cloud Logging Group
+                          description: |-
+                            (String) ID of the destination Cloud Logging Group.
+                            ID of the destination [Cloud Logging Group](https://yandex.cloud/docs/logging/concepts/log-group).
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Name of the trail.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   serviceAccountId:
-                    description: ID of the IAM service account that is used by the
-                      trail.
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
                   storageDestination:
-                    description: Structure describing destination bucket of the trail.
-                      Mutually exclusive with logging_destination and data_stream_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination bucket of the trail. Mutually exclusive with logging_destination and data_stream_destination. (see below for nested schema)
+                      Structure describing destination bucket of the trail. Mutually exclusive with `logging_destination` and `data_stream_destination`.
                     items:
                       properties:
                         bucketName:
-                          description: Name of the destination bucket
+                          description: |-
+                            (String) Name of the destination bucket.
+                            Name of the [destination bucket](https://yandex.cloud/docs/storage/concepts/bucket).
                           type: string
                         objectPrefix:
-                          description: Additional prefix of the uploaded objects.
-                            If not specified, objects will be uploaded with prefix
-                            equal to trail_id
+                          description: |-
+                            (String) Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id.
+                            Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to `trail_id`.
                           type: string
                       type: object
                     type: array
@@ -363,156 +501,281 @@ spec:
                   autoscaler.
                 properties:
                   dataStreamDestination:
-                    description: Structure describing destination data stream of the
-                      trail. Mutually exclusive with logging_destination and storage_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination data stream of the trail. Mutually exclusive with logging_destination and storage_destination. (see below for nested schema)
+                      Structure describing destination data stream of the trail. Mutually exclusive with `logging_destination` and `storage_destination`.
                     items:
                       properties:
+                        codec:
+                          description: |-
+                            (String) Codec for compressing events. Allowed values: RAW, GZIP, ZSTD. Default: RAW
+                            Codec for compressing events. Allowed values: RAW, GZIP, ZSTD. Default: RAW
+                          type: string
                         databaseId:
-                          description: ID of the YDB hosting the destination data
-                            stream.
+                          description: |-
+                            (String) ID of the YDB hosting the destination data stream.
+                            ID of the [YDB](https://yandex.cloud/docs/ydb/concepts/resources) hosting the destination data stream.
                           type: string
                         streamName:
-                          description: Name of the YDS stream belonging to the specified
-                            YDB.
+                          description: |-
+                            (String) Name of the YDS stream belonging to the specified YDB.
+                            Name of the [YDS stream](https://yandex.cloud/docs/data-streams/concepts/glossary#stream-concepts) belonging to the specified YDB.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the trail.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   filter:
-                    description: Structure describing event filtering process for
-                      the trail.
+                    description: |-
+                      (Block List, Max: 1, Deprecated) Structure is deprecated. Use filtering_policy instead. (see below for nested schema)
+                      Structure is deprecated. Use `filtering_policy` instead.
                     items:
                       properties:
                         eventFilters:
-                          description: Structure describing filtering process for
-                            the service-specific data plane events
+                          description: |-
+                            (Block List) Deprecated. (see below for nested schema)
+                            Deprecated.
                           items:
                             properties:
                               categories:
-                                description: List of structures describing categories
-                                  of gathered data plane events
+                                description: |-
+                                  blocks. With the introduction of included_events/excluded_events you can configure filtering per each event type.
+                                  Deprecated.
                                 items:
                                   properties:
                                     plane:
-                                      description: 'Type of the event by its relation
-                                        to the cloud resource model. Possible values:
-                                        CONTROL_PLANE/DATA_PLANE'
+                                      description: |-
+                                        (String) Deprecated.
+                                        Deprecated.
                                       type: string
                                     type:
-                                      description: 'Type of the event by its operation
-                                        effect on the resource. Possible values: READ/WRITE'
+                                      description: |-
+                                        (String) Deprecated.
+                                        Deprecated.
                                       type: string
                                   type: object
                                 type: array
                               pathFilter:
-                                description: Structure describing filtering process
-                                  for default control plane events. If omitted, the
-                                  trail will not deliver this category
+                                description: |-
+                                  with the appropriate resource_scope blocks. You have to account that resource_scope does not support specifying relations between resources, so your configuration will simplify to only the actual resources, that will be monitored.
+                                  Deprecated.
                                 items:
                                   properties:
                                     anyFilter:
-                                      description: Structure describing that events
-                                        will be gathered from all cloud resources
-                                        that belong to the parent resource. Mutually
-                                        exclusive with some_filter.
+                                      description: |-
+                                        (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Resource ID.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Resource type.
                                             type: string
                                         type: object
                                       type: array
                                     someFilter:
-                                      description: Structure describing that events
-                                        will be gathered from some of the cloud resources
-                                        that belong to the parent resource. Mutually
-                                        exclusive with any_filter.
+                                      description: |-
+                                        (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           anyFilters:
-                                            description: List of child resources from
-                                              which events will be gathered
+                                            description: |-
+                                              (Block List, Min: 1) Deprecated. (see below for nested schema)
+                                              Deprecated.
                                             items:
                                               properties:
                                                 resourceId:
-                                                  description: ID of the parent resource.
+                                                  description: |-
+                                                    (String) Resource ID.
+                                                    Resource ID.
                                                   type: string
                                                 resourceType:
-                                                  description: Resource type of the
-                                                    parent resource.
+                                                  description: |-
+                                                    (String) Resource type.
+                                                    Resource type.
                                                   type: string
                                               type: object
                                             type: array
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Deprecated.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Deprecated.
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               service:
-                                description: ID of the service which events will be
-                                  gathered
+                                description: |-
+                                  (String) Deprecated.
+                                  Deprecated.
                                 type: string
                             type: object
                           type: array
                         pathFilter:
-                          description: Structure describing filtering process for
-                            default control plane events. If omitted, the trail will
-                            not deliver this category
+                          description: |-
+                            block with the filtering_policy.management_events_filter. New API states management events filtration in a more clear way. The resources, that were specified, must migrate into the filtering_policy.management_events_filter.resource_scope.
+                            Deprecated.
                           items:
                             properties:
                               anyFilter:
-                                description: Structure describing that events will
-                                  be gathered from all cloud resources that belong
-                                  to the parent resource. Mutually exclusive with
-                                  some_filter.
+                                description: |-
+                                  (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                  Deprecated.
                                 items:
                                   properties:
                                     resourceId:
-                                      description: ID of the parent resource.
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
                                       type: string
                                     resourceType:
-                                      description: Resource type of the parent resource.
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
                                       type: string
                                   type: object
                                 type: array
                               someFilter:
-                                description: Structure describing that events will
-                                  be gathered from some of the cloud resources that
-                                  belong to the parent resource. Mutually exclusive
-                                  with any_filter.
+                                description: |-
+                                  (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                  Deprecated.
                                 items:
                                   properties:
                                     anyFilters:
-                                      description: List of child resources from which
-                                        events will be gathered
+                                      description: |-
+                                        (Block List, Min: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Resource ID.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Resource type.
                                             type: string
                                         type: object
                                       type: array
                                     resourceId:
-                                      description: ID of the parent resource.
+                                      description: |-
+                                        (String) Resource ID.
+                                        Deprecated.
                                       type: string
                                     resourceType:
-                                      description: Resource type of the parent resource.
+                                      description: |-
+                                        (String) Resource type.
+                                        Deprecated.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  filteringPolicy:
+                    description: |-
+                      (Block List, Max: 1) Structure describing event filtering process for the trail. Mutually exclusive with filter. At least one of the management_events_filter or data_events_filter fields will be filled. (see below for nested schema)
+                      Structure describing event filtering process for the trail. Mutually exclusive with `filter`. At least one of the `management_events_filter` or `data_events_filter` fields will be filled.
+                    items:
+                      properties:
+                        dataEventsFilter:
+                          description: |-
+                            specific data events. (see below for nested schema)
+                            Structure describing filtering process for the service-specific data events.
+                          items:
+                            properties:
+                              dnsFilter:
+                                description: |-
+                                  (Block List, Max: 1) Specific filter for DNS service. (see below for nested schema)
+                                  Specific filter for DNS service.
+                                items:
+                                  properties:
+                                    includeNonrecursiveQueries:
+                                      description: |-
+                                        (Boolean) All types of queries will be delivered.
+                                        All types of queries will be delivered.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              excludedEvents:
+                                description: |-
+                                  (List of String) A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with included_events.
+                                  A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with `included_events`.
+                                items:
+                                  type: string
+                                type: array
+                              includedEvents:
+                                description: |-
+                                  (List of String) A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with excluded_events.
+                                  A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with `excluded_events`.
+                                items:
+                                  type: string
+                                type: array
+                              resourceScope:
+                                description: |-
+                                  (Block List, Min: 1) Structure describing that events will be gathered from the specified resource. (see below for nested schema)
+                                  Structure describing that events will be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
+                                      type: string
+                                    resourceType:
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
+                                      type: string
+                                  type: object
+                                type: array
+                              service:
+                                description: |-
+                                  (String) Deprecated.
+                                  ID of the service which events will be gathered.
+                                type: string
+                            type: object
+                          type: array
+                        managementEventsFilter:
+                          description: |-
+                            (Block List, Max: 1) Structure describing filtering process for management events. (see below for nested schema)
+                            Structure describing filtering process for management events.
+                          items:
+                            properties:
+                              resourceScope:
+                                description: |-
+                                  (Block List, Min: 1) Structure describing that events will be gathered from the specified resource. (see below for nested schema)
+                                  Structure describing that events will be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
+                                      type: string
+                                    resourceType:
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
                                       type: string
                                   type: object
                                 type: array
@@ -521,7 +784,9 @@ spec:
                       type: object
                     type: array
                   folderId:
-                    description: ID of the folder to which the trail belongs.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -602,38 +867,49 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Labels defined by the user.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   loggingDestination:
-                    description: Structure describing destination log group of the
-                      trail. Mutually exclusive with storage_destination and data_stream_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination log group of the trail. Mutually exclusive with storage_destination and data_stream_destination. (see below for nested schema)
+                      Structure describing destination log group of the trail. Mutually exclusive with `storage_destination` and `data_stream_destination`.
                     items:
                       properties:
                         logGroupId:
-                          description: ID of the destination Cloud Logging Group
+                          description: |-
+                            (String) ID of the destination Cloud Logging Group.
+                            ID of the destination [Cloud Logging Group](https://yandex.cloud/docs/logging/concepts/log-group).
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Name of the trail.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   serviceAccountId:
-                    description: ID of the IAM service account that is used by the
-                      trail.
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
                   storageDestination:
-                    description: Structure describing destination bucket of the trail.
-                      Mutually exclusive with logging_destination and data_stream_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination bucket of the trail. Mutually exclusive with logging_destination and data_stream_destination. (see below for nested schema)
+                      Structure describing destination bucket of the trail. Mutually exclusive with `logging_destination` and `data_stream_destination`.
                     items:
                       properties:
                         bucketName:
-                          description: Name of the destination bucket
+                          description: |-
+                            (String) Name of the destination bucket.
+                            Name of the [destination bucket](https://yandex.cloud/docs/storage/concepts/bucket).
                           type: string
                         objectPrefix:
-                          description: Additional prefix of the uploaded objects.
-                            If not specified, objects will be uploaded with prefix
-                            equal to trail_id
+                          description: |-
+                            (String) Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id.
+                            Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to `trail_id`.
                           type: string
                       type: object
                     type: array
@@ -725,10 +1001,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.filter is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.filter)
-                || (has(self.initProvider) && has(self.initProvider.filter))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
@@ -743,156 +1015,281 @@ spec:
               atProvider:
                 properties:
                   dataStreamDestination:
-                    description: Structure describing destination data stream of the
-                      trail. Mutually exclusive with logging_destination and storage_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination data stream of the trail. Mutually exclusive with logging_destination and storage_destination. (see below for nested schema)
+                      Structure describing destination data stream of the trail. Mutually exclusive with `logging_destination` and `storage_destination`.
                     items:
                       properties:
+                        codec:
+                          description: |-
+                            (String) Codec for compressing events. Allowed values: RAW, GZIP, ZSTD. Default: RAW
+                            Codec for compressing events. Allowed values: RAW, GZIP, ZSTD. Default: RAW
+                          type: string
                         databaseId:
-                          description: ID of the YDB hosting the destination data
-                            stream.
+                          description: |-
+                            (String) ID of the YDB hosting the destination data stream.
+                            ID of the [YDB](https://yandex.cloud/docs/ydb/concepts/resources) hosting the destination data stream.
                           type: string
                         streamName:
-                          description: Name of the YDS stream belonging to the specified
-                            YDB.
+                          description: |-
+                            (String) Name of the YDS stream belonging to the specified YDB.
+                            Name of the [YDS stream](https://yandex.cloud/docs/data-streams/concepts/glossary#stream-concepts) belonging to the specified YDB.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the trail.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   filter:
-                    description: Structure describing event filtering process for
-                      the trail.
+                    description: |-
+                      (Block List, Max: 1, Deprecated) Structure is deprecated. Use filtering_policy instead. (see below for nested schema)
+                      Structure is deprecated. Use `filtering_policy` instead.
                     items:
                       properties:
                         eventFilters:
-                          description: Structure describing filtering process for
-                            the service-specific data plane events
+                          description: |-
+                            (Block List) Deprecated. (see below for nested schema)
+                            Deprecated.
                           items:
                             properties:
                               categories:
-                                description: List of structures describing categories
-                                  of gathered data plane events
+                                description: |-
+                                  blocks. With the introduction of included_events/excluded_events you can configure filtering per each event type.
+                                  Deprecated.
                                 items:
                                   properties:
                                     plane:
-                                      description: 'Type of the event by its relation
-                                        to the cloud resource model. Possible values:
-                                        CONTROL_PLANE/DATA_PLANE'
+                                      description: |-
+                                        (String) Deprecated.
+                                        Deprecated.
                                       type: string
                                     type:
-                                      description: 'Type of the event by its operation
-                                        effect on the resource. Possible values: READ/WRITE'
+                                      description: |-
+                                        (String) Deprecated.
+                                        Deprecated.
                                       type: string
                                   type: object
                                 type: array
                               pathFilter:
-                                description: Structure describing filtering process
-                                  for default control plane events. If omitted, the
-                                  trail will not deliver this category
+                                description: |-
+                                  with the appropriate resource_scope blocks. You have to account that resource_scope does not support specifying relations between resources, so your configuration will simplify to only the actual resources, that will be monitored.
+                                  Deprecated.
                                 items:
                                   properties:
                                     anyFilter:
-                                      description: Structure describing that events
-                                        will be gathered from all cloud resources
-                                        that belong to the parent resource. Mutually
-                                        exclusive with some_filter.
+                                      description: |-
+                                        (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Resource ID.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Resource type.
                                             type: string
                                         type: object
                                       type: array
                                     someFilter:
-                                      description: Structure describing that events
-                                        will be gathered from some of the cloud resources
-                                        that belong to the parent resource. Mutually
-                                        exclusive with any_filter.
+                                      description: |-
+                                        (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           anyFilters:
-                                            description: List of child resources from
-                                              which events will be gathered
+                                            description: |-
+                                              (Block List, Min: 1) Deprecated. (see below for nested schema)
+                                              Deprecated.
                                             items:
                                               properties:
                                                 resourceId:
-                                                  description: ID of the parent resource.
+                                                  description: |-
+                                                    (String) Resource ID.
+                                                    Resource ID.
                                                   type: string
                                                 resourceType:
-                                                  description: Resource type of the
-                                                    parent resource.
+                                                  description: |-
+                                                    (String) Resource type.
+                                                    Resource type.
                                                   type: string
                                               type: object
                                             type: array
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Deprecated.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Deprecated.
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               service:
-                                description: ID of the service which events will be
-                                  gathered
+                                description: |-
+                                  (String) Deprecated.
+                                  Deprecated.
                                 type: string
                             type: object
                           type: array
                         pathFilter:
-                          description: Structure describing filtering process for
-                            default control plane events. If omitted, the trail will
-                            not deliver this category
+                          description: |-
+                            block with the filtering_policy.management_events_filter. New API states management events filtration in a more clear way. The resources, that were specified, must migrate into the filtering_policy.management_events_filter.resource_scope.
+                            Deprecated.
                           items:
                             properties:
                               anyFilter:
-                                description: Structure describing that events will
-                                  be gathered from all cloud resources that belong
-                                  to the parent resource. Mutually exclusive with
-                                  some_filter.
+                                description: |-
+                                  (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                  Deprecated.
                                 items:
                                   properties:
                                     resourceId:
-                                      description: ID of the parent resource.
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
                                       type: string
                                     resourceType:
-                                      description: Resource type of the parent resource.
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
                                       type: string
                                   type: object
                                 type: array
                               someFilter:
-                                description: Structure describing that events will
-                                  be gathered from some of the cloud resources that
-                                  belong to the parent resource. Mutually exclusive
-                                  with any_filter.
+                                description: |-
+                                  (Block List, Max: 1) Deprecated. (see below for nested schema)
+                                  Deprecated.
                                 items:
                                   properties:
                                     anyFilters:
-                                      description: List of child resources from which
-                                        events will be gathered
+                                      description: |-
+                                        (Block List, Min: 1) Deprecated. (see below for nested schema)
+                                        Deprecated.
                                       items:
                                         properties:
                                           resourceId:
-                                            description: ID of the parent resource.
+                                            description: |-
+                                              (String) Resource ID.
+                                              Resource ID.
                                             type: string
                                           resourceType:
-                                            description: Resource type of the parent
-                                              resource.
+                                            description: |-
+                                              (String) Resource type.
+                                              Resource type.
                                             type: string
                                         type: object
                                       type: array
                                     resourceId:
-                                      description: ID of the parent resource.
+                                      description: |-
+                                        (String) Resource ID.
+                                        Deprecated.
                                       type: string
                                     resourceType:
-                                      description: Resource type of the parent resource.
+                                      description: |-
+                                        (String) Resource type.
+                                        Deprecated.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  filteringPolicy:
+                    description: |-
+                      (Block List, Max: 1) Structure describing event filtering process for the trail. Mutually exclusive with filter. At least one of the management_events_filter or data_events_filter fields will be filled. (see below for nested schema)
+                      Structure describing event filtering process for the trail. Mutually exclusive with `filter`. At least one of the `management_events_filter` or `data_events_filter` fields will be filled.
+                    items:
+                      properties:
+                        dataEventsFilter:
+                          description: |-
+                            specific data events. (see below for nested schema)
+                            Structure describing filtering process for the service-specific data events.
+                          items:
+                            properties:
+                              dnsFilter:
+                                description: |-
+                                  (Block List, Max: 1) Specific filter for DNS service. (see below for nested schema)
+                                  Specific filter for DNS service.
+                                items:
+                                  properties:
+                                    includeNonrecursiveQueries:
+                                      description: |-
+                                        (Boolean) All types of queries will be delivered.
+                                        All types of queries will be delivered.
+                                      type: boolean
+                                  type: object
+                                type: array
+                              excludedEvents:
+                                description: |-
+                                  (List of String) A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with included_events.
+                                  A list of events that won't be gathered by the trail from this service. New events will be automatically gathered when this option is specified. Mutually exclusive with `included_events`.
+                                items:
+                                  type: string
+                                type: array
+                              includedEvents:
+                                description: |-
+                                  (List of String) A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with excluded_events.
+                                  A list of events that will be gathered by the trail from this service. New events won't be gathered by default when this option is specified. Mutually exclusive with `excluded_events`.
+                                items:
+                                  type: string
+                                type: array
+                              resourceScope:
+                                description: |-
+                                  (Block List, Min: 1) Structure describing that events will be gathered from the specified resource. (see below for nested schema)
+                                  Structure describing that events will be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
+                                      type: string
+                                    resourceType:
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
+                                      type: string
+                                  type: object
+                                type: array
+                              service:
+                                description: |-
+                                  (String) Deprecated.
+                                  ID of the service which events will be gathered.
+                                type: string
+                            type: object
+                          type: array
+                        managementEventsFilter:
+                          description: |-
+                            (Block List, Max: 1) Structure describing filtering process for management events. (see below for nested schema)
+                            Structure describing filtering process for management events.
+                          items:
+                            properties:
+                              resourceScope:
+                                description: |-
+                                  (Block List, Min: 1) Structure describing that events will be gathered from the specified resource. (see below for nested schema)
+                                  Structure describing that events will be gathered from the specified resource.
+                                items:
+                                  properties:
+                                    resourceId:
+                                      description: |-
+                                        (String) Resource ID.
+                                        Resource ID.
+                                      type: string
+                                    resourceType:
+                                      description: |-
+                                        (String) Resource type.
+                                        Resource type.
                                       type: string
                                   type: object
                                 type: array
@@ -901,53 +1298,71 @@ spec:
                       type: object
                     type: array
                   folderId:
-                    description: ID of the folder to which the trail belongs.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: Labels defined by the user.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   loggingDestination:
-                    description: Structure describing destination log group of the
-                      trail. Mutually exclusive with storage_destination and data_stream_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination log group of the trail. Mutually exclusive with storage_destination and data_stream_destination. (see below for nested schema)
+                      Structure describing destination log group of the trail. Mutually exclusive with `storage_destination` and `data_stream_destination`.
                     items:
                       properties:
                         logGroupId:
-                          description: ID of the destination Cloud Logging Group
+                          description: |-
+                            (String) ID of the destination Cloud Logging Group.
+                            ID of the destination [Cloud Logging Group](https://yandex.cloud/docs/logging/concepts/log-group).
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Name of the trail.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   serviceAccountId:
-                    description: ID of the IAM service account that is used by the
-                      trail.
+                    description: |-
+                      (String) Service account which linked to the resource.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource.
                     type: string
                   status:
-                    description: Status of this trail.
+                    description: |-
+                      (String) Status of this trail.
+                      Status of this trail.
                     type: string
                   storageDestination:
-                    description: Structure describing destination bucket of the trail.
-                      Mutually exclusive with logging_destination and data_stream_destination.
+                    description: |-
+                      (Block List, Max: 1) Structure describing destination bucket of the trail. Mutually exclusive with logging_destination and data_stream_destination. (see below for nested schema)
+                      Structure describing destination bucket of the trail. Mutually exclusive with `logging_destination` and `data_stream_destination`.
                     items:
                       properties:
                         bucketName:
-                          description: Name of the destination bucket
+                          description: |-
+                            (String) Name of the destination bucket.
+                            Name of the [destination bucket](https://yandex.cloud/docs/storage/concepts/bucket).
                           type: string
                         objectPrefix:
-                          description: Additional prefix of the uploaded objects.
-                            If not specified, objects will be uploaded with prefix
-                            equal to trail_id
+                          description: |-
+                            (String) Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to trail_id.
+                            Additional prefix of the uploaded objects. If not specified, objects will be uploaded with prefix equal to `trail_id`.
                           type: string
                       type: object
                     type: array
                   trailId:
-                    description: ID of the trail resource.
+                    description: |-
+                      (String) ID of the trail resource.
+                      ID of the trail resource.
                     type: string
                 type: object
               conditions:

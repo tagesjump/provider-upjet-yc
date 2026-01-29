@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CoreDevice is the Schema for the CoreDevices API. Allows management
-          of a Yandex.Cloud IoT Core Device.
+          of a Yandex Cloud IoT Core Device.
         properties:
           apiVersion:
             description: |-
@@ -76,25 +76,41 @@ spec:
                   aliases:
                     additionalProperties:
                       type: string
-                    description: A set of key/value aliases pairs to assign to the
-                      IoT Core Device
+                    description: |-
+                      (Map of String) A set of key/value aliases pairs to assign to the IoT Core Device.
+                      A set of key/value aliases pairs to assign to the IoT Core Device.
                     type: object
                     x-kubernetes-map-type: granular
                   certificates:
-                    description: A set of certificate's fingerprints for the IoT Core
-                      Device
+                    description: |-
+                      (Set of String) A set of certificate's fingerprints for the IoT Core Device.
+                      A set of certificate's fingerprints for the IoT Core Device.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   description:
-                    description: Description of the IoT Core Device
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
-                    description: IoT Core Device name used to define device
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   passwordsSecretRef:
-                    description: A set of passwords's id for the IoT Core Device
+                    description: |-
+                      (Set of String, Sensitive) A set of passwords's id for the IoT Core Device.
+                      A set of passwords's id for the IoT Core Device.
                     items:
                       description: A SecretKeySelector is a reference to a secret
                         key in an arbitrary namespace.
@@ -115,7 +131,9 @@ spec:
                       type: object
                     type: array
                   registryId:
-                    description: IoT Core Registry ID for the IoT Core Device
+                    description: |-
+                      (String) IoT Core Registry ID for the IoT Core Device.
+                      IoT Core Registry ID for the IoT Core Device.
                     type: string
                 type: object
               initProvider:
@@ -134,29 +152,45 @@ spec:
                   aliases:
                     additionalProperties:
                       type: string
-                    description: A set of key/value aliases pairs to assign to the
-                      IoT Core Device
+                    description: |-
+                      (Map of String) A set of key/value aliases pairs to assign to the IoT Core Device.
+                      A set of key/value aliases pairs to assign to the IoT Core Device.
                     type: object
                     x-kubernetes-map-type: granular
                   certificates:
-                    description: A set of certificate's fingerprints for the IoT Core
-                      Device
+                    description: |-
+                      (Set of String) A set of certificate's fingerprints for the IoT Core Device.
+                      A set of certificate's fingerprints for the IoT Core Device.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   description:
-                    description: Description of the IoT Core Device
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
-                    description: IoT Core Device name used to define device
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   passwordsSecretRef:
                     items:
                       type: string
                     type: array
                   registryId:
-                    description: IoT Core Registry ID for the IoT Core Device
+                    description: |-
+                      (String) IoT Core Registry ID for the IoT Core Device.
+                      IoT Core Registry ID for the IoT Core Device.
                     type: string
                 type: object
               managementPolicies:
@@ -262,30 +296,49 @@ spec:
                   aliases:
                     additionalProperties:
                       type: string
-                    description: A set of key/value aliases pairs to assign to the
-                      IoT Core Device
+                    description: |-
+                      (Map of String) A set of key/value aliases pairs to assign to the IoT Core Device.
+                      A set of key/value aliases pairs to assign to the IoT Core Device.
                     type: object
                     x-kubernetes-map-type: granular
                   certificates:
-                    description: A set of certificate's fingerprints for the IoT Core
-                      Device
+                    description: |-
+                      (Set of String) A set of certificate's fingerprints for the IoT Core Device.
+                      A set of certificate's fingerprints for the IoT Core Device.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   createdAt:
-                    description: Creation timestamp of the IoT Core Device
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   description:
-                    description: Description of the IoT Core Device
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
-                    description: IoT Core Device name used to define device
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   registryId:
-                    description: IoT Core Registry ID for the IoT Core Device
+                    description: |-
+                      (String) IoT Core Registry ID for the IoT Core Device.
+                      IoT Core Registry ID for the IoT Core Device.
                     type: string
                 type: object
               conditions:

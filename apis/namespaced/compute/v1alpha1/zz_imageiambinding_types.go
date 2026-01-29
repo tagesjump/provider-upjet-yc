@@ -12,51 +12,100 @@ import (
 
 type ImageIAMBindingInitParameters struct {
 
-	// ID of the image to attach the policy to.
+	// (String) The ID of the compute image to attach the policy to.
+	// The ID of the compute `image` to attach the policy to.
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_image_iam_binding can be used per role.
+	// (String) The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
+	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type ImageIAMBindingObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// ID of the image to attach the policy to.
+	// (String) The ID of the compute image to attach the policy to.
+	// The ID of the compute `image` to attach the policy to.
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_image_iam_binding can be used per role.
+	// (String) The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
+	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type ImageIAMBindingParameters struct {
 
-	// ID of the image to attach the policy to.
+	// (String) The ID of the compute image to attach the policy to.
+	// The ID of the compute `image` to attach the policy to.
 	// +kubebuilder:validation:Optional
 	ImageID *string `json:"imageId,omitempty" tf:"image_id,omitempty"`
 
-	// An array of identities that will be granted the privilege in the role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be assigned. Only one
-	// yandex_compute_image_iam_binding can be used per role.
+	// (String) The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_compute_image_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
+	// +kubebuilder:validation:Optional
+	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 // ImageIAMBindingSpec defines the desired state of ImageIAMBinding
@@ -86,7 +135,7 @@ type ImageIAMBindingStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ImageIAMBinding is the Schema for the ImageIAMBindings API. Allows management of a single IAM binding for an image.
+// ImageIAMBinding is the Schema for the ImageIAMBindings API. Allows management of a single IAM binding for the compute Image.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

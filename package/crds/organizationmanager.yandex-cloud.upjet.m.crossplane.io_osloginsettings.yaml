@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: OsLoginSettings is the Schema for the OsLoginSettingss API. Allows
-          management of OsLogin Settings within an existing Yandex.Cloud Organization.
+          management of OsLogin Settings within an existing Yandex Cloud Organization.
         properties:
           apiVersion:
             description: |-
@@ -60,29 +60,38 @@ spec:
               forProvider:
                 properties:
                   organizationId:
-                    description: The organization to manage it's OsLogin Settings.
+                    description: |-
+                      (String) The organization to manage it's OsLogin Settings.
+                      The organization to manage it's OsLogin Settings.
                     type: string
                   sshCertificateSettings:
-                    description: The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) SSH Certificate settings. (see below for nested schema)
+                      SSH Certificate settings.
                     items:
                       properties:
                         enabled:
-                          description: Enables or disables usage of ssh certificates
-                            signed by trusted CA.
+                          description: |-
+                            (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+                            Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
                           type: boolean
                       type: object
                     type: array
                   userSshKeySettings:
-                    description: The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Users SSH key settings. (see below for nested schema)
+                      Users SSH key settings.
                     items:
                       properties:
                         allowManageOwnKeys:
-                          description: If set to true subject is allowed to manage
-                            own ssh keys without having to be assigned specific permissions.
+                          description: |-
+                            (Boolean) If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
+                            If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
                           type: boolean
                         enabled:
-                          description: Enables or disables usage of ssh keys assigned
-                            to a specific subject.
+                          description: |-
+                            (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+                            Enables or disables usage of ssh keys assigned to a specific subject.
                           type: boolean
                       type: object
                     type: array
@@ -101,29 +110,38 @@ spec:
                   autoscaler.
                 properties:
                   organizationId:
-                    description: The organization to manage it's OsLogin Settings.
+                    description: |-
+                      (String) The organization to manage it's OsLogin Settings.
+                      The organization to manage it's OsLogin Settings.
                     type: string
                   sshCertificateSettings:
-                    description: The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) SSH Certificate settings. (see below for nested schema)
+                      SSH Certificate settings.
                     items:
                       properties:
                         enabled:
-                          description: Enables or disables usage of ssh certificates
-                            signed by trusted CA.
+                          description: |-
+                            (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+                            Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
                           type: boolean
                       type: object
                     type: array
                   userSshKeySettings:
-                    description: The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Users SSH key settings. (see below for nested schema)
+                      Users SSH key settings.
                     items:
                       properties:
                         allowManageOwnKeys:
-                          description: If set to true subject is allowed to manage
-                            own ssh keys without having to be assigned specific permissions.
+                          description: |-
+                            (Boolean) If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
+                            If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
                           type: boolean
                         enabled:
-                          description: Enables or disables usage of ssh keys assigned
-                            to a specific subject.
+                          description: |-
+                            (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+                            Enables or disables usage of ssh keys assigned to a specific subject.
                           type: boolean
                       type: object
                     type: array
@@ -197,31 +215,41 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   organizationId:
-                    description: The organization to manage it's OsLogin Settings.
+                    description: |-
+                      (String) The organization to manage it's OsLogin Settings.
+                      The organization to manage it's OsLogin Settings.
                     type: string
                   sshCertificateSettings:
-                    description: The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) SSH Certificate settings. (see below for nested schema)
+                      SSH Certificate settings.
                     items:
                       properties:
                         enabled:
-                          description: Enables or disables usage of ssh certificates
-                            signed by trusted CA.
+                          description: |-
+                            (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+                            Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
                           type: boolean
                       type: object
                     type: array
                   userSshKeySettings:
-                    description: The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Users SSH key settings. (see below for nested schema)
+                      Users SSH key settings.
                     items:
                       properties:
                         allowManageOwnKeys:
-                          description: If set to true subject is allowed to manage
-                            own ssh keys without having to be assigned specific permissions.
+                          description: |-
+                            (Boolean) If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
+                            If set to true subject is allowed to manage own ssh keys without having to be assigned specific permissions.
                           type: boolean
                         enabled:
-                          description: Enables or disables usage of ssh keys assigned
-                            to a specific subject.
+                          description: |-
+                            (Boolean) Enables or disables usage of SSH certificates signed by trusted Certification Authority (CA).
+                            Enables or disables usage of ssh keys assigned to a specific subject.
                           type: boolean
                       type: object
                     type: array

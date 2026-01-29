@@ -61,19 +61,26 @@ spec:
               forProvider:
                 properties:
                   deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Certificate description.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   domains:
-                    description: Domains for this certificate. Should be specified
-                      for managed certificates.
+                    description: |-
+                      (List of String) Domains for this certificate. Should be specified for managed certificates.
+                      Domains for this certificate. Should be specified for managed certificates.
                     items:
                       type: string
                     type: array
                   folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -160,51 +167,74 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Labels to assign to this certificate.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   managed:
-                    description: Managed specification. Structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Managed specification.
+                      Managed specification.
+
+                      ~> Resource creation awaits getting challenges from issue provider.
                     items:
                       properties:
                         challengeCount:
                           description: |-
-                            . Expected number of challenge count needed to validate certificate.
-                            Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-                            This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+                            domain certificates.
+                            Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
                           type: number
                         challengeType:
-                          description: 'Domain owner-check method. Possible values:'
+                          description: |-
+                            check method. Possible values:
+                            Domain owner-check method. Possible values:
+                            * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+                            * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+                            * `HTTP` - you will need to place specified value into specified url.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Certificate name.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   selfManaged:
-                    description: Self-managed specification. Structure is documented
-                      below.
+                    description: |-
+                      managed specification.
+                      Self-managed specification.
+
+                      ~> Only one type `private_key` or `private_key_lockbox_secret` should be specified.
                     items:
                       properties:
                         certificate:
-                          description: Certificate with chain.
+                          description: |-
+                            (String) Certificate with chain.
+                            Certificate with chain.
                           type: string
                         privateKeyLockboxSecret:
-                          description: Lockbox secret specification for getting private
-                            key. Structure is documented below.
+                          description: |-
+                            (Block List, Max: 1) Lockbox secret specification for getting private key. (see below for nested schema)
+                            Lockbox secret specification for getting private key.
                           items:
                             properties:
                               id:
-                                description: Lockbox secret Id.
+                                description: |-
+                                  (String) The ID of this resource.
+                                  Lockbox secret Id.
                                 type: string
                               key:
-                                description: Key of the Lockbox secret, the value
-                                  of which contains the private key of the certificate.
+                                description: |-
+                                  (String) Key of the Lockbox secret, the value of which contains the private key of the certificate.
+                                  Key of the Lockbox secret, the value of which contains the private key of the certificate.
                                 type: string
                             type: object
                           type: array
                         privateKeySecretRef:
-                          description: Private key of certificate.
+                          description: |-
+                            (String, Sensitive) Private key of certificate.
+                            Private key of certificate.
                           properties:
                             key:
                               type: string
@@ -232,19 +262,26 @@ spec:
                   autoscaler.
                 properties:
                   deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Certificate description.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   domains:
-                    description: Domains for this certificate. Should be specified
-                      for managed certificates.
+                    description: |-
+                      (List of String) Domains for this certificate. Should be specified for managed certificates.
+                      Domains for this certificate. Should be specified for managed certificates.
                     items:
                       type: string
                     type: array
                   folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -331,51 +368,74 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: Labels to assign to this certificate.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   managed:
-                    description: Managed specification. Structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Managed specification.
+                      Managed specification.
+
+                      ~> Resource creation awaits getting challenges from issue provider.
                     items:
                       properties:
                         challengeCount:
                           description: |-
-                            . Expected number of challenge count needed to validate certificate.
-                            Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-                            This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+                            domain certificates.
+                            Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
                           type: number
                         challengeType:
-                          description: 'Domain owner-check method. Possible values:'
+                          description: |-
+                            check method. Possible values:
+                            Domain owner-check method. Possible values:
+                            * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+                            * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+                            * `HTTP` - you will need to place specified value into specified url.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Certificate name.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   selfManaged:
-                    description: Self-managed specification. Structure is documented
-                      below.
+                    description: |-
+                      managed specification.
+                      Self-managed specification.
+
+                      ~> Only one type `private_key` or `private_key_lockbox_secret` should be specified.
                     items:
                       properties:
                         certificate:
-                          description: Certificate with chain.
+                          description: |-
+                            (String) Certificate with chain.
+                            Certificate with chain.
                           type: string
                         privateKeyLockboxSecret:
-                          description: Lockbox secret specification for getting private
-                            key. Structure is documented below.
+                          description: |-
+                            (Block List, Max: 1) Lockbox secret specification for getting private key. (see below for nested schema)
+                            Lockbox secret specification for getting private key.
                           items:
                             properties:
                               id:
-                                description: Lockbox secret Id.
+                                description: |-
+                                  (String) The ID of this resource.
+                                  Lockbox secret Id.
                                 type: string
                               key:
-                                description: Key of the Lockbox secret, the value
-                                  of which contains the private key of the certificate.
+                                description: |-
+                                  (String) Key of the Lockbox secret, the value of which contains the private key of the certificate.
+                                  Key of the Lockbox secret, the value of which contains the private key of the certificate.
                                 type: string
                             type: object
                           type: array
                         privateKeySecretRef:
-                          description: Private key of certificate.
+                          description: |-
+                            (String, Sensitive) Private key of certificate.
+                            Private key of certificate.
                           properties:
                             key:
                               type: string
@@ -458,140 +518,186 @@ spec:
               atProvider:
                 properties:
                   challenges:
-                    description: Array of challenges. Structure is documented below.
+                    description: |-
+                      (List of Object) Array of challenges. (see below for nested schema)
+                      Array of challenges.
                     items:
                       properties:
                         createdAt:
-                          description: Time the challenge was created.
+                          description: (String) The creation timestamp of the resource.
                           type: string
                         dnsName:
-                          description: DNS record name (only for DNS challenge).
+                          description: (String)
                           type: string
                         dnsType:
-                          description: 'DNS record type: "TXT" or "CNAME" (only for
-                            DNS challenge).'
+                          description: (String)
                           type: string
                         dnsValue:
-                          description: DNS record value (only for DNS challenge).
+                          description: (String)
                           type: string
                         domain:
-                          description: Validated domain.
+                          description: (String)
                           type: string
                         httpContent:
-                          description: The content that should be made accessible
-                            with the given http_url (only for HTTP challenge).
+                          description: (String)
                           type: string
                         httpUrl:
-                          description: URL where the challenge content http_content
-                            should be placed (only for HTTP challenge).
+                          description: (String)
                           type: string
                         message:
-                          description: Current status message.
+                          description: (String)
                           type: string
                         type:
-                          description: Challenge type "DNS" or "HTTP".
+                          description: '(String) Certificate type: MANAGED or IMPORTED.'
                           type: string
                         updatedAt:
-                          description: Last time the challenge was updated.
+                          description: (String) Certificate update timestamp.
                           type: string
                       type: object
                     type: array
                   createdAt:
-                    description: Certificate create timestamp.
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Certificate description.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   domains:
-                    description: Domains for this certificate. Should be specified
-                      for managed certificates.
+                    description: |-
+                      (List of String) Domains for this certificate. Should be specified for managed certificates.
+                      Domains for this certificate. Should be specified for managed certificates.
                     items:
                       type: string
                     type: array
                   folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
-                    description: Certificate Id.
+                    description: (String) The ID of this resource.
                     type: string
                   issuedAt:
-                    description: Certificate issue timestamp.
+                    description: |-
+                      (String) Certificate issue timestamp.
+                      Certificate issue timestamp.
                     type: string
                   issuer:
-                    description: Certificate issuer.
+                    description: |-
+                      (String) Certificate Issuer.
+                      Certificate Issuer.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: Labels to assign to this certificate.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   managed:
-                    description: Managed specification. Structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Managed specification.
+                      Managed specification.
+
+                      ~> Resource creation awaits getting challenges from issue provider.
                     items:
                       properties:
                         challengeCount:
                           description: |-
-                            . Expected number of challenge count needed to validate certificate.
-                            Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-                            This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+                            domain certificates.
+                            Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
                           type: number
                         challengeType:
-                          description: 'Domain owner-check method. Possible values:'
+                          description: |-
+                            check method. Possible values:
+                            Domain owner-check method. Possible values:
+                            * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+                            * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+                            * `HTTP` - you will need to place specified value into specified url.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Certificate name.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   notAfter:
-                    description: Certificate end valid period.
+                    description: |-
+                      (String) Certificate end valid period.
+                      Certificate end valid period.
                     type: string
                   notBefore:
-                    description: Certificate start valid period.
+                    description: |-
+                      (String) Certificate start valid period.
+                      Certificate start valid period.
                     type: string
                   selfManaged:
-                    description: Self-managed specification. Structure is documented
-                      below.
+                    description: |-
+                      managed specification.
+                      Self-managed specification.
+
+                      ~> Only one type `private_key` or `private_key_lockbox_secret` should be specified.
                     items:
                       properties:
                         certificate:
-                          description: Certificate with chain.
+                          description: |-
+                            (String) Certificate with chain.
+                            Certificate with chain.
                           type: string
                         privateKeyLockboxSecret:
-                          description: Lockbox secret specification for getting private
-                            key. Structure is documented below.
+                          description: |-
+                            (Block List, Max: 1) Lockbox secret specification for getting private key. (see below for nested schema)
+                            Lockbox secret specification for getting private key.
                           items:
                             properties:
                               id:
-                                description: Lockbox secret Id.
+                                description: |-
+                                  (String) The ID of this resource.
+                                  Lockbox secret Id.
                                 type: string
                               key:
-                                description: Key of the Lockbox secret, the value
-                                  of which contains the private key of the certificate.
+                                description: |-
+                                  (String) Key of the Lockbox secret, the value of which contains the private key of the certificate.
+                                  Key of the Lockbox secret, the value of which contains the private key of the certificate.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   serial:
-                    description: Certificate serial number.
+                    description: |-
+                      (String) Certificate Serial Number.
+                      Certificate Serial Number.
                     type: string
                   status:
-                    description: 'Certificate status: "VALIDATING", "INVALID",  "ISSUED",
-                      "REVOKED", "RENEWING" or "RENEWAL_FAILED".'
+                    description: |-
+                      (String) Certificate status: VALIDATING, INVALID, ISSUED, REVOKED, RENEWING or RENEWAL_FAILED.
+                      Certificate status: `VALIDATING`, `INVALID`, `ISSUED`, `REVOKED`, `RENEWING` or `RENEWAL_FAILED`.
                     type: string
                   subject:
-                    description: Certificate subject.
+                    description: |-
+                      (String) Certificate Subject.
+                      Certificate Subject.
                     type: string
                   type:
-                    description: 'Certificate type: "MANAGED" or "IMPORTED".'
+                    description: |-
+                      (String) Certificate type: MANAGED or IMPORTED.
+                      Certificate type: `MANAGED` or `IMPORTED`.
                     type: string
                   updatedAt:
-                    description: Certificate update timestamp.
+                    description: |-
+                      (String) Certificate update timestamp.
+                      Certificate update timestamp.
                     type: string
                 type: object
               conditions:

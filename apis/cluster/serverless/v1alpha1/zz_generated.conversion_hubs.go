@@ -7,3 +7,12 @@ func (tr *Container) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ContainerIAMBinding) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *EventrouterBus) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *EventrouterConnector) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *EventrouterRule) Hub() {}
