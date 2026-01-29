@@ -33,8 +33,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/kafkauser
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
 spec:
   forProvider:
     config:
@@ -65,7 +65,7 @@ spec:
   forProvider:
     clusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: my_cluster
     name: events
     partitions: 4
     replicationFactor: 1

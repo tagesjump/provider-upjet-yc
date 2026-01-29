@@ -80,7 +80,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromFloatPtrValue(mg.Spec.ForProvider.OriginGroupID),
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OriginGroupID),
 		Extract:      resource.ExtractResourceID(),
 		Namespace:    mg.GetNamespace(),
 		Reference:    mg.Spec.ForProvider.OriginGroupIDRef,
@@ -93,7 +93,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.OriginGroupID")
 	}
-	mg.Spec.ForProvider.OriginGroupID = reference.ToFloatPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.OriginGroupIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -114,7 +114,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromFloatPtrValue(mg.Spec.InitProvider.OriginGroupID),
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OriginGroupID),
 		Extract:      resource.ExtractResourceID(),
 		Namespace:    mg.GetNamespace(),
 		Reference:    mg.Spec.InitProvider.OriginGroupIDRef,
@@ -127,7 +127,7 @@ func (mg *Resource) ResolveReferences(ctx context.Context, c client.Reader) erro
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.OriginGroupID")
 	}
-	mg.Spec.InitProvider.OriginGroupID = reference.ToFloatPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.OriginGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.OriginGroupIDRef = rsp.ResolvedReference
 
 	return nil

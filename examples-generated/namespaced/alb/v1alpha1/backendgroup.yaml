@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: alb/v1alpha1/backendgroup
   labels:
-    testing.upbound.io/example-name: test-backend-group
-  name: test-backend-group
+    testing.upbound.io/example-name: my_alb_bg
+  name: my-alb-bg
   namespace: upbound-system
 spec:
   forProvider:

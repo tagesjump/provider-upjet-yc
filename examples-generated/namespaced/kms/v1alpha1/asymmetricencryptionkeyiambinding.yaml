@@ -29,7 +29,4 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    folderIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
     name: asymmetric-encryption-key-name

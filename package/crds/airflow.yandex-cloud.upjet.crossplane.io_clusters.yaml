@@ -1,0 +1,1583 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: clusters.airflow.yandex-cloud.upjet.crossplane.io
+spec:
+  group: airflow.yandex-cloud.upjet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - yandex-cloud
+    kind: Cluster
+    listKind: ClusterList
+    plural: clusters
+    singular: cluster
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Cluster is the Schema for the Clusters API. Manages an Apache
+          Airflow cluster within Yandex Cloud.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ClusterSpec defines the desired state of Cluster
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  adminPasswordSecretRef:
+                    description: |-
+                      (String, Sensitive) Password that is used to log in to Apache Airflow web UI under admin user.
+                      Password that is used to log in to Apache Airflow web UI under `admin` user.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  airflowConfig:
+                    additionalProperties:
+                      additionalProperties:
+                        type: string
+                      type: object
+                    description: |-
+                      level map. Keys of top-level map are the names of configuration sections. Keys of inner maps are the names of configuration options within corresponding section.
+                      Configuration of the Apache Airflow application itself. The value of this attribute is a two-level map. Keys of top-level map are the names of [configuration sections](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#airflow-configuration-options). Keys of inner maps are the names of configuration options within corresponding section.
+                    type: object
+                  airflowVersion:
+                    description: |-
+                      (String) Apache Airflow version in format <major>.<minor>.
+                      Apache Airflow version in format `<major>.<minor>`.
+                    type: string
+                  codeSync:
+                    description: (Attributes) Parameters of the location and access
+                      to the code that will be executed in the cluster. (see below
+                      for nested schema)
+                    properties:
+                      gitSync:
+                        description: (Attributes) Git repository that stores DAG files
+                          used in the cluster. (see below for nested schema)
+                        properties:
+                          branch:
+                            description: |-
+                              (String) The name of the branch that stores DAG files used in the cluster.
+                              The name of the branch that stores DAG files used in the cluster.
+                            type: string
+                          repo:
+                            description: |-
+                              (String) The URL of the Git repository that stores DAG files used in the cluster.
+                              The URL of the Git repository that stores DAG files used in the cluster.
+                            type: string
+                          sshKeySecretRef:
+                            description: |-
+                              (String, Sensitive) The SSH key that is used to access the Git repository.
+                              The SSH key that is used to access the Git repository.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          subPath:
+                            description: |-
+                              (String) The path to the directory in the repository that stores DAG files used in the cluster.
+                              The path to the directory in the repository that stores DAG files used in the cluster.
+                            type: string
+                        type: object
+                      s3:
+                        description: (Attributes) Currently only Object Storage (S3)
+                          is supported as the source of DAG files. (see below for
+                          nested schema)
+                        properties:
+                          bucket:
+                            description: |-
+                              (String) The name of the Object Storage bucket that stores DAG files used in the cluster.
+                              The name of the Object Storage bucket that stores DAG files used in the cluster.
+                            type: string
+                        type: object
+                    type: object
+                  dagProcessor:
+                    description: processor instances. Only for airflow version 3.*.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of dag-processor instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  debPackages:
+                    description: |-
+                      (Set of String) System packages that are installed in the cluster.
+                      System packages that are installed in the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  lockboxSecretsBackend:
+                    description: (Attributes) Configuration of Lockbox Secrets Backend.
+                      See documentation for details. (see below for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Enables usage of Lockbox Secrets Backend.
+                          Enables usage of Lockbox Secrets Backend.
+                        type: boolean
+                    type: object
+                  logging:
+                    description: (Attributes) Cloud Logging configuration. (see below
+                      for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Enables usage of Lockbox Secrets Backend.
+                          Enables delivery of logs generated by the Airflow components to [Cloud Logging](https://yandex.cloud/docs/logging/).
+                        type: boolean
+                      folderId:
+                        description: |-
+                          id is used.
+                          Logs will be written to **default log group** of specified folder. Exactly one of the attributes `folder_id` or `log_group_id` should be specified.
+                        type: string
+                      logGroupId:
+                        description: |-
+                          (String) Logs will be written to the specified log group. Exactly one of the attributes folder_id or log_group_id should be specified.
+                          Logs will be written to the **specified log group**. Exactly one of the attributes `folder_id` or `log_group_id` should be specified.
+                        type: string
+                      minLevel:
+                        description: |-
+                          (String) Minimum level of messages that will be sent to Cloud Logging. Can be either TRACE, DEBUG, INFO, WARN, ERROR or FATAL. If not set then server default is applied (currently INFO).
+                          Minimum level of messages that will be sent to Cloud Logging. Can be either `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`. If not set then server default is applied (currently `INFO`).
+                        type: string
+                    type: object
+                  maintenanceWindow:
+                    description: (Attributes) Configuration of window for maintenance
+                      operations. (see below for nested schema)
+                    properties:
+                      day:
+                        description: |-
+                          (String) Day of week for maintenance window. One of MON, TUE, WED, THU, FRI, SAT, SUN.
+                          Day of week for maintenance window. One of `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+                        type: string
+                      hour:
+                        description: |-
+                          24) for maintenance window.
+                          Hour of day in UTC time zone (1-24) for maintenance window.
+                        type: number
+                      type:
+                        description: |-
+                          (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. If WEEKLY, day and hour must be specified.
+                          Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. If `WEEKLY`, day and hour must be specified.
+                        type: string
+                    type: object
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  pipPackages:
+                    description: |-
+                      (Set of String) Python packages that are installed in the cluster.
+                      Python packages that are installed in the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  pythonVersion:
+                    description: |-
+                      (String) Version of Python that Airflow will run on. Must be in format <major>.<minor>.
+                      Version of Python that Airflow will run on. Must be in format `<major>.<minor>`.
+                    type: string
+                  scheduler:
+                    description: (Attributes) Configuration of scheduler instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of scheduler instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  serviceAccountId:
+                    description: |-
+                      (String) Service account which linked to the resource. For more information, see documentation.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource. For more information, see [documentation](https://yandex.cloud/docs/managed-airflow/concepts/impersonation).
+                    type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  subnetIds:
+                    description: |-
+                      (Set of String) The list of VPC subnets identifiers which resource is attached.
+                      The list of VPC subnets identifiers which resource is attached.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  subnetIdsRefs:
+                    description: References to Subnet in vpc to populate subnetIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  subnetIdsSelector:
+                    description: Selector for a list of Subnet in vpc to populate
+                      subnetIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  triggerer:
+                    description: (Attributes) Configuration of triggerer instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of triggerer instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  webserver:
+                    description: (Attributes) Configuration of webserver instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of webserver instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  worker:
+                    description: (Attributes) Configuration of worker instances. (see
+                      below for nested schema)
+                    properties:
+                      maxCount:
+                        description: |-
+                          (Number) The maximum number of worker instances in the cluster.
+                          The maximum number of worker instances in the cluster.
+                        type: number
+                      minCount:
+                        description: |-
+                          (Number) The minimum number of worker instances in the cluster.
+                          The minimum number of worker instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  adminPasswordSecretRef:
+                    description: |-
+                      (String, Sensitive) Password that is used to log in to Apache Airflow web UI under admin user.
+                      Password that is used to log in to Apache Airflow web UI under `admin` user.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  airflowConfig:
+                    additionalProperties:
+                      additionalProperties:
+                        type: string
+                      type: object
+                    description: |-
+                      level map. Keys of top-level map are the names of configuration sections. Keys of inner maps are the names of configuration options within corresponding section.
+                      Configuration of the Apache Airflow application itself. The value of this attribute is a two-level map. Keys of top-level map are the names of [configuration sections](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#airflow-configuration-options). Keys of inner maps are the names of configuration options within corresponding section.
+                    type: object
+                  airflowVersion:
+                    description: |-
+                      (String) Apache Airflow version in format <major>.<minor>.
+                      Apache Airflow version in format `<major>.<minor>`.
+                    type: string
+                  codeSync:
+                    description: (Attributes) Parameters of the location and access
+                      to the code that will be executed in the cluster. (see below
+                      for nested schema)
+                    properties:
+                      gitSync:
+                        description: (Attributes) Git repository that stores DAG files
+                          used in the cluster. (see below for nested schema)
+                        properties:
+                          branch:
+                            description: |-
+                              (String) The name of the branch that stores DAG files used in the cluster.
+                              The name of the branch that stores DAG files used in the cluster.
+                            type: string
+                          repo:
+                            description: |-
+                              (String) The URL of the Git repository that stores DAG files used in the cluster.
+                              The URL of the Git repository that stores DAG files used in the cluster.
+                            type: string
+                          sshKeySecretRef:
+                            description: |-
+                              (String, Sensitive) The SSH key that is used to access the Git repository.
+                              The SSH key that is used to access the Git repository.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          subPath:
+                            description: |-
+                              (String) The path to the directory in the repository that stores DAG files used in the cluster.
+                              The path to the directory in the repository that stores DAG files used in the cluster.
+                            type: string
+                        required:
+                        - sshKeySecretRef
+                        type: object
+                      s3:
+                        description: (Attributes) Currently only Object Storage (S3)
+                          is supported as the source of DAG files. (see below for
+                          nested schema)
+                        properties:
+                          bucket:
+                            description: |-
+                              (String) The name of the Object Storage bucket that stores DAG files used in the cluster.
+                              The name of the Object Storage bucket that stores DAG files used in the cluster.
+                            type: string
+                        type: object
+                    type: object
+                  dagProcessor:
+                    description: processor instances. Only for airflow version 3.*.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of dag-processor instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  debPackages:
+                    description: |-
+                      (Set of String) System packages that are installed in the cluster.
+                      System packages that are installed in the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  lockboxSecretsBackend:
+                    description: (Attributes) Configuration of Lockbox Secrets Backend.
+                      See documentation for details. (see below for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Enables usage of Lockbox Secrets Backend.
+                          Enables usage of Lockbox Secrets Backend.
+                        type: boolean
+                    type: object
+                  logging:
+                    description: (Attributes) Cloud Logging configuration. (see below
+                      for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Enables usage of Lockbox Secrets Backend.
+                          Enables delivery of logs generated by the Airflow components to [Cloud Logging](https://yandex.cloud/docs/logging/).
+                        type: boolean
+                      folderId:
+                        description: |-
+                          id is used.
+                          Logs will be written to **default log group** of specified folder. Exactly one of the attributes `folder_id` or `log_group_id` should be specified.
+                        type: string
+                      logGroupId:
+                        description: |-
+                          (String) Logs will be written to the specified log group. Exactly one of the attributes folder_id or log_group_id should be specified.
+                          Logs will be written to the **specified log group**. Exactly one of the attributes `folder_id` or `log_group_id` should be specified.
+                        type: string
+                      minLevel:
+                        description: |-
+                          (String) Minimum level of messages that will be sent to Cloud Logging. Can be either TRACE, DEBUG, INFO, WARN, ERROR or FATAL. If not set then server default is applied (currently INFO).
+                          Minimum level of messages that will be sent to Cloud Logging. Can be either `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`. If not set then server default is applied (currently `INFO`).
+                        type: string
+                    type: object
+                  maintenanceWindow:
+                    description: (Attributes) Configuration of window for maintenance
+                      operations. (see below for nested schema)
+                    properties:
+                      day:
+                        description: |-
+                          (String) Day of week for maintenance window. One of MON, TUE, WED, THU, FRI, SAT, SUN.
+                          Day of week for maintenance window. One of `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+                        type: string
+                      hour:
+                        description: |-
+                          24) for maintenance window.
+                          Hour of day in UTC time zone (1-24) for maintenance window.
+                        type: number
+                      type:
+                        description: |-
+                          (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. If WEEKLY, day and hour must be specified.
+                          Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. If `WEEKLY`, day and hour must be specified.
+                        type: string
+                    type: object
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  pipPackages:
+                    description: |-
+                      (Set of String) Python packages that are installed in the cluster.
+                      Python packages that are installed in the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  pythonVersion:
+                    description: |-
+                      (String) Version of Python that Airflow will run on. Must be in format <major>.<minor>.
+                      Version of Python that Airflow will run on. Must be in format `<major>.<minor>`.
+                    type: string
+                  scheduler:
+                    description: (Attributes) Configuration of scheduler instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of scheduler instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  serviceAccountId:
+                    description: |-
+                      (String) Service account which linked to the resource. For more information, see documentation.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource. For more information, see [documentation](https://yandex.cloud/docs/managed-airflow/concepts/impersonation).
+                    type: string
+                  serviceAccountIdRef:
+                    description: Reference to a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  serviceAccountIdSelector:
+                    description: Selector for a ServiceAccount in iam to populate
+                      serviceAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  subnetIds:
+                    description: |-
+                      (Set of String) The list of VPC subnets identifiers which resource is attached.
+                      The list of VPC subnets identifiers which resource is attached.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  subnetIdsRefs:
+                    description: References to Subnet in vpc to populate subnetIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  subnetIdsSelector:
+                    description: Selector for a list of Subnet in vpc to populate
+                      subnetIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  triggerer:
+                    description: (Attributes) Configuration of triggerer instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of triggerer instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  webserver:
+                    description: (Attributes) Configuration of webserver instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of webserver instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  worker:
+                    description: (Attributes) Configuration of worker instances. (see
+                      below for nested schema)
+                    properties:
+                      maxCount:
+                        description: |-
+                          (Number) The maximum number of worker instances in the cluster.
+                          The maximum number of worker instances in the cluster.
+                        type: number
+                      minCount:
+                        description: |-
+                          (Number) The minimum number of worker instances in the cluster.
+                          The minimum number of worker instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.codeSync is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.codeSync)
+                || (has(self.initProvider) && has(self.initProvider.codeSync))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
+            - message: spec.forProvider.scheduler is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scheduler)
+                || (has(self.initProvider) && has(self.initProvider.scheduler))'
+            - message: spec.forProvider.webserver is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.webserver)
+                || (has(self.initProvider) && has(self.initProvider.webserver))'
+            - message: spec.forProvider.worker is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.worker)
+                || (has(self.initProvider) && has(self.initProvider.worker))'
+          status:
+            description: ClusterStatus defines the observed state of Cluster.
+            properties:
+              atProvider:
+                properties:
+                  airflowConfig:
+                    additionalProperties:
+                      additionalProperties:
+                        type: string
+                      type: object
+                    description: |-
+                      level map. Keys of top-level map are the names of configuration sections. Keys of inner maps are the names of configuration options within corresponding section.
+                      Configuration of the Apache Airflow application itself. The value of this attribute is a two-level map. Keys of top-level map are the names of [configuration sections](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#airflow-configuration-options). Keys of inner maps are the names of configuration options within corresponding section.
+                    type: object
+                  airflowVersion:
+                    description: |-
+                      (String) Apache Airflow version in format <major>.<minor>.
+                      Apache Airflow version in format `<major>.<minor>`.
+                    type: string
+                  codeSync:
+                    description: (Attributes) Parameters of the location and access
+                      to the code that will be executed in the cluster. (see below
+                      for nested schema)
+                    properties:
+                      gitSync:
+                        description: (Attributes) Git repository that stores DAG files
+                          used in the cluster. (see below for nested schema)
+                        properties:
+                          branch:
+                            description: |-
+                              (String) The name of the branch that stores DAG files used in the cluster.
+                              The name of the branch that stores DAG files used in the cluster.
+                            type: string
+                          repo:
+                            description: |-
+                              (String) The URL of the Git repository that stores DAG files used in the cluster.
+                              The URL of the Git repository that stores DAG files used in the cluster.
+                            type: string
+                          subPath:
+                            description: |-
+                              (String) The path to the directory in the repository that stores DAG files used in the cluster.
+                              The path to the directory in the repository that stores DAG files used in the cluster.
+                            type: string
+                        type: object
+                      s3:
+                        description: (Attributes) Currently only Object Storage (S3)
+                          is supported as the source of DAG files. (see below for
+                          nested schema)
+                        properties:
+                          bucket:
+                            description: |-
+                              (String) The name of the Object Storage bucket that stores DAG files used in the cluster.
+                              The name of the Object Storage bucket that stores DAG files used in the cluster.
+                            type: string
+                        type: object
+                    type: object
+                  createdAt:
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
+                    type: string
+                  dagProcessor:
+                    description: processor instances. Only for airflow version 3.*.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of dag-processor instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  debPackages:
+                    description: |-
+                      (Set of String) System packages that are installed in the cluster.
+                      System packages that are installed in the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                    type: string
+                  id:
+                    description: (String) The resource identifier.
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  lockboxSecretsBackend:
+                    description: (Attributes) Configuration of Lockbox Secrets Backend.
+                      See documentation for details. (see below for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Enables usage of Lockbox Secrets Backend.
+                          Enables usage of Lockbox Secrets Backend.
+                        type: boolean
+                    type: object
+                  logging:
+                    description: (Attributes) Cloud Logging configuration. (see below
+                      for nested schema)
+                    properties:
+                      enabled:
+                        description: |-
+                          (Boolean) Enables usage of Lockbox Secrets Backend.
+                          Enables delivery of logs generated by the Airflow components to [Cloud Logging](https://yandex.cloud/docs/logging/).
+                        type: boolean
+                      folderId:
+                        description: |-
+                          id is used.
+                          Logs will be written to **default log group** of specified folder. Exactly one of the attributes `folder_id` or `log_group_id` should be specified.
+                        type: string
+                      logGroupId:
+                        description: |-
+                          (String) Logs will be written to the specified log group. Exactly one of the attributes folder_id or log_group_id should be specified.
+                          Logs will be written to the **specified log group**. Exactly one of the attributes `folder_id` or `log_group_id` should be specified.
+                        type: string
+                      minLevel:
+                        description: |-
+                          (String) Minimum level of messages that will be sent to Cloud Logging. Can be either TRACE, DEBUG, INFO, WARN, ERROR or FATAL. If not set then server default is applied (currently INFO).
+                          Minimum level of messages that will be sent to Cloud Logging. Can be either `TRACE`, `DEBUG`, `INFO`, `WARN`, `ERROR` or `FATAL`. If not set then server default is applied (currently `INFO`).
+                        type: string
+                    type: object
+                  maintenanceWindow:
+                    description: (Attributes) Configuration of window for maintenance
+                      operations. (see below for nested schema)
+                    properties:
+                      day:
+                        description: |-
+                          (String) Day of week for maintenance window. One of MON, TUE, WED, THU, FRI, SAT, SUN.
+                          Day of week for maintenance window. One of `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+                        type: string
+                      hour:
+                        description: |-
+                          24) for maintenance window.
+                          Hour of day in UTC time zone (1-24) for maintenance window.
+                        type: number
+                      type:
+                        description: |-
+                          (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. If WEEKLY, day and hour must be specified.
+                          Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. If `WEEKLY`, day and hour must be specified.
+                        type: string
+                    type: object
+                  name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
+                    type: string
+                  pipPackages:
+                    description: |-
+                      (Set of String) Python packages that are installed in the cluster.
+                      Python packages that are installed in the cluster.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  pythonVersion:
+                    description: |-
+                      (String) Version of Python that Airflow will run on. Must be in format <major>.<minor>.
+                      Version of Python that Airflow will run on. Must be in format `<major>.<minor>`.
+                    type: string
+                  scheduler:
+                    description: (Attributes) Configuration of scheduler instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of scheduler instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  securityGroupIds:
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  serviceAccountId:
+                    description: |-
+                      (String) Service account which linked to the resource. For more information, see documentation.
+                      [Service account](https://yandex.cloud/docs/iam/concepts/users/service-accounts) which linked to the resource. For more information, see [documentation](https://yandex.cloud/docs/managed-airflow/concepts/impersonation).
+                    type: string
+                  status:
+                    description: |-
+                      (String) Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN. For more information see status field of JSON representation in the official documentation.
+                      Status of the cluster. Can be either `CREATING`, `STARTING`, `RUNNING`, `UPDATING`, `STOPPING`, `STOPPED`, `ERROR` or `STATUS_UNKNOWN`. For more information see `status` field of JSON representation in [the official documentation](https://yandex.cloud/docs/managed-airflow/api-ref/Cluster/).
+                    type: string
+                  subnetIds:
+                    description: |-
+                      (Set of String) The list of VPC subnets identifiers which resource is attached.
+                      The list of VPC subnets identifiers which resource is attached.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  triggerer:
+                    description: (Attributes) Configuration of triggerer instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of triggerer instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  webserver:
+                    description: (Attributes) Configuration of webserver instances.
+                      (see below for nested schema)
+                    properties:
+                      count:
+                        description: |-
+                          (Number) The number of scheduler instances in the cluster.
+                          The number of webserver instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                  worker:
+                    description: (Attributes) Configuration of worker instances. (see
+                      below for nested schema)
+                    properties:
+                      maxCount:
+                        description: |-
+                          (Number) The maximum number of worker instances in the cluster.
+                          The maximum number of worker instances in the cluster.
+                        type: number
+                      minCount:
+                        description: |-
+                          (Number) The minimum number of worker instances in the cluster.
+                          The minimum number of worker instances in the cluster.
+                        type: number
+                      resourcePresetId:
+                        description: |-
+                          (String) The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                          The identifier of the preset for computational resources available to an instance (CPU, memory etc.).
+                        type: string
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -60,117 +60,151 @@ spec:
               forProvider:
                 properties:
                   container:
+                    description: |-
+                      (Block List, Max: 1) Yandex Cloud Serverless Container settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      [Yandex Cloud Serverless Container](https://yandex.cloud/docs/serverless-containers/concepts/container) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         id:
-                          description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) The ID of this resource.
+                            Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
                           type: string
                         path:
-                          description: Path for Yandex.Cloud Serverless Container
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         retryAttempts:
-                          description: Retry attempts for Yandex.Cloud Function for
-                            Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         retryInterval:
-                          description: Retry interval in seconds for Yandex.Cloud
-                            Function for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   containerRegistry:
-                    description: Container Registry settings definition for Yandex
-                      Cloud Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Container Registry settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Container Registry](https://yandex.cloud/docs/functions/concepts/trigger/cr-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         createImage:
-                          description: Boolean flag for setting create image event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create image event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         createImageTag:
-                          description: Boolean flag for setting create image tag event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         deleteImage:
-                          description: Boolean flag for setting delete image event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete image event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         deleteImageTag:
-                          description: Boolean flag for setting delete image tag event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         imageName:
-                          description: Image name filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image name filter setting for Yandex Cloud Functions Trigger.
+                            Image name filter setting for Yandex Cloud Functions Trigger.
                           type: string
                         registryId:
-                          description: IoT Registry ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Container Registry ID for Yandex Cloud Functions Trigger.
+                            Container Registry ID for Yandex Cloud Functions Trigger.
                           type: string
                         tag:
-                          description: Tag for Yandex.Cloud Function for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+                            Image tag filter setting for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   dataStreams:
-                    description: Data Streams settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Data Streams settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Data Streams](https://yandex.cloud/docs/functions/concepts/trigger/data-streams-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         database:
-                          description: Stream database for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Stream database for Yandex Cloud Functions Trigger.
+                            Stream database for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID to access data stream for Yandex Cloud Functions Trigger.
                           type: string
                         streamName:
-                          description: Stream name for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Stream name for Yandex Cloud Functions Trigger.
+                            Stream name for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud Functions Trigger
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   dlq:
-                    description: Dead Letter Queue settings definition for Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Block List, Max: 1) Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         queueId:
-                          description: Message Queue ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+                            ID of Dead Letter Queue for Trigger (Queue ARN).
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   folderId:
-                    description: Folder ID for the Yandex Cloud Functions Trigger
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -255,75 +289,93 @@ spec:
                         type: object
                     type: object
                   function:
-                    description: Yandex.Cloud Function settings definition for Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Block List, Max: 1) Yandex Cloud Function settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      [Yandex Cloud Function](https://yandex.cloud/docs/functions/concepts/function) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         id:
-                          description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) The ID of this resource.
+                            Yandex Cloud Function ID.
                           type: string
                         retryAttempts:
-                          description: Retry attempts for Yandex.Cloud Function for
-                            Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                         retryInterval:
-                          description: Retry interval in seconds for Yandex.Cloud
-                            Function for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID for Yandex Cloud Function.
                           type: string
                         tag:
-                          description: Tag for Yandex.Cloud Function for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+                            Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   iot:
-                    description: IoT settings definition for Yandex Cloud Functions
-                      Trigger, if present. Only one section iot or message_queue or
-                      object_storage or timer can be defined.
+                    description: |-
+                      (Block List, Max: 1) IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue. (see below for nested schema)
+                      [IoT](https://yandex.cloud/docs/functions/concepts/trigger/iot-core-trigger) settings definition for Yandex Cloud Functions Trigger, if present. Only one section `iot` or `message_queue`.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         deviceId:
-                          description: IoT Device ID for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) IoT Device ID for Yandex Cloud Functions Trigger.
+                            IoT Device ID for Yandex Cloud Functions Trigger.
                           type: string
                         registryId:
-                          description: IoT Registry ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Container Registry ID for Yandex Cloud Functions Trigger.
+                            IoT Registry ID for Yandex Cloud Functions Trigger.
                           type: string
                         topic:
-                          description: IoT Topic for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) IoT Topic for Yandex Cloud Functions Trigger.
+                            IoT Topic for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logGroup:
+                    description: '(Block List, Max: 1) (see below for nested schema)'
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: (String) Batch Duration in seconds for Yandex
+                            Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: (String) Batch Size for Yandex Cloud Functions
+                            Trigger.
                           type: string
                         logGroupIds:
+                          description: (Set of String)
                           items:
                             type: string
                           type: array
@@ -331,45 +383,54 @@ spec:
                       type: object
                     type: array
                   logging:
-                    description: Logging settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Logging](https://yandex.cloud/docs/functions/concepts/trigger/cloud-logging-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         groupId:
-                          description: Logging group ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Logging group ID for Yandex Cloud Functions Trigger.
+                            Logging group ID for Yandex Cloud Functions Trigger.
                           type: string
                         levels:
-                          description: Logging level filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Logging level filter setting for Yandex Cloud Functions Trigger.
+                            Logging level filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         resourceIds:
-                          description: Resource ID filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Resource ID filter setting for Yandex Cloud Functions Trigger.
+                            Resource ID filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         resourceTypes:
-                          description: Resource type filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Resource type filter setting for Yandex Cloud Functions Trigger.
+                            Resource type filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         streamNames:
-                          description: Logging stream name filter setting for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Set of String) Logging stream name filter setting for Yandex Cloud Functions Trigger.
+                            Logging stream name filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
@@ -377,106 +438,134 @@ spec:
                       type: object
                     type: array
                   mail:
-                    description: Logging settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Mail settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Mail](https://yandex.cloud/docs/functions/concepts/trigger/mail-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         attachmentsBucketId:
-                          description: Object Storage Bucket ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+                            Object Storage Bucket ID for Yandex Cloud Functions Trigger.
                           type: string
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID to access object storage for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   messageQueue:
-                    description: Message Queue settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Message Queue settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Message Queue](https://yandex.cloud/docs/functions/concepts/trigger/ymq-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         queueId:
-                          description: Message Queue ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+                            Message Queue ID for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Message Queue Service Account ID for Yandex Cloud Functions Trigger.
                           type: string
                         visibilityTimeout:
-                          description: Visibility timeout for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Visibility timeout for Yandex Cloud Functions Trigger.
+                            Visibility timeout for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Yandex Cloud Functions Trigger name used to define
-                      trigger
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   objectStorage:
-                    description: Object Storage settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Object Storage settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Object Storage](https://yandex.cloud/docs/functions/concepts/trigger/os-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         bucketId:
-                          description: Object Storage Bucket ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+                            Object Storage Bucket ID for Yandex Cloud Functions Trigger.
                           type: string
                         create:
-                          description: Boolean flag for setting create event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         delete:
-                          description: Boolean flag for setting delete event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         prefix:
-                          description: Prefix for Object Storage for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Prefix for Object Storage for Yandex Cloud Functions Trigger.
+                            Prefix for Object Storage for Yandex Cloud Functions Trigger.
                           type: string
                         suffix:
-                          description: Suffix for Object Storage for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Suffix for Object Storage for Yandex Cloud Functions Trigger.
+                            Suffix for Object Storage for Yandex Cloud Functions Trigger.
                           type: string
                         update:
-                          description: Boolean flag for setting update event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting update event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
                           type: boolean
                       type: object
                     type: array
                   timer:
-                    description: Timer settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Timer settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Timer](https://yandex.cloud/docs/functions/concepts/trigger/timer) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         cronExpression:
-                          description: Cron expression for timer for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Cron expression for timer for Yandex Cloud Functions Trigger.
+                            Cron expression for timer for Yandex Cloud Functions Trigger.
                           type: string
                         payload:
-                          description: Payload to be passed to function
+                          description: |-
+                            (String) Payload to be passed to function.
+                            Payload to be passed to function.
                           type: string
                       type: object
                     type: array
@@ -495,117 +584,151 @@ spec:
                   autoscaler.
                 properties:
                   container:
+                    description: |-
+                      (Block List, Max: 1) Yandex Cloud Serverless Container settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      [Yandex Cloud Serverless Container](https://yandex.cloud/docs/serverless-containers/concepts/container) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         id:
-                          description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) The ID of this resource.
+                            Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
                           type: string
                         path:
-                          description: Path for Yandex.Cloud Serverless Container
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         retryAttempts:
-                          description: Retry attempts for Yandex.Cloud Function for
-                            Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         retryInterval:
-                          description: Retry interval in seconds for Yandex.Cloud
-                            Function for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   containerRegistry:
-                    description: Container Registry settings definition for Yandex
-                      Cloud Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Container Registry settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Container Registry](https://yandex.cloud/docs/functions/concepts/trigger/cr-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         createImage:
-                          description: Boolean flag for setting create image event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create image event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         createImageTag:
-                          description: Boolean flag for setting create image tag event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         deleteImage:
-                          description: Boolean flag for setting delete image event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete image event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         deleteImageTag:
-                          description: Boolean flag for setting delete image tag event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         imageName:
-                          description: Image name filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image name filter setting for Yandex Cloud Functions Trigger.
+                            Image name filter setting for Yandex Cloud Functions Trigger.
                           type: string
                         registryId:
-                          description: IoT Registry ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Container Registry ID for Yandex Cloud Functions Trigger.
+                            Container Registry ID for Yandex Cloud Functions Trigger.
                           type: string
                         tag:
-                          description: Tag for Yandex.Cloud Function for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+                            Image tag filter setting for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   dataStreams:
-                    description: Data Streams settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Data Streams settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Data Streams](https://yandex.cloud/docs/functions/concepts/trigger/data-streams-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         database:
-                          description: Stream database for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Stream database for Yandex Cloud Functions Trigger.
+                            Stream database for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID to access data stream for Yandex Cloud Functions Trigger.
                           type: string
                         streamName:
-                          description: Stream name for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Stream name for Yandex Cloud Functions Trigger.
+                            Stream name for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud Functions Trigger
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   dlq:
-                    description: Dead Letter Queue settings definition for Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Block List, Max: 1) Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         queueId:
-                          description: Message Queue ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+                            ID of Dead Letter Queue for Trigger (Queue ARN).
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   folderId:
-                    description: Folder ID for the Yandex Cloud Functions Trigger
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -690,75 +813,93 @@ spec:
                         type: object
                     type: object
                   function:
-                    description: Yandex.Cloud Function settings definition for Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Block List, Max: 1) Yandex Cloud Function settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      [Yandex Cloud Function](https://yandex.cloud/docs/functions/concepts/function) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         id:
-                          description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) The ID of this resource.
+                            Yandex Cloud Function ID.
                           type: string
                         retryAttempts:
-                          description: Retry attempts for Yandex.Cloud Function for
-                            Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                         retryInterval:
-                          description: Retry interval in seconds for Yandex.Cloud
-                            Function for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID for Yandex Cloud Function.
                           type: string
                         tag:
-                          description: Tag for Yandex.Cloud Function for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+                            Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   iot:
-                    description: IoT settings definition for Yandex Cloud Functions
-                      Trigger, if present. Only one section iot or message_queue or
-                      object_storage or timer can be defined.
+                    description: |-
+                      (Block List, Max: 1) IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue. (see below for nested schema)
+                      [IoT](https://yandex.cloud/docs/functions/concepts/trigger/iot-core-trigger) settings definition for Yandex Cloud Functions Trigger, if present. Only one section `iot` or `message_queue`.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         deviceId:
-                          description: IoT Device ID for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) IoT Device ID for Yandex Cloud Functions Trigger.
+                            IoT Device ID for Yandex Cloud Functions Trigger.
                           type: string
                         registryId:
-                          description: IoT Registry ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Container Registry ID for Yandex Cloud Functions Trigger.
+                            IoT Registry ID for Yandex Cloud Functions Trigger.
                           type: string
                         topic:
-                          description: IoT Topic for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) IoT Topic for Yandex Cloud Functions Trigger.
+                            IoT Topic for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logGroup:
+                    description: '(Block List, Max: 1) (see below for nested schema)'
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: (String) Batch Duration in seconds for Yandex
+                            Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: (String) Batch Size for Yandex Cloud Functions
+                            Trigger.
                           type: string
                         logGroupIds:
+                          description: (Set of String)
                           items:
                             type: string
                           type: array
@@ -766,45 +907,54 @@ spec:
                       type: object
                     type: array
                   logging:
-                    description: Logging settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Logging](https://yandex.cloud/docs/functions/concepts/trigger/cloud-logging-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         groupId:
-                          description: Logging group ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Logging group ID for Yandex Cloud Functions Trigger.
+                            Logging group ID for Yandex Cloud Functions Trigger.
                           type: string
                         levels:
-                          description: Logging level filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Logging level filter setting for Yandex Cloud Functions Trigger.
+                            Logging level filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         resourceIds:
-                          description: Resource ID filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Resource ID filter setting for Yandex Cloud Functions Trigger.
+                            Resource ID filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         resourceTypes:
-                          description: Resource type filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Resource type filter setting for Yandex Cloud Functions Trigger.
+                            Resource type filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         streamNames:
-                          description: Logging stream name filter setting for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Set of String) Logging stream name filter setting for Yandex Cloud Functions Trigger.
+                            Logging stream name filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
@@ -812,106 +962,134 @@ spec:
                       type: object
                     type: array
                   mail:
-                    description: Logging settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Mail settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Mail](https://yandex.cloud/docs/functions/concepts/trigger/mail-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         attachmentsBucketId:
-                          description: Object Storage Bucket ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+                            Object Storage Bucket ID for Yandex Cloud Functions Trigger.
                           type: string
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID to access object storage for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   messageQueue:
-                    description: Message Queue settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Message Queue settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Message Queue](https://yandex.cloud/docs/functions/concepts/trigger/ymq-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         queueId:
-                          description: Message Queue ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+                            Message Queue ID for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Message Queue Service Account ID for Yandex Cloud Functions Trigger.
                           type: string
                         visibilityTimeout:
-                          description: Visibility timeout for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Visibility timeout for Yandex Cloud Functions Trigger.
+                            Visibility timeout for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Yandex Cloud Functions Trigger name used to define
-                      trigger
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   objectStorage:
-                    description: Object Storage settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Object Storage settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Object Storage](https://yandex.cloud/docs/functions/concepts/trigger/os-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         bucketId:
-                          description: Object Storage Bucket ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+                            Object Storage Bucket ID for Yandex Cloud Functions Trigger.
                           type: string
                         create:
-                          description: Boolean flag for setting create event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         delete:
-                          description: Boolean flag for setting delete event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         prefix:
-                          description: Prefix for Object Storage for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Prefix for Object Storage for Yandex Cloud Functions Trigger.
+                            Prefix for Object Storage for Yandex Cloud Functions Trigger.
                           type: string
                         suffix:
-                          description: Suffix for Object Storage for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Suffix for Object Storage for Yandex Cloud Functions Trigger.
+                            Suffix for Object Storage for Yandex Cloud Functions Trigger.
                           type: string
                         update:
-                          description: Boolean flag for setting update event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting update event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
                           type: boolean
                       type: object
                     type: array
                   timer:
-                    description: Timer settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Timer settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Timer](https://yandex.cloud/docs/functions/concepts/trigger/timer) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         cronExpression:
-                          description: Cron expression for timer for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Cron expression for timer for Yandex Cloud Functions Trigger.
+                            Cron expression for timer for Yandex Cloud Functions Trigger.
                           type: string
                         payload:
-                          description: Payload to be passed to function
+                          description: |-
+                            (String) Payload to be passed to function.
+                            Payload to be passed to function.
                           type: string
                       type: object
                     type: array
@@ -985,196 +1163,248 @@ spec:
               atProvider:
                 properties:
                   container:
+                    description: |-
+                      (Block List, Max: 1) Yandex Cloud Serverless Container settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      [Yandex Cloud Serverless Container](https://yandex.cloud/docs/serverless-containers/concepts/container) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         id:
-                          description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) The ID of this resource.
+                            Yandex Cloud Serverless Container ID for Yandex Cloud Functions Trigger.
                           type: string
                         path:
-                          description: Path for Yandex.Cloud Serverless Container
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Path for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         retryAttempts:
-                          description: Retry attempts for Yandex.Cloud Function for
-                            Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         retryInterval:
-                          description: Retry interval in seconds for Yandex.Cloud
-                            Function for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   containerRegistry:
-                    description: Container Registry settings definition for Yandex
-                      Cloud Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Container Registry settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Container Registry](https://yandex.cloud/docs/functions/concepts/trigger/cr-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         createImage:
-                          description: Boolean flag for setting create image event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create image event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create image` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         createImageTag:
-                          description: Boolean flag for setting create image tag event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create image tag event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create image tag` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         deleteImage:
-                          description: Boolean flag for setting delete image event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete image event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete image` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         deleteImageTag:
-                          description: Boolean flag for setting delete image tag event
-                            for Yandex Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete image tag event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete image tag` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         imageName:
-                          description: Image name filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image name filter setting for Yandex Cloud Functions Trigger.
+                            Image name filter setting for Yandex Cloud Functions Trigger.
                           type: string
                         registryId:
-                          description: IoT Registry ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Container Registry ID for Yandex Cloud Functions Trigger.
+                            Container Registry ID for Yandex Cloud Functions Trigger.
                           type: string
                         tag:
-                          description: Tag for Yandex.Cloud Function for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+                            Image tag filter setting for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   createdAt:
-                    description: Creation timestamp of the Yandex Cloud Functions
-                      Trigger
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   dataStreams:
-                    description: Data Streams settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Data Streams settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Data Streams](https://yandex.cloud/docs/functions/concepts/trigger/data-streams-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         database:
-                          description: Stream database for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Stream database for Yandex Cloud Functions Trigger.
+                            Stream database for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID to access data stream for Yandex Cloud Functions Trigger.
                           type: string
                         streamName:
-                          description: Stream name for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Stream name for Yandex Cloud Functions Trigger.
+                            Stream name for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud Functions Trigger
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   dlq:
-                    description: Dead Letter Queue settings definition for Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Block List, Max: 1) Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      Dead Letter Queue (DLQ) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         queueId:
-                          description: Message Queue ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+                            ID of Dead Letter Queue for Trigger (Queue ARN).
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service Account ID for Dead Letter Queue for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   folderId:
-                    description: Folder ID for the Yandex Cloud Functions Trigger
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   function:
-                    description: Yandex.Cloud Function settings definition for Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Block List, Max: 1) Yandex Cloud Function settings definition for Yandex Cloud Functions Trigger. (see below for nested schema)
+                      [Yandex Cloud Function](https://yandex.cloud/docs/functions/concepts/function) settings definition for Yandex Cloud Functions Trigger.
                     items:
                       properties:
                         id:
-                          description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) The ID of this resource.
+                            Yandex Cloud Function ID.
                           type: string
                         retryAttempts:
-                          description: Retry attempts for Yandex.Cloud Function for
-                            Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry attempts for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry attempts for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                         retryInterval:
-                          description: Retry interval in seconds for Yandex.Cloud
-                            Function for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Retry interval in seconds for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Retry interval in seconds for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID for Yandex Cloud Function.
                           type: string
                         tag:
-                          description: Tag for Yandex.Cloud Function for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Image tag filter setting for Yandex Cloud Functions Trigger.
+                            Tag for Yandex Cloud Function for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   id:
-                    description: Yandex.Cloud Function ID for Yandex Cloud Functions
-                      Trigger
+                    description: (String) The ID of this resource.
                     type: string
                   iot:
-                    description: IoT settings definition for Yandex Cloud Functions
-                      Trigger, if present. Only one section iot or message_queue or
-                      object_storage or timer can be defined.
+                    description: |-
+                      (Block List, Max: 1) IoT settings definition for Yandex Cloud Functions Trigger, if present. Only one section iot or message_queue. (see below for nested schema)
+                      [IoT](https://yandex.cloud/docs/functions/concepts/trigger/iot-core-trigger) settings definition for Yandex Cloud Functions Trigger, if present. Only one section `iot` or `message_queue`.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         deviceId:
-                          description: IoT Device ID for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) IoT Device ID for Yandex Cloud Functions Trigger.
+                            IoT Device ID for Yandex Cloud Functions Trigger.
                           type: string
                         registryId:
-                          description: IoT Registry ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Container Registry ID for Yandex Cloud Functions Trigger.
+                            IoT Registry ID for Yandex Cloud Functions Trigger.
                           type: string
                         topic:
-                          description: IoT Topic for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) IoT Topic for Yandex Cloud Functions Trigger.
+                            IoT Topic for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud Functions Trigger
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logGroup:
+                    description: '(Block List, Max: 1) (see below for nested schema)'
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: (String) Batch Duration in seconds for Yandex
+                            Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: (String) Batch Size for Yandex Cloud Functions
+                            Trigger.
                           type: string
                         logGroupIds:
+                          description: (Set of String)
                           items:
                             type: string
                           type: array
@@ -1182,45 +1412,54 @@ spec:
                       type: object
                     type: array
                   logging:
-                    description: Logging settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Logging](https://yandex.cloud/docs/functions/concepts/trigger/cloud-logging-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         groupId:
-                          description: Logging group ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Logging group ID for Yandex Cloud Functions Trigger.
+                            Logging group ID for Yandex Cloud Functions Trigger.
                           type: string
                         levels:
-                          description: Logging level filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Logging level filter setting for Yandex Cloud Functions Trigger.
+                            Logging level filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         resourceIds:
-                          description: Resource ID filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Resource ID filter setting for Yandex Cloud Functions Trigger.
+                            Resource ID filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         resourceTypes:
-                          description: Resource type filter setting for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (Set of String) Resource type filter setting for Yandex Cloud Functions Trigger.
+                            Resource type filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         streamNames:
-                          description: Logging stream name filter setting for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Set of String) Logging stream name filter setting for Yandex Cloud Functions Trigger.
+                            Logging stream name filter setting for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
@@ -1228,106 +1467,134 @@ spec:
                       type: object
                     type: array
                   mail:
-                    description: Logging settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Mail settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Mail](https://yandex.cloud/docs/functions/concepts/trigger/mail-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         attachmentsBucketId:
-                          description: Object Storage Bucket ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+                            Object Storage Bucket ID for Yandex Cloud Functions Trigger.
                           type: string
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Service account ID to access object storage for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   messageQueue:
-                    description: Message Queue settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Message Queue settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Message Queue](https://yandex.cloud/docs/functions/concepts/trigger/ymq-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         queueId:
-                          description: Message Queue ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) ID of Dead Letter Queue for Trigger (Queue ARN).
+                            Message Queue ID for Yandex Cloud Functions Trigger.
                           type: string
                         serviceAccountId:
-                          description: Message Queue Service Account ID for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (String) Service account ID for Yandex Cloud Serverless Container for Yandex Cloud Functions Trigger.
+                            Message Queue Service Account ID for Yandex Cloud Functions Trigger.
                           type: string
                         visibilityTimeout:
-                          description: Visibility timeout for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Visibility timeout for Yandex Cloud Functions Trigger.
+                            Visibility timeout for Yandex Cloud Functions Trigger.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Yandex Cloud Functions Trigger name used to define
-                      trigger
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   objectStorage:
-                    description: Object Storage settings definition for Yandex Cloud
-                      Functions Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Object Storage settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Object Storage](https://yandex.cloud/docs/functions/concepts/trigger/os-trigger) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         batchCutoff:
-                          description: Batch Duration in seconds for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: Batch Size for Yandex Cloud Functions Trigger
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         bucketId:
-                          description: Object Storage Bucket ID for Yandex Cloud Functions
-                            Trigger
+                          description: |-
+                            (String) Object Storage Bucket ID for Yandex Cloud Functions Trigger.
+                            Object Storage Bucket ID for Yandex Cloud Functions Trigger.
                           type: string
                         create:
-                          description: Boolean flag for setting create event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting create event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `create` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         delete:
-                          description: Boolean flag for setting delete event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting delete event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `delete` event for Yandex Cloud Functions Trigger.
                           type: boolean
                         prefix:
-                          description: Prefix for Object Storage for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Prefix for Object Storage for Yandex Cloud Functions Trigger.
+                            Prefix for Object Storage for Yandex Cloud Functions Trigger.
                           type: string
                         suffix:
-                          description: Suffix for Object Storage for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Suffix for Object Storage for Yandex Cloud Functions Trigger.
+                            Suffix for Object Storage for Yandex Cloud Functions Trigger.
                           type: string
                         update:
-                          description: Boolean flag for setting update event for Yandex
-                            Cloud Functions Trigger
+                          description: |-
+                            (Boolean) Boolean flag for setting update event for Yandex Cloud Functions Trigger.
+                            Boolean flag for setting `update` event for Yandex Cloud Functions Trigger.
                           type: boolean
                       type: object
                     type: array
                   timer:
-                    description: Timer settings definition for Yandex Cloud Functions
-                      Trigger, if present
+                    description: |-
+                      (Block List, Max: 1) Timer settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
+                      [Timer](https://yandex.cloud/docs/functions/concepts/trigger/timer) settings definition for Yandex Cloud Functions Trigger, if present.
                     items:
                       properties:
                         cronExpression:
-                          description: Cron expression for timer for Yandex Cloud
-                            Functions Trigger
+                          description: |-
+                            (String) Cron expression for timer for Yandex Cloud Functions Trigger.
+                            Cron expression for timer for Yandex Cloud Functions Trigger.
                           type: string
                         payload:
-                          description: Payload to be passed to function
+                          description: |-
+                            (String) Payload to be passed to function.
+                            Payload to be passed to function.
                           type: string
                       type: object
                     type: array

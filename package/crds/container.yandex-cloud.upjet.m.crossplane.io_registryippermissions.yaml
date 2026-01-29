@@ -60,20 +60,25 @@ spec:
               forProvider:
                 properties:
                   pull:
-                    description: List of configured CIDRs, from which pull is allowed.
+                    description: |-
+                      (Set of String) List of configured CIDRs, from which pull is allowed.
+                      List of configured CIDRs, from which `pull` is allowed.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   push:
-                    description: List of configured CIDRs, from which push is allowed.
+                    description: |-
+                      (Set of String) List of configured CIDRs, from which push is allowed.
+                      List of configured CIDRs, from which `push` is allowed.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   registryId:
-                    description: The ID of the registry that ip restrictions applied
-                      to.
+                    description: |-
+                      (String) The ID of the registry that ip restrictions applied to.
+                      The ID of the registry that ip restrictions applied to.
                     type: string
                   registryIdRef:
                     description: Reference to a Registry to populate registryId.
@@ -170,20 +175,25 @@ spec:
                   autoscaler.
                 properties:
                   pull:
-                    description: List of configured CIDRs, from which pull is allowed.
+                    description: |-
+                      (Set of String) List of configured CIDRs, from which pull is allowed.
+                      List of configured CIDRs, from which `pull` is allowed.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   push:
-                    description: List of configured CIDRs, from which push is allowed.
+                    description: |-
+                      (Set of String) List of configured CIDRs, from which push is allowed.
+                      List of configured CIDRs, from which `push` is allowed.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   registryId:
-                    description: The ID of the registry that ip restrictions applied
-                      to.
+                    description: |-
+                      (String) The ID of the registry that ip restrictions applied to.
+                      The ID of the registry that ip restrictions applied to.
                     type: string
                   registryIdRef:
                     description: Reference to a Registry to populate registryId.
@@ -331,22 +341,28 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   pull:
-                    description: List of configured CIDRs, from which pull is allowed.
+                    description: |-
+                      (Set of String) List of configured CIDRs, from which pull is allowed.
+                      List of configured CIDRs, from which `pull` is allowed.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   push:
-                    description: List of configured CIDRs, from which push is allowed.
+                    description: |-
+                      (Set of String) List of configured CIDRs, from which push is allowed.
+                      List of configured CIDRs, from which `push` is allowed.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   registryId:
-                    description: The ID of the registry that ip restrictions applied
-                      to.
+                    description: |-
+                      (String) The ID of the registry that ip restrictions applied to.
+                      The ID of the registry that ip restrictions applied to.
                     type: string
                 type: object
               conditions:

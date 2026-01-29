@@ -9,13 +9,80 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type SnapshotHardwareGenerationGeneration2FeaturesInitParameters struct {
+}
+
+type SnapshotHardwareGenerationGeneration2FeaturesObservation struct {
+}
+
+type SnapshotHardwareGenerationGeneration2FeaturesParameters struct {
+}
+
+type SnapshotHardwareGenerationInitParameters struct {
+
+	// (Block List, Max: 1) A newer hardware generation, which always uses PCI_TOPOLOGY_V2 and UEFI boot. (see below for nested schema)
+	// A newer hardware generation, which always uses `PCI_TOPOLOGY_V2` and UEFI boot.
+	Generation2Features []SnapshotHardwareGenerationGeneration2FeaturesInitParameters `json:"generation2Features,omitempty" tf:"generation2_features,omitempty"`
+
+	// (Block List, Max: 1) Defines the first known hardware generation and its features. (see below for nested schema)
+	// Defines the first known hardware generation and its features.
+	LegacyFeatures []SnapshotHardwareGenerationLegacyFeaturesInitParameters `json:"legacyFeatures,omitempty" tf:"legacy_features,omitempty"`
+}
+
+type SnapshotHardwareGenerationLegacyFeaturesInitParameters struct {
+
+	// (String) A variant of PCI topology, one of PCI_TOPOLOGY_V1 or PCI_TOPOLOGY_V2.
+	// A variant of PCI topology, one of `PCI_TOPOLOGY_V1` or `PCI_TOPOLOGY_V2`.
+	PciTopology *string `json:"pciTopology,omitempty" tf:"pci_topology,omitempty"`
+}
+
+type SnapshotHardwareGenerationLegacyFeaturesObservation struct {
+
+	// (String) A variant of PCI topology, one of PCI_TOPOLOGY_V1 or PCI_TOPOLOGY_V2.
+	// A variant of PCI topology, one of `PCI_TOPOLOGY_V1` or `PCI_TOPOLOGY_V2`.
+	PciTopology *string `json:"pciTopology,omitempty" tf:"pci_topology,omitempty"`
+}
+
+type SnapshotHardwareGenerationLegacyFeaturesParameters struct {
+
+	// (String) A variant of PCI topology, one of PCI_TOPOLOGY_V1 or PCI_TOPOLOGY_V2.
+	// A variant of PCI topology, one of `PCI_TOPOLOGY_V1` or `PCI_TOPOLOGY_V2`.
+	// +kubebuilder:validation:Optional
+	PciTopology *string `json:"pciTopology,omitempty" tf:"pci_topology,omitempty"`
+}
+
+type SnapshotHardwareGenerationObservation struct {
+
+	// (Block List, Max: 1) A newer hardware generation, which always uses PCI_TOPOLOGY_V2 and UEFI boot. (see below for nested schema)
+	// A newer hardware generation, which always uses `PCI_TOPOLOGY_V2` and UEFI boot.
+	Generation2Features []SnapshotHardwareGenerationGeneration2FeaturesParameters `json:"generation2Features,omitempty" tf:"generation2_features,omitempty"`
+
+	// (Block List, Max: 1) Defines the first known hardware generation and its features. (see below for nested schema)
+	// Defines the first known hardware generation and its features.
+	LegacyFeatures []SnapshotHardwareGenerationLegacyFeaturesObservation `json:"legacyFeatures,omitempty" tf:"legacy_features,omitempty"`
+}
+
+type SnapshotHardwareGenerationParameters struct {
+
+	// (Block List, Max: 1) A newer hardware generation, which always uses PCI_TOPOLOGY_V2 and UEFI boot. (see below for nested schema)
+	// A newer hardware generation, which always uses `PCI_TOPOLOGY_V2` and UEFI boot.
+	// +kubebuilder:validation:Optional
+	Generation2Features []SnapshotHardwareGenerationGeneration2FeaturesParameters `json:"generation2Features,omitempty" tf:"generation2_features,omitempty"`
+
+	// (Block List, Max: 1) Defines the first known hardware generation and its features. (see below for nested schema)
+	// Defines the first known hardware generation and its features.
+	// +kubebuilder:validation:Optional
+	LegacyFeatures []SnapshotHardwareGenerationLegacyFeaturesParameters `json:"legacyFeatures,omitempty" tf:"legacy_features,omitempty"`
+}
+
 type SnapshotInitParameters struct {
 
-	// Description of the resource.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -27,13 +94,20 @@ type SnapshotInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the snapshot.
+	// (Block List, Max: 1) Hardware generation and its features, which will be applied to the instance when this snapshot is used as a boot disk source. Provide this property if you wish to override this value, which otherwise is inherited from the source. (see below for nested schema)
+	// Hardware generation and its features, which will be applied to the instance when this snapshot is used as a boot disk source. Provide this property if you wish to override this value, which otherwise is inherited from the source.
+	HardwareGeneration []SnapshotHardwareGenerationInitParameters `json:"hardwareGeneration,omitempty" tf:"hardware_generation,omitempty"`
+
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A name for the resource.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) ID of the disk to create a snapshot from.
 	// ID of the disk to create a snapshot from.
 	// +crossplane:generate:reference:type=Disk
 	SourceDiskID *string `json:"sourceDiskId,omitempty" tf:"source_disk_id,omitempty"`
@@ -49,43 +123,56 @@ type SnapshotInitParameters struct {
 
 type SnapshotObservation struct {
 
-	// Creation timestamp of the snapshot.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the resource.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Number) Size of the disk when the snapshot was created, specified in GB.
 	// Size of the disk when the snapshot was created, specified in GB.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (Block List, Max: 1) Hardware generation and its features, which will be applied to the instance when this snapshot is used as a boot disk source. Provide this property if you wish to override this value, which otherwise is inherited from the source. (see below for nested schema)
+	// Hardware generation and its features, which will be applied to the instance when this snapshot is used as a boot disk source. Provide this property if you wish to override this value, which otherwise is inherited from the source.
+	HardwareGeneration []SnapshotHardwareGenerationObservation `json:"hardwareGeneration,omitempty" tf:"hardware_generation,omitempty"`
+
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the snapshot.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A name for the resource.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) ID of the disk to create a snapshot from.
 	// ID of the disk to create a snapshot from.
 	SourceDiskID *string `json:"sourceDiskId,omitempty" tf:"source_disk_id,omitempty"`
 
+	// (Number) Size of the snapshot, specified in GB.
 	// Size of the snapshot, specified in GB.
 	StorageSize *float64 `json:"storageSize,omitempty" tf:"storage_size,omitempty"`
 }
 
 type SnapshotParameters struct {
 
-	// Description of the resource.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -98,15 +185,23 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the snapshot.
+	// (Block List, Max: 1) Hardware generation and its features, which will be applied to the instance when this snapshot is used as a boot disk source. Provide this property if you wish to override this value, which otherwise is inherited from the source. (see below for nested schema)
+	// Hardware generation and its features, which will be applied to the instance when this snapshot is used as a boot disk source. Provide this property if you wish to override this value, which otherwise is inherited from the source.
+	// +kubebuilder:validation:Optional
+	HardwareGeneration []SnapshotHardwareGenerationParameters `json:"hardwareGeneration,omitempty" tf:"hardware_generation,omitempty"`
+
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A name for the resource.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) ID of the disk to create a snapshot from.
 	// ID of the disk to create a snapshot from.
 	// +crossplane:generate:reference:type=Disk
 	// +kubebuilder:validation:Optional

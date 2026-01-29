@@ -12,12 +12,15 @@ import (
 
 type RepositoryLifecyclePolicyInitParameters struct {
 
-	// Description of the lifecycle policy.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Lifecycle policy name.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) The ID of the repository that the resource belongs to.
 	// The ID of the repository that the resource belongs to.
 	// +crossplane:generate:reference:type=Repository
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
@@ -30,44 +33,58 @@ type RepositoryLifecyclePolicyInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryIDSelector *v1.NamespacedSelector `json:"repositoryIdSelector,omitempty" tf:"-"`
 
+	// (Block List) Repository rules. (see below for nested schema)
+	// Repository rules.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The status of lifecycle policy. Must be active or disabled.
+	// (String) The status of lifecycle policy. Must be active or disabled.
+	// The status of lifecycle policy. Must be `active` or `disabled`.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RepositoryLifecyclePolicyObservation struct {
 
-	// Creation timestamp of the instance.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the lifecycle policy.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Lifecycle policy name.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) The ID of the repository that the resource belongs to.
 	// The ID of the repository that the resource belongs to.
 	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 
+	// (Block List) Repository rules. (see below for nested schema)
+	// Repository rules.
 	Rule []RuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The status of lifecycle policy. Must be active or disabled.
+	// (String) The status of lifecycle policy. Must be active or disabled.
+	// The status of lifecycle policy. Must be `active` or `disabled`.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RepositoryLifecyclePolicyParameters struct {
 
-	// Description of the lifecycle policy.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Lifecycle policy name.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) The ID of the repository that the resource belongs to.
 	// The ID of the repository that the resource belongs to.
 	// +crossplane:generate:reference:type=Repository
 	// +kubebuilder:validation:Optional
@@ -81,68 +98,86 @@ type RepositoryLifecyclePolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	RepositoryIDSelector *v1.NamespacedSelector `json:"repositoryIdSelector,omitempty" tf:"-"`
 
+	// (Block List) Repository rules. (see below for nested schema)
+	// Repository rules.
 	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
-	// The status of lifecycle policy. Must be active or disabled.
+	// (String) The status of lifecycle policy. Must be active or disabled.
+	// The status of lifecycle policy. Must be `active` or `disabled`.
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type RuleInitParameters struct {
 
+	// (String) The resource description.
 	// Description of the lifecycle policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
 	// The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
 	ExpirePeriod *string `json:"expirePeriod,omitempty" tf:"expire_period,omitempty"`
 
-	// The number of images to be retained even if the expire_period already expired.
+	// (Number) The number of images to be retained even if the expire_period already expired.
+	// The number of images to be retained even if the `expire_period` already expired.
 	RetainedTop *float64 `json:"retainedTop,omitempty" tf:"retained_top,omitempty"`
 
-	// Tag to specify a filter as a regular expression. For example .* - all images with tags.
+	// all images with tags.
+	// Tag to specify a filter as a regular expression. For example `.*` - all images with tags.
 	TagRegexp *string `json:"tagRegexp,omitempty" tf:"tag_regexp,omitempty"`
 
+	// (Boolean) If enabled, rules apply to untagged Docker images.
 	// If enabled, rules apply to untagged Docker images.
 	Untagged *bool `json:"untagged,omitempty" tf:"untagged,omitempty"`
 }
 
 type RuleObservation struct {
 
+	// (String) The resource description.
 	// Description of the lifecycle policy.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
 	// The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
 	ExpirePeriod *string `json:"expirePeriod,omitempty" tf:"expire_period,omitempty"`
 
-	// The number of images to be retained even if the expire_period already expired.
+	// (Number) The number of images to be retained even if the expire_period already expired.
+	// The number of images to be retained even if the `expire_period` already expired.
 	RetainedTop *float64 `json:"retainedTop,omitempty" tf:"retained_top,omitempty"`
 
-	// Tag to specify a filter as a regular expression. For example .* - all images with tags.
+	// all images with tags.
+	// Tag to specify a filter as a regular expression. For example `.*` - all images with tags.
 	TagRegexp *string `json:"tagRegexp,omitempty" tf:"tag_regexp,omitempty"`
 
+	// (Boolean) If enabled, rules apply to untagged Docker images.
 	// If enabled, rules apply to untagged Docker images.
 	Untagged *bool `json:"untagged,omitempty" tf:"untagged,omitempty"`
 }
 
 type RuleParameters struct {
 
+	// (String) The resource description.
 	// Description of the lifecycle policy.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
 	// The period of time that must pass after creating a image for it to suit the automatic deletion criteria. It must be a multiple of 24 hours.
 	// +kubebuilder:validation:Optional
 	ExpirePeriod *string `json:"expirePeriod,omitempty" tf:"expire_period,omitempty"`
 
-	// The number of images to be retained even if the expire_period already expired.
+	// (Number) The number of images to be retained even if the expire_period already expired.
+	// The number of images to be retained even if the `expire_period` already expired.
 	// +kubebuilder:validation:Optional
 	RetainedTop *float64 `json:"retainedTop,omitempty" tf:"retained_top,omitempty"`
 
-	// Tag to specify a filter as a regular expression. For example .* - all images with tags.
+	// all images with tags.
+	// Tag to specify a filter as a regular expression. For example `.*` - all images with tags.
 	// +kubebuilder:validation:Optional
 	TagRegexp *string `json:"tagRegexp,omitempty" tf:"tag_regexp,omitempty"`
 
+	// (Boolean) If enabled, rules apply to untagged Docker images.
 	// If enabled, rules apply to untagged Docker images.
 	// +kubebuilder:validation:Optional
 	Untagged *bool `json:"untagged,omitempty" tf:"untagged,omitempty"`

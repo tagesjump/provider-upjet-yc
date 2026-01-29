@@ -12,249 +12,360 @@ import (
 
 type AuditLogInitParameters struct {
 
-	// Configuration of the audit log filter in JSON format.
-	// For more information see auditLog.filter
-	// description in the official documentation. Available only in enterprise edition.
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
-
-	// Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable.
-	// For more information see auditLog.runtimeConfiguration
-	// description in the official documentation. Available only in enterprise edition.
-	RuntimeConfiguration *bool `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
 }
 
 type AuditLogObservation struct {
 
-	// Configuration of the audit log filter in JSON format.
-	// For more information see auditLog.filter
-	// description in the official documentation. Available only in enterprise edition.
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
-
-	// Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable.
-	// For more information see auditLog.runtimeConfiguration
-	// description in the official documentation. Available only in enterprise edition.
-	RuntimeConfiguration *bool `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
 }
 
 type AuditLogParameters struct {
 
-	// Configuration of the audit log filter in JSON format.
-	// For more information see auditLog.filter
-	// description in the official documentation. Available only in enterprise edition.
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
-
-	// Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable.
-	// For more information see auditLog.runtimeConfiguration
-	// description in the official documentation. Available only in enterprise edition.
-	// +kubebuilder:validation:Optional
-	RuntimeConfiguration *bool `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
 }
 
 type ClusterConfigAccessInitParameters struct {
 
-	// Allow access for Yandex DataLens.
+	// (Boolean) Allow access for Yandex DataLens.
+	// Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
 	DataLens *bool `json:"dataLens,omitempty" tf:"data_lens,omitempty"`
 
-	// Allow access for DataTransfer
+	// (Boolean) Allow access for DataTransfer.
+	// Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
 	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
+
+	// (Boolean) Allow access for WebSQL.
+	// Allow access for [WebSQL](https://yandex.cloud/ru/docs/websql/).
+	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
 }
 
 type ClusterConfigAccessObservation struct {
 
-	// Allow access for Yandex DataLens.
+	// (Boolean) Allow access for Yandex DataLens.
+	// Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
 	DataLens *bool `json:"dataLens,omitempty" tf:"data_lens,omitempty"`
 
-	// Allow access for DataTransfer
+	// (Boolean) Allow access for DataTransfer.
+	// Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
 	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
+
+	// (Boolean) Allow access for WebSQL.
+	// Allow access for [WebSQL](https://yandex.cloud/ru/docs/websql/).
+	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
 }
 
 type ClusterConfigAccessParameters struct {
 
-	// Allow access for Yandex DataLens.
+	// (Boolean) Allow access for Yandex DataLens.
+	// Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
 	// +kubebuilder:validation:Optional
 	DataLens *bool `json:"dataLens,omitempty" tf:"data_lens,omitempty"`
 
-	// Allow access for DataTransfer
+	// (Boolean) Allow access for DataTransfer.
+	// Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer).
 	// +kubebuilder:validation:Optional
 	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
+
+	// (Boolean) Allow access for WebSQL.
+	// Allow access for [WebSQL](https://yandex.cloud/ru/docs/websql/).
+	// +kubebuilder:validation:Optional
+	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
 }
 
 type ClusterConfigBackupWindowStartInitParameters struct {
 
+	// (Number) The hour at which backup will be started.
 	// The hour at which backup will be started.
 	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
+	// (Number) The minute at which backup will be started.
 	// The minute at which backup will be started.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type ClusterConfigBackupWindowStartObservation struct {
 
+	// (Number) The hour at which backup will be started.
 	// The hour at which backup will be started.
 	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
+	// (Number) The minute at which backup will be started.
 	// The minute at which backup will be started.
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type ClusterConfigBackupWindowStartParameters struct {
 
+	// (Number) The hour at which backup will be started.
 	// The hour at which backup will be started.
 	// +kubebuilder:validation:Optional
 	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
+	// (Number) The minute at which backup will be started.
 	// The minute at which backup will be started.
 	// +kubebuilder:validation:Optional
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
-type ClusterConfigInitParameters struct {
+type DiskSizeAutoscalingMongocfgInitParameters struct {
 
-	// Access policy to the MongoDB cluster. The structure is documented below.
-	Access []ClusterConfigAccessInitParameters `json:"access,omitempty" tf:"access,omitempty"`
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
 
-	// Retain period of automatically created backup in days.
-	BackupRetainPeriodDays *float64 `json:"backupRetainPeriodDays,omitempty" tf:"backup_retain_period_days,omitempty"`
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
 
-	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
-	BackupWindowStart []ClusterConfigBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
-
-	// Feature compatibility version of MongoDB. If not provided version is taken. Can be either 6.0, 5.0, 4.4 and 4.2.
-	FeatureCompatibilityVersion *string `json:"featureCompatibilityVersion,omitempty" tf:"feature_compatibility_version,omitempty"`
-
-	// Configuration of the mongocfg service. The structure is documented below.
-	Mongocfg []MongocfgInitParameters `json:"mongocfg,omitempty" tf:"mongocfg,omitempty"`
-
-	// Configuration of the mongod service. The structure is documented below.
-	Mongod []MongodInitParameters `json:"mongod,omitempty" tf:"mongod,omitempty"`
-
-	// Configuration of the mongos service. The structure is documented below.
-	Mongos []MongosInitParameters `json:"mongos,omitempty" tf:"mongos,omitempty"`
-
-	// Performance diagnostics to the MongoDB cluster. The structure is documented below.
-	PerformanceDiagnostics []PerformanceDiagnosticsInitParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
-
-	// Version of the MongoDB server software. Can be either 4.2, 4.4, 4.4-enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
 }
 
-type ClusterConfigObservation struct {
+type DiskSizeAutoscalingMongocfgObservation struct {
 
-	// Access policy to the MongoDB cluster. The structure is documented below.
-	Access []ClusterConfigAccessObservation `json:"access,omitempty" tf:"access,omitempty"`
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
 
-	// Retain period of automatically created backup in days.
-	BackupRetainPeriodDays *float64 `json:"backupRetainPeriodDays,omitempty" tf:"backup_retain_period_days,omitempty"`
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
 
-	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
-	BackupWindowStart []ClusterConfigBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
-
-	// Feature compatibility version of MongoDB. If not provided version is taken. Can be either 6.0, 5.0, 4.4 and 4.2.
-	FeatureCompatibilityVersion *string `json:"featureCompatibilityVersion,omitempty" tf:"feature_compatibility_version,omitempty"`
-
-	// Configuration of the mongocfg service. The structure is documented below.
-	Mongocfg []MongocfgObservation `json:"mongocfg,omitempty" tf:"mongocfg,omitempty"`
-
-	// Configuration of the mongod service. The structure is documented below.
-	Mongod []MongodObservation `json:"mongod,omitempty" tf:"mongod,omitempty"`
-
-	// Configuration of the mongos service. The structure is documented below.
-	Mongos []MongosObservation `json:"mongos,omitempty" tf:"mongos,omitempty"`
-
-	// Performance diagnostics to the MongoDB cluster. The structure is documented below.
-	PerformanceDiagnostics []PerformanceDiagnosticsObservation `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
-
-	// Version of the MongoDB server software. Can be either 4.2, 4.4, 4.4-enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
 }
 
-type ClusterConfigParameters struct {
+type DiskSizeAutoscalingMongocfgParameters struct {
 
-	// Access policy to the MongoDB cluster. The structure is documented below.
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
 	// +kubebuilder:validation:Optional
-	Access []ClusterConfigAccessParameters `json:"access,omitempty" tf:"access,omitempty"`
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
 
-	// Retain period of automatically created backup in days.
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
 	// +kubebuilder:validation:Optional
-	BackupRetainPeriodDays *float64 `json:"backupRetainPeriodDays,omitempty" tf:"backup_retain_period_days,omitempty"`
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
 
-	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
 	// +kubebuilder:validation:Optional
-	BackupWindowStart []ClusterConfigBackupWindowStartParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
 
-	// Feature compatibility version of MongoDB. If not provided version is taken. Can be either 6.0, 5.0, 4.4 and 4.2.
-	// +kubebuilder:validation:Optional
-	FeatureCompatibilityVersion *string `json:"featureCompatibilityVersion,omitempty" tf:"feature_compatibility_version,omitempty"`
+type DiskSizeAutoscalingMongodInitParameters struct {
 
-	// Configuration of the mongocfg service. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	Mongocfg []MongocfgParameters `json:"mongocfg,omitempty" tf:"mongocfg,omitempty"`
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
 
-	// Configuration of the mongod service. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	Mongod []MongodParameters `json:"mongod,omitempty" tf:"mongod,omitempty"`
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
 
-	// Configuration of the mongos service. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	Mongos []MongosParameters `json:"mongos,omitempty" tf:"mongos,omitempty"`
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
 
-	// Performance diagnostics to the MongoDB cluster. The structure is documented below.
-	// +kubebuilder:validation:Optional
-	PerformanceDiagnostics []PerformanceDiagnosticsParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
+type DiskSizeAutoscalingMongodObservation struct {
 
-	// Version of the MongoDB server software. Can be either 4.2, 4.4, 4.4-enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongodParameters struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version" tf:"version,omitempty"`
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongoinfraInitParameters struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongoinfraObservation struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongoinfraParameters struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	// +kubebuilder:validation:Optional
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongosInitParameters struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongosObservation struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	DiskSizeLimit *float64 `json:"diskSizeLimit,omitempty" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
+}
+
+type DiskSizeAutoscalingMongosParameters struct {
+
+	// (Number) Limit of disk size after autoscaling (GiB).
+	// Limit of disk size after autoscaling (GiB).
+	// +kubebuilder:validation:Optional
+	DiskSizeLimit *float64 `json:"diskSizeLimit" tf:"disk_size_limit,omitempty"`
+
+	// (Number) Immediate autoscaling disk usage (percent).
+	// Immediate autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	EmergencyUsageThreshold *float64 `json:"emergencyUsageThreshold,omitempty" tf:"emergency_usage_threshold,omitempty"`
+
+	// (Number) Maintenance window autoscaling disk usage (percent).
+	// Maintenance window autoscaling disk usage (percent).
+	// +kubebuilder:validation:Optional
+	PlannedUsageThreshold *float64 `json:"plannedUsageThreshold,omitempty" tf:"planned_usage_threshold,omitempty"`
 }
 
 type HostParametersInitParameters struct {
 
-	// Should this host be hidden in replicaset. Can be either true of false. For more information see the official documentation
+	// (Boolean) Should this host be hidden in replicaset. Can be either true of false. For more information see the official documentation.
+	// Should this host be hidden in replicaset. Can be either `true` of `false`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.hidden).
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see the official documentation
+	// (Number) A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see the official documentation.
+	// A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.priority).
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The number of seconds "behind" the primary that this replica set member should "lag". For more information see the official documentation
+	// (Number) The number of seconds behind the primary that this replica set member should lag. For more information see the official documentation.
+	// The number of seconds `behind` the primary that this replica set member should `lag`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.secondaryDelaySecs).
 	SecondaryDelaySecs *float64 `json:"secondaryDelaySecs,omitempty" tf:"secondary_delay_secs,omitempty"`
 
-	// A set of key/value pairs to assign for the replica set member. For more information see the official documentation
+	// (Map of String) A set of key/value pairs to assign for the replica set member. For more information see the official documentation.
+	// A set of key/value pairs to assign for the replica set member. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HostParametersObservation struct {
 
-	// Should this host be hidden in replicaset. Can be either true of false. For more information see the official documentation
+	// (Boolean) Should this host be hidden in replicaset. Can be either true of false. For more information see the official documentation.
+	// Should this host be hidden in replicaset. Can be either `true` of `false`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.hidden).
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see the official documentation
+	// (Number) A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see the official documentation.
+	// A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.priority).
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The number of seconds "behind" the primary that this replica set member should "lag". For more information see the official documentation
+	// (Number) The number of seconds behind the primary that this replica set member should lag. For more information see the official documentation.
+	// The number of seconds `behind` the primary that this replica set member should `lag`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.secondaryDelaySecs).
 	SecondaryDelaySecs *float64 `json:"secondaryDelaySecs,omitempty" tf:"secondary_delay_secs,omitempty"`
 
-	// A set of key/value pairs to assign for the replica set member. For more information see the official documentation
+	// (Map of String) A set of key/value pairs to assign for the replica set member. For more information see the official documentation.
+	// A set of key/value pairs to assign for the replica set member. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HostParametersParameters struct {
 
-	// Should this host be hidden in replicaset. Can be either true of false. For more information see the official documentation
+	// (Boolean) Should this host be hidden in replicaset. Can be either true of false. For more information see the official documentation.
+	// Should this host be hidden in replicaset. Can be either `true` of `false`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.hidden).
 	// +kubebuilder:validation:Optional
 	Hidden *bool `json:"hidden,omitempty" tf:"hidden,omitempty"`
 
-	// A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see the official documentation
+	// (Number) A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see the official documentation.
+	// A floating point number that indicates the relative likelihood of a replica set member to become the primary. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.priority).
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// The number of seconds "behind" the primary that this replica set member should "lag". For more information see the official documentation
+	// (Number) The number of seconds behind the primary that this replica set member should lag. For more information see the official documentation.
+	// The number of seconds `behind` the primary that this replica set member should `lag`. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.secondaryDelaySecs).
 	// +kubebuilder:validation:Optional
 	SecondaryDelaySecs *float64 `json:"secondaryDelaySecs,omitempty" tf:"secondary_delay_secs,omitempty"`
 
-	// A set of key/value pairs to assign for the replica set member. For more information see the official documentation
+	// (Map of String) A set of key/value pairs to assign for the replica set member. For more information see the official documentation.
+	// A set of key/value pairs to assign for the replica set member. For more information see [the official documentation](https://www.mongodb.com/docs/current/reference/replica-configuration/#mongodb-rsconf-rsconf.members-n-.tags).
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -262,433 +373,844 @@ type HostParametersParameters struct {
 
 type JournalInitParameters struct {
 
-	// The maximum amount of time in milliseconds that the mongod process allows between journal operations.
-	// For more information, see the storage.journal.commitIntervalMs
-	// description in the official documentation.
+	// (Number) The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the storage.journal.commitIntervalMs description in the official documentation.
+	// The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the [storage.journal.commitIntervalMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.journal.commitIntervalMs) description in the official documentation.
 	CommitInterval *float64 `json:"commitInterval,omitempty" tf:"commit_interval,omitempty"`
 }
 
 type JournalObservation struct {
 
-	// The maximum amount of time in milliseconds that the mongod process allows between journal operations.
-	// For more information, see the storage.journal.commitIntervalMs
-	// description in the official documentation.
+	// (Number) The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the storage.journal.commitIntervalMs description in the official documentation.
+	// The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the [storage.journal.commitIntervalMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.journal.commitIntervalMs) description in the official documentation.
 	CommitInterval *float64 `json:"commitInterval,omitempty" tf:"commit_interval,omitempty"`
 }
 
 type JournalParameters struct {
 
-	// The maximum amount of time in milliseconds that the mongod process allows between journal operations.
-	// For more information, see the storage.journal.commitIntervalMs
-	// description in the official documentation.
+	// (Number) The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the storage.journal.commitIntervalMs description in the official documentation.
+	// The maximum amount of time in milliseconds that the mongod process allows between journal operations. For more information, see the [storage.journal.commitIntervalMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.journal.commitIntervalMs) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	CommitInterval *float64 `json:"commitInterval,omitempty" tf:"commit_interval,omitempty"`
 }
 
 type KmipInitParameters struct {
 
-	// String containing the client certificate used for authenticating MongoDB to the KMIP server.
-	// For more information see security.kmip.clientCertificateFile
-	// description in the official documentation.
+	// (String) String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see security.kmip.clientCertificateFile description in the official documentation.
+	// String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see [security.kmip.clientCertificateFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.clientCertificateFile) description in the official documentation.
 	ClientCertificate *string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
 
-	// Unique KMIP identifier for an existing key within the KMIP server.
-	// For more information see security.kmip.keyIdentifier
-	// description in the official documentation.
+	// (String) Unique KMIP identifier for an existing key within the KMIP server. For more information see security.kmip.keyIdentifier description in the official documentation.
+	// Unique KMIP identifier for an existing key within the KMIP server. For more information see [security.kmip.keyIdentifier](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.keyIdentifier) description in the official documentation.
 	KeyIdentifier *string `json:"keyIdentifier,omitempty" tf:"key_identifier,omitempty"`
 
-	// Port number to use to communicate with the KMIP server. Default: 5696
-	// For more information see security.kmip.port
-	// description in the official documentation.
+	// (Number) Port number to use to communicate with the KMIP server. Default: 5696 For more information see security.kmip.port description in the official documentation.
+	// Port number to use to communicate with the KMIP server. Default: 5696 For more information see [security.kmip.port](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.port) description in the official documentation.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Path to CA File. Used for validating secure client connection to KMIP server.
-	// For more information see security.kmip.serverCAFile
-	// description in the official documentation.
+	// (String) Path to CA File. Used for validating secure client connection to KMIP server. For more information see security.kmip.serverCAFile description in the official documentation.
+	// Path to CA File. Used for validating secure client connection to KMIP server. For more information see [security.kmip.serverCAFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverCAFile) description in the official documentation.
 	ServerCA *string `json:"serverCa,omitempty" tf:"server_ca,omitempty"`
 
-	// Hostname or IP address of the KMIP server to connect to.
-	// For more information see security.kmip.serverName
-	// description in the official documentation.
+	// (String) Hostname or IP address of the KMIP server to connect to. For more information see security.kmip.serverName description in the official documentation.
+	// Hostname or IP address of the KMIP server to connect to. For more information see [security.kmip.serverName](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverName) description in the official documentation.
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 }
 
 type KmipObservation struct {
 
-	// String containing the client certificate used for authenticating MongoDB to the KMIP server.
-	// For more information see security.kmip.clientCertificateFile
-	// description in the official documentation.
+	// (String) String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see security.kmip.clientCertificateFile description in the official documentation.
+	// String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see [security.kmip.clientCertificateFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.clientCertificateFile) description in the official documentation.
 	ClientCertificate *string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
 
-	// Unique KMIP identifier for an existing key within the KMIP server.
-	// For more information see security.kmip.keyIdentifier
-	// description in the official documentation.
+	// (String) Unique KMIP identifier for an existing key within the KMIP server. For more information see security.kmip.keyIdentifier description in the official documentation.
+	// Unique KMIP identifier for an existing key within the KMIP server. For more information see [security.kmip.keyIdentifier](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.keyIdentifier) description in the official documentation.
 	KeyIdentifier *string `json:"keyIdentifier,omitempty" tf:"key_identifier,omitempty"`
 
-	// Port number to use to communicate with the KMIP server. Default: 5696
-	// For more information see security.kmip.port
-	// description in the official documentation.
+	// (Number) Port number to use to communicate with the KMIP server. Default: 5696 For more information see security.kmip.port description in the official documentation.
+	// Port number to use to communicate with the KMIP server. Default: 5696 For more information see [security.kmip.port](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.port) description in the official documentation.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Path to CA File. Used for validating secure client connection to KMIP server.
-	// For more information see security.kmip.serverCAFile
-	// description in the official documentation.
+	// (String) Path to CA File. Used for validating secure client connection to KMIP server. For more information see security.kmip.serverCAFile description in the official documentation.
+	// Path to CA File. Used for validating secure client connection to KMIP server. For more information see [security.kmip.serverCAFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverCAFile) description in the official documentation.
 	ServerCA *string `json:"serverCa,omitempty" tf:"server_ca,omitempty"`
 
-	// Hostname or IP address of the KMIP server to connect to.
-	// For more information see security.kmip.serverName
-	// description in the official documentation.
+	// (String) Hostname or IP address of the KMIP server to connect to. For more information see security.kmip.serverName description in the official documentation.
+	// Hostname or IP address of the KMIP server to connect to. For more information see [security.kmip.serverName](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverName) description in the official documentation.
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 }
 
 type KmipParameters struct {
 
-	// String containing the client certificate used for authenticating MongoDB to the KMIP server.
-	// For more information see security.kmip.clientCertificateFile
-	// description in the official documentation.
+	// (String) String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see security.kmip.clientCertificateFile description in the official documentation.
+	// String containing the client certificate used for authenticating MongoDB to the KMIP server. For more information see [security.kmip.clientCertificateFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.clientCertificateFile) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	ClientCertificate *string `json:"clientCertificate,omitempty" tf:"client_certificate,omitempty"`
 
-	// Unique KMIP identifier for an existing key within the KMIP server.
-	// For more information see security.kmip.keyIdentifier
-	// description in the official documentation.
+	// (String) Unique KMIP identifier for an existing key within the KMIP server. For more information see security.kmip.keyIdentifier description in the official documentation.
+	// Unique KMIP identifier for an existing key within the KMIP server. For more information see [security.kmip.keyIdentifier](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.keyIdentifier) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	KeyIdentifier *string `json:"keyIdentifier,omitempty" tf:"key_identifier,omitempty"`
 
-	// Port number to use to communicate with the KMIP server. Default: 5696
-	// For more information see security.kmip.port
-	// description in the official documentation.
+	// (Number) Port number to use to communicate with the KMIP server. Default: 5696 For more information see security.kmip.port description in the official documentation.
+	// Port number to use to communicate with the KMIP server. Default: 5696 For more information see [security.kmip.port](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.port) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// Path to CA File. Used for validating secure client connection to KMIP server.
-	// For more information see security.kmip.serverCAFile
-	// description in the official documentation.
+	// (String) Path to CA File. Used for validating secure client connection to KMIP server. For more information see security.kmip.serverCAFile description in the official documentation.
+	// Path to CA File. Used for validating secure client connection to KMIP server. For more information see [security.kmip.serverCAFile](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverCAFile) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	ServerCA *string `json:"serverCa,omitempty" tf:"server_ca,omitempty"`
 
-	// Hostname or IP address of the KMIP server to connect to.
-	// For more information see security.kmip.serverName
-	// description in the official documentation.
+	// (String) Hostname or IP address of the KMIP server to connect to. For more information see security.kmip.serverName description in the official documentation.
+	// Hostname or IP address of the KMIP server to connect to. For more information see [security.kmip.serverName](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.kmip.serverName) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 }
 
+type MirrorReadsInitParameters struct {
+
+	// (Number) The maximum time in milliseconds for the mirrored reads. For more information see mirrorReads.maxTimeMS description in the official documentation
+	// The maximum time in milliseconds for the mirrored reads. For more information see [mirrorReads.maxTimeMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) description in the official documentation
+	MaxTimeMs *float64 `json:"maxTimeMs,omitempty" tf:"max_time_ms,omitempty"`
+
+	// (Number) The sampling rate used to mirror a subset of operations that support mirroring. For more information see mirrorReads.samplingRate description in the official documentation
+	// The sampling rate used to mirror a subset of operations that support mirroring. For more information see [mirrorReads.samplingRate](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) description in the official documentation
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
+type MirrorReadsObservation struct {
+
+	// (Number) The maximum time in milliseconds for the mirrored reads. For more information see mirrorReads.maxTimeMS description in the official documentation
+	// The maximum time in milliseconds for the mirrored reads. For more information see [mirrorReads.maxTimeMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) description in the official documentation
+	MaxTimeMs *float64 `json:"maxTimeMs,omitempty" tf:"max_time_ms,omitempty"`
+
+	// (Number) The sampling rate used to mirror a subset of operations that support mirroring. For more information see mirrorReads.samplingRate description in the official documentation
+	// The sampling rate used to mirror a subset of operations that support mirroring. For more information see [mirrorReads.samplingRate](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) description in the official documentation
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
+type MirrorReadsParameters struct {
+
+	// (Number) The maximum time in milliseconds for the mirrored reads. For more information see mirrorReads.maxTimeMS description in the official documentation
+	// The maximum time in milliseconds for the mirrored reads. For more information see [mirrorReads.maxTimeMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) description in the official documentation
+	// +kubebuilder:validation:Optional
+	MaxTimeMs *float64 `json:"maxTimeMs,omitempty" tf:"max_time_ms,omitempty"`
+
+	// (Number) The sampling rate used to mirror a subset of operations that support mirroring. For more information see mirrorReads.samplingRate description in the official documentation
+	// The sampling rate used to mirror a subset of operations that support mirroring. For more information see [mirrorReads.samplingRate](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) description in the official documentation
+	// +kubebuilder:validation:Optional
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
 type MongocfgInitParameters struct {
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	AuditLog []AuditLogInitParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+
+	// (Boolean) Chained replication setting. For more information, see the chainingAllowed description in the official documentation.
+	// Chained replication setting. For more information, see the [chainingAllowed](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-chainingAllowed) description in the official documentation.
+	ChainingAllowed *bool `json:"chainingAllowed,omitempty" tf:"chaining_allowed,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	Net []NetInitParameters `json:"net,omitempty" tf:"net,omitempty"`
 
-	// A set of profiling settings
-	// (see the operationProfiling option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of profiling settings (see the operationProfiling option). (see below for nested schema)
+	// A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
 	OperationProfiling []OperationProfilingInitParameters `json:"operationProfiling,omitempty" tf:"operation_profiling,omitempty"`
 
-	// A set of storage settings
-	// (see the storage option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of oplog settings (see the oplog option). (see below for nested schema)
+	// A set of oplog settings (see the [oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog) option).
+	Oplog []OplogInitParameters `json:"oplog,omitempty" tf:"oplog,omitempty"`
+
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	SetParameter []SetParameterInitParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+
+	// (Block List, Max: 1) A set of storage settings (see the storage option). (see below for nested schema)
+	// A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
 	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type MongocfgObservation struct {
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	AuditLog []AuditLogObservation `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+
+	// (Boolean) Chained replication setting. For more information, see the chainingAllowed description in the official documentation.
+	// Chained replication setting. For more information, see the [chainingAllowed](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-chainingAllowed) description in the official documentation.
+	ChainingAllowed *bool `json:"chainingAllowed,omitempty" tf:"chaining_allowed,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	Net []NetObservation `json:"net,omitempty" tf:"net,omitempty"`
 
-	// A set of profiling settings
-	// (see the operationProfiling option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of profiling settings (see the operationProfiling option). (see below for nested schema)
+	// A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
 	OperationProfiling []OperationProfilingObservation `json:"operationProfiling,omitempty" tf:"operation_profiling,omitempty"`
 
-	// A set of storage settings
-	// (see the storage option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of oplog settings (see the oplog option). (see below for nested schema)
+	// A set of oplog settings (see the [oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog) option).
+	Oplog []OplogObservation `json:"oplog,omitempty" tf:"oplog,omitempty"`
+
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	SetParameter []SetParameterObservation `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+
+	// (Block List, Max: 1) A set of storage settings (see the storage option). (see below for nested schema)
+	// A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
 	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type MongocfgParameters struct {
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	AuditLog []AuditLogParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+
+	// (Boolean) Chained replication setting. For more information, see the chainingAllowed description in the official documentation.
+	// Chained replication setting. For more information, see the [chainingAllowed](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-chainingAllowed) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ChainingAllowed *bool `json:"chainingAllowed,omitempty" tf:"chaining_allowed,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	// +kubebuilder:validation:Optional
 	Net []NetParameters `json:"net,omitempty" tf:"net,omitempty"`
 
-	// A set of profiling settings
-	// (see the operationProfiling option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of profiling settings (see the operationProfiling option). (see below for nested schema)
+	// A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
 	// +kubebuilder:validation:Optional
 	OperationProfiling []OperationProfilingParameters `json:"operationProfiling,omitempty" tf:"operation_profiling,omitempty"`
 
-	// A set of storage settings
-	// (see the storage option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of oplog settings (see the oplog option). (see below for nested schema)
+	// A set of oplog settings (see the [oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog) option).
+	// +kubebuilder:validation:Optional
+	Oplog []OplogParameters `json:"oplog,omitempty" tf:"oplog,omitempty"`
+
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	// +kubebuilder:validation:Optional
+	SetParameter []SetParameterParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+
+	// (Block List, Max: 1) A set of storage settings (see the storage option). (see below for nested schema)
+	// A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
 	// +kubebuilder:validation:Optional
 	Storage []StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
+type MongodAuditLogInitParameters struct {
+
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// (Boolean) Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see auditLog.runtimeConfiguration description in the official documentation. Available only in enterprise edition.
+	// Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see [auditLog.runtimeConfiguration](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.runtimeConfiguration) description in the official documentation. Available only in enterprise edition.
+	RuntimeConfiguration *bool `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
+}
+
+type MongodAuditLogObservation struct {
+
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// (Boolean) Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see auditLog.runtimeConfiguration description in the official documentation. Available only in enterprise edition.
+	// Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see [auditLog.runtimeConfiguration](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.runtimeConfiguration) description in the official documentation. Available only in enterprise edition.
+	RuntimeConfiguration *bool `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
+}
+
+type MongodAuditLogParameters struct {
+
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// (Boolean) Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see auditLog.runtimeConfiguration description in the official documentation. Available only in enterprise edition.
+	// Specifies if a node allows runtime configuration of audit filters and the auditAuthorizationSuccess variable. For more information see [auditLog.runtimeConfiguration](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.runtimeConfiguration) description in the official documentation. Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	RuntimeConfiguration *bool `json:"runtimeConfiguration,omitempty" tf:"runtime_configuration,omitempty"`
+}
+
 type MongodInitParameters struct {
 
-	// A set of audit log settings
-	// (see the auditLog option).
-	// The structure is documented below. Available only in enterprise edition.
-	AuditLog []AuditLogInitParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	AuditLog []MongodAuditLogInitParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Boolean) Chained replication setting. For more information, see the chainingAllowed description in the official documentation.
+	// Chained replication setting. For more information, see the [chainingAllowed](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-chainingAllowed) description in the official documentation.
+	ChainingAllowed *bool `json:"chainingAllowed,omitempty" tf:"chaining_allowed,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	Net []MongodNetInitParameters `json:"net,omitempty" tf:"net,omitempty"`
 
-	// A set of profiling settings
-	// (see the operationProfiling option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of profiling settings (see the operationProfiling option). (see below for nested schema)
+	// A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
 	OperationProfiling []MongodOperationProfilingInitParameters `json:"operationProfiling,omitempty" tf:"operation_profiling,omitempty"`
 
-	// A set of MongoDB Security settings
-	// (see the security option).
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) A set of oplog settings (see the oplog option). (see below for nested schema)
+	// A set of oplog settings (see the [oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog) option).
+	Oplog []MongodOplogInitParameters `json:"oplog,omitempty" tf:"oplog,omitempty"`
+
+	// (Block List, Max: 1) A set of MongoDB Security settings (see the security option). Available only in enterprise edition. (see below for nested schema)
+	// A set of MongoDB Security settings (see the [security](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options) option). Available only in enterprise edition.
 	Security []SecurityInitParameters `json:"security,omitempty" tf:"security,omitempty"`
 
-	// A set of MongoDB Server Parameters
-	// (see the setParameter option).
-	// The structure is documented below.
-	SetParameter []SetParameterInitParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	SetParameter []MongodSetParameterInitParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
 
-	// A set of storage settings
-	// (see the storage option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of storage settings (see the storage option). (see below for nested schema)
+	// A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
 	Storage []MongodStorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type MongodNetInitParameters struct {
 
-	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
-	// For more information, see the net.Compression.Compressors
-	// description in the official documentation.
+	// (List of String) Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make disabled the only value. For more information, see the net.Compression.Compressors description in the official documentation.
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type MongodNetObservation struct {
 
-	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
-	// For more information, see the net.Compression.Compressors
-	// description in the official documentation.
+	// (List of String) Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make disabled the only value. For more information, see the net.Compression.Compressors description in the official documentation.
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type MongodNetParameters struct {
 
-	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
-	// For more information, see the net.Compression.Compressors
-	// description in the official documentation.
+	// (List of String) Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make disabled the only value. For more information, see the net.Compression.Compressors description in the official documentation.
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type MongodObservation struct {
 
-	// A set of audit log settings
-	// (see the auditLog option).
-	// The structure is documented below. Available only in enterprise edition.
-	AuditLog []AuditLogObservation `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	AuditLog []MongodAuditLogObservation `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Boolean) Chained replication setting. For more information, see the chainingAllowed description in the official documentation.
+	// Chained replication setting. For more information, see the [chainingAllowed](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-chainingAllowed) description in the official documentation.
+	ChainingAllowed *bool `json:"chainingAllowed,omitempty" tf:"chaining_allowed,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	Net []MongodNetObservation `json:"net,omitempty" tf:"net,omitempty"`
 
-	// A set of profiling settings
-	// (see the operationProfiling option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of profiling settings (see the operationProfiling option). (see below for nested schema)
+	// A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
 	OperationProfiling []MongodOperationProfilingObservation `json:"operationProfiling,omitempty" tf:"operation_profiling,omitempty"`
 
-	// A set of MongoDB Security settings
-	// (see the security option).
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) A set of oplog settings (see the oplog option). (see below for nested schema)
+	// A set of oplog settings (see the [oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog) option).
+	Oplog []MongodOplogObservation `json:"oplog,omitempty" tf:"oplog,omitempty"`
+
+	// (Block List, Max: 1) A set of MongoDB Security settings (see the security option). Available only in enterprise edition. (see below for nested schema)
+	// A set of MongoDB Security settings (see the [security](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options) option). Available only in enterprise edition.
 	Security []SecurityObservation `json:"security,omitempty" tf:"security,omitempty"`
 
-	// A set of MongoDB Server Parameters
-	// (see the setParameter option).
-	// The structure is documented below.
-	SetParameter []SetParameterObservation `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	SetParameter []MongodSetParameterObservation `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
 
-	// A set of storage settings
-	// (see the storage option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of storage settings (see the storage option). (see below for nested schema)
+	// A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
 	Storage []MongodStorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
 type MongodOperationProfilingInitParameters struct {
 
-	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
-	// For more information, see the operationProfiling.mode
-	// description in the official documentation.
+	// (String) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the operationProfiling.mode description in the official documentation.
+	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
-	// For more information, see the operationProfiling.slowOpSampleRate
-	// description in the official documentation.
+	// (Number) The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the operationProfiling.slowOpSampleRate description in the official documentation.
+	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the [operationProfiling.slowOpSampleRate](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpSampleRate) description in the official documentation.
 	SlowOpSampleRate *float64 `json:"slowOpSampleRate,omitempty" tf:"slow_op_sample_rate,omitempty"`
 
-	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
-	// For more information, see the operationProfiling.slowOpThresholdMs
-	// description in the official documentation.
+	// (Number) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the operationProfiling.slowOpThresholdMs description in the official documentation.
+	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
 	SlowOpThreshold *float64 `json:"slowOpThreshold,omitempty" tf:"slow_op_threshold,omitempty"`
 }
 
 type MongodOperationProfilingObservation struct {
 
-	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
-	// For more information, see the operationProfiling.mode
-	// description in the official documentation.
+	// (String) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the operationProfiling.mode description in the official documentation.
+	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
-	// For more information, see the operationProfiling.slowOpSampleRate
-	// description in the official documentation.
+	// (Number) The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the operationProfiling.slowOpSampleRate description in the official documentation.
+	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the [operationProfiling.slowOpSampleRate](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpSampleRate) description in the official documentation.
 	SlowOpSampleRate *float64 `json:"slowOpSampleRate,omitempty" tf:"slow_op_sample_rate,omitempty"`
 
-	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
-	// For more information, see the operationProfiling.slowOpThresholdMs
-	// description in the official documentation.
+	// (Number) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the operationProfiling.slowOpThresholdMs description in the official documentation.
+	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
 	SlowOpThreshold *float64 `json:"slowOpThreshold,omitempty" tf:"slow_op_threshold,omitempty"`
 }
 
 type MongodOperationProfilingParameters struct {
 
-	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
-	// For more information, see the operationProfiling.mode
-	// description in the official documentation.
+	// (String) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the operationProfiling.mode description in the official documentation.
+	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive.
-	// For more information, see the operationProfiling.slowOpSampleRate
-	// description in the official documentation.
+	// (Number) The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the operationProfiling.slowOpSampleRate description in the official documentation.
+	// The fraction of slow operations that should be profiled or logged. Accepts values between 0 and 1, inclusive. For more information, see the [operationProfiling.slowOpSampleRate](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpSampleRate) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	SlowOpSampleRate *float64 `json:"slowOpSampleRate,omitempty" tf:"slow_op_sample_rate,omitempty"`
 
-	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
-	// For more information, see the operationProfiling.slowOpThresholdMs
-	// description in the official documentation.
+	// (Number) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the operationProfiling.slowOpThresholdMs description in the official documentation.
+	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	SlowOpThreshold *float64 `json:"slowOpThreshold,omitempty" tf:"slow_op_threshold,omitempty"`
 }
 
+type MongodOplogInitParameters struct {
+
+	// (Number) The maximum size of the oplog, as a percentage of the total storage size. For more information, see the oplog.oplogSizeMB description in the official documentation.
+	// The maximum size of the oplog, as a percentage of the total storage size. For more information, see the [oplog.oplogSizeMB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MaxSizePercent *float64 `json:"maxSizePercent,omitempty" tf:"max_size_percent,omitempty"`
+
+	// (Number) The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the oplog.minRetentionHours description in the official documentation.
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the [oplog.minRetentionHours](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MinRetentionHours *float64 `json:"minRetentionHours,omitempty" tf:"min_retention_hours,omitempty"`
+}
+
+type MongodOplogObservation struct {
+
+	// (Number) The maximum size of the oplog, as a percentage of the total storage size. For more information, see the oplog.oplogSizeMB description in the official documentation.
+	// The maximum size of the oplog, as a percentage of the total storage size. For more information, see the [oplog.oplogSizeMB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MaxSizePercent *float64 `json:"maxSizePercent,omitempty" tf:"max_size_percent,omitempty"`
+
+	// (Number) The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the oplog.minRetentionHours description in the official documentation.
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the [oplog.minRetentionHours](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MinRetentionHours *float64 `json:"minRetentionHours,omitempty" tf:"min_retention_hours,omitempty"`
+}
+
+type MongodOplogParameters struct {
+
+	// (Number) The maximum size of the oplog, as a percentage of the total storage size. For more information, see the oplog.oplogSizeMB description in the official documentation.
+	// The maximum size of the oplog, as a percentage of the total storage size. For more information, see the [oplog.oplogSizeMB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MaxSizePercent *float64 `json:"maxSizePercent,omitempty" tf:"max_size_percent,omitempty"`
+
+	// (Number) The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the oplog.minRetentionHours description in the official documentation.
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the [oplog.minRetentionHours](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MinRetentionHours *float64 `json:"minRetentionHours,omitempty" tf:"min_retention_hours,omitempty"`
+}
+
 type MongodParameters struct {
 
-	// A set of audit log settings
-	// (see the auditLog option).
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
-	AuditLog []AuditLogParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+	AuditLog []MongodAuditLogParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Boolean) Chained replication setting. For more information, see the chainingAllowed description in the official documentation.
+	// Chained replication setting. For more information, see the [chainingAllowed](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-chainingAllowed) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ChainingAllowed *bool `json:"chainingAllowed,omitempty" tf:"chaining_allowed,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	// +kubebuilder:validation:Optional
 	Net []MongodNetParameters `json:"net,omitempty" tf:"net,omitempty"`
 
-	// A set of profiling settings
-	// (see the operationProfiling option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of profiling settings (see the operationProfiling option). (see below for nested schema)
+	// A set of profiling settings (see the [operationProfiling](https://www.mongodb.com/docs/manual/reference/configuration-options/#operationprofiling-options) option).
 	// +kubebuilder:validation:Optional
 	OperationProfiling []MongodOperationProfilingParameters `json:"operationProfiling,omitempty" tf:"operation_profiling,omitempty"`
 
-	// A set of MongoDB Security settings
-	// (see the security option).
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) A set of oplog settings (see the oplog option). (see below for nested schema)
+	// A set of oplog settings (see the [oplog](https://www.mongodb.com/docs/manual/core/replica-set-oplog) option).
+	// +kubebuilder:validation:Optional
+	Oplog []MongodOplogParameters `json:"oplog,omitempty" tf:"oplog,omitempty"`
+
+	// (Block List, Max: 1) A set of MongoDB Security settings (see the security option). Available only in enterprise edition. (see below for nested schema)
+	// A set of MongoDB Security settings (see the [security](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options) option). Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
 	Security []SecurityParameters `json:"security,omitempty" tf:"security,omitempty"`
 
-	// A set of MongoDB Server Parameters
-	// (see the setParameter option).
-	// The structure is documented below.
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
 	// +kubebuilder:validation:Optional
-	SetParameter []SetParameterParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+	SetParameter []MongodSetParameterParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
 
-	// A set of storage settings
-	// (see the storage option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of storage settings (see the storage option). (see below for nested schema)
+	// A set of storage settings (see the [storage](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) option).
 	// +kubebuilder:validation:Optional
 	Storage []MongodStorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 }
 
+type MongodSetParameterInitParameters struct {
+
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// (Boolean) Enables the flow control. Can be either true or false. For more information, see the enableFlowControl description in the official documentation.
+	// Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
+	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
+
+	// (Number) The target maximum majority committed lag when running with flow control. For more information, see the flowControlTargetLagSeconds description in the official documentation.
+	// The target maximum majority committed lag when running with flow control. For more information, see the [flowControlTargetLagSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.flowControlTargetLagSeconds) description in the official documentation.
+	FlowControlTargetLagSeconds *float64 `json:"flowControlTargetLagSeconds,omitempty" tf:"flow_control_target_lag_seconds,omitempty"`
+
+	// (Number) The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved. For more information, see the flowControlWarnThresholdSeconds description in the official documentation.
+	// The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved. For more information, see the [flowControlWarnThresholdSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.flowControlWarnThresholdSeconds) description in the official documentation.
+	FlowControlWarnThresholdSeconds *float64 `json:"flowControlWarnThresholdSeconds,omitempty" tf:"flow_control_warn_threshold_seconds,omitempty"`
+
+	// (Number) Time in milliseconds to wait between batches of insertions during cloning step of the migration process. For more information, see the migrateCloneInsertionBatchDelayMs description in the official documentation.
+	// Time in milliseconds to wait between batches of insertions during cloning step of the migration process. For more information, see the [migrateCloneInsertionBatchDelayMs](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.migrateCloneInsertionBatchDelayMS) description in the official documentation.
+	MigrateCloneInsertionBatchDelayMs *float64 `json:"migrateCloneInsertionBatchDelayMs,omitempty" tf:"migrate_clone_insertion_batch_delay_ms,omitempty"`
+
+	// (Number) The maximum number of documents to insert in a single batch during the cloning step of the migration process. For more information, see the migrateCloneInsertionBatchSize description in the official documentation.
+	// The maximum number of documents to insert in a single batch during the cloning step of the migration process. For more information, see the [migrateCloneInsertionBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.migrateCloneInsertionBatchSize) description in the official documentation.
+	MigrateCloneInsertionBatchSize *float64 `json:"migrateCloneInsertionBatchSize,omitempty" tf:"migrate_clone_insertion_batch_size,omitempty"`
+
+	// (Number) The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the minSnapshotHistoryWindowInSeconds description in the official documentation.
+	// The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the [minSnapshotHistoryWindowInSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.minSnapshotHistoryWindowInSeconds) description in the official documentation.
+	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
+
+	// (Block List, Max: 1) A set of MongoDB Mirror Reads settings (see the mirrorReads option). (see below for nested schema)
+	// A set of MongoDB Mirror Reads settings (see the [mirrorReads](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) option).
+	MirrorReads []MirrorReadsInitParameters `json:"mirrorReads,omitempty" tf:"mirror_reads,omitempty"`
+
+	// (Number) Minimum delay before a migrated chunk is deleted from the source shard. For more information, see the orphanCleanupDelaySecs description in the official documentation.
+	// Minimum delay before a migrated chunk is deleted from the source shard. For more information, see the [orphanCleanupDelaySecs](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.orphanCleanupDelaySecs) description in the official documentation.
+	OrphanCleanupDelaySecs *float64 `json:"orphanCleanupDelaySecs,omitempty" tf:"orphan_cleanup_delay_secs,omitempty"`
+
+	// (Number) Specifies the maximum batch size used for updating the persisted chunk cache. For more information, see the persistedChunkCacheUpdateMaxBatchSize description in the official documentation.
+	// Specifies the maximum batch size used for updating the persisted chunk cache. For more information, see the [persistedChunkCacheUpdateMaxBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.persistedChunkCacheUpdateMaxBatchSize) description in the official documentation.
+	PersistedChunkCacheUpdateMaxBatchSize *float64 `json:"persistedChunkCacheUpdateMaxBatchSize,omitempty" tf:"persisted_chunk_cache_update_max_batch_size,omitempty"`
+
+	// (Number) The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the rangeDeleterBatchDelayMS description in the official documentation.
+	// The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the [rangeDeleterBatchDelayMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.rangeDeleterBatchDelayMS) description in the official documentation.
+	RangeDeleterBatchDelayMs *float64 `json:"rangeDeleterBatchDelayMs,omitempty" tf:"range_deleter_batch_delay_ms,omitempty"`
+
+	// (Number) The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the rangeDeleterBatchSize description in the official documentation.
+	// The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the [rangeDeleterBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.rangeDeleterBatchSize) description in the official documentation.
+	RangeDeleterBatchSize *float64 `json:"rangeDeleterBatchSize,omitempty" tf:"range_deleter_batch_size,omitempty"`
+}
+
+type MongodSetParameterObservation struct {
+
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// (Boolean) Enables the flow control. Can be either true or false. For more information, see the enableFlowControl description in the official documentation.
+	// Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
+	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
+
+	// (Number) The target maximum majority committed lag when running with flow control. For more information, see the flowControlTargetLagSeconds description in the official documentation.
+	// The target maximum majority committed lag when running with flow control. For more information, see the [flowControlTargetLagSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.flowControlTargetLagSeconds) description in the official documentation.
+	FlowControlTargetLagSeconds *float64 `json:"flowControlTargetLagSeconds,omitempty" tf:"flow_control_target_lag_seconds,omitempty"`
+
+	// (Number) The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved. For more information, see the flowControlWarnThresholdSeconds description in the official documentation.
+	// The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved. For more information, see the [flowControlWarnThresholdSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.flowControlWarnThresholdSeconds) description in the official documentation.
+	FlowControlWarnThresholdSeconds *float64 `json:"flowControlWarnThresholdSeconds,omitempty" tf:"flow_control_warn_threshold_seconds,omitempty"`
+
+	// (Number) Time in milliseconds to wait between batches of insertions during cloning step of the migration process. For more information, see the migrateCloneInsertionBatchDelayMs description in the official documentation.
+	// Time in milliseconds to wait between batches of insertions during cloning step of the migration process. For more information, see the [migrateCloneInsertionBatchDelayMs](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.migrateCloneInsertionBatchDelayMS) description in the official documentation.
+	MigrateCloneInsertionBatchDelayMs *float64 `json:"migrateCloneInsertionBatchDelayMs,omitempty" tf:"migrate_clone_insertion_batch_delay_ms,omitempty"`
+
+	// (Number) The maximum number of documents to insert in a single batch during the cloning step of the migration process. For more information, see the migrateCloneInsertionBatchSize description in the official documentation.
+	// The maximum number of documents to insert in a single batch during the cloning step of the migration process. For more information, see the [migrateCloneInsertionBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.migrateCloneInsertionBatchSize) description in the official documentation.
+	MigrateCloneInsertionBatchSize *float64 `json:"migrateCloneInsertionBatchSize,omitempty" tf:"migrate_clone_insertion_batch_size,omitempty"`
+
+	// (Number) The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the minSnapshotHistoryWindowInSeconds description in the official documentation.
+	// The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the [minSnapshotHistoryWindowInSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.minSnapshotHistoryWindowInSeconds) description in the official documentation.
+	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
+
+	// (Block List, Max: 1) A set of MongoDB Mirror Reads settings (see the mirrorReads option). (see below for nested schema)
+	// A set of MongoDB Mirror Reads settings (see the [mirrorReads](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) option).
+	MirrorReads []MirrorReadsObservation `json:"mirrorReads,omitempty" tf:"mirror_reads,omitempty"`
+
+	// (Number) Minimum delay before a migrated chunk is deleted from the source shard. For more information, see the orphanCleanupDelaySecs description in the official documentation.
+	// Minimum delay before a migrated chunk is deleted from the source shard. For more information, see the [orphanCleanupDelaySecs](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.orphanCleanupDelaySecs) description in the official documentation.
+	OrphanCleanupDelaySecs *float64 `json:"orphanCleanupDelaySecs,omitempty" tf:"orphan_cleanup_delay_secs,omitempty"`
+
+	// (Number) Specifies the maximum batch size used for updating the persisted chunk cache. For more information, see the persistedChunkCacheUpdateMaxBatchSize description in the official documentation.
+	// Specifies the maximum batch size used for updating the persisted chunk cache. For more information, see the [persistedChunkCacheUpdateMaxBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.persistedChunkCacheUpdateMaxBatchSize) description in the official documentation.
+	PersistedChunkCacheUpdateMaxBatchSize *float64 `json:"persistedChunkCacheUpdateMaxBatchSize,omitempty" tf:"persisted_chunk_cache_update_max_batch_size,omitempty"`
+
+	// (Number) The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the rangeDeleterBatchDelayMS description in the official documentation.
+	// The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the [rangeDeleterBatchDelayMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.rangeDeleterBatchDelayMS) description in the official documentation.
+	RangeDeleterBatchDelayMs *float64 `json:"rangeDeleterBatchDelayMs,omitempty" tf:"range_deleter_batch_delay_ms,omitempty"`
+
+	// (Number) The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the rangeDeleterBatchSize description in the official documentation.
+	// The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the [rangeDeleterBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.rangeDeleterBatchSize) description in the official documentation.
+	RangeDeleterBatchSize *float64 `json:"rangeDeleterBatchSize,omitempty" tf:"range_deleter_batch_size,omitempty"`
+}
+
+type MongodSetParameterParameters struct {
+
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// (Boolean) Enables the flow control. Can be either true or false. For more information, see the enableFlowControl description in the official documentation.
+	// Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
+
+	// (Number) The target maximum majority committed lag when running with flow control. For more information, see the flowControlTargetLagSeconds description in the official documentation.
+	// The target maximum majority committed lag when running with flow control. For more information, see the [flowControlTargetLagSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.flowControlTargetLagSeconds) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	FlowControlTargetLagSeconds *float64 `json:"flowControlTargetLagSeconds,omitempty" tf:"flow_control_target_lag_seconds,omitempty"`
+
+	// (Number) The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved. For more information, see the flowControlWarnThresholdSeconds description in the official documentation.
+	// The amount of time to wait to log a warning once the flow control mechanism detects the majority commit point has not moved. For more information, see the [flowControlWarnThresholdSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.flowControlWarnThresholdSeconds) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	FlowControlWarnThresholdSeconds *float64 `json:"flowControlWarnThresholdSeconds,omitempty" tf:"flow_control_warn_threshold_seconds,omitempty"`
+
+	// (Number) Time in milliseconds to wait between batches of insertions during cloning step of the migration process. For more information, see the migrateCloneInsertionBatchDelayMs description in the official documentation.
+	// Time in milliseconds to wait between batches of insertions during cloning step of the migration process. For more information, see the [migrateCloneInsertionBatchDelayMs](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.migrateCloneInsertionBatchDelayMS) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MigrateCloneInsertionBatchDelayMs *float64 `json:"migrateCloneInsertionBatchDelayMs,omitempty" tf:"migrate_clone_insertion_batch_delay_ms,omitempty"`
+
+	// (Number) The maximum number of documents to insert in a single batch during the cloning step of the migration process. For more information, see the migrateCloneInsertionBatchSize description in the official documentation.
+	// The maximum number of documents to insert in a single batch during the cloning step of the migration process. For more information, see the [migrateCloneInsertionBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.migrateCloneInsertionBatchSize) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MigrateCloneInsertionBatchSize *float64 `json:"migrateCloneInsertionBatchSize,omitempty" tf:"migrate_clone_insertion_batch_size,omitempty"`
+
+	// (Number) The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the minSnapshotHistoryWindowInSeconds description in the official documentation.
+	// The minimum time window in seconds for which the storage engine keeps the snapshot history. For more information, see the [minSnapshotHistoryWindowInSeconds](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.minSnapshotHistoryWindowInSeconds) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
+
+	// (Block List, Max: 1) A set of MongoDB Mirror Reads settings (see the mirrorReads option). (see below for nested schema)
+	// A set of MongoDB Mirror Reads settings (see the [mirrorReads](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.mirrorReads) option).
+	// +kubebuilder:validation:Optional
+	MirrorReads []MirrorReadsParameters `json:"mirrorReads,omitempty" tf:"mirror_reads,omitempty"`
+
+	// (Number) Minimum delay before a migrated chunk is deleted from the source shard. For more information, see the orphanCleanupDelaySecs description in the official documentation.
+	// Minimum delay before a migrated chunk is deleted from the source shard. For more information, see the [orphanCleanupDelaySecs](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.orphanCleanupDelaySecs) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	OrphanCleanupDelaySecs *float64 `json:"orphanCleanupDelaySecs,omitempty" tf:"orphan_cleanup_delay_secs,omitempty"`
+
+	// (Number) Specifies the maximum batch size used for updating the persisted chunk cache. For more information, see the persistedChunkCacheUpdateMaxBatchSize description in the official documentation.
+	// Specifies the maximum batch size used for updating the persisted chunk cache. For more information, see the [persistedChunkCacheUpdateMaxBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.persistedChunkCacheUpdateMaxBatchSize) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	PersistedChunkCacheUpdateMaxBatchSize *float64 `json:"persistedChunkCacheUpdateMaxBatchSize,omitempty" tf:"persisted_chunk_cache_update_max_batch_size,omitempty"`
+
+	// (Number) The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the rangeDeleterBatchDelayMS description in the official documentation.
+	// The amount of time in milliseconds to wait before the next batch of deletion during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the [rangeDeleterBatchDelayMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.rangeDeleterBatchDelayMS) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	RangeDeleterBatchDelayMs *float64 `json:"rangeDeleterBatchDelayMs,omitempty" tf:"range_deleter_batch_delay_ms,omitempty"`
+
+	// (Number) The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the rangeDeleterBatchSize description in the official documentation.
+	// The maximum number of documents in each batch to delete during the cleanup stage of chunk migration (or the cleanupOrphaned command). For more information, see the [rangeDeleterBatchSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.rangeDeleterBatchSize) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	RangeDeleterBatchSize *float64 `json:"rangeDeleterBatchSize,omitempty" tf:"range_deleter_batch_size,omitempty"`
+}
+
 type MongodStorageInitParameters struct {
 
+	// (Block List, Max: 1) The durability journal to ensure data files remain valid and recoverable. (see below for nested schema)
 	// The durability journal to ensure data files remain valid and recoverable.
-	// The structure is documented below.
 	Journal []JournalInitParameters `json:"journal,omitempty" tf:"journal,omitempty"`
 
-	// The WiredTiger engine settings.
-	// (see the storage.wiredTiger option).
-	// These settings available only on mongod hosts. The structure is documented below.
+	// (Block List, Max: 1) The WiredTiger engine settings. (see the storage.wiredTiger option). (see below for nested schema)
+	// The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option). These settings available only on `mongod` hosts.
 	WiredTiger []StorageWiredTigerInitParameters `json:"wiredTiger,omitempty" tf:"wired_tiger,omitempty"`
 }
 
 type MongodStorageObservation struct {
 
+	// (Block List, Max: 1) The durability journal to ensure data files remain valid and recoverable. (see below for nested schema)
 	// The durability journal to ensure data files remain valid and recoverable.
-	// The structure is documented below.
 	Journal []JournalObservation `json:"journal,omitempty" tf:"journal,omitempty"`
 
-	// The WiredTiger engine settings.
-	// (see the storage.wiredTiger option).
-	// These settings available only on mongod hosts. The structure is documented below.
+	// (Block List, Max: 1) The WiredTiger engine settings. (see the storage.wiredTiger option). (see below for nested schema)
+	// The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option). These settings available only on `mongod` hosts.
 	WiredTiger []StorageWiredTigerObservation `json:"wiredTiger,omitempty" tf:"wired_tiger,omitempty"`
 }
 
 type MongodStorageParameters struct {
 
+	// (Block List, Max: 1) The durability journal to ensure data files remain valid and recoverable. (see below for nested schema)
 	// The durability journal to ensure data files remain valid and recoverable.
-	// The structure is documented below.
 	// +kubebuilder:validation:Optional
 	Journal []JournalParameters `json:"journal,omitempty" tf:"journal,omitempty"`
 
-	// The WiredTiger engine settings.
-	// (see the storage.wiredTiger option).
-	// These settings available only on mongod hosts. The structure is documented below.
+	// (Block List, Max: 1) The WiredTiger engine settings. (see the storage.wiredTiger option). (see below for nested schema)
+	// The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option). These settings available only on `mongod` hosts.
 	// +kubebuilder:validation:Optional
 	WiredTiger []StorageWiredTigerParameters `json:"wiredTiger,omitempty" tf:"wired_tiger,omitempty"`
 }
 
+type MongodbClusterClusterConfigInitParameters struct {
+
+	// (Block List, Max: 1) Access policy to the MongoDB cluster. (see below for nested schema)
+	// Access policy to the MongoDB cluster.
+	Access []ClusterConfigAccessInitParameters `json:"access,omitempty" tf:"access,omitempty"`
+
+	// (Number) Retain period of automatically created backup in days.
+	// Retain period of automatically created backup in days.
+	BackupRetainPeriodDays *float64 `json:"backupRetainPeriodDays,omitempty" tf:"backup_retain_period_days,omitempty"`
+
+	// (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+	// Time to start the daily backup, in the UTC timezone.
+	BackupWindowStart []ClusterConfigBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// (String) Feature compatibility version of MongoDB. If not provided version is taken. Can be either 6.0, 5.0, 4.4 and 4.2.
+	// Feature compatibility version of MongoDB. If not provided version is taken. Can be either `6.0`, `5.0`, `4.4` and `4.2`.
+	FeatureCompatibilityVersion *string `json:"featureCompatibilityVersion,omitempty" tf:"feature_compatibility_version,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongocfg service. (see below for nested schema)
+	// Configuration of the mongocfg service.
+	Mongocfg []MongocfgInitParameters `json:"mongocfg,omitempty" tf:"mongocfg,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongod service. (see below for nested schema)
+	// Configuration of the mongod service.
+	Mongod []MongodInitParameters `json:"mongod,omitempty" tf:"mongod,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongos service. (see below for nested schema)
+	// Configuration of the mongos service.
+	Mongos []MongosInitParameters `json:"mongos,omitempty" tf:"mongos,omitempty"`
+
+	// (Block List, Max: 1) Performance diagnostics to the MongoDB cluster. (see below for nested schema)
+	// Performance diagnostics to the MongoDB cluster.
+	PerformanceDiagnostics []PerformanceDiagnosticsInitParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
+
+	// enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.
+	// Version of the MongoDB server software. Can be either `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0` and `6.0-enterprise`.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type MongodbClusterClusterConfigObservation struct {
+
+	// (Block List, Max: 1) Access policy to the MongoDB cluster. (see below for nested schema)
+	// Access policy to the MongoDB cluster.
+	Access []ClusterConfigAccessObservation `json:"access,omitempty" tf:"access,omitempty"`
+
+	// (Number) Retain period of automatically created backup in days.
+	// Retain period of automatically created backup in days.
+	BackupRetainPeriodDays *float64 `json:"backupRetainPeriodDays,omitempty" tf:"backup_retain_period_days,omitempty"`
+
+	// (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+	// Time to start the daily backup, in the UTC timezone.
+	BackupWindowStart []ClusterConfigBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// (String) Feature compatibility version of MongoDB. If not provided version is taken. Can be either 6.0, 5.0, 4.4 and 4.2.
+	// Feature compatibility version of MongoDB. If not provided version is taken. Can be either `6.0`, `5.0`, `4.4` and `4.2`.
+	FeatureCompatibilityVersion *string `json:"featureCompatibilityVersion,omitempty" tf:"feature_compatibility_version,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongocfg service. (see below for nested schema)
+	// Configuration of the mongocfg service.
+	Mongocfg []MongocfgObservation `json:"mongocfg,omitempty" tf:"mongocfg,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongod service. (see below for nested schema)
+	// Configuration of the mongod service.
+	Mongod []MongodObservation `json:"mongod,omitempty" tf:"mongod,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongos service. (see below for nested schema)
+	// Configuration of the mongos service.
+	Mongos []MongosObservation `json:"mongos,omitempty" tf:"mongos,omitempty"`
+
+	// (Block List, Max: 1) Performance diagnostics to the MongoDB cluster. (see below for nested schema)
+	// Performance diagnostics to the MongoDB cluster.
+	PerformanceDiagnostics []PerformanceDiagnosticsObservation `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
+
+	// enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.
+	// Version of the MongoDB server software. Can be either `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0` and `6.0-enterprise`.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type MongodbClusterClusterConfigParameters struct {
+
+	// (Block List, Max: 1) Access policy to the MongoDB cluster. (see below for nested schema)
+	// Access policy to the MongoDB cluster.
+	// +kubebuilder:validation:Optional
+	Access []ClusterConfigAccessParameters `json:"access,omitempty" tf:"access,omitempty"`
+
+	// (Number) Retain period of automatically created backup in days.
+	// Retain period of automatically created backup in days.
+	// +kubebuilder:validation:Optional
+	BackupRetainPeriodDays *float64 `json:"backupRetainPeriodDays,omitempty" tf:"backup_retain_period_days,omitempty"`
+
+	// (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+	// Time to start the daily backup, in the UTC timezone.
+	// +kubebuilder:validation:Optional
+	BackupWindowStart []ClusterConfigBackupWindowStartParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
+
+	// (String) Feature compatibility version of MongoDB. If not provided version is taken. Can be either 6.0, 5.0, 4.4 and 4.2.
+	// Feature compatibility version of MongoDB. If not provided version is taken. Can be either `6.0`, `5.0`, `4.4` and `4.2`.
+	// +kubebuilder:validation:Optional
+	FeatureCompatibilityVersion *string `json:"featureCompatibilityVersion,omitempty" tf:"feature_compatibility_version,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongocfg service. (see below for nested schema)
+	// Configuration of the mongocfg service.
+	// +kubebuilder:validation:Optional
+	Mongocfg []MongocfgParameters `json:"mongocfg,omitempty" tf:"mongocfg,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongod service. (see below for nested schema)
+	// Configuration of the mongod service.
+	// +kubebuilder:validation:Optional
+	Mongod []MongodParameters `json:"mongod,omitempty" tf:"mongod,omitempty"`
+
+	// (Block List, Max: 1) Configuration of the mongos service. (see below for nested schema)
+	// Configuration of the mongos service.
+	// +kubebuilder:validation:Optional
+	Mongos []MongosParameters `json:"mongos,omitempty" tf:"mongos,omitempty"`
+
+	// (Block List, Max: 1) Performance diagnostics to the MongoDB cluster. (see below for nested schema)
+	// Performance diagnostics to the MongoDB cluster.
+	// +kubebuilder:validation:Optional
+	PerformanceDiagnostics []PerformanceDiagnosticsParameters `json:"performanceDiagnostics,omitempty" tf:"performance_diagnostics,omitempty"`
+
+	// enterprise, 5.0, 5.0-enterprise, 6.0 and 6.0-enterprise.
+	// Version of the MongoDB server software. Can be either `4.2`, `4.4`, `4.4-enterprise`, `5.0`, `5.0-enterprise`, `6.0` and `6.0-enterprise`.
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version" tf:"version,omitempty"`
+}
+
 type MongodbClusterDatabaseInitParameters struct {
 
+	// (String) The resource name.
 	// The name of the database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type MongodbClusterDatabaseObservation struct {
 
+	// (String) The resource name.
 	// The name of the database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type MongodbClusterDatabaseParameters struct {
 
+	// (String) The resource name.
 	// The name of the database.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -696,20 +1218,24 @@ type MongodbClusterDatabaseParameters struct {
 
 type MongodbClusterHostInitParameters struct {
 
-	// Should this host have assigned public IP assigned. Can be either true or false.
+	// (Boolean) Should this host have assigned public IP assigned. Can be either true or false.
+	// Should this host have assigned public IP assigned. Can be either `true` or `false`.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Block List, Max: 1) The parameters of mongod host in replicaset. (see below for nested schema)
 	// The parameters of mongod host in replicaset.
 	HostParameters []HostParametersInitParameters `json:"hostParameters,omitempty" tf:"host_parameters,omitempty"`
 
+	// (String) The role of the cluster (either PRIMARY or SECONDARY).
 	// The role of the cluster (either PRIMARY or SECONDARY).
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (String) The name of the shard to which the host belongs. Only for sharded cluster.
 	// The name of the shard to which the host belongs. Only for sharded cluster.
 	ShardName *string `json:"shardName,omitempty" tf:"shard_name,omitempty"`
 
-	// The ID of the subnet, to which the host belongs. The subnet must
-	// be a part of the network to which the cluster belongs.
+	// (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -721,66 +1247,78 @@ type MongodbClusterHostInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// type of mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// (String) Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to `mongod`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The availability zone where the MongoDB host will be created.
-	// For more information see the official documentation.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type MongodbClusterHostObservation struct {
 
-	// Should this host have assigned public IP assigned. Can be either true or false.
+	// (Boolean) Should this host have assigned public IP assigned. Can be either true or false.
+	// Should this host have assigned public IP assigned. Can be either `true` or `false`.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// (Computed) The health of the host.
+	// (String) Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN. For more information see health field of JSON representation in the official documentation.
+	// The health of the host.
 	Health *string `json:"health,omitempty" tf:"health,omitempty"`
 
+	// (Block List, Max: 1) The parameters of mongod host in replicaset. (see below for nested schema)
 	// The parameters of mongod host in replicaset.
 	HostParameters []HostParametersObservation `json:"hostParameters,omitempty" tf:"host_parameters,omitempty"`
 
-	// (Computed) The fully qualified domain name of the host. Computed on server side.
+	// (String) The resource name.
+	// The fully qualified domain name of the host. Computed on server side.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) The role of the cluster (either PRIMARY or SECONDARY).
 	// The role of the cluster (either PRIMARY or SECONDARY).
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (String) The name of the shard to which the host belongs. Only for sharded cluster.
 	// The name of the shard to which the host belongs. Only for sharded cluster.
 	ShardName *string `json:"shardName,omitempty" tf:"shard_name,omitempty"`
 
-	// The ID of the subnet, to which the host belongs. The subnet must
-	// be a part of the network to which the cluster belongs.
+	// (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// type of mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// (String) Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to `mongod`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The availability zone where the MongoDB host will be created.
-	// For more information see the official documentation.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type MongodbClusterHostParameters struct {
 
-	// Should this host have assigned public IP assigned. Can be either true or false.
+	// (Boolean) Should this host have assigned public IP assigned. Can be either true or false.
+	// Should this host have assigned public IP assigned. Can be either `true` or `false`.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Block List, Max: 1) The parameters of mongod host in replicaset. (see below for nested schema)
 	// The parameters of mongod host in replicaset.
 	// +kubebuilder:validation:Optional
 	HostParameters []HostParametersParameters `json:"hostParameters,omitempty" tf:"host_parameters,omitempty"`
 
+	// (String) The role of the cluster (either PRIMARY or SECONDARY).
 	// The role of the cluster (either PRIMARY or SECONDARY).
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (String) The name of the shard to which the host belongs. Only for sharded cluster.
 	// The name of the shard to which the host belongs. Only for sharded cluster.
 	// +kubebuilder:validation:Optional
 	ShardName *string `json:"shardName,omitempty" tf:"shard_name,omitempty"`
 
-	// The ID of the subnet, to which the host belongs. The subnet must
-	// be a part of the network to which the cluster belongs.
+	// (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+	// The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -793,38 +1331,65 @@ type MongodbClusterHostParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.NamespacedSelector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// type of mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// (String) Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to `mongod`.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// The availability zone where the MongoDB host will be created.
-	// For more information see the official documentation.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId" tf:"zone_id,omitempty"`
 }
 
 type MongodbClusterInitParameters struct {
 
-	// Configuration of the MongoDB subcluster. The structure is documented below.
-	ClusterConfig []ClusterConfigInitParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
+	// (Block List, Min: 1, Max: 1) Configuration of the MongoDB subcluster. (see below for nested schema)
+	// Configuration of the MongoDB subcluster.
+	ClusterConfig []MongodbClusterClusterConfigInitParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
+	// (String) The ID of the cluster.
 	// The ID of the cluster.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// A database of the MongoDB cluster. The structure is documented below.
+	// (Block Set, Deprecated) A database of the MongoDB cluster. (see below for nested schema)
+	// A database of the MongoDB cluster.
 	Database []MongodbClusterDatabaseInitParameters `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the MongoDB cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
+	// (String) ID of the KMS key for cluster disk encryption.
+	// ID of the KMS key for cluster disk encryption.
+	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongocfg. (see below for nested schema)
+	// Disk size autoscaling settings for mongocfg.
+	DiskSizeAutoscalingMongocfg []DiskSizeAutoscalingMongocfgInitParameters `json:"diskSizeAutoscalingMongocfg,omitempty" tf:"disk_size_autoscaling_mongocfg,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongod. (see below for nested schema)
+	// Disk size autoscaling settings for mongod.
+	DiskSizeAutoscalingMongod []DiskSizeAutoscalingMongodInitParameters `json:"diskSizeAutoscalingMongod,omitempty" tf:"disk_size_autoscaling_mongod,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongoinfra. (see below for nested schema)
+	// Disk size autoscaling settings for mongoinfra.
+	DiskSizeAutoscalingMongoinfra []DiskSizeAutoscalingMongoinfraInitParameters `json:"diskSizeAutoscalingMongoinfra,omitempty" tf:"disk_size_autoscaling_mongoinfra,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongos. (see below for nested schema)
+	// Disk size autoscaling settings for mongos.
+	DiskSizeAutoscalingMongos []DiskSizeAutoscalingMongosInitParameters `json:"diskSizeAutoscalingMongos,omitempty" tf:"disk_size_autoscaling_mongos,omitempty"`
+
+	// (String) Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
+	// Deployment environment of the MongoDB cluster. Can be either `PRESTABLE` or `PRODUCTION`.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -836,20 +1401,25 @@ type MongodbClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A host of the MongoDB cluster. The structure is documented below.
+	// (Block List, Min: 1) A host of the MongoDB cluster. (see below for nested schema)
+	// A host of the MongoDB cluster.
 	Host []MongodbClusterHostInitParameters `json:"host,omitempty" tf:"host,omitempty"`
 
-	// A set of key/value label pairs to assign to the MongoDB cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Maintenance window settings of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Maintenance window settings of the MongoDB cluster. (see below for nested schema)
+	// Maintenance window settings of the MongoDB cluster.
 	MaintenanceWindow []MongodbClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Name of the MongoDB cluster. Provided by the client when the cluster is created.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the MongoDB cluster belongs.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Network
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
@@ -861,25 +1431,32 @@ type MongodbClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkIDSelector *v1.NamespacedSelector `json:"networkIdSelector,omitempty" tf:"-"`
 
-	// (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1, Deprecated) (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. (see below for nested schema)
+	// (**DEPRECATED**, use `resources_*` instead) Resources allocated to hosts of the MongoDB cluster.
 	Resources []MongodbClusterResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Resources allocated to mongocfg hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongocfg hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongocfg` hosts of the MongoDB cluster.
 	ResourcesMongocfg []ResourcesMongocfgInitParameters `json:"resourcesMongocfg,omitempty" tf:"resources_mongocfg,omitempty"`
 
-	// Resources allocated to mongod hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongod hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongod` hosts of the MongoDB cluster.
 	ResourcesMongod []ResourcesMongodInitParameters `json:"resourcesMongod,omitempty" tf:"resources_mongod,omitempty"`
 
-	// Resources allocated to mongoinfra hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongoinfra hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongoinfra` hosts of the MongoDB cluster.
 	ResourcesMongoinfra []ResourcesMongoinfraInitParameters `json:"resourcesMongoinfra,omitempty" tf:"resources_mongoinfra,omitempty"`
 
-	// Resources allocated to mongos hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongos hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongos` hosts of the MongoDB cluster.
 	ResourcesMongos []ResourcesMongosInitParameters `json:"resourcesMongos,omitempty" tf:"resources_mongos,omitempty"`
 
-	// The cluster will be created from the specified backup. The structure is documented below.
-	Restore []RestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+	// (Block List, Max: 1) The cluster will be created from the specified backup. (see below for nested schema)
+	// The cluster will be created from the specified backup.
+	Restore []MongodbClusterRestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.SecurityGroup
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -892,159 +1469,242 @@ type MongodbClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// A user of the MongoDB cluster. The structure is documented below.
+	// (Block Set, Deprecated) A user of the MongoDB cluster. (see below for nested schema)
+	// A user of the MongoDB cluster.
 	User []MongodbClusterUserInitParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type MongodbClusterMaintenanceWindowInitParameters struct {
 
-	// Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// (String) Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
+	// 24) for maintenance window if window type is weekly.
 	// Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String) Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type MongodbClusterMaintenanceWindowObservation struct {
 
-	// Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// (String) Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
+	// 24) for maintenance window if window type is weekly.
 	// Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String) Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type MongodbClusterMaintenanceWindowParameters struct {
 
-	// Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// (String) Day of week for maintenance window if window type is weekly. Possible values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// Day of week for maintenance window if window type is weekly. Possible values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
 	// +kubebuilder:validation:Optional
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
+	// 24) for maintenance window if window type is weekly.
 	// Hour of day in UTC time zone (1-24) for maintenance window if window type is weekly.
 	// +kubebuilder:validation:Optional
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String) Type of Mongo daemon which runs on this host (mongod, mongos, mongocfg, mongoinfra). Defaults to mongod.
+	// Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MongodbClusterObservation struct {
 
-	// Configuration of the MongoDB subcluster. The structure is documented below.
-	ClusterConfig []ClusterConfigObservation `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
+	// (Block List, Min: 1, Max: 1) Configuration of the MongoDB subcluster. (see below for nested schema)
+	// Configuration of the MongoDB subcluster.
+	ClusterConfig []MongodbClusterClusterConfigObservation `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
+	// (String) The ID of the cluster.
 	// The ID of the cluster.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// Creation timestamp of the key.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// A database of the MongoDB cluster. The structure is documented below.
+	// (Block Set, Deprecated) A database of the MongoDB cluster. (see below for nested schema)
+	// A database of the MongoDB cluster.
 	Database []MongodbClusterDatabaseObservation `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the MongoDB cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
+	// (String) ID of the KMS key for cluster disk encryption.
+	// ID of the KMS key for cluster disk encryption.
+	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongocfg. (see below for nested schema)
+	// Disk size autoscaling settings for mongocfg.
+	DiskSizeAutoscalingMongocfg []DiskSizeAutoscalingMongocfgObservation `json:"diskSizeAutoscalingMongocfg,omitempty" tf:"disk_size_autoscaling_mongocfg,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongod. (see below for nested schema)
+	// Disk size autoscaling settings for mongod.
+	DiskSizeAutoscalingMongod []DiskSizeAutoscalingMongodObservation `json:"diskSizeAutoscalingMongod,omitempty" tf:"disk_size_autoscaling_mongod,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongoinfra. (see below for nested schema)
+	// Disk size autoscaling settings for mongoinfra.
+	DiskSizeAutoscalingMongoinfra []DiskSizeAutoscalingMongoinfraObservation `json:"diskSizeAutoscalingMongoinfra,omitempty" tf:"disk_size_autoscaling_mongoinfra,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongos. (see below for nested schema)
+	// Disk size autoscaling settings for mongos.
+	DiskSizeAutoscalingMongos []DiskSizeAutoscalingMongosObservation `json:"diskSizeAutoscalingMongos,omitempty" tf:"disk_size_autoscaling_mongos,omitempty"`
+
+	// (String) Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
+	// Deployment environment of the MongoDB cluster. Can be either `PRESTABLE` or `PRODUCTION`.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN.
-	// For more information see health field of JSON representation in the official documentation.
+	// (String) Aggregated health of the cluster. Can be either ALIVE, DEGRADED, DEAD or HEALTH_UNKNOWN. For more information see health field of JSON representation in the official documentation.
+	// Aggregated health of the cluster. Can be either `ALIVE`, `DEGRADED`, `DEAD` or `HEALTH_UNKNOWN`. For more information see `health` field of JSON representation in [the official documentation](https://yandex.cloud/docs/managed-mongodb/api-ref/Cluster/).
 	Health *string `json:"health,omitempty" tf:"health,omitempty"`
 
-	// A host of the MongoDB cluster. The structure is documented below.
+	// (Block List, Min: 1) A host of the MongoDB cluster. (see below for nested schema)
+	// A host of the MongoDB cluster.
 	Host []MongodbClusterHostObservation `json:"host,omitempty" tf:"host,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the MongoDB cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Maintenance window settings of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Maintenance window settings of the MongoDB cluster. (see below for nested schema)
+	// Maintenance window settings of the MongoDB cluster.
 	MaintenanceWindow []MongodbClusterMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Name of the MongoDB cluster. Provided by the client when the cluster is created.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the MongoDB cluster belongs.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
-	// (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1, Deprecated) (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. (see below for nested schema)
+	// (**DEPRECATED**, use `resources_*` instead) Resources allocated to hosts of the MongoDB cluster.
 	Resources []MongodbClusterResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Resources allocated to mongocfg hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongocfg hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongocfg` hosts of the MongoDB cluster.
 	ResourcesMongocfg []ResourcesMongocfgObservation `json:"resourcesMongocfg,omitempty" tf:"resources_mongocfg,omitempty"`
 
-	// Resources allocated to mongod hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongod hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongod` hosts of the MongoDB cluster.
 	ResourcesMongod []ResourcesMongodObservation `json:"resourcesMongod,omitempty" tf:"resources_mongod,omitempty"`
 
-	// Resources allocated to mongoinfra hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongoinfra hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongoinfra` hosts of the MongoDB cluster.
 	ResourcesMongoinfra []ResourcesMongoinfraObservation `json:"resourcesMongoinfra,omitempty" tf:"resources_mongoinfra,omitempty"`
 
-	// Resources allocated to mongos hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongos hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongos` hosts of the MongoDB cluster.
 	ResourcesMongos []ResourcesMongosObservation `json:"resourcesMongos,omitempty" tf:"resources_mongos,omitempty"`
 
-	// The cluster will be created from the specified backup. The structure is documented below.
-	Restore []RestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
+	// (Block List, Max: 1) The cluster will be created from the specified backup. (see below for nested schema)
+	// The cluster will be created from the specified backup.
+	Restore []MongodbClusterRestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// (Boolean) MongoDB Cluster mode enabled/disabled.
 	// MongoDB Cluster mode enabled/disabled.
 	Sharded *bool `json:"sharded,omitempty" tf:"sharded,omitempty"`
 
-	// Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN.
-	// For more information see status field of JSON representation in the official documentation.
+	// (String) Status of the cluster. Can be either CREATING, STARTING, RUNNING, UPDATING, STOPPING, STOPPED, ERROR or STATUS_UNKNOWN. For more information see status field of JSON representation in the official documentation.
+	// Status of the cluster. Can be either `CREATING`, `STARTING`, `RUNNING`, `UPDATING`, `STOPPING`, `STOPPED`, `ERROR` or `STATUS_UNKNOWN`. For more information see `status` field of JSON representation in [the official documentation](https://yandex.cloud/docs/managed-mongodb/api-ref/Cluster/).
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// A user of the MongoDB cluster. The structure is documented below.
+	// (Block Set, Deprecated) A user of the MongoDB cluster. (see below for nested schema)
+	// A user of the MongoDB cluster.
 	User []MongodbClusterUserObservation `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type MongodbClusterParameters struct {
 
-	// Configuration of the MongoDB subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Configuration of the MongoDB subcluster. (see below for nested schema)
+	// Configuration of the MongoDB subcluster.
 	// +kubebuilder:validation:Optional
-	ClusterConfig []ClusterConfigParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
+	ClusterConfig []MongodbClusterClusterConfigParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
+	// (String) The ID of the cluster.
 	// The ID of the cluster.
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
-	// A database of the MongoDB cluster. The structure is documented below.
+	// (Block Set, Deprecated) A database of the MongoDB cluster. (see below for nested schema)
+	// A database of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	Database []MongodbClusterDatabaseParameters `json:"database,omitempty" tf:"database,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the MongoDB cluster.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
+	// (String) ID of the KMS key for cluster disk encryption.
+	// ID of the KMS key for cluster disk encryption.
+	// +kubebuilder:validation:Optional
+	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongocfg. (see below for nested schema)
+	// Disk size autoscaling settings for mongocfg.
+	// +kubebuilder:validation:Optional
+	DiskSizeAutoscalingMongocfg []DiskSizeAutoscalingMongocfgParameters `json:"diskSizeAutoscalingMongocfg,omitempty" tf:"disk_size_autoscaling_mongocfg,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongod. (see below for nested schema)
+	// Disk size autoscaling settings for mongod.
+	// +kubebuilder:validation:Optional
+	DiskSizeAutoscalingMongod []DiskSizeAutoscalingMongodParameters `json:"diskSizeAutoscalingMongod,omitempty" tf:"disk_size_autoscaling_mongod,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongoinfra. (see below for nested schema)
+	// Disk size autoscaling settings for mongoinfra.
+	// +kubebuilder:validation:Optional
+	DiskSizeAutoscalingMongoinfra []DiskSizeAutoscalingMongoinfraParameters `json:"diskSizeAutoscalingMongoinfra,omitempty" tf:"disk_size_autoscaling_mongoinfra,omitempty"`
+
+	// (Block List, Max: 1) Disk size autoscaling settings for mongos. (see below for nested schema)
+	// Disk size autoscaling settings for mongos.
+	// +kubebuilder:validation:Optional
+	DiskSizeAutoscalingMongos []DiskSizeAutoscalingMongosParameters `json:"diskSizeAutoscalingMongos,omitempty" tf:"disk_size_autoscaling_mongos,omitempty"`
+
+	// (String) Deployment environment of the MongoDB cluster. Can be either PRESTABLE or PRODUCTION.
+	// Deployment environment of the MongoDB cluster. Can be either `PRESTABLE` or `PRODUCTION`.
 	// +kubebuilder:validation:Optional
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -1057,24 +1717,29 @@ type MongodbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A host of the MongoDB cluster. The structure is documented below.
+	// (Block List, Min: 1) A host of the MongoDB cluster. (see below for nested schema)
+	// A host of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	Host []MongodbClusterHostParameters `json:"host,omitempty" tf:"host,omitempty"`
 
-	// A set of key/value label pairs to assign to the MongoDB cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Maintenance window settings of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Maintenance window settings of the MongoDB cluster. (see below for nested schema)
+	// Maintenance window settings of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []MongodbClusterMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// Name of the MongoDB cluster. Provided by the client when the cluster is created.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the MongoDB cluster belongs.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Network
 	// +kubebuilder:validation:Optional
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
@@ -1087,31 +1752,38 @@ type MongodbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkIDSelector *v1.NamespacedSelector `json:"networkIdSelector,omitempty" tf:"-"`
 
-	// (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1, Deprecated) (DEPRECATED, use resources_* instead) Resources allocated to hosts of the MongoDB cluster. (see below for nested schema)
+	// (**DEPRECATED**, use `resources_*` instead) Resources allocated to hosts of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	Resources []MongodbClusterResourcesParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Resources allocated to mongocfg hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongocfg hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongocfg` hosts of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	ResourcesMongocfg []ResourcesMongocfgParameters `json:"resourcesMongocfg,omitempty" tf:"resources_mongocfg,omitempty"`
 
-	// Resources allocated to mongod hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongod hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongod` hosts of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	ResourcesMongod []ResourcesMongodParameters `json:"resourcesMongod,omitempty" tf:"resources_mongod,omitempty"`
 
-	// Resources allocated to mongoinfra hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongoinfra hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongoinfra` hosts of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	ResourcesMongoinfra []ResourcesMongoinfraParameters `json:"resourcesMongoinfra,omitempty" tf:"resources_mongoinfra,omitempty"`
 
-	// Resources allocated to mongos hosts of the MongoDB cluster. The structure is documented below.
+	// (Block List, Max: 1) Resources allocated to mongos hosts of the MongoDB cluster. (see below for nested schema)
+	// Resources allocated to `mongos` hosts of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	ResourcesMongos []ResourcesMongosParameters `json:"resourcesMongos,omitempty" tf:"resources_mongos,omitempty"`
 
-	// The cluster will be created from the specified backup. The structure is documented below.
+	// (Block List, Max: 1) The cluster will be created from the specified backup. (see below for nested schema)
+	// The cluster will be created from the specified backup.
 	// +kubebuilder:validation:Optional
-	Restore []RestoreParameters `json:"restore,omitempty" tf:"restore,omitempty"`
+	Restore []MongodbClusterRestoreParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -1125,264 +1797,579 @@ type MongodbClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.NamespacedSelector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
-	// A user of the MongoDB cluster. The structure is documented below.
+	// (Block Set, Deprecated) A user of the MongoDB cluster. (see below for nested schema)
+	// A user of the MongoDB cluster.
 	// +kubebuilder:validation:Optional
 	User []MongodbClusterUserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type MongodbClusterResourcesInitParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type MongodbClusterResourcesObservation struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type MongodbClusterResourcesParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
+type MongodbClusterRestoreInitParameters struct {
+
+	// (String) Backup ID. The cluster will be created from the specified backup. How to get a list of PostgreSQL backups.
+	// Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-mongodb/operations/cluster-backups).
+	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
+
+	// 01-02T15:04:05 - UTC). When not set, current time is used.
+	// Timestamp of the moment to which the MongoDB cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
+type MongodbClusterRestoreObservation struct {
+
+	// (String) Backup ID. The cluster will be created from the specified backup. How to get a list of PostgreSQL backups.
+	// Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-mongodb/operations/cluster-backups).
+	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
+
+	// 01-02T15:04:05 - UTC). When not set, current time is used.
+	// Timestamp of the moment to which the MongoDB cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
+type MongodbClusterRestoreParameters struct {
+
+	// (String) Backup ID. The cluster will be created from the specified backup. How to get a list of PostgreSQL backups.
+	// Backup ID. The cluster will be created from the specified backup. [How to get a list of PostgreSQL backups](https://yandex.cloud/docs/managed-mongodb/operations/cluster-backups).
+	// +kubebuilder:validation:Optional
+	BackupID *string `json:"backupId" tf:"backup_id,omitempty"`
+
+	// 01-02T15:04:05 - UTC). When not set, current time is used.
+	// Timestamp of the moment to which the MongoDB cluster should be restored. (Format: `2006-01-02T15:04:05` - UTC). When not set, current time is used.
+	// +kubebuilder:validation:Optional
+	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+}
+
 type MongodbClusterUserInitParameters struct {
 
+	// (String) The resource name.
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String, Sensitive) The password of the user.
 	// The password of the user.
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// Set of permissions granted to the user. The structure is documented below.
+	// (Block Set) Set of permissions granted to the user. (see below for nested schema)
+	// Set of permissions granted to the user.
 	Permission []MongodbClusterUserPermissionInitParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type MongodbClusterUserObservation struct {
 
+	// (String) The resource name.
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Set of permissions granted to the user. The structure is documented below.
+	// (Block Set) Set of permissions granted to the user. (see below for nested schema)
+	// Set of permissions granted to the user.
 	Permission []MongodbClusterUserPermissionObservation `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type MongodbClusterUserParameters struct {
 
+	// (String) The resource name.
 	// The name of the user.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
+	// (String, Sensitive) The password of the user.
 	// The password of the user.
 	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.LocalSecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
-	// Set of permissions granted to the user. The structure is documented below.
+	// (Block Set) Set of permissions granted to the user. (see below for nested schema)
+	// Set of permissions granted to the user.
 	// +kubebuilder:validation:Optional
 	Permission []MongodbClusterUserPermissionParameters `json:"permission,omitempty" tf:"permission,omitempty"`
 }
 
 type MongodbClusterUserPermissionInitParameters struct {
 
+	// (String) The name of the database that the permission grants access to.
 	// The name of the database that the permission grants access to.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The roles of the user in this database. For more information see the official documentation.
+	// (List of String) The roles of the user in this database. For more information see the official documentation.
+	// The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
 type MongodbClusterUserPermissionObservation struct {
 
+	// (String) The name of the database that the permission grants access to.
 	// The name of the database that the permission grants access to.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The roles of the user in this database. For more information see the official documentation.
+	// (List of String) The roles of the user in this database. For more information see the official documentation.
+	// The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
 type MongodbClusterUserPermissionParameters struct {
 
+	// (String) The name of the database that the permission grants access to.
 	// The name of the database that the permission grants access to.
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
-	// The roles of the user in this database. For more information see the official documentation.
+	// (List of String) The roles of the user in this database. For more information see the official documentation.
+	// The roles of the user in this database. For more information see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts/users-and-roles).
 	// +kubebuilder:validation:Optional
 	Roles []*string `json:"roles,omitempty" tf:"roles,omitempty"`
 }
 
+type MongosAuditLogInitParameters struct {
+
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+}
+
+type MongosAuditLogObservation struct {
+
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+}
+
+type MongosAuditLogParameters struct {
+
+	// (String) Configuration of the audit log filter in JSON format. For more information see auditLog.filter description in the official documentation. Available only in enterprise edition.
+	// Configuration of the audit log filter in JSON format. For more information see [auditLog.filter](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-auditLog.filter) description in the official documentation. Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+}
+
 type MongosInitParameters struct {
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	AuditLog []MongosAuditLogInitParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+
+	// (Number) The size of the chunk, in bytes. For more information, see the chunkSize description in the official documentation.
+	// The size of the chunk, in bytes. For more information, see the [chunkSize](https://www.mongodb.com/docs/manual/tutorial/modify-chunk-size-in-sharded-cluster) description in the official documentation.
+	ChunkSize *float64 `json:"chunkSize,omitempty" tf:"chunk_size,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	Net []MongosNetInitParameters `json:"net,omitempty" tf:"net,omitempty"`
+
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	SetParameter []MongosSetParameterInitParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
 }
 
 type MongosNetInitParameters struct {
 
-	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
-	// For more information, see the net.Compression.Compressors
-	// description in the official documentation.
+	// (List of String) Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make disabled the only value. For more information, see the net.Compression.Compressors description in the official documentation.
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type MongosNetObservation struct {
 
-	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
-	// For more information, see the net.Compression.Compressors
-	// description in the official documentation.
+	// (List of String) Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make disabled the only value. For more information, see the net.Compression.Compressors description in the official documentation.
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type MongosNetParameters struct {
 
-	// Specifies the default compressor(s) to use for communication between this mongod or mongos.
-	// Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make "disabled" the only value.
-	// For more information, see the net.Compression.Compressors
-	// description in the official documentation.
+	// (List of String) Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make disabled the only value. For more information, see the net.Compression.Compressors description in the official documentation.
+	// Specifies the default compressor(s) to use for communication between this mongod or mongos. Accepts array of compressors. Order matters. Available compressors: snappy, zlib, zstd, disabled. To disable network compression, make `disabled` the only value. For more information, see the [net.Compression.Compressors](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.compression.compressors) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	Compressors []*string `json:"compressors,omitempty" tf:"compressors,omitempty"`
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type MongosObservation struct {
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	AuditLog []MongosAuditLogObservation `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+
+	// (Number) The size of the chunk, in bytes. For more information, see the chunkSize description in the official documentation.
+	// The size of the chunk, in bytes. For more information, see the [chunkSize](https://www.mongodb.com/docs/manual/tutorial/modify-chunk-size-in-sharded-cluster) description in the official documentation.
+	ChunkSize *float64 `json:"chunkSize,omitempty" tf:"chunk_size,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	Net []MongosNetObservation `json:"net,omitempty" tf:"net,omitempty"`
+
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	SetParameter []MongosSetParameterObservation `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
 }
 
 type MongosParameters struct {
 
-	// A set of network settings
-	// (see the net option).
-	// The structure is documented below.
+	// (Block List, Max: 1) A set of audit log settings (see the auditLog option). Available only in enterprise edition. (see below for nested schema)
+	// A set of audit log settings (see the [auditLog](https://www.mongodb.com/docs/manual/reference/configuration-options/#auditlog-options) option). Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	AuditLog []MongosAuditLogParameters `json:"auditLog,omitempty" tf:"audit_log,omitempty"`
+
+	// (Number) The size of the chunk, in bytes. For more information, see the chunkSize description in the official documentation.
+	// The size of the chunk, in bytes. For more information, see the [chunkSize](https://www.mongodb.com/docs/manual/tutorial/modify-chunk-size-in-sharded-cluster) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ChunkSize *float64 `json:"chunkSize,omitempty" tf:"chunk_size,omitempty"`
+
+	// (Block List, Max: 1) A set of network settings (see the net option). (see below for nested schema)
+	// A set of network settings (see the [net](https://www.mongodb.com/docs/manual/reference/configuration-options/#net-options) option).
 	// +kubebuilder:validation:Optional
 	Net []MongosNetParameters `json:"net,omitempty" tf:"net,omitempty"`
+
+	// (Block List) A set of MongoDB Server Parameters (see the setParameter option). (see below for nested schema)
+	// A set of MongoDB Server Parameters (see the [setParameter](https://www.mongodb.com/docs/manual/reference/configuration-options/#setparameter-option) option).
+	// +kubebuilder:validation:Optional
+	SetParameter []MongosSetParameterParameters `json:"setParameter,omitempty" tf:"set_parameter,omitempty"`
+}
+
+type MongosSetParameterInitParameters struct {
+
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// (String) Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option. For more information, see the readHedgingMode description in the official documentation.
+	// Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option. For more information, see the [readHedgingMode](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.readHedgingMode) description in the official documentation.
+	ReadHedgingMode *string `json:"readHedgingMode,omitempty" tf:"read_hedging_mode,omitempty"`
+
+	// (Number) Maximum time that mongos goes without communication to a host before mongos drops all connections to the host. For more information, see the shardingTaskExecutorPoolHostTimeoutMS description in the official documentation.
+	// Maximum time that mongos goes without communication to a host before mongos drops all connections to the host. For more information, see the [shardingTaskExecutorPoolHostTimeoutMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolHostTimeoutMS) description in the official documentation.
+	ShardingTaskExecutorPoolHostTimeoutMs *float64 `json:"shardingTaskExecutorPoolHostTimeoutMs,omitempty" tf:"sharding_task_executor_pool_host_timeout_ms,omitempty"`
+
+	// (Number) Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance. For more information, see the shardingTaskExecutorPoolMaxConnecting description in the official documentation.
+	// Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance. For more information, see the [shardingTaskExecutorPoolMaxConnecting](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxConnecting) description in the official documentation.
+	ShardingTaskExecutorPoolMaxConnecting *float64 `json:"shardingTaskExecutorPoolMaxConnecting,omitempty" tf:"sharding_task_executor_pool_max_connecting,omitempty"`
+
+	// (Number) Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the shardingTaskExecutorPoolMaxSize description in the official documentation.
+	// Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the [shardingTaskExecutorPoolMaxSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxSize) description in the official documentation.
+	ShardingTaskExecutorPoolMaxSize *float64 `json:"shardingTaskExecutorPoolMaxSize,omitempty" tf:"sharding_task_executor_pool_max_size,omitempty"`
+
+	// (Number) Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the shardingTaskExecutorPoolMaxSizeForConfigServers description in the official documentation.
+	// Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the [shardingTaskExecutorPoolMaxSizeForConfigServers](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxSizeForConfigServers) description in the official documentation.
+	ShardingTaskExecutorPoolMaxSizeForConfigServers *float64 `json:"shardingTaskExecutorPoolMaxSizeForConfigServers,omitempty" tf:"sharding_task_executor_pool_max_size_for_config_servers,omitempty"`
+
+	// (Number) Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the shardingTaskExecutorPoolMinSize description in the official documentation.
+	// Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the [shardingTaskExecutorPoolMinSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMinSize) description in the official documentation.
+	ShardingTaskExecutorPoolMinSize *float64 `json:"shardingTaskExecutorPoolMinSize,omitempty" tf:"sharding_task_executor_pool_min_size,omitempty"`
+
+	// (Number) Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the shardingTaskExecutorPoolMinSizeForConfigServers description in the official documentation.
+	// Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the [shardingTaskExecutorPoolMinSizeForConfigServers](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMinSizeForConfigServers) description in the official documentation.
+	ShardingTaskExecutorPoolMinSizeForConfigServers *float64 `json:"shardingTaskExecutorPoolMinSizeForConfigServers,omitempty" tf:"sharding_task_executor_pool_min_size_for_config_servers,omitempty"`
+
+	// (Number) Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool. For more information, see the shardingTaskExecutorPoolRefreshRequirementMS description in the official documentation.
+	// Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool. For more information, see the [shardingTaskExecutorPoolRefreshRequirementMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolRefreshRequirementMS) description in the official documentation.
+	ShardingTaskExecutorPoolRefreshRequirementMs *float64 `json:"shardingTaskExecutorPoolRefreshRequirementMs,omitempty" tf:"sharding_task_executor_pool_refresh_requirement_ms,omitempty"`
+
+	// (Number) Maximum time the mongos waits for a heartbeat before timing out the heartbeat. For more information, see the shardingTaskExecutorPoolRefreshTimeoutMS description in the official documentation.
+	// Maximum time the mongos waits for a heartbeat before timing out the heartbeat. For more information, see the [shardingTaskExecutorPoolRefreshTimeoutMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolRefreshTimeoutMS) description in the official documentation.
+	ShardingTaskExecutorPoolRefreshTimeoutMs *float64 `json:"shardingTaskExecutorPoolRefreshTimeoutMs,omitempty" tf:"sharding_task_executor_pool_refresh_timeout_ms,omitempty"`
+
+	// (String) On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets. For more information, see the shardingTaskExecutorPoolReplicaSetMatching description in the official documentation.
+	// On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets. For more information, see the [shardingTaskExecutorPoolReplicaSetMatching](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolReplicaSetMatching) description in the official documentation.
+	ShardingTaskExecutorPoolReplicaSetMatching *string `json:"shardingTaskExecutorPoolReplicaSetMatching,omitempty" tf:"sharding_task_executor_pool_replica_set_matching,omitempty"`
+
+	// (Boolean) Configures a mongos instance to prewarm its connection pool on startup. For more information, see the warmMinConnectionsInShardingTaskExecutorPoolOnStartup description in the official documentation.
+	// Configures a mongos instance to prewarm its connection pool on startup. For more information, see the [warmMinConnectionsInShardingTaskExecutorPoolOnStartup](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.warmMinConnectionsInShardingTaskExecutorPoolOnStartup) description in the official documentation.
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartup *bool `json:"warmMinConnectionsInShardingTaskExecutorPoolOnStartup,omitempty" tf:"warm_min_connections_in_sharding_task_executor_pool_on_startup,omitempty"`
+
+	// (Number) Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter. For more information, see the warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS description in the official documentation.
+	// Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter. For more information, see the [warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS) description in the official documentation.
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs *float64 `json:"warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs,omitempty" tf:"warm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms,omitempty"`
+}
+
+type MongosSetParameterObservation struct {
+
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// (String) Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option. For more information, see the readHedgingMode description in the official documentation.
+	// Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option. For more information, see the [readHedgingMode](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.readHedgingMode) description in the official documentation.
+	ReadHedgingMode *string `json:"readHedgingMode,omitempty" tf:"read_hedging_mode,omitempty"`
+
+	// (Number) Maximum time that mongos goes without communication to a host before mongos drops all connections to the host. For more information, see the shardingTaskExecutorPoolHostTimeoutMS description in the official documentation.
+	// Maximum time that mongos goes without communication to a host before mongos drops all connections to the host. For more information, see the [shardingTaskExecutorPoolHostTimeoutMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolHostTimeoutMS) description in the official documentation.
+	ShardingTaskExecutorPoolHostTimeoutMs *float64 `json:"shardingTaskExecutorPoolHostTimeoutMs,omitempty" tf:"sharding_task_executor_pool_host_timeout_ms,omitempty"`
+
+	// (Number) Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance. For more information, see the shardingTaskExecutorPoolMaxConnecting description in the official documentation.
+	// Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance. For more information, see the [shardingTaskExecutorPoolMaxConnecting](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxConnecting) description in the official documentation.
+	ShardingTaskExecutorPoolMaxConnecting *float64 `json:"shardingTaskExecutorPoolMaxConnecting,omitempty" tf:"sharding_task_executor_pool_max_connecting,omitempty"`
+
+	// (Number) Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the shardingTaskExecutorPoolMaxSize description in the official documentation.
+	// Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the [shardingTaskExecutorPoolMaxSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxSize) description in the official documentation.
+	ShardingTaskExecutorPoolMaxSize *float64 `json:"shardingTaskExecutorPoolMaxSize,omitempty" tf:"sharding_task_executor_pool_max_size,omitempty"`
+
+	// (Number) Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the shardingTaskExecutorPoolMaxSizeForConfigServers description in the official documentation.
+	// Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the [shardingTaskExecutorPoolMaxSizeForConfigServers](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxSizeForConfigServers) description in the official documentation.
+	ShardingTaskExecutorPoolMaxSizeForConfigServers *float64 `json:"shardingTaskExecutorPoolMaxSizeForConfigServers,omitempty" tf:"sharding_task_executor_pool_max_size_for_config_servers,omitempty"`
+
+	// (Number) Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the shardingTaskExecutorPoolMinSize description in the official documentation.
+	// Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the [shardingTaskExecutorPoolMinSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMinSize) description in the official documentation.
+	ShardingTaskExecutorPoolMinSize *float64 `json:"shardingTaskExecutorPoolMinSize,omitempty" tf:"sharding_task_executor_pool_min_size,omitempty"`
+
+	// (Number) Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the shardingTaskExecutorPoolMinSizeForConfigServers description in the official documentation.
+	// Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the [shardingTaskExecutorPoolMinSizeForConfigServers](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMinSizeForConfigServers) description in the official documentation.
+	ShardingTaskExecutorPoolMinSizeForConfigServers *float64 `json:"shardingTaskExecutorPoolMinSizeForConfigServers,omitempty" tf:"sharding_task_executor_pool_min_size_for_config_servers,omitempty"`
+
+	// (Number) Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool. For more information, see the shardingTaskExecutorPoolRefreshRequirementMS description in the official documentation.
+	// Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool. For more information, see the [shardingTaskExecutorPoolRefreshRequirementMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolRefreshRequirementMS) description in the official documentation.
+	ShardingTaskExecutorPoolRefreshRequirementMs *float64 `json:"shardingTaskExecutorPoolRefreshRequirementMs,omitempty" tf:"sharding_task_executor_pool_refresh_requirement_ms,omitempty"`
+
+	// (Number) Maximum time the mongos waits for a heartbeat before timing out the heartbeat. For more information, see the shardingTaskExecutorPoolRefreshTimeoutMS description in the official documentation.
+	// Maximum time the mongos waits for a heartbeat before timing out the heartbeat. For more information, see the [shardingTaskExecutorPoolRefreshTimeoutMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolRefreshTimeoutMS) description in the official documentation.
+	ShardingTaskExecutorPoolRefreshTimeoutMs *float64 `json:"shardingTaskExecutorPoolRefreshTimeoutMs,omitempty" tf:"sharding_task_executor_pool_refresh_timeout_ms,omitempty"`
+
+	// (String) On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets. For more information, see the shardingTaskExecutorPoolReplicaSetMatching description in the official documentation.
+	// On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets. For more information, see the [shardingTaskExecutorPoolReplicaSetMatching](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolReplicaSetMatching) description in the official documentation.
+	ShardingTaskExecutorPoolReplicaSetMatching *string `json:"shardingTaskExecutorPoolReplicaSetMatching,omitempty" tf:"sharding_task_executor_pool_replica_set_matching,omitempty"`
+
+	// (Boolean) Configures a mongos instance to prewarm its connection pool on startup. For more information, see the warmMinConnectionsInShardingTaskExecutorPoolOnStartup description in the official documentation.
+	// Configures a mongos instance to prewarm its connection pool on startup. For more information, see the [warmMinConnectionsInShardingTaskExecutorPoolOnStartup](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.warmMinConnectionsInShardingTaskExecutorPoolOnStartup) description in the official documentation.
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartup *bool `json:"warmMinConnectionsInShardingTaskExecutorPoolOnStartup,omitempty" tf:"warm_min_connections_in_sharding_task_executor_pool_on_startup,omitempty"`
+
+	// (Number) Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter. For more information, see the warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS description in the official documentation.
+	// Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter. For more information, see the [warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS) description in the official documentation.
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs *float64 `json:"warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs,omitempty" tf:"warm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms,omitempty"`
+}
+
+type MongosSetParameterParameters struct {
+
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
+	// +kubebuilder:validation:Optional
+	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
+
+	// (String) Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option. For more information, see the readHedgingMode description in the official documentation.
+	// Specifies whether mongos supports hedged reads for those read operations whose read preference have enabled the hedged read option. For more information, see the [readHedgingMode](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.readHedgingMode) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ReadHedgingMode *string `json:"readHedgingMode,omitempty" tf:"read_hedging_mode,omitempty"`
+
+	// (Number) Maximum time that mongos goes without communication to a host before mongos drops all connections to the host. For more information, see the shardingTaskExecutorPoolHostTimeoutMS description in the official documentation.
+	// Maximum time that mongos goes without communication to a host before mongos drops all connections to the host. For more information, see the [shardingTaskExecutorPoolHostTimeoutMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolHostTimeoutMS) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolHostTimeoutMs *float64 `json:"shardingTaskExecutorPoolHostTimeoutMs,omitempty" tf:"sharding_task_executor_pool_host_timeout_ms,omitempty"`
+
+	// (Number) Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance. For more information, see the shardingTaskExecutorPoolMaxConnecting description in the official documentation.
+	// Maximum number of simultaneous initiating connections (including pending connections in setup/refresh state) each TaskExecutor connection pool can have to a mongod instance. For more information, see the [shardingTaskExecutorPoolMaxConnecting](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxConnecting) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolMaxConnecting *float64 `json:"shardingTaskExecutorPoolMaxConnecting,omitempty" tf:"sharding_task_executor_pool_max_connecting,omitempty"`
+
+	// (Number) Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the shardingTaskExecutorPoolMaxSize description in the official documentation.
+	// Maximum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the [shardingTaskExecutorPoolMaxSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxSize) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolMaxSize *float64 `json:"shardingTaskExecutorPoolMaxSize,omitempty" tf:"sharding_task_executor_pool_max_size,omitempty"`
+
+	// (Number) Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the shardingTaskExecutorPoolMaxSizeForConfigServers description in the official documentation.
+	// Optional override for ShardingTaskExecutorPoolMaxSize to set the maximum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the [shardingTaskExecutorPoolMaxSizeForConfigServers](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMaxSizeForConfigServers) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolMaxSizeForConfigServers *float64 `json:"shardingTaskExecutorPoolMaxSizeForConfigServers,omitempty" tf:"sharding_task_executor_pool_max_size_for_config_servers,omitempty"`
+
+	// (Number) Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the shardingTaskExecutorPoolMinSize description in the official documentation.
+	// Minimum number of outbound connections each TaskExecutor connection pool can open to any given mongod instance. For more information, see the [shardingTaskExecutorPoolMinSize](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMinSize) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolMinSize *float64 `json:"shardingTaskExecutorPoolMinSize,omitempty" tf:"sharding_task_executor_pool_min_size,omitempty"`
+
+	// (Number) Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the shardingTaskExecutorPoolMinSizeForConfigServers description in the official documentation.
+	// Optional override for ShardingTaskExecutorPoolMinSize to set the minimum number of outbound connections each TaskExecutor connection pool can open to a configuration server. For more information, see the [shardingTaskExecutorPoolMinSizeForConfigServers](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolMinSizeForConfigServers) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolMinSizeForConfigServers *float64 `json:"shardingTaskExecutorPoolMinSizeForConfigServers,omitempty" tf:"sharding_task_executor_pool_min_size_for_config_servers,omitempty"`
+
+	// (Number) Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool. For more information, see the shardingTaskExecutorPoolRefreshRequirementMS description in the official documentation.
+	// Maximum time the mongos waits before attempting to heartbeat an idle connection in the pool. For more information, see the [shardingTaskExecutorPoolRefreshRequirementMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolRefreshRequirementMS) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolRefreshRequirementMs *float64 `json:"shardingTaskExecutorPoolRefreshRequirementMs,omitempty" tf:"sharding_task_executor_pool_refresh_requirement_ms,omitempty"`
+
+	// (Number) Maximum time the mongos waits for a heartbeat before timing out the heartbeat. For more information, see the shardingTaskExecutorPoolRefreshTimeoutMS description in the official documentation.
+	// Maximum time the mongos waits for a heartbeat before timing out the heartbeat. For more information, see the [shardingTaskExecutorPoolRefreshTimeoutMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolRefreshTimeoutMS) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolRefreshTimeoutMs *float64 `json:"shardingTaskExecutorPoolRefreshTimeoutMs,omitempty" tf:"sharding_task_executor_pool_refresh_timeout_ms,omitempty"`
+
+	// (String) On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets. For more information, see the shardingTaskExecutorPoolReplicaSetMatching description in the official documentation.
+	// On a mongos instance, this parameter sets the policy that determines the minimum size limit of its connection pools to nodes within replica sets. For more information, see the [shardingTaskExecutorPoolReplicaSetMatching](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.ShardingTaskExecutorPoolReplicaSetMatching) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	ShardingTaskExecutorPoolReplicaSetMatching *string `json:"shardingTaskExecutorPoolReplicaSetMatching,omitempty" tf:"sharding_task_executor_pool_replica_set_matching,omitempty"`
+
+	// (Boolean) Configures a mongos instance to prewarm its connection pool on startup. For more information, see the warmMinConnectionsInShardingTaskExecutorPoolOnStartup description in the official documentation.
+	// Configures a mongos instance to prewarm its connection pool on startup. For more information, see the [warmMinConnectionsInShardingTaskExecutorPoolOnStartup](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.warmMinConnectionsInShardingTaskExecutorPoolOnStartup) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartup *bool `json:"warmMinConnectionsInShardingTaskExecutorPoolOnStartup,omitempty" tf:"warm_min_connections_in_sharding_task_executor_pool_on_startup,omitempty"`
+
+	// (Number) Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter. For more information, see the warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS description in the official documentation.
+	// Sets the timeout threshold in milliseconds for a mongos to wait for ShardingTaskExecutorPoolMinSize connections to be established per shard host when using the warmMinConnectionsInShardingTaskExecutorPoolOnStartup parameter. For more information, see the [warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMS) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	WarmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs *float64 `json:"warmMinConnectionsInShardingTaskExecutorPoolOnStartupWaitMs,omitempty" tf:"warm_min_connections_in_sharding_task_executor_pool_on_startup_wait_ms,omitempty"`
 }
 
 type NetInitParameters struct {
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type NetObservation struct {
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type NetParameters struct {
 
-	// The maximum number of simultaneous connections that host will accept.
-	// For more information, see the net.maxIncomingConnections
-	// description in the official documentation.
+	// (Number) The maximum number of simultaneous connections that host will accept. For more information, see the net.maxIncomingConnections description in the official documentation.
+	// The maximum number of simultaneous connections that host will accept. For more information, see the [net.maxIncomingConnections](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.maxIncomingConnections) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	MaxIncomingConnections *float64 `json:"maxIncomingConnections,omitempty" tf:"max_incoming_connections,omitempty"`
 }
 
 type OperationProfilingInitParameters struct {
 
-	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
-	// For more information, see the operationProfiling.mode
-	// description in the official documentation.
+	// (String) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the operationProfiling.mode description in the official documentation.
+	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
-	// For more information, see the operationProfiling.slowOpThresholdMs
-	// description in the official documentation.
+	// (Number) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the operationProfiling.slowOpThresholdMs description in the official documentation.
+	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
 	SlowOpThreshold *float64 `json:"slowOpThreshold,omitempty" tf:"slow_op_threshold,omitempty"`
 }
 
 type OperationProfilingObservation struct {
 
-	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
-	// For more information, see the operationProfiling.mode
-	// description in the official documentation.
+	// (String) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the operationProfiling.mode description in the official documentation.
+	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
-	// For more information, see the operationProfiling.slowOpThresholdMs
-	// description in the official documentation.
+	// (Number) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the operationProfiling.slowOpThresholdMs description in the official documentation.
+	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
 	SlowOpThreshold *float64 `json:"slowOpThreshold,omitempty" tf:"slow_op_threshold,omitempty"`
 }
 
 type OperationProfilingParameters struct {
 
-	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all.
-	// For more information, see the operationProfiling.mode
-	// description in the official documentation.
+	// (String) Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the operationProfiling.mode description in the official documentation.
+	// Specifies which operations should be profiled. The following profiler levels are available: off, slow_op, all. For more information, see the [operationProfiling.mode](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.mode) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
-	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow.
-	// For more information, see the operationProfiling.slowOpThresholdMs
-	// description in the official documentation.
+	// (Number) The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the operationProfiling.slowOpThresholdMs description in the official documentation.
+	// The slow operation time threshold, in milliseconds. Operations that run for longer than this threshold are considered slow. For more information, see the [operationProfiling.slowOpThresholdMs](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-operationProfiling.slowOpThresholdMs) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	SlowOpThreshold *float64 `json:"slowOpThreshold,omitempty" tf:"slow_op_threshold,omitempty"`
 }
 
+type OplogInitParameters struct {
+
+	// (Number) The maximum size of the oplog, as a percentage of the total storage size. For more information, see the oplog.oplogSizeMB description in the official documentation.
+	// The maximum size of the oplog, as a percentage of the total storage size. For more information, see the [oplog.oplogSizeMB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MaxSizePercent *float64 `json:"maxSizePercent,omitempty" tf:"max_size_percent,omitempty"`
+
+	// (Number) The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the oplog.minRetentionHours description in the official documentation.
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the [oplog.minRetentionHours](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MinRetentionHours *float64 `json:"minRetentionHours,omitempty" tf:"min_retention_hours,omitempty"`
+}
+
+type OplogObservation struct {
+
+	// (Number) The maximum size of the oplog, as a percentage of the total storage size. For more information, see the oplog.oplogSizeMB description in the official documentation.
+	// The maximum size of the oplog, as a percentage of the total storage size. For more information, see the [oplog.oplogSizeMB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MaxSizePercent *float64 `json:"maxSizePercent,omitempty" tf:"max_size_percent,omitempty"`
+
+	// (Number) The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the oplog.minRetentionHours description in the official documentation.
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the [oplog.minRetentionHours](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	MinRetentionHours *float64 `json:"minRetentionHours,omitempty" tf:"min_retention_hours,omitempty"`
+}
+
+type OplogParameters struct {
+
+	// (Number) The maximum size of the oplog, as a percentage of the total storage size. For more information, see the oplog.oplogSizeMB description in the official documentation.
+	// The maximum size of the oplog, as a percentage of the total storage size. For more information, see the [oplog.oplogSizeMB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MaxSizePercent *float64 `json:"maxSizePercent,omitempty" tf:"max_size_percent,omitempty"`
+
+	// (Number) The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the oplog.minRetentionHours description in the official documentation.
+	// The minimum number of hours to preserve an oplog entry, where decimal values represent the fractions of an hour. For more information, see the [oplog.minRetentionHours](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-replication.oplogSizeMB) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	MinRetentionHours *float64 `json:"minRetentionHours,omitempty" tf:"min_retention_hours,omitempty"`
+}
+
 type PerformanceDiagnosticsInitParameters struct {
 
+	// (Boolean) Enable or disable performance diagnostics.
 	// Enable or disable performance diagnostics.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type PerformanceDiagnosticsObservation struct {
 
+	// (Boolean) Enable or disable performance diagnostics.
 	// Enable or disable performance diagnostics.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type PerformanceDiagnosticsParameters struct {
 
+	// (Boolean) Enable or disable performance diagnostics.
 	// Enable or disable performance diagnostics.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -1390,393 +2377,380 @@ type PerformanceDiagnosticsParameters struct {
 
 type ResourcesMongocfgInitParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongocfgObservation struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongocfgParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongodInitParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongodObservation struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongodParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongoinfraInitParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongoinfraObservation struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongoinfraParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongosInitParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongosObservation struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesMongosParameters struct {
 
+	// (Number) Volume of the storage available to a MongoDB host, in gigabytes.
 	// Volume of the storage available to a MongoDB host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
-	// Type of the storage of MongoDB hosts.
-	// For more information see the official documentation.
+	// (String) Type of the storage of MongoDB hosts. For more information see the official documentation.
+	// Type of the storage of MongoDB hosts. For more information see [the official documentation](https://yandex.cloud/docs/managed-clickhouse/concepts/storage).
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a MongoDB host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-mongodb/concepts).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
-type RestoreInitParameters struct {
-
-	// Backup ID. The cluster will be created from the specified backup. How to get a list of PostgreSQL backups
-	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
-
-	// Timestamp of the moment to which the MongoDB cluster should be restored. (Format: "2006-01-02T15:04:05" - UTC). When not set, current time is used.
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
-type RestoreObservation struct {
-
-	// Backup ID. The cluster will be created from the specified backup. How to get a list of PostgreSQL backups
-	BackupID *string `json:"backupId,omitempty" tf:"backup_id,omitempty"`
-
-	// Timestamp of the moment to which the MongoDB cluster should be restored. (Format: "2006-01-02T15:04:05" - UTC). When not set, current time is used.
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
-type RestoreParameters struct {
-
-	// Backup ID. The cluster will be created from the specified backup. How to get a list of PostgreSQL backups
-	// +kubebuilder:validation:Optional
-	BackupID *string `json:"backupId" tf:"backup_id,omitempty"`
-
-	// Timestamp of the moment to which the MongoDB cluster should be restored. (Format: "2006-01-02T15:04:05" - UTC). When not set, current time is used.
-	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
 type SecurityInitParameters struct {
 
-	// Enables the encryption for the WiredTiger storage engine. Can be either true or false.
-	// For more information see security.enableEncryption
-	// description in the official documentation. Available only in enterprise edition.
+	// (Boolean) Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see security.enableEncryption description in the official documentation. Available only in enterprise edition.
+	// Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see [security.enableEncryption](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.enableEncryption) description in the official documentation. Available only in enterprise edition.
 	EnableEncryption *bool `json:"enableEncryption,omitempty" tf:"enable_encryption,omitempty"`
 
-	// Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP)
-	// (see Encryption tutorial ). Requires enable_encryption to be true.
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see Encryption tutorial ). Requires enable_encryption to be true. The structure is documented below. Available only in enterprise edition. (see below for nested schema)
+	// Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see [Encryption tutorial](https://www.mongodb.com/docs/rapid/tutorial/configure-encryption) ). Requires `enable_encryption` to be true. The structure is documented below. Available only in enterprise edition.
 	Kmip []KmipInitParameters `json:"kmip,omitempty" tf:"kmip,omitempty"`
 }
 
 type SecurityObservation struct {
 
-	// Enables the encryption for the WiredTiger storage engine. Can be either true or false.
-	// For more information see security.enableEncryption
-	// description in the official documentation. Available only in enterprise edition.
+	// (Boolean) Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see security.enableEncryption description in the official documentation. Available only in enterprise edition.
+	// Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see [security.enableEncryption](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.enableEncryption) description in the official documentation. Available only in enterprise edition.
 	EnableEncryption *bool `json:"enableEncryption,omitempty" tf:"enable_encryption,omitempty"`
 
-	// Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP)
-	// (see Encryption tutorial ). Requires enable_encryption to be true.
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see Encryption tutorial ). Requires enable_encryption to be true. The structure is documented below. Available only in enterprise edition. (see below for nested schema)
+	// Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see [Encryption tutorial](https://www.mongodb.com/docs/rapid/tutorial/configure-encryption) ). Requires `enable_encryption` to be true. The structure is documented below. Available only in enterprise edition.
 	Kmip []KmipObservation `json:"kmip,omitempty" tf:"kmip,omitempty"`
 }
 
 type SecurityParameters struct {
 
-	// Enables the encryption for the WiredTiger storage engine. Can be either true or false.
-	// For more information see security.enableEncryption
-	// description in the official documentation. Available only in enterprise edition.
+	// (Boolean) Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see security.enableEncryption description in the official documentation. Available only in enterprise edition.
+	// Enables the encryption for the WiredTiger storage engine. Can be either true or false. For more information see [security.enableEncryption](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-security.enableEncryption) description in the official documentation. Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
 	EnableEncryption *bool `json:"enableEncryption,omitempty" tf:"enable_encryption,omitempty"`
 
-	// Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP)
-	// (see Encryption tutorial ). Requires enable_encryption to be true.
-	// The structure is documented below. Available only in enterprise edition.
+	// (Block List, Max: 1) Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see Encryption tutorial ). Requires enable_encryption to be true. The structure is documented below. Available only in enterprise edition. (see below for nested schema)
+	// Configuration of the third party key management appliance via the Key Management Interoperability Protocol (KMIP) (see [Encryption tutorial](https://www.mongodb.com/docs/rapid/tutorial/configure-encryption) ). Requires `enable_encryption` to be true. The structure is documented below. Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
 	Kmip []KmipParameters `json:"kmip,omitempty" tf:"kmip,omitempty"`
 }
 
 type SetParameterInitParameters struct {
 
-	// Enables the auditing of authorization successes. Can be either true or false.
-	// For more information, see the auditAuthorizationSuccess
-	// description in the official documentation. Available only in enterprise edition.
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
 	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
 
-	// Enables the flow control. Can be either true or false.
-	// For more information, see the enableFlowControl
-	// description in the official documentation.
+	// (Boolean) Enables the flow control. Can be either true or false. For more information, see the enableFlowControl description in the official documentation.
+	// Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
 	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
-
-	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
-	// For more information, see the minSnapshotHistoryWindowInSeconds
-	// description in the official documentation.
-	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
 }
 
 type SetParameterObservation struct {
 
-	// Enables the auditing of authorization successes. Can be either true or false.
-	// For more information, see the auditAuthorizationSuccess
-	// description in the official documentation. Available only in enterprise edition.
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
 	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
 
-	// Enables the flow control. Can be either true or false.
-	// For more information, see the enableFlowControl
-	// description in the official documentation.
+	// (Boolean) Enables the flow control. Can be either true or false. For more information, see the enableFlowControl description in the official documentation.
+	// Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
 	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
-
-	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
-	// For more information, see the minSnapshotHistoryWindowInSeconds
-	// description in the official documentation.
-	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
 }
 
 type SetParameterParameters struct {
 
-	// Enables the auditing of authorization successes. Can be either true or false.
-	// For more information, see the auditAuthorizationSuccess
-	// description in the official documentation. Available only in enterprise edition.
+	// (Boolean) Enables the auditing of authorization successes. Can be either true or false. For more information, see the auditAuthorizationSuccess description in the official documentation. Available only in enterprise edition.
+	// Enables the auditing of authorization successes. Can be either true or false. For more information, see the [auditAuthorizationSuccess](https://www.mongodb.com/docs/manual/reference/parameters/#mongodb-parameter-param.auditAuthorizationSuccess) description in the official documentation. Available only in enterprise edition.
 	// +kubebuilder:validation:Optional
 	AuditAuthorizationSuccess *bool `json:"auditAuthorizationSuccess,omitempty" tf:"audit_authorization_success,omitempty"`
 
-	// Enables the flow control. Can be either true or false.
-	// For more information, see the enableFlowControl
-	// description in the official documentation.
+	// (Boolean) Enables the flow control. Can be either true or false. For more information, see the enableFlowControl description in the official documentation.
+	// Enables the flow control. Can be either true or false. For more information, see the [enableFlowControl](https://www.mongodb.com/docs/rapid/reference/parameters/#mongodb-parameter-param.enableFlowControl) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	EnableFlowControl *bool `json:"enableFlowControl,omitempty" tf:"enable_flow_control,omitempty"`
-
-	// The minimum time window in seconds for which the storage engine keeps the snapshot history.
-	// For more information, see the minSnapshotHistoryWindowInSeconds
-	// description in the official documentation.
-	// +kubebuilder:validation:Optional
-	MinSnapshotHistoryWindowInSeconds *float64 `json:"minSnapshotHistoryWindowInSeconds,omitempty" tf:"min_snapshot_history_window_in_seconds,omitempty"`
 }
 
 type StorageInitParameters struct {
 
-	// The WiredTiger engine settings.
-	// (see the storage.wiredTiger option).
-	// These settings available only on mongod hosts. The structure is documented below.
+	// (Block List, Max: 1) The WiredTiger engine settings. (see the storage.wiredTiger option). (see below for nested schema)
+	// The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option).
 	WiredTiger []WiredTigerInitParameters `json:"wiredTiger,omitempty" tf:"wired_tiger,omitempty"`
 }
 
 type StorageObservation struct {
 
-	// The WiredTiger engine settings.
-	// (see the storage.wiredTiger option).
-	// These settings available only on mongod hosts. The structure is documented below.
+	// (Block List, Max: 1) The WiredTiger engine settings. (see the storage.wiredTiger option). (see below for nested schema)
+	// The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option).
 	WiredTiger []WiredTigerObservation `json:"wiredTiger,omitempty" tf:"wired_tiger,omitempty"`
 }
 
 type StorageParameters struct {
 
-	// The WiredTiger engine settings.
-	// (see the storage.wiredTiger option).
-	// These settings available only on mongod hosts. The structure is documented below.
+	// (Block List, Max: 1) The WiredTiger engine settings. (see the storage.wiredTiger option). (see below for nested schema)
+	// The WiredTiger engine settings. (see the [storage.wiredTiger](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage.wiredtiger-options) option).
 	// +kubebuilder:validation:Optional
 	WiredTiger []WiredTigerParameters `json:"wiredTiger,omitempty" tf:"wired_tiger,omitempty"`
 }
 
 type StorageWiredTigerInitParameters struct {
 
-	// Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections.
-	// Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts.
-	// For more information, see the storage.wiredTiger.collectionConfig.blockCompressor
-	// description in the official documentation.
+	// collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts. For more information, see the storage.wiredTiger.collectionConfig.blockCompressor description in the official documentation.
+	// Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on `mongod` hosts. For more information, see the [storage.wiredTiger.collectionConfig.blockCompressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor) description in the official documentation.
 	BlockCompressor *string `json:"blockCompressor,omitempty" tf:"block_compressor,omitempty"`
 
-	// Defines the maximum size of the internal cache that WiredTiger will use for all data.
-	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
-	// description in the official documentation.
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the storage.wiredTiger.engineConfig.cacheSize description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the [storage.wiredTiger.engineConfig.cacheSize](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizePct) description in the official documentation.
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
 
-	// Enables or disables prefix compression for index data. Сan be either true or false.
-	// For more information, see the storage.wiredTiger.indexConfig.prefixCompression
-	// description in the official documentation.
+	// (Boolean) Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the storage.wiredTiger.indexConfig.prefixCompression description in the official documentation.
+	// Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the [storage.wiredTiger.indexConfig.prefixCompression](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.indexConfig.prefixCompression) description in the official documentation.
 	PrefixCompression *bool `json:"prefixCompression,omitempty" tf:"prefix_compression,omitempty"`
 }
 
 type StorageWiredTigerObservation struct {
 
-	// Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections.
-	// Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts.
-	// For more information, see the storage.wiredTiger.collectionConfig.blockCompressor
-	// description in the official documentation.
+	// collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts. For more information, see the storage.wiredTiger.collectionConfig.blockCompressor description in the official documentation.
+	// Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on `mongod` hosts. For more information, see the [storage.wiredTiger.collectionConfig.blockCompressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor) description in the official documentation.
 	BlockCompressor *string `json:"blockCompressor,omitempty" tf:"block_compressor,omitempty"`
 
-	// Defines the maximum size of the internal cache that WiredTiger will use for all data.
-	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
-	// description in the official documentation.
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the storage.wiredTiger.engineConfig.cacheSize description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the [storage.wiredTiger.engineConfig.cacheSize](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizePct) description in the official documentation.
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
 
-	// Enables or disables prefix compression for index data. Сan be either true or false.
-	// For more information, see the storage.wiredTiger.indexConfig.prefixCompression
-	// description in the official documentation.
+	// (Boolean) Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the storage.wiredTiger.indexConfig.prefixCompression description in the official documentation.
+	// Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the [storage.wiredTiger.indexConfig.prefixCompression](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.indexConfig.prefixCompression) description in the official documentation.
 	PrefixCompression *bool `json:"prefixCompression,omitempty" tf:"prefix_compression,omitempty"`
 }
 
 type StorageWiredTigerParameters struct {
 
-	// Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections.
-	// Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts.
-	// For more information, see the storage.wiredTiger.collectionConfig.blockCompressor
-	// description in the official documentation.
+	// collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on mongod hosts. For more information, see the storage.wiredTiger.collectionConfig.blockCompressor description in the official documentation.
+	// Specifies the default compression for collection data. You can override this on a per-collection basis when creating collections. Available compressors are: none, snappy, zlib, zstd. This setting available only on `mongod` hosts. For more information, see the [storage.wiredTiger.collectionConfig.blockCompressor](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.collectionConfig.blockCompressor) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	BlockCompressor *string `json:"blockCompressor,omitempty" tf:"block_compressor,omitempty"`
 
-	// Defines the maximum size of the internal cache that WiredTiger will use for all data.
-	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
-	// description in the official documentation.
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the storage.wiredTiger.engineConfig.cacheSize description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the [storage.wiredTiger.engineConfig.cacheSize](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizePct) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
 
-	// Enables or disables prefix compression for index data. Сan be either true or false.
-	// For more information, see the storage.wiredTiger.indexConfig.prefixCompression
-	// description in the official documentation.
+	// (Boolean) Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the storage.wiredTiger.indexConfig.prefixCompression description in the official documentation.
+	// Enables or disables prefix compression for index data. Сan be either true or false. For more information, see the [storage.wiredTiger.indexConfig.prefixCompression](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.indexConfig.prefixCompression) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	PrefixCompression *bool `json:"prefixCompression,omitempty" tf:"prefix_compression,omitempty"`
 }
 
 type WiredTigerInitParameters struct {
 
-	// Defines the maximum size of the internal cache that WiredTiger will use for all data.
-	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
-	// description in the official documentation.
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the storage.wiredTiger.engineConfig.cacheSize description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the [storage.wiredTiger.engineConfig.cacheSize](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizePct) description in the official documentation.
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
 }
 
 type WiredTigerObservation struct {
 
-	// Defines the maximum size of the internal cache that WiredTiger will use for all data.
-	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
-	// description in the official documentation.
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the storage.wiredTiger.engineConfig.cacheSize description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the [storage.wiredTiger.engineConfig.cacheSize](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizePct) description in the official documentation.
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
 }
 
 type WiredTigerParameters struct {
 
-	// Defines the maximum size of the internal cache that WiredTiger will use for all data.
-	// For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB
-	// description in the official documentation.
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the storage.wiredTiger.engineConfig.cacheSize description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data in percents. For more information, see the [storage.wiredTiger.engineConfig.cacheSize](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizePct) description in the official documentation.
+	// +kubebuilder:validation:Optional
+	CacheSize *float64 `json:"cacheSize,omitempty" tf:"cache_size,omitempty"`
+
+	// (Number) Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the storage.wiredTiger.engineConfig.cacheSizeGB description in the official documentation.
+	// Defines the maximum size of the internal cache that WiredTiger will use for all data. For more information, see the [storage.wiredTiger.engineConfig.cacheSizeGB](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-storage.wiredTiger.engineConfig.cacheSizeGB) description in the official documentation.
 	// +kubebuilder:validation:Optional
 	CacheSizeGb *float64 `json:"cacheSizeGb,omitempty" tf:"cache_size_gb,omitempty"`
 }
@@ -1808,7 +2782,7 @@ type MongodbClusterStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// MongodbCluster is the Schema for the MongodbClusters API. Manages a MongoDB cluster within Yandex.Cloud.
+// MongodbCluster is the Schema for the MongodbClusters API. Manages a MongoDB cluster within Yandex Cloud.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

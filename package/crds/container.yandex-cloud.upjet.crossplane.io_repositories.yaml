@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Repository is the Schema for the Repositorys API. Creates a new
-          container repository.
+          Container Repository.
         properties:
           apiVersion:
             description: |-
@@ -74,9 +74,18 @@ spec:
               forProvider:
                 properties:
                   name:
-                    description: A name of the repository. The name of the repository
-                      should start with id of a container registry and match the name
-                      of the images that will be pushed in the repository.
+                    description: |-
+                      (String) Name of the repository.
+                      The name is unique within the registry.
+                      Name of the repository.
+                      The name is unique within the registry.
+                    type: string
+                  repositoryId:
+                    description: |-
+                      (String) ID of the Repository resource to return.
+                      ID of the Repository resource to return.
+
+                      To get the repository ID use a [RepositoryService.List] request.
                     type: string
                 type: object
               initProvider:
@@ -93,9 +102,18 @@ spec:
                   autoscaler.
                 properties:
                   name:
-                    description: A name of the repository. The name of the repository
-                      should start with id of a container registry and match the name
-                      of the images that will be pushed in the repository.
+                    description: |-
+                      (String) Name of the repository.
+                      The name is unique within the registry.
+                      Name of the repository.
+                      The name is unique within the registry.
+                    type: string
+                  repositoryId:
+                    description: |-
+                      (String) ID of the Repository resource to return.
+                      ID of the Repository resource to return.
+
+                      To get the repository ID use a [RepositoryService.List] request.
                     type: string
                 type: object
               managementPolicies:
@@ -195,11 +213,21 @@ spec:
               atProvider:
                 properties:
                   id:
+                    description: (String) ID of the Repository resource to return.
                     type: string
                   name:
-                    description: A name of the repository. The name of the repository
-                      should start with id of a container registry and match the name
-                      of the images that will be pushed in the repository.
+                    description: |-
+                      (String) Name of the repository.
+                      The name is unique within the registry.
+                      Name of the repository.
+                      The name is unique within the registry.
+                    type: string
+                  repositoryId:
+                    description: |-
+                      (String) ID of the Repository resource to return.
+                      ID of the Repository resource to return.
+
+                      To get the repository ID use a [RepositoryService.List] request.
                     type: string
                 type: object
               conditions:

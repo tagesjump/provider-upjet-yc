@@ -1,0 +1,34 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: MfaEnforcementAudience
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/mfaenforcementaudience
+  labels:
+    testing.upbound.io/example-name: example_mfa_enforcement_audience
+  name: example-mfa-enforcement-audience
+spec:
+  forProvider:
+    mfaEnforcementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_mfa_enforcement
+    subjectId: your_subject_id
+
+---
+
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: MfaEnforcement
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/mfaenforcementaudience
+  labels:
+    testing.upbound.io/example-name: example_mfa_enforcement
+  name: example-mfa-enforcement
+spec:
+  forProvider:
+    acrId: any-mfa
+    description: Description example
+    enrollWindow: 2h45m
+    name: example-mfa-enforcement
+    organizationId: your_organization_id
+    status: MFA_ENFORCEMENT_STATUS_ACTIVE
+    ttl: 2h45m

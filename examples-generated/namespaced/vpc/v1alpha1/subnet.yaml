@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpc/v1alpha1/subnet
   labels:
-    testing.upbound.io/example-name: lab-subnet-a
-  name: lab-subnet-a
+    testing.upbound.io/example-name: my_subnet
+  name: my-subnet
   namespace: upbound-system
 spec:
   forProvider:

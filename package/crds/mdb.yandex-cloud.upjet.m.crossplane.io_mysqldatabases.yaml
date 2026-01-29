@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MySQLDatabase is the Schema for the MySQLDatabases API. Manages
-          a MySQL database within Yandex.Cloud.
+          a MySQL database within Yandex Cloud.
         properties:
           apiVersion:
             description: |-
@@ -60,6 +60,9 @@ spec:
               forProvider:
                 properties:
                   clusterId:
+                    description: |-
+                      (String) The MySQL cluster ID.
+                      The MySQL cluster ID.
                     type: string
                   clusterIdRef:
                     description: Reference to a MySQLCluster to populate clusterId.
@@ -142,7 +145,9 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the database.
+                    description: |-
+                      (String) The name of the database.
+                      The name of the database.
                     type: string
                 type: object
               initProvider:
@@ -159,6 +164,9 @@ spec:
                   autoscaler.
                 properties:
                   clusterId:
+                    description: |-
+                      (String) The MySQL cluster ID.
+                      The MySQL cluster ID.
                     type: string
                   clusterIdRef:
                     description: Reference to a MySQLCluster to populate clusterId.
@@ -241,7 +249,9 @@ spec:
                         type: object
                     type: object
                   name:
-                    description: The name of the database.
+                    description: |-
+                      (String) The name of the database.
+                      The name of the database.
                     type: string
                 type: object
               managementPolicies:
@@ -313,11 +323,17 @@ spec:
               atProvider:
                 properties:
                   clusterId:
+                    description: |-
+                      (String) The MySQL cluster ID.
+                      The MySQL cluster ID.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   name:
-                    description: The name of the database.
+                    description: |-
+                      (String) The name of the database.
+                      The name of the database.
                     type: string
                 type: object
               conditions:

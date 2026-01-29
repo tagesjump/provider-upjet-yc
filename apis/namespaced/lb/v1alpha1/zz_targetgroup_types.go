@@ -12,12 +12,12 @@ import (
 
 type TargetGroupInitParameters struct {
 
-	// An optional description of the target group. Provide this property when
-	// you create the resource.
+	// 256 characters long.
+	// Description of the target group. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder to which the resource belongs.
-	// If omitted, the provider folder is used.
+	// (String) ID of the folder that the target group belongs to.
+	// ID of the folder that the target group belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -29,61 +29,83 @@ type TargetGroupInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Labels to assign to this target group. A list of key/value pairs.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of the target group. Provided by the client when the target group is created.
+	// 63 characters long.
+	// Name of the target group.
+	// The name is unique within the folder. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the availability zone where the target group resides.
-	// If omitted, default region is being used.
+	// (String) ID of the region where the target group resides.
+	// ID of the region where the target group resides.
 	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
 
-	// A Target resource. The structure is documented below.
+	// (Block Set) A list of targets in the target group. (see below for nested schema)
+	// A list of targets in the target group.
 	Target []TargetInitParameters `json:"target,omitempty" tf:"target,omitempty"`
+
+	// (String) ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
+	// ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
+	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 }
 
 type TargetGroupObservation struct {
 
-	// The target group creation timestamp.
+	// (String) Output only. Creation timestamp in RFC3339 text format.
+	// Output only. Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// An optional description of the target group. Provide this property when
-	// you create the resource.
+	// 256 characters long.
+	// Description of the target group. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder to which the resource belongs.
-	// If omitted, the provider folder is used.
+	// (String) ID of the folder that the target group belongs to.
+	// ID of the folder that the target group belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// The ID of the target group.
+	// (String) ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Labels to assign to this target group. A list of key/value pairs.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of the target group. Provided by the client when the target group is created.
+	// 63 characters long.
+	// Name of the target group.
+	// The name is unique within the folder. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the availability zone where the target group resides.
-	// If omitted, default region is being used.
+	// (String) ID of the region where the target group resides.
+	// ID of the region where the target group resides.
 	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
 
-	// A Target resource. The structure is documented below.
+	// (Block Set) A list of targets in the target group. (see below for nested schema)
+	// A list of targets in the target group.
 	Target []TargetObservation `json:"target,omitempty" tf:"target,omitempty"`
+
+	// (String) ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
+	// ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
+	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 }
 
 type TargetGroupParameters struct {
 
-	// An optional description of the target group. Provide this property when
-	// you create the resource.
+	// 256 characters long.
+	// Description of the target group. 0-256 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// The ID of the folder to which the resource belongs.
-	// If omitted, the provider folder is used.
+	// (String) ID of the folder that the target group belongs to.
+	// ID of the folder that the target group belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -96,30 +118,44 @@ type TargetGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Labels to assign to this target group. A list of key/value pairs.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of the target group. Provided by the client when the target group is created.
+	// 63 characters long.
+	// Name of the target group.
+	// The name is unique within the folder. 3-63 characters long.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the availability zone where the target group resides.
-	// If omitted, default region is being used.
+	// (String) ID of the region where the target group resides.
+	// ID of the region where the target group resides.
 	// +kubebuilder:validation:Optional
 	RegionID *string `json:"regionId,omitempty" tf:"region_id,omitempty"`
 
-	// A Target resource. The structure is documented below.
+	// (Block Set) A list of targets in the target group. (see below for nested schema)
+	// A list of targets in the target group.
 	// +kubebuilder:validation:Optional
 	Target []TargetParameters `json:"target,omitempty" tf:"target,omitempty"`
+
+	// (String) ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
+	// ID of the TargetGroup resource to return.
+	// To get the target group ID, use a [TargetGroupService.List] request.
+	// +kubebuilder:validation:Optional
+	TargetGroupID *string `json:"targetGroupId,omitempty" tf:"target_group_id,omitempty"`
 }
 
 type TargetInitParameters struct {
 
+	// (String) IP address of the target.
 	// IP address of the target.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// (String) ID of the subnet that targets are connected to.
+	// All targets in the target group must be connected to the same subnet within a single availability zone.
 	// ID of the subnet that targets are connected to.
 	// All targets in the target group must be connected to the same subnet within a single availability zone.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
@@ -136,9 +172,12 @@ type TargetInitParameters struct {
 
 type TargetObservation struct {
 
+	// (String) IP address of the target.
 	// IP address of the target.
 	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// (String) ID of the subnet that targets are connected to.
+	// All targets in the target group must be connected to the same subnet within a single availability zone.
 	// ID of the subnet that targets are connected to.
 	// All targets in the target group must be connected to the same subnet within a single availability zone.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -146,10 +185,13 @@ type TargetObservation struct {
 
 type TargetParameters struct {
 
+	// (String) IP address of the target.
 	// IP address of the target.
 	// +kubebuilder:validation:Optional
-	Address *string `json:"address" tf:"address,omitempty"`
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
 
+	// (String) ID of the subnet that targets are connected to.
+	// All targets in the target group must be connected to the same subnet within a single availability zone.
 	// ID of the subnet that targets are connected to.
 	// All targets in the target group must be connected to the same subnet within a single availability zone.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet

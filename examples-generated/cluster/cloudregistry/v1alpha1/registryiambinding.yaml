@@ -1,0 +1,38 @@
+apiVersion: cloudregistry.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: RegistryIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudregistry/v1alpha1/registryiambinding
+  labels:
+    testing.upbound.io/example-name: puller
+  name: puller
+spec:
+  forProvider:
+    members:
+    - system:allUsers
+    registryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your-registry
+    role: cloud-registry.artifacts.puller
+
+---
+
+apiVersion: cloudregistry.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Registry
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloudregistry/v1alpha1/registryiambinding
+  labels:
+    testing.upbound.io/example-name: your-registry
+  name: your-registry
+spec:
+  forProvider:
+    description: Some desctiption
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kind: DOCKER
+    labels:
+      my-label: my-label-value
+    name: test-registry
+    type: LOCAL

@@ -12,66 +12,135 @@ import (
 
 type UserSSHKeyInitParameters struct {
 
-	// Data of the user ssh key.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// User ssh key will be no longer valid after expiration timestamp.
+	// (String) Used for temporary keys, if empty the key doesn't expire
+	// Used for temporary keys, if empty the key doesn't expire
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// Name of the user ssh key.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Organization that the user ssh key belongs to.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// Subject that the user ssh key belongs to.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	SubjectID *string `json:"subjectId,omitempty" tf:"subject_id,omitempty"`
+
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+	UserSSHKeyID *string `json:"userSshKeyId,omitempty" tf:"user_ssh_key_id,omitempty"`
 }
 
 type UserSSHKeyObservation struct {
+
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Data of the user ssh key.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// User ssh key will be no longer valid after expiration timestamp.
+	// (String) Used for temporary keys, if empty the key doesn't expire
+	// Used for temporary keys, if empty the key doesn't expire
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	Fingerprint *string `json:"fingerprint,omitempty" tf:"fingerprint,omitempty"`
 
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the user ssh key.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Organization that the user ssh key belongs to.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// Subject that the user ssh key belongs to.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	SubjectID *string `json:"subjectId,omitempty" tf:"subject_id,omitempty"`
+
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+	UserSSHKeyID *string `json:"userSshKeyId,omitempty" tf:"user_ssh_key_id,omitempty"`
 }
 
 type UserSSHKeyParameters struct {
 
-	// Data of the user ssh key.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	// +kubebuilder:validation:Optional
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// User ssh key will be no longer valid after expiration timestamp.
+	// (String) Used for temporary keys, if empty the key doesn't expire
+	// Used for temporary keys, if empty the key doesn't expire
 	// +kubebuilder:validation:Optional
 	ExpiresAt *string `json:"expiresAt,omitempty" tf:"expires_at,omitempty"`
 
-	// Name of the user ssh key.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Organization that the user ssh key belongs to.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	// +kubebuilder:validation:Optional
 	OrganizationID *string `json:"organizationId,omitempty" tf:"organization_id,omitempty"`
 
-	// Subject that the user ssh key belongs to.
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key.proto
 	// +kubebuilder:validation:Optional
 	SubjectID *string `json:"subjectId,omitempty" tf:"subject_id,omitempty"`
+
+	// (String) package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+	// package: yandex.cloud.organizationmanager.v1
+	// filename: yandex/cloud/organizationmanager/v1/user_ssh_key_service.proto
+	// +kubebuilder:validation:Optional
+	UserSSHKeyID *string `json:"userSshKeyId,omitempty" tf:"user_ssh_key_id,omitempty"`
 }
 
 // UserSSHKeySpec defines the desired state of UserSSHKey
@@ -101,7 +170,7 @@ type UserSSHKeyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// UserSSHKey is the Schema for the UserSSHKeys API. Allows management of User Ssh Keys within an existing Yandex.Cloud Organization and Subject.
+// UserSSHKey is the Schema for the UserSSHKeys API. Allows management of User SSH Keys within an existing Yandex Cloud Organization and Subject.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

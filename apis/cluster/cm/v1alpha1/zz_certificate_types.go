@@ -10,15 +10,21 @@ import (
 )
 
 type CertificateInitParameters struct {
+
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Certificate description.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (List of String) Domains for this certificate. Should be specified for managed certificates.
 	// Domains for this certificate. Should be specified for managed certificates.
 	Domains []*string `json:"domains,omitempty" tf:"domains,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -30,97 +36,134 @@ type CertificateInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Labels to assign to this certificate.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Managed specification. Structure is documented below.
+	// (Block List, Max: 1) Managed specification.
+	// Managed specification.
+	//
+	// ~> Resource creation awaits getting challenges from issue provider.
 	Managed []ManagedInitParameters `json:"managed,omitempty" tf:"managed,omitempty"`
 
-	// Certificate name.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Self-managed specification. Structure is documented below.
+	// managed specification.
+	// Self-managed specification.
+	//
+	// ~> Only one type `private_key` or `private_key_lockbox_secret` should be specified.
 	SelfManaged []SelfManagedInitParameters `json:"selfManaged,omitempty" tf:"self_managed,omitempty"`
 }
 
 type CertificateObservation struct {
 
-	// Array of challenges. Structure is documented below.
+	// (List of Object) Array of challenges. (see below for nested schema)
+	// Array of challenges.
 	Challenges []ChallengesObservation `json:"challenges,omitempty" tf:"challenges,omitempty"`
 
-	// Certificate create timestamp.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Certificate description.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (List of String) Domains for this certificate. Should be specified for managed certificates.
 	// Domains for this certificate. Should be specified for managed certificates.
 	Domains []*string `json:"domains,omitempty" tf:"domains,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Certificate Id.
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) Certificate issue timestamp.
 	// Certificate issue timestamp.
 	IssuedAt *string `json:"issuedAt,omitempty" tf:"issued_at,omitempty"`
 
-	// Certificate issuer.
+	// (String) Certificate Issuer.
+	// Certificate Issuer.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
-	// Labels to assign to this certificate.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Managed specification. Structure is documented below.
+	// (Block List, Max: 1) Managed specification.
+	// Managed specification.
+	//
+	// ~> Resource creation awaits getting challenges from issue provider.
 	Managed []ManagedObservation `json:"managed,omitempty" tf:"managed,omitempty"`
 
-	// Certificate name.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (String) Certificate end valid period.
 	// Certificate end valid period.
 	NotAfter *string `json:"notAfter,omitempty" tf:"not_after,omitempty"`
 
+	// (String) Certificate start valid period.
 	// Certificate start valid period.
 	NotBefore *string `json:"notBefore,omitempty" tf:"not_before,omitempty"`
 
-	// Self-managed specification. Structure is documented below.
+	// managed specification.
+	// Self-managed specification.
+	//
+	// ~> Only one type `private_key` or `private_key_lockbox_secret` should be specified.
 	SelfManaged []SelfManagedObservation `json:"selfManaged,omitempty" tf:"self_managed,omitempty"`
 
-	// Certificate serial number.
+	// (String) Certificate Serial Number.
+	// Certificate Serial Number.
 	Serial *string `json:"serial,omitempty" tf:"serial,omitempty"`
 
-	// Certificate status: "VALIDATING", "INVALID",  "ISSUED", "REVOKED", "RENEWING" or "RENEWAL_FAILED".
+	// (String) Certificate status: VALIDATING, INVALID, ISSUED, REVOKED, RENEWING or RENEWAL_FAILED.
+	// Certificate status: `VALIDATING`, `INVALID`, `ISSUED`, `REVOKED`, `RENEWING` or `RENEWAL_FAILED`.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// Certificate subject.
+	// (String) Certificate Subject.
+	// Certificate Subject.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
-	// Certificate type: "MANAGED" or "IMPORTED".
+	// (String) Certificate type: MANAGED or IMPORTED.
+	// Certificate type: `MANAGED` or `IMPORTED`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
+	// (String) Certificate update timestamp.
 	// Certificate update timestamp.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type CertificateParameters struct {
 
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Certificate description.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (List of String) Domains for this certificate. Should be specified for managed certificates.
 	// Domains for this certificate. Should be specified for managed certificates.
 	// +kubebuilder:validation:Optional
 	Domains []*string `json:"domains,omitempty" tf:"domains,omitempty"`
 
-	// Folder that the resource belongs to. If value is omitted, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -133,20 +176,28 @@ type CertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Labels to assign to this certificate.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Managed specification. Structure is documented below.
+	// (Block List, Max: 1) Managed specification.
+	// Managed specification.
+	//
+	// ~> Resource creation awaits getting challenges from issue provider.
 	// +kubebuilder:validation:Optional
 	Managed []ManagedParameters `json:"managed,omitempty" tf:"managed,omitempty"`
 
-	// Certificate name.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Self-managed specification. Structure is documented below.
+	// managed specification.
+	// Self-managed specification.
+	//
+	// ~> Only one type `private_key` or `private_key_lockbox_secret` should be specified.
 	// +kubebuilder:validation:Optional
 	SelfManaged []SelfManagedParameters `json:"selfManaged,omitempty" tf:"self_managed,omitempty"`
 }
@@ -156,34 +207,34 @@ type ChallengesInitParameters struct {
 
 type ChallengesObservation struct {
 
-	// Time the challenge was created.
+	// (String) The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// DNS record name (only for DNS challenge).
+	// (String)
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
-	// DNS record type: "TXT" or "CNAME" (only for DNS challenge).
+	// (String)
 	DNSType *string `json:"dnsType,omitempty" tf:"dns_type,omitempty"`
 
-	// DNS record value (only for DNS challenge).
+	// (String)
 	DNSValue *string `json:"dnsValue,omitempty" tf:"dns_value,omitempty"`
 
-	// Validated domain.
+	// (String)
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The content that should be made accessible with the given http_url (only for HTTP challenge).
+	// (String)
 	HTTPContent *string `json:"httpContent,omitempty" tf:"http_content,omitempty"`
 
-	// URL where the challenge content http_content should be placed (only for HTTP challenge).
+	// (String)
 	HTTPURL *string `json:"httpUrl,omitempty" tf:"http_url,omitempty"`
 
-	// Current status message.
+	// (String)
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 
-	// Challenge type "DNS" or "HTTP".
+	// (String) Certificate type: MANAGED or IMPORTED.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// Last time the challenge was updated.
+	// (String) Certificate update timestamp.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
@@ -192,63 +243,78 @@ type ChallengesParameters struct {
 
 type ManagedInitParameters struct {
 
-	// . Expected number of challenge count needed to validate certificate.
-	// Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-	// This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+	// domain certificates.
+	// Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
 	ChallengeCount *float64 `json:"challengeCount,omitempty" tf:"challenge_count,omitempty"`
 
+	// check method. Possible values:
 	// Domain owner-check method. Possible values:
+	// * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+	// * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+	// * `HTTP` - you will need to place specified value into specified url.
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 }
 
 type ManagedObservation struct {
 
-	// . Expected number of challenge count needed to validate certificate.
-	// Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-	// This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+	// domain certificates.
+	// Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
 	ChallengeCount *float64 `json:"challengeCount,omitempty" tf:"challenge_count,omitempty"`
 
+	// check method. Possible values:
 	// Domain owner-check method. Possible values:
+	// * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+	// * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+	// * `HTTP` - you will need to place specified value into specified url.
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 }
 
 type ManagedParameters struct {
 
-	// . Expected number of challenge count needed to validate certificate.
-	// Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider.
-	// This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
+	// domain certificates.
+	// Expected number of challenge count needed to validate certificate. Resource creation will fail if the specified value does not match the actual number of challenges received from issue provider. This argument is helpful for safe automatic resource creation for passing challenges for multi-domain certificates.
 	// +kubebuilder:validation:Optional
 	ChallengeCount *float64 `json:"challengeCount,omitempty" tf:"challenge_count,omitempty"`
 
+	// check method. Possible values:
 	// Domain owner-check method. Possible values:
+	// * `DNS_CNAME` - you will need to create a CNAME dns record with the specified value. Recommended for fully automated certificate renewal.
+	// * `DNS_TXT` - you will need to create a TXT dns record with specified value.
+	// * `HTTP` - you will need to place specified value into specified url.
 	// +kubebuilder:validation:Optional
 	ChallengeType *string `json:"challengeType" tf:"challenge_type,omitempty"`
 }
 
 type PrivateKeyLockboxSecretInitParameters struct {
 
+	// (String) The ID of this resource.
 	// Lockbox secret Id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) Key of the Lockbox secret, the value of which contains the private key of the certificate.
 	// Key of the Lockbox secret, the value of which contains the private key of the certificate.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type PrivateKeyLockboxSecretObservation struct {
 
+	// (String) The ID of this resource.
 	// Lockbox secret Id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) Key of the Lockbox secret, the value of which contains the private key of the certificate.
 	// Key of the Lockbox secret, the value of which contains the private key of the certificate.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type PrivateKeyLockboxSecretParameters struct {
 
+	// (String) The ID of this resource.
 	// Lockbox secret Id.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id" tf:"id,omitempty"`
 
+	// (String) Key of the Lockbox secret, the value of which contains the private key of the certificate.
 	// Key of the Lockbox secret, the value of which contains the private key of the certificate.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
@@ -256,35 +322,43 @@ type PrivateKeyLockboxSecretParameters struct {
 
 type SelfManagedInitParameters struct {
 
+	// (String) Certificate with chain.
 	// Certificate with chain.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// Lockbox secret specification for getting private key. Structure is documented below.
+	// (Block List, Max: 1) Lockbox secret specification for getting private key. (see below for nested schema)
+	// Lockbox secret specification for getting private key.
 	PrivateKeyLockboxSecret []PrivateKeyLockboxSecretInitParameters `json:"privateKeyLockboxSecret,omitempty" tf:"private_key_lockbox_secret,omitempty"`
 
+	// (String, Sensitive) Private key of certificate.
 	// Private key of certificate.
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 }
 
 type SelfManagedObservation struct {
 
+	// (String) Certificate with chain.
 	// Certificate with chain.
 	Certificate *string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// Lockbox secret specification for getting private key. Structure is documented below.
+	// (Block List, Max: 1) Lockbox secret specification for getting private key. (see below for nested schema)
+	// Lockbox secret specification for getting private key.
 	PrivateKeyLockboxSecret []PrivateKeyLockboxSecretObservation `json:"privateKeyLockboxSecret,omitempty" tf:"private_key_lockbox_secret,omitempty"`
 }
 
 type SelfManagedParameters struct {
 
+	// (String) Certificate with chain.
 	// Certificate with chain.
 	// +kubebuilder:validation:Optional
 	Certificate *string `json:"certificate" tf:"certificate,omitempty"`
 
-	// Lockbox secret specification for getting private key. Structure is documented below.
+	// (Block List, Max: 1) Lockbox secret specification for getting private key. (see below for nested schema)
+	// Lockbox secret specification for getting private key.
 	// +kubebuilder:validation:Optional
 	PrivateKeyLockboxSecret []PrivateKeyLockboxSecretParameters `json:"privateKeyLockboxSecret,omitempty" tf:"private_key_lockbox_secret,omitempty"`
 
+	// (String, Sensitive) Private key of certificate.
 	// Private key of certificate.
 	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`

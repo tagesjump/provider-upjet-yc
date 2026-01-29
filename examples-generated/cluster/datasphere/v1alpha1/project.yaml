@@ -1,0 +1,50 @@
+apiVersion: datasphere.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/project
+  labels:
+    testing.upbound.io/example-name: my-project
+  name: my-project
+spec:
+  forProvider:
+    communityIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my-community
+    description: Datasphere Project description
+    labels:
+      foo: bar
+    limits:
+      balance: 10
+      maxUnitsPerExecution: 10
+      maxUnitsPerHour: 10
+    name: example-datasphere-project
+    settings:
+      commit_mode: AUTO
+      dataProcClusterId: foo-data-proc-cluster-id
+      defaultFolderId: foo-folder-id
+      ide: JUPYTER_LAB
+      securityGroupIds:
+      - ${yandex_vpc_security_group.my-security-group.id}
+      serviceAccountId: ${yandex_iam_service_account.my-account.id}
+      staleExecTimeoutMode: ONE_HOUR
+      subnetId: ${yandex_vpc_subnet.my-subnet.id}
+
+---
+
+apiVersion: datasphere.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Community
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/project
+  labels:
+    testing.upbound.io/example-name: my-community
+  name: my-community
+spec:
+  forProvider:
+    billingAccountId: example-organization-id
+    description: Description of community
+    labels:
+      foo: bar
+    name: example-datasphere-community
+    organizationId: example-organization-id

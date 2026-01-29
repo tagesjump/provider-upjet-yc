@@ -1,0 +1,64 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: RedisClusterV2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/redisclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+      version: 7.2-valkey
+    environment: PRESTABLE
+    hosts:
+      aaa:
+        subnet_id: ${yandex_vpc_subnet.foo.id}
+        zone: ru-central1-a
+    maintenanceWindow:
+      type: ANYTIME
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    resources:
+      diskSize: 16
+      resourcePresetId: hm1.nano
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/redisclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/redisclusterv2
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-a

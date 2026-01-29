@@ -1,0 +1,25 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: IdpApplicationOauthApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpapplicationoauthapplication
+  labels:
+    testing.upbound.io/example-name: example_app
+  name: example-app
+  namespace: upbound-system
+spec:
+  forProvider:
+    clientGrant:
+      authorizedScopes:
+      - openid
+      - profile
+      - email
+      clientId: some_client_id
+    description: Example OAuth application
+    groupClaimsSettings:
+      groupDistributionType: ALL_GROUPS
+    labels:
+      app: example
+      env: production
+    name: example-oauth-app
+    organizationId: some_organization_id

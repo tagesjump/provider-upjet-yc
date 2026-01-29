@@ -9,7 +9,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    functionId: your-function-id
+    functionId: dns9m**********tducf
     members:
     - system:allUsers
     role: serverless.functions.invoker

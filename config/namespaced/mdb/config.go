@@ -296,17 +296,20 @@ func Configure(p *ujconfig.Provider) {
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			return postgresqlConnDetails(attr), nil
 		}
+		r.UseAsync = true
 	})
 
 	p.AddResourceConfigurator("yandex_mdb_postgresql_database", func(r *ujconfig.Resource) {
 		r.References["cluster_id"] = ujconfig.Reference{
 			Type: "PostgresqlCluster",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("yandex_mdb_postgresql_user", func(r *ujconfig.Resource) {
 		r.References["cluster_id"] = ujconfig.Reference{
 			Type: "PostgresqlCluster",
 		}
+		r.UseAsync = true
 	})
 	p.AddResourceConfigurator("yandex_mdb_mysql_cluster", func(r *ujconfig.Resource) {
 		r.References["network_id"] = ujconfig.Reference{

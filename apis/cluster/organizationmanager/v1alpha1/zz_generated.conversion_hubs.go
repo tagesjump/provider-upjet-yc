@@ -9,7 +9,43 @@ func (tr *Group) Hub() {}
 func (tr *GroupIAMMember) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *GroupMapping) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *GroupMappingItem) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *GroupMembership) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpApplicationOauthApplication) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpApplicationOauthApplicationAssignment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpApplicationSAMLApplication) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpApplicationSAMLApplicationAssignment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpApplicationSAMLSignatureCertificate) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpUser) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpUserpool) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *IdpUserpoolDomain) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MfaEnforcement) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MfaEnforcementAudience) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *OrganizationIAMBinding) Hub() {}

@@ -1,0 +1,18 @@
+apiVersion: yq.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: MonitoringConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: yq/v1alpha1/monitoringconnection
+  labels:
+    testing.upbound.io/example-name: my_mon_connection
+  name: my-mon-connection
+spec:
+  forProvider:
+    description: Connection has been created from Terraform
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: tf-test-mon-connection
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: for-yq

@@ -4,36 +4,27 @@ metadata:
   annotations:
     meta.upbound.io/example-id: audit/v1alpha1/trailstrail
   labels:
-    testing.upbound.io/example-name: basic_trail
+    testing.upbound.io/example-name: basic-trail
   name: basic-trail
 spec:
   forProvider:
     description: Some trail description
-    filter:
-    - eventFilters:
-      - categories:
-        - plane: DATA_PLANE
-          type: WRITE
-        pathFilter:
-        - anyFilter:
-          - resourceId: home-folder
-            resourceType: resource-manager.folder
+    filteringPolicy:
+    - dataEventsFilter:
+      - resourceScope:
+        - resourceId: home-folder
+          resourceType: resource-manager.folder
         service: storage
-      - categories:
-        - plane: DATA_PLANE
-          type: READ
-        pathFilter:
-        - someFilter:
-          - anyFilters:
-            - resourceId: vpc-net-id-1
-              resourceType: vpc.network
-            - resourceId: vpc-net-id-2
-              resourceType: vpc.network
-            resourceId: home-folder
-            resourceType: resource-manager.folder
+      - dnsFilter:
+        - includeNonrecursiveQueries: true
+        resourceScope:
+        - resourceId: vpc-net-id-1
+          resourceType: vpc.network
+        - resourceId: vpc-net-id-2
+          resourceType: vpc.network
         service: dns
-      pathFilter:
-      - anyFilter:
+      managementEventsFilter:
+      - resourceScope:
         - resourceId: home-folder
           resourceType: resource-manager.folder
     folderIdSelector:
@@ -43,5 +34,5 @@ spec:
       key: value
     loggingDestination:
     - logGroupId: some-log-group
-    name: a-trail
+    name: basic-trail
     serviceAccountId: trail-service-account

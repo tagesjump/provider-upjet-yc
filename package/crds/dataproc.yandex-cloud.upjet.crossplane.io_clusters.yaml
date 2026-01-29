@@ -34,8 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Cluster is the Schema for the Clusters API. Manages a Data Proc
-          cluster within Yandex.Cloud.
+        description: Cluster is the Schema for the Clusters API. Manages a Data Processing
+          cluster within Yandex Cloud.
         properties:
           apiVersion:
             description: |-
@@ -73,12 +73,15 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  autoscalingServiceAccountId:
+                    description: |-
+                      (String) Service account to be used for managing hosts in an autoscaled subcluster.
+                      Service account to be used for managing hosts in an autoscaled subcluster.
+                    type: string
                   bucket:
-                    description: Name of the Object Storage bucket to use for Data
-                      Proc jobs. Data Proc Agent saves output of job driver's process
-                      to specified bucket. In order for this to work service account
-                      (specified by the service_account_id argument) should be given
-                      permission to create objects within this bucket.
+                    description: |-
+                      (String) Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+                      Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the `service_account_id` argument) should be given permission to create objects within this bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in storage to populate bucket.
@@ -155,52 +158,67 @@ spec:
                         type: object
                     type: object
                   clusterConfig:
-                    description: Configuration and resources for hosts that should
-                      be created with the cluster. The structure is documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Configuration and resources for hosts that should be created with the cluster. (see below for nested schema)
+                      Configuration and resources for hosts that should be created with the cluster.
                     items:
                       properties:
                         hadoop:
-                          description: Data Proc specific options. The structure is
-                            documented below.
+                          description: |-
+                            (Block List, Max: 1) Yandex Data Processing specific options. (see below for nested schema)
+                            Yandex Data Processing specific options.
                           items:
                             properties:
                               initializationAction:
-                                description: List of initialization scripts. The structure
-                                  is documented below.
+                                description: |-
+                                  (Block List) List of initialization scripts. (see below for nested schema)
+                                  List of initialization scripts.
                                 items:
                                   properties:
                                     args:
-                                      description: List of arguments of the initialization
-                                        script.
+                                      description: |-
+                                        (List of String) List of arguments of the initialization script.
+                                        List of arguments of the initialization script.
                                       items:
                                         type: string
                                       type: array
                                     timeout:
-                                      description: Script execution timeout, in seconds.
+                                      description: |-
+                                        (String) Script execution timeout, in seconds.
+                                        Script execution timeout, in seconds.
                                       type: string
                                     uri:
-                                      description: Script URI.
+                                      description: |-
+                                        (String) Script URI.
+                                        Script URI.
                                       type: string
                                   type: object
                                 type: array
+                              oslogin:
+                                description: |-
+                                  (Boolean) Whether to enable authorization via OS Login.
+                                  Whether to enable authorization via OS Login.
+                                type: boolean
                               properties:
                                 additionalProperties:
                                   type: string
-                                description: A set of key/value pairs that are used
-                                  to configure cluster services.
+                                description: |-
+                                  (Map of String) A set of key/value pairs that are used to configure cluster services.
+                                  A set of key/value pairs that are used to configure cluster services.
                                 type: object
                                 x-kubernetes-map-type: granular
                               services:
-                                description: List of services to run on Data Proc
-                                  cluster.
+                                description: |-
+                                  (Set of String) List of services to run on Yandex Data Processing cluster.
+                                  List of services to run on Yandex Data Processing cluster.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               sshPublicKeys:
-                                description: List of SSH public keys to put to the
-                                  hosts of the cluster. For information on how to
-                                  connect to the cluster, see the official documentation.
+                                description: |-
+                                  (Set of String) List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+                                  List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
                                 items:
                                   type: string
                                 type: array
@@ -208,96 +226,101 @@ spec:
                             type: object
                           type: array
                         subclusterSpec:
-                          description: Configuration of the Data Proc subcluster.
-                            The structure is documented below.
+                          description: |-
+                            (Block List, Min: 1) Configuration of the Yandex Data Processing subcluster. (see below for nested schema)
+                            Configuration of the Yandex Data Processing subcluster.
                           items:
                             properties:
                               assignPublicIp:
-                                description: If true then assign public IP addresses
-                                  to the hosts of the subclusters.
+                                description: |-
+                                  (Boolean) If true then assign public IP addresses to the hosts of the subclusters.
+                                  If `true` then assign public IP addresses to the hosts of the subclusters.
                                 type: boolean
                               autoscalingConfig:
-                                description: Autoscaling configuration for compute
-                                  subclusters.
+                                description: |-
+                                  (Block List, Max: 1) Autoscaling configuration for compute subclusters. (see below for nested schema)
+                                  Autoscaling configuration for compute subclusters.
                                 items:
                                   properties:
                                     cpuUtilizationTarget:
-                                      description: Defines an autoscaling rule based
-                                        on the average CPU utilization of the instance
-                                        group. If not set default autoscaling metric
-                                        will be used.
+                                      description: |-
+                                        (String) Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
+                                        Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
                                       type: string
                                     decommissionTimeout:
-                                      description: Timeout to gracefully decommission
-                                        nodes during downscaling. In seconds.
+                                      description: |-
+                                        (String) Timeout to gracefully decommission nodes during downscaling. In seconds.
+                                        Timeout to gracefully decommission nodes during downscaling. In seconds.
                                       type: string
                                     maxHostsCount:
-                                      description: Maximum number of nodes in autoscaling
-                                        subclusters.
+                                      description: |-
+                                        (Number) Maximum number of nodes in autoscaling subclusters.
+                                        Maximum number of nodes in autoscaling subclusters.
                                       type: number
                                     measurementDuration:
-                                      description: Time in seconds allotted for averaging
-                                        metrics.
+                                      description: |-
+                                        (String) Time in seconds allotted for averaging metrics.
+                                        Time in seconds allotted for averaging metrics.
                                       type: string
                                     preemptible:
-                                      description: Bool flag -- whether to use preemptible
-                                        compute instances. Preemptible instances are
-                                        stopped at least once every 24 hours, and
-                                        can be stopped at any time if their resources
-                                        are needed by Compute. For more information,
-                                        see Preemptible Virtual Machines.
+                                      description: |-
+                                        (Boolean) Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+                                        Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
                                       type: boolean
                                     stabilizationDuration:
-                                      description: Minimum amount of time in seconds
-                                        allotted for monitoring before Instance Groups
-                                        can reduce the number of instances in the
-                                        group. During this time, the group size doesn't
-                                        decrease, even if the new metric values indicate
-                                        that it should.
+                                      description: |-
+                                        (String) Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
+                                        Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
                                       type: string
                                     warmupDuration:
-                                      description: The warmup time of the instance
-                                        in seconds. During this time, traffic is sent
-                                        to the instance, but instance metrics are
-                                        not collected.
+                                      description: |-
+                                        (String) The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
+                                        The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
                                       type: string
                                   type: object
                                 type: array
                               hostsCount:
-                                description: Number of hosts within Data Proc subcluster.
+                                description: |-
+                                  (Number) Number of hosts within Yandex Data Processing subcluster.
+                                  Number of hosts within Yandex Data Processing subcluster.
                                 type: number
                               name:
-                                description: Name of the Data Proc subcluster.
+                                description: |-
+                                  (String) The resource name.
+                                  Name of the Yandex Data Processing subcluster.
                                 type: string
                               resources:
-                                description: Resources allocated to each host of the
-                                  Data Proc subcluster. The structure is documented
-                                  below.
+                                description: |-
+                                  (Block List, Min: 1, Max: 1) Resources allocated to each host of the Yandex Data Processing subcluster. (see below for nested schema)
+                                  Resources allocated to each host of the Yandex Data Processing subcluster.
                                 items:
                                   properties:
                                     diskSize:
-                                      description: Volume of the storage available
-                                        to a host, in gigabytes.
+                                      description: |-
+                                        (Number) Volume of the storage available to a host, in gigabytes.
+                                        Volume of the storage available to a host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: Type of the storage of a host.
-                                        One of network-hdd (default) or network-ssd.
+                                      description: |-
+                                        hdd (default) or network-ssd.
+                                        Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
                                       type: string
                                     resourcePresetId:
-                                      description: The ID of the preset for computational
-                                        resources available to a host. All available
-                                        presets are listed in the documentation.
+                                      description: |-
+                                        (String) The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+                                        The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
                                       type: string
                                   type: object
                                 type: array
                               role:
-                                description: Role of the subcluster in the Data Proc
-                                  cluster.
+                                description: |-
+                                  (String) Role of the subcluster in the Yandex Data Processing cluster.
+                                  Role of the subcluster in the Yandex Data Processing cluster.
                                 type: string
                               subnetId:
-                                description: The ID of the subnet, to which hosts
-                                  of the subcluster belong. Subnets of all the subclusters
-                                  must belong to the same VPC network.
+                                description: |-
+                                  (String) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
+                                  The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in vpc to populate
@@ -378,20 +401,31 @@ spec:
                             type: object
                           type: array
                         versionId:
-                          description: Version of Data Proc image.
+                          description: |-
+                            (String) Version of Yandex Data Processing image.
+                            Version of Yandex Data Processing image.
                           type: string
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the Data Proc cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the cluster. Can be either PRESTABLE or PRODUCTION. The default is PRESTABLE.
+                      Deployment environment of the cluster. Can be either `PRESTABLE` or `PRODUCTION`. The default is `PRESTABLE`.
                     type: string
                   folderId:
-                    description: ID of the folder to create a cluster in. If it is
-                      not provided, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -470,8 +504,9 @@ spec:
                         type: object
                     type: object
                   hostGroupIds:
-                    description: A list of host group IDs to place VMs of the cluster
-                      on.
+                    description: |-
+                      (Set of String) A list of host group IDs to place VMs of the cluster on.
+                      A list of host group IDs to place VMs of the cluster on.
                     items:
                       type: string
                     type: array
@@ -479,25 +514,33 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Data
-                      Proc cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  logGroupId:
+                    description: |-
+                      (String) ID of the cloud logging group for cluster logs.
+                      ID of the cloud logging group for cluster logs.
+                    type: string
                   name:
-                    description: Name of a specific Data Proc cluster.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   securityGroupIds:
-                    description: A list of security group IDs that the cluster belongs
-                      to.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   serviceAccountId:
-                    description: Service account to be used by the Data Proc agent
-                      to access resources of Yandex.Cloud. Selected service account
-                      should have mdb.dataproc.agent role on the folder where the
-                      Data Proc cluster will be located.
+                    description: |-
+                      (String) Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Yandex Data Processing cluster will be located.
+                      Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have `mdb.dataproc.agent` role on the folder where the Yandex Data Processing cluster will be located.
                     type: string
                   serviceAccountIdRef:
                     description: Reference to a ServiceAccount in iam to populate
@@ -576,11 +619,14 @@ spec:
                         type: object
                     type: object
                   uiProxy:
-                    description: Whether to enable UI Proxy feature.
+                    description: |-
+                      (Boolean) Whether to enable UI Proxy feature.
+                      Whether to enable UI Proxy feature.
                     type: boolean
                   zoneId:
-                    description: ID of the availability zone to create cluster in.
-                      If it is not provided, the default provider zone is used.
+                    description: |-
+                      (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                      The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                     type: string
                 type: object
               initProvider:
@@ -596,12 +642,15 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  autoscalingServiceAccountId:
+                    description: |-
+                      (String) Service account to be used for managing hosts in an autoscaled subcluster.
+                      Service account to be used for managing hosts in an autoscaled subcluster.
+                    type: string
                   bucket:
-                    description: Name of the Object Storage bucket to use for Data
-                      Proc jobs. Data Proc Agent saves output of job driver's process
-                      to specified bucket. In order for this to work service account
-                      (specified by the service_account_id argument) should be given
-                      permission to create objects within this bucket.
+                    description: |-
+                      (String) Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+                      Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the `service_account_id` argument) should be given permission to create objects within this bucket.
                     type: string
                   bucketRef:
                     description: Reference to a Bucket in storage to populate bucket.
@@ -678,52 +727,67 @@ spec:
                         type: object
                     type: object
                   clusterConfig:
-                    description: Configuration and resources for hosts that should
-                      be created with the cluster. The structure is documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Configuration and resources for hosts that should be created with the cluster. (see below for nested schema)
+                      Configuration and resources for hosts that should be created with the cluster.
                     items:
                       properties:
                         hadoop:
-                          description: Data Proc specific options. The structure is
-                            documented below.
+                          description: |-
+                            (Block List, Max: 1) Yandex Data Processing specific options. (see below for nested schema)
+                            Yandex Data Processing specific options.
                           items:
                             properties:
                               initializationAction:
-                                description: List of initialization scripts. The structure
-                                  is documented below.
+                                description: |-
+                                  (Block List) List of initialization scripts. (see below for nested schema)
+                                  List of initialization scripts.
                                 items:
                                   properties:
                                     args:
-                                      description: List of arguments of the initialization
-                                        script.
+                                      description: |-
+                                        (List of String) List of arguments of the initialization script.
+                                        List of arguments of the initialization script.
                                       items:
                                         type: string
                                       type: array
                                     timeout:
-                                      description: Script execution timeout, in seconds.
+                                      description: |-
+                                        (String) Script execution timeout, in seconds.
+                                        Script execution timeout, in seconds.
                                       type: string
                                     uri:
-                                      description: Script URI.
+                                      description: |-
+                                        (String) Script URI.
+                                        Script URI.
                                       type: string
                                   type: object
                                 type: array
+                              oslogin:
+                                description: |-
+                                  (Boolean) Whether to enable authorization via OS Login.
+                                  Whether to enable authorization via OS Login.
+                                type: boolean
                               properties:
                                 additionalProperties:
                                   type: string
-                                description: A set of key/value pairs that are used
-                                  to configure cluster services.
+                                description: |-
+                                  (Map of String) A set of key/value pairs that are used to configure cluster services.
+                                  A set of key/value pairs that are used to configure cluster services.
                                 type: object
                                 x-kubernetes-map-type: granular
                               services:
-                                description: List of services to run on Data Proc
-                                  cluster.
+                                description: |-
+                                  (Set of String) List of services to run on Yandex Data Processing cluster.
+                                  List of services to run on Yandex Data Processing cluster.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               sshPublicKeys:
-                                description: List of SSH public keys to put to the
-                                  hosts of the cluster. For information on how to
-                                  connect to the cluster, see the official documentation.
+                                description: |-
+                                  (Set of String) List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+                                  List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
                                 items:
                                   type: string
                                 type: array
@@ -731,96 +795,101 @@ spec:
                             type: object
                           type: array
                         subclusterSpec:
-                          description: Configuration of the Data Proc subcluster.
-                            The structure is documented below.
+                          description: |-
+                            (Block List, Min: 1) Configuration of the Yandex Data Processing subcluster. (see below for nested schema)
+                            Configuration of the Yandex Data Processing subcluster.
                           items:
                             properties:
                               assignPublicIp:
-                                description: If true then assign public IP addresses
-                                  to the hosts of the subclusters.
+                                description: |-
+                                  (Boolean) If true then assign public IP addresses to the hosts of the subclusters.
+                                  If `true` then assign public IP addresses to the hosts of the subclusters.
                                 type: boolean
                               autoscalingConfig:
-                                description: Autoscaling configuration for compute
-                                  subclusters.
+                                description: |-
+                                  (Block List, Max: 1) Autoscaling configuration for compute subclusters. (see below for nested schema)
+                                  Autoscaling configuration for compute subclusters.
                                 items:
                                   properties:
                                     cpuUtilizationTarget:
-                                      description: Defines an autoscaling rule based
-                                        on the average CPU utilization of the instance
-                                        group. If not set default autoscaling metric
-                                        will be used.
+                                      description: |-
+                                        (String) Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
+                                        Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
                                       type: string
                                     decommissionTimeout:
-                                      description: Timeout to gracefully decommission
-                                        nodes during downscaling. In seconds.
+                                      description: |-
+                                        (String) Timeout to gracefully decommission nodes during downscaling. In seconds.
+                                        Timeout to gracefully decommission nodes during downscaling. In seconds.
                                       type: string
                                     maxHostsCount:
-                                      description: Maximum number of nodes in autoscaling
-                                        subclusters.
+                                      description: |-
+                                        (Number) Maximum number of nodes in autoscaling subclusters.
+                                        Maximum number of nodes in autoscaling subclusters.
                                       type: number
                                     measurementDuration:
-                                      description: Time in seconds allotted for averaging
-                                        metrics.
+                                      description: |-
+                                        (String) Time in seconds allotted for averaging metrics.
+                                        Time in seconds allotted for averaging metrics.
                                       type: string
                                     preemptible:
-                                      description: Bool flag -- whether to use preemptible
-                                        compute instances. Preemptible instances are
-                                        stopped at least once every 24 hours, and
-                                        can be stopped at any time if their resources
-                                        are needed by Compute. For more information,
-                                        see Preemptible Virtual Machines.
+                                      description: |-
+                                        (Boolean) Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+                                        Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
                                       type: boolean
                                     stabilizationDuration:
-                                      description: Minimum amount of time in seconds
-                                        allotted for monitoring before Instance Groups
-                                        can reduce the number of instances in the
-                                        group. During this time, the group size doesn't
-                                        decrease, even if the new metric values indicate
-                                        that it should.
+                                      description: |-
+                                        (String) Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
+                                        Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
                                       type: string
                                     warmupDuration:
-                                      description: The warmup time of the instance
-                                        in seconds. During this time, traffic is sent
-                                        to the instance, but instance metrics are
-                                        not collected.
+                                      description: |-
+                                        (String) The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
+                                        The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
                                       type: string
                                   type: object
                                 type: array
                               hostsCount:
-                                description: Number of hosts within Data Proc subcluster.
+                                description: |-
+                                  (Number) Number of hosts within Yandex Data Processing subcluster.
+                                  Number of hosts within Yandex Data Processing subcluster.
                                 type: number
                               name:
-                                description: Name of the Data Proc subcluster.
+                                description: |-
+                                  (String) The resource name.
+                                  Name of the Yandex Data Processing subcluster.
                                 type: string
                               resources:
-                                description: Resources allocated to each host of the
-                                  Data Proc subcluster. The structure is documented
-                                  below.
+                                description: |-
+                                  (Block List, Min: 1, Max: 1) Resources allocated to each host of the Yandex Data Processing subcluster. (see below for nested schema)
+                                  Resources allocated to each host of the Yandex Data Processing subcluster.
                                 items:
                                   properties:
                                     diskSize:
-                                      description: Volume of the storage available
-                                        to a host, in gigabytes.
+                                      description: |-
+                                        (Number) Volume of the storage available to a host, in gigabytes.
+                                        Volume of the storage available to a host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: Type of the storage of a host.
-                                        One of network-hdd (default) or network-ssd.
+                                      description: |-
+                                        hdd (default) or network-ssd.
+                                        Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
                                       type: string
                                     resourcePresetId:
-                                      description: The ID of the preset for computational
-                                        resources available to a host. All available
-                                        presets are listed in the documentation.
+                                      description: |-
+                                        (String) The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+                                        The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
                                       type: string
                                   type: object
                                 type: array
                               role:
-                                description: Role of the subcluster in the Data Proc
-                                  cluster.
+                                description: |-
+                                  (String) Role of the subcluster in the Yandex Data Processing cluster.
+                                  Role of the subcluster in the Yandex Data Processing cluster.
                                 type: string
                               subnetId:
-                                description: The ID of the subnet, to which hosts
-                                  of the subcluster belong. Subnets of all the subclusters
-                                  must belong to the same VPC network.
+                                description: |-
+                                  (String) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
+                                  The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in vpc to populate
@@ -901,20 +970,31 @@ spec:
                             type: object
                           type: array
                         versionId:
-                          description: Version of Data Proc image.
+                          description: |-
+                            (String) Version of Yandex Data Processing image.
+                            Version of Yandex Data Processing image.
                           type: string
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the Data Proc cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the cluster. Can be either PRESTABLE or PRODUCTION. The default is PRESTABLE.
+                      Deployment environment of the cluster. Can be either `PRESTABLE` or `PRODUCTION`. The default is `PRESTABLE`.
                     type: string
                   folderId:
-                    description: ID of the folder to create a cluster in. If it is
-                      not provided, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -993,8 +1073,9 @@ spec:
                         type: object
                     type: object
                   hostGroupIds:
-                    description: A list of host group IDs to place VMs of the cluster
-                      on.
+                    description: |-
+                      (Set of String) A list of host group IDs to place VMs of the cluster on.
+                      A list of host group IDs to place VMs of the cluster on.
                     items:
                       type: string
                     type: array
@@ -1002,25 +1083,33 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Data
-                      Proc cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  logGroupId:
+                    description: |-
+                      (String) ID of the cloud logging group for cluster logs.
+                      ID of the cloud logging group for cluster logs.
+                    type: string
                   name:
-                    description: Name of a specific Data Proc cluster.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   securityGroupIds:
-                    description: A list of security group IDs that the cluster belongs
-                      to.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   serviceAccountId:
-                    description: Service account to be used by the Data Proc agent
-                      to access resources of Yandex.Cloud. Selected service account
-                      should have mdb.dataproc.agent role on the folder where the
-                      Data Proc cluster will be located.
+                    description: |-
+                      (String) Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Yandex Data Processing cluster will be located.
+                      Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have `mdb.dataproc.agent` role on the folder where the Yandex Data Processing cluster will be located.
                     type: string
                   serviceAccountIdRef:
                     description: Reference to a ServiceAccount in iam to populate
@@ -1099,11 +1188,14 @@ spec:
                         type: object
                     type: object
                   uiProxy:
-                    description: Whether to enable UI Proxy feature.
+                    description: |-
+                      (Boolean) Whether to enable UI Proxy feature.
+                      Whether to enable UI Proxy feature.
                     type: boolean
                   zoneId:
-                    description: ID of the availability zone to create cluster in.
-                      If it is not provided, the default provider zone is used.
+                    description: |-
+                      (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                      The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                     type: string
                 type: object
               managementPolicies:
@@ -1206,60 +1298,78 @@ spec:
             properties:
               atProvider:
                 properties:
+                  autoscalingServiceAccountId:
+                    description: |-
+                      (String) Service account to be used for managing hosts in an autoscaled subcluster.
+                      Service account to be used for managing hosts in an autoscaled subcluster.
+                    type: string
                   bucket:
-                    description: Name of the Object Storage bucket to use for Data
-                      Proc jobs. Data Proc Agent saves output of job driver's process
-                      to specified bucket. In order for this to work service account
-                      (specified by the service_account_id argument) should be given
-                      permission to create objects within this bucket.
+                    description: |-
+                      (String) Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+                      Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the `service_account_id` argument) should be given permission to create objects within this bucket.
                     type: string
                   clusterConfig:
-                    description: Configuration and resources for hosts that should
-                      be created with the cluster. The structure is documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Configuration and resources for hosts that should be created with the cluster. (see below for nested schema)
+                      Configuration and resources for hosts that should be created with the cluster.
                     items:
                       properties:
                         hadoop:
-                          description: Data Proc specific options. The structure is
-                            documented below.
+                          description: |-
+                            (Block List, Max: 1) Yandex Data Processing specific options. (see below for nested schema)
+                            Yandex Data Processing specific options.
                           items:
                             properties:
                               initializationAction:
-                                description: List of initialization scripts. The structure
-                                  is documented below.
+                                description: |-
+                                  (Block List) List of initialization scripts. (see below for nested schema)
+                                  List of initialization scripts.
                                 items:
                                   properties:
                                     args:
-                                      description: List of arguments of the initialization
-                                        script.
+                                      description: |-
+                                        (List of String) List of arguments of the initialization script.
+                                        List of arguments of the initialization script.
                                       items:
                                         type: string
                                       type: array
                                     timeout:
-                                      description: Script execution timeout, in seconds.
+                                      description: |-
+                                        (String) Script execution timeout, in seconds.
+                                        Script execution timeout, in seconds.
                                       type: string
                                     uri:
-                                      description: Script URI.
+                                      description: |-
+                                        (String) Script URI.
+                                        Script URI.
                                       type: string
                                   type: object
                                 type: array
+                              oslogin:
+                                description: |-
+                                  (Boolean) Whether to enable authorization via OS Login.
+                                  Whether to enable authorization via OS Login.
+                                type: boolean
                               properties:
                                 additionalProperties:
                                   type: string
-                                description: A set of key/value pairs that are used
-                                  to configure cluster services.
+                                description: |-
+                                  (Map of String) A set of key/value pairs that are used to configure cluster services.
+                                  A set of key/value pairs that are used to configure cluster services.
                                 type: object
                                 x-kubernetes-map-type: granular
                               services:
-                                description: List of services to run on Data Proc
-                                  cluster.
+                                description: |-
+                                  (Set of String) List of services to run on Yandex Data Processing cluster.
+                                  List of services to run on Yandex Data Processing cluster.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               sshPublicKeys:
-                                description: List of SSH public keys to put to the
-                                  hosts of the cluster. For information on how to
-                                  connect to the cluster, see the official documentation.
+                                description: |-
+                                  (Set of String) List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+                                  List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
                                 items:
                                   type: string
                                 type: array
@@ -1267,160 +1377,192 @@ spec:
                             type: object
                           type: array
                         subclusterSpec:
-                          description: Configuration of the Data Proc subcluster.
-                            The structure is documented below.
+                          description: |-
+                            (Block List, Min: 1) Configuration of the Yandex Data Processing subcluster. (see below for nested schema)
+                            Configuration of the Yandex Data Processing subcluster.
                           items:
                             properties:
                               assignPublicIp:
-                                description: If true then assign public IP addresses
-                                  to the hosts of the subclusters.
+                                description: |-
+                                  (Boolean) If true then assign public IP addresses to the hosts of the subclusters.
+                                  If `true` then assign public IP addresses to the hosts of the subclusters.
                                 type: boolean
                               autoscalingConfig:
-                                description: Autoscaling configuration for compute
-                                  subclusters.
+                                description: |-
+                                  (Block List, Max: 1) Autoscaling configuration for compute subclusters. (see below for nested schema)
+                                  Autoscaling configuration for compute subclusters.
                                 items:
                                   properties:
                                     cpuUtilizationTarget:
-                                      description: Defines an autoscaling rule based
-                                        on the average CPU utilization of the instance
-                                        group. If not set default autoscaling metric
-                                        will be used.
+                                      description: |-
+                                        (String) Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
+                                        Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
                                       type: string
                                     decommissionTimeout:
-                                      description: Timeout to gracefully decommission
-                                        nodes during downscaling. In seconds.
+                                      description: |-
+                                        (String) Timeout to gracefully decommission nodes during downscaling. In seconds.
+                                        Timeout to gracefully decommission nodes during downscaling. In seconds.
                                       type: string
                                     maxHostsCount:
-                                      description: Maximum number of nodes in autoscaling
-                                        subclusters.
+                                      description: |-
+                                        (Number) Maximum number of nodes in autoscaling subclusters.
+                                        Maximum number of nodes in autoscaling subclusters.
                                       type: number
                                     measurementDuration:
-                                      description: Time in seconds allotted for averaging
-                                        metrics.
+                                      description: |-
+                                        (String) Time in seconds allotted for averaging metrics.
+                                        Time in seconds allotted for averaging metrics.
                                       type: string
                                     preemptible:
-                                      description: Bool flag -- whether to use preemptible
-                                        compute instances. Preemptible instances are
-                                        stopped at least once every 24 hours, and
-                                        can be stopped at any time if their resources
-                                        are needed by Compute. For more information,
-                                        see Preemptible Virtual Machines.
+                                      description: |-
+                                        (Boolean) Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+                                        Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
                                       type: boolean
                                     stabilizationDuration:
-                                      description: Minimum amount of time in seconds
-                                        allotted for monitoring before Instance Groups
-                                        can reduce the number of instances in the
-                                        group. During this time, the group size doesn't
-                                        decrease, even if the new metric values indicate
-                                        that it should.
+                                      description: |-
+                                        (String) Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
+                                        Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
                                       type: string
                                     warmupDuration:
-                                      description: The warmup time of the instance
-                                        in seconds. During this time, traffic is sent
-                                        to the instance, but instance metrics are
-                                        not collected.
+                                      description: |-
+                                        (String) The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
+                                        The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
                                       type: string
                                   type: object
                                 type: array
                               hostsCount:
-                                description: Number of hosts within Data Proc subcluster.
+                                description: |-
+                                  (Number) Number of hosts within Yandex Data Processing subcluster.
+                                  Number of hosts within Yandex Data Processing subcluster.
                                 type: number
                               id:
-                                description: (Computed) ID of a new Data Proc cluster.
+                                description: |-
+                                  (String) The ID of this resource.
+                                  ID of the subcluster.
                                 type: string
                               name:
-                                description: Name of the Data Proc subcluster.
+                                description: |-
+                                  (String) The resource name.
+                                  Name of the Yandex Data Processing subcluster.
                                 type: string
                               resources:
-                                description: Resources allocated to each host of the
-                                  Data Proc subcluster. The structure is documented
-                                  below.
+                                description: |-
+                                  (Block List, Min: 1, Max: 1) Resources allocated to each host of the Yandex Data Processing subcluster. (see below for nested schema)
+                                  Resources allocated to each host of the Yandex Data Processing subcluster.
                                 items:
                                   properties:
                                     diskSize:
-                                      description: Volume of the storage available
-                                        to a host, in gigabytes.
+                                      description: |-
+                                        (Number) Volume of the storage available to a host, in gigabytes.
+                                        Volume of the storage available to a host, in gigabytes.
                                       type: number
                                     diskTypeId:
-                                      description: Type of the storage of a host.
-                                        One of network-hdd (default) or network-ssd.
+                                      description: |-
+                                        hdd (default) or network-ssd.
+                                        Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
                                       type: string
                                     resourcePresetId:
-                                      description: The ID of the preset for computational
-                                        resources available to a host. All available
-                                        presets are listed in the documentation.
+                                      description: |-
+                                        (String) The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+                                        The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
                                       type: string
                                   type: object
                                 type: array
                               role:
-                                description: Role of the subcluster in the Data Proc
-                                  cluster.
+                                description: |-
+                                  (String) Role of the subcluster in the Yandex Data Processing cluster.
+                                  Role of the subcluster in the Yandex Data Processing cluster.
                                 type: string
                               subnetId:
-                                description: The ID of the subnet, to which hosts
-                                  of the subcluster belong. Subnets of all the subclusters
-                                  must belong to the same VPC network.
+                                description: |-
+                                  (String) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
+                                  The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
                                 type: string
                             type: object
                           type: array
                         versionId:
-                          description: Version of Data Proc image.
+                          description: |-
+                            (String) Version of Yandex Data Processing image.
+                            Version of Yandex Data Processing image.
                           type: string
                       type: object
                     type: array
                   createdAt:
-                    description: (Computed) The Data Proc cluster creation timestamp.
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the Data Proc cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
+                    type: string
+                  environment:
+                    description: |-
+                      (String) Deployment environment of the cluster. Can be either PRESTABLE or PRODUCTION. The default is PRESTABLE.
+                      Deployment environment of the cluster. Can be either `PRESTABLE` or `PRODUCTION`. The default is `PRESTABLE`.
                     type: string
                   folderId:
-                    description: ID of the folder to create a cluster in. If it is
-                      not provided, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   hostGroupIds:
-                    description: A list of host group IDs to place VMs of the cluster
-                      on.
+                    description: |-
+                      (Set of String) A list of host group IDs to place VMs of the cluster on.
+                      A list of host group IDs to place VMs of the cluster on.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   id:
-                    description: (Computed) ID of a new Data Proc cluster.
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Data
-                      Proc cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  logGroupId:
+                    description: |-
+                      (String) ID of the cloud logging group for cluster logs.
+                      ID of the cloud logging group for cluster logs.
+                    type: string
                   name:
-                    description: Name of a specific Data Proc cluster.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   securityGroupIds:
-                    description: A list of security group IDs that the cluster belongs
-                      to.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   serviceAccountId:
-                    description: Service account to be used by the Data Proc agent
-                      to access resources of Yandex.Cloud. Selected service account
-                      should have mdb.dataproc.agent role on the folder where the
-                      Data Proc cluster will be located.
+                    description: |-
+                      (String) Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Yandex Data Processing cluster will be located.
+                      Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have `mdb.dataproc.agent` role on the folder where the Yandex Data Processing cluster will be located.
                     type: string
                   uiProxy:
-                    description: Whether to enable UI Proxy feature.
+                    description: |-
+                      (Boolean) Whether to enable UI Proxy feature.
+                      Whether to enable UI Proxy feature.
                     type: boolean
                   zoneId:
-                    description: ID of the availability zone to create cluster in.
-                      If it is not provided, the default provider zone is used.
+                    description: |-
+                      (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                      The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                     type: string
                 type: object
               conditions:

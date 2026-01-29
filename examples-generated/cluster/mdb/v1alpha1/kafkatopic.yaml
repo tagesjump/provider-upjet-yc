@@ -10,7 +10,7 @@ spec:
   forProvider:
     clusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: my_cluster
     name: events
     partitions: 4
     replicationFactor: 1
@@ -24,7 +24,6 @@ spec:
       maxMessageBytes: 1048588
       minCompactionLagMs: 0
       minInsyncReplicas: 1
-      preallocate: true
       retentionBytes: 10737418240
       retentionMs: 604800000
       segmentBytes: 268435456
@@ -37,8 +36,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/kafkatopic
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
 spec:
   forProvider:
     config:

@@ -5,8 +5,12 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
+	v1alpha13 "github.com/tagesjump/provider-upjet-yc/apis/cluster/iam/v1alpha1"
+	v1alpha12 "github.com/tagesjump/provider-upjet-yc/apis/cluster/lockbox/v1alpha1"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1"
+	v1alpha11 "github.com/tagesjump/provider-upjet-yc/apis/cluster/storage/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,6 +38,82 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FolderIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Mounts); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Mounts[i3].ObjectStorage); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Mounts[i3].ObjectStorage[i4].Bucket),
+				Extract:      resource.ExtractParamPath("bucket", false),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.ForProvider.Mounts[i3].ObjectStorage[i4].BucketRef,
+				Selector:     mg.Spec.ForProvider.Mounts[i3].ObjectStorage[i4].BucketSelector,
+				To: reference.To{
+					List:    &v1alpha11.BucketList{},
+					Managed: &v1alpha11.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Mounts[i3].ObjectStorage[i4].Bucket")
+			}
+			mg.Spec.ForProvider.Mounts[i3].ObjectStorage[i4].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Mounts[i3].ObjectStorage[i4].BucketRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Secrets); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Secrets[i3].ID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.Secrets[i3].IDRef,
+			Selector:     mg.Spec.ForProvider.Secrets[i3].IDSelector,
+			To: reference.To{
+				List:    &v1alpha12.SecretList{},
+				Managed: &v1alpha12.Secret{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Secrets[i3].ID")
+		}
+		mg.Spec.ForProvider.Secrets[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Secrets[i3].IDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Secrets); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Secrets[i3].VersionID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.ForProvider.Secrets[i3].VersionIDRef,
+			Selector:     mg.Spec.ForProvider.Secrets[i3].VersionIDSelector,
+			To: reference.To{
+				List:    &v1alpha12.SecretVersionList{},
+				Managed: &v1alpha12.SecretVersion{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Secrets[i3].VersionID")
+		}
+		mg.Spec.ForProvider.Secrets[i3].VersionID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Secrets[i3].VersionIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ServiceAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ServiceAccountIDRef,
+		Selector:     mg.Spec.ForProvider.ServiceAccountIDSelector,
+		To: reference.To{
+			List:    &v1alpha13.ServiceAccountList{},
+			Managed: &v1alpha13.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ServiceAccountID")
+	}
+	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
+
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
 		Extract:      reference.ExternalName(),
@@ -50,6 +130,82 @@ func (mg *Function) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Mounts); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Mounts[i3].ObjectStorage); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Mounts[i3].ObjectStorage[i4].Bucket),
+				Extract:      resource.ExtractParamPath("bucket", false),
+				Namespace:    mg.GetNamespace(),
+				Reference:    mg.Spec.InitProvider.Mounts[i3].ObjectStorage[i4].BucketRef,
+				Selector:     mg.Spec.InitProvider.Mounts[i3].ObjectStorage[i4].BucketSelector,
+				To: reference.To{
+					List:    &v1alpha11.BucketList{},
+					Managed: &v1alpha11.Bucket{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Mounts[i3].ObjectStorage[i4].Bucket")
+			}
+			mg.Spec.InitProvider.Mounts[i3].ObjectStorage[i4].Bucket = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Mounts[i3].ObjectStorage[i4].BucketRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Secrets); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Secrets[i3].ID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.Secrets[i3].IDRef,
+			Selector:     mg.Spec.InitProvider.Secrets[i3].IDSelector,
+			To: reference.To{
+				List:    &v1alpha12.SecretList{},
+				Managed: &v1alpha12.Secret{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Secrets[i3].ID")
+		}
+		mg.Spec.InitProvider.Secrets[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Secrets[i3].IDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Secrets); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Secrets[i3].VersionID),
+			Extract:      resource.ExtractResourceID(),
+			Namespace:    mg.GetNamespace(),
+			Reference:    mg.Spec.InitProvider.Secrets[i3].VersionIDRef,
+			Selector:     mg.Spec.InitProvider.Secrets[i3].VersionIDSelector,
+			To: reference.To{
+				List:    &v1alpha12.SecretVersionList{},
+				Managed: &v1alpha12.SecretVersion{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Secrets[i3].VersionID")
+		}
+		mg.Spec.InitProvider.Secrets[i3].VersionID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Secrets[i3].VersionIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ServiceAccountIDRef,
+		Selector:     mg.Spec.InitProvider.ServiceAccountIDSelector,
+		To: reference.To{
+			List:    &v1alpha13.ServiceAccountList{},
+			Managed: &v1alpha13.ServiceAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceAccountID")
+	}
+	mg.Spec.InitProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }

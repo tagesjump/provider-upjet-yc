@@ -293,3 +293,91 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	return nil
 }
+
+// ResolveReferences of this TableChangefeed.
+func (mg *TableChangefeed) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.TableIDRef,
+		Selector:     mg.Spec.ForProvider.TableIDSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TableID")
+	}
+	mg.Spec.ForProvider.TableID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TableIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.TableIDRef,
+		Selector:     mg.Spec.InitProvider.TableIDSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TableID")
+	}
+	mg.Spec.InitProvider.TableID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this Topic.
+func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DatabaseEndpoint),
+		Extract:      resource.ExtractParamPath("ydb_full_endpoint", true),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.DatabaseEndpointRef,
+		Selector:     mg.Spec.ForProvider.DatabaseEndpointSelector,
+		To: reference.To{
+			List:    &DatabaseServerlessList{},
+			Managed: &DatabaseServerless{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DatabaseEndpoint")
+	}
+	mg.Spec.ForProvider.DatabaseEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DatabaseEndpointRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DatabaseEndpoint),
+		Extract:      resource.ExtractParamPath("ydb_full_endpoint", true),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.DatabaseEndpointRef,
+		Selector:     mg.Spec.InitProvider.DatabaseEndpointSelector,
+		To: reference.To{
+			List:    &DatabaseServerlessList{},
+			Managed: &DatabaseServerless{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DatabaseEndpoint")
+	}
+	mg.Spec.InitProvider.DatabaseEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseEndpointRef = rsp.ResolvedReference
+
+	return nil
+}

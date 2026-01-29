@@ -1,0 +1,12 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: IdpUserpoolDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpuserpooldomain
+  labels:
+    testing.upbound.io/example-name: example_domain
+  name: example-domain
+spec:
+  forProvider:
+    domain: example.com
+    userpoolId: your_userpool_id

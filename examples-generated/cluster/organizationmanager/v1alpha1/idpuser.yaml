@@ -1,0 +1,24 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: IdpUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpuser
+  labels:
+    testing.upbound.io/example-name: example_user
+  name: example-user
+spec:
+  forProvider:
+    email: test-userov@example.com
+    familyName: User
+    fullName: Test User
+    givenName: Test
+    isActive: true
+    passwordSpec:
+      passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+    username: example@your-domain.com
+    userpoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: your_userpool

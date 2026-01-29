@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: ydb/v1alpha1/topic
   labels:
-    testing.upbound.io/example-name: topic
-  name: topic
+    testing.upbound.io/example-name: my_topic
+  name: my-topic
 spec:
   forProvider:
     consumer:
@@ -14,7 +14,9 @@ spec:
       supportedCodecs:
       - raw
       - gzip
-    databaseEndpoint: ${yandex_ydb_database_serverless.database_name.ydb_full_endpoint}
+    databaseEndpointSelector:
+      matchLabels:
+        testing.upbound.io/example-name: database_name
     name: topic-test
     partitionsCount: 1
     retention_period_ms: 2000000

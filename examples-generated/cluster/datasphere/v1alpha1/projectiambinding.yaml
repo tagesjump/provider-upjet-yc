@@ -1,0 +1,49 @@
+apiVersion: datasphere.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: ProjectIAMBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/projectiambinding
+  labels:
+    testing.upbound.io/example-name: project-iam
+  name: project-iam
+spec:
+  forProvider:
+    members:
+    - system:allUsers
+    projectId: your-datasphere-project-id
+    role: datasphere.community-projects.developer
+
+---
+
+apiVersion: datasphere.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Community
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/projectiambinding
+  labels:
+    testing.upbound.io/example-name: my-community
+  name: my-community
+spec:
+  forProvider:
+    billingAccountId: example-organization-id
+    description: Description of community
+    name: example-datasphere-community
+    organizationId: example-organization-id
+
+---
+
+apiVersion: datasphere.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Project
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datasphere/v1alpha1/projectiambinding
+  labels:
+    testing.upbound.io/example-name: my-project
+  name: my-project
+spec:
+  forProvider:
+    communityIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: my-community
+    description: Datasphere Project description
+    name: example-datasphere-project

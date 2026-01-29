@@ -8,7 +8,7 @@ metadata:
   name: function-iam
 spec:
   forProvider:
-    functionId: your-function-id
+    functionId: dns9m**********tducf
     members:
     - system:allUsers
     role: serverless.functions.invoker

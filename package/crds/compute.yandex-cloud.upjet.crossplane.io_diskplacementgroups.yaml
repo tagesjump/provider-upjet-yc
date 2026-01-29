@@ -74,11 +74,21 @@ spec:
               forProvider:
                 properties:
                   description:
-                    description: A description of the Disk Placement Group.
+                    description: |-
+                      (String) Description of the placement group.
+                      Description of the placement group.
+                    type: string
+                  diskPlacementGroupId:
+                    description: |-
+                      (String) ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
+                      ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
                     type: string
                   folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
+                    description: |-
+                      (String) ID of the folder that the placement group belongs to.
+                      ID of the folder that the placement group belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -159,15 +169,22 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Disk
-                      Placement Group.
+                    description: |-
+                      (Map of String) Resource labels as key:value pairs.
+                      Resource labels as `key:value` pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: The name of the Disk Placement Group.
+                    description: |-
+                      (String) Name of the placement group.
+                      The name is unique within the folder.
+                      Name of the placement group.
+                      The name is unique within the folder.
                     type: string
                   zone:
-                    description: ID of the zone where the Disk Placement Group resides.
+                    description: |-
+                      (String) ID of the availability zone where the placement group resides.
+                      ID of the availability zone where the placement group resides.
                     type: string
                 type: object
               initProvider:
@@ -184,11 +201,21 @@ spec:
                   autoscaler.
                 properties:
                   description:
-                    description: A description of the Disk Placement Group.
+                    description: |-
+                      (String) Description of the placement group.
+                      Description of the placement group.
+                    type: string
+                  diskPlacementGroupId:
+                    description: |-
+                      (String) ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
+                      ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
                     type: string
                   folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
+                    description: |-
+                      (String) ID of the folder that the placement group belongs to.
+                      ID of the folder that the placement group belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -269,15 +296,22 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Disk
-                      Placement Group.
+                    description: |-
+                      (Map of String) Resource labels as key:value pairs.
+                      Resource labels as `key:value` pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: The name of the Disk Placement Group.
+                    description: |-
+                      (String) Name of the placement group.
+                      The name is unique within the folder.
+                      Name of the placement group.
+                      The name is unique within the folder.
                     type: string
                   zone:
-                    description: ID of the zone where the Disk Placement Group resides.
+                    description: |-
+                      (String) ID of the availability zone where the placement group resides.
+                      ID of the availability zone where the placement group resides.
                     type: string
                 type: object
               managementPolicies:
@@ -372,31 +406,56 @@ spec:
               atProvider:
                 properties:
                   createdAt:
+                    description: |-
+                      (String) Creation timestamp in RFC3339 text format.
+                      Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
                     type: string
                   description:
-                    description: A description of the Disk Placement Group.
+                    description: |-
+                      (String) Description of the placement group.
+                      Description of the placement group.
+                    type: string
+                  diskPlacementGroupId:
+                    description: |-
+                      (String) ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
+                      ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
                     type: string
                   folderId:
-                    description: Folder that the resource belongs to. If value is
-                      omitted, the default provider folder is used.
+                    description: |-
+                      (String) ID of the folder that the placement group belongs to.
+                      ID of the folder that the placement group belongs to.
                     type: string
                   id:
+                    description: |-
+                      (String) ID of the placement group to return.
+                      To get the placement group ID, use [DiskPlacementGroupService.List] request.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Disk
-                      Placement Group.
+                    description: |-
+                      (Map of String) Resource labels as key:value pairs.
+                      Resource labels as `key:value` pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: The name of the Disk Placement Group.
+                    description: |-
+                      (String) Name of the placement group.
+                      The name is unique within the folder.
+                      Name of the placement group.
+                      The name is unique within the folder.
                     type: string
                   status:
-                    description: Status of the Disk Placement Group.
+                    description: |-
+                      (String) Current status of the placement group
+                      Current status of the placement group
                     type: string
                   zone:
-                    description: ID of the zone where the Disk Placement Group resides.
+                    description: |-
+                      (String) ID of the availability zone where the placement group resides.
+                      ID of the availability zone where the placement group resides.
                     type: string
                 type: object
               conditions:

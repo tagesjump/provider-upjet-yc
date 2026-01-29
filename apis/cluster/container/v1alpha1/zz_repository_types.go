@@ -11,22 +11,52 @@ import (
 
 type RepositoryInitParameters struct {
 
-	// A name of the repository. The name of the repository should start with id of a container registry and match the name of the images that will be pushed in the repository.
+	// (String) Name of the repository.
+	// The name is unique within the registry.
+	// Name of the repository.
+	// The name is unique within the registry.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the Repository resource to return.
+	// ID of the Repository resource to return.
+	//
+	// To get the repository ID use a [RepositoryService.List] request.
+	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 }
 
 type RepositoryObservation struct {
+
+	// (String) ID of the Repository resource to return.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A name of the repository. The name of the repository should start with id of a container registry and match the name of the images that will be pushed in the repository.
+	// (String) Name of the repository.
+	// The name is unique within the registry.
+	// Name of the repository.
+	// The name is unique within the registry.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the Repository resource to return.
+	// ID of the Repository resource to return.
+	//
+	// To get the repository ID use a [RepositoryService.List] request.
+	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 }
 
 type RepositoryParameters struct {
 
-	// A name of the repository. The name of the repository should start with id of a container registry and match the name of the images that will be pushed in the repository.
+	// (String) Name of the repository.
+	// The name is unique within the registry.
+	// Name of the repository.
+	// The name is unique within the registry.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the Repository resource to return.
+	// ID of the Repository resource to return.
+	//
+	// To get the repository ID use a [RepositoryService.List] request.
+	// +kubebuilder:validation:Optional
+	RepositoryID *string `json:"repositoryId,omitempty" tf:"repository_id,omitempty"`
 }
 
 // RepositorySpec defines the desired state of Repository
@@ -56,7 +86,7 @@ type RepositoryStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Repository is the Schema for the Repositorys API. Creates a new container repository.
+// Repository is the Schema for the Repositorys API. Creates a new Container Repository.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

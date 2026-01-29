@@ -11,14 +11,17 @@ import (
 
 type CoreBrokerInitParameters struct {
 
-	// A set of certificate's fingerprints for the IoT Core Broker
+	// (Set of String) A set of certificate's fingerprints for the IoT Core Broker.
+	// A set of certificate's fingerprints for the IoT Core Broker.
 	// +listType=set
 	Certificates []*string `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
-	// Description of the IoT Core Broker
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder ID for the IoT Core Broker
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -30,57 +33,71 @@ type CoreBrokerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the IoT Core Broker.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging for IoT Core Broker
+	// (Block List, Max: 1) Options for logging for IoT Core Broker. (see below for nested schema)
+	// Options for logging for IoT Core Broker.
 	LogOptions []LogOptionsInitParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// IoT Core Broker name used to define broker
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CoreBrokerObservation struct {
 
-	// A set of certificate's fingerprints for the IoT Core Broker
+	// (Set of String) A set of certificate's fingerprints for the IoT Core Broker.
+	// A set of certificate's fingerprints for the IoT Core Broker.
 	// +listType=set
 	Certificates []*string `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
-	// Creation timestamp of the IoT Core Broker
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the IoT Core Broker
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder ID for the IoT Core Broker
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the IoT Core Broker.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging for IoT Core Broker
+	// (Block List, Max: 1) Options for logging for IoT Core Broker. (see below for nested schema)
+	// Options for logging for IoT Core Broker.
 	LogOptions []LogOptionsObservation `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// IoT Core Broker name used to define broker
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CoreBrokerParameters struct {
 
-	// A set of certificate's fingerprints for the IoT Core Broker
+	// (Set of String) A set of certificate's fingerprints for the IoT Core Broker.
+	// A set of certificate's fingerprints for the IoT Core Broker.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Certificates []*string `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
-	// Description of the IoT Core Broker
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Folder ID for the IoT Core Broker
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -93,65 +110,80 @@ type CoreBrokerParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the IoT Core Broker.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Options for logging for IoT Core Broker
+	// (Block List, Max: 1) Options for logging for IoT Core Broker. (see below for nested schema)
+	// Options for logging for IoT Core Broker.
 	// +kubebuilder:validation:Optional
 	LogOptions []LogOptionsParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// IoT Core Broker name used to define broker
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type LogOptionsInitParameters struct {
 
-	// Is logging for broker disabled
+	// (Boolean) Is logging for broker disabled.
+	// Is logging for broker disabled.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Log entries are written to default log group for specified folder
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) Log entries are written to specified log group.
+	// Log entries are written to specified log group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
 type LogOptionsObservation struct {
 
-	// Is logging for broker disabled
+	// (Boolean) Is logging for broker disabled.
+	// Is logging for broker disabled.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Log entries are written to default log group for specified folder
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) Log entries are written to specified log group.
+	// Log entries are written to specified log group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
 type LogOptionsParameters struct {
 
-	// Is logging for broker disabled
+	// (Boolean) Is logging for broker disabled.
+	// Is logging for broker disabled.
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Log entries are written to default log group for specified folder
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) Log entries are written to specified log group.
+	// Log entries are written to specified log group.
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	// +kubebuilder:validation:Optional
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
@@ -183,7 +215,7 @@ type CoreBrokerStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// CoreBroker is the Schema for the CoreBrokers API. Allows management of a Yandex.Cloud IoT Core Broker.
+// CoreBroker is the Schema for the CoreBrokers API. Allows management of a Yandex Cloud IoT Core Broker.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

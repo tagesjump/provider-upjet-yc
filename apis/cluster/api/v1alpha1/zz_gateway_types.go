@@ -11,31 +11,37 @@ import (
 
 type CanaryInitParameters struct {
 
-	// A set of values for variables in gateway specification.
+	// (Map of String) A set of values for variables in gateway specification.
+	// A list of values for variables in gateway specification of canary release.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
+	// (Number) Percentage of requests, which will be processed by canary release.
 	// Percentage of requests, which will be processed by canary release.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CanaryObservation struct {
 
-	// A set of values for variables in gateway specification.
+	// (Map of String) A set of values for variables in gateway specification.
+	// A list of values for variables in gateway specification of canary release.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
+	// (Number) Percentage of requests, which will be processed by canary release.
 	// Percentage of requests, which will be processed by canary release.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type CanaryParameters struct {
 
-	// A set of values for variables in gateway specification.
+	// (Map of String) A set of values for variables in gateway specification.
+	// A list of values for variables in gateway specification of canary release.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 
+	// (Number) Percentage of requests, which will be processed by canary release.
 	// Percentage of requests, which will be processed by canary release.
 	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
@@ -43,69 +49,89 @@ type CanaryParameters struct {
 
 type ConnectivityInitParameters struct {
 
+	// (String) Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
 	// Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 }
 
 type ConnectivityObservation struct {
 
+	// (String) Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
 	// Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 }
 
 type ConnectivityParameters struct {
 
+	// (String) Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
 	// Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
 	// +kubebuilder:validation:Optional
 	NetworkID *string `json:"networkId" tf:"network_id,omitempty"`
 }
 
 type CustomDomainsInitParameters struct {
+
+	// (String)
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
+	// (String)
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
+	// (String)
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 }
 
 type CustomDomainsObservation struct {
+
+	// (String)
 	CertificateID *string `json:"certificateId,omitempty" tf:"certificate_id,omitempty"`
 
+	// (String)
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
+	// (String)
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 }
 
 type CustomDomainsParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	CertificateID *string `json:"certificateId" tf:"certificate_id,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	DomainID *string `json:"domainId,omitempty" tf:"domain_id,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	Fqdn *string `json:"fqdn" tf:"fqdn,omitempty"`
 }
 
 type GatewayInitParameters struct {
 
+	// (Block List, Max: 1) Canary release settings of gateway. (see below for nested schema)
 	// Canary release settings of gateway.
 	Canary []CanaryInitParameters `json:"canary,omitempty" tf:"canary,omitempty"`
 
+	// (Block List, Max: 1) Gateway connectivity. If specified the gateway will be attached to specified network. (see below for nested schema)
 	// Gateway connectivity. If specified the gateway will be attached to specified network.
 	Connectivity []ConnectivityInitParameters `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Set of custom domains to be attached to Yandex API Gateway.
+	// (Block Set) Set of custom domains to be attached to Yandex Cloud API Gateway. (see below for nested schema)
+	// Set of custom domains to be attached to Yandex Cloud API Gateway.
 	CustomDomains []CustomDomainsInitParameters `json:"customDomains,omitempty" tf:"custom_domains,omitempty"`
 
-	// Description of the Yandex Cloud API Gateway.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) Execution timeout in seconds for the Yandex Cloud API Gateway.
 	// Execution timeout in seconds for the Yandex Cloud API Gateway.
 	ExecutionTimeout *string `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
 
-	// Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -117,19 +143,24 @@ type GatewayInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud API Gateway.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Block List, Max: 1) Options for logging from Yandex Cloud API Gateway. (see below for nested schema)
 	// Options for logging from Yandex Cloud API Gateway.
 	LogOptions []LogOptionsInitParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// Yandex Cloud API Gateway name used to define API Gateway.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// OpenAPI specification for Yandex API Gateway.
+	// (String) The OpenAPI specification for Yandex Cloud API Gateway.
+	// The OpenAPI specification for Yandex Cloud API Gateway.
 	Spec *string `json:"spec,omitempty" tf:"spec,omitempty"`
 
+	// (Map of String) A set of values for variables in gateway specification.
 	// A set of values for variables in gateway specification.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
@@ -137,55 +168,72 @@ type GatewayInitParameters struct {
 
 type GatewayObservation struct {
 
+	// (Block List, Max: 1) Canary release settings of gateway. (see below for nested schema)
 	// Canary release settings of gateway.
 	Canary []CanaryObservation `json:"canary,omitempty" tf:"canary,omitempty"`
 
+	// (Block List, Max: 1) Gateway connectivity. If specified the gateway will be attached to specified network. (see below for nested schema)
 	// Gateway connectivity. If specified the gateway will be attached to specified network.
 	Connectivity []ConnectivityObservation `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Creation timestamp of the Yandex Cloud API Gateway.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Set of custom domains to be attached to Yandex API Gateway.
+	// (Block Set) Set of custom domains to be attached to Yandex Cloud API Gateway. (see below for nested schema)
+	// Set of custom domains to be attached to Yandex Cloud API Gateway.
 	CustomDomains []CustomDomainsObservation `json:"customDomains,omitempty" tf:"custom_domains,omitempty"`
 
-	// Description of the Yandex Cloud API Gateway.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Default domain for the Yandex API Gateway. Generated at creation time.
+	// (String) Default domain for the Yandex Cloud API Gateway. Generated at creation time.
+	// Default domain for the Yandex Cloud API Gateway. Generated at creation time.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
+	// (String) Execution timeout in seconds for the Yandex Cloud API Gateway.
 	// Execution timeout in seconds for the Yandex Cloud API Gateway.
 	ExecutionTimeout *string `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
 
-	// Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud API Gateway.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) ID of the log group for the Yandex Cloud API Gateway.
+	// ID of the log group for the Yandex Cloud API Gateway.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
+	// (Block List, Max: 1) Options for logging from Yandex Cloud API Gateway. (see below for nested schema)
 	// Options for logging from Yandex Cloud API Gateway.
 	LogOptions []LogOptionsObservation `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// Yandex Cloud API Gateway name used to define API Gateway.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// OpenAPI specification for Yandex API Gateway.
+	// (String) The OpenAPI specification for Yandex Cloud API Gateway.
+	// The OpenAPI specification for Yandex Cloud API Gateway.
 	Spec *string `json:"spec,omitempty" tf:"spec,omitempty"`
 
-	// Status of the Yandex API Gateway.
+	// (String) Status of the Yandex Cloud API Gateway.
+	// Status of the Yandex Cloud API Gateway.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
-	// (DEPRECATED, use custom_domains instead) Set of user domains attached to Yandex API Gateway.
+	// (Set of String, Deprecated) ~> DEPRECATED Use custom_domains instead. Set of user domains attached to Yandex Cloud API Gateway.
+	// ~> **DEPRECATED** Use `custom_domains` instead. Set of user domains attached to Yandex Cloud API Gateway.
 	// +listType=set
 	UserDomains []*string `json:"userDomains,omitempty" tf:"user_domains,omitempty"`
 
+	// (Map of String) A set of values for variables in gateway specification.
 	// A set of values for variables in gateway specification.
 	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
@@ -193,27 +241,33 @@ type GatewayObservation struct {
 
 type GatewayParameters struct {
 
+	// (Block List, Max: 1) Canary release settings of gateway. (see below for nested schema)
 	// Canary release settings of gateway.
 	// +kubebuilder:validation:Optional
 	Canary []CanaryParameters `json:"canary,omitempty" tf:"canary,omitempty"`
 
+	// (Block List, Max: 1) Gateway connectivity. If specified the gateway will be attached to specified network. (see below for nested schema)
 	// Gateway connectivity. If specified the gateway will be attached to specified network.
 	// +kubebuilder:validation:Optional
 	Connectivity []ConnectivityParameters `json:"connectivity,omitempty" tf:"connectivity,omitempty"`
 
-	// Set of custom domains to be attached to Yandex API Gateway.
+	// (Block Set) Set of custom domains to be attached to Yandex Cloud API Gateway. (see below for nested schema)
+	// Set of custom domains to be attached to Yandex Cloud API Gateway.
 	// +kubebuilder:validation:Optional
 	CustomDomains []CustomDomainsParameters `json:"customDomains,omitempty" tf:"custom_domains,omitempty"`
 
-	// Description of the Yandex Cloud API Gateway.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) Execution timeout in seconds for the Yandex Cloud API Gateway.
 	// Execution timeout in seconds for the Yandex Cloud API Gateway.
 	// +kubebuilder:validation:Optional
 	ExecutionTimeout *string `json:"executionTimeout,omitempty" tf:"execution_timeout,omitempty"`
 
-	// Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -226,23 +280,28 @@ type GatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// A set of key/value label pairs to assign to the Yandex Cloud API Gateway.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (Block List, Max: 1) Options for logging from Yandex Cloud API Gateway. (see below for nested schema)
 	// Options for logging from Yandex Cloud API Gateway.
 	// +kubebuilder:validation:Optional
 	LogOptions []LogOptionsParameters `json:"logOptions,omitempty" tf:"log_options,omitempty"`
 
-	// Yandex Cloud API Gateway name used to define API Gateway.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// OpenAPI specification for Yandex API Gateway.
+	// (String) The OpenAPI specification for Yandex Cloud API Gateway.
+	// The OpenAPI specification for Yandex Cloud API Gateway.
 	// +kubebuilder:validation:Optional
 	Spec *string `json:"spec,omitempty" tf:"spec,omitempty"`
 
+	// (Map of String) A set of values for variables in gateway specification.
 	// A set of values for variables in gateway specification.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
@@ -251,49 +310,61 @@ type GatewayParameters struct {
 
 type LogOptionsInitParameters struct {
 
-	// Is logging from API Gateway disabled
+	// (Boolean) Is logging from Yandex Cloud API Gateway disabled.
+	// Is logging from Yandex Cloud API Gateway disabled.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) ID of the log group for the Yandex Cloud API Gateway.
+	// Log entries are written to specified log group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
 type LogOptionsObservation struct {
 
-	// Is logging from API Gateway disabled
+	// (Boolean) Is logging from Yandex Cloud API Gateway disabled.
+	// Is logging from Yandex Cloud API Gateway disabled.
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) ID of the log group for the Yandex Cloud API Gateway.
+	// Log entries are written to specified log group.
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
 
 type LogOptionsParameters struct {
 
-	// Is logging from API Gateway disabled
+	// (Boolean) Is logging from Yandex Cloud API Gateway disabled.
+	// Is logging from Yandex Cloud API Gateway disabled.
 	// +kubebuilder:validation:Optional
 	Disabled *bool `json:"disabled,omitempty" tf:"disabled,omitempty"`
 
-	// Folder ID for the Yandex Cloud API Gateway. If it is not provided, the default provider folder is used.
+	// id is used.
+	// Log entries are written to default log group for specified folder.
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Log entries are written to specified log group
+	// (String) ID of the log group for the Yandex Cloud API Gateway.
+	// Log entries are written to specified log group.
 	// +kubebuilder:validation:Optional
 	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
 
-	// Minimum log entry level
+	// (String) Minimum log entry level.
+	// Minimum log entry level.
 	// +kubebuilder:validation:Optional
 	MinLevel *string `json:"minLevel,omitempty" tf:"min_level,omitempty"`
 }
@@ -325,7 +396,7 @@ type GatewayStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Gateway is the Schema for the Gateways API. Allows management of a Yandex Cloud API Gateway.
+// Gateway is the Schema for the Gateways API. Allows management of a Yandex API Gateway.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -3,6 +3,12 @@
 package v1alpha1
 
 // Hub marks this type as a conversion hub.
+func (tr *OauthClient) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *OauthClientSecret) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ServiceAccount) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -22,3 +28,12 @@ func (tr *ServiceAccountKey) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ServiceAccountStaticAccessKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkloadIdentityFederatedCredential) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkloadIdentityOidcFederation) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkloadIdentityOidcFederationIAMBinding) Hub() {}

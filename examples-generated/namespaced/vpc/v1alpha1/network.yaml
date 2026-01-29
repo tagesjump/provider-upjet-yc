@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpc/v1alpha1/network
   labels:
-    testing.upbound.io/example-name: default
-  name: default
+    testing.upbound.io/example-name: my_net
+  name: my-net
   namespace: upbound-system
 spec:
   forProvider:

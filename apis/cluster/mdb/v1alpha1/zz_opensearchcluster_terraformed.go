@@ -121,5 +121,5 @@ func (tr *OpensearchCluster) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *OpensearchCluster) GetTerraformSchemaVersion() int {
-	return 0
+	return 2
 }

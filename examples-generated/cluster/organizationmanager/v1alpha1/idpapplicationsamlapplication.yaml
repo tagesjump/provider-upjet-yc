@@ -1,0 +1,35 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: IdpApplicationSAMLApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/idpapplicationsamlapplication
+  labels:
+    testing.upbound.io/example-name: example_saml_app
+  name: example-saml-app
+spec:
+  forProvider:
+    attributeMapping:
+      attributes:
+      - name: email
+        value: SubjectClaims.email
+      - name: firstName
+        value: SubjectClaims.given_name
+      - name: lastName
+        value: SubjectClaims.family_name
+      nameId:
+        format: EMAIL
+    description: Example SAML application
+    labels:
+      app-type: saml
+      environment: production
+    name: example-saml-app
+    organizationId: your_organization_id
+    securitySettings:
+      signatureMode: RESPONSE_AND_ASSERTIONS
+    serviceProvider:
+      acsUrls:
+      - url: https://example.com/saml/acs
+      entityId: https://example.com/saml/metadata
+      sloUrls:
+      - protocolBinding: HTTP_POST
+        url: https://example.com/saml/slo

@@ -8,7 +8,7 @@ metadata:
   name: editor
 spec:
   forProvider:
-    instanceId: ${data.yandex_compute_instance.instance1.id}
+    image_id: ${data.yandex_compute_instance.vm1.id}
     members:
     - userAccount:some_user_id
     role: editor
@@ -21,8 +21,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1alpha1/instanceiambinding
   labels:
-    testing.upbound.io/example-name: instance1
-  name: instance1
+    testing.upbound.io/example-name: vm1
+  name: vm1
 spec:
   forProvider:
     bootDisk:
@@ -31,47 +31,15 @@ spec:
           testing.upbound.io/example-name: boot-disk
     metadata:
       foo: bar
-      ssh-keys: ubuntu:${file("~/.ssh/id_rsa.pub")}
+      ssh-keys: ubuntu:${file("~/.ssh/id_ed25519.pub")}
     name: test
     networkInterface:
     - index: 1
       subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: foo
-    platformId: standard-v1
+    platformId: standard-v3
     resources:
     - cores: 2
       memory: 4
-    zone: ru-central1-a
-
----
-
-apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
-kind: Network
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/instanceiambinding
-  labels:
-    testing.upbound.io/example-name: foo
-  name: foo
-spec:
-  forProvider: {}
-
----
-
-apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1alpha1/instanceiambinding
-  labels:
-    testing.upbound.io/example-name: foo
-  name: foo
-spec:
-  forProvider:
-    networkIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: foo
-    v4CidrBlocks:
-    - 10.5.0.0/24
     zone: ru-central1-a

@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: GroupMembership is the Schema for the GroupMemberships API. Allows
-          management of members of Yandex.Cloud Organization Manager Group.
+          management of members of Yandex Cloud Organization Manager Group.
         properties:
           apiVersion:
             description: |-
@@ -74,7 +74,9 @@ spec:
               forProvider:
                 properties:
                   groupId:
-                    description: The Group to add/remove members to/from.
+                    description: |-
+                      (String) The Group to add/remove members to/from.
+                      The Group to add/remove members to/from.
                     type: string
                   groupIdRef:
                     description: Reference to a Group to populate groupId.
@@ -151,8 +153,9 @@ spec:
                         type: object
                     type: object
                   members:
-                    description: A set of members of the Group. Each member is represented
-                      by an id.
+                    description: |-
+                      (Set of String) A set of members of the Group. Each member is represented by an id.
+                      A set of members of the Group. Each member is represented by an id.
                     items:
                       type: string
                     type: array
@@ -172,7 +175,9 @@ spec:
                   autoscaler.
                 properties:
                   groupId:
-                    description: The Group to add/remove members to/from.
+                    description: |-
+                      (String) The Group to add/remove members to/from.
+                      The Group to add/remove members to/from.
                     type: string
                   groupIdRef:
                     description: Reference to a Group to populate groupId.
@@ -249,8 +254,9 @@ spec:
                         type: object
                     type: object
                   members:
-                    description: A set of members of the Group. Each member is represented
-                      by an id.
+                    description: |-
+                      (Set of String) A set of members of the Group. Each member is represented by an id.
+                      A set of members of the Group. Each member is represented by an id.
                     items:
                       type: string
                     type: array
@@ -353,13 +359,17 @@ spec:
               atProvider:
                 properties:
                   groupId:
-                    description: The Group to add/remove members to/from.
+                    description: |-
+                      (String) The Group to add/remove members to/from.
+                      The Group to add/remove members to/from.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   members:
-                    description: A set of members of the Group. Each member is represented
-                      by an id.
+                    description: |-
+                      (Set of String) A set of members of the Group. Each member is represented by an id.
+                      A set of members of the Group. Each member is represented by an id.
                     items:
                       type: string
                     type: array

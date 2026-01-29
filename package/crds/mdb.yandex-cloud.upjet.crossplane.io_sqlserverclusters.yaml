@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: SqlserverCluster is the Schema for the SqlserverClusters API.
-          Manages a Microsoft SQLServer cluster within Yandex.Cloud.
+          Manages a Microsoft SQLServer cluster within Yandex Cloud.
         properties:
           apiVersion:
             description: |-
@@ -74,43 +74,55 @@ spec:
               forProvider:
                 properties:
                   backupWindowStart:
-                    description: Time to start the daily backup, in the UTC. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Time to start the daily backup, in the UTC. (see below for nested schema)
+                      Time to start the daily backup, in the UTC.
                     items:
                       properties:
                         hours:
-                          description: The hour at which backup will be started.
+                          description: |-
+                            (Number) The hour at which backup will be started.
+                            The hour at which backup will be started.
                           type: number
                         minutes:
-                          description: The minute at which backup will be started.
+                          description: |-
+                            (Number) The minute at which backup will be started.
+                            The minute at which backup will be started.
                           type: number
                       type: object
                     type: array
                   database:
-                    description: A database of the SQLServer cluster. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Min: 1) A database of the SQLServer cluster. (see below for nested schema)
+                      A database of the SQLServer cluster.
                     items:
                       properties:
                         name:
-                          description: The name of the database.
+                          description: |-
+                            (String) The resource name.
+                            The name of the database.
                           type: string
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the SQLServer cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   environment:
-                    description: Deployment environment of the SQLServer cluster.
-                      (PRODUCTION, PRESTABLE)
+                    description: |-
+                      (String) Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
+                      Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -189,19 +201,20 @@ spec:
                         type: object
                     type: object
                   host:
-                    description: A host of the SQLServer cluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1) A host of the SQLServer cluster. (see below for nested schema)
+                      A host of the SQLServer cluster.
                     items:
                       properties:
                         assignPublicIp:
-                          description: Sets whether the host should get a public IP
-                            address on creation. Changing this parameter for an existing
-                            host is not supported at the moment
+                          description: |-
+                            (Boolean) Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+                            Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
                           type: boolean
                         subnetId:
-                          description: The ID of the subnet, to which the host belongs.
-                            The subnet must be a part of the network to which the
-                            cluster belongs.
+                          description: |-
+                            (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                            The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -278,14 +291,16 @@ spec:
                               type: object
                           type: object
                         zone:
-                          description: The availability zone where the SQLServer host
-                            will be created.
+                          description: |-
+                            (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                            The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                           type: string
                       type: object
                     type: array
                   hostGroupIds:
-                    description: A list of IDs of the host groups hosting VMs of the
-                      cluster.
+                    description: |-
+                      (Set of String) A list of IDs of the host groups hosting VMs of the cluster.
+                      A list of IDs of the host groups hosting VMs of the cluster.
                     items:
                       type: string
                     type: array
@@ -293,17 +308,20 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the SQLServer
-                      cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the SQLServer cluster. Provided by the client
-                      when the cluster is created.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   networkId:
-                    description: ID of the network, to which the SQLServer cluster
-                      uses.
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
                     type: string
                   networkIdRef:
                     description: Reference to a Network in vpc to populate networkId.
@@ -380,24 +398,32 @@ spec:
                         type: object
                     type: object
                   resources:
-                    description: Resources allocated to hosts of the SQLServer cluster.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Resources allocated to hosts of the SQLServer cluster. (see below for nested schema)
+                      Resources allocated to hosts of the SQLServer cluster.
                     items:
                       properties:
                         diskSize:
-                          description: Volume of the storage available to a SQLServer
-                            host, in gigabytes.
+                          description: |-
+                            (Number) Volume of the storage available to a SQLServer host, in gigabytes.
+                            Volume of the storage available to a SQLServer host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of SQLServer hosts.
+                          description: |-
+                            (String) Type of the storage of SQLServer hosts.
+                            Type of the storage of SQLServer hosts.
                           type: string
                         resourcePresetId:
+                          description: |-
+                            (String) The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see the official documentation.
+                            The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-sqlserver/concepts/instance-types).
                           type: string
                       type: object
                     type: array
                   securityGroupIds:
-                    description: A set of ids of security groups assigned to hosts
-                      of the cluster.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
@@ -481,26 +507,33 @@ spec:
                         type: object
                     type: object
                   sqlcollation:
-                    description: SQL Collation cluster will be created with. This
-                      attribute cannot be changed when cluster is created!
+                    description: |-
+                      (String) SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
+                      SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
                     type: string
                   sqlserverConfig:
                     additionalProperties:
                       type: string
-                    description: SQLServer cluster config. Detail info in "SQLServer
-                      config" section (documented below).
+                    description: |-
+                      (Map of String) SQLServer cluster config. Detail info in SQLServer config section.
+                      SQLServer cluster config. Detail info in `SQLServer config` section.
                     type: object
                     x-kubernetes-map-type: granular
                   user:
-                    description: A user of the SQLServer cluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1) A user of the SQLServer cluster. (see below for nested schema)
+                      A user of the SQLServer cluster.
                     items:
                       properties:
                         name:
-                          description: The name of the user.
+                          description: |-
+                            (String) The resource name.
+                            The name of the user.
                           type: string
                         passwordSecretRef:
-                          description: The password of the user.
+                          description: |-
+                            (String, Sensitive) The password of the user.
+                            The password of the user.
                           properties:
                             key:
                               description: The key to select.
@@ -517,18 +550,20 @@ spec:
                           - namespace
                           type: object
                         permission:
-                          description: Set of permissions granted to the user. The
-                            structure is documented below.
+                          description: |-
+                            (Block Set) Set of permissions granted to the user. (see below for nested schema)
+                            Set of permissions granted to the user.
                           items:
                             properties:
                               databaseName:
-                                description: The name of the database that the permission
-                                  grants access to.
+                                description: |-
+                                  (String) The name of the database that the permission grants access to.
+                                  The name of the database that the permission grants access to.
                                 type: string
                               roles:
                                 description: |-
-                                  List user's roles in the database.
-                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                  (Set of String) List user's roles in the database. Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                  List user's roles in the database. Allowed roles: `OWNER`, `SECURITYADMIN`, `ACCESSADMIN`, `BACKUPOPERATOR`, `DDLADMIN`, `DATAWRITER`, `DATAREADER`, `DENYDATAWRITER`, `DENYDATAREADER`.
                                 items:
                                   type: string
                                 type: array
@@ -538,7 +573,9 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: Version of the SQLServer cluster. (2016sp2std, 2016sp2ent)
+                    description: |-
+                      (String) Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
+                      Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
                     type: string
                 type: object
               initProvider:
@@ -555,43 +592,55 @@ spec:
                   autoscaler.
                 properties:
                   backupWindowStart:
-                    description: Time to start the daily backup, in the UTC. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Time to start the daily backup, in the UTC. (see below for nested schema)
+                      Time to start the daily backup, in the UTC.
                     items:
                       properties:
                         hours:
-                          description: The hour at which backup will be started.
+                          description: |-
+                            (Number) The hour at which backup will be started.
+                            The hour at which backup will be started.
                           type: number
                         minutes:
-                          description: The minute at which backup will be started.
+                          description: |-
+                            (Number) The minute at which backup will be started.
+                            The minute at which backup will be started.
                           type: number
                       type: object
                     type: array
                   database:
-                    description: A database of the SQLServer cluster. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Min: 1) A database of the SQLServer cluster. (see below for nested schema)
+                      A database of the SQLServer cluster.
                     items:
                       properties:
                         name:
-                          description: The name of the database.
+                          description: |-
+                            (String) The resource name.
+                            The name of the database.
                           type: string
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the SQLServer cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   environment:
-                    description: Deployment environment of the SQLServer cluster.
-                      (PRODUCTION, PRESTABLE)
+                    description: |-
+                      (String) Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
+                      Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -670,19 +719,20 @@ spec:
                         type: object
                     type: object
                   host:
-                    description: A host of the SQLServer cluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1) A host of the SQLServer cluster. (see below for nested schema)
+                      A host of the SQLServer cluster.
                     items:
                       properties:
                         assignPublicIp:
-                          description: Sets whether the host should get a public IP
-                            address on creation. Changing this parameter for an existing
-                            host is not supported at the moment
+                          description: |-
+                            (Boolean) Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+                            Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
                           type: boolean
                         subnetId:
-                          description: The ID of the subnet, to which the host belongs.
-                            The subnet must be a part of the network to which the
-                            cluster belongs.
+                          description: |-
+                            (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                            The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
                           type: string
                         subnetIdRef:
                           description: Reference to a Subnet in vpc to populate subnetId.
@@ -759,14 +809,16 @@ spec:
                               type: object
                           type: object
                         zone:
-                          description: The availability zone where the SQLServer host
-                            will be created.
+                          description: |-
+                            (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                            The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                           type: string
                       type: object
                     type: array
                   hostGroupIds:
-                    description: A list of IDs of the host groups hosting VMs of the
-                      cluster.
+                    description: |-
+                      (Set of String) A list of IDs of the host groups hosting VMs of the cluster.
+                      A list of IDs of the host groups hosting VMs of the cluster.
                     items:
                       type: string
                     type: array
@@ -774,17 +826,20 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the SQLServer
-                      cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the SQLServer cluster. Provided by the client
-                      when the cluster is created.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   networkId:
-                    description: ID of the network, to which the SQLServer cluster
-                      uses.
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
                     type: string
                   networkIdRef:
                     description: Reference to a Network in vpc to populate networkId.
@@ -861,24 +916,32 @@ spec:
                         type: object
                     type: object
                   resources:
-                    description: Resources allocated to hosts of the SQLServer cluster.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Resources allocated to hosts of the SQLServer cluster. (see below for nested schema)
+                      Resources allocated to hosts of the SQLServer cluster.
                     items:
                       properties:
                         diskSize:
-                          description: Volume of the storage available to a SQLServer
-                            host, in gigabytes.
+                          description: |-
+                            (Number) Volume of the storage available to a SQLServer host, in gigabytes.
+                            Volume of the storage available to a SQLServer host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of SQLServer hosts.
+                          description: |-
+                            (String) Type of the storage of SQLServer hosts.
+                            Type of the storage of SQLServer hosts.
                           type: string
                         resourcePresetId:
+                          description: |-
+                            (String) The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see the official documentation.
+                            The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-sqlserver/concepts/instance-types).
                           type: string
                       type: object
                     type: array
                   securityGroupIds:
-                    description: A set of ids of security groups assigned to hosts
-                      of the cluster.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
@@ -962,26 +1025,33 @@ spec:
                         type: object
                     type: object
                   sqlcollation:
-                    description: SQL Collation cluster will be created with. This
-                      attribute cannot be changed when cluster is created!
+                    description: |-
+                      (String) SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
+                      SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
                     type: string
                   sqlserverConfig:
                     additionalProperties:
                       type: string
-                    description: SQLServer cluster config. Detail info in "SQLServer
-                      config" section (documented below).
+                    description: |-
+                      (Map of String) SQLServer cluster config. Detail info in SQLServer config section.
+                      SQLServer cluster config. Detail info in `SQLServer config` section.
                     type: object
                     x-kubernetes-map-type: granular
                   user:
-                    description: A user of the SQLServer cluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1) A user of the SQLServer cluster. (see below for nested schema)
+                      A user of the SQLServer cluster.
                     items:
                       properties:
                         name:
-                          description: The name of the user.
+                          description: |-
+                            (String) The resource name.
+                            The name of the user.
                           type: string
                         passwordSecretRef:
-                          description: The password of the user.
+                          description: |-
+                            (String, Sensitive) The password of the user.
+                            The password of the user.
                           properties:
                             key:
                               description: The key to select.
@@ -998,18 +1068,20 @@ spec:
                           - namespace
                           type: object
                         permission:
-                          description: Set of permissions granted to the user. The
-                            structure is documented below.
+                          description: |-
+                            (Block Set) Set of permissions granted to the user. (see below for nested schema)
+                            Set of permissions granted to the user.
                           items:
                             properties:
                               databaseName:
-                                description: The name of the database that the permission
-                                  grants access to.
+                                description: |-
+                                  (String) The name of the database that the permission grants access to.
+                                  The name of the database that the permission grants access to.
                                 type: string
                               roles:
                                 description: |-
-                                  List user's roles in the database.
-                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                  (Set of String) List user's roles in the database. Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                  List user's roles in the database. Allowed roles: `OWNER`, `SECURITYADMIN`, `ACCESSADMIN`, `BACKUPOPERATOR`, `DDLADMIN`, `DATAWRITER`, `DATAREADER`, `DENYDATAWRITER`, `DENYDATAREADER`.
                                 items:
                                   type: string
                                 type: array
@@ -1021,7 +1093,9 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: Version of the SQLServer cluster. (2016sp2std, 2016sp2ent)
+                    description: |-
+                      (String) Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
+                      Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
                     type: string
                 type: object
               managementPolicies:
@@ -1145,157 +1219,198 @@ spec:
               atProvider:
                 properties:
                   backupWindowStart:
-                    description: Time to start the daily backup, in the UTC. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Time to start the daily backup, in the UTC. (see below for nested schema)
+                      Time to start the daily backup, in the UTC.
                     items:
                       properties:
                         hours:
-                          description: The hour at which backup will be started.
+                          description: |-
+                            (Number) The hour at which backup will be started.
+                            The hour at which backup will be started.
                           type: number
                         minutes:
-                          description: The minute at which backup will be started.
+                          description: |-
+                            (Number) The minute at which backup will be started.
+                            The minute at which backup will be started.
                           type: number
                       type: object
                     type: array
                   createdAt:
-                    description: Creation timestamp of the cluster.
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   database:
-                    description: A database of the SQLServer cluster. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Min: 1) A database of the SQLServer cluster. (see below for nested schema)
+                      A database of the SQLServer cluster.
                     items:
                       properties:
                         name:
-                          description: The name of the database.
+                          description: |-
+                            (String) The resource name.
+                            The name of the database.
                           type: string
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the SQLServer cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   environment:
-                    description: Deployment environment of the SQLServer cluster.
-                      (PRODUCTION, PRESTABLE)
+                    description: |-
+                      (String) Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
+                      Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   health:
-                    description: Aggregated health of the cluster.
+                    description: |-
+                      (String) Aggregated health of the cluster.
+                      Aggregated health of the cluster.
                     type: string
                   host:
-                    description: A host of the SQLServer cluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1) A host of the SQLServer cluster. (see below for nested schema)
+                      A host of the SQLServer cluster.
                     items:
                       properties:
                         assignPublicIp:
-                          description: Sets whether the host should get a public IP
-                            address on creation. Changing this parameter for an existing
-                            host is not supported at the moment
+                          description: |-
+                            (Boolean) Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+                            Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
                           type: boolean
                         fqdn:
-                          description: (Computed) The fully qualified domain name
-                            of the host.
+                          description: |-
+                            (String) The fully qualified domain name of the host.
+                            The fully qualified domain name of the host.
                           type: string
                         subnetId:
-                          description: The ID of the subnet, to which the host belongs.
-                            The subnet must be a part of the network to which the
-                            cluster belongs.
+                          description: |-
+                            (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                            The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
                           type: string
                         zone:
-                          description: The availability zone where the SQLServer host
-                            will be created.
+                          description: |-
+                            (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                            The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                           type: string
                       type: object
                     type: array
                   hostGroupIds:
-                    description: A list of IDs of the host groups hosting VMs of the
-                      cluster.
+                    description: |-
+                      (Set of String) A list of IDs of the host groups hosting VMs of the cluster.
+                      A list of IDs of the host groups hosting VMs of the cluster.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the SQLServer
-                      cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
-                    description: Name of the SQLServer cluster. Provided by the client
-                      when the cluster is created.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   networkId:
-                    description: ID of the network, to which the SQLServer cluster
-                      uses.
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
                     type: string
                   resources:
-                    description: Resources allocated to hosts of the SQLServer cluster.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Resources allocated to hosts of the SQLServer cluster. (see below for nested schema)
+                      Resources allocated to hosts of the SQLServer cluster.
                     items:
                       properties:
                         diskSize:
-                          description: Volume of the storage available to a SQLServer
-                            host, in gigabytes.
+                          description: |-
+                            (Number) Volume of the storage available to a SQLServer host, in gigabytes.
+                            Volume of the storage available to a SQLServer host, in gigabytes.
                           type: number
                         diskTypeId:
-                          description: Type of the storage of SQLServer hosts.
+                          description: |-
+                            (String) Type of the storage of SQLServer hosts.
+                            Type of the storage of SQLServer hosts.
                           type: string
                         resourcePresetId:
+                          description: |-
+                            (String) The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see the official documentation.
+                            The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-sqlserver/concepts/instance-types).
                           type: string
                       type: object
                     type: array
                   securityGroupIds:
-                    description: A set of ids of security groups assigned to hosts
-                      of the cluster.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   sqlcollation:
-                    description: SQL Collation cluster will be created with. This
-                      attribute cannot be changed when cluster is created!
+                    description: |-
+                      (String) SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
+                      SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
                     type: string
                   sqlserverConfig:
                     additionalProperties:
                       type: string
-                    description: SQLServer cluster config. Detail info in "SQLServer
-                      config" section (documented below).
+                    description: |-
+                      (Map of String) SQLServer cluster config. Detail info in SQLServer config section.
+                      SQLServer cluster config. Detail info in `SQLServer config` section.
                     type: object
                     x-kubernetes-map-type: granular
                   status:
-                    description: Status of the cluster.
+                    description: |-
+                      (String) Status of the cluster.
+                      Status of the cluster.
                     type: string
                   user:
-                    description: A user of the SQLServer cluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1) A user of the SQLServer cluster. (see below for nested schema)
+                      A user of the SQLServer cluster.
                     items:
                       properties:
                         name:
-                          description: The name of the user.
+                          description: |-
+                            (String) The resource name.
+                            The name of the user.
                           type: string
                         permission:
-                          description: Set of permissions granted to the user. The
-                            structure is documented below.
+                          description: |-
+                            (Block Set) Set of permissions granted to the user. (see below for nested schema)
+                            Set of permissions granted to the user.
                           items:
                             properties:
                               databaseName:
-                                description: The name of the database that the permission
-                                  grants access to.
+                                description: |-
+                                  (String) The name of the database that the permission grants access to.
+                                  The name of the database that the permission grants access to.
                                 type: string
                               roles:
                                 description: |-
-                                  List user's roles in the database.
-                                  Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                  (Set of String) List user's roles in the database. Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.
+                                  List user's roles in the database. Allowed roles: `OWNER`, `SECURITYADMIN`, `ACCESSADMIN`, `BACKUPOPERATOR`, `DDLADMIN`, `DATAWRITER`, `DATAREADER`, `DENYDATAWRITER`, `DENYDATAREADER`.
                                 items:
                                   type: string
                                 type: array
@@ -1305,7 +1420,9 @@ spec:
                       type: object
                     type: array
                   version:
-                    description: Version of the SQLServer cluster. (2016sp2std, 2016sp2ent)
+                    description: |-
+                      (String) Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
+                      Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
                     type: string
                 type: object
               conditions:

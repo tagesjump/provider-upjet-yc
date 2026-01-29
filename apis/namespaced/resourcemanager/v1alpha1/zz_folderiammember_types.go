@@ -12,7 +12,8 @@ import (
 
 type FolderIAMMemberInitParameters struct {
 
-	// ID of the folder to attach a policy to.
+	// (String) The ID of the compute folder to attach the policy to.
+	// The ID of the compute `folder` to attach the policy to.
 	// +crossplane:generate:reference:type=Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -24,36 +25,66 @@ type FolderIAMMemberInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// (String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
-	// The role that should be assigned.
+	// (String) The role that should be assigned. Only one yandex_resourcemanager_folder_iam_member can be used per role.
+	// The role that should be assigned. Only one yandex_resourcemanager_folder_iam_member can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type FolderIAMMemberObservation struct {
 
-	// ID of the folder to attach a policy to.
+	// (String) The ID of the compute folder to attach the policy to.
+	// The ID of the compute `folder` to attach the policy to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// (String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
-	// The role that should be assigned.
+	// (String) The role that should be assigned. Only one yandex_resourcemanager_folder_iam_member can be used per role.
+	// The role that should be assigned. Only one yandex_resourcemanager_folder_iam_member can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type FolderIAMMemberParameters struct {
 
-	// ID of the folder to attach a policy to.
+	// (String) The ID of the compute folder to attach the policy to.
+	// The ID of the compute `folder` to attach the policy to.
 	// +crossplane:generate:reference:type=Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -66,15 +97,29 @@ type FolderIAMMemberParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// The identity that will be granted the privilege that is specified in the role field.
-	// This field can have one of the following values:
+	// (String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +kubebuilder:validation:Optional
 	Member *string `json:"member,omitempty" tf:"member,omitempty"`
 
-	// The role that should be assigned.
+	// (String) The role that should be assigned. Only one yandex_resourcemanager_folder_iam_member can be used per role.
+	// The role that should be assigned. Only one yandex_resourcemanager_folder_iam_member can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	// +kubebuilder:validation:Optional
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }

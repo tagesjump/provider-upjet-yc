@@ -12,70 +12,86 @@ import (
 
 type PolicyInitParameters struct {
 
-	// Yandex.Cloud Function version tag for Yandex Cloud Function scaling policy
+	// (String) Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+	// Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// max number of instances in one zone for Yandex.Cloud Function with tag
+	// (Number) Max number of instances in one zone for Yandex Cloud Function with tag.
+	// Max number of instances in one zone for Yandex Cloud Function with tag.
 	ZoneInstancesLimit *float64 `json:"zoneInstancesLimit,omitempty" tf:"zone_instances_limit,omitempty"`
 
-	// max number of requests in one zone for Yandex.Cloud Function with tag
+	// (Number) Max number of requests in one zone for Yandex Cloud Function with tag.
+	// Max number of requests in one zone for Yandex Cloud Function with tag.
 	ZoneRequestsLimit *float64 `json:"zoneRequestsLimit,omitempty" tf:"zone_requests_limit,omitempty"`
 }
 
 type PolicyObservation struct {
 
-	// Yandex.Cloud Function version tag for Yandex Cloud Function scaling policy
+	// (String) Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+	// Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 
-	// max number of instances in one zone for Yandex.Cloud Function with tag
+	// (Number) Max number of instances in one zone for Yandex Cloud Function with tag.
+	// Max number of instances in one zone for Yandex Cloud Function with tag.
 	ZoneInstancesLimit *float64 `json:"zoneInstancesLimit,omitempty" tf:"zone_instances_limit,omitempty"`
 
-	// max number of requests in one zone for Yandex.Cloud Function with tag
+	// (Number) Max number of requests in one zone for Yandex Cloud Function with tag.
+	// Max number of requests in one zone for Yandex Cloud Function with tag.
 	ZoneRequestsLimit *float64 `json:"zoneRequestsLimit,omitempty" tf:"zone_requests_limit,omitempty"`
 }
 
 type PolicyParameters struct {
 
-	// Yandex.Cloud Function version tag for Yandex Cloud Function scaling policy
+	// (String) Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
+	// Yandex Cloud Function version tag for Yandex Cloud Function scaling policy.
 	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag" tf:"tag,omitempty"`
 
-	// max number of instances in one zone for Yandex.Cloud Function with tag
+	// (Number) Max number of instances in one zone for Yandex Cloud Function with tag.
+	// Max number of instances in one zone for Yandex Cloud Function with tag.
 	// +kubebuilder:validation:Optional
 	ZoneInstancesLimit *float64 `json:"zoneInstancesLimit,omitempty" tf:"zone_instances_limit,omitempty"`
 
-	// max number of requests in one zone for Yandex.Cloud Function with tag
+	// (Number) Max number of requests in one zone for Yandex Cloud Function with tag.
+	// Max number of requests in one zone for Yandex Cloud Function with tag.
 	// +kubebuilder:validation:Optional
 	ZoneRequestsLimit *float64 `json:"zoneRequestsLimit,omitempty" tf:"zone_requests_limit,omitempty"`
 }
 
 type ScalingPolicyInitParameters struct {
 
-	// Yandex Cloud Function id used to define function
+	// (String) Yandex Cloud Function id used to define function.
+	// Yandex Cloud Function id used to define function.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// list definition for Yandex Cloud Function scaling policies
+	// (Block Set) List definition for Yandex Cloud Function scaling policies. (see below for nested schema)
+	// List definition for Yandex Cloud Function scaling policies.
 	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ScalingPolicyObservation struct {
 
-	// Yandex Cloud Function id used to define function
+	// (String) Yandex Cloud Function id used to define function.
+	// Yandex Cloud Function id used to define function.
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// list definition for Yandex Cloud Function scaling policies
+	// (Block Set) List definition for Yandex Cloud Function scaling policies. (see below for nested schema)
+	// List definition for Yandex Cloud Function scaling policies.
 	Policy []PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 }
 
 type ScalingPolicyParameters struct {
 
-	// Yandex Cloud Function id used to define function
+	// (String) Yandex Cloud Function id used to define function.
+	// Yandex Cloud Function id used to define function.
 	// +kubebuilder:validation:Optional
 	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
 
-	// list definition for Yandex Cloud Function scaling policies
+	// (Block Set) List definition for Yandex Cloud Function scaling policies. (see below for nested schema)
+	// List definition for Yandex Cloud Function scaling policies.
 	// +kubebuilder:validation:Optional
 	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 }

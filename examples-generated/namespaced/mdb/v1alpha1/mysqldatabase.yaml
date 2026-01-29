@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/mysqldatabase
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_db
+  name: my-db
   namespace: upbound-system
 spec:
   forProvider:
     clusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: my_cluster
     name: testdb
 
 ---
@@ -22,8 +22,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/mysqldatabase
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
   namespace: upbound-system
 spec:
   forProvider:
@@ -32,7 +32,7 @@ spec:
     - subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: foo
-      zone: ru-central1-a
+      zone: ru-central1-d
     name: test
     networkIdSelector:
       matchLabels:
@@ -75,4 +75,4 @@ spec:
         testing.upbound.io/example-name: foo
     v4CidrBlocks:
     - 10.5.0.0/24
-    zone: ru-central1-a
+    zone: ru-central1-d

@@ -1,0 +1,20 @@
+apiVersion: kubernetes.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: MarketplaceHelmRelease
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kubernetes/v1alpha1/marketplacehelmrelease
+  labels:
+    testing.upbound.io/example-name: gatekeeper_helm_release
+  name: gatekeeper-helm-release
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: cluster_resource_name
+    name: gatekeeper
+    namespace: ${kubernetes_namespace.namespace_resource_name.name}
+    productVersion: f2ecif2vt62k2637tgus
+    userValuesSecretRef:
+      key: example-key
+      name: example-secret

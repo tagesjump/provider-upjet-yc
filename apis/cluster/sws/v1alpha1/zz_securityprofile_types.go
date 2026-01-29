@@ -9,792 +9,752 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
-type AuthoritiesInitParameters struct {
+type AnalyzeRequestBodyInitParameters struct {
+
+	// (Number)
+	SizeLimit *float64 `json:"sizeLimit,omitempty" tf:"size_limit,omitempty"`
+
+	// (String)
+	SizeLimitAction *string `json:"sizeLimitAction,omitempty" tf:"size_limit_action,omitempty"`
+}
+
+type AnalyzeRequestBodyObservation struct {
+
+	// (Number)
+	SizeLimit *float64 `json:"sizeLimit,omitempty" tf:"size_limit,omitempty"`
+
+	// (String)
+	SizeLimitAction *string `json:"sizeLimitAction,omitempty" tf:"size_limit_action,omitempty"`
+}
+
+type AnalyzeRequestBodyParameters struct {
+
+	// (Number)
+	// +kubebuilder:validation:Optional
+	SizeLimit *float64 `json:"sizeLimit,omitempty" tf:"size_limit,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	SizeLimitAction *string `json:"sizeLimitAction,omitempty" tf:"size_limit_action,omitempty"`
+}
+
+type ConditionAuthorityAuthoritiesInitParameters struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type AuthoritiesObservation struct {
+type ConditionAuthorityAuthoritiesObservation struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type AuthoritiesParameters struct {
+type ConditionAuthorityAuthoritiesParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type AuthorityAuthoritiesInitParameters struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type AuthorityAuthoritiesObservation struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type AuthorityAuthoritiesParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type AuthorityInitParameters struct {
-	Authorities []AuthoritiesInitParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
-}
-
-type AuthorityObservation struct {
-	Authorities []AuthoritiesObservation `json:"authorities,omitempty" tf:"authorities,omitempty"`
-}
-
-type AuthorityParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Authorities []AuthoritiesParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
-}
-
-type ConditionAuthorityInitParameters struct {
-	Authorities []AuthorityAuthoritiesInitParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
-}
-
-type ConditionAuthorityObservation struct {
-	Authorities []AuthorityAuthoritiesObservation `json:"authorities,omitempty" tf:"authorities,omitempty"`
-}
-
-type ConditionAuthorityParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Authorities []AuthorityAuthoritiesParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
-}
-
-type ConditionHTTPMethodInitParameters struct {
-	HTTPMethods []HTTPMethodHTTPMethodsInitParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
-}
-
-type ConditionHTTPMethodObservation struct {
-	HTTPMethods []HTTPMethodHTTPMethodsObservation `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
-}
-
-type ConditionHTTPMethodParameters struct {
-
-	// +kubebuilder:validation:Optional
-	HTTPMethods []HTTPMethodHTTPMethodsParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
-}
-
-type ConditionHeadersInitParameters struct {
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	Value []HeadersValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ConditionHeadersObservation struct {
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	Value []HeadersValueObservation `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ConditionHeadersParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Value []HeadersValueParameters `json:"value" tf:"value,omitempty"`
-}
-
-type ConditionInitParameters struct {
-	Authority []AuthorityInitParameters `json:"authority,omitempty" tf:"authority,omitempty"`
-
-	HTTPMethod []HTTPMethodInitParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
-
-	Headers []HeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	RequestURI []RequestURIInitParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
-
-	SourceIP []SourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
-}
-
-type ConditionObservation struct {
-	Authority []AuthorityObservation `json:"authority,omitempty" tf:"authority,omitempty"`
-
-	HTTPMethod []HTTPMethodObservation `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
-
-	Headers []HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	RequestURI []RequestURIObservation `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
-
-	SourceIP []SourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
-}
-
-type ConditionParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Authority []AuthorityParameters `json:"authority,omitempty" tf:"authority,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	HTTPMethod []HTTPMethodParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Headers []HeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	RequestURI []RequestURIParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	SourceIP []SourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
-}
-
-type ConditionRequestURIInitParameters struct {
-	Path []RequestURIPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
-
-	Queries []RequestURIQueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
-}
-
-type ConditionRequestURIObservation struct {
-	Path []RequestURIPathObservation `json:"path,omitempty" tf:"path,omitempty"`
-
-	Queries []RequestURIQueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
-}
-
-type ConditionRequestURIParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Path []RequestURIPathParameters `json:"path,omitempty" tf:"path,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Queries []RequestURIQueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
-}
-
-type ConditionSourceIPInitParameters struct {
-	GeoIPMatch []SourceIPGeoIPMatchInitParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
-
-	GeoIPNotMatch []SourceIPGeoIPNotMatchInitParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
-
-	IPRangesMatch []SourceIPIPRangesMatchInitParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
-
-	IPRangesNotMatch []SourceIPIPRangesNotMatchInitParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
-}
-
-type ConditionSourceIPObservation struct {
-	GeoIPMatch []SourceIPGeoIPMatchObservation `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
-
-	GeoIPNotMatch []SourceIPGeoIPNotMatchObservation `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
-
-	IPRangesMatch []SourceIPIPRangesMatchObservation `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
-
-	IPRangesNotMatch []SourceIPIPRangesNotMatchObservation `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
-}
-
-type ConditionSourceIPParameters struct {
-
-	// +kubebuilder:validation:Optional
-	GeoIPMatch []SourceIPGeoIPMatchParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	GeoIPNotMatch []SourceIPGeoIPNotMatchParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IPRangesMatch []SourceIPIPRangesMatchParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IPRangesNotMatch []SourceIPIPRangesNotMatchParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
-}
-
-type GeoIPMatchInitParameters struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type GeoIPMatchObservation struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type GeoIPMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type GeoIPNotMatchInitParameters struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type GeoIPNotMatchObservation struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type GeoIPNotMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type HTTPMethodHTTPMethodsInitParameters struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type HTTPMethodHTTPMethodsObservation struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type HTTPMethodHTTPMethodsParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type HTTPMethodInitParameters struct {
-	HTTPMethods []HTTPMethodsInitParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
-}
+type ConditionHTTPMethodHTTPMethodsInitParameters struct {
 
-type HTTPMethodObservation struct {
-	HTTPMethods []HTTPMethodsObservation `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
-}
-
-type HTTPMethodParameters struct {
-
-	// +kubebuilder:validation:Optional
-	HTTPMethods []HTTPMethodsParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
-}
-
-type HTTPMethodsInitParameters struct {
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type HTTPMethodsObservation struct {
+type ConditionHTTPMethodHTTPMethodsObservation struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type HTTPMethodsParameters struct {
+type ConditionHTTPMethodHTTPMethodsParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type HeadersInitParameters struct {
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	Value []ValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type HeadersObservation struct {
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	Value []ValueObservation `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type HeadersParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Value []ValueParameters `json:"value" tf:"value,omitempty"`
-}
-
-type HeadersValueInitParameters struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type HeadersValueObservation struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type HeadersValueParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type IPRangesMatchInitParameters struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
+type ConditionHeadersValueInitParameters struct {
 
-type IPRangesMatchObservation struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type IPRangesMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type IPRangesNotMatchInitParameters struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type IPRangesNotMatchObservation struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type IPRangesNotMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type PathInitParameters struct {
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type PathObservation struct {
+type ConditionHeadersValueObservation struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type PathParameters struct {
+type ConditionHeadersValueParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type QueriesInitParameters struct {
+type ConditionRequestURIPathInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type ConditionRequestURIPathObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type ConditionRequestURIPathParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type ConditionRequestURIQueriesInitParameters struct {
+
+	// (String)
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	Value []QueriesValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []ConditionRequestURIQueriesValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type QueriesObservation struct {
+type ConditionRequestURIQueriesObservation struct {
+
+	// (String)
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	Value []QueriesValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []ConditionRequestURIQueriesValueObservation `json:"value,omitempty" tf:"value,omitempty"`
 }
 
-type QueriesParameters struct {
+type ConditionRequestURIQueriesParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	Value []QueriesValueParameters `json:"value" tf:"value,omitempty"`
+	Value []ConditionRequestURIQueriesValueParameters `json:"value" tf:"value,omitempty"`
 }
 
-type QueriesValueInitParameters struct {
+type ConditionRequestURIQueriesValueInitParameters struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type QueriesValueObservation struct {
+type ConditionRequestURIQueriesValueObservation struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type QueriesValueParameters struct {
+type ConditionRequestURIQueriesValueParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// +kubebuilder:validation:Optional
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type RequestURIInitParameters struct {
-	Path []PathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
-
-	Queries []QueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
-}
-
-type RequestURIObservation struct {
-	Path []PathObservation `json:"path,omitempty" tf:"path,omitempty"`
-
-	Queries []QueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
-}
-
-type RequestURIParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Path []PathParameters `json:"path,omitempty" tf:"path,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Queries []QueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
-}
-
-type RequestURIPathInitParameters struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type RequestURIPathObservation struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
-}
-
-type RequestURIPathParameters struct {
-
-	// +kubebuilder:validation:Optional
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type RequestURIQueriesInitParameters struct {
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+type ConditionSourceIPGeoIPMatchInitParameters struct {
 
-	Value []RequestURIQueriesValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
-type RequestURIQueriesObservation struct {
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+type ConditionSourceIPGeoIPMatchObservation struct {
 
-	Value []RequestURIQueriesValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
-type RequestURIQueriesParameters struct {
+type ConditionSourceIPGeoIPMatchParameters struct {
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key" tf:"key,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	Value []RequestURIQueriesValueParameters `json:"value" tf:"value,omitempty"`
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
-type RequestURIQueriesValueInitParameters struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+type ConditionSourceIPGeoIPNotMatchInitParameters struct {
 
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
-type RequestURIQueriesValueObservation struct {
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+type ConditionSourceIPGeoIPNotMatchObservation struct {
 
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
-
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
-
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
-
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
-
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
-type RequestURIQueriesValueParameters struct {
+type ConditionSourceIPGeoIPNotMatchParameters struct {
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
-	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
 
-	// +kubebuilder:validation:Optional
-	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+type ConditionSourceIPIPRangesMatchInitParameters struct {
 
-	// +kubebuilder:validation:Optional
-	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
 
-	// +kubebuilder:validation:Optional
-	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+type ConditionSourceIPIPRangesMatchObservation struct {
 
-	// +kubebuilder:validation:Optional
-	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
 
+type ConditionSourceIPIPRangesMatchParameters struct {
+
+	// (List of String)
 	// +kubebuilder:validation:Optional
-	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type ConditionSourceIPIPRangesNotMatchInitParameters struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type ConditionSourceIPIPRangesNotMatchObservation struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type ConditionSourceIPIPRangesNotMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type RuleConditionConditionAuthorityInitParameters struct {
+
+	// (Block List) (see below for nested schema)
+	Authorities []ConditionAuthorityAuthoritiesInitParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type RuleConditionConditionAuthorityObservation struct {
+
+	// (Block List) (see below for nested schema)
+	Authorities []ConditionAuthorityAuthoritiesObservation `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type RuleConditionConditionAuthorityParameters struct {
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Authorities []ConditionAuthorityAuthoritiesParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type RuleConditionConditionHTTPMethodInitParameters struct {
+
+	// (Block List) (see below for nested schema)
+	HTTPMethods []ConditionHTTPMethodHTTPMethodsInitParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type RuleConditionConditionHTTPMethodObservation struct {
+
+	// (Block List) (see below for nested schema)
+	HTTPMethods []ConditionHTTPMethodHTTPMethodsObservation `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type RuleConditionConditionHTTPMethodParameters struct {
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	HTTPMethods []ConditionHTTPMethodHTTPMethodsParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type RuleConditionConditionHeadersInitParameters struct {
+
+	// (String) The resource name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []ConditionHeadersValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type RuleConditionConditionHeadersObservation struct {
+
+	// (String) The resource name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []ConditionHeadersValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type RuleConditionConditionHeadersParameters struct {
+
+	// (String) The resource name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Value []ConditionHeadersValueParameters `json:"value" tf:"value,omitempty"`
+}
+
+type RuleConditionConditionInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Authority []RuleConditionConditionAuthorityInitParameters `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	HTTPMethod []RuleConditionConditionHTTPMethodInitParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Headers []RuleConditionConditionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	RequestURI []RuleConditionConditionRequestURIInitParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	SourceIP []RuleConditionConditionSourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type RuleConditionConditionObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Authority []RuleConditionConditionAuthorityObservation `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	HTTPMethod []RuleConditionConditionHTTPMethodObservation `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Headers []RuleConditionConditionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	RequestURI []RuleConditionConditionRequestURIObservation `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	SourceIP []RuleConditionConditionSourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type RuleConditionConditionParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Authority []RuleConditionConditionAuthorityParameters `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	HTTPMethod []RuleConditionConditionHTTPMethodParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Headers []RuleConditionConditionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	RequestURI []RuleConditionConditionRequestURIParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	SourceIP []RuleConditionConditionSourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type RuleConditionConditionRequestURIInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Path []ConditionRequestURIPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Queries []ConditionRequestURIQueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type RuleConditionConditionRequestURIObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Path []ConditionRequestURIPathObservation `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Queries []ConditionRequestURIQueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type RuleConditionConditionRequestURIParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Path []ConditionRequestURIPathParameters `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Queries []ConditionRequestURIQueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type RuleConditionConditionSourceIPInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPMatch []ConditionSourceIPGeoIPMatchInitParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPNotMatch []ConditionSourceIPGeoIPNotMatchInitParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesMatch []ConditionSourceIPIPRangesMatchInitParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesNotMatch []ConditionSourceIPIPRangesNotMatchInitParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type RuleConditionConditionSourceIPObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPMatch []ConditionSourceIPGeoIPMatchObservation `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPNotMatch []ConditionSourceIPGeoIPNotMatchObservation `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesMatch []ConditionSourceIPIPRangesMatchObservation `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesNotMatch []ConditionSourceIPIPRangesNotMatchObservation `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type RuleConditionConditionSourceIPParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	GeoIPMatch []ConditionSourceIPGeoIPMatchParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	GeoIPNotMatch []ConditionSourceIPGeoIPNotMatchParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	IPRangesMatch []ConditionSourceIPIPRangesMatchParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	IPRangesNotMatch []ConditionSourceIPIPRangesNotMatchParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
 }
 
 type RuleConditionInitParameters struct {
+
+	// (String) Action to perform if this rule matched. Possible values: ALLOW or DENY.
+	// Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+	Condition []RuleConditionConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type RuleConditionObservation struct {
+
+	// (String) Action to perform if this rule matched. Possible values: ALLOW or DENY.
+	// Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+	Condition []RuleConditionConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type RuleConditionParameters struct {
 
+	// (String) Action to perform if this rule matched. Possible values: ALLOW or DENY.
+	// Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
 	// +kubebuilder:validation:Optional
-	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+	Condition []RuleConditionConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type SecurityProfileInitParameters struct {
+
+	// (String) Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+	// Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+	AdvancedRateLimiterProfileID *string `json:"advancedRateLimiterProfileId,omitempty" tf:"advanced_rate_limiter_profile_id,omitempty"`
+
+	// (Block List, Max: 1) Analyze request body. (see below for nested schema)
+	// Analyze request body.
+	AnalyzeRequestBody []AnalyzeRequestBodyInitParameters `json:"analyzeRequestBody,omitempty" tf:"analyze_request_body,omitempty"`
+
+	// (String) Captcha ID to use with this security profile. Set empty to use default.
+	// Captcha ID to use with this security profile. Set empty to use default.
 	CaptchaID *string `json:"captchaId,omitempty" tf:"captcha_id,omitempty"`
 
+	// id is used.
+	// The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
+	// (String) Action to perform if none of rules matched. Possible values: ALLOW or DENY.
+	// Action to perform if none of rules matched. Possible values: `ALLOW` or `DENY`.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -806,51 +766,109 @@ type SecurityProfileInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Block List) List of security rules.
+	// List of security rules.
+	//
+	// ~> Exactly one rule specifier: `smart_protection` or `rule_condition` or `waf` should be specified.
 	SecurityRule []SecurityRuleInitParameters `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
 }
 
 type SecurityProfileObservation struct {
+
+	// (String) Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+	// Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+	AdvancedRateLimiterProfileID *string `json:"advancedRateLimiterProfileId,omitempty" tf:"advanced_rate_limiter_profile_id,omitempty"`
+
+	// (Block List, Max: 1) Analyze request body. (see below for nested schema)
+	// Analyze request body.
+	AnalyzeRequestBody []AnalyzeRequestBodyObservation `json:"analyzeRequestBody,omitempty" tf:"analyze_request_body,omitempty"`
+
+	// (String) Captcha ID to use with this security profile. Set empty to use default.
+	// Captcha ID to use with this security profile. Set empty to use default.
 	CaptchaID *string `json:"captchaId,omitempty" tf:"captcha_id,omitempty"`
 
+	// id is used.
+	// The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
+	// (String) Action to perform if none of rules matched. Possible values: ALLOW or DENY.
+	// Action to perform if none of rules matched. Possible values: `ALLOW` or `DENY`.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Block List) List of security rules.
+	// List of security rules.
+	//
+	// ~> Exactly one rule specifier: `smart_protection` or `rule_condition` or `waf` should be specified.
 	SecurityRule []SecurityRuleObservation `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
 }
 
 type SecurityProfileParameters struct {
 
+	// (String) Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+	// Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+	// +kubebuilder:validation:Optional
+	AdvancedRateLimiterProfileID *string `json:"advancedRateLimiterProfileId,omitempty" tf:"advanced_rate_limiter_profile_id,omitempty"`
+
+	// (Block List, Max: 1) Analyze request body. (see below for nested schema)
+	// Analyze request body.
+	// +kubebuilder:validation:Optional
+	AnalyzeRequestBody []AnalyzeRequestBodyParameters `json:"analyzeRequestBody,omitempty" tf:"analyze_request_body,omitempty"`
+
+	// (String) Captcha ID to use with this security profile. Set empty to use default.
+	// Captcha ID to use with this security profile. Set empty to use default.
 	// +kubebuilder:validation:Optional
 	CaptchaID *string `json:"captchaId,omitempty" tf:"captcha_id,omitempty"`
 
+	// id is used.
+	// The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
 	// +kubebuilder:validation:Optional
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
+	// (String) Action to perform if none of rules matched. Possible values: ALLOW or DENY.
+	// Action to perform if none of rules matched. Possible values: `ALLOW` or `DENY`.
 	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -863,267 +881,1514 @@ type SecurityProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Block List) List of security rules.
+	// List of security rules.
+	//
+	// ~> Exactly one rule specifier: `smart_protection` or `rule_condition` or `waf` should be specified.
 	// +kubebuilder:validation:Optional
 	SecurityRule []SecurityRuleParameters `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
 }
 
 type SecurityRuleInitParameters struct {
+
+	// (String) The resource description.
+	// Optional description of the rule. 0-512 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Boolean) This mode allows you to test your security profile or a single rule.
+	// This mode allows you to test your security profile or a single rule.
 	DryRun *bool `json:"dryRun,omitempty" tf:"dry_run,omitempty"`
 
+	// (String) The resource name.
+	// Name of the rule. The name is unique within the security profile. 1-50 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) Determines the priority for checking the incoming traffic.
+	// Determines the priority for checking the incoming traffic.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// (Block List, Max: 1) Rule actions, see Rule actions. (see below for nested schema)
+	// Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
 	RuleCondition []RuleConditionInitParameters `json:"ruleCondition,omitempty" tf:"rule_condition,omitempty"`
 
+	// (Block List, Max: 1) Smart Protection rule, see Smart Protection rules. (see below for nested schema)
+	// Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
 	SmartProtection []SmartProtectionInitParameters `json:"smartProtection,omitempty" tf:"smart_protection,omitempty"`
+
+	// (Block List, Max: 1) Web Application Firewall (WAF) rule, see WAF rules. (see below for nested schema)
+	// Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+	Waf []WafInitParameters `json:"waf,omitempty" tf:"waf,omitempty"`
 }
 
 type SecurityRuleObservation struct {
+
+	// (String) The resource description.
+	// Optional description of the rule. 0-512 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Boolean) This mode allows you to test your security profile or a single rule.
+	// This mode allows you to test your security profile or a single rule.
 	DryRun *bool `json:"dryRun,omitempty" tf:"dry_run,omitempty"`
 
+	// (String) The resource name.
+	// Name of the rule. The name is unique within the security profile. 1-50 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) Determines the priority for checking the incoming traffic.
+	// Determines the priority for checking the incoming traffic.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// (Block List, Max: 1) Rule actions, see Rule actions. (see below for nested schema)
+	// Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
 	RuleCondition []RuleConditionObservation `json:"ruleCondition,omitempty" tf:"rule_condition,omitempty"`
 
+	// (Block List, Max: 1) Smart Protection rule, see Smart Protection rules. (see below for nested schema)
+	// Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
 	SmartProtection []SmartProtectionObservation `json:"smartProtection,omitempty" tf:"smart_protection,omitempty"`
+
+	// (Block List, Max: 1) Web Application Firewall (WAF) rule, see WAF rules. (see below for nested schema)
+	// Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+	Waf []WafObservation `json:"waf,omitempty" tf:"waf,omitempty"`
 }
 
 type SecurityRuleParameters struct {
 
+	// (String) The resource description.
+	// Optional description of the rule. 0-512 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (Boolean) This mode allows you to test your security profile or a single rule.
+	// This mode allows you to test your security profile or a single rule.
 	// +kubebuilder:validation:Optional
 	DryRun *bool `json:"dryRun,omitempty" tf:"dry_run,omitempty"`
 
+	// (String) The resource name.
+	// Name of the rule. The name is unique within the security profile. 1-50 characters long.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Number) Determines the priority for checking the incoming traffic.
+	// Determines the priority for checking the incoming traffic.
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// (Block List, Max: 1) Rule actions, see Rule actions. (see below for nested schema)
+	// Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
 	// +kubebuilder:validation:Optional
 	RuleCondition []RuleConditionParameters `json:"ruleCondition,omitempty" tf:"rule_condition,omitempty"`
 
+	// (Block List, Max: 1) Smart Protection rule, see Smart Protection rules. (see below for nested schema)
+	// Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
 	// +kubebuilder:validation:Optional
 	SmartProtection []SmartProtectionParameters `json:"smartProtection,omitempty" tf:"smart_protection,omitempty"`
+
+	// (Block List, Max: 1) Web Application Firewall (WAF) rule, see WAF rules. (see below for nested schema)
+	// Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+	// +kubebuilder:validation:Optional
+	Waf []WafParameters `json:"waf,omitempty" tf:"waf,omitempty"`
+}
+
+type SmartProtectionConditionAuthorityAuthoritiesInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionAuthorityAuthoritiesObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionAuthorityAuthoritiesParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionAuthorityInitParameters struct {
+
+	// (Block List) (see below for nested schema)
+	Authorities []SmartProtectionConditionAuthorityAuthoritiesInitParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type SmartProtectionConditionAuthorityObservation struct {
+
+	// (Block List) (see below for nested schema)
+	Authorities []SmartProtectionConditionAuthorityAuthoritiesObservation `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type SmartProtectionConditionAuthorityParameters struct {
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Authorities []SmartProtectionConditionAuthorityAuthoritiesParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type SmartProtectionConditionHTTPMethodHTTPMethodsInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionHTTPMethodHTTPMethodsObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionHTTPMethodHTTPMethodsParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionHTTPMethodInitParameters struct {
+
+	// (Block List) (see below for nested schema)
+	HTTPMethods []SmartProtectionConditionHTTPMethodHTTPMethodsInitParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type SmartProtectionConditionHTTPMethodObservation struct {
+
+	// (Block List) (see below for nested schema)
+	HTTPMethods []SmartProtectionConditionHTTPMethodHTTPMethodsObservation `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type SmartProtectionConditionHTTPMethodParameters struct {
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	HTTPMethods []SmartProtectionConditionHTTPMethodHTTPMethodsParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type SmartProtectionConditionHeadersInitParameters struct {
+
+	// (String) The resource name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []SmartProtectionConditionHeadersValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SmartProtectionConditionHeadersObservation struct {
+
+	// (String) The resource name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []SmartProtectionConditionHeadersValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SmartProtectionConditionHeadersParameters struct {
+
+	// (String) The resource name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Value []SmartProtectionConditionHeadersValueParameters `json:"value" tf:"value,omitempty"`
+}
+
+type SmartProtectionConditionHeadersValueInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionHeadersValueObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionHeadersValueParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type SmartProtectionConditionInitParameters struct {
-	Authority []ConditionAuthorityInitParameters `json:"authority,omitempty" tf:"authority,omitempty"`
 
-	HTTPMethod []ConditionHTTPMethodInitParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+	// (Block List, Max: 1) (see below for nested schema)
+	Authority []SmartProtectionConditionAuthorityInitParameters `json:"authority,omitempty" tf:"authority,omitempty"`
 
-	Headers []ConditionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	// (Block List, Max: 1) (see below for nested schema)
+	HTTPMethod []SmartProtectionConditionHTTPMethodInitParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
-	RequestURI []ConditionRequestURIInitParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+	// (Block List) (see below for nested schema)
+	Headers []SmartProtectionConditionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
-	SourceIP []ConditionSourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+	// (Block List, Max: 1) (see below for nested schema)
+	RequestURI []SmartProtectionConditionRequestURIInitParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	SourceIP []SmartProtectionConditionSourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
 type SmartProtectionConditionObservation struct {
-	Authority []ConditionAuthorityObservation `json:"authority,omitempty" tf:"authority,omitempty"`
 
-	HTTPMethod []ConditionHTTPMethodObservation `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+	// (Block List, Max: 1) (see below for nested schema)
+	Authority []SmartProtectionConditionAuthorityObservation `json:"authority,omitempty" tf:"authority,omitempty"`
 
-	Headers []ConditionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	// (Block List, Max: 1) (see below for nested schema)
+	HTTPMethod []SmartProtectionConditionHTTPMethodObservation `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
-	RequestURI []ConditionRequestURIObservation `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+	// (Block List) (see below for nested schema)
+	Headers []SmartProtectionConditionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
-	SourceIP []ConditionSourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+	// (Block List, Max: 1) (see below for nested schema)
+	RequestURI []SmartProtectionConditionRequestURIObservation `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	SourceIP []SmartProtectionConditionSourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 }
 
 type SmartProtectionConditionParameters struct {
 
+	// (Block List, Max: 1) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	Authority []ConditionAuthorityParameters `json:"authority,omitempty" tf:"authority,omitempty"`
+	Authority []SmartProtectionConditionAuthorityParameters `json:"authority,omitempty" tf:"authority,omitempty"`
 
+	// (Block List, Max: 1) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	HTTPMethod []ConditionHTTPMethodParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+	HTTPMethod []SmartProtectionConditionHTTPMethodParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
 
+	// (Block List) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	Headers []ConditionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers []SmartProtectionConditionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
+	// (Block List, Max: 1) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	RequestURI []ConditionRequestURIParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+	RequestURI []SmartProtectionConditionRequestURIParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
 
+	// (Block List, Max: 1) (see below for nested schema)
 	// +kubebuilder:validation:Optional
-	SourceIP []ConditionSourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+	SourceIP []SmartProtectionConditionSourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Path []SmartProtectionConditionRequestURIPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Queries []SmartProtectionConditionRequestURIQueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Path []SmartProtectionConditionRequestURIPathObservation `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Queries []SmartProtectionConditionRequestURIQueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Path []SmartProtectionConditionRequestURIPathParameters `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Queries []SmartProtectionConditionRequestURIQueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIPathInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIPathObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIPathParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIQueriesInitParameters struct {
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []SmartProtectionConditionRequestURIQueriesValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIQueriesObservation struct {
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []SmartProtectionConditionRequestURIQueriesValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIQueriesParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Value []SmartProtectionConditionRequestURIQueriesValueParameters `json:"value" tf:"value,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIQueriesValueInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIQueriesValueObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionRequestURIQueriesValueParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPGeoIPMatchInitParameters struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPGeoIPMatchObservation struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPGeoIPMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPGeoIPNotMatchInitParameters struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPGeoIPNotMatchObservation struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPGeoIPNotMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPIPRangesMatchInitParameters struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPIPRangesMatchObservation struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPIPRangesMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPIPRangesNotMatchInitParameters struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPIPRangesNotMatchObservation struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPIPRangesNotMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPMatch []SmartProtectionConditionSourceIPGeoIPMatchInitParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPNotMatch []SmartProtectionConditionSourceIPGeoIPNotMatchInitParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesMatch []SmartProtectionConditionSourceIPIPRangesMatchInitParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesNotMatch []SmartProtectionConditionSourceIPIPRangesNotMatchInitParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPMatch []SmartProtectionConditionSourceIPGeoIPMatchObservation `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPNotMatch []SmartProtectionConditionSourceIPGeoIPNotMatchObservation `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesMatch []SmartProtectionConditionSourceIPIPRangesMatchObservation `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesNotMatch []SmartProtectionConditionSourceIPIPRangesNotMatchObservation `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type SmartProtectionConditionSourceIPParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	GeoIPMatch []SmartProtectionConditionSourceIPGeoIPMatchParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	GeoIPNotMatch []SmartProtectionConditionSourceIPGeoIPNotMatchParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	IPRangesMatch []SmartProtectionConditionSourceIPIPRangesMatchParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	IPRangesNotMatch []SmartProtectionConditionSourceIPIPRangesNotMatchParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
 }
 
 type SmartProtectionInitParameters struct {
+
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
 	Condition []SmartProtectionConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type SmartProtectionObservation struct {
+
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
 	Condition []SmartProtectionConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type SmartProtectionParameters struct {
 
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
 	// +kubebuilder:validation:Optional
 	Condition []SmartProtectionConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
+	// (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
-type SourceIPGeoIPMatchInitParameters struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
+type WafConditionAuthorityAuthoritiesInitParameters struct {
 
-type SourceIPGeoIPMatchObservation struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type SourceIPGeoIPMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type SourceIPGeoIPNotMatchInitParameters struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type SourceIPGeoIPNotMatchObservation struct {
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type SourceIPGeoIPNotMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
-}
-
-type SourceIPIPRangesMatchInitParameters struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type SourceIPIPRangesMatchObservation struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type SourceIPIPRangesMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type SourceIPIPRangesNotMatchInitParameters struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type SourceIPIPRangesNotMatchObservation struct {
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type SourceIPIPRangesNotMatchParameters struct {
-
-	// +kubebuilder:validation:Optional
-	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
-}
-
-type SourceIPInitParameters struct {
-	GeoIPMatch []GeoIPMatchInitParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
-
-	GeoIPNotMatch []GeoIPNotMatchInitParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
-
-	IPRangesMatch []IPRangesMatchInitParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
-
-	IPRangesNotMatch []IPRangesNotMatchInitParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
-}
-
-type SourceIPObservation struct {
-	GeoIPMatch []GeoIPMatchObservation `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
-
-	GeoIPNotMatch []GeoIPNotMatchObservation `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
-
-	IPRangesMatch []IPRangesMatchObservation `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
-
-	IPRangesNotMatch []IPRangesNotMatchObservation `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
-}
-
-type SourceIPParameters struct {
-
-	// +kubebuilder:validation:Optional
-	GeoIPMatch []GeoIPMatchParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	GeoIPNotMatch []GeoIPNotMatchParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IPRangesMatch []IPRangesMatchParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	IPRangesNotMatch []IPRangesNotMatchParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
-}
-
-type ValueInitParameters struct {
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type ValueObservation struct {
+type WafConditionAuthorityAuthoritiesObservation struct {
+
+	// (String)
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
-type ValueParameters struct {
+type WafConditionAuthorityAuthoritiesParameters struct {
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionAuthorityInitParameters struct {
+
+	// (Block List) (see below for nested schema)
+	Authorities []WafConditionAuthorityAuthoritiesInitParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type WafConditionAuthorityObservation struct {
+
+	// (Block List) (see below for nested schema)
+	Authorities []WafConditionAuthorityAuthoritiesObservation `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type WafConditionAuthorityParameters struct {
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Authorities []WafConditionAuthorityAuthoritiesParameters `json:"authorities,omitempty" tf:"authorities,omitempty"`
+}
+
+type WafConditionHTTPMethodHTTPMethodsInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionHTTPMethodHTTPMethodsObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionHTTPMethodHTTPMethodsParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionHTTPMethodInitParameters struct {
+
+	// (Block List) (see below for nested schema)
+	HTTPMethods []WafConditionHTTPMethodHTTPMethodsInitParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type WafConditionHTTPMethodObservation struct {
+
+	// (Block List) (see below for nested schema)
+	HTTPMethods []WafConditionHTTPMethodHTTPMethodsObservation `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type WafConditionHTTPMethodParameters struct {
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	HTTPMethods []WafConditionHTTPMethodHTTPMethodsParameters `json:"httpMethods,omitempty" tf:"http_methods,omitempty"`
+}
+
+type WafConditionHeadersInitParameters struct {
+
+	// (String) The resource name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []WafConditionHeadersValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WafConditionHeadersObservation struct {
+
+	// (String) The resource name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []WafConditionHeadersValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WafConditionHeadersParameters struct {
+
+	// (String) The resource name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Value []WafConditionHeadersValueParameters `json:"value" tf:"value,omitempty"`
+}
+
+type WafConditionHeadersValueInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionHeadersValueObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionHeadersValueParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Authority []WafConditionAuthorityInitParameters `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	HTTPMethod []WafConditionHTTPMethodInitParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Headers []WafConditionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	RequestURI []WafConditionRequestURIInitParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	SourceIP []WafConditionSourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type WafConditionObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Authority []WafConditionAuthorityObservation `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	HTTPMethod []WafConditionHTTPMethodObservation `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Headers []WafConditionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	RequestURI []WafConditionRequestURIObservation `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	SourceIP []WafConditionSourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type WafConditionParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Authority []WafConditionAuthorityParameters `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	HTTPMethod []WafConditionHTTPMethodParameters `json:"httpMethod,omitempty" tf:"http_method,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Headers []WafConditionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	RequestURI []WafConditionRequestURIParameters `json:"requestUri,omitempty" tf:"request_uri,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	SourceIP []WafConditionSourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
+}
+
+type WafConditionRequestURIInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Path []WafConditionRequestURIPathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Queries []WafConditionRequestURIQueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type WafConditionRequestURIObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	Path []WafConditionRequestURIPathObservation `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	Queries []WafConditionRequestURIQueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type WafConditionRequestURIParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Path []WafConditionRequestURIPathParameters `json:"path,omitempty" tf:"path,omitempty"`
+
+	// (Block List) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Queries []WafConditionRequestURIQueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
+}
+
+type WafConditionRequestURIPathInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionRequestURIPathObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionRequestURIPathParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionRequestURIQueriesInitParameters struct {
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []WafConditionRequestURIQueriesValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WafConditionRequestURIQueriesObservation struct {
+
+	// (String)
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	Value []WafConditionRequestURIQueriesValueObservation `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type WafConditionRequestURIQueriesParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key" tf:"key,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Value []WafConditionRequestURIQueriesValueParameters `json:"value" tf:"value,omitempty"`
+}
+
+type WafConditionRequestURIQueriesValueInitParameters struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionRequestURIQueriesValueObservation struct {
+
+	// (String)
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionRequestURIQueriesValueParameters struct {
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+
+	// (String)
+	// +kubebuilder:validation:Optional
+	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
+}
+
+type WafConditionSourceIPGeoIPMatchInitParameters struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type WafConditionSourceIPGeoIPMatchObservation struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type WafConditionSourceIPGeoIPMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type WafConditionSourceIPGeoIPNotMatchInitParameters struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type WafConditionSourceIPGeoIPNotMatchObservation struct {
+
+	// (List of String)
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type WafConditionSourceIPGeoIPNotMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+}
+
+type WafConditionSourceIPIPRangesMatchInitParameters struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type WafConditionSourceIPIPRangesMatchObservation struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type WafConditionSourceIPIPRangesMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type WafConditionSourceIPIPRangesNotMatchInitParameters struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type WafConditionSourceIPIPRangesNotMatchObservation struct {
+
+	// (List of String)
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type WafConditionSourceIPIPRangesNotMatchParameters struct {
+
+	// (List of String)
+	// +kubebuilder:validation:Optional
+	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
+}
+
+type WafConditionSourceIPInitParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPMatch []WafConditionSourceIPGeoIPMatchInitParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPNotMatch []WafConditionSourceIPGeoIPNotMatchInitParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesMatch []WafConditionSourceIPIPRangesMatchInitParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesNotMatch []WafConditionSourceIPIPRangesNotMatchInitParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type WafConditionSourceIPObservation struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPMatch []WafConditionSourceIPGeoIPMatchObservation `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	GeoIPNotMatch []WafConditionSourceIPGeoIPNotMatchObservation `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesMatch []WafConditionSourceIPIPRangesMatchObservation `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	IPRangesNotMatch []WafConditionSourceIPIPRangesNotMatchObservation `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type WafConditionSourceIPParameters struct {
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	GeoIPMatch []WafConditionSourceIPGeoIPMatchParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	GeoIPNotMatch []WafConditionSourceIPGeoIPNotMatchParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	IPRangesMatch []WafConditionSourceIPIPRangesMatchParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
+
+	// (Block List, Max: 1) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	IPRangesNotMatch []WafConditionSourceIPIPRangesNotMatchParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
+}
+
+type WafInitParameters struct {
+
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+	Condition []WafConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// (String) ID of WAF profile to use in this rule.
+	// ID of WAF profile to use in this rule.
+	WafProfileID *string `json:"wafProfileId,omitempty" tf:"waf_profile_id,omitempty"`
+}
+
+type WafObservation struct {
+
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+	Condition []WafConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// (String) ID of WAF profile to use in this rule.
+	// ID of WAF profile to use in this rule.
+	WafProfileID *string `json:"wafProfileId,omitempty" tf:"waf_profile_id,omitempty"`
+}
+
+type WafParameters struct {
+
+	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+	// +kubebuilder:validation:Optional
+	Condition []WafConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// (String) ID of WAF profile to use in this rule.
+	// ID of WAF profile to use in this rule.
+	// +kubebuilder:validation:Optional
+	WafProfileID *string `json:"wafProfileId" tf:"waf_profile_id,omitempty"`
 }
 
 // SecurityProfileSpec defines the desired state of SecurityProfile
@@ -1153,7 +2418,7 @@ type SecurityProfileStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// SecurityProfile is the Schema for the SecurityProfiles API. <no value>
+// SecurityProfile is the Schema for the SecurityProfiles API. With security profiles you can protect your infrastructure from DDoS attacks at the application level (L7).
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

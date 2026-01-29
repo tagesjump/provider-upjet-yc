@@ -12,78 +12,99 @@ import (
 
 type AutoscalingConfigInitParameters struct {
 
+	// (String) Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
 	// Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
 	CPUUtilizationTarget *string `json:"cpuUtilizationTarget,omitempty" tf:"cpu_utilization_target,omitempty"`
 
+	// (String) Timeout to gracefully decommission nodes during downscaling. In seconds.
 	// Timeout to gracefully decommission nodes during downscaling. In seconds.
 	DecommissionTimeout *string `json:"decommissionTimeout,omitempty" tf:"decommission_timeout,omitempty"`
 
+	// (Number) Maximum number of nodes in autoscaling subclusters.
 	// Maximum number of nodes in autoscaling subclusters.
 	MaxHostsCount *float64 `json:"maxHostsCount,omitempty" tf:"max_hosts_count,omitempty"`
 
+	// (String) Time in seconds allotted for averaging metrics.
 	// Time in seconds allotted for averaging metrics.
 	MeasurementDuration *string `json:"measurementDuration,omitempty" tf:"measurement_duration,omitempty"`
 
-	// Bool flag -- whether to use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+	// (Boolean) Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+	// Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
 	Preemptible *bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
 
+	// (String) Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
 	// Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
 	StabilizationDuration *string `json:"stabilizationDuration,omitempty" tf:"stabilization_duration,omitempty"`
 
+	// (String) The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
 	// The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
 	WarmupDuration *string `json:"warmupDuration,omitempty" tf:"warmup_duration,omitempty"`
 }
 
 type AutoscalingConfigObservation struct {
 
+	// (String) Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
 	// Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
 	CPUUtilizationTarget *string `json:"cpuUtilizationTarget,omitempty" tf:"cpu_utilization_target,omitempty"`
 
+	// (String) Timeout to gracefully decommission nodes during downscaling. In seconds.
 	// Timeout to gracefully decommission nodes during downscaling. In seconds.
 	DecommissionTimeout *string `json:"decommissionTimeout,omitempty" tf:"decommission_timeout,omitempty"`
 
+	// (Number) Maximum number of nodes in autoscaling subclusters.
 	// Maximum number of nodes in autoscaling subclusters.
 	MaxHostsCount *float64 `json:"maxHostsCount,omitempty" tf:"max_hosts_count,omitempty"`
 
+	// (String) Time in seconds allotted for averaging metrics.
 	// Time in seconds allotted for averaging metrics.
 	MeasurementDuration *string `json:"measurementDuration,omitempty" tf:"measurement_duration,omitempty"`
 
-	// Bool flag -- whether to use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+	// (Boolean) Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+	// Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
 	Preemptible *bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
 
+	// (String) Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
 	// Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
 	StabilizationDuration *string `json:"stabilizationDuration,omitempty" tf:"stabilization_duration,omitempty"`
 
+	// (String) The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
 	// The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
 	WarmupDuration *string `json:"warmupDuration,omitempty" tf:"warmup_duration,omitempty"`
 }
 
 type AutoscalingConfigParameters struct {
 
+	// (String) Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
 	// Defines an autoscaling rule based on the average CPU utilization of the instance group. If not set default autoscaling metric will be used.
 	// +kubebuilder:validation:Optional
 	CPUUtilizationTarget *string `json:"cpuUtilizationTarget,omitempty" tf:"cpu_utilization_target,omitempty"`
 
+	// (String) Timeout to gracefully decommission nodes during downscaling. In seconds.
 	// Timeout to gracefully decommission nodes during downscaling. In seconds.
 	// +kubebuilder:validation:Optional
 	DecommissionTimeout *string `json:"decommissionTimeout,omitempty" tf:"decommission_timeout,omitempty"`
 
+	// (Number) Maximum number of nodes in autoscaling subclusters.
 	// Maximum number of nodes in autoscaling subclusters.
 	// +kubebuilder:validation:Optional
 	MaxHostsCount *float64 `json:"maxHostsCount" tf:"max_hosts_count,omitempty"`
 
+	// (String) Time in seconds allotted for averaging metrics.
 	// Time in seconds allotted for averaging metrics.
 	// +kubebuilder:validation:Optional
 	MeasurementDuration *string `json:"measurementDuration,omitempty" tf:"measurement_duration,omitempty"`
 
-	// Bool flag -- whether to use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+	// (Boolean) Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see Preemptible Virtual Machines.
+	// Use preemptible compute instances. Preemptible instances are stopped at least once every 24 hours, and can be stopped at any time if their resources are needed by Compute. For more information, see [Preemptible Virtual Machines](https://yandex.cloud/docs/compute/concepts/preemptible-vm).
 	// +kubebuilder:validation:Optional
 	Preemptible *bool `json:"preemptible,omitempty" tf:"preemptible,omitempty"`
 
+	// (String) Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
 	// Minimum amount of time in seconds allotted for monitoring before Instance Groups can reduce the number of instances in the group. During this time, the group size doesn't decrease, even if the new metric values indicate that it should.
 	// +kubebuilder:validation:Optional
 	StabilizationDuration *string `json:"stabilizationDuration,omitempty" tf:"stabilization_duration,omitempty"`
 
+	// (String) The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
 	// The warmup time of the instance in seconds. During this time, traffic is sent to the instance, but instance metrics are not collected.
 	// +kubebuilder:validation:Optional
 	WarmupDuration *string `json:"warmupDuration,omitempty" tf:"warmup_duration,omitempty"`
@@ -91,46 +112,60 @@ type AutoscalingConfigParameters struct {
 
 type ClusterConfigInitParameters struct {
 
-	// Data Proc specific options. The structure is documented below.
+	// (Block List, Max: 1) Yandex Data Processing specific options. (see below for nested schema)
+	// Yandex Data Processing specific options.
 	Hadoop []HadoopInitParameters `json:"hadoop,omitempty" tf:"hadoop,omitempty"`
 
-	// Configuration of the Data Proc subcluster. The structure is documented below.
+	// (Block List, Min: 1) Configuration of the Yandex Data Processing subcluster. (see below for nested schema)
+	// Configuration of the Yandex Data Processing subcluster.
 	SubclusterSpec []SubclusterSpecInitParameters `json:"subclusterSpec,omitempty" tf:"subcluster_spec,omitempty"`
 
-	// Version of Data Proc image.
+	// (String) Version of Yandex Data Processing image.
+	// Version of Yandex Data Processing image.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type ClusterConfigObservation struct {
 
-	// Data Proc specific options. The structure is documented below.
+	// (Block List, Max: 1) Yandex Data Processing specific options. (see below for nested schema)
+	// Yandex Data Processing specific options.
 	Hadoop []HadoopObservation `json:"hadoop,omitempty" tf:"hadoop,omitempty"`
 
-	// Configuration of the Data Proc subcluster. The structure is documented below.
+	// (Block List, Min: 1) Configuration of the Yandex Data Processing subcluster. (see below for nested schema)
+	// Configuration of the Yandex Data Processing subcluster.
 	SubclusterSpec []SubclusterSpecObservation `json:"subclusterSpec,omitempty" tf:"subcluster_spec,omitempty"`
 
-	// Version of Data Proc image.
+	// (String) Version of Yandex Data Processing image.
+	// Version of Yandex Data Processing image.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type ClusterConfigParameters struct {
 
-	// Data Proc specific options. The structure is documented below.
+	// (Block List, Max: 1) Yandex Data Processing specific options. (see below for nested schema)
+	// Yandex Data Processing specific options.
 	// +kubebuilder:validation:Optional
 	Hadoop []HadoopParameters `json:"hadoop,omitempty" tf:"hadoop,omitempty"`
 
-	// Configuration of the Data Proc subcluster. The structure is documented below.
+	// (Block List, Min: 1) Configuration of the Yandex Data Processing subcluster. (see below for nested schema)
+	// Configuration of the Yandex Data Processing subcluster.
 	// +kubebuilder:validation:Optional
 	SubclusterSpec []SubclusterSpecParameters `json:"subclusterSpec" tf:"subcluster_spec,omitempty"`
 
-	// Version of Data Proc image.
+	// (String) Version of Yandex Data Processing image.
+	// Version of Yandex Data Processing image.
 	// +kubebuilder:validation:Optional
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type ClusterInitParameters struct {
 
-	// Name of the Object Storage bucket to use for Data Proc jobs. Data Proc Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+	// (String) Service account to be used for managing hosts in an autoscaled subcluster.
+	// Service account to be used for managing hosts in an autoscaled subcluster.
+	AutoscalingServiceAccountID *string `json:"autoscalingServiceAccountId,omitempty" tf:"autoscaling_service_account_id,omitempty"`
+
+	// (String) Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+	// Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the `service_account_id` argument) should be given permission to create objects within this bucket.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/storage/v1alpha1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
@@ -143,16 +178,24 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Configuration and resources for hosts that should be created with the cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Configuration and resources for hosts that should be created with the cluster. (see below for nested schema)
+	// Configuration and resources for hosts that should be created with the cluster.
 	ClusterConfig []ClusterConfigInitParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the Data Proc cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder to create a cluster in. If it is not provided, the default provider folder is used.
+	// (String) Deployment environment of the cluster. Can be either PRESTABLE or PRODUCTION. The default is PRESTABLE.
+	// Deployment environment of the cluster. Can be either `PRESTABLE` or `PRODUCTION`. The default is `PRESTABLE`.
+	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -164,22 +207,31 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Set of String) A list of host group IDs to place VMs of the cluster on.
 	// A list of host group IDs to place VMs of the cluster on.
 	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
-	// A set of key/value label pairs to assign to the Data Proc cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of a specific Data Proc cluster.
+	// (String) ID of the cloud logging group for cluster logs.
+	// ID of the cloud logging group for cluster logs.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A list of security group IDs that the cluster belongs to.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Service account to be used by the Data Proc agent to access resources of Yandex.Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Data Proc cluster will be located.
+	// (String) Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Yandex Data Processing cluster will be located.
+	// Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have `mdb.dataproc.agent` role on the folder where the Yandex Data Processing cluster will be located.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
@@ -192,64 +244,97 @@ type ClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v1.NamespacedSelector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
+	// (Boolean) Whether to enable UI Proxy feature.
 	// Whether to enable UI Proxy feature.
 	UIProxy *bool `json:"uiProxy,omitempty" tf:"ui_proxy,omitempty"`
 
-	// ID of the availability zone to create cluster in. If it is not provided, the default provider zone is used.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type ClusterObservation struct {
 
-	// Name of the Object Storage bucket to use for Data Proc jobs. Data Proc Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+	// (String) Service account to be used for managing hosts in an autoscaled subcluster.
+	// Service account to be used for managing hosts in an autoscaled subcluster.
+	AutoscalingServiceAccountID *string `json:"autoscalingServiceAccountId,omitempty" tf:"autoscaling_service_account_id,omitempty"`
+
+	// (String) Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+	// Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the `service_account_id` argument) should be given permission to create objects within this bucket.
 	Bucket *string `json:"bucket,omitempty" tf:"bucket,omitempty"`
 
-	// Configuration and resources for hosts that should be created with the cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Configuration and resources for hosts that should be created with the cluster. (see below for nested schema)
+	// Configuration and resources for hosts that should be created with the cluster.
 	ClusterConfig []ClusterConfigObservation `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
-	// (Computed) The Data Proc cluster creation timestamp.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the Data Proc cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder to create a cluster in. If it is not provided, the default provider folder is used.
+	// (String) Deployment environment of the cluster. Can be either PRESTABLE or PRODUCTION. The default is PRESTABLE.
+	// Deployment environment of the cluster. Can be either `PRESTABLE` or `PRODUCTION`. The default is `PRESTABLE`.
+	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (Set of String) A list of host group IDs to place VMs of the cluster on.
 	// A list of host group IDs to place VMs of the cluster on.
 	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
-	// (Computed) ID of a new Data Proc cluster.
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Data Proc cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of a specific Data Proc cluster.
+	// (String) ID of the cloud logging group for cluster logs.
+	// ID of the cloud logging group for cluster logs.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A list of security group IDs that the cluster belongs to.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Service account to be used by the Data Proc agent to access resources of Yandex.Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Data Proc cluster will be located.
+	// (String) Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Yandex Data Processing cluster will be located.
+	// Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have `mdb.dataproc.agent` role on the folder where the Yandex Data Processing cluster will be located.
 	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 
+	// (Boolean) Whether to enable UI Proxy feature.
 	// Whether to enable UI Proxy feature.
 	UIProxy *bool `json:"uiProxy,omitempty" tf:"ui_proxy,omitempty"`
 
-	// ID of the availability zone to create cluster in. If it is not provided, the default provider zone is used.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type ClusterParameters struct {
 
-	// Name of the Object Storage bucket to use for Data Proc jobs. Data Proc Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+	// (String) Service account to be used for managing hosts in an autoscaled subcluster.
+	// Service account to be used for managing hosts in an autoscaled subcluster.
+	// +kubebuilder:validation:Optional
+	AutoscalingServiceAccountID *string `json:"autoscalingServiceAccountId,omitempty" tf:"autoscaling_service_account_id,omitempty"`
+
+	// (String) Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the service_account_id argument) should be given permission to create objects within this bucket.
+	// Name of the Object Storage bucket to use for Yandex Data Processing jobs. Yandex Data Processing Agent saves output of job driver's process to specified bucket. In order for this to work service account (specified by the `service_account_id` argument) should be given permission to create objects within this bucket.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/storage/v1alpha1.Bucket
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("bucket",false)
 	// +kubebuilder:validation:Optional
@@ -263,19 +348,28 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	BucketSelector *v1.NamespacedSelector `json:"bucketSelector,omitempty" tf:"-"`
 
-	// Configuration and resources for hosts that should be created with the cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Configuration and resources for hosts that should be created with the cluster. (see below for nested schema)
+	// Configuration and resources for hosts that should be created with the cluster.
 	// +kubebuilder:validation:Optional
 	ClusterConfig []ClusterConfigParameters `json:"clusterConfig,omitempty" tf:"cluster_config,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the Data Proc cluster.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder to create a cluster in. If it is not provided, the default provider folder is used.
+	// (String) Deployment environment of the cluster. Can be either PRESTABLE or PRODUCTION. The default is PRESTABLE.
+	// Deployment environment of the cluster. Can be either `PRESTABLE` or `PRODUCTION`. The default is `PRESTABLE`.
+	// +kubebuilder:validation:Optional
+	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -288,26 +382,36 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Set of String) A list of host group IDs to place VMs of the cluster on.
 	// A list of host group IDs to place VMs of the cluster on.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	HostGroupIds []*string `json:"hostGroupIds,omitempty" tf:"host_group_ids,omitempty"`
 
-	// A set of key/value label pairs to assign to the Data Proc cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Name of a specific Data Proc cluster.
+	// (String) ID of the cloud logging group for cluster logs.
+	// ID of the cloud logging group for cluster logs.
+	// +kubebuilder:validation:Optional
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A list of security group IDs that the cluster belongs to.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
-	// Service account to be used by the Data Proc agent to access resources of Yandex.Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Data Proc cluster will be located.
+	// (String) Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have mdb.dataproc.agent role on the folder where the Yandex Data Processing cluster will be located.
+	// Service account to be used by the Yandex Data Processing agent to access resources of Yandex Cloud. Selected service account should have `mdb.dataproc.agent` role on the folder where the Yandex Data Processing cluster will be located.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/iam/v1alpha1.ServiceAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -321,68 +425,95 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceAccountIDSelector *v1.NamespacedSelector `json:"serviceAccountIdSelector,omitempty" tf:"-"`
 
+	// (Boolean) Whether to enable UI Proxy feature.
 	// Whether to enable UI Proxy feature.
 	// +kubebuilder:validation:Optional
 	UIProxy *bool `json:"uiProxy,omitempty" tf:"ui_proxy,omitempty"`
 
-	// ID of the availability zone to create cluster in. If it is not provided, the default provider zone is used.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	// +kubebuilder:validation:Optional
 	ZoneID *string `json:"zoneId,omitempty" tf:"zone_id,omitempty"`
 }
 
 type HadoopInitParameters struct {
 
-	// List of initialization scripts. The structure is documented below.
+	// (Block List) List of initialization scripts. (see below for nested schema)
+	// List of initialization scripts.
 	InitializationAction []InitializationActionInitParameters `json:"initializationAction,omitempty" tf:"initialization_action,omitempty"`
 
+	// (Boolean) Whether to enable authorization via OS Login.
+	// Whether to enable authorization via OS Login.
+	Oslogin *bool `json:"oslogin,omitempty" tf:"oslogin,omitempty"`
+
+	// (Map of String) A set of key/value pairs that are used to configure cluster services.
 	// A set of key/value pairs that are used to configure cluster services.
 	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
-	// List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+	// (Set of String) List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+	// List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
 	// +listType=set
 	SSHPublicKeys []*string `json:"sshPublicKeys,omitempty" tf:"ssh_public_keys,omitempty"`
 
-	// List of services to run on Data Proc cluster.
+	// (Set of String) List of services to run on Yandex Data Processing cluster.
+	// List of services to run on Yandex Data Processing cluster.
 	// +listType=set
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type HadoopObservation struct {
 
-	// List of initialization scripts. The structure is documented below.
+	// (Block List) List of initialization scripts. (see below for nested schema)
+	// List of initialization scripts.
 	InitializationAction []InitializationActionObservation `json:"initializationAction,omitempty" tf:"initialization_action,omitempty"`
 
+	// (Boolean) Whether to enable authorization via OS Login.
+	// Whether to enable authorization via OS Login.
+	Oslogin *bool `json:"oslogin,omitempty" tf:"oslogin,omitempty"`
+
+	// (Map of String) A set of key/value pairs that are used to configure cluster services.
 	// A set of key/value pairs that are used to configure cluster services.
 	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
-	// List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+	// (Set of String) List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+	// List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
 	// +listType=set
 	SSHPublicKeys []*string `json:"sshPublicKeys,omitempty" tf:"ssh_public_keys,omitempty"`
 
-	// List of services to run on Data Proc cluster.
+	// (Set of String) List of services to run on Yandex Data Processing cluster.
+	// List of services to run on Yandex Data Processing cluster.
 	// +listType=set
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type HadoopParameters struct {
 
-	// List of initialization scripts. The structure is documented below.
+	// (Block List) List of initialization scripts. (see below for nested schema)
+	// List of initialization scripts.
 	// +kubebuilder:validation:Optional
 	InitializationAction []InitializationActionParameters `json:"initializationAction,omitempty" tf:"initialization_action,omitempty"`
 
+	// (Boolean) Whether to enable authorization via OS Login.
+	// Whether to enable authorization via OS Login.
+	// +kubebuilder:validation:Optional
+	Oslogin *bool `json:"oslogin,omitempty" tf:"oslogin,omitempty"`
+
+	// (Map of String) A set of key/value pairs that are used to configure cluster services.
 	// A set of key/value pairs that are used to configure cluster services.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
-	// List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+	// (Set of String) List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see the official documentation.
+	// List of SSH public keys to put to the hosts of the cluster. For information on how to connect to the cluster, see [the official documentation](https://yandex.cloud/docs/data-proc/operations/connect).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SSHPublicKeys []*string `json:"sshPublicKeys,omitempty" tf:"ssh_public_keys,omitempty"`
 
-	// List of services to run on Data Proc cluster.
+	// (Set of String) List of services to run on Yandex Data Processing cluster.
+	// List of services to run on Yandex Data Processing cluster.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
@@ -390,38 +521,47 @@ type HadoopParameters struct {
 
 type InitializationActionInitParameters struct {
 
+	// (List of String) List of arguments of the initialization script.
 	// List of arguments of the initialization script.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// (String) Script execution timeout, in seconds.
 	// Script execution timeout, in seconds.
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
+	// (String) Script URI.
 	// Script URI.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type InitializationActionObservation struct {
 
+	// (List of String) List of arguments of the initialization script.
 	// List of arguments of the initialization script.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// (String) Script execution timeout, in seconds.
 	// Script execution timeout, in seconds.
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
+	// (String) Script URI.
 	// Script URI.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type InitializationActionParameters struct {
 
+	// (List of String) List of arguments of the initialization script.
 	// List of arguments of the initialization script.
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// (String) Script execution timeout, in seconds.
 	// Script execution timeout, in seconds.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
+	// (String) Script URI.
 	// Script URI.
 	// +kubebuilder:validation:Optional
 	URI *string `json:"uri" tf:"uri,omitempty"`
@@ -429,63 +569,79 @@ type InitializationActionParameters struct {
 
 type ResourcesInitParameters struct {
 
+	// (Number) Volume of the storage available to a host, in gigabytes.
 	// Volume of the storage available to a host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of a host. One of network-hdd (default) or network-ssd.
+	// hdd (default) or network-ssd.
+	// Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
-	// The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+	// (String) The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+	// The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesObservation struct {
 
+	// (Number) Volume of the storage available to a host, in gigabytes.
 	// Volume of the storage available to a host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
-	// Type of the storage of a host. One of network-hdd (default) or network-ssd.
+	// hdd (default) or network-ssd.
+	// Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
-	// The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+	// (String) The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+	// The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type ResourcesParameters struct {
 
+	// (Number) Volume of the storage available to a host, in gigabytes.
 	// Volume of the storage available to a host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
-	// Type of the storage of a host. One of network-hdd (default) or network-ssd.
+	// hdd (default) or network-ssd.
+	// Type of the storage of a host. One of `network-hdd` (default) or `network-ssd`.
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
-	// The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+	// (String) The ID of the preset for computational resources available to a host. All available presets are listed in the documentation.
+	// The ID of the preset for computational resources available to a host. All available presets are listed in the [documentation](https://yandex.cloud/docs/data-proc/concepts/instance-types).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
 type SubclusterSpecInitParameters struct {
 
-	// If true then assign public IP addresses to the hosts of the subclusters.
+	// (Boolean) If true then assign public IP addresses to the hosts of the subclusters.
+	// If `true` then assign public IP addresses to the hosts of the subclusters.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Block List, Max: 1) Autoscaling configuration for compute subclusters. (see below for nested schema)
 	// Autoscaling configuration for compute subclusters.
 	AutoscalingConfig []AutoscalingConfigInitParameters `json:"autoscalingConfig,omitempty" tf:"autoscaling_config,omitempty"`
 
-	// Number of hosts within Data Proc subcluster.
+	// (Number) Number of hosts within Yandex Data Processing subcluster.
+	// Number of hosts within Yandex Data Processing subcluster.
 	HostsCount *float64 `json:"hostsCount,omitempty" tf:"hosts_count,omitempty"`
 
-	// Name of the Data Proc subcluster.
+	// (String) The resource name.
+	// Name of the Yandex Data Processing subcluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Resources allocated to each host of the Data Proc subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to each host of the Yandex Data Processing subcluster. (see below for nested schema)
+	// Resources allocated to each host of the Yandex Data Processing subcluster.
 	Resources []ResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Role of the subcluster in the Data Proc cluster.
+	// (String) Role of the subcluster in the Yandex Data Processing cluster.
+	// Role of the subcluster in the Yandex Data Processing cluster.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (String) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
 	// The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -502,57 +658,72 @@ type SubclusterSpecInitParameters struct {
 
 type SubclusterSpecObservation struct {
 
-	// If true then assign public IP addresses to the hosts of the subclusters.
+	// (Boolean) If true then assign public IP addresses to the hosts of the subclusters.
+	// If `true` then assign public IP addresses to the hosts of the subclusters.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Block List, Max: 1) Autoscaling configuration for compute subclusters. (see below for nested schema)
 	// Autoscaling configuration for compute subclusters.
 	AutoscalingConfig []AutoscalingConfigObservation `json:"autoscalingConfig,omitempty" tf:"autoscaling_config,omitempty"`
 
-	// Number of hosts within Data Proc subcluster.
+	// (Number) Number of hosts within Yandex Data Processing subcluster.
+	// Number of hosts within Yandex Data Processing subcluster.
 	HostsCount *float64 `json:"hostsCount,omitempty" tf:"hosts_count,omitempty"`
 
-	// (Computed) ID of a new Data Proc cluster.
+	// (String) The ID of this resource.
+	// ID of the subcluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Name of the Data Proc subcluster.
+	// (String) The resource name.
+	// Name of the Yandex Data Processing subcluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Resources allocated to each host of the Data Proc subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to each host of the Yandex Data Processing subcluster. (see below for nested schema)
+	// Resources allocated to each host of the Yandex Data Processing subcluster.
 	Resources []ResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 
-	// Role of the subcluster in the Data Proc cluster.
+	// (String) Role of the subcluster in the Yandex Data Processing cluster.
+	// Role of the subcluster in the Yandex Data Processing cluster.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (String) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
 	// The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubclusterSpecParameters struct {
 
-	// If true then assign public IP addresses to the hosts of the subclusters.
+	// (Boolean) If true then assign public IP addresses to the hosts of the subclusters.
+	// If `true` then assign public IP addresses to the hosts of the subclusters.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
+	// (Block List, Max: 1) Autoscaling configuration for compute subclusters. (see below for nested schema)
 	// Autoscaling configuration for compute subclusters.
 	// +kubebuilder:validation:Optional
 	AutoscalingConfig []AutoscalingConfigParameters `json:"autoscalingConfig,omitempty" tf:"autoscaling_config,omitempty"`
 
-	// Number of hosts within Data Proc subcluster.
+	// (Number) Number of hosts within Yandex Data Processing subcluster.
+	// Number of hosts within Yandex Data Processing subcluster.
 	// +kubebuilder:validation:Optional
 	HostsCount *float64 `json:"hostsCount" tf:"hosts_count,omitempty"`
 
-	// Name of the Data Proc subcluster.
+	// (String) The resource name.
+	// Name of the Yandex Data Processing subcluster.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Resources allocated to each host of the Data Proc subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to each host of the Yandex Data Processing subcluster. (see below for nested schema)
+	// Resources allocated to each host of the Yandex Data Processing subcluster.
 	// +kubebuilder:validation:Optional
 	Resources []ResourcesParameters `json:"resources" tf:"resources,omitempty"`
 
-	// Role of the subcluster in the Data Proc cluster.
+	// (String) Role of the subcluster in the Yandex Data Processing cluster.
+	// Role of the subcluster in the Yandex Data Processing cluster.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role" tf:"role,omitempty"`
 
+	// (String) The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
 	// The ID of the subnet, to which hosts of the subcluster belong. Subnets of all the subclusters must belong to the same VPC network.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/namespaced/vpc/v1alpha1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
@@ -595,7 +766,7 @@ type ClusterStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// Cluster is the Schema for the Clusters API. Manages a Data Proc cluster within Yandex.Cloud.
+// Cluster is the Schema for the Clusters API. Manages a Data Processing cluster within Yandex Cloud.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -1,0 +1,28 @@
+apiVersion: connectionmanager.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Connection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: connectionmanager/v1alpha1/connection
+  labels:
+    testing.upbound.io/example-name: test-connection
+  name: test-connection
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: my_connection description
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labels:
+      key: value
+    name: my_connection
+    params:
+      postgresql:
+        auth:
+          userPassword:
+            password:
+              rawSecretRef:
+                key: example-key
+                name: example-secret
+            user: name
+        managedClusterId: cluster_id

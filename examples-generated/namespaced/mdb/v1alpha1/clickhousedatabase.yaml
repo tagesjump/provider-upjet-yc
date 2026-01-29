@@ -1,0 +1,85 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: ClickhouseDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhousedatabase
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    name: database1
+
+---
+
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: ClickhouseCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhousedatabase
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+    - {}
+    environment: PRESTABLE
+    host:
+    - subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: foo
+      type: CLICKHOUSE
+      zone: ru-central1-a
+    maintenanceWindow:
+    - type: ANYTIME
+    name: test
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    resources:
+    - disk_size: 32
+      disk_type_id: network-ssd
+      resource_preset_id: s2.micro
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhousedatabase
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/clickhousedatabase
+  labels:
+    testing.upbound.io/example-name: foo
+  name: foo
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: foo
+    v4CidrBlocks:
+    - 10.5.0.0/24
+    zone: ru-central1-a

@@ -11,7 +11,8 @@ import (
 
 type ZoneIAMBindingInitParameters struct {
 
-	// The DNS Zone ID to apply a binding to.
+	// (String) The ID of the compute dns_zone to attach the policy to.
+	// The ID of the compute `dns_zone` to attach the policy to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/dns/v1alpha1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
@@ -24,38 +25,68 @@ type ZoneIAMBindingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String) The role that should be assigned. Only one yandex_dns_zone_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_dns_zone_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type ZoneIAMBindingObservation struct {
 
-	// The DNS Zone ID to apply a binding to.
+	// (String) The ID of the compute dns_zone to attach the policy to.
+	// The ID of the compute `dns_zone` to attach the policy to.
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
 
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String) The role that should be assigned. Only one yandex_dns_zone_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_dns_zone_iam_binding can be used per role.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
 
 type ZoneIAMBindingParameters struct {
 
-	// The DNS Zone ID to apply a binding to.
+	// (String) The ID of the compute dns_zone to attach the policy to.
+	// The ID of the compute `dns_zone` to attach the policy to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/dns/v1alpha1.Zone
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -69,16 +100,30 @@ type ZoneIAMBindingParameters struct {
 	// +kubebuilder:validation:Optional
 	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
-	// Identities that will be granted the privilege in role.
-	// Each entry can have one of the following values:
+	// (Set of String) An array of identities that will be granted the privilege in the role. Each entry can have one of the following values:
+	// An array of identities that will be granted the privilege in the `role`. Each entry can have one of the following values:
+	// * **userAccount:{user_id}**: A unique user ID that represents a specific Yandex account.
+	// * **serviceAccount:{service_account_id}**: A unique service account ID.
+	// * **federatedUser:{federated_user_id}**: A unique federated user ID.
+	// * **federatedUser:{federated_user_id}:**: A unique SAML federation user account ID.
+	// * **group:{group_id}**: A unique group ID.
+	// * **system:group:federation:{federation_id}:users**: All users in federation.
+	// * **system:group:organization:{organization_id}:users**: All users in organization.
+	// * **system:allAuthenticatedUsers**: All authenticated users.
+	// * **system:allUsers**: All users, including unauthenticated ones.
+	//
+	// ~> for more information about system groups, see [Cloud Documentation](https://yandex.cloud/docs/iam/concepts/access-control/system-group).
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Members []*string `json:"members,omitempty" tf:"members,omitempty"`
 
-	// The role that should be applied. See roles.
+	// (String) The role that should be assigned. Only one yandex_dns_zone_iam_binding can be used per role.
+	// The role that should be assigned. Only one yandex_dns_zone_iam_binding can be used per role.
 	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
+	// (Number) For test purposes, to compensate IAM operations delay
+	// For test purposes, to compensate IAM operations delay
 	// +kubebuilder:validation:Optional
 	SleepAfter *float64 `json:"sleepAfter,omitempty" tf:"sleep_after,omitempty"`
 }
@@ -110,7 +155,7 @@ type ZoneIAMBindingStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ZoneIAMBinding is the Schema for the ZoneIAMBindings API. Allows management of a single IAM binding for a
+// ZoneIAMBinding is the Schema for the ZoneIAMBindings API. Allows management of a single IAM binding for a Cloud DNS Zone.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

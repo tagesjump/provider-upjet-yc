@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: message/v1alpha1/queue
   labels:
-    testing.upbound.io/example-name: example_queue
-  name: example-queue
+    testing.upbound.io/example-name: my_queue
+  name: my-queue
   namespace: upbound-system
 spec:
   forProvider:

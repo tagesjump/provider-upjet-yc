@@ -1,0 +1,105 @@
+apiVersion: cloud.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: DesktopsDesktop
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloud/v1alpha1/desktopsdesktop
+  labels:
+    testing.upbound.io/example-name: desktop
+  name: desktop
+  namespace: upbound-system
+spec:
+  forProvider:
+    desktopGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: desktop_group
+    labels:
+      label1: label1-value
+      label2: label2-value
+    members:
+    - subjectId: bfblmuiaug62t0cki3dq
+      subjectType: userAccount
+    name: desktop-name
+    networkInterface:
+      subnetId: ${yandex_vpc_subnet.subnet.id}
+
+---
+
+apiVersion: cloud.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: DesktopsDesktopGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloud/v1alpha1/desktopsdesktop
+  labels:
+    testing.upbound.io/example-name: desktop_group
+  name: desktop-group
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Sample description
+    desktopTemplate:
+      bootDisk:
+        initializeParams:
+          size: 24
+          type: SSD
+      dataDisk:
+        initializeParams:
+          size: 16
+          type: HDD
+      group_config:
+        initialize_params:
+          desktop_type: PERSISTENT
+          max_desktops_amount: 5
+          members:
+          - id: <your id>
+            type: userAccount
+          min_ready_desktops: 1
+      networkInterface:
+        networkId: ${yandex_vpc_network.network.id}
+        subnetIds:
+        - ${yandex_vpc_subnet.subnet.id}
+      resources:
+        coreFraction: 100
+        cores: 4
+        memory: 8
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    imageId: ${data.yandex_cloud_desktops_image.image.id}
+    labels:
+      label1: label1-value
+      label2: label2-value
+    name: desktop-group-name
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloud/v1alpha1/desktopsdesktop
+  labels:
+    testing.upbound.io/example-name: network
+  name: network
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cloud/v1alpha1/desktopsdesktop
+  labels:
+    testing.upbound.io/example-name: subnet
+  name: subnet
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: network
+    v4CidrBlocks:
+    - 10.1.0.0/24
+    zone: ru-central1-a

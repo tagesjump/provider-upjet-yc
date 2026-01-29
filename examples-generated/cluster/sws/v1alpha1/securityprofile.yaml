@@ -1,0 +1,17 @@
+apiVersion: sws.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: SecurityProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sws/v1alpha1/securityprofile
+  labels:
+    testing.upbound.io/example-name: demo-profile-simple
+  name: demo-profile-simple
+spec:
+  forProvider:
+    defaultAction: ALLOW
+    name: demo-profile-simple
+    securityRule:
+    - name: smart-protection
+      priority: 99999
+      smartProtection:
+      - mode: API

@@ -11,11 +11,12 @@ import (
 
 type ServiceAccountInitParameters struct {
 
-	// Description of the service account.
+	// 256 characters long.
+	// Description of the service account. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
+	// (String) ID of the folder that the service account belongs to.
+	// ID of the folder that the service account belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -26,29 +27,68 @@ type ServiceAccountInitParameters struct {
 	// Selector for a Folder in resourcemanager to populate folderId.
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// 63 characters long.
+	// Name of the service account.
+	// The name is unique within the cloud. 3-63 characters long.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
+	// ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type ServiceAccountObservation struct {
+
+	// (String) Creation timestamp.
+	// Creation timestamp.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the service account.
+	// 256 characters long.
+	// Description of the service account. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
+	// (String) ID of the folder that the service account belongs to.
+	// ID of the folder that the service account belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
+	// (String) ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// 63 characters long.
+	// Name of the service account.
+	// The name is unique within the cloud. 3-63 characters long.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
+	// ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 type ServiceAccountParameters struct {
 
-	// Description of the service account.
+	// 256 characters long.
+	// Description of the service account. 0-256 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// ID of the folder that the service account will be created in.
-	// Defaults to the provider folder configuration.
+	// (String) ID of the folder that the service account belongs to.
+	// ID of the folder that the service account belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -60,6 +100,25 @@ type ServiceAccountParameters struct {
 	// Selector for a Folder in resourcemanager to populate folderId.
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// 63 characters long.
+	// Name of the service account.
+	// The name is unique within the cloud. 3-63 characters long.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
+	// ID of the ServiceAccount resource to return.
+	// To get the service account ID, use a [ServiceAccountService.List] request.
+	// +kubebuilder:validation:Optional
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
 }
 
 // ServiceAccountSpec defines the desired state of ServiceAccount
@@ -89,7 +148,7 @@ type ServiceAccountStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// ServiceAccount is the Schema for the ServiceAccounts API. Allows management of a Yandex.Cloud IAM service account.
+// ServiceAccount is the Schema for the ServiceAccounts API. Allows management of a Yandex Cloud IAM service account.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
@@ -98,8 +157,9 @@ type ServiceAccountStatus struct {
 type ServiceAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ServiceAccountSpec   `json:"spec"`
-	Status            ServiceAccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   ServiceAccountSpec   `json:"spec"`
+	Status ServiceAccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -6,4 +6,13 @@ package v1alpha1
 func (tr *Bucket) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BucketGrant) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *BucketIAMBinding) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *BucketPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Object) Hub() {}

@@ -11,76 +11,110 @@ import (
 
 type CoreDeviceInitParameters struct {
 
-	// A set of key/value aliases pairs to assign to the IoT Core Device
+	// (Map of String) A set of key/value aliases pairs to assign to the IoT Core Device.
+	// A set of key/value aliases pairs to assign to the IoT Core Device.
 	// +mapType=granular
 	Aliases map[string]*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// A set of certificate's fingerprints for the IoT Core Device
+	// (Set of String) A set of certificate's fingerprints for the IoT Core Device.
+	// A set of certificate's fingerprints for the IoT Core Device.
 	// +listType=set
 	Certificates []*string `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
-	// Description of the IoT Core Device
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// IoT Core Device name used to define device
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	Passwords []*string `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// IoT Core Registry ID for the IoT Core Device
+	// (String) IoT Core Registry ID for the IoT Core Device.
+	// IoT Core Registry ID for the IoT Core Device.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type CoreDeviceObservation struct {
 
-	// A set of key/value aliases pairs to assign to the IoT Core Device
+	// (Map of String) A set of key/value aliases pairs to assign to the IoT Core Device.
+	// A set of key/value aliases pairs to assign to the IoT Core Device.
 	// +mapType=granular
 	Aliases map[string]*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// A set of certificate's fingerprints for the IoT Core Device
+	// (Set of String) A set of certificate's fingerprints for the IoT Core Device.
+	// A set of certificate's fingerprints for the IoT Core Device.
 	// +listType=set
 	Certificates []*string `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
-	// Creation timestamp of the IoT Core Device
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Description of the IoT Core Device
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// IoT Core Device name used to define device
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// IoT Core Registry ID for the IoT Core Device
+	// (String) IoT Core Registry ID for the IoT Core Device.
+	// IoT Core Registry ID for the IoT Core Device.
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
 
 type CoreDeviceParameters struct {
 
-	// A set of key/value aliases pairs to assign to the IoT Core Device
+	// (Map of String) A set of key/value aliases pairs to assign to the IoT Core Device.
+	// A set of key/value aliases pairs to assign to the IoT Core Device.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Aliases map[string]*string `json:"aliases,omitempty" tf:"aliases,omitempty"`
 
-	// A set of certificate's fingerprints for the IoT Core Device
+	// (Set of String) A set of certificate's fingerprints for the IoT Core Device.
+	// A set of certificate's fingerprints for the IoT Core Device.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Certificates []*string `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
-	// Description of the IoT Core Device
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// IoT Core Device name used to define device
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A set of passwords's id for the IoT Core Device
+	// (Set of String, Sensitive) A set of passwords's id for the IoT Core Device.
+	// A set of passwords's id for the IoT Core Device.
 	// +kubebuilder:validation:Optional
 	PasswordsSecretRef *[]v1.SecretKeySelector `json:"passwordsSecretRef,omitempty" tf:"-"`
 
-	// IoT Core Registry ID for the IoT Core Device
+	// (String) IoT Core Registry ID for the IoT Core Device.
+	// IoT Core Registry ID for the IoT Core Device.
 	// +kubebuilder:validation:Optional
 	RegistryID *string `json:"registryId,omitempty" tf:"registry_id,omitempty"`
 }
@@ -112,7 +146,7 @@ type CoreDeviceStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// CoreDevice is the Schema for the CoreDevices API. Allows management of a Yandex.Cloud IoT Core Device.
+// CoreDevice is the Schema for the CoreDevices API. Allows management of a Yandex Cloud IoT Core Device.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

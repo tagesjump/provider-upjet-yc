@@ -11,48 +11,60 @@ import (
 
 type ColumnInitParameters struct {
 
-	// Column group
+	// (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+	// Column group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Column name
+	// (String) Column name.
+	// Column name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A column cannot have the NULL data type. (	Default: false	)
+	// (Boolean) A column cannot have the NULL data type. Default: false.
+	// A column cannot have the NULL data type. Default: `false`.
 	NotNull *bool `json:"notNull,omitempty" tf:"not_null,omitempty"`
 
+	// (String) Column data type. YQL data types are used.
 	// Column data type. YQL data types are used.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ColumnObservation struct {
 
-	// Column group
+	// (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+	// Column group.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Column name
+	// (String) Column name.
+	// Column name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A column cannot have the NULL data type. (	Default: false	)
+	// (Boolean) A column cannot have the NULL data type. Default: false.
+	// A column cannot have the NULL data type. Default: `false`.
 	NotNull *bool `json:"notNull,omitempty" tf:"not_null,omitempty"`
 
+	// (String) Column data type. YQL data types are used.
 	// Column data type. YQL data types are used.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ColumnParameters struct {
 
-	// Column group
+	// (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+	// Column group.
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Column name
+	// (String) Column name.
+	// Column name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// A column cannot have the NULL data type. (	Default: false	)
+	// (Boolean) A column cannot have the NULL data type. Default: false.
+	// A column cannot have the NULL data type. Default: `false`.
 	// +kubebuilder:validation:Optional
 	NotNull *bool `json:"notNull,omitempty" tf:"not_null,omitempty"`
 
+	// (String) Column data type. YQL data types are used.
 	// Column data type. YQL data types are used.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
@@ -60,159 +72,220 @@ type ColumnParameters struct {
 
 type FamilyInitParameters struct {
 
+	// (String) Data codec (acceptable values: off, lz4).
 	// Data codec (acceptable values: off, lz4).
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
+	// (String) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
 	// Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// Column family name
+	// (String) Column name.
+	// Column family name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type FamilyObservation struct {
 
+	// (String) Data codec (acceptable values: off, lz4).
 	// Data codec (acceptable values: off, lz4).
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
+	// (String) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
 	// Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
 	Data *string `json:"data,omitempty" tf:"data,omitempty"`
 
-	// Column family name
+	// (String) Column name.
+	// Column family name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type FamilyParameters struct {
 
+	// (String) Data codec (acceptable values: off, lz4).
 	// Data codec (acceptable values: off, lz4).
 	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression" tf:"compression,omitempty"`
 
+	// (String) Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
 	// Type of storage device for column data in this group (acceptable values: ssd, rot (from HDD spindle rotation)).
 	// +kubebuilder:validation:Optional
 	Data *string `json:"data" tf:"data,omitempty"`
 
-	// Column family name
+	// (String) Column name.
+	// Column family name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PartitionAtKeysInitParameters struct {
+
+	// (List of String)
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 }
 
 type PartitionAtKeysObservation struct {
+
+	// (List of String)
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 }
 
 type PartitionAtKeysParameters struct {
 
+	// (List of String)
 	// +kubebuilder:validation:Optional
 	Keys []*string `json:"keys" tf:"keys,omitempty"`
 }
 
 type PartitioningSettingsInitParameters struct {
+
+	// (Boolean)
 	AutoPartitioningByLoad *bool `json:"autoPartitioningByLoad,omitempty" tf:"auto_partitioning_by_load,omitempty"`
 
+	// (Boolean)
 	AutoPartitioningBySizeEnabled *bool `json:"autoPartitioningBySizeEnabled,omitempty" tf:"auto_partitioning_by_size_enabled,omitempty"`
 
+	// (Number)
 	AutoPartitioningMaxPartitionsCount *float64 `json:"autoPartitioningMaxPartitionsCount,omitempty" tf:"auto_partitioning_max_partitions_count,omitempty"`
 
+	// (Number)
 	AutoPartitioningMinPartitionsCount *float64 `json:"autoPartitioningMinPartitionsCount,omitempty" tf:"auto_partitioning_min_partitions_count,omitempty"`
 
+	// (Number)
 	AutoPartitioningPartitionSizeMb *float64 `json:"autoPartitioningPartitionSizeMb,omitempty" tf:"auto_partitioning_partition_size_mb,omitempty"`
 
+	// (Block List) (see below for nested schema)
 	PartitionAtKeys []PartitionAtKeysInitParameters `json:"partitionAtKeys,omitempty" tf:"partition_at_keys,omitempty"`
 
+	// (List of String) Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+	// Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+	PartitionBy []*string `json:"partitionBy,omitempty" tf:"partition_by,omitempty"`
+
+	// (Number)
 	UniformPartitions *float64 `json:"uniformPartitions,omitempty" tf:"uniform_partitions,omitempty"`
 }
 
 type PartitioningSettingsObservation struct {
+
+	// (Boolean)
 	AutoPartitioningByLoad *bool `json:"autoPartitioningByLoad,omitempty" tf:"auto_partitioning_by_load,omitempty"`
 
+	// (Boolean)
 	AutoPartitioningBySizeEnabled *bool `json:"autoPartitioningBySizeEnabled,omitempty" tf:"auto_partitioning_by_size_enabled,omitempty"`
 
+	// (Number)
 	AutoPartitioningMaxPartitionsCount *float64 `json:"autoPartitioningMaxPartitionsCount,omitempty" tf:"auto_partitioning_max_partitions_count,omitempty"`
 
+	// (Number)
 	AutoPartitioningMinPartitionsCount *float64 `json:"autoPartitioningMinPartitionsCount,omitempty" tf:"auto_partitioning_min_partitions_count,omitempty"`
 
+	// (Number)
 	AutoPartitioningPartitionSizeMb *float64 `json:"autoPartitioningPartitionSizeMb,omitempty" tf:"auto_partitioning_partition_size_mb,omitempty"`
 
+	// (Block List) (see below for nested schema)
 	PartitionAtKeys []PartitionAtKeysObservation `json:"partitionAtKeys,omitempty" tf:"partition_at_keys,omitempty"`
 
+	// (List of String) Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+	// Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+	PartitionBy []*string `json:"partitionBy,omitempty" tf:"partition_by,omitempty"`
+
+	// (Number)
 	UniformPartitions *float64 `json:"uniformPartitions,omitempty" tf:"uniform_partitions,omitempty"`
 }
 
 type PartitioningSettingsParameters struct {
 
+	// (Boolean)
 	// +kubebuilder:validation:Optional
 	AutoPartitioningByLoad *bool `json:"autoPartitioningByLoad,omitempty" tf:"auto_partitioning_by_load,omitempty"`
 
+	// (Boolean)
 	// +kubebuilder:validation:Optional
 	AutoPartitioningBySizeEnabled *bool `json:"autoPartitioningBySizeEnabled,omitempty" tf:"auto_partitioning_by_size_enabled,omitempty"`
 
+	// (Number)
 	// +kubebuilder:validation:Optional
 	AutoPartitioningMaxPartitionsCount *float64 `json:"autoPartitioningMaxPartitionsCount,omitempty" tf:"auto_partitioning_max_partitions_count,omitempty"`
 
+	// (Number)
 	// +kubebuilder:validation:Optional
 	AutoPartitioningMinPartitionsCount *float64 `json:"autoPartitioningMinPartitionsCount,omitempty" tf:"auto_partitioning_min_partitions_count,omitempty"`
 
+	// (Number)
 	// +kubebuilder:validation:Optional
 	AutoPartitioningPartitionSizeMb *float64 `json:"autoPartitioningPartitionSizeMb,omitempty" tf:"auto_partitioning_partition_size_mb,omitempty"`
 
+	// (Block List) (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	PartitionAtKeys []PartitionAtKeysParameters `json:"partitionAtKeys,omitempty" tf:"partition_at_keys,omitempty"`
 
+	// (List of String) Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+	// Partitioning keys constitute a subset of the table's primary keys. If not set, primary keys will be used.
+	// +kubebuilder:validation:Optional
+	PartitionBy []*string `json:"partitionBy,omitempty" tf:"partition_by,omitempty"`
+
+	// (Number)
 	// +kubebuilder:validation:Optional
 	UniformPartitions *float64 `json:"uniformPartitions,omitempty" tf:"uniform_partitions,omitempty"`
 }
 
 type TTLInitParameters struct {
 
-	// Column name for TTL
+	// (String) Column name for TTL.
+	// Column name for TTL.
 	ColumnName *string `json:"columnName,omitempty" tf:"column_name,omitempty"`
 
-	// Interval in the ISO 8601 format
+	// (String) Interval in the ISO 8601 format.
+	// Interval in the ISO 8601 format.
 	ExpireInterval *string `json:"expireInterval,omitempty" tf:"expire_interval,omitempty"`
 
+	// (String)
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type TTLObservation struct {
 
-	// Column name for TTL
+	// (String) Column name for TTL.
+	// Column name for TTL.
 	ColumnName *string `json:"columnName,omitempty" tf:"column_name,omitempty"`
 
-	// Interval in the ISO 8601 format
+	// (String) Interval in the ISO 8601 format.
+	// Interval in the ISO 8601 format.
 	ExpireInterval *string `json:"expireInterval,omitempty" tf:"expire_interval,omitempty"`
 
+	// (String)
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type TTLParameters struct {
 
-	// Column name for TTL
+	// (String) Column name for TTL.
+	// Column name for TTL.
 	// +kubebuilder:validation:Optional
 	ColumnName *string `json:"columnName" tf:"column_name,omitempty"`
 
-	// Interval in the ISO 8601 format
+	// (String) Interval in the ISO 8601 format.
+	// Interval in the ISO 8601 format.
 	// +kubebuilder:validation:Optional
 	ExpireInterval *string `json:"expireInterval" tf:"expire_interval,omitempty"`
 
+	// (String)
 	// +kubebuilder:validation:Optional
 	Unit *string `json:"unit,omitempty" tf:"unit,omitempty"`
 }
 
 type TableInitParameters struct {
 
+	// (Map of String) A map of table attributes.
 	// A map of table attributes.
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
+	// (Block Set, Min: 1) A list of column configuration options. (see below for nested schema)
 	// A list of column configuration options.
-	// The structure is documented below.
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
+	// (String) Connection string for database.
 	// Connection string for database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/ydb/v1alpha1.DatabaseServerless
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
@@ -226,83 +299,104 @@ type TableInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
-	// A list of column group configuration options.
-	// The structure is documented below.
+	// (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+	// A list of column group configuration options. The `family` block may be used to group columns into [families](https://ydb.tech/en/docs/yql/reference/syntax/create_table#column-family) to set shared parameters for them.
 	Family []FamilyInitParameters `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Use the Bloom filter for the primary key
+	// (Boolean) Use the Bloom filter for the primary key.
+	// Use the Bloom filter for the primary key.
 	KeyBloomFilter *bool `json:"keyBloomFilter,omitempty" tf:"key_bloom_filter,omitempty"`
 
-	// Table partiotioning settings
-	// The structure is documented below.
+	// (Block List, Max: 1) Table partitioning settings. (see below for nested schema)
+	// Table partitioning settings.
 	PartitioningSettings []PartitioningSettingsInitParameters `json:"partitioningSettings,omitempty" tf:"partitioning_settings,omitempty"`
 
+	// (String) Table path.
 	// Table path.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// A list of table columns to be uased as primary key.
+	// (List of String) A list of table columns to be used as primary key.
+	// A list of table columns to be used as primary key.
 	PrimaryKey []*string `json:"primaryKey,omitempty" tf:"primary_key,omitempty"`
 
-	// Read replication settings
+	// (String) Read replication settings.
+	// Read replication settings.
 	ReadReplicasSettings *string `json:"readReplicasSettings,omitempty" tf:"read_replicas_settings,omitempty"`
 
-	// ttl		TTL settings
-	// The structure is documented below.
+	// oriented tables. Omit for row-oriented tables (default).
+	// Table storage type. Set to `column` for column-oriented tables. Omit for row-oriented tables (default).
+	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+
+	// to-live for rows. (see below for nested schema)
+	// The `TTL` block supports allow you to create a special column type, [TTL column](https://ydb.tech/en/docs/concepts/ttl), whose values determine the time-to-live for rows.
 	TTL []TTLInitParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type TableObservation struct {
 
+	// (Map of String) A map of table attributes.
 	// A map of table attributes.
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
+	// (Block Set, Min: 1) A list of column configuration options. (see below for nested schema)
 	// A list of column configuration options.
-	// The structure is documented below.
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
 
+	// (String) Connection string for database.
 	// Connection string for database.
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
-	// A list of column group configuration options.
-	// The structure is documented below.
+	// (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+	// A list of column group configuration options. The `family` block may be used to group columns into [families](https://ydb.tech/en/docs/yql/reference/syntax/create_table#column-family) to set shared parameters for them.
 	Family []FamilyObservation `json:"family,omitempty" tf:"family,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Use the Bloom filter for the primary key
+	// (Boolean) Use the Bloom filter for the primary key.
+	// Use the Bloom filter for the primary key.
 	KeyBloomFilter *bool `json:"keyBloomFilter,omitempty" tf:"key_bloom_filter,omitempty"`
 
-	// Table partiotioning settings
-	// The structure is documented below.
+	// (Block List, Max: 1) Table partitioning settings. (see below for nested schema)
+	// Table partitioning settings.
 	PartitioningSettings []PartitioningSettingsObservation `json:"partitioningSettings,omitempty" tf:"partitioning_settings,omitempty"`
 
+	// (String) Table path.
 	// Table path.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// A list of table columns to be uased as primary key.
+	// (List of String) A list of table columns to be used as primary key.
+	// A list of table columns to be used as primary key.
 	PrimaryKey []*string `json:"primaryKey,omitempty" tf:"primary_key,omitempty"`
 
-	// Read replication settings
+	// (String) Read replication settings.
+	// Read replication settings.
 	ReadReplicasSettings *string `json:"readReplicasSettings,omitempty" tf:"read_replicas_settings,omitempty"`
 
-	// ttl		TTL settings
-	// The structure is documented below.
+	// oriented tables. Omit for row-oriented tables (default).
+	// Table storage type. Set to `column` for column-oriented tables. Omit for row-oriented tables (default).
+	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+
+	// to-live for rows. (see below for nested schema)
+	// The `TTL` block supports allow you to create a special column type, [TTL column](https://ydb.tech/en/docs/concepts/ttl), whose values determine the time-to-live for rows.
 	TTL []TTLObservation `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }
 
 type TableParameters struct {
 
+	// (Map of String) A map of table attributes.
 	// A map of table attributes.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Attributes map[string]*string `json:"attributes,omitempty" tf:"attributes,omitempty"`
 
+	// (Block Set, Min: 1) A list of column configuration options. (see below for nested schema)
 	// A list of column configuration options.
-	// The structure is documented below.
 	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
 
+	// (String) Connection string for database.
 	// Connection string for database.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/ydb/v1alpha1.DatabaseServerless
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/v2/pkg/resource.ExtractParamPath("ydb_full_endpoint",true)
@@ -317,34 +411,43 @@ type TableParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
-	// A list of column group configuration options.
-	// The structure is documented below.
+	// (Block List) A list of column group configuration options. The family block may be used to group columns into families to set shared parameters for them. (see below for nested schema)
+	// A list of column group configuration options. The `family` block may be used to group columns into [families](https://ydb.tech/en/docs/yql/reference/syntax/create_table#column-family) to set shared parameters for them.
 	// +kubebuilder:validation:Optional
 	Family []FamilyParameters `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Use the Bloom filter for the primary key
+	// (Boolean) Use the Bloom filter for the primary key.
+	// Use the Bloom filter for the primary key.
 	// +kubebuilder:validation:Optional
 	KeyBloomFilter *bool `json:"keyBloomFilter,omitempty" tf:"key_bloom_filter,omitempty"`
 
-	// Table partiotioning settings
-	// The structure is documented below.
+	// (Block List, Max: 1) Table partitioning settings. (see below for nested schema)
+	// Table partitioning settings.
 	// +kubebuilder:validation:Optional
 	PartitioningSettings []PartitioningSettingsParameters `json:"partitioningSettings,omitempty" tf:"partitioning_settings,omitempty"`
 
+	// (String) Table path.
 	// Table path.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// A list of table columns to be uased as primary key.
+	// (List of String) A list of table columns to be used as primary key.
+	// A list of table columns to be used as primary key.
 	// +kubebuilder:validation:Optional
 	PrimaryKey []*string `json:"primaryKey,omitempty" tf:"primary_key,omitempty"`
 
-	// Read replication settings
+	// (String) Read replication settings.
+	// Read replication settings.
 	// +kubebuilder:validation:Optional
 	ReadReplicasSettings *string `json:"readReplicasSettings,omitempty" tf:"read_replicas_settings,omitempty"`
 
-	// ttl		TTL settings
-	// The structure is documented below.
+	// oriented tables. Omit for row-oriented tables (default).
+	// Table storage type. Set to `column` for column-oriented tables. Omit for row-oriented tables (default).
+	// +kubebuilder:validation:Optional
+	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+
+	// to-live for rows. (see below for nested schema)
+	// The `TTL` block supports allow you to create a special column type, [TTL column](https://ydb.tech/en/docs/concepts/ttl), whose values determine the time-to-live for rows.
 	// +kubebuilder:validation:Optional
 	TTL []TTLParameters `json:"ttl,omitempty" tf:"ttl,omitempty"`
 }

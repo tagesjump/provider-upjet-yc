@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -93,6 +94,182 @@ func (mg *GroupMembership) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.InitProvider.GroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.GroupIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this IdpApplicationOauthApplicationAssignment.
+func (mg *IdpApplicationOauthApplicationAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
+		Extract:      resource.ExtractParamPath("application_id", false),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ApplicationIDRef,
+		Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
+		To: reference.To{
+			List:    &IdpApplicationOauthApplicationList{},
+			Managed: &IdpApplicationOauthApplication{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationID")
+	}
+	mg.Spec.ForProvider.ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApplicationIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
+		Extract:      resource.ExtractParamPath("application_id", false),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ApplicationIDRef,
+		Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
+		To: reference.To{
+			List:    &IdpApplicationOauthApplicationList{},
+			Managed: &IdpApplicationOauthApplication{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationID")
+	}
+	mg.Spec.InitProvider.ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this IdpApplicationSAMLApplicationAssignment.
+func (mg *IdpApplicationSAMLApplicationAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ApplicationID),
+		Extract:      resource.ExtractParamPath("application_id", false),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.ApplicationIDRef,
+		Selector:     mg.Spec.ForProvider.ApplicationIDSelector,
+		To: reference.To{
+			List:    &IdpApplicationSAMLApplicationList{},
+			Managed: &IdpApplicationSAMLApplication{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ApplicationID")
+	}
+	mg.Spec.ForProvider.ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ApplicationIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationID),
+		Extract:      resource.ExtractParamPath("application_id", false),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.ApplicationIDRef,
+		Selector:     mg.Spec.InitProvider.ApplicationIDSelector,
+		To: reference.To{
+			List:    &IdpApplicationSAMLApplicationList{},
+			Managed: &IdpApplicationSAMLApplication{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationID")
+	}
+	mg.Spec.InitProvider.ApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this IdpUser.
+func (mg *IdpUser) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.UserpoolID),
+		Extract:      resource.ExtractParamPath("userpool_id", false),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.UserpoolIDRef,
+		Selector:     mg.Spec.ForProvider.UserpoolIDSelector,
+		To: reference.To{
+			List:    &IdpUserpoolList{},
+			Managed: &IdpUserpool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.UserpoolID")
+	}
+	mg.Spec.ForProvider.UserpoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.UserpoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.UserpoolID),
+		Extract:      resource.ExtractParamPath("userpool_id", false),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.UserpoolIDRef,
+		Selector:     mg.Spec.InitProvider.UserpoolIDSelector,
+		To: reference.To{
+			List:    &IdpUserpoolList{},
+			Managed: &IdpUserpool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.UserpoolID")
+	}
+	mg.Spec.InitProvider.UserpoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserpoolIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MfaEnforcementAudience.
+func (mg *MfaEnforcementAudience) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MfaEnforcementID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.MfaEnforcementIDRef,
+		Selector:     mg.Spec.ForProvider.MfaEnforcementIDSelector,
+		To: reference.To{
+			List:    &MfaEnforcementList{},
+			Managed: &MfaEnforcement{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.MfaEnforcementID")
+	}
+	mg.Spec.ForProvider.MfaEnforcementID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.MfaEnforcementIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MfaEnforcementID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.MfaEnforcementIDRef,
+		Selector:     mg.Spec.InitProvider.MfaEnforcementIDSelector,
+		To: reference.To{
+			List:    &MfaEnforcementList{},
+			Managed: &MfaEnforcement{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MfaEnforcementID")
+	}
+	mg.Spec.InitProvider.MfaEnforcementID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MfaEnforcementIDRef = rsp.ResolvedReference
 
 	return nil
 }

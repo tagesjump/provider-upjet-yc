@@ -4,14 +4,14 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/mongodbuser
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_user
+  name: my-user
   namespace: upbound-system
 spec:
   forProvider:
     clusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: foo
+        testing.upbound.io/example-name: my_cluster
     name: alice
     passwordSecretRef:
       key: example-key
@@ -25,8 +25,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: mdb/v1alpha1/mongodbuser
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
   namespace: upbound-system
 spec:
   forProvider:
@@ -37,7 +37,7 @@ spec:
     - subnetIdSelector:
         matchLabels:
           testing.upbound.io/example-name: foo
-      zoneId: ru-central1-a
+      zoneId: ru-central1-d
     name: test
     networkIdSelector:
       matchLabels:
@@ -79,4 +79,4 @@ spec:
         testing.upbound.io/example-name: foo
     v4CidrBlocks:
     - 10.5.0.0/24
-    zone: ru-central1-a
+    zone: ru-central1-d

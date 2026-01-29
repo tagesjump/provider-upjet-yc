@@ -5,6 +5,7 @@ package v1alpha1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
+	resource "github.com/crossplane/upjet/v2/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1alpha1 "github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -50,6 +51,94 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.FolderID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FolderIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CertificateIAMBinding.
+func (mg *CertificateIAMBinding) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.CertificateIDRef,
+		Selector:     mg.Spec.ForProvider.CertificateIDSelector,
+		To: reference.To{
+			List:    &CertificateList{},
+			Managed: &Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CertificateID")
+	}
+	mg.Spec.ForProvider.CertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CertificateIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.CertificateIDRef,
+		Selector:     mg.Spec.InitProvider.CertificateIDSelector,
+		To: reference.To{
+			List:    &CertificateList{},
+			Managed: &Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateID")
+	}
+	mg.Spec.InitProvider.CertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CertificateIAMMember.
+func (mg *CertificateIAMMember) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CertificateID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.ForProvider.CertificateIDRef,
+		Selector:     mg.Spec.ForProvider.CertificateIDSelector,
+		To: reference.To{
+			List:    &CertificateList{},
+			Managed: &Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CertificateID")
+	}
+	mg.Spec.ForProvider.CertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CertificateIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CertificateID),
+		Extract:      resource.ExtractResourceID(),
+		Namespace:    mg.GetNamespace(),
+		Reference:    mg.Spec.InitProvider.CertificateIDRef,
+		Selector:     mg.Spec.InitProvider.CertificateIDSelector,
+		To: reference.To{
+			List:    &CertificateList{},
+			Managed: &Certificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CertificateID")
+	}
+	mg.Spec.InitProvider.CertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CertificateIDRef = rsp.ResolvedReference
 
 	return nil
 }

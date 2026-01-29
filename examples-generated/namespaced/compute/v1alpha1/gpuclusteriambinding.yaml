@@ -9,7 +9,7 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    gpuClusterId: ${data.yandex_compute_gpu_cluster.cluster1.id}
+    gpuClusterId: ${data.yandex_compute_gpu_cluster.gpu1.id}
     members:
     - userAccount:some_user_id
     role: editor
@@ -22,12 +22,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1alpha1/gpuclusteriambinding
   labels:
-    testing.upbound.io/example-name: cluster1
-  name: cluster1
+    testing.upbound.io/example-name: gpu1
+  name: gpu1
   namespace: upbound-system
 spec:
   forProvider:
-    interconnectType: infiniband
+    interconnectType: INFINIBAND
     labels:
       environment: test
     name: gpu-cluster-name

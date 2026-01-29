@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: vpc/v1alpha1/gateway
   labels:
-    testing.upbound.io/example-name: default
-  name: default
+    testing.upbound.io/example-name: my_gw
+  name: my-gw
   namespace: upbound-system
 spec:
   forProvider:

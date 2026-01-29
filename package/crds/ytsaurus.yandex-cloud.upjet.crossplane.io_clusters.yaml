@@ -1,0 +1,1460 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.18.0
+  name: clusters.ytsaurus.yandex-cloud.upjet.crossplane.io
+spec:
+  group: ytsaurus.yandex-cloud.upjet.crossplane.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - yandex-cloud
+    kind: Cluster
+    listKind: ClusterList
+    plural: clusters
+    singular: cluster
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        description: Cluster is the Schema for the Clusters API. Allows management
+          of a YTsaurus cluster.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ClusterSpec defines the desired state of Cluster
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  cidrBlocksWhitelist:
+                    description: (Attributes) CIDRs whitelist. (see below for nested
+                      schema)
+                    properties:
+                      v4CidrBlocks:
+                        description: |-
+                          (List of String) IPv4 CIDR blocks.
+                          IPv4 CIDR blocks.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  clusterId:
+                    description: |-
+                      (String) ID of the cluster to return.
+                      ID of the cluster to return.
+                    type: string
+                  description:
+                    description: |-
+                      (String) Description of the cluster.
+                      Description of the cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      (String) ID of the folder that the cluster belongs to.
+                      ID of the folder that the cluster belongs to.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) Cluster labels as key:value pairs.
+                      Cluster labels as `key:value` pairs.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  name:
+                    description: |-
+                      (String) Name of the cluster.
+                      The name is unique within the folder.
+                      Name of the cluster.
+                      The name is unique within the folder.
+                    type: string
+                  securityGroupIds:
+                    description: |-
+                      (List of String) Network interfaces security groups.
+                      Network interfaces security groups.
+                    items:
+                      type: string
+                    type: array
+                  spec:
+                    description: (Attributes) Cluster specification. (see below for
+                      nested schema)
+                    properties:
+                      clientLogging:
+                        description: (Attributes) Client Cloud logging configuration.
+                          (see below for nested schema)
+                        properties:
+                          auditLogsEnabled:
+                            description: |-
+                              (Boolean) Enable audit logs.
+                              Enable audit logs.
+                            type: boolean
+                          folderId:
+                            description: |-
+                              (String) ID of the folder that the cluster belongs to.
+                              ID of cloud logging folder. Used default loging group.
+                            type: string
+                          logGroupId:
+                            description: |-
+                              (String) ID of cloud logging group.
+                              ID of cloud logging group.
+                            type: string
+                          serviceAccountId:
+                            description: |-
+                              (String) ID of Service account used for write logs.
+                              ID of Service account used for write logs.
+                            type: string
+                        type: object
+                      compute:
+                        description: (Attributes List) Cluster exec nodes configuration.
+                          (see below for nested schema)
+                        items:
+                          properties:
+                            disks:
+                              description: (Attributes List) Configuration of exec
+                                node strorage. (see below for nested schema)
+                              items:
+                                properties:
+                                  locations:
+                                    description: |-
+                                      (List of String) Locations on a disk.
+                                      Locations on a disk.
+                                    items:
+                                      type: string
+                                    type: array
+                                  sizeGb:
+                                    description: |-
+                                      (Number) Size of a single disk in GB.
+                                      Size of a single disk in GB.
+                                    type: number
+                                  type:
+                                    description: |-
+                                      (String) Type of a disk.
+                                      Type of a disk.
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: |-
+                                (String) Name of the cluster.
+                                The name is unique within the folder.
+                                Name for exec pool.
+                              type: string
+                            preset:
+                              description: |-
+                                (String) VM configuration preset name.
+                                VM configuration preset name.
+                              type: string
+                            scalePolicy:
+                              description: (Attributes) Exec nodes scaling policy.
+                                (see below for nested schema)
+                              properties:
+                                auto:
+                                  description: (Attributes) Scale policy that can
+                                    adjust number of running exec nodes within specified
+                                    range based on some criteria. (see below for nested
+                                    schema)
+                                  properties:
+                                    maxSize:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                    minSize:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                  type: object
+                                fixed:
+                                  description: (Attributes) Scale policy that doesn't
+                                    change number of running exec nodes over time.
+                                    (see below for nested schema)
+                                  properties:
+                                    size:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                  type: object
+                              type: object
+                          type: object
+                        type: array
+                      cron:
+                        description: (Attributes) Cluster regular processing settings.
+                          (see below for nested schema)
+                        properties:
+                          clearTmp:
+                            description: account cleaning settings. (see below for
+                              nested schema)
+                            properties:
+                              accountUsageRatioSavePerOwner:
+                                description: |-
+                                  (Number) Per account max space usage ratio.
+                                  Per account max space usage ratio.
+                                type: number
+                              accountUsageRatioSaveTotal:
+                                description: |-
+                                  (Number) Total max space usage ratio.
+                                  Total max space usage ratio.
+                                type: number
+                              interval:
+                                description: |-
+                                  (String) Script starting interval.
+                                  Script starting interval.
+                                type: string
+                              maxDirNodeCount:
+                                description: |-
+                                  (Number) Max nodes in every directory.
+                                  Max nodes in every directory.
+                                type: number
+                            type: object
+                        type: object
+                      flavor:
+                        description: |-
+                          (String) Cluster flavor (type).
+                          Cluster flavor (type).
+                        type: string
+                      odin:
+                        description: (Attributes) Odin configuration. (see below for
+                          nested schema)
+                        properties:
+                          checksTtl:
+                            description: |-
+                              (String) TTL of Odin check samples.
+                              TTL of Odin check samples.
+                            type: string
+                        type: object
+                      proxy:
+                        description: (Attributes) Cluster proxies configuration. (see
+                          below for nested schema)
+                        properties:
+                          http:
+                            description: (Attributes) Configuration of HTTP proxies.
+                              (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of HTTP proxies.
+                                type: number
+                            type: object
+                          rpc:
+                            description: (Attributes) Configuration of rpc proxies.
+                              (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of RPC proxies.
+                                type: number
+                            type: object
+                        type: object
+                      storage:
+                        description: (Attributes) Cluster storage configuration. (see
+                          below for nested schema)
+                        properties:
+                          hdd:
+                            description: (Attributes) Configuration of cluster HDD
+                              strorage. (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of HDD disks.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of a single disk in GB.
+                                  Size of a single HDD disk in GB.
+                                type: number
+                            type: object
+                          ssd:
+                            description: (Attributes) Configuration of cluster SSD
+                              strorage (see below for nested schema)
+                            properties:
+                              changelogs:
+                                description: (Attributes) Configuration of dynamic
+                                  table changelogs. (see below for nested schema)
+                                properties:
+                                  sizeGb:
+                                    description: |-
+                                      (Number) Size of a single disk in GB.
+                                      package: yandex.cloud.ytsaurus.v1
+                                      filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                    type: number
+                                type: object
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of SSD disks.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of a single disk in GB.
+                                  Size of a single SSD disk in GB.
+                                type: number
+                              type:
+                                description: |-
+                                  (String) Type of a disk.
+                                  Type of a SSD disk.
+                                type: string
+                            type: object
+                        type: object
+                      tablet:
+                        description: (Attributes) Cluster tablet nodes configuration.
+                          (see below for nested schema)
+                        properties:
+                          count:
+                            description: |-
+                              (Number) Total amount of HTTP proxies.
+                              Total amount of tablet nodes.
+                            type: number
+                          preset:
+                            description: |-
+                              (String) VM configuration preset name.
+                              VM configuration preset name.
+                            type: string
+                        type: object
+                    type: object
+                  subnetId:
+                    description: |-
+                      (String) ID of the subnet where the cluster resides.
+                      ID of the subnet where the cluster resides.
+                    type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  zoneId:
+                    description: |-
+                      (String) ID of the availability zone where the cluster resides.
+                      ID of the availability zone where the cluster resides.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  cidrBlocksWhitelist:
+                    description: (Attributes) CIDRs whitelist. (see below for nested
+                      schema)
+                    properties:
+                      v4CidrBlocks:
+                        description: |-
+                          (List of String) IPv4 CIDR blocks.
+                          IPv4 CIDR blocks.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  clusterId:
+                    description: |-
+                      (String) ID of the cluster to return.
+                      ID of the cluster to return.
+                    type: string
+                  description:
+                    description: |-
+                      (String) Description of the cluster.
+                      Description of the cluster.
+                    type: string
+                  folderId:
+                    description: |-
+                      (String) ID of the folder that the cluster belongs to.
+                      ID of the folder that the cluster belongs to.
+                    type: string
+                  folderIdRef:
+                    description: Reference to a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  folderIdSelector:
+                    description: Selector for a Folder in resourcemanager to populate
+                      folderId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) Cluster labels as key:value pairs.
+                      Cluster labels as `key:value` pairs.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  name:
+                    description: |-
+                      (String) Name of the cluster.
+                      The name is unique within the folder.
+                      Name of the cluster.
+                      The name is unique within the folder.
+                    type: string
+                  securityGroupIds:
+                    description: |-
+                      (List of String) Network interfaces security groups.
+                      Network interfaces security groups.
+                    items:
+                      type: string
+                    type: array
+                  spec:
+                    description: (Attributes) Cluster specification. (see below for
+                      nested schema)
+                    properties:
+                      clientLogging:
+                        description: (Attributes) Client Cloud logging configuration.
+                          (see below for nested schema)
+                        properties:
+                          auditLogsEnabled:
+                            description: |-
+                              (Boolean) Enable audit logs.
+                              Enable audit logs.
+                            type: boolean
+                          folderId:
+                            description: |-
+                              (String) ID of the folder that the cluster belongs to.
+                              ID of cloud logging folder. Used default loging group.
+                            type: string
+                          logGroupId:
+                            description: |-
+                              (String) ID of cloud logging group.
+                              ID of cloud logging group.
+                            type: string
+                          serviceAccountId:
+                            description: |-
+                              (String) ID of Service account used for write logs.
+                              ID of Service account used for write logs.
+                            type: string
+                        type: object
+                      compute:
+                        description: (Attributes List) Cluster exec nodes configuration.
+                          (see below for nested schema)
+                        items:
+                          properties:
+                            disks:
+                              description: (Attributes List) Configuration of exec
+                                node strorage. (see below for nested schema)
+                              items:
+                                properties:
+                                  locations:
+                                    description: |-
+                                      (List of String) Locations on a disk.
+                                      Locations on a disk.
+                                    items:
+                                      type: string
+                                    type: array
+                                  sizeGb:
+                                    description: |-
+                                      (Number) Size of a single disk in GB.
+                                      Size of a single disk in GB.
+                                    type: number
+                                  type:
+                                    description: |-
+                                      (String) Type of a disk.
+                                      Type of a disk.
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: |-
+                                (String) Name of the cluster.
+                                The name is unique within the folder.
+                                Name for exec pool.
+                              type: string
+                            preset:
+                              description: |-
+                                (String) VM configuration preset name.
+                                VM configuration preset name.
+                              type: string
+                            scalePolicy:
+                              description: (Attributes) Exec nodes scaling policy.
+                                (see below for nested schema)
+                              properties:
+                                auto:
+                                  description: (Attributes) Scale policy that can
+                                    adjust number of running exec nodes within specified
+                                    range based on some criteria. (see below for nested
+                                    schema)
+                                  properties:
+                                    maxSize:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                    minSize:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                  type: object
+                                fixed:
+                                  description: (Attributes) Scale policy that doesn't
+                                    change number of running exec nodes over time.
+                                    (see below for nested schema)
+                                  properties:
+                                    size:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                  type: object
+                              type: object
+                          type: object
+                        type: array
+                      cron:
+                        description: (Attributes) Cluster regular processing settings.
+                          (see below for nested schema)
+                        properties:
+                          clearTmp:
+                            description: account cleaning settings. (see below for
+                              nested schema)
+                            properties:
+                              accountUsageRatioSavePerOwner:
+                                description: |-
+                                  (Number) Per account max space usage ratio.
+                                  Per account max space usage ratio.
+                                type: number
+                              accountUsageRatioSaveTotal:
+                                description: |-
+                                  (Number) Total max space usage ratio.
+                                  Total max space usage ratio.
+                                type: number
+                              interval:
+                                description: |-
+                                  (String) Script starting interval.
+                                  Script starting interval.
+                                type: string
+                              maxDirNodeCount:
+                                description: |-
+                                  (Number) Max nodes in every directory.
+                                  Max nodes in every directory.
+                                type: number
+                            type: object
+                        type: object
+                      flavor:
+                        description: |-
+                          (String) Cluster flavor (type).
+                          Cluster flavor (type).
+                        type: string
+                      odin:
+                        description: (Attributes) Odin configuration. (see below for
+                          nested schema)
+                        properties:
+                          checksTtl:
+                            description: |-
+                              (String) TTL of Odin check samples.
+                              TTL of Odin check samples.
+                            type: string
+                        type: object
+                      proxy:
+                        description: (Attributes) Cluster proxies configuration. (see
+                          below for nested schema)
+                        properties:
+                          http:
+                            description: (Attributes) Configuration of HTTP proxies.
+                              (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of HTTP proxies.
+                                type: number
+                            type: object
+                          rpc:
+                            description: (Attributes) Configuration of rpc proxies.
+                              (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of RPC proxies.
+                                type: number
+                            type: object
+                        type: object
+                      storage:
+                        description: (Attributes) Cluster storage configuration. (see
+                          below for nested schema)
+                        properties:
+                          hdd:
+                            description: (Attributes) Configuration of cluster HDD
+                              strorage. (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of HDD disks.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of a single disk in GB.
+                                  Size of a single HDD disk in GB.
+                                type: number
+                            type: object
+                          ssd:
+                            description: (Attributes) Configuration of cluster SSD
+                              strorage (see below for nested schema)
+                            properties:
+                              changelogs:
+                                description: (Attributes) Configuration of dynamic
+                                  table changelogs. (see below for nested schema)
+                                properties:
+                                  sizeGb:
+                                    description: |-
+                                      (Number) Size of a single disk in GB.
+                                      package: yandex.cloud.ytsaurus.v1
+                                      filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                    type: number
+                                type: object
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of SSD disks.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of a single disk in GB.
+                                  Size of a single SSD disk in GB.
+                                type: number
+                              type:
+                                description: |-
+                                  (String) Type of a disk.
+                                  Type of a SSD disk.
+                                type: string
+                            type: object
+                        type: object
+                      tablet:
+                        description: (Attributes) Cluster tablet nodes configuration.
+                          (see below for nested schema)
+                        properties:
+                          count:
+                            description: |-
+                              (Number) Total amount of HTTP proxies.
+                              Total amount of tablet nodes.
+                            type: number
+                          preset:
+                            description: |-
+                              (String) VM configuration preset name.
+                              VM configuration preset name.
+                            type: string
+                        type: object
+                    type: object
+                  subnetId:
+                    description: |-
+                      (String) ID of the subnet where the cluster resides.
+                      ID of the subnet where the cluster resides.
+                    type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  zoneId:
+                    description: |-
+                      (String) ID of the availability zone where the cluster resides.
+                      ID of the availability zone where the cluster resides.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.subnetId is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subnetId)
+                || (has(self.initProvider) && has(self.initProvider.subnetId))'
+            - message: spec.forProvider.zoneId is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.zoneId)
+                || (has(self.initProvider) && has(self.initProvider.zoneId))'
+          status:
+            description: ClusterStatus defines the observed state of Cluster.
+            properties:
+              atProvider:
+                properties:
+                  cidrBlocksWhitelist:
+                    description: (Attributes) CIDRs whitelist. (see below for nested
+                      schema)
+                    properties:
+                      v4CidrBlocks:
+                        description: |-
+                          (List of String) IPv4 CIDR blocks.
+                          IPv4 CIDR blocks.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  clusterId:
+                    description: |-
+                      (String) ID of the cluster to return.
+                      ID of the cluster to return.
+                    type: string
+                  createdAt:
+                    description: |-
+                      (String) Time when the cluster was created.
+                      Time when the cluster was created.
+                    type: string
+                  createdBy:
+                    description: |-
+                      (String) User who created the cluster.
+                      User who created the cluster.
+                    type: string
+                  description:
+                    description: |-
+                      (String) Description of the cluster.
+                      Description of the cluster.
+                    type: string
+                  endpoints:
+                    description: (Attributes) Endpoints of the cluster. (see below
+                      for nested schema)
+                    properties:
+                      externalHttpProxyBalancer:
+                        description: |-
+                          (String) package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                          package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                        type: string
+                      internalHttpProxyAlias:
+                        description: |-
+                          (String) package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                          package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                        type: string
+                      internalRpcProxyAlias:
+                        description: |-
+                          (String) package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                          package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                        type: string
+                      ui:
+                        description: |-
+                          (String) package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                          package: yandex.cloud.ytsaurus.v1
+                          filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                        type: string
+                    type: object
+                  folderId:
+                    description: |-
+                      (String) ID of the folder that the cluster belongs to.
+                      ID of the folder that the cluster belongs to.
+                    type: string
+                  health:
+                    description: |-
+                      (String) Health of the cluster.
+                      Health of the cluster.
+                    type: string
+                  id:
+                    description: (String) ID of the cluster to return.
+                    type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) Cluster labels as key:value pairs.
+                      Cluster labels as `key:value` pairs.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  name:
+                    description: |-
+                      (String) Name of the cluster.
+                      The name is unique within the folder.
+                      Name of the cluster.
+                      The name is unique within the folder.
+                    type: string
+                  securityGroupIds:
+                    description: |-
+                      (List of String) Network interfaces security groups.
+                      Network interfaces security groups.
+                    items:
+                      type: string
+                    type: array
+                  spec:
+                    description: (Attributes) Cluster specification. (see below for
+                      nested schema)
+                    properties:
+                      clientLogging:
+                        description: (Attributes) Client Cloud logging configuration.
+                          (see below for nested schema)
+                        properties:
+                          auditLogsEnabled:
+                            description: |-
+                              (Boolean) Enable audit logs.
+                              Enable audit logs.
+                            type: boolean
+                          folderId:
+                            description: |-
+                              (String) ID of the folder that the cluster belongs to.
+                              ID of cloud logging folder. Used default loging group.
+                            type: string
+                          logGroupId:
+                            description: |-
+                              (String) ID of cloud logging group.
+                              ID of cloud logging group.
+                            type: string
+                          serviceAccountId:
+                            description: |-
+                              (String) ID of Service account used for write logs.
+                              ID of Service account used for write logs.
+                            type: string
+                        type: object
+                      compute:
+                        description: (Attributes List) Cluster exec nodes configuration.
+                          (see below for nested schema)
+                        items:
+                          properties:
+                            disks:
+                              description: (Attributes List) Configuration of exec
+                                node strorage. (see below for nested schema)
+                              items:
+                                properties:
+                                  locations:
+                                    description: |-
+                                      (List of String) Locations on a disk.
+                                      Locations on a disk.
+                                    items:
+                                      type: string
+                                    type: array
+                                  sizeGb:
+                                    description: |-
+                                      (Number) Size of a single disk in GB.
+                                      Size of a single disk in GB.
+                                    type: number
+                                  type:
+                                    description: |-
+                                      (String) Type of a disk.
+                                      Type of a disk.
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: |-
+                                (String) Name of the cluster.
+                                The name is unique within the folder.
+                                Name for exec pool.
+                              type: string
+                            preset:
+                              description: |-
+                                (String) VM configuration preset name.
+                                VM configuration preset name.
+                              type: string
+                            scalePolicy:
+                              description: (Attributes) Exec nodes scaling policy.
+                                (see below for nested schema)
+                              properties:
+                                auto:
+                                  description: (Attributes) Scale policy that can
+                                    adjust number of running exec nodes within specified
+                                    range based on some criteria. (see below for nested
+                                    schema)
+                                  properties:
+                                    maxSize:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                    minSize:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                  type: object
+                                fixed:
+                                  description: (Attributes) Scale policy that doesn't
+                                    change number of running exec nodes over time.
+                                    (see below for nested schema)
+                                  properties:
+                                    size:
+                                      description: |-
+                                        (Number) package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                        package: yandex.cloud.ytsaurus.v1
+                                        filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                      type: number
+                                  type: object
+                              type: object
+                          type: object
+                        type: array
+                      cron:
+                        description: (Attributes) Cluster regular processing settings.
+                          (see below for nested schema)
+                        properties:
+                          clearTmp:
+                            description: account cleaning settings. (see below for
+                              nested schema)
+                            properties:
+                              accountUsageRatioSavePerOwner:
+                                description: |-
+                                  (Number) Per account max space usage ratio.
+                                  Per account max space usage ratio.
+                                type: number
+                              accountUsageRatioSaveTotal:
+                                description: |-
+                                  (Number) Total max space usage ratio.
+                                  Total max space usage ratio.
+                                type: number
+                              interval:
+                                description: |-
+                                  (String) Script starting interval.
+                                  Script starting interval.
+                                type: string
+                              maxDirNodeCount:
+                                description: |-
+                                  (Number) Max nodes in every directory.
+                                  Max nodes in every directory.
+                                type: number
+                            type: object
+                        type: object
+                      flavor:
+                        description: |-
+                          (String) Cluster flavor (type).
+                          Cluster flavor (type).
+                        type: string
+                      odin:
+                        description: (Attributes) Odin configuration. (see below for
+                          nested schema)
+                        properties:
+                          checksTtl:
+                            description: |-
+                              (String) TTL of Odin check samples.
+                              TTL of Odin check samples.
+                            type: string
+                        type: object
+                      proxy:
+                        description: (Attributes) Cluster proxies configuration. (see
+                          below for nested schema)
+                        properties:
+                          http:
+                            description: (Attributes) Configuration of HTTP proxies.
+                              (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of HTTP proxies.
+                                type: number
+                            type: object
+                          rpc:
+                            description: (Attributes) Configuration of rpc proxies.
+                              (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of RPC proxies.
+                                type: number
+                            type: object
+                        type: object
+                      storage:
+                        description: (Attributes) Cluster storage configuration. (see
+                          below for nested schema)
+                        properties:
+                          hdd:
+                            description: (Attributes) Configuration of cluster HDD
+                              strorage. (see below for nested schema)
+                            properties:
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of HDD disks.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of a single disk in GB.
+                                  Size of a single HDD disk in GB.
+                                type: number
+                            type: object
+                          ssd:
+                            description: (Attributes) Configuration of cluster SSD
+                              strorage (see below for nested schema)
+                            properties:
+                              changelogs:
+                                description: (Attributes) Configuration of dynamic
+                                  table changelogs. (see below for nested schema)
+                                properties:
+                                  sizeGb:
+                                    description: |-
+                                      (Number) Size of a single disk in GB.
+                                      package: yandex.cloud.ytsaurus.v1
+                                      filename: yandex/cloud/ytsaurus/v1/cluster.proto
+                                    type: number
+                                type: object
+                              count:
+                                description: |-
+                                  (Number) Total amount of HTTP proxies.
+                                  Total amount of SSD disks.
+                                type: number
+                              sizeGb:
+                                description: |-
+                                  (Number) Size of a single disk in GB.
+                                  Size of a single SSD disk in GB.
+                                type: number
+                              type:
+                                description: |-
+                                  (String) Type of a disk.
+                                  Type of a SSD disk.
+                                type: string
+                            type: object
+                        type: object
+                      tablet:
+                        description: (Attributes) Cluster tablet nodes configuration.
+                          (see below for nested schema)
+                        properties:
+                          count:
+                            description: |-
+                              (Number) Total amount of HTTP proxies.
+                              Total amount of tablet nodes.
+                            type: number
+                          preset:
+                            description: |-
+                              (String) VM configuration preset name.
+                              VM configuration preset name.
+                            type: string
+                        type: object
+                    type: object
+                  status:
+                    description: |-
+                      (String) Status of the cluster.
+                      Status of the cluster.
+                    type: string
+                  subnetId:
+                    description: |-
+                      (String) ID of the subnet where the cluster resides.
+                      ID of the subnet where the cluster resides.
+                    type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
+                  updatedAt:
+                    description: |-
+                      (String) Time when the cluster was last updated.
+                      Time when the cluster was last updated.
+                    type: string
+                  updatedBy:
+                    description: |-
+                      (String) User who last updated the cluster.
+                      User who last updated the cluster.
+                    type: string
+                  zoneId:
+                    description: |-
+                      (String) ID of the availability zone where the cluster resides.
+                      ID of the availability zone where the cluster resides.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

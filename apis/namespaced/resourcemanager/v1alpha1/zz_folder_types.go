@@ -12,7 +12,8 @@ import (
 
 type FolderInitParameters struct {
 
-	// Cloud that the resource belongs to. If value is omitted, the default provider Cloud ID is used.
+	// (String) ID of the cloud that the folder belongs to.
+	// ID of the cloud that the folder belongs to.
 	// +crossplane:generate:reference:type=Cloud
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
@@ -24,40 +25,85 @@ type FolderInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudIDSelector *v1.NamespacedSelector `json:"cloudIdSelector,omitempty" tf:"-"`
 
-	// A description of the Folder.
+	// 256 characters long.
+	// Description of the folder. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A set of key/value label pairs to assign to the Folder.
+	// (String) ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
+	// ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
+	// +crossplane:generate:reference:type=Folder
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.NamespacedReference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Folder.
+	// 63 characters long.
+	// Name of the folder.
+	// The name is unique within the cloud. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Attributes) (see below for nested schema)
+	Timeouts *FolderTimeoutsInitParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
 }
 
 type FolderObservation struct {
 
-	// Cloud that the resource belongs to. If value is omitted, the default provider Cloud ID is used.
+	// (String) ID of the cloud that the folder belongs to.
+	// ID of the cloud that the folder belongs to.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
+	// (String) Creation timestamp.
+	// Creation timestamp.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// A description of the Folder.
+	// 256 characters long.
+	// Description of the folder. 0-256 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
+	// ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// (String) ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Folder.
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Folder.
+	// 63 characters long.
+	// Name of the folder.
+	// The name is unique within the cloud. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (String) Status of the folder.
+	// Status of the folder.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// (Attributes) (see below for nested schema)
+	Timeouts *FolderTimeoutsObservation `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
 }
 
 type FolderParameters struct {
 
-	// Cloud that the resource belongs to. If value is omitted, the default provider Cloud ID is used.
+	// (String) ID of the cloud that the folder belongs to.
+	// ID of the cloud that the folder belongs to.
 	// +crossplane:generate:reference:type=Cloud
 	// +kubebuilder:validation:Optional
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
@@ -70,18 +116,103 @@ type FolderParameters struct {
 	// +kubebuilder:validation:Optional
 	CloudIDSelector *v1.NamespacedSelector `json:"cloudIdSelector,omitempty" tf:"-"`
 
-	// A description of the Folder.
+	// 256 characters long.
+	// Description of the folder. 0-256 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A set of key/value label pairs to assign to the Folder.
+	// (String) ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
+	// ID of the Folder resource to return.
+	// To get the folder ID, use a [FolderService.List] request.
+	// +crossplane:generate:reference:type=Folder
+	// +kubebuilder:validation:Optional
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// Reference to a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDRef *v1.NamespacedReference `json:"folderIdRef,omitempty" tf:"-"`
+
+	// Selector for a Folder to populate folderId.
+	// +kubebuilder:validation:Optional
+	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
+
+	// (Map of String) Resource labels as key:value pairs. Maximum of 64 per resource.
+	// Resource labels as “ key:value “ pairs. Maximum of 64 per resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// The name of the Folder.
+	// 63 characters long.
+	// Name of the folder.
+	// The name is unique within the cloud. 3-63 characters long.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Attributes) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Timeouts *FolderTimeoutsParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+}
+
+type FolderTimeoutsInitParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type FolderTimeoutsObservation struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type FolderTimeoutsParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// +kubebuilder:validation:Optional
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// +kubebuilder:validation:Optional
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
 }
 
 // FolderSpec defines the desired state of Folder
@@ -120,8 +251,9 @@ type FolderStatus struct {
 type Folder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FolderSpec   `json:"spec"`
-	Status            FolderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	Spec   FolderSpec   `json:"spec"`
+	Status FolderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

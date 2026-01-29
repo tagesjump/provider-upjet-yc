@@ -99,6 +99,7 @@ metadata:
 spec:
   forProvider:
     description: service account to manage Dataproc Cluster
+    name: dataproc
 
 ---
 

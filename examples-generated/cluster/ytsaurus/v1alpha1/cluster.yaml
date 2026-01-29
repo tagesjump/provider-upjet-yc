@@ -1,0 +1,41 @@
+apiVersion: ytsaurus.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: ytsaurus/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: my_cluster
+  name: my-cluster
+spec:
+  forProvider:
+    description: my_cluster description
+    name: my-cluster
+    securityGroupIds:
+    - my_security_group_id
+    spec:
+      compute:
+      - disks:
+        - sizeGb: 50
+          type: network-ssd
+        preset: c8-m32
+        scalePolicy:
+          fixed:
+            size: 3
+      proxy:
+        http:
+          count: 1
+        rpc:
+          count: 1
+      storage:
+        hdd:
+          count: 3
+          sizeGb: 100
+        ssd:
+          count: 3
+          sizeGb: 100
+          type: network-ssd
+      tablet:
+        count: 3
+        preset: c8-m16
+    subnetId: my_subnet_id
+    zoneId: ru-central1-a

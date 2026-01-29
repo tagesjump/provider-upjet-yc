@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: CoreBroker is the Schema for the CoreBrokers API. Allows management
-          of a Yandex.Cloud IoT Core Broker.
+          of a Yandex Cloud IoT Core Broker.
         properties:
           apiVersion:
             description: |-
@@ -60,17 +60,22 @@ spec:
               forProvider:
                 properties:
                   certificates:
-                    description: A set of certificate's fingerprints for the IoT Core
-                      Broker
+                    description: |-
+                      (Set of String) A set of certificate's fingerprints for the IoT Core Broker.
+                      A set of certificate's fingerprints for the IoT Core Broker.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   description:
-                    description: Description of the IoT Core Broker
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
-                    description: Folder ID for the IoT Core Broker
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -157,31 +162,43 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the IoT
-                      Core Broker.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging for IoT Core Broker
+                    description: |-
+                      (Block List, Max: 1) Options for logging for IoT Core Broker. (see below for nested schema)
+                      Options for logging for IoT Core Broker.
                     items:
                       properties:
                         disabled:
-                          description: Is logging for broker disabled
+                          description: |-
+                            (Boolean) Is logging for broker disabled.
+                            Is logging for broker disabled.
                           type: boolean
                         folderId:
-                          description: Log entries are written to default log group
-                            for specified folder
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: IoT Core Broker name used to define broker
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                 type: object
               initProvider:
@@ -198,17 +215,22 @@ spec:
                   autoscaler.
                 properties:
                   certificates:
-                    description: A set of certificate's fingerprints for the IoT Core
-                      Broker
+                    description: |-
+                      (Set of String) A set of certificate's fingerprints for the IoT Core Broker.
+                      A set of certificate's fingerprints for the IoT Core Broker.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   description:
-                    description: Description of the IoT Core Broker
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
-                    description: Folder ID for the IoT Core Broker
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -295,31 +317,43 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the IoT
-                      Core Broker.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging for IoT Core Broker
+                    description: |-
+                      (Block List, Max: 1) Options for logging for IoT Core Broker. (see below for nested schema)
+                      Options for logging for IoT Core Broker.
                     items:
                       properties:
                         disabled:
-                          description: Is logging for broker disabled
+                          description: |-
+                            (Boolean) Is logging for broker disabled.
+                            Is logging for broker disabled.
                           type: boolean
                         folderId:
-                          description: Log entries are written to default log group
-                            for specified folder
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: IoT Core Broker name used to define broker
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                 type: object
               managementPolicies:
@@ -391,51 +425,71 @@ spec:
               atProvider:
                 properties:
                   certificates:
-                    description: A set of certificate's fingerprints for the IoT Core
-                      Broker
+                    description: |-
+                      (Set of String) A set of certificate's fingerprints for the IoT Core Broker.
+                      A set of certificate's fingerprints for the IoT Core Broker.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   createdAt:
-                    description: Creation timestamp of the IoT Core Broker
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   description:
-                    description: Description of the IoT Core Broker
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
-                    description: Folder ID for the IoT Core Broker
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the IoT
-                      Core Broker.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging for IoT Core Broker
+                    description: |-
+                      (Block List, Max: 1) Options for logging for IoT Core Broker. (see below for nested schema)
+                      Options for logging for IoT Core Broker.
                     items:
                       properties:
                         disabled:
-                          description: Is logging for broker disabled
+                          description: |-
+                            (Boolean) Is logging for broker disabled.
+                            Is logging for broker disabled.
                           type: boolean
                         folderId:
-                          description: Log entries are written to default log group
-                            for specified folder
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) Log entries are written to specified log group.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: IoT Core Broker name used to define broker
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                 type: object
               conditions:

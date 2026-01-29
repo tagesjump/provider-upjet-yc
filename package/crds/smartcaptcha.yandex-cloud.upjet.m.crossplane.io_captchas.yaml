@@ -34,7 +34,8 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: Captcha is the Schema for the Captchas API. <no value>
+        description: Captcha is the Schema for the Captchas API. Allows management
+          of a Yandex Cloud SmartCaptcha.
         properties:
           apiVersion:
             description: |-
@@ -59,18 +60,43 @@ spec:
               forProvider:
                 properties:
                   allowedSites:
+                    description: |-
+                      (List of String) List of allowed host names, see Domain validation.
+                      List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
                     items:
                       type: string
                     type: array
                   challengeType:
+                    description: |-
+                      (String) Additional task type of the captcha. Possible values:
+                      Additional task type of the captcha. Possible values:
+                      * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
+                      * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
+                      * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
                     type: string
                   cloudId:
+                    description: |-
+                      id is used.
+                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
                     type: string
                   complexity:
+                    description: |-
+                      (String) Complexity of the captcha. Possible values:
+                      Complexity of the captcha. Possible values:
+                      * `EASY` - High chance to pass pre-check and easy advanced challenge.
+                      * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
+                      * `HARD` - Little chance to pass pre-check and hard advanced challenge.
+                      * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
                     type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -155,110 +181,176 @@ spec:
                         type: object
                     type: object
                   name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   overrideVariant:
+                    description: |-
+                      (Block List) List of variants to use in security_rules. (see below for nested schema)
+                      List of variants to use in security_rules.
                     items:
                       properties:
                         challengeType:
+                          description: |-
+                            (String) Additional task type of the captcha. Possible values:
+                            Additional task type of the captcha.
                           type: string
                         complexity:
+                          description: |-
+                            (String) Complexity of the captcha. Possible values:
+                            Complexity of the captcha.
                           type: string
                         description:
+                          description: |-
+                            512 characters long.
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         preCheckType:
+                          description: |-
+                            (String) Basic check type of the captcha.Possible values:
+                            Basic check type of the captcha.
                           type: string
                         uuid:
+                          description: |-
+                            (String) Unique identifier of the variant.
+                            Unique identifier of the variant.
                           type: string
                       type: object
                     type: array
                   preCheckType:
+                    description: |-
+                      (String) Basic check type of the captcha.Possible values:
+                      Basic check type of the captcha.Possible values:
+                      * `CHECKBOX` - User must click the 'I am not a robot' button.
+                      * `SLIDER` - User must move the slider from left to right.
                     type: string
                   securityRule:
+                    description: |-
+                      (Block List) List of security rules. (see below for nested schema)
+                      List of security rules.
                     items:
                       properties:
                         condition:
+                          description: |-
+                            (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                            The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
                           items:
                             properties:
                               headers:
+                                description: (Block List) (see below for nested schema)
                                 items:
                                   properties:
                                     name:
+                                      description: (String) The resource name.
                                       type: string
                                     value:
+                                      description: '(Block List, Min: 1, Max: 1) (see
+                                        below for nested schema)'
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               host:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     hosts:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               sourceIp:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     geoIpMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           locations:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     geoIpNotMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           locations:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           ipRanges:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesNotMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           ipRanges:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
@@ -267,44 +359,65 @@ spec:
                                   type: object
                                 type: array
                               uri:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     path:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                     queries:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           key:
+                                            description: (String)
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
@@ -315,18 +428,36 @@ spec:
                             type: object
                           type: array
                         description:
+                          description: |-
+                            512 characters long.
+                            Description of the rule. 0-512 characters long.
                           type: string
                         name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the rule. The name is unique within the captcha. 1-50 characters long.
                           type: string
                         overrideVariantUuid:
+                          description: |-
+                            (String) Variant UUID to show in case of match the rule. Keep empty to use defaults.
+                            Variant UUID to show in case of match the rule. Keep empty to use defaults.
                           type: string
                         priority:
+                          description: |-
+                            (Number) Priority of the rule. Lower value means higher priority.
+                            Priority of the rule. Lower value means higher priority.
                           type: number
                       type: object
                     type: array
                   styleJson:
+                    description: |-
+                      (String) JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
+                      JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                     type: string
                   turnOffHostnameCheck:
+                    description: |-
+                      (Boolean) Turn off host name check, see Domain validation.
+                      Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
                     type: boolean
                 type: object
               initProvider:
@@ -343,18 +474,43 @@ spec:
                   autoscaler.
                 properties:
                   allowedSites:
+                    description: |-
+                      (List of String) List of allowed host names, see Domain validation.
+                      List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
                     items:
                       type: string
                     type: array
                   challengeType:
+                    description: |-
+                      (String) Additional task type of the captcha. Possible values:
+                      Additional task type of the captcha. Possible values:
+                      * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
+                      * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
+                      * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
                     type: string
                   cloudId:
+                    description: |-
+                      id is used.
+                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
                     type: string
                   complexity:
+                    description: |-
+                      (String) Complexity of the captcha. Possible values:
+                      Complexity of the captcha. Possible values:
+                      * `EASY` - High chance to pass pre-check and easy advanced challenge.
+                      * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
+                      * `HARD` - Little chance to pass pre-check and hard advanced challenge.
+                      * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
                     type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -439,110 +595,176 @@ spec:
                         type: object
                     type: object
                   name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   overrideVariant:
+                    description: |-
+                      (Block List) List of variants to use in security_rules. (see below for nested schema)
+                      List of variants to use in security_rules.
                     items:
                       properties:
                         challengeType:
+                          description: |-
+                            (String) Additional task type of the captcha. Possible values:
+                            Additional task type of the captcha.
                           type: string
                         complexity:
+                          description: |-
+                            (String) Complexity of the captcha. Possible values:
+                            Complexity of the captcha.
                           type: string
                         description:
+                          description: |-
+                            512 characters long.
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         preCheckType:
+                          description: |-
+                            (String) Basic check type of the captcha.Possible values:
+                            Basic check type of the captcha.
                           type: string
                         uuid:
+                          description: |-
+                            (String) Unique identifier of the variant.
+                            Unique identifier of the variant.
                           type: string
                       type: object
                     type: array
                   preCheckType:
+                    description: |-
+                      (String) Basic check type of the captcha.Possible values:
+                      Basic check type of the captcha.Possible values:
+                      * `CHECKBOX` - User must click the 'I am not a robot' button.
+                      * `SLIDER` - User must move the slider from left to right.
                     type: string
                   securityRule:
+                    description: |-
+                      (Block List) List of security rules. (see below for nested schema)
+                      List of security rules.
                     items:
                       properties:
                         condition:
+                          description: |-
+                            (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                            The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
                           items:
                             properties:
                               headers:
+                                description: (Block List) (see below for nested schema)
                                 items:
                                   properties:
                                     name:
+                                      description: (String) The resource name.
                                       type: string
                                     value:
+                                      description: '(Block List, Min: 1, Max: 1) (see
+                                        below for nested schema)'
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               host:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     hosts:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               sourceIp:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     geoIpMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           locations:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     geoIpNotMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           locations:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           ipRanges:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesNotMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           ipRanges:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
@@ -551,44 +773,65 @@ spec:
                                   type: object
                                 type: array
                               uri:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     path:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                     queries:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           key:
+                                            description: (String)
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
@@ -599,18 +842,36 @@ spec:
                             type: object
                           type: array
                         description:
+                          description: |-
+                            512 characters long.
+                            Description of the rule. 0-512 characters long.
                           type: string
                         name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the rule. The name is unique within the captcha. 1-50 characters long.
                           type: string
                         overrideVariantUuid:
+                          description: |-
+                            (String) Variant UUID to show in case of match the rule. Keep empty to use defaults.
+                            Variant UUID to show in case of match the rule. Keep empty to use defaults.
                           type: string
                         priority:
+                          description: |-
+                            (Number) Priority of the rule. Lower value means higher priority.
+                            Priority of the rule. Lower value means higher priority.
                           type: number
                       type: object
                     type: array
                   styleJson:
+                    description: |-
+                      (String) JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
+                      JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                     type: string
                   turnOffHostnameCheck:
+                    description: |-
+                      (Boolean) Turn off host name check, see Domain validation.
+                      Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
                     type: boolean
                 type: object
               managementPolicies:
@@ -677,130 +938,228 @@ spec:
               atProvider:
                 properties:
                   allowedSites:
+                    description: |-
+                      (List of String) List of allowed host names, see Domain validation.
+                      List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
                     items:
                       type: string
                     type: array
                   challengeType:
+                    description: |-
+                      (String) Additional task type of the captcha. Possible values:
+                      Additional task type of the captcha. Possible values:
+                      * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
+                      * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
+                      * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
                     type: string
                   clientKey:
+                    description: |-
+                      (String) Client key of the captcha, see CAPTCHA keys.
+                      Client key of the captcha, see [CAPTCHA keys](https://yandex.cloud/docs/smartcaptcha/concepts/keys).
                     type: string
                   cloudId:
+                    description: |-
+                      id is used.
+                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
                     type: string
                   complexity:
+                    description: |-
+                      (String) Complexity of the captcha. Possible values:
+                      Complexity of the captcha. Possible values:
+                      * `EASY` - High chance to pass pre-check and easy advanced challenge.
+                      * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
+                      * `HARD` - Little chance to pass pre-check and hard advanced challenge.
+                      * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
                     type: string
                   createdAt:
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   deletionProtection:
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   overrideVariant:
+                    description: |-
+                      (Block List) List of variants to use in security_rules. (see below for nested schema)
+                      List of variants to use in security_rules.
                     items:
                       properties:
                         challengeType:
+                          description: |-
+                            (String) Additional task type of the captcha. Possible values:
+                            Additional task type of the captcha.
                           type: string
                         complexity:
+                          description: |-
+                            (String) Complexity of the captcha. Possible values:
+                            Complexity of the captcha.
                           type: string
                         description:
+                          description: |-
+                            512 characters long.
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         preCheckType:
+                          description: |-
+                            (String) Basic check type of the captcha.Possible values:
+                            Basic check type of the captcha.
                           type: string
                         uuid:
+                          description: |-
+                            (String) Unique identifier of the variant.
+                            Unique identifier of the variant.
                           type: string
                       type: object
                     type: array
                   preCheckType:
+                    description: |-
+                      (String) Basic check type of the captcha.Possible values:
+                      Basic check type of the captcha.Possible values:
+                      * `CHECKBOX` - User must click the 'I am not a robot' button.
+                      * `SLIDER` - User must move the slider from left to right.
                     type: string
                   securityRule:
+                    description: |-
+                      (Block List) List of security rules. (see below for nested schema)
+                      List of security rules.
                     items:
                       properties:
                         condition:
+                          description: |-
+                            (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                            The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
                           items:
                             properties:
                               headers:
+                                description: (Block List) (see below for nested schema)
                                 items:
                                   properties:
                                     name:
+                                      description: (String) The resource name.
                                       type: string
                                     value:
+                                      description: '(Block List, Min: 1, Max: 1) (see
+                                        below for nested schema)'
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               host:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     hosts:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               sourceIp:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     geoIpMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           locations:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     geoIpNotMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           locations:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           ipRanges:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesNotMatch:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           ipRanges:
+                                            description: (List of String)
                                             items:
                                               type: string
                                             type: array
@@ -809,44 +1168,65 @@ spec:
                                   type: object
                                 type: array
                               uri:
+                                description: '(Block List, Max: 1) (see below for
+                                  nested schema)'
                                 items:
                                   properties:
                                     path:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           exactMatch:
+                                            description: (String)
                                             type: string
                                           exactNotMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexMatch:
+                                            description: (String)
                                             type: string
                                           pireRegexNotMatch:
+                                            description: (String)
                                             type: string
                                           prefixMatch:
+                                            description: (String)
                                             type: string
                                           prefixNotMatch:
+                                            description: (String)
                                             type: string
                                         type: object
                                       type: array
                                     queries:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           key:
+                                            description: (String)
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
@@ -857,20 +1237,39 @@ spec:
                             type: object
                           type: array
                         description:
+                          description: |-
+                            512 characters long.
+                            Description of the rule. 0-512 characters long.
                           type: string
                         name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the rule. The name is unique within the captcha. 1-50 characters long.
                           type: string
                         overrideVariantUuid:
+                          description: |-
+                            (String) Variant UUID to show in case of match the rule. Keep empty to use defaults.
+                            Variant UUID to show in case of match the rule. Keep empty to use defaults.
                           type: string
                         priority:
+                          description: |-
+                            (Number) Priority of the rule. Lower value means higher priority.
+                            Priority of the rule. Lower value means higher priority.
                           type: number
                       type: object
                     type: array
                   styleJson:
+                    description: |-
+                      (String) JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
+                      JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                     type: string
                   suspend:
+                    description: (Boolean)
                     type: boolean
                   turnOffHostnameCheck:
+                    description: |-
+                      (Boolean) Turn off host name check, see Domain validation.
+                      Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
                     type: boolean
                 type: object
               conditions:

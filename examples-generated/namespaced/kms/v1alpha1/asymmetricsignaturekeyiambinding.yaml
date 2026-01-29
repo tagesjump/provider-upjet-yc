@@ -27,7 +27,4 @@ metadata:
   namespace: upbound-system
 spec:
   forProvider:
-    folderIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
     name: asymmetric-signature-key-name

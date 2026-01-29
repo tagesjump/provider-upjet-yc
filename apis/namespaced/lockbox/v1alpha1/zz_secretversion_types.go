@@ -12,41 +12,50 @@ import (
 
 type CommandInitParameters struct {
 
+	// (List of String) List of arguments to be passed to the script/command.
 	// List of arguments to be passed to the script/command.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// (Map of String) Map of environment variables to set before calling the script/command.
 	// Map of environment variables to set before calling the script/command.
 	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
+	// (String) The path to the script or command to execute.
 	// The path to the script or command to execute.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type CommandObservation struct {
 
+	// (List of String) List of arguments to be passed to the script/command.
 	// List of arguments to be passed to the script/command.
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// (Map of String) Map of environment variables to set before calling the script/command.
 	// Map of environment variables to set before calling the script/command.
 	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
+	// (String) The path to the script or command to execute.
 	// The path to the script or command to execute.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type CommandParameters struct {
 
+	// (List of String) List of arguments to be passed to the script/command.
 	// List of arguments to be passed to the script/command.
 	// +kubebuilder:validation:Optional
 	Args []*string `json:"args,omitempty" tf:"args,omitempty"`
 
+	// (Map of String) Map of environment variables to set before calling the script/command.
 	// Map of environment variables to set before calling the script/command.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Env map[string]*string `json:"env,omitempty" tf:"env,omitempty"`
 
+	// (String) The path to the script or command to execute.
 	// The path to the script or command to execute.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path" tf:"path,omitempty"`
@@ -54,35 +63,43 @@ type CommandParameters struct {
 
 type EntriesInitParameters struct {
 
+	// (Block List, Max: 1) The command that generates the text value of the entry. (see below for nested schema)
 	// The command that generates the text value of the entry.
 	Command []CommandInitParameters `json:"command,omitempty" tf:"command,omitempty"`
 
+	// (String) The key of the entry.
 	// The key of the entry.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
+	// (String, Sensitive) The text value of the entry.
 	// The text value of the entry.
 	TextValueSecretRef *v1.LocalSecretKeySelector `json:"textValueSecretRef,omitempty" tf:"-"`
 }
 
 type EntriesObservation struct {
 
+	// (Block List, Max: 1) The command that generates the text value of the entry. (see below for nested schema)
 	// The command that generates the text value of the entry.
 	Command []CommandObservation `json:"command,omitempty" tf:"command,omitempty"`
 
+	// (String) The key of the entry.
 	// The key of the entry.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type EntriesParameters struct {
 
+	// (Block List, Max: 1) The command that generates the text value of the entry. (see below for nested schema)
 	// The command that generates the text value of the entry.
 	// +kubebuilder:validation:Optional
 	Command []CommandParameters `json:"command,omitempty" tf:"command,omitempty"`
 
+	// (String) The key of the entry.
 	// The key of the entry.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
+	// (String, Sensitive) The text value of the entry.
 	// The text value of the entry.
 	// +kubebuilder:validation:Optional
 	TextValueSecretRef *v1.LocalSecretKeySelector `json:"textValueSecretRef,omitempty" tf:"-"`
@@ -90,12 +107,17 @@ type EntriesParameters struct {
 
 type SecretVersionInitParameters struct {
 
-	// The Yandex Cloud Lockbox secret version description.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// List of entries in the Yandex Cloud Lockbox secret version.
+	// (Block List) List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
+	// List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
+	//
+	// ~> One either `text_value` or `command` is required.
 	Entries []EntriesInitParameters `json:"entries,omitempty" tf:"entries,omitempty"`
 
+	// (String) The Yandex Cloud Lockbox secret ID where to add the version.
 	// The Yandex Cloud Lockbox secret ID where to add the version.
 	// +crossplane:generate:reference:type=Secret
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
@@ -111,28 +133,39 @@ type SecretVersionInitParameters struct {
 
 type SecretVersionObservation struct {
 
-	// The Yandex Cloud Lockbox secret version description.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// List of entries in the Yandex Cloud Lockbox secret version.
+	// (Block List) List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
+	// List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
+	//
+	// ~> One either `text_value` or `command` is required.
 	Entries []EntriesObservation `json:"entries,omitempty" tf:"entries,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// (String) The Yandex Cloud Lockbox secret ID where to add the version.
 	// The Yandex Cloud Lockbox secret ID where to add the version.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 type SecretVersionParameters struct {
 
-	// The Yandex Cloud Lockbox secret version description.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// List of entries in the Yandex Cloud Lockbox secret version.
+	// (Block List) List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
+	// List of entries in the Yandex Cloud Lockbox secret version. Must be omitted for secrets with a payload specification.
+	//
+	// ~> One either `text_value` or `command` is required.
 	// +kubebuilder:validation:Optional
 	Entries []EntriesParameters `json:"entries,omitempty" tf:"entries,omitempty"`
 
+	// (String) The Yandex Cloud Lockbox secret ID where to add the version.
 	// The Yandex Cloud Lockbox secret ID where to add the version.
 	// +crossplane:generate:reference:type=Secret
 	// +kubebuilder:validation:Optional
@@ -183,9 +216,8 @@ type SecretVersionStatus struct {
 type SecretVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.entries) || (has(self.initProvider) && has(self.initProvider.entries))",message="spec.forProvider.entries is a required parameter"
-	Spec   SecretVersionSpec   `json:"spec"`
-	Status SecretVersionStatus `json:"status,omitempty"`
+	Spec              SecretVersionSpec   `json:"spec"`
+	Status            SecretVersionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

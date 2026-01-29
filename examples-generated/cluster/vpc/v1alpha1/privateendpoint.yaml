@@ -1,0 +1,58 @@
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/privateendpoint
+  labels:
+    testing.upbound.io/example-name: my_pe
+  name: my-pe
+spec:
+  forProvider:
+    description: description for private endpoint
+    dnsOptions:
+    - privateDnsRecordsEnabled: true
+    endpointAddress:
+    - subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: lab-subnet-a
+    labels:
+      my-label: my-label-value
+    name: object-storage-private-endpoint
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lab-net
+    objectStorage:
+    - {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/privateendpoint
+  labels:
+    testing.upbound.io/example-name: lab-net
+  name: lab-net
+spec:
+  forProvider:
+    name: lab-network
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: vpc/v1alpha1/privateendpoint
+  labels:
+    testing.upbound.io/example-name: lab-subnet-a
+  name: lab-subnet-a
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: lab-net
+    v4CidrBlocks:
+    - 10.2.0.0/16
+    zone: ru-central1-a

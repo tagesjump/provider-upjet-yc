@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: organizationmanager/v1alpha1/osloginsettings
   labels:
-    testing.upbound.io/example-name: my_os_login_settings
-  name: my-os-login-settings
+    testing.upbound.io/example-name: my_settings
+  name: my-settings
   namespace: upbound-system
 spec:
   forProvider:

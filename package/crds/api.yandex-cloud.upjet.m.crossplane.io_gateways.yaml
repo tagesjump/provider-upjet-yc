@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Gateway is the Schema for the Gateways API. Allows management
-          of a Yandex Cloud API Gateway.
+          of a Yandex API Gateway.
         properties:
           apiVersion:
             description: |-
@@ -60,56 +60,70 @@ spec:
               forProvider:
                 properties:
                   canary:
-                    description: Canary release settings of gateway.
+                    description: |-
+                      (Block List, Max: 1) Canary release settings of gateway. (see below for nested schema)
+                      Canary release settings of gateway.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
-                          description: A set of values for variables in gateway specification.
+                          description: |-
+                            (Map of String) A set of values for variables in gateway specification.
+                            A list of values for variables in gateway specification of canary release.
                           type: object
                           x-kubernetes-map-type: granular
                         weight:
-                          description: Percentage of requests, which will be processed
-                            by canary release.
+                          description: |-
+                            (Number) Percentage of requests, which will be processed by canary release.
+                            Percentage of requests, which will be processed by canary release.
                           type: number
                       type: object
                     type: array
                   connectivity:
-                    description: Gateway connectivity. If specified the gateway will
-                      be attached to specified network.
+                    description: |-
+                      (Block List, Max: 1) Gateway connectivity. If specified the gateway will be attached to specified network. (see below for nested schema)
+                      Gateway connectivity. If specified the gateway will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the gateway will have access to. It's
-                            essential to specify network with subnets in all availability
-                            zones.
+                          description: |-
+                            (String) Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
+                            Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
                           type: string
                       type: object
                     type: array
                   customDomains:
-                    description: Set of custom domains to be attached to Yandex API
-                      Gateway.
+                    description: |-
+                      (Block Set) Set of custom domains to be attached to Yandex Cloud API Gateway. (see below for nested schema)
+                      Set of custom domains to be attached to Yandex Cloud API Gateway.
                     items:
                       properties:
                         certificateId:
+                          description: (String)
                           type: string
                         domainId:
+                          description: (String)
                           type: string
                         fqdn:
+                          description: (String)
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud API Gateway.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   executionTimeout:
-                    description: Execution timeout in seconds for the Yandex Cloud
-                      API Gateway.
+                    description: |-
+                      (String) Execution timeout in seconds for the Yandex Cloud API Gateway.
+                      Execution timeout in seconds for the Yandex Cloud API Gateway.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud API Gateway. If it
-                      is not provided, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -196,41 +210,55 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud API Gateway.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud API Gateway.
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud API Gateway. (see below for nested schema)
+                      Options for logging from Yandex Cloud API Gateway.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from API Gateway disabled
+                          description: |-
+                            (Boolean) Is logging from Yandex Cloud API Gateway disabled.
+                            Is logging from Yandex Cloud API Gateway disabled.
                           type: boolean
                         folderId:
-                          description: Folder ID for the Yandex Cloud API Gateway.
-                            If it is not provided, the default provider folder is
-                            used.
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) ID of the log group for the Yandex Cloud API Gateway.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Yandex Cloud API Gateway name used to define API
-                      Gateway.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   spec:
-                    description: OpenAPI specification for Yandex API Gateway.
+                    description: |-
+                      (String) The OpenAPI specification for Yandex Cloud API Gateway.
+                      The OpenAPI specification for Yandex Cloud API Gateway.
                     type: string
                   variables:
                     additionalProperties:
                       type: string
-                    description: A set of values for variables in gateway specification.
+                    description: |-
+                      (Map of String) A set of values for variables in gateway specification.
+                      A set of values for variables in gateway specification.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -248,56 +276,70 @@ spec:
                   autoscaler.
                 properties:
                   canary:
-                    description: Canary release settings of gateway.
+                    description: |-
+                      (Block List, Max: 1) Canary release settings of gateway. (see below for nested schema)
+                      Canary release settings of gateway.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
-                          description: A set of values for variables in gateway specification.
+                          description: |-
+                            (Map of String) A set of values for variables in gateway specification.
+                            A list of values for variables in gateway specification of canary release.
                           type: object
                           x-kubernetes-map-type: granular
                         weight:
-                          description: Percentage of requests, which will be processed
-                            by canary release.
+                          description: |-
+                            (Number) Percentage of requests, which will be processed by canary release.
+                            Percentage of requests, which will be processed by canary release.
                           type: number
                       type: object
                     type: array
                   connectivity:
-                    description: Gateway connectivity. If specified the gateway will
-                      be attached to specified network.
+                    description: |-
+                      (Block List, Max: 1) Gateway connectivity. If specified the gateway will be attached to specified network. (see below for nested schema)
+                      Gateway connectivity. If specified the gateway will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the gateway will have access to. It's
-                            essential to specify network with subnets in all availability
-                            zones.
+                          description: |-
+                            (String) Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
+                            Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
                           type: string
                       type: object
                     type: array
                   customDomains:
-                    description: Set of custom domains to be attached to Yandex API
-                      Gateway.
+                    description: |-
+                      (Block Set) Set of custom domains to be attached to Yandex Cloud API Gateway. (see below for nested schema)
+                      Set of custom domains to be attached to Yandex Cloud API Gateway.
                     items:
                       properties:
                         certificateId:
+                          description: (String)
                           type: string
                         domainId:
+                          description: (String)
                           type: string
                         fqdn:
+                          description: (String)
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud API Gateway.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   executionTimeout:
-                    description: Execution timeout in seconds for the Yandex Cloud
-                      API Gateway.
+                    description: |-
+                      (String) Execution timeout in seconds for the Yandex Cloud API Gateway.
+                      Execution timeout in seconds for the Yandex Cloud API Gateway.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud API Gateway. If it
-                      is not provided, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -384,41 +426,55 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud API Gateway.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logOptions:
-                    description: Options for logging from Yandex Cloud API Gateway.
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud API Gateway. (see below for nested schema)
+                      Options for logging from Yandex Cloud API Gateway.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from API Gateway disabled
+                          description: |-
+                            (Boolean) Is logging from Yandex Cloud API Gateway disabled.
+                            Is logging from Yandex Cloud API Gateway disabled.
                           type: boolean
                         folderId:
-                          description: Folder ID for the Yandex Cloud API Gateway.
-                            If it is not provided, the default provider folder is
-                            used.
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) ID of the log group for the Yandex Cloud API Gateway.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Yandex Cloud API Gateway name used to define API
-                      Gateway.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   spec:
-                    description: OpenAPI specification for Yandex API Gateway.
+                    description: |-
+                      (String) The OpenAPI specification for Yandex Cloud API Gateway.
+                      The OpenAPI specification for Yandex Cloud API Gateway.
                     type: string
                   variables:
                     additionalProperties:
                       type: string
-                    description: A set of values for variables in gateway specification.
+                    description: |-
+                      (Map of String) A set of values for variables in gateway specification.
+                      A set of values for variables in gateway specification.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object
@@ -495,109 +551,144 @@ spec:
               atProvider:
                 properties:
                   canary:
-                    description: Canary release settings of gateway.
+                    description: |-
+                      (Block List, Max: 1) Canary release settings of gateway. (see below for nested schema)
+                      Canary release settings of gateway.
                     items:
                       properties:
                         variables:
                           additionalProperties:
                             type: string
-                          description: A set of values for variables in gateway specification.
+                          description: |-
+                            (Map of String) A set of values for variables in gateway specification.
+                            A list of values for variables in gateway specification of canary release.
                           type: object
                           x-kubernetes-map-type: granular
                         weight:
-                          description: Percentage of requests, which will be processed
-                            by canary release.
+                          description: |-
+                            (Number) Percentage of requests, which will be processed by canary release.
+                            Percentage of requests, which will be processed by canary release.
                           type: number
                       type: object
                     type: array
                   connectivity:
-                    description: Gateway connectivity. If specified the gateway will
-                      be attached to specified network.
+                    description: |-
+                      (Block List, Max: 1) Gateway connectivity. If specified the gateway will be attached to specified network. (see below for nested schema)
+                      Gateway connectivity. If specified the gateway will be attached to specified network.
                     items:
                       properties:
                         networkId:
-                          description: Network the gateway will have access to. It's
-                            essential to specify network with subnets in all availability
-                            zones.
+                          description: |-
+                            (String) Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
+                            Network the gateway will have access to. It's essential to specify network with subnets in all availability zones.
                           type: string
                       type: object
                     type: array
                   createdAt:
-                    description: Creation timestamp of the Yandex Cloud API Gateway.
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   customDomains:
-                    description: Set of custom domains to be attached to Yandex API
-                      Gateway.
+                    description: |-
+                      (Block Set) Set of custom domains to be attached to Yandex Cloud API Gateway. (see below for nested schema)
+                      Set of custom domains to be attached to Yandex Cloud API Gateway.
                     items:
                       properties:
                         certificateId:
+                          description: (String)
                           type: string
                         domainId:
+                          description: (String)
                           type: string
                         fqdn:
+                          description: (String)
                           type: string
                       type: object
                     type: array
                   description:
-                    description: Description of the Yandex Cloud API Gateway.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   domain:
-                    description: Default domain for the Yandex API Gateway. Generated
-                      at creation time.
+                    description: |-
+                      (String) Default domain for the Yandex Cloud API Gateway. Generated at creation time.
+                      Default domain for the Yandex Cloud API Gateway. Generated at creation time.
                     type: string
                   executionTimeout:
-                    description: Execution timeout in seconds for the Yandex Cloud
-                      API Gateway.
+                    description: |-
+                      (String) Execution timeout in seconds for the Yandex Cloud API Gateway.
+                      Execution timeout in seconds for the Yandex Cloud API Gateway.
                     type: string
                   folderId:
-                    description: Folder ID for the Yandex Cloud API Gateway. If it
-                      is not provided, the default provider folder is used.
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Yandex
-                      Cloud API Gateway.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   logGroupId:
-                    description: Log entries are written to specified log group
+                    description: |-
+                      (String) ID of the log group for the Yandex Cloud API Gateway.
+                      ID of the log group for the Yandex Cloud API Gateway.
                     type: string
                   logOptions:
-                    description: Options for logging from Yandex Cloud API Gateway.
+                    description: |-
+                      (Block List, Max: 1) Options for logging from Yandex Cloud API Gateway. (see below for nested schema)
+                      Options for logging from Yandex Cloud API Gateway.
                     items:
                       properties:
                         disabled:
-                          description: Is logging from API Gateway disabled
+                          description: |-
+                            (Boolean) Is logging from Yandex Cloud API Gateway disabled.
+                            Is logging from Yandex Cloud API Gateway disabled.
                           type: boolean
                         folderId:
-                          description: Folder ID for the Yandex Cloud API Gateway.
-                            If it is not provided, the default provider folder is
-                            used.
+                          description: |-
+                            id is used.
+                            Log entries are written to default log group for specified folder.
                           type: string
                         logGroupId:
-                          description: Log entries are written to specified log group
+                          description: |-
+                            (String) ID of the log group for the Yandex Cloud API Gateway.
+                            Log entries are written to specified log group.
                           type: string
                         minLevel:
-                          description: Minimum log entry level
+                          description: |-
+                            (String) Minimum log entry level.
+                            Minimum log entry level.
                           type: string
                       type: object
                     type: array
                   name:
-                    description: Yandex Cloud API Gateway name used to define API
-                      Gateway.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   spec:
-                    description: OpenAPI specification for Yandex API Gateway.
+                    description: |-
+                      (String) The OpenAPI specification for Yandex Cloud API Gateway.
+                      The OpenAPI specification for Yandex Cloud API Gateway.
                     type: string
                   status:
-                    description: Status of the Yandex API Gateway.
+                    description: |-
+                      (String) Status of the Yandex Cloud API Gateway.
+                      Status of the Yandex Cloud API Gateway.
                     type: string
                   userDomains:
-                    description: (DEPRECATED, use custom_domains instead) Set of user
-                      domains attached to Yandex API Gateway.
+                    description: |-
+                      (Set of String, Deprecated) ~> DEPRECATED Use custom_domains instead. Set of user domains attached to Yandex Cloud API Gateway.
+                      ~> **DEPRECATED** Use `custom_domains` instead. Set of user domains attached to Yandex Cloud API Gateway.
                     items:
                       type: string
                     type: array
@@ -605,7 +696,9 @@ spec:
                   variables:
                     additionalProperties:
                       type: string
-                    description: A set of values for variables in gateway specification.
+                    description: |-
+                      (Map of String) A set of values for variables in gateway specification.
+                      A set of values for variables in gateway specification.
                     type: object
                     x-kubernetes-map-type: granular
                 type: object

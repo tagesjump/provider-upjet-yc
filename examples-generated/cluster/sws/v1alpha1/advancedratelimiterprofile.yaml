@@ -1,0 +1,24 @@
+apiVersion: sws.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: AdvancedRateLimiterProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sws/v1alpha1/advancedratelimiterprofile
+  labels:
+    testing.upbound.io/example-name: demo-profile
+  name: demo-profile
+spec:
+  forProvider:
+    advancedRateLimiterRule:
+    - description: First test rule
+      dryRun: true
+      name: rule1
+      priority: 10
+      staticQuota:
+      - action: DENY
+        condition:
+        - requestUri:
+          - path:
+            - exactMatch: /api
+        limit: 10000000
+        period: 1
+    name: demo-profile

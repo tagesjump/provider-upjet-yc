@@ -1,0 +1,42 @@
+apiVersion: spark.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: spark/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: my_spark_cluster
+  name: my-spark-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    config:
+      dependencies:
+        pipPackages:
+        - numpy==2.2.2
+      resourcePools:
+        driver:
+          resourcePresetId: c2-m8
+          size: 1
+        executor:
+          maxSize: 2
+          minSize: 1
+          resourcePresetId: c4-m16
+    description: created by terraform
+    labels:
+      my_key: my_value
+    logging:
+      enabled: true
+      folderId: ${var.folder_id}
+    maintenanceWindow:
+      day: TUE
+      hour: 10
+      type: WEEKLY
+    name: spark-cluster-1
+    network:
+      securityGroupIds:
+      - ${yandex_vpc_security_group.spark-sg1.id}
+      subnetIds:
+      - ${yandex_vpc_subnet.a.id}
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: for-spark

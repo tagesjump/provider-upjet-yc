@@ -1,0 +1,22 @@
+apiVersion: trino.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Catalog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: trino/v1alpha1/catalog
+  labels:
+    testing.upbound.io/example-name: catalog
+  name: catalog
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: trino
+    description: descriptionr
+    name: name
+    postgresql:
+      connectionManager:
+        connectionId: <connection_id>
+        connectionProperties:
+          targetServerType: primary
+        database: database-name

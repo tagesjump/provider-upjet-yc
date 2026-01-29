@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: Dashboard is the Schema for the Dashboards API. Allows management
-          of a Yandex.Cloud Monitoring Dashboard.
+          of a Yandex Cloud Monitoring Dashboard.
         properties:
           apiVersion:
             description: |-
@@ -75,13 +75,13 @@ spec:
                 properties:
                   description:
                     description: |-
-                      Dashboard description.
-                      Dashboard description
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
                     description: |-
-                      Folder that the resource belongs to. If value is omitted, the default provider folder is used.
-                      Folder ID
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -163,49 +163,49 @@ spec:
                     additionalProperties:
                       type: string
                     description: |-
-                      A set of key/value label pairs to assign to the Dashboard.
-                      Dashboard labels
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
                     description: |-
-                      Name of the Dashboard.
-                      Dashboard name, used as local identifier in folder_id
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   parametrization:
                     description: |-
-                      Dashboard parametrization
-                      Dashboard parametrization
+                      (Block List) Dashboard parametrization. (see below for nested schema)
+                      Dashboard parametrization.
                     items:
                       properties:
                         parameters:
                           description: |-
-                            parameters list.
-                            Dashboard parameter
+                            (Block List) Dashboard parameters. (see below for nested schema)
+                            Dashboard parameters.
                           items:
                             properties:
                               custom:
                                 description: |-
+                                  (Block List) Custom values parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Custom values parameter. Oneof: label_values, custom, text.
-                                  Custom parameter
                                 items:
                                   properties:
                                     defaultValues:
                                       description: |-
+                                        (List of String) Default value.
                                         Default value.
-                                        Default value
                                       items:
                                         type: string
                                       type: array
                                     multiselectable:
                                       description: |-
+                                        (Boolean) Specifies the multiselectable values of parameter.
                                         Specifies the multiselectable values of parameter.
-                                        Specifies the multiselectable values of parameter
                                       type: boolean
                                     values:
                                       description: |-
+                                        (List of String) Parameter values.
                                         Parameter values.
-                                        Parameter values
                                       items:
                                         type: string
                                       type: array
@@ -213,36 +213,36 @@ spec:
                                 type: array
                               description:
                                 description: |-
+                                  (String) The resource description.
                                   Parameter description.
-                                  Parameter description
                                 type: string
                               hidden:
                                 description: |-
-                                  UI-visibility.
+                                  visibility
                                   UI-visibility
                                 type: boolean
                               id:
                                 description: |-
-                                  Parameter identifier
-                                  Parameter identifier
+                                  (String) The ID of this resource.
+                                  Parameter identifier.
                                 type: string
                               labelValues:
                                 description: |-
+                                  (Block List) Label values parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Label values parameter. Oneof: label_values, custom, text.
-                                  Label values parameter
                                 items:
                                   properties:
                                     defaultValues:
                                       description: |-
+                                        (List of String) Default value.
                                         Default value.
-                                        Default value
                                       items:
                                         type: string
                                       type: array
                                     folderId:
                                       description: |-
-                                        Labels folder ID.
-                                        Folder ID
+                                        id is used.
+                                        Folder ID.
                                       type: string
                                     folderIdRef:
                                       description: Reference to a Folder in resourcemanager
@@ -322,161 +322,165 @@ spec:
                                       type: object
                                     labelKey:
                                       description: |-
+                                        (String) Label key to list label values.
                                         Label key to list label values.
-                                        Required. Label key to list label values
                                       type: string
                                     multiselectable:
                                       description: |-
+                                        (Boolean) Specifies the multiselectable values of parameter.
                                         Specifies the multiselectable values of parameter.
-                                        Specifies the multiselectable values of parameter
                                       type: boolean
                                     selectors:
                                       description: |-
-                                        dashboard predefined parameters selector.
-                                        Required. Selectors to select metric label values
+                                        (String) Dashboard predefined parameters selector.
+                                        Selectors to select metric label values.
                                       type: string
                                   type: object
                                 type: array
                               text:
                                 description: |-
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Text parameter. Oneof: label_values, custom, text.
-                                  Text parameter
                                 items:
                                   properties:
                                     defaultValue:
                                       description: |-
+                                        (String) Default value.
                                         Default value.
-                                        Default value
                                       type: string
                                   type: object
                                 type: array
                               title:
                                 description: |-
+                                  (String) Dashboard title.
                                   UI-visible title of the parameter.
-                                  UI-visible title of the parameter
                                 type: string
                             type: object
                           type: array
                         selectors:
                           description: |-
-                            dashboard predefined parameters selector.
-                            Predefined selectors
+                            (String) Dashboard predefined parameters selector.
+                            Dashboard predefined parameters selector.
                           type: string
                       type: object
                     type: array
                   title:
                     description: |-
+                      (String) Dashboard title.
                       Dashboard title.
-                      Dashboard title
                     type: string
                   widgets:
                     description: |-
-                      Widgets
-                      Widgets
+                      (Block List) Widgets. (see below for nested schema)
+                      Widgets.
                     items:
                       properties:
                         chart:
                           description: |-
-                            Chart widget settings. Oneof: text, title or chart.
-                            Chart widget
+                            (Block List) Chart widget settings. (see below for nested schema)
+                            Chart widget settings.
                           items:
                             properties:
                               chartId:
                                 description: |-
+                                  (String) Chart ID.
                                   Chart ID.
-                                  Chart ID
                                 type: string
                               description:
                                 description: |-
-                                  Parameter description.
-                                  Chart description in dashboard (not enabled in UI)
+                                  (String) The resource description.
+                                  Chart description in dashboard (not enabled in UI).
                                 type: string
                               displayLegend:
                                 description: |-
+                                  (Boolean) Enable legend under chart.
                                   Enable legend under chart.
-                                  Enable legend under chart
                                 type: boolean
                               freeze:
                                 description: |-
+                                  (String) Fixed time interval for chart. Values:
                                   Fixed time interval for chart. Values:
-                                  Fixed time interval for chart
+                                  - FREEZE_DURATION_HOUR: Last hour.
+                                  - FREEZE_DURATION_DAY: Last day = last 24 hours.
+                                  - FREEZE_DURATION_WEEK: Last 7 days.
+                                  - FREEZE_DURATION_MONTH: Last 31 days.
                                 type: string
                               nameHidingSettings:
                                 description: |-
-                                  Names settings.
+                                  (Block List) Name hiding settings (see below for nested schema)
                                   Name hiding settings
                                 items:
                                   properties:
                                     names:
-                                      description: Series name.
+                                      description: (List of String)
                                       items:
                                         type: string
                                       type: array
                                     positive:
                                       description: |-
-                                        True if we want to show concrete series names only, false if we want to hide concrete series names.
+                                        (Boolean) True if we want to show concrete series names only, false if we want to hide concrete series names
                                         True if we want to show concrete series names only, false if we want to hide concrete series names
                                       type: boolean
                                   type: object
                                 type: array
                               queries:
                                 description: |-
+                                  (Block List) Queries settings. (see below for nested schema)
                                   Queries settings.
-                                  Queries
                                 items:
                                   properties:
                                     downsampling:
                                       description: |-
-                                        Downsamplang settings.
+                                        (Block List) Downsampling settings (see below for nested schema)
                                         Downsampling settings
                                       items:
                                         properties:
                                           disabled:
                                             description: |-
-                                              Disable downsampling.
+                                              (Boolean) Disable downsampling
                                               Disable downsampling
                                             type: boolean
                                           gapFilling:
                                             description: |-
-                                              Parameters for filling gaps in data.
+                                              (String) Parameters for filling gaps in data
                                               Parameters for filling gaps in data
                                             type: string
                                           gridAggregation:
                                             description: |-
-                                              Function that is used for downsampling.
+                                              (String) Function that is used for downsampling
                                               Function that is used for downsampling
                                             type: string
                                           gridInterval:
                                             description: |-
-                                              Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+                                              (Number) Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
                                               Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
                                             type: number
                                           maxPoints:
                                             description: |-
-                                              Maximum number of points to be returned.
+                                              (Number) Maximum number of points to be returned
                                               Maximum number of points to be returned
                                             type: number
                                         type: object
                                       type: array
                                     target:
                                       description: |-
-                                        Query targets.
+                                        (Block List) Downsampling settings (see below for nested schema)
                                         Downsampling settings
                                       items:
                                         properties:
                                           hidden:
                                             description: |-
-                                              Checks that target is visible or invisible.
+                                              visibility
                                               Checks that target is visible or invisible
                                             type: boolean
                                           query:
                                             description: |-
-                                              Query.
+                                              (String) Required. Query
                                               Required. Query
                                             type: string
                                           textMode:
                                             description: |-
-                                              Text mode enabled.
+                                              (Boolean) Text mode
                                               Text mode
                                             type: boolean
                                         type: object
@@ -484,119 +488,121 @@ spec:
                                   type: object
                                 type: array
                               seriesOverrides:
-                                description: Time series settings.
+                                description: |-
+                                  (Block List) Time series settings. (see below for nested schema)
+                                  Time series settings.
                                 items:
                                   properties:
                                     name:
                                       description: |-
-                                        Series name or empty.
+                                        (String) The resource name.
                                         Series name
                                       type: string
                                     settings:
                                       description: |-
-                                        Override settings.
+                                        (Block List) Override settings (see below for nested schema)
                                         Override settings
                                       items:
                                         properties:
                                           color:
                                             description: |-
-                                              Series color or empty.
+                                              (String) Series color or empty
                                               Series color or empty
                                             type: string
                                           growDown:
                                             description: |-
-                                              Stack grow down.
+                                              (Boolean) Stack grow down
                                               Stack grow down
                                             type: boolean
                                           name:
                                             description: |-
-                                              Series name or empty.
+                                              (String) The resource name.
                                               Series name or empty
                                             type: string
                                           stackName:
                                             description: |-
-                                              Stack name or empty.
+                                              (String) Stack name or empty
                                               Stack name or empty
                                             type: string
                                           type:
                                             description: |-
-                                              Type. Values:
+                                              (String) Type
                                               Type
                                             type: string
                                           yaxisPosition:
                                             description: |-
-                                              Yaxis position.
+                                              (String) Yaxis position
                                               Yaxis position
                                             type: string
                                         type: object
                                       type: array
                                     targetIndex:
                                       description: |-
-                                        Series index. Oneof: name or target_index.
+                                        (String) Target index
                                         Target index
                                       type: string
                                   type: object
                                 type: array
                               title:
                                 description: |-
-                                  Title or empty.
-                                  Chart widget title
+                                  (String) Dashboard title.
+                                  Chart widget title.
                                 type: string
                               visualizationSettings:
                                 description: |-
+                                  (Block List) Visualization settings. (see below for nested schema)
                                   Visualization settings.
-                                  Visualization settings
                                 items:
                                   properties:
                                     aggregation:
                                       description: |-
-                                        Aggregation. Values:
+                                        (String) Aggregation
                                         Aggregation
                                       type: string
                                     colorSchemeSettings:
                                       description: |-
-                                        Color settings.
+                                        (Block List) Color scheme settings (see below for nested schema)
                                         Color scheme settings
                                       items:
                                         properties:
                                           automatic:
                                             description: |-
-                                              Automatic color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Automatic color scheme (see below for nested schema)
                                               Automatic color scheme
                                             items:
                                               type: object
                                             type: array
                                           gradient:
                                             description: |-
-                                              Gradient color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Gradient color scheme (see below for nested schema)
                                               Gradient color scheme
                                             items:
                                               properties:
                                                 greenValue:
                                                   description: |-
-                                                    Gradient green value.
+                                                    (String) Gradient green value
                                                     Gradient green value
                                                   type: string
                                                 redValue:
                                                   description: |-
-                                                    Gradient red value.
+                                                    (String) Gradient red value
                                                     Gradient red value
                                                   type: string
                                                 violetValue:
                                                   description: |-
-                                                    Gradient violet value.
+                                                    (String) Gradient violet_value
                                                     Gradient violet_value
                                                   type: string
                                                 yellowValue:
                                                   description: |-
-                                                    Gradient yellow value.
+                                                    (String) Gradient yellow value
                                                     Gradient yellow value
                                                   type: string
                                               type: object
                                             type: array
                                           standard:
                                             description: |-
-                                              Standard color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Standard color scheme (see below for nested schema)
                                               Standard color scheme
                                             items:
                                               type: object
@@ -605,135 +611,135 @@ spec:
                                       type: array
                                     heatmapSettings:
                                       description: |-
-                                        Heatmap settings.
+                                        (Block List) Heatmap settings (see below for nested schema)
                                         Heatmap settings
                                       items:
                                         properties:
                                           greenValue:
                                             description: |-
-                                              Gradient green value.
+                                              (String) Gradient green value
                                               Heatmap green value
                                             type: string
                                           redValue:
                                             description: |-
-                                              Gradient red value.
+                                              (String) Gradient red value
                                               Heatmap red value
                                             type: string
                                           violetValue:
                                             description: |-
-                                              Gradient violet value.
+                                              (String) Gradient violet_value
                                               Heatmap violet_value
                                             type: string
                                           yellowValue:
                                             description: |-
-                                              Gradient yellow value.
+                                              (String) Gradient yellow value
                                               Heatmap yellow value
                                             type: string
                                         type: object
                                       type: array
                                     interpolate:
                                       description: |-
-                                        Interpolate values. Values:
+                                        (String) Interpolate
                                         Interpolate
                                       type: string
                                     normalize:
                                       description: |-
-                                        Normalize values.
+                                        (Boolean) Normalize
                                         Normalize
                                       type: boolean
                                     showLabels:
                                       description: |-
-                                        Show chart labels.
+                                        (Boolean) Show chart labels
                                         Show chart labels
                                       type: boolean
                                     title:
                                       description: |-
-                                        Title or empty.
+                                        (String) Dashboard title.
                                         Inside chart title
                                       type: string
                                     type:
                                       description: |-
-                                        Type. Values:
+                                        (String) Type
                                         Visualization type
                                       type: string
                                     yaxisSettings:
                                       description: |-
-                                        Y axis settings.
+                                        (Block List) Y axis settings (see below for nested schema)
                                         Y axis settings
                                       items:
                                         properties:
                                           left:
                                             description: |-
-                                              Left yaxis config.
+                                              (Block List) Left Y axis settings (see below for nested schema)
                                               Left Y axis settings
                                             items:
                                               properties:
                                                 max:
                                                   description: |-
-                                                    Max value in extended number format or empty.
+                                                    (String) Max value in extended number format or empty
                                                     Max value in extended number format or empty
                                                   type: string
                                                 min:
                                                   description: |-
-                                                    Min value in extended number format or empty.
+                                                    (String) Min value in extended number format or empty
                                                     Min value in extended number format or empty
                                                   type: string
                                                 precision:
                                                   description: |-
-                                                    Tick value precision (null as default, 0-7 in other cases).
+                                                    7 in other cases)
                                                     Tick value precision (null as default, 0-7 in other cases)
                                                   type: number
                                                 title:
                                                   description: |-
-                                                    Title or empty.
+                                                    (String) Dashboard title.
                                                     Title or empty
                                                   type: string
                                                 type:
                                                   description: |-
-                                                    Type. Values:
+                                                    (String) Type
                                                     Type
                                                   type: string
                                                 unitFormat:
                                                   description: |-
-                                                    Unit format. Values:
+                                                    (String) Unit format
                                                     Unit format
                                                   type: string
                                               type: object
                                             type: array
                                           right:
                                             description: |-
-                                              Right yaxis config.
+                                              (Block List) Right Y axis settings (see below for nested schema)
                                               Right Y axis settings
                                             items:
                                               properties:
                                                 max:
                                                   description: |-
-                                                    Max value in extended number format or empty.
+                                                    (String) Max value in extended number format or empty
                                                     Max value in extended number format or empty
                                                   type: string
                                                 min:
                                                   description: |-
-                                                    Min value in extended number format or empty.
+                                                    (String) Min value in extended number format or empty
                                                     Min value in extended number format or empty
                                                   type: string
                                                 precision:
                                                   description: |-
-                                                    Tick value precision (null as default, 0-7 in other cases).
+                                                    7 in other cases)
                                                     Tick value precision (null as default, 0-7 in other cases)
                                                   type: number
                                                 title:
                                                   description: |-
-                                                    Title or empty.
+                                                    (String) Dashboard title.
                                                     Title or empty
                                                   type: string
                                                 type:
                                                   description: |-
-                                                    Type. Values:
+                                                    (String) Type
                                                     Type
                                                   type: string
                                                 unitFormat:
                                                   description: |-
-                                                    Unit format. Values:
+                                                    (String) Unit format
                                                     Unit format
                                                   type: string
                                               type: object
@@ -746,60 +752,66 @@ spec:
                           type: array
                         position:
                           description: |-
-                            Widget position.
-                            Required. Widget layout position
+                            (Block List) Widget layout position. (see below for nested schema)
+                            Widget layout position.
                           items:
                             properties:
                               h:
                                 description: |-
+                                  (Number) Height.
                                   Height.
-                                  Required. Height
                                 type: number
                               w:
                                 description: |-
-                                  Width.
-                                  Required. Weight
+                                  (Number) Weight.
+                                  Weight.
                                 type: number
                               x:
                                 description: |-
+                                  axis top-left corner coordinate.
                                   X-axis top-left corner coordinate.
-                                  Required. X-axis top-left corner coordinate
                                 type: number
                               "y":
                                 description: |-
+                                  axis top-left corner coordinate.
                                   Y-axis top-left corner coordinate.
-                                  Required. Y-axis top-left corner coordinate
                                 type: number
                             type: object
                           type: array
                         text:
                           description: |-
-                            Text widget settings. Oneof: text, title or chart.
-                            Text widget
+                            (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                            Text widget settings.
                           items:
                             properties:
                               text:
                                 description: |-
-                                  Text widget settings. Oneof: text, title or chart.
-                                  Text
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                                  Widget text.
                                 type: string
                             type: object
                           type: array
                         title:
                           description: |-
-                            Title widget settings. Oneof: text, title or chart.
-                            Title widget
+                            (String) Dashboard title.
+                            Title widget settings.
                           items:
                             properties:
                               size:
                                 description: |-
+                                  (String) Title size.
                                   Title size. Values:
-                                  Title size
+                                  Title size.
+                                  Title size. Values:
+                                  - TITLE_SIZE_XS: Extra small size.
+                                  - TITLE_SIZE_S: Small size.
+                                  - TITLE_SIZE_M: Middle size.
+                                  - TITLE_SIZE_L: Large size.
                                 type: string
                               text:
                                 description: |-
-                                  Text widget settings. Oneof: text, title or chart.
-                                  Title text
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                                  Title text.
                                 type: string
                             type: object
                           type: array
@@ -821,13 +833,13 @@ spec:
                 properties:
                   description:
                     description: |-
-                      Dashboard description.
-                      Dashboard description
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
                     description: |-
-                      Folder that the resource belongs to. If value is omitted, the default provider folder is used.
-                      Folder ID
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -909,49 +921,49 @@ spec:
                     additionalProperties:
                       type: string
                     description: |-
-                      A set of key/value label pairs to assign to the Dashboard.
-                      Dashboard labels
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
                     description: |-
-                      Name of the Dashboard.
-                      Dashboard name, used as local identifier in folder_id
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   parametrization:
                     description: |-
-                      Dashboard parametrization
-                      Dashboard parametrization
+                      (Block List) Dashboard parametrization. (see below for nested schema)
+                      Dashboard parametrization.
                     items:
                       properties:
                         parameters:
                           description: |-
-                            parameters list.
-                            Dashboard parameter
+                            (Block List) Dashboard parameters. (see below for nested schema)
+                            Dashboard parameters.
                           items:
                             properties:
                               custom:
                                 description: |-
+                                  (Block List) Custom values parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Custom values parameter. Oneof: label_values, custom, text.
-                                  Custom parameter
                                 items:
                                   properties:
                                     defaultValues:
                                       description: |-
+                                        (List of String) Default value.
                                         Default value.
-                                        Default value
                                       items:
                                         type: string
                                       type: array
                                     multiselectable:
                                       description: |-
+                                        (Boolean) Specifies the multiselectable values of parameter.
                                         Specifies the multiselectable values of parameter.
-                                        Specifies the multiselectable values of parameter
                                       type: boolean
                                     values:
                                       description: |-
+                                        (List of String) Parameter values.
                                         Parameter values.
-                                        Parameter values
                                       items:
                                         type: string
                                       type: array
@@ -959,36 +971,36 @@ spec:
                                 type: array
                               description:
                                 description: |-
+                                  (String) The resource description.
                                   Parameter description.
-                                  Parameter description
                                 type: string
                               hidden:
                                 description: |-
-                                  UI-visibility.
+                                  visibility
                                   UI-visibility
                                 type: boolean
                               id:
                                 description: |-
-                                  Parameter identifier
-                                  Parameter identifier
+                                  (String) The ID of this resource.
+                                  Parameter identifier.
                                 type: string
                               labelValues:
                                 description: |-
+                                  (Block List) Label values parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Label values parameter. Oneof: label_values, custom, text.
-                                  Label values parameter
                                 items:
                                   properties:
                                     defaultValues:
                                       description: |-
+                                        (List of String) Default value.
                                         Default value.
-                                        Default value
                                       items:
                                         type: string
                                       type: array
                                     folderId:
                                       description: |-
-                                        Labels folder ID.
-                                        Folder ID
+                                        id is used.
+                                        Folder ID.
                                       type: string
                                     folderIdRef:
                                       description: Reference to a Folder in resourcemanager
@@ -1068,161 +1080,165 @@ spec:
                                       type: object
                                     labelKey:
                                       description: |-
+                                        (String) Label key to list label values.
                                         Label key to list label values.
-                                        Required. Label key to list label values
                                       type: string
                                     multiselectable:
                                       description: |-
+                                        (Boolean) Specifies the multiselectable values of parameter.
                                         Specifies the multiselectable values of parameter.
-                                        Specifies the multiselectable values of parameter
                                       type: boolean
                                     selectors:
                                       description: |-
-                                        dashboard predefined parameters selector.
-                                        Required. Selectors to select metric label values
+                                        (String) Dashboard predefined parameters selector.
+                                        Selectors to select metric label values.
                                       type: string
                                   type: object
                                 type: array
                               text:
                                 description: |-
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Text parameter. Oneof: label_values, custom, text.
-                                  Text parameter
                                 items:
                                   properties:
                                     defaultValue:
                                       description: |-
+                                        (String) Default value.
                                         Default value.
-                                        Default value
                                       type: string
                                   type: object
                                 type: array
                               title:
                                 description: |-
+                                  (String) Dashboard title.
                                   UI-visible title of the parameter.
-                                  UI-visible title of the parameter
                                 type: string
                             type: object
                           type: array
                         selectors:
                           description: |-
-                            dashboard predefined parameters selector.
-                            Predefined selectors
+                            (String) Dashboard predefined parameters selector.
+                            Dashboard predefined parameters selector.
                           type: string
                       type: object
                     type: array
                   title:
                     description: |-
+                      (String) Dashboard title.
                       Dashboard title.
-                      Dashboard title
                     type: string
                   widgets:
                     description: |-
-                      Widgets
-                      Widgets
+                      (Block List) Widgets. (see below for nested schema)
+                      Widgets.
                     items:
                       properties:
                         chart:
                           description: |-
-                            Chart widget settings. Oneof: text, title or chart.
-                            Chart widget
+                            (Block List) Chart widget settings. (see below for nested schema)
+                            Chart widget settings.
                           items:
                             properties:
                               chartId:
                                 description: |-
+                                  (String) Chart ID.
                                   Chart ID.
-                                  Chart ID
                                 type: string
                               description:
                                 description: |-
-                                  Parameter description.
-                                  Chart description in dashboard (not enabled in UI)
+                                  (String) The resource description.
+                                  Chart description in dashboard (not enabled in UI).
                                 type: string
                               displayLegend:
                                 description: |-
+                                  (Boolean) Enable legend under chart.
                                   Enable legend under chart.
-                                  Enable legend under chart
                                 type: boolean
                               freeze:
                                 description: |-
+                                  (String) Fixed time interval for chart. Values:
                                   Fixed time interval for chart. Values:
-                                  Fixed time interval for chart
+                                  - FREEZE_DURATION_HOUR: Last hour.
+                                  - FREEZE_DURATION_DAY: Last day = last 24 hours.
+                                  - FREEZE_DURATION_WEEK: Last 7 days.
+                                  - FREEZE_DURATION_MONTH: Last 31 days.
                                 type: string
                               nameHidingSettings:
                                 description: |-
-                                  Names settings.
+                                  (Block List) Name hiding settings (see below for nested schema)
                                   Name hiding settings
                                 items:
                                   properties:
                                     names:
-                                      description: Series name.
+                                      description: (List of String)
                                       items:
                                         type: string
                                       type: array
                                     positive:
                                       description: |-
-                                        True if we want to show concrete series names only, false if we want to hide concrete series names.
+                                        (Boolean) True if we want to show concrete series names only, false if we want to hide concrete series names
                                         True if we want to show concrete series names only, false if we want to hide concrete series names
                                       type: boolean
                                   type: object
                                 type: array
                               queries:
                                 description: |-
+                                  (Block List) Queries settings. (see below for nested schema)
                                   Queries settings.
-                                  Queries
                                 items:
                                   properties:
                                     downsampling:
                                       description: |-
-                                        Downsamplang settings.
+                                        (Block List) Downsampling settings (see below for nested schema)
                                         Downsampling settings
                                       items:
                                         properties:
                                           disabled:
                                             description: |-
-                                              Disable downsampling.
+                                              (Boolean) Disable downsampling
                                               Disable downsampling
                                             type: boolean
                                           gapFilling:
                                             description: |-
-                                              Parameters for filling gaps in data.
+                                              (String) Parameters for filling gaps in data
                                               Parameters for filling gaps in data
                                             type: string
                                           gridAggregation:
                                             description: |-
-                                              Function that is used for downsampling.
+                                              (String) Function that is used for downsampling
                                               Function that is used for downsampling
                                             type: string
                                           gridInterval:
                                             description: |-
-                                              Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+                                              (Number) Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
                                               Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
                                             type: number
                                           maxPoints:
                                             description: |-
-                                              Maximum number of points to be returned.
+                                              (Number) Maximum number of points to be returned
                                               Maximum number of points to be returned
                                             type: number
                                         type: object
                                       type: array
                                     target:
                                       description: |-
-                                        Query targets.
+                                        (Block List) Downsampling settings (see below for nested schema)
                                         Downsampling settings
                                       items:
                                         properties:
                                           hidden:
                                             description: |-
-                                              Checks that target is visible or invisible.
+                                              visibility
                                               Checks that target is visible or invisible
                                             type: boolean
                                           query:
                                             description: |-
-                                              Query.
+                                              (String) Required. Query
                                               Required. Query
                                             type: string
                                           textMode:
                                             description: |-
-                                              Text mode enabled.
+                                              (Boolean) Text mode
                                               Text mode
                                             type: boolean
                                         type: object
@@ -1230,119 +1246,121 @@ spec:
                                   type: object
                                 type: array
                               seriesOverrides:
-                                description: Time series settings.
+                                description: |-
+                                  (Block List) Time series settings. (see below for nested schema)
+                                  Time series settings.
                                 items:
                                   properties:
                                     name:
                                       description: |-
-                                        Series name or empty.
+                                        (String) The resource name.
                                         Series name
                                       type: string
                                     settings:
                                       description: |-
-                                        Override settings.
+                                        (Block List) Override settings (see below for nested schema)
                                         Override settings
                                       items:
                                         properties:
                                           color:
                                             description: |-
-                                              Series color or empty.
+                                              (String) Series color or empty
                                               Series color or empty
                                             type: string
                                           growDown:
                                             description: |-
-                                              Stack grow down.
+                                              (Boolean) Stack grow down
                                               Stack grow down
                                             type: boolean
                                           name:
                                             description: |-
-                                              Series name or empty.
+                                              (String) The resource name.
                                               Series name or empty
                                             type: string
                                           stackName:
                                             description: |-
-                                              Stack name or empty.
+                                              (String) Stack name or empty
                                               Stack name or empty
                                             type: string
                                           type:
                                             description: |-
-                                              Type. Values:
+                                              (String) Type
                                               Type
                                             type: string
                                           yaxisPosition:
                                             description: |-
-                                              Yaxis position.
+                                              (String) Yaxis position
                                               Yaxis position
                                             type: string
                                         type: object
                                       type: array
                                     targetIndex:
                                       description: |-
-                                        Series index. Oneof: name or target_index.
+                                        (String) Target index
                                         Target index
                                       type: string
                                   type: object
                                 type: array
                               title:
                                 description: |-
-                                  Title or empty.
-                                  Chart widget title
+                                  (String) Dashboard title.
+                                  Chart widget title.
                                 type: string
                               visualizationSettings:
                                 description: |-
+                                  (Block List) Visualization settings. (see below for nested schema)
                                   Visualization settings.
-                                  Visualization settings
                                 items:
                                   properties:
                                     aggregation:
                                       description: |-
-                                        Aggregation. Values:
+                                        (String) Aggregation
                                         Aggregation
                                       type: string
                                     colorSchemeSettings:
                                       description: |-
-                                        Color settings.
+                                        (Block List) Color scheme settings (see below for nested schema)
                                         Color scheme settings
                                       items:
                                         properties:
                                           automatic:
                                             description: |-
-                                              Automatic color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Automatic color scheme (see below for nested schema)
                                               Automatic color scheme
                                             items:
                                               type: object
                                             type: array
                                           gradient:
                                             description: |-
-                                              Gradient color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Gradient color scheme (see below for nested schema)
                                               Gradient color scheme
                                             items:
                                               properties:
                                                 greenValue:
                                                   description: |-
-                                                    Gradient green value.
+                                                    (String) Gradient green value
                                                     Gradient green value
                                                   type: string
                                                 redValue:
                                                   description: |-
-                                                    Gradient red value.
+                                                    (String) Gradient red value
                                                     Gradient red value
                                                   type: string
                                                 violetValue:
                                                   description: |-
-                                                    Gradient violet value.
+                                                    (String) Gradient violet_value
                                                     Gradient violet_value
                                                   type: string
                                                 yellowValue:
                                                   description: |-
-                                                    Gradient yellow value.
+                                                    (String) Gradient yellow value
                                                     Gradient yellow value
                                                   type: string
                                               type: object
                                             type: array
                                           standard:
                                             description: |-
-                                              Standard color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Standard color scheme (see below for nested schema)
                                               Standard color scheme
                                             items:
                                               type: object
@@ -1351,135 +1369,135 @@ spec:
                                       type: array
                                     heatmapSettings:
                                       description: |-
-                                        Heatmap settings.
+                                        (Block List) Heatmap settings (see below for nested schema)
                                         Heatmap settings
                                       items:
                                         properties:
                                           greenValue:
                                             description: |-
-                                              Gradient green value.
+                                              (String) Gradient green value
                                               Heatmap green value
                                             type: string
                                           redValue:
                                             description: |-
-                                              Gradient red value.
+                                              (String) Gradient red value
                                               Heatmap red value
                                             type: string
                                           violetValue:
                                             description: |-
-                                              Gradient violet value.
+                                              (String) Gradient violet_value
                                               Heatmap violet_value
                                             type: string
                                           yellowValue:
                                             description: |-
-                                              Gradient yellow value.
+                                              (String) Gradient yellow value
                                               Heatmap yellow value
                                             type: string
                                         type: object
                                       type: array
                                     interpolate:
                                       description: |-
-                                        Interpolate values. Values:
+                                        (String) Interpolate
                                         Interpolate
                                       type: string
                                     normalize:
                                       description: |-
-                                        Normalize values.
+                                        (Boolean) Normalize
                                         Normalize
                                       type: boolean
                                     showLabels:
                                       description: |-
-                                        Show chart labels.
+                                        (Boolean) Show chart labels
                                         Show chart labels
                                       type: boolean
                                     title:
                                       description: |-
-                                        Title or empty.
+                                        (String) Dashboard title.
                                         Inside chart title
                                       type: string
                                     type:
                                       description: |-
-                                        Type. Values:
+                                        (String) Type
                                         Visualization type
                                       type: string
                                     yaxisSettings:
                                       description: |-
-                                        Y axis settings.
+                                        (Block List) Y axis settings (see below for nested schema)
                                         Y axis settings
                                       items:
                                         properties:
                                           left:
                                             description: |-
-                                              Left yaxis config.
+                                              (Block List) Left Y axis settings (see below for nested schema)
                                               Left Y axis settings
                                             items:
                                               properties:
                                                 max:
                                                   description: |-
-                                                    Max value in extended number format or empty.
+                                                    (String) Max value in extended number format or empty
                                                     Max value in extended number format or empty
                                                   type: string
                                                 min:
                                                   description: |-
-                                                    Min value in extended number format or empty.
+                                                    (String) Min value in extended number format or empty
                                                     Min value in extended number format or empty
                                                   type: string
                                                 precision:
                                                   description: |-
-                                                    Tick value precision (null as default, 0-7 in other cases).
+                                                    7 in other cases)
                                                     Tick value precision (null as default, 0-7 in other cases)
                                                   type: number
                                                 title:
                                                   description: |-
-                                                    Title or empty.
+                                                    (String) Dashboard title.
                                                     Title or empty
                                                   type: string
                                                 type:
                                                   description: |-
-                                                    Type. Values:
+                                                    (String) Type
                                                     Type
                                                   type: string
                                                 unitFormat:
                                                   description: |-
-                                                    Unit format. Values:
+                                                    (String) Unit format
                                                     Unit format
                                                   type: string
                                               type: object
                                             type: array
                                           right:
                                             description: |-
-                                              Right yaxis config.
+                                              (Block List) Right Y axis settings (see below for nested schema)
                                               Right Y axis settings
                                             items:
                                               properties:
                                                 max:
                                                   description: |-
-                                                    Max value in extended number format or empty.
+                                                    (String) Max value in extended number format or empty
                                                     Max value in extended number format or empty
                                                   type: string
                                                 min:
                                                   description: |-
-                                                    Min value in extended number format or empty.
+                                                    (String) Min value in extended number format or empty
                                                     Min value in extended number format or empty
                                                   type: string
                                                 precision:
                                                   description: |-
-                                                    Tick value precision (null as default, 0-7 in other cases).
+                                                    7 in other cases)
                                                     Tick value precision (null as default, 0-7 in other cases)
                                                   type: number
                                                 title:
                                                   description: |-
-                                                    Title or empty.
+                                                    (String) Dashboard title.
                                                     Title or empty
                                                   type: string
                                                 type:
                                                   description: |-
-                                                    Type. Values:
+                                                    (String) Type
                                                     Type
                                                   type: string
                                                 unitFormat:
                                                   description: |-
-                                                    Unit format. Values:
+                                                    (String) Unit format
                                                     Unit format
                                                   type: string
                                               type: object
@@ -1492,60 +1510,66 @@ spec:
                           type: array
                         position:
                           description: |-
-                            Widget position.
-                            Required. Widget layout position
+                            (Block List) Widget layout position. (see below for nested schema)
+                            Widget layout position.
                           items:
                             properties:
                               h:
                                 description: |-
+                                  (Number) Height.
                                   Height.
-                                  Required. Height
                                 type: number
                               w:
                                 description: |-
-                                  Width.
-                                  Required. Weight
+                                  (Number) Weight.
+                                  Weight.
                                 type: number
                               x:
                                 description: |-
+                                  axis top-left corner coordinate.
                                   X-axis top-left corner coordinate.
-                                  Required. X-axis top-left corner coordinate
                                 type: number
                               "y":
                                 description: |-
+                                  axis top-left corner coordinate.
                                   Y-axis top-left corner coordinate.
-                                  Required. Y-axis top-left corner coordinate
                                 type: number
                             type: object
                           type: array
                         text:
                           description: |-
-                            Text widget settings. Oneof: text, title or chart.
-                            Text widget
+                            (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                            Text widget settings.
                           items:
                             properties:
                               text:
                                 description: |-
-                                  Text widget settings. Oneof: text, title or chart.
-                                  Text
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                                  Widget text.
                                 type: string
                             type: object
                           type: array
                         title:
                           description: |-
-                            Title widget settings. Oneof: text, title or chart.
-                            Title widget
+                            (String) Dashboard title.
+                            Title widget settings.
                           items:
                             properties:
                               size:
                                 description: |-
+                                  (String) Title size.
                                   Title size. Values:
-                                  Title size
+                                  Title size.
+                                  Title size. Values:
+                                  - TITLE_SIZE_XS: Extra small size.
+                                  - TITLE_SIZE_S: Small size.
+                                  - TITLE_SIZE_M: Middle size.
+                                  - TITLE_SIZE_L: Large size.
                                 type: string
                               text:
                                 description: |-
-                                  Text widget settings. Oneof: text, title or chart.
-                                  Title text
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                                  Title text.
                                 type: string
                             type: object
                           type: array
@@ -1649,68 +1673,70 @@ spec:
               atProvider:
                 properties:
                   dashboardId:
-                    description: Dashboard ID
+                    description: |-
+                      (String) Dashboard ID.
+                      Dashboard ID.
                     type: string
                   description:
                     description: |-
-                      Dashboard description.
-                      Dashboard description
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
                     description: |-
-                      Folder that the resource belongs to. If value is omitted, the default provider folder is used.
-                      Folder ID
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
-                    description: Parameter identifier
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
                     description: |-
-                      A set of key/value label pairs to assign to the Dashboard.
-                      Dashboard labels
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
                     description: |-
-                      Name of the Dashboard.
-                      Dashboard name, used as local identifier in folder_id
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   parametrization:
                     description: |-
-                      Dashboard parametrization
-                      Dashboard parametrization
+                      (Block List) Dashboard parametrization. (see below for nested schema)
+                      Dashboard parametrization.
                     items:
                       properties:
                         parameters:
                           description: |-
-                            parameters list.
-                            Dashboard parameter
+                            (Block List) Dashboard parameters. (see below for nested schema)
+                            Dashboard parameters.
                           items:
                             properties:
                               custom:
                                 description: |-
+                                  (Block List) Custom values parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Custom values parameter. Oneof: label_values, custom, text.
-                                  Custom parameter
                                 items:
                                   properties:
                                     defaultValues:
                                       description: |-
+                                        (List of String) Default value.
                                         Default value.
-                                        Default value
                                       items:
                                         type: string
                                       type: array
                                     multiselectable:
                                       description: |-
+                                        (Boolean) Specifies the multiselectable values of parameter.
                                         Specifies the multiselectable values of parameter.
-                                        Specifies the multiselectable values of parameter
                                       type: boolean
                                     values:
                                       description: |-
+                                        (List of String) Parameter values.
                                         Parameter values.
-                                        Parameter values
                                       items:
                                         type: string
                                       type: array
@@ -1718,194 +1744,198 @@ spec:
                                 type: array
                               description:
                                 description: |-
+                                  (String) The resource description.
                                   Parameter description.
-                                  Parameter description
                                 type: string
                               hidden:
                                 description: |-
-                                  UI-visibility.
+                                  visibility
                                   UI-visibility
                                 type: boolean
                               id:
                                 description: |-
-                                  Parameter identifier
-                                  Parameter identifier
+                                  (String) The ID of this resource.
+                                  Parameter identifier.
                                 type: string
                               labelValues:
                                 description: |-
+                                  (Block List) Label values parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Label values parameter. Oneof: label_values, custom, text.
-                                  Label values parameter
                                 items:
                                   properties:
                                     defaultValues:
                                       description: |-
+                                        (List of String) Default value.
                                         Default value.
-                                        Default value
                                       items:
                                         type: string
                                       type: array
                                     folderId:
                                       description: |-
-                                        Labels folder ID.
-                                        Folder ID
+                                        id is used.
+                                        Folder ID.
                                       type: string
                                     labelKey:
                                       description: |-
+                                        (String) Label key to list label values.
                                         Label key to list label values.
-                                        Required. Label key to list label values
                                       type: string
                                     multiselectable:
                                       description: |-
+                                        (Boolean) Specifies the multiselectable values of parameter.
                                         Specifies the multiselectable values of parameter.
-                                        Specifies the multiselectable values of parameter
                                       type: boolean
                                     selectors:
                                       description: |-
-                                        dashboard predefined parameters selector.
-                                        Required. Selectors to select metric label values
+                                        (String) Dashboard predefined parameters selector.
+                                        Selectors to select metric label values.
                                       type: string
                                   type: object
                                 type: array
                               text:
                                 description: |-
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
                                   Text parameter. Oneof: label_values, custom, text.
-                                  Text parameter
                                 items:
                                   properties:
                                     defaultValue:
                                       description: |-
+                                        (String) Default value.
                                         Default value.
-                                        Default value
                                       type: string
                                   type: object
                                 type: array
                               title:
                                 description: |-
+                                  (String) Dashboard title.
                                   UI-visible title of the parameter.
-                                  UI-visible title of the parameter
                                 type: string
                             type: object
                           type: array
                         selectors:
                           description: |-
-                            dashboard predefined parameters selector.
-                            Predefined selectors
+                            (String) Dashboard predefined parameters selector.
+                            Dashboard predefined parameters selector.
                           type: string
                       type: object
                     type: array
                   title:
                     description: |-
+                      (String) Dashboard title.
                       Dashboard title.
-                      Dashboard title
                     type: string
                   widgets:
                     description: |-
-                      Widgets
-                      Widgets
+                      (Block List) Widgets. (see below for nested schema)
+                      Widgets.
                     items:
                       properties:
                         chart:
                           description: |-
-                            Chart widget settings. Oneof: text, title or chart.
-                            Chart widget
+                            (Block List) Chart widget settings. (see below for nested schema)
+                            Chart widget settings.
                           items:
                             properties:
                               chartId:
                                 description: |-
+                                  (String) Chart ID.
                                   Chart ID.
-                                  Chart ID
                                 type: string
                               description:
                                 description: |-
-                                  Parameter description.
-                                  Chart description in dashboard (not enabled in UI)
+                                  (String) The resource description.
+                                  Chart description in dashboard (not enabled in UI).
                                 type: string
                               displayLegend:
                                 description: |-
+                                  (Boolean) Enable legend under chart.
                                   Enable legend under chart.
-                                  Enable legend under chart
                                 type: boolean
                               freeze:
                                 description: |-
+                                  (String) Fixed time interval for chart. Values:
                                   Fixed time interval for chart. Values:
-                                  Fixed time interval for chart
+                                  - FREEZE_DURATION_HOUR: Last hour.
+                                  - FREEZE_DURATION_DAY: Last day = last 24 hours.
+                                  - FREEZE_DURATION_WEEK: Last 7 days.
+                                  - FREEZE_DURATION_MONTH: Last 31 days.
                                 type: string
                               nameHidingSettings:
                                 description: |-
-                                  Names settings.
+                                  (Block List) Name hiding settings (see below for nested schema)
                                   Name hiding settings
                                 items:
                                   properties:
                                     names:
-                                      description: Series name.
+                                      description: (List of String)
                                       items:
                                         type: string
                                       type: array
                                     positive:
                                       description: |-
-                                        True if we want to show concrete series names only, false if we want to hide concrete series names.
+                                        (Boolean) True if we want to show concrete series names only, false if we want to hide concrete series names
                                         True if we want to show concrete series names only, false if we want to hide concrete series names
                                       type: boolean
                                   type: object
                                 type: array
                               queries:
                                 description: |-
+                                  (Block List) Queries settings. (see below for nested schema)
                                   Queries settings.
-                                  Queries
                                 items:
                                   properties:
                                     downsampling:
                                       description: |-
-                                        Downsamplang settings.
+                                        (Block List) Downsampling settings (see below for nested schema)
                                         Downsampling settings
                                       items:
                                         properties:
                                           disabled:
                                             description: |-
-                                              Disable downsampling.
+                                              (Boolean) Disable downsampling
                                               Disable downsampling
                                             type: boolean
                                           gapFilling:
                                             description: |-
-                                              Parameters for filling gaps in data.
+                                              (String) Parameters for filling gaps in data
                                               Parameters for filling gaps in data
                                             type: string
                                           gridAggregation:
                                             description: |-
-                                              Function that is used for downsampling.
+                                              (String) Function that is used for downsampling
                                               Function that is used for downsampling
                                             type: string
                                           gridInterval:
                                             description: |-
-                                              Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
+                                              (Number) Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
                                               Time interval (grid) for downsampling in milliseconds. Points in the specified range are aggregated into one time point
                                             type: number
                                           maxPoints:
                                             description: |-
-                                              Maximum number of points to be returned.
+                                              (Number) Maximum number of points to be returned
                                               Maximum number of points to be returned
                                             type: number
                                         type: object
                                       type: array
                                     target:
                                       description: |-
-                                        Query targets.
+                                        (Block List) Downsampling settings (see below for nested schema)
                                         Downsampling settings
                                       items:
                                         properties:
                                           hidden:
                                             description: |-
-                                              Checks that target is visible or invisible.
+                                              visibility
                                               Checks that target is visible or invisible
                                             type: boolean
                                           query:
                                             description: |-
-                                              Query.
+                                              (String) Required. Query
                                               Required. Query
                                             type: string
                                           textMode:
                                             description: |-
-                                              Text mode enabled.
+                                              (Boolean) Text mode
                                               Text mode
                                             type: boolean
                                         type: object
@@ -1913,119 +1943,121 @@ spec:
                                   type: object
                                 type: array
                               seriesOverrides:
-                                description: Time series settings.
+                                description: |-
+                                  (Block List) Time series settings. (see below for nested schema)
+                                  Time series settings.
                                 items:
                                   properties:
                                     name:
                                       description: |-
-                                        Series name or empty.
+                                        (String) The resource name.
                                         Series name
                                       type: string
                                     settings:
                                       description: |-
-                                        Override settings.
+                                        (Block List) Override settings (see below for nested schema)
                                         Override settings
                                       items:
                                         properties:
                                           color:
                                             description: |-
-                                              Series color or empty.
+                                              (String) Series color or empty
                                               Series color or empty
                                             type: string
                                           growDown:
                                             description: |-
-                                              Stack grow down.
+                                              (Boolean) Stack grow down
                                               Stack grow down
                                             type: boolean
                                           name:
                                             description: |-
-                                              Series name or empty.
+                                              (String) The resource name.
                                               Series name or empty
                                             type: string
                                           stackName:
                                             description: |-
-                                              Stack name or empty.
+                                              (String) Stack name or empty
                                               Stack name or empty
                                             type: string
                                           type:
                                             description: |-
-                                              Type. Values:
+                                              (String) Type
                                               Type
                                             type: string
                                           yaxisPosition:
                                             description: |-
-                                              Yaxis position.
+                                              (String) Yaxis position
                                               Yaxis position
                                             type: string
                                         type: object
                                       type: array
                                     targetIndex:
                                       description: |-
-                                        Series index. Oneof: name or target_index.
+                                        (String) Target index
                                         Target index
                                       type: string
                                   type: object
                                 type: array
                               title:
                                 description: |-
-                                  Title or empty.
-                                  Chart widget title
+                                  (String) Dashboard title.
+                                  Chart widget title.
                                 type: string
                               visualizationSettings:
                                 description: |-
+                                  (Block List) Visualization settings. (see below for nested schema)
                                   Visualization settings.
-                                  Visualization settings
                                 items:
                                   properties:
                                     aggregation:
                                       description: |-
-                                        Aggregation. Values:
+                                        (String) Aggregation
                                         Aggregation
                                       type: string
                                     colorSchemeSettings:
                                       description: |-
-                                        Color settings.
+                                        (Block List) Color scheme settings (see below for nested schema)
                                         Color scheme settings
                                       items:
                                         properties:
                                           automatic:
                                             description: |-
-                                              Automatic color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Automatic color scheme (see below for nested schema)
                                               Automatic color scheme
                                             items:
                                               type: object
                                             type: array
                                           gradient:
                                             description: |-
-                                              Gradient color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Gradient color scheme (see below for nested schema)
                                               Gradient color scheme
                                             items:
                                               properties:
                                                 greenValue:
                                                   description: |-
-                                                    Gradient green value.
+                                                    (String) Gradient green value
                                                     Gradient green value
                                                   type: string
                                                 redValue:
                                                   description: |-
-                                                    Gradient red value.
+                                                    (String) Gradient red value
                                                     Gradient red value
                                                   type: string
                                                 violetValue:
                                                   description: |-
-                                                    Gradient violet value.
+                                                    (String) Gradient violet_value
                                                     Gradient violet_value
                                                   type: string
                                                 yellowValue:
                                                   description: |-
-                                                    Gradient yellow value.
+                                                    (String) Gradient yellow value
                                                     Gradient yellow value
                                                   type: string
                                               type: object
                                             type: array
                                           standard:
                                             description: |-
-                                              Standard color scheme. Oneof: automatic, standard or gradient.
+                                              (Block List) Standard color scheme (see below for nested schema)
                                               Standard color scheme
                                             items:
                                               type: object
@@ -2034,135 +2066,135 @@ spec:
                                       type: array
                                     heatmapSettings:
                                       description: |-
-                                        Heatmap settings.
+                                        (Block List) Heatmap settings (see below for nested schema)
                                         Heatmap settings
                                       items:
                                         properties:
                                           greenValue:
                                             description: |-
-                                              Gradient green value.
+                                              (String) Gradient green value
                                               Heatmap green value
                                             type: string
                                           redValue:
                                             description: |-
-                                              Gradient red value.
+                                              (String) Gradient red value
                                               Heatmap red value
                                             type: string
                                           violetValue:
                                             description: |-
-                                              Gradient violet value.
+                                              (String) Gradient violet_value
                                               Heatmap violet_value
                                             type: string
                                           yellowValue:
                                             description: |-
-                                              Gradient yellow value.
+                                              (String) Gradient yellow value
                                               Heatmap yellow value
                                             type: string
                                         type: object
                                       type: array
                                     interpolate:
                                       description: |-
-                                        Interpolate values. Values:
+                                        (String) Interpolate
                                         Interpolate
                                       type: string
                                     normalize:
                                       description: |-
-                                        Normalize values.
+                                        (Boolean) Normalize
                                         Normalize
                                       type: boolean
                                     showLabels:
                                       description: |-
-                                        Show chart labels.
+                                        (Boolean) Show chart labels
                                         Show chart labels
                                       type: boolean
                                     title:
                                       description: |-
-                                        Title or empty.
+                                        (String) Dashboard title.
                                         Inside chart title
                                       type: string
                                     type:
                                       description: |-
-                                        Type. Values:
+                                        (String) Type
                                         Visualization type
                                       type: string
                                     yaxisSettings:
                                       description: |-
-                                        Y axis settings.
+                                        (Block List) Y axis settings (see below for nested schema)
                                         Y axis settings
                                       items:
                                         properties:
                                           left:
                                             description: |-
-                                              Left yaxis config.
+                                              (Block List) Left Y axis settings (see below for nested schema)
                                               Left Y axis settings
                                             items:
                                               properties:
                                                 max:
                                                   description: |-
-                                                    Max value in extended number format or empty.
+                                                    (String) Max value in extended number format or empty
                                                     Max value in extended number format or empty
                                                   type: string
                                                 min:
                                                   description: |-
-                                                    Min value in extended number format or empty.
+                                                    (String) Min value in extended number format or empty
                                                     Min value in extended number format or empty
                                                   type: string
                                                 precision:
                                                   description: |-
-                                                    Tick value precision (null as default, 0-7 in other cases).
+                                                    7 in other cases)
                                                     Tick value precision (null as default, 0-7 in other cases)
                                                   type: number
                                                 title:
                                                   description: |-
-                                                    Title or empty.
+                                                    (String) Dashboard title.
                                                     Title or empty
                                                   type: string
                                                 type:
                                                   description: |-
-                                                    Type. Values:
+                                                    (String) Type
                                                     Type
                                                   type: string
                                                 unitFormat:
                                                   description: |-
-                                                    Unit format. Values:
+                                                    (String) Unit format
                                                     Unit format
                                                   type: string
                                               type: object
                                             type: array
                                           right:
                                             description: |-
-                                              Right yaxis config.
+                                              (Block List) Right Y axis settings (see below for nested schema)
                                               Right Y axis settings
                                             items:
                                               properties:
                                                 max:
                                                   description: |-
-                                                    Max value in extended number format or empty.
+                                                    (String) Max value in extended number format or empty
                                                     Max value in extended number format or empty
                                                   type: string
                                                 min:
                                                   description: |-
-                                                    Min value in extended number format or empty.
+                                                    (String) Min value in extended number format or empty
                                                     Min value in extended number format or empty
                                                   type: string
                                                 precision:
                                                   description: |-
-                                                    Tick value precision (null as default, 0-7 in other cases).
+                                                    7 in other cases)
                                                     Tick value precision (null as default, 0-7 in other cases)
                                                   type: number
                                                 title:
                                                   description: |-
-                                                    Title or empty.
+                                                    (String) Dashboard title.
                                                     Title or empty
                                                   type: string
                                                 type:
                                                   description: |-
-                                                    Type. Values:
+                                                    (String) Type
                                                     Type
                                                   type: string
                                                 unitFormat:
                                                   description: |-
-                                                    Unit format. Values:
+                                                    (String) Unit format
                                                     Unit format
                                                   type: string
                                               type: object
@@ -2175,60 +2207,66 @@ spec:
                           type: array
                         position:
                           description: |-
-                            Widget position.
-                            Required. Widget layout position
+                            (Block List) Widget layout position. (see below for nested schema)
+                            Widget layout position.
                           items:
                             properties:
                               h:
                                 description: |-
+                                  (Number) Height.
                                   Height.
-                                  Required. Height
                                 type: number
                               w:
                                 description: |-
-                                  Width.
-                                  Required. Weight
+                                  (Number) Weight.
+                                  Weight.
                                 type: number
                               x:
                                 description: |-
+                                  axis top-left corner coordinate.
                                   X-axis top-left corner coordinate.
-                                  Required. X-axis top-left corner coordinate
                                 type: number
                               "y":
                                 description: |-
+                                  axis top-left corner coordinate.
                                   Y-axis top-left corner coordinate.
-                                  Required. Y-axis top-left corner coordinate
                                 type: number
                             type: object
                           type: array
                         text:
                           description: |-
-                            Text widget settings. Oneof: text, title or chart.
-                            Text widget
+                            (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                            Text widget settings.
                           items:
                             properties:
                               text:
                                 description: |-
-                                  Text widget settings. Oneof: text, title or chart.
-                                  Text
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                                  Widget text.
                                 type: string
                             type: object
                           type: array
                         title:
                           description: |-
-                            Title widget settings. Oneof: text, title or chart.
-                            Title widget
+                            (String) Dashboard title.
+                            Title widget settings.
                           items:
                             properties:
                               size:
                                 description: |-
+                                  (String) Title size.
                                   Title size. Values:
-                                  Title size
+                                  Title size.
+                                  Title size. Values:
+                                  - TITLE_SIZE_XS: Extra small size.
+                                  - TITLE_SIZE_S: Small size.
+                                  - TITLE_SIZE_M: Middle size.
+                                  - TITLE_SIZE_L: Large size.
                                 type: string
                               text:
                                 description: |-
-                                  Text widget settings. Oneof: text, title or chart.
-                                  Title text
+                                  (Block List) Text parameter. Oneof: label_values, custom, text. (see below for nested schema)
+                                  Title text.
                                 type: string
                             type: object
                           type: array

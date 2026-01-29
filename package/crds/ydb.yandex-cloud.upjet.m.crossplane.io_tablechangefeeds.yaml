@@ -60,49 +60,149 @@ spec:
               forProvider:
                 properties:
                   connectionString:
-                    description: Connection string, conflicts with table_id
+                    description: |-
+                      (String) Connection string, conflicts with table_id.
+                      Connection string, conflicts with `table_id`.
                     type: string
                   consumer:
-                    description: Changefeed consumers - named entities for reading
-                      data from the topic.
+                    description: |-
+                      named entities for reading data from the topic. (see below for nested schema)
+                      Changefeed [consumers](https://ydb.tech/en/docs/concepts/topic#consumer) - named entities for reading data from the topic.
                     items:
                       properties:
+                        important:
+                          description: (Boolean)
+                          type: boolean
                         name:
-                          description: ': Changefeed name.'
+                          description: |-
+                            (String) Changefeed name.
+                            Consumer name. It is used in the SDK or CLI to [read data](https://ydb.tech/en/docs/best_practices/cdc#read) from the topic.
                           type: string
                         startingMessageTimestampMs:
-                          description: Timestamp in the UNIX timestamp format, from
-                            which the consumer will start reading data
+                          description: |-
+                            (Number) Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
+                            Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
                           type: number
                         supportedCodecs:
-                          description: Supported data encodings
+                          description: |-
+                            (List of String) Supported data encodings.
+                            Supported data encodings.
                           items:
                             type: string
                           type: array
-                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   format:
-                    description: ': Changefeed format. Only JSON format is available.'
+                    description: |-
+                      (String) Changefeed format.
+                      Changefeed format.
                     type: string
                   mode:
-                    description: ': Changefeed operating mode. The available changefeed
-                      operating modes are presented in the documentation.'
+                    description: |-
+                      (String) Changefeed mode.
+                      [Changefeed mode](https://ydb.tech/en/docs/yql/reference/syntax/alter_table#changefeed-options).
                     type: string
                   name:
-                    description: ': Changefeed name.'
+                    description: |-
+                      (String) Changefeed name.
+                      Changefeed name.
                     type: string
                   retentionPeriod:
-                    description: Time of data retention in the topic, ISO 8601 format
+                    description: |-
+                      (String) Time of data retention in the topic, ISO 8601 format.
+                      Time of data retention in the topic, [ISO 8601](https://ru.wikipedia.org/wiki/ISO_8601) format.
                     type: string
                   tableId:
-                    description: ': ID of the table for which we create the changefeed.'
                     type: string
+                  tableIdRef:
+                    description: Reference to a Table in ydb to populate tableId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  tableIdSelector:
+                    description: Selector for a Table in ydb to populate tableId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   tablePath:
-                    description: Table path
+                    description: |-
+                      (String) Table path.
+                      Table path.
                     type: string
                   virtualTimestamps:
-                    description: Use virtual timestamps
+                    description: |-
+                      (Boolean) Use virtual timestamps.
+                      Use [virtual timestamps](https://ydb.tech/en/docs/concepts/cdc#virtual-timestamps).
                     type: boolean
                 type: object
               initProvider:
@@ -119,49 +219,149 @@ spec:
                   autoscaler.
                 properties:
                   connectionString:
-                    description: Connection string, conflicts with table_id
+                    description: |-
+                      (String) Connection string, conflicts with table_id.
+                      Connection string, conflicts with `table_id`.
                     type: string
                   consumer:
-                    description: Changefeed consumers - named entities for reading
-                      data from the topic.
+                    description: |-
+                      named entities for reading data from the topic. (see below for nested schema)
+                      Changefeed [consumers](https://ydb.tech/en/docs/concepts/topic#consumer) - named entities for reading data from the topic.
                     items:
                       properties:
+                        important:
+                          description: (Boolean)
+                          type: boolean
                         name:
-                          description: ': Changefeed name.'
+                          description: |-
+                            (String) Changefeed name.
+                            Consumer name. It is used in the SDK or CLI to [read data](https://ydb.tech/en/docs/best_practices/cdc#read) from the topic.
                           type: string
                         startingMessageTimestampMs:
-                          description: Timestamp in the UNIX timestamp format, from
-                            which the consumer will start reading data
+                          description: |-
+                            (Number) Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
+                            Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
                           type: number
                         supportedCodecs:
-                          description: Supported data encodings
+                          description: |-
+                            (List of String) Supported data encodings.
+                            Supported data encodings.
                           items:
                             type: string
                           type: array
-                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   format:
-                    description: ': Changefeed format. Only JSON format is available.'
+                    description: |-
+                      (String) Changefeed format.
+                      Changefeed format.
                     type: string
                   mode:
-                    description: ': Changefeed operating mode. The available changefeed
-                      operating modes are presented in the documentation.'
+                    description: |-
+                      (String) Changefeed mode.
+                      [Changefeed mode](https://ydb.tech/en/docs/yql/reference/syntax/alter_table#changefeed-options).
                     type: string
                   name:
-                    description: ': Changefeed name.'
+                    description: |-
+                      (String) Changefeed name.
+                      Changefeed name.
                     type: string
                   retentionPeriod:
-                    description: Time of data retention in the topic, ISO 8601 format
+                    description: |-
+                      (String) Time of data retention in the topic, ISO 8601 format.
+                      Time of data retention in the topic, [ISO 8601](https://ru.wikipedia.org/wiki/ISO_8601) format.
                     type: string
                   tableId:
-                    description: ': ID of the table for which we create the changefeed.'
                     type: string
+                  tableIdRef:
+                    description: Reference to a Table in ydb to populate tableId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      namespace:
+                        description: Namespace of the referenced object
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  tableIdSelector:
+                    description: Selector for a Table in ydb to populate tableId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      namespace:
+                        description: Namespace for the selector
+                        type: string
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   tablePath:
-                    description: Table path
+                    description: |-
+                      (String) Table path.
+                      Table path.
                     type: string
                   virtualTimestamps:
-                    description: Use virtual timestamps
+                    description: |-
+                      (Boolean) Use virtual timestamps.
+                      Use [virtual timestamps](https://ydb.tech/en/docs/concepts/cdc#virtual-timestamps).
                     type: boolean
                 type: object
               managementPolicies:
@@ -241,51 +441,72 @@ spec:
               atProvider:
                 properties:
                   connectionString:
-                    description: Connection string, conflicts with table_id
+                    description: |-
+                      (String) Connection string, conflicts with table_id.
+                      Connection string, conflicts with `table_id`.
                     type: string
                   consumer:
-                    description: Changefeed consumers - named entities for reading
-                      data from the topic.
+                    description: |-
+                      named entities for reading data from the topic. (see below for nested schema)
+                      Changefeed [consumers](https://ydb.tech/en/docs/concepts/topic#consumer) - named entities for reading data from the topic.
                     items:
                       properties:
+                        important:
+                          description: (Boolean)
+                          type: boolean
                         name:
-                          description: ': Changefeed name.'
+                          description: |-
+                            (String) Changefeed name.
+                            Consumer name. It is used in the SDK or CLI to [read data](https://ydb.tech/en/docs/best_practices/cdc#read) from the topic.
                           type: string
                         startingMessageTimestampMs:
-                          description: Timestamp in the UNIX timestamp format, from
-                            which the consumer will start reading data
+                          description: |-
+                            (Number) Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
+                            Timestamp in the UNIX timestamp format, from which the consumer will start reading data.
                           type: number
                         supportedCodecs:
-                          description: Supported data encodings
+                          description: |-
+                            (List of String) Supported data encodings.
+                            Supported data encodings.
                           items:
                             type: string
                           type: array
-                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   format:
-                    description: ': Changefeed format. Only JSON format is available.'
+                    description: |-
+                      (String) Changefeed format.
+                      Changefeed format.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   mode:
-                    description: ': Changefeed operating mode. The available changefeed
-                      operating modes are presented in the documentation.'
+                    description: |-
+                      (String) Changefeed mode.
+                      [Changefeed mode](https://ydb.tech/en/docs/yql/reference/syntax/alter_table#changefeed-options).
                     type: string
                   name:
-                    description: ': Changefeed name.'
+                    description: |-
+                      (String) Changefeed name.
+                      Changefeed name.
                     type: string
                   retentionPeriod:
-                    description: Time of data retention in the topic, ISO 8601 format
+                    description: |-
+                      (String) Time of data retention in the topic, ISO 8601 format.
+                      Time of data retention in the topic, [ISO 8601](https://ru.wikipedia.org/wiki/ISO_8601) format.
                     type: string
                   tableId:
-                    description: ': ID of the table for which we create the changefeed.'
                     type: string
                   tablePath:
-                    description: Table path
+                    description: |-
+                      (String) Table path.
+                      Table path.
                     type: string
                   virtualTimestamps:
-                    description: Use virtual timestamps
+                    description: |-
+                      (Boolean) Use virtual timestamps.
+                      Use [virtual timestamps](https://ydb.tech/en/docs/concepts/cdc#virtual-timestamps).
                     type: boolean
                 type: object
               conditions:

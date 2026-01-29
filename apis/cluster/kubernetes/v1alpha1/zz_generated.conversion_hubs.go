@@ -6,4 +6,13 @@ package v1alpha1
 func (tr *Cluster) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ClusterIAMBinding) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ClusterIAMMember) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MarketplaceHelmRelease) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *NodeGroup) Hub() {}

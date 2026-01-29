@@ -1,0 +1,12 @@
+apiVersion: organizationmanager.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: GroupMapping
+metadata:
+  annotations:
+    meta.upbound.io/example-id: organizationmanager/v1alpha1/groupmapping
+  labels:
+    testing.upbound.io/example-name: my_group_map
+  name: my-group-map
+spec:
+  forProvider:
+    enabled: true
+    federationId: my-federation-id

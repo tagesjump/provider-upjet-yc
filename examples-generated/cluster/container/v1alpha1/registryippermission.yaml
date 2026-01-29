@@ -31,4 +31,9 @@ metadata:
   name: my-registry
 spec:
   forProvider:
+    folderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labels:
+      my-label: my-label-value
     name: test-registry

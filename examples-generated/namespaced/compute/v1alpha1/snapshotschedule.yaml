@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1alpha1/snapshotschedule
   labels:
-    testing.upbound.io/example-name: default
-  name: default
+    testing.upbound.io/example-name: vm_snap_sch1
+  name: vm-snap-sch1
   namespace: upbound-system
 spec:
   forProvider:

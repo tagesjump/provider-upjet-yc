@@ -1,0 +1,17 @@
+apiVersion: yq.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: YdsConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: yq/v1alpha1/ydsconnection
+  labels:
+    testing.upbound.io/example-name: my_yds_connection
+  name: my-yds-connection
+  namespace: upbound-system
+spec:
+  forProvider:
+    databaseId: db_id
+    description: Connection has been created from Terraform
+    name: tf-test-yds-connection
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: for-yq

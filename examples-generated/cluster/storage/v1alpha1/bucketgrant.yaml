@@ -1,0 +1,18 @@
+apiVersion: storage.yandex-cloud.upjet.crossplane.io/v1alpha1
+kind: BucketGrant
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1alpha1/bucketgrant
+  labels:
+    testing.upbound.io/example-name: my_grant_0
+  name: my-grant-0
+spec:
+  forProvider:
+    bucket: my_bucket_name_0
+    grant:
+    - id: <user_id>
+      permissions:
+      - READ
+      - WRITE
+      - FULL_CONTROL
+      type: CanonicalUser

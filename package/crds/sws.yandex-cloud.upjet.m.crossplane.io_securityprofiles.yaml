@@ -34,8 +34,9 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: SecurityProfile is the Schema for the SecurityProfiles API. <no
-          value>
+        description: SecurityProfile is the Schema for the SecurityProfiles API. With
+          security profiles you can protect your infrastructure from DDoS attacks
+          at the application level (L7).
         properties:
           apiVersion:
             description: |-
@@ -59,15 +60,49 @@ spec:
             properties:
               forProvider:
                 properties:
+                  advancedRateLimiterProfileId:
+                    description: |-
+                      (String) Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+                      Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+                    type: string
+                  analyzeRequestBody:
+                    description: |-
+                      (Block List, Max: 1) Analyze request body. (see below for nested schema)
+                      Analyze request body.
+                    items:
+                      properties:
+                        sizeLimit:
+                          description: (Number)
+                          type: number
+                        sizeLimitAction:
+                          description: (String)
+                          type: string
+                      type: object
+                    type: array
                   captchaId:
+                    description: |-
+                      (String) Captcha ID to use with this security profile. Set empty to use default.
+                      Captcha ID to use with this security profile. Set empty to use default.
                     type: string
                   cloudId:
+                    description: |-
+                      id is used.
+                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
                     type: string
                   defaultAction:
+                    description: |-
+                      (String) Action to perform if none of rules matched. Possible values: ALLOW or DENY.
+                      Action to perform if none of rules matched. Possible values: `ALLOW` or `DENY`.
                     type: string
                   description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -154,136 +189,221 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   securityRule:
+                    description: |-
+                      (Block List) List of security rules.
+                      List of security rules.
+
+                      ~> Exactly one rule specifier: `smart_protection` or `rule_condition` or `waf` should be specified.
                     items:
                       properties:
                         description:
+                          description: |-
+                            (String) The resource description.
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         dryRun:
+                          description: |-
+                            (Boolean) This mode allows you to test your security profile or a single rule.
+                            This mode allows you to test your security profile or a single rule.
                           type: boolean
                         name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the rule. The name is unique within the security profile. 1-50 characters long.
                           type: string
                         priority:
+                          description: |-
+                            (Number) Determines the priority for checking the incoming traffic.
+                            Determines the priority for checking the incoming traffic.
                           type: number
                         ruleCondition:
+                          description: |-
+                            (Block List, Max: 1) Rule actions, see Rule actions. (see below for nested schema)
+                            Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
                           items:
                             properties:
                               action:
+                                description: |-
+                                  (String) Action to perform if this rule matched. Possible values: ALLOW or DENY.
+                                  Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
                                 type: string
                               condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
                                 items:
                                   properties:
                                     authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           name:
+                                            description: (String) The resource name.
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                           queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 key:
+                                                  description: (String)
                                                   type: string
                                                 value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
                                                   items:
                                                     properties:
                                                       exactMatch:
+                                                        description: (String)
                                                         type: string
                                                       exactNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixNotMatch:
+                                                        description: (String)
                                                         type: string
                                                     type: object
                                                   type: array
@@ -292,39 +412,53 @@ spec:
                                         type: object
                                       type: array
                                     sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
@@ -337,118 +471,177 @@ spec:
                             type: object
                           type: array
                         smartProtection:
+                          description: |-
+                            (Block List, Max: 1) Smart Protection rule, see Smart Protection rules. (see below for nested schema)
+                            Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
                           items:
                             properties:
                               condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
                                 items:
                                   properties:
                                     authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           name:
+                                            description: (String) The resource name.
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                           queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 key:
+                                                  description: (String)
                                                   type: string
                                                 value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
                                                   items:
                                                     properties:
                                                       exactMatch:
+                                                        description: (String)
                                                         type: string
                                                       exactNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixNotMatch:
+                                                        description: (String)
                                                         type: string
                                                     type: object
                                                   type: array
@@ -457,39 +650,53 @@ spec:
                                         type: object
                                       type: array
                                     sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
@@ -500,6 +707,257 @@ spec:
                                   type: object
                                 type: array
                               mode:
+                                description: |-
+                                  (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                  Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                type: string
+                            type: object
+                          type: array
+                        waf:
+                          description: |-
+                            (Block List, Max: 1) Web Application Firewall (WAF) rule, see WAF rules. (see below for nested schema)
+                            Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+                          items:
+                            properties:
+                              condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+                                items:
+                                  properties:
+                                    authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
+                                      items:
+                                        properties:
+                                          name:
+                                            description: (String) The resource name.
+                                            type: string
+                                          value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                key:
+                                                  description: (String)
+                                                  type: string
+                                                value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
+                                                  items:
+                                                    properties:
+                                                      exactMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      exactNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      pireRegexMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      pireRegexNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      prefixMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      prefixNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                locations:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                locations:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              mode:
+                                description: |-
+                                  (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                  Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                type: string
+                              wafProfileId:
+                                description: |-
+                                  (String) ID of WAF profile to use in this rule.
+                                  ID of WAF profile to use in this rule.
                                 type: string
                             type: object
                           type: array
@@ -519,15 +977,49 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  advancedRateLimiterProfileId:
+                    description: |-
+                      (String) Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+                      Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+                    type: string
+                  analyzeRequestBody:
+                    description: |-
+                      (Block List, Max: 1) Analyze request body. (see below for nested schema)
+                      Analyze request body.
+                    items:
+                      properties:
+                        sizeLimit:
+                          description: (Number)
+                          type: number
+                        sizeLimitAction:
+                          description: (String)
+                          type: string
+                      type: object
+                    type: array
                   captchaId:
+                    description: |-
+                      (String) Captcha ID to use with this security profile. Set empty to use default.
+                      Captcha ID to use with this security profile. Set empty to use default.
                     type: string
                   cloudId:
+                    description: |-
+                      id is used.
+                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
                     type: string
                   defaultAction:
+                    description: |-
+                      (String) Action to perform if none of rules matched. Possible values: ALLOW or DENY.
+                      Action to perform if none of rules matched. Possible values: `ALLOW` or `DENY`.
                     type: string
                   description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -614,136 +1106,221 @@ spec:
                   labels:
                     additionalProperties:
                       type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   securityRule:
+                    description: |-
+                      (Block List) List of security rules.
+                      List of security rules.
+
+                      ~> Exactly one rule specifier: `smart_protection` or `rule_condition` or `waf` should be specified.
                     items:
                       properties:
                         description:
+                          description: |-
+                            (String) The resource description.
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         dryRun:
+                          description: |-
+                            (Boolean) This mode allows you to test your security profile or a single rule.
+                            This mode allows you to test your security profile or a single rule.
                           type: boolean
                         name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the rule. The name is unique within the security profile. 1-50 characters long.
                           type: string
                         priority:
+                          description: |-
+                            (Number) Determines the priority for checking the incoming traffic.
+                            Determines the priority for checking the incoming traffic.
                           type: number
                         ruleCondition:
+                          description: |-
+                            (Block List, Max: 1) Rule actions, see Rule actions. (see below for nested schema)
+                            Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
                           items:
                             properties:
                               action:
+                                description: |-
+                                  (String) Action to perform if this rule matched. Possible values: ALLOW or DENY.
+                                  Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
                                 type: string
                               condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
                                 items:
                                   properties:
                                     authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           name:
+                                            description: (String) The resource name.
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                           queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 key:
+                                                  description: (String)
                                                   type: string
                                                 value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
                                                   items:
                                                     properties:
                                                       exactMatch:
+                                                        description: (String)
                                                         type: string
                                                       exactNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixNotMatch:
+                                                        description: (String)
                                                         type: string
                                                     type: object
                                                   type: array
@@ -752,39 +1329,53 @@ spec:
                                         type: object
                                       type: array
                                     sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
@@ -797,118 +1388,177 @@ spec:
                             type: object
                           type: array
                         smartProtection:
+                          description: |-
+                            (Block List, Max: 1) Smart Protection rule, see Smart Protection rules. (see below for nested schema)
+                            Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
                           items:
                             properties:
                               condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
                                 items:
                                   properties:
                                     authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           name:
+                                            description: (String) The resource name.
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                           queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 key:
+                                                  description: (String)
                                                   type: string
                                                 value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
                                                   items:
                                                     properties:
                                                       exactMatch:
+                                                        description: (String)
                                                         type: string
                                                       exactNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixNotMatch:
+                                                        description: (String)
                                                         type: string
                                                     type: object
                                                   type: array
@@ -917,39 +1567,53 @@ spec:
                                         type: object
                                       type: array
                                     sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
@@ -960,6 +1624,257 @@ spec:
                                   type: object
                                 type: array
                               mode:
+                                description: |-
+                                  (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                  Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                type: string
+                            type: object
+                          type: array
+                        waf:
+                          description: |-
+                            (Block List, Max: 1) Web Application Firewall (WAF) rule, see WAF rules. (see below for nested schema)
+                            Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+                          items:
+                            properties:
+                              condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+                                items:
+                                  properties:
+                                    authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
+                                      items:
+                                        properties:
+                                          name:
+                                            description: (String) The resource name.
+                                            type: string
+                                          value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                key:
+                                                  description: (String)
+                                                  type: string
+                                                value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
+                                                  items:
+                                                    properties:
+                                                      exactMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      exactNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      pireRegexMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      pireRegexNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      prefixMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      prefixNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                locations:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                locations:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              mode:
+                                description: |-
+                                  (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                  Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                type: string
+                              wafProfileId:
+                                description: |-
+                                  (String) ID of WAF profile to use in this rule.
+                                  ID of WAF profile to use in this rule.
                                 type: string
                             type: object
                           type: array
@@ -1029,153 +1944,276 @@ spec:
             properties:
               atProvider:
                 properties:
+                  advancedRateLimiterProfileId:
+                    description: |-
+                      (String) Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+                      Advanced rate limiter profile ID to use with this security profile. Set empty to use default.
+                    type: string
+                  analyzeRequestBody:
+                    description: |-
+                      (Block List, Max: 1) Analyze request body. (see below for nested schema)
+                      Analyze request body.
+                    items:
+                      properties:
+                        sizeLimit:
+                          description: (Number)
+                          type: number
+                        sizeLimitAction:
+                          description: (String)
+                          type: string
+                      type: object
+                    type: array
                   captchaId:
+                    description: |-
+                      (String) Captcha ID to use with this security profile. Set empty to use default.
+                      Captcha ID to use with this security profile. Set empty to use default.
                     type: string
                   cloudId:
+                    description: |-
+                      id is used.
+                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
                     type: string
                   createdAt:
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   defaultAction:
+                    description: |-
+                      (String) Action to perform if none of rules matched. Possible values: ALLOW or DENY.
+                      Action to perform if none of rules matched. Possible values: `ALLOW` or `DENY`.
                     type: string
                   description:
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   folderId:
+                    description: |-
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
                   name:
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   securityRule:
+                    description: |-
+                      (Block List) List of security rules.
+                      List of security rules.
+
+                      ~> Exactly one rule specifier: `smart_protection` or `rule_condition` or `waf` should be specified.
                     items:
                       properties:
                         description:
+                          description: |-
+                            (String) The resource description.
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         dryRun:
+                          description: |-
+                            (Boolean) This mode allows you to test your security profile or a single rule.
+                            This mode allows you to test your security profile or a single rule.
                           type: boolean
                         name:
+                          description: |-
+                            (String) The resource name.
+                            Name of the rule. The name is unique within the security profile. 1-50 characters long.
                           type: string
                         priority:
+                          description: |-
+                            (Number) Determines the priority for checking the incoming traffic.
+                            Determines the priority for checking the incoming traffic.
                           type: number
                         ruleCondition:
+                          description: |-
+                            (Block List, Max: 1) Rule actions, see Rule actions. (see below for nested schema)
+                            Rule actions, see [Rule actions](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#rule-action).
                           items:
                             properties:
                               action:
+                                description: |-
+                                  (String) Action to perform if this rule matched. Possible values: ALLOW or DENY.
+                                  Action to perform if this rule matched. Possible values: `ALLOW` or `DENY`.
                                 type: string
                               condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
                                 items:
                                   properties:
                                     authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           name:
+                                            description: (String) The resource name.
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                           queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 key:
+                                                  description: (String)
                                                   type: string
                                                 value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
                                                   items:
                                                     properties:
                                                       exactMatch:
+                                                        description: (String)
                                                         type: string
                                                       exactNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixNotMatch:
+                                                        description: (String)
                                                         type: string
                                                     type: object
                                                   type: array
@@ -1184,39 +2222,53 @@ spec:
                                         type: object
                                       type: array
                                     sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
@@ -1229,118 +2281,177 @@ spec:
                             type: object
                           type: array
                         smartProtection:
+                          description: |-
+                            (Block List, Max: 1) Smart Protection rule, see Smart Protection rules. (see below for nested schema)
+                            Smart Protection rule, see [Smart Protection rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#smart-protection-rules).
                           items:
                             properties:
                               condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
                                 items:
                                   properties:
                                     authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
                                       items:
                                         properties:
                                           name:
+                                            description: (String) The resource name.
                                             type: string
                                           value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                         type: object
                                       type: array
                                     requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 exactMatch:
+                                                  description: (String)
                                                   type: string
                                                 exactNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexMatch:
+                                                  description: (String)
                                                   type: string
                                                 pireRegexNotMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixMatch:
+                                                  description: (String)
                                                   type: string
                                                 prefixNotMatch:
+                                                  description: (String)
                                                   type: string
                                               type: object
                                             type: array
                                           queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
                                             items:
                                               properties:
                                                 key:
+                                                  description: (String)
                                                   type: string
                                                 value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
                                                   items:
                                                     properties:
                                                       exactMatch:
+                                                        description: (String)
                                                         type: string
                                                       exactNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexMatch:
+                                                        description: (String)
                                                         type: string
                                                       pireRegexNotMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixMatch:
+                                                        description: (String)
                                                         type: string
                                                       prefixNotMatch:
+                                                        description: (String)
                                                         type: string
                                                     type: object
                                                   type: array
@@ -1349,39 +2460,53 @@ spec:
                                         type: object
                                       type: array
                                     sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
                                       items:
                                         properties:
                                           geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 locations:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
                                               type: object
                                             type: array
                                           ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
                                             items:
                                               properties:
                                                 ipRanges:
+                                                  description: (List of String)
                                                   items:
                                                     type: string
                                                   type: array
@@ -1392,6 +2517,257 @@ spec:
                                   type: object
                                 type: array
                               mode:
+                                description: |-
+                                  (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                  Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                type: string
+                            type: object
+                          type: array
+                        waf:
+                          description: |-
+                            (Block List, Max: 1) Web Application Firewall (WAF) rule, see WAF rules. (see below for nested schema)
+                            Web Application Firewall (WAF) rule, see [WAF rules](https://yandex.cloud/en/docs/smartwebsecurity/concepts/rules#waf-rules).
+                          items:
+                            properties:
+                              condition:
+                                description: |-
+                                  (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
+                                  The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartwebsecurity/v1/security_profile.proto).
+                                items:
+                                  properties:
+                                    authority:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          authorities:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    headers:
+                                      description: (Block List) (see below for nested
+                                        schema)
+                                      items:
+                                        properties:
+                                          name:
+                                            description: (String) The resource name.
+                                            type: string
+                                          value:
+                                            description: '(Block List, Min: 1, Max:
+                                              1) (see below for nested schema)'
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    httpMethod:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          httpMethods:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    requestUri:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          path:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                exactMatch:
+                                                  description: (String)
+                                                  type: string
+                                                exactNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexMatch:
+                                                  description: (String)
+                                                  type: string
+                                                pireRegexNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixMatch:
+                                                  description: (String)
+                                                  type: string
+                                                prefixNotMatch:
+                                                  description: (String)
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          queries:
+                                            description: (Block List) (see below for
+                                              nested schema)
+                                            items:
+                                              properties:
+                                                key:
+                                                  description: (String)
+                                                  type: string
+                                                value:
+                                                  description: '(Block List, Min:
+                                                    1, Max: 1) (see below for nested
+                                                    schema)'
+                                                  items:
+                                                    properties:
+                                                      exactMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      exactNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      pireRegexMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      pireRegexNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      prefixMatch:
+                                                        description: (String)
+                                                        type: string
+                                                      prefixNotMatch:
+                                                        description: (String)
+                                                        type: string
+                                                    type: object
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                    sourceIp:
+                                      description: '(Block List, Max: 1) (see below
+                                        for nested schema)'
+                                      items:
+                                        properties:
+                                          geoIpMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                locations:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          geoIpNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                locations:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                          ipRangesNotMatch:
+                                            description: '(Block List, Max: 1) (see
+                                              below for nested schema)'
+                                            items:
+                                              properties:
+                                                ipRanges:
+                                                  description: (List of String)
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                              type: object
+                                            type: array
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              mode:
+                                description: |-
+                                  (String) Mode of protection. Possible values: FULL (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or API (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                  Mode of protection. Possible values: `FULL` (full protection means that the traffic will be checked based on ML models and behavioral analysis, with suspicious requests being sent to SmartCaptcha) or `API` (API protection means checking the traffic based on ML models and behavioral analysis without sending suspicious requests to SmartCaptcha. The suspicious requests will be blocked).
+                                type: string
+                              wafProfileId:
+                                description: |-
+                                  (String) ID of WAF profile to use in this rule.
+                                  ID of WAF profile to use in this rule.
                                 type: string
                             type: object
                           type: array

@@ -9,69 +9,206 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/v2/apis/common/v1"
 )
 
+type AnalyzeAndVacuumInitParameters struct {
+
+	// (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+	// Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+	AnalyzeTimeout *float64 `json:"analyzeTimeout,omitempty" tf:"analyze_timeout,omitempty"`
+
+	// (String) Time of day in 'HH:MM' format when scripts should run.
+	// Time of day in 'HH:MM' format when scripts should run.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+	// Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+	VacuumTimeout *float64 `json:"vacuumTimeout,omitempty" tf:"vacuum_timeout,omitempty"`
+}
+
+type AnalyzeAndVacuumObservation struct {
+
+	// (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+	// Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+	AnalyzeTimeout *float64 `json:"analyzeTimeout,omitempty" tf:"analyze_timeout,omitempty"`
+
+	// (String) Time of day in 'HH:MM' format when scripts should run.
+	// Time of day in 'HH:MM' format when scripts should run.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+	// Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+	VacuumTimeout *float64 `json:"vacuumTimeout,omitempty" tf:"vacuum_timeout,omitempty"`
+}
+
+type AnalyzeAndVacuumParameters struct {
+
+	// (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+	// Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+	// +kubebuilder:validation:Optional
+	AnalyzeTimeout *float64 `json:"analyzeTimeout,omitempty" tf:"analyze_timeout,omitempty"`
+
+	// (String) Time of day in 'HH:MM' format when scripts should run.
+	// Time of day in 'HH:MM' format when scripts should run.
+	// +kubebuilder:validation:Optional
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+	// Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+	// +kubebuilder:validation:Optional
+	VacuumTimeout *float64 `json:"vacuumTimeout,omitempty" tf:"vacuum_timeout,omitempty"`
+}
+
+type BackgroundActivitiesInitParameters struct {
+
+	// (Block List) Block to configure 'ANALYZE' and 'VACUUM' daily operations. (see below for nested schema)
+	// Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+	AnalyzeAndVacuum []AnalyzeAndVacuumInitParameters `json:"analyzeAndVacuum,omitempty" tf:"analyze_and_vacuum,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries that are in idle state. (see below for nested schema)
+	// Block to configure script that kills long running queries that are in `idle` state.
+	QueryKillerIdle []QueryKillerIdleInitParameters `json:"queryKillerIdle,omitempty" tf:"query_killer_idle,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries that are in idle in transaction state. (see below for nested schema)
+	// Block to configure script that kills long running queries that are in `idle in transaction` state.
+	QueryKillerIdleInTransaction []QueryKillerIdleInTransactionInitParameters `json:"queryKillerIdleInTransaction,omitempty" tf:"query_killer_idle_in_transaction,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries (in any state). (see below for nested schema)
+	// Block to configure script that kills long running queries (in any state).
+	QueryKillerLongRunning []QueryKillerLongRunningInitParameters `json:"queryKillerLongRunning,omitempty" tf:"query_killer_long_running,omitempty"`
+}
+
+type BackgroundActivitiesObservation struct {
+
+	// (Block List) Block to configure 'ANALYZE' and 'VACUUM' daily operations. (see below for nested schema)
+	// Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+	AnalyzeAndVacuum []AnalyzeAndVacuumObservation `json:"analyzeAndVacuum,omitempty" tf:"analyze_and_vacuum,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries that are in idle state. (see below for nested schema)
+	// Block to configure script that kills long running queries that are in `idle` state.
+	QueryKillerIdle []QueryKillerIdleObservation `json:"queryKillerIdle,omitempty" tf:"query_killer_idle,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries that are in idle in transaction state. (see below for nested schema)
+	// Block to configure script that kills long running queries that are in `idle in transaction` state.
+	QueryKillerIdleInTransaction []QueryKillerIdleInTransactionObservation `json:"queryKillerIdleInTransaction,omitempty" tf:"query_killer_idle_in_transaction,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries (in any state). (see below for nested schema)
+	// Block to configure script that kills long running queries (in any state).
+	QueryKillerLongRunning []QueryKillerLongRunningObservation `json:"queryKillerLongRunning,omitempty" tf:"query_killer_long_running,omitempty"`
+}
+
+type BackgroundActivitiesParameters struct {
+
+	// (Block List) Block to configure 'ANALYZE' and 'VACUUM' daily operations. (see below for nested schema)
+	// Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+	// +kubebuilder:validation:Optional
+	AnalyzeAndVacuum []AnalyzeAndVacuumParameters `json:"analyzeAndVacuum,omitempty" tf:"analyze_and_vacuum,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries that are in idle state. (see below for nested schema)
+	// Block to configure script that kills long running queries that are in `idle` state.
+	// +kubebuilder:validation:Optional
+	QueryKillerIdle []QueryKillerIdleParameters `json:"queryKillerIdle,omitempty" tf:"query_killer_idle,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries that are in idle in transaction state. (see below for nested schema)
+	// Block to configure script that kills long running queries that are in `idle in transaction` state.
+	// +kubebuilder:validation:Optional
+	QueryKillerIdleInTransaction []QueryKillerIdleInTransactionParameters `json:"queryKillerIdleInTransaction,omitempty" tf:"query_killer_idle_in_transaction,omitempty"`
+
+	// (Block List) Block to configure script that kills long running queries (in any state). (see below for nested schema)
+	// Block to configure script that kills long running queries (in any state).
+	// +kubebuilder:validation:Optional
+	QueryKillerLongRunning []QueryKillerLongRunningParameters `json:"queryKillerLongRunning,omitempty" tf:"query_killer_long_running,omitempty"`
+}
+
 type GreenplumClusterAccessInitParameters struct {
 
-	// Allow access for Yandex DataLens.
+	// (Boolean) Allow access for Yandex DataLens.
+	// Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
 	DataLens *bool `json:"dataLens,omitempty" tf:"data_lens,omitempty"`
 
-	// Allow access for DataTransfer
+	// (Boolean) Allow access for DataTransfer
+	// Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
 	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
 
-	// Allows access for SQL queries in the management console.
+	// (Boolean) Allows access for SQL queries in the management console.
+	// Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
 	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
+
+	// (Boolean) Allow access for Yandex Query
+	// Allow access for [Yandex Query](https://yandex.cloud/services/query)
+	YandexQuery *bool `json:"yandexQuery,omitempty" tf:"yandex_query,omitempty"`
 }
 
 type GreenplumClusterAccessObservation struct {
 
-	// Allow access for Yandex DataLens.
+	// (Boolean) Allow access for Yandex DataLens.
+	// Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
 	DataLens *bool `json:"dataLens,omitempty" tf:"data_lens,omitempty"`
 
-	// Allow access for DataTransfer
+	// (Boolean) Allow access for DataTransfer
+	// Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
 	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
 
-	// Allows access for SQL queries in the management console.
+	// (Boolean) Allows access for SQL queries in the management console.
+	// Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
 	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
+
+	// (Boolean) Allow access for Yandex Query
+	// Allow access for [Yandex Query](https://yandex.cloud/services/query)
+	YandexQuery *bool `json:"yandexQuery,omitempty" tf:"yandex_query,omitempty"`
 }
 
 type GreenplumClusterAccessParameters struct {
 
-	// Allow access for Yandex DataLens.
+	// (Boolean) Allow access for Yandex DataLens.
+	// Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
 	// +kubebuilder:validation:Optional
 	DataLens *bool `json:"dataLens,omitempty" tf:"data_lens,omitempty"`
 
-	// Allow access for DataTransfer
+	// (Boolean) Allow access for DataTransfer
+	// Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
 	// +kubebuilder:validation:Optional
 	DataTransfer *bool `json:"dataTransfer,omitempty" tf:"data_transfer,omitempty"`
 
-	// Allows access for SQL queries in the management console.
+	// (Boolean) Allows access for SQL queries in the management console.
+	// Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
 	// +kubebuilder:validation:Optional
 	WebSQL *bool `json:"webSql,omitempty" tf:"web_sql,omitempty"`
+
+	// (Boolean) Allow access for Yandex Query
+	// Allow access for [Yandex Query](https://yandex.cloud/services/query)
+	// +kubebuilder:validation:Optional
+	YandexQuery *bool `json:"yandexQuery,omitempty" tf:"yandex_query,omitempty"`
 }
 
 type GreenplumClusterBackupWindowStartInitParameters struct {
 
+	// (Number) The hour at which backup will be started (UTC).
 	// The hour at which backup will be started (UTC).
 	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
+	// (Number) The minute at which backup will be started (UTC).
 	// The minute at which backup will be started (UTC).
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type GreenplumClusterBackupWindowStartObservation struct {
 
+	// (Number) The hour at which backup will be started (UTC).
 	// The hour at which backup will be started (UTC).
 	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
+	// (Number) The minute at which backup will be started (UTC).
 	// The minute at which backup will be started (UTC).
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 }
 
 type GreenplumClusterBackupWindowStartParameters struct {
 
+	// (Number) The hour at which backup will be started (UTC).
 	// The hour at which backup will be started (UTC).
 	// +kubebuilder:validation:Optional
 	Hours *float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
+	// (Number) The minute at which backup will be started (UTC).
 	// The minute at which backup will be started (UTC).
 	// +kubebuilder:validation:Optional
 	Minutes *float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
@@ -79,18 +216,21 @@ type GreenplumClusterBackupWindowStartParameters struct {
 
 type GreenplumClusterCloudStorageInitParameters struct {
 
+	// (Boolean) Flag that indicates whether script is enabled.
 	// Whether to use cloud storage or not.
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 }
 
 type GreenplumClusterCloudStorageObservation struct {
 
+	// (Boolean) Flag that indicates whether script is enabled.
 	// Whether to use cloud storage or not.
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 }
 
 type GreenplumClusterCloudStorageParameters struct {
 
+	// (Boolean) Flag that indicates whether script is enabled.
 	// Whether to use cloud storage or not.
 	// +kubebuilder:validation:Optional
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
@@ -98,29 +238,40 @@ type GreenplumClusterCloudStorageParameters struct {
 
 type GreenplumClusterInitParameters struct {
 
-	// Access policy to the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Access policy to the Greenplum cluster. (see below for nested schema)
+	// Access policy to the Greenplum cluster.
 	Access []GreenplumClusterAccessInitParameters `json:"access,omitempty" tf:"access,omitempty"`
 
+	// (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	// Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
+	// (Block List) Background activities settings. (see below for nested schema)
+	// Background activities settings.
+	BackgroundActivities []BackgroundActivitiesInitParameters `json:"backgroundActivities,omitempty" tf:"background_activities,omitempty"`
+
+	// (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart []GreenplumClusterBackupWindowStartInitParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
-	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Cloud Storage settings of the Greenplum cluster. (see below for nested schema)
+	// Cloud Storage settings of the Greenplum cluster.
 	CloudStorage []GreenplumClusterCloudStorageInitParameters `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the Greenplum cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	// Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -132,27 +283,43 @@ type GreenplumClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
+	// (Map of String) Greenplum cluster config. Detail info in Greenplum cluster settings block.
+	// Greenplum cluster config. Detail info in `Greenplum cluster settings` block.
 	// +mapType=granular
 	GreenplumConfig map[string]*string `json:"greenplumConfig,omitempty" tf:"greenplum_config,omitempty"`
 
-	// A set of key/value label pairs to assign to the Greenplum cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Maintenance policy of the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Cloud Logging settings. (see below for nested schema)
+	// Cloud Logging settings.
+	Logging []LoggingInitParameters `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// (Block List, Max: 1) Maintenance policy of the Greenplum cluster. (see below for nested schema)
+	// Maintenance policy of the Greenplum cluster.
 	MaintenanceWindow []GreenplumClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// (Number) Number of hosts in master subcluster (1 or 2).
 	// Number of hosts in master subcluster (1 or 2).
 	MasterHostCount *float64 `json:"masterHostCount,omitempty" tf:"master_host_count,omitempty"`
 
-	// Settings for master subcluster. The structure is documented below.
+	// (Set of String) A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// +listType=set
+	MasterHostGroupIds []*string `json:"masterHostGroupIds,omitempty" tf:"master_host_group_ids,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) Settings for master subcluster. (see below for nested schema)
+	// Settings for master subcluster.
 	MasterSubcluster []MasterSubclusterInitParameters `json:"masterSubcluster,omitempty" tf:"master_subcluster,omitempty"`
 
-	// Name of the Greenplum cluster. Provided by the client when the cluster is created.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the Greenplum cluster uses.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/vpc/v1alpha1.Network
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
@@ -164,13 +331,16 @@ type GreenplumClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
 
-	// Configuration of the connection pooler. The structure is documented below.
+	// (Block List, Max: 1) Configuration of the connection pooler. (see below for nested schema)
+	// Configuration of the connection pooler.
 	PoolerConfig []PoolerConfigInitParameters `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
-	// Configuration of the PXF daemon. The structure is documented below.
+	// (Block List, Max: 1) Configuration of the PXF daemon. (see below for nested schema)
+	// Configuration of the PXF daemon.
 	PxfConfig []PxfConfigInitParameters `json:"pxfConfig,omitempty" tf:"pxf_config,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/vpc/v1alpha1.SecurityGroup
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
@@ -183,15 +353,28 @@ type GreenplumClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
+	// (Number) Number of hosts in segment subcluster (from 1 to 32).
 	// Number of hosts in segment subcluster (from 1 to 32).
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
 
+	// (Set of String) A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// +listType=set
+	SegmentHostGroupIds []*string `json:"segmentHostGroupIds,omitempty" tf:"segment_host_group_ids,omitempty"`
+
+	// (Number) Number of segments on segment host (not more then 1 + RAM/8).
 	// Number of segments on segment host (not more then 1 + RAM/8).
 	SegmentInHost *float64 `json:"segmentInHost,omitempty" tf:"segment_in_host,omitempty"`
 
-	// Settings for segment subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Settings for segment subcluster. (see below for nested schema)
+	// Settings for segment subcluster.
 	SegmentSubcluster []SegmentSubclusterInitParameters `json:"segmentSubcluster,omitempty" tf:"segment_subcluster,omitempty"`
 
+	// (String) ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+	// ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// (String) The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
 	// The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/vpc/v1alpha1.Subnet
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -204,189 +387,266 @@ type GreenplumClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// (String) Greenplum cluster admin user name.
 	// Greenplum cluster admin user name.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
+	// (String, Sensitive) Greenplum cluster admin password name.
 	// Greenplum cluster admin password name.
 	UserPasswordSecretRef v1.SecretKeySelector `json:"userPasswordSecretRef" tf:"-"`
 
-	// Version of the Greenplum cluster. (6.22 or 6.25)
+	// (String) Version of the Greenplum cluster. (6.28)
+	// Version of the Greenplum cluster. (`6.28`)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// The availability zone where the Greenplum hosts will be created.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type GreenplumClusterMaintenanceWindowInitParameters struct {
 
-	// Day of the week (in DDD format). Allowed values: "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"
+	// (String) Day of the week (in DDD format). Allowed values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
-	// Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+	// (Number) Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+	// Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type GreenplumClusterMaintenanceWindowObservation struct {
 
-	// Day of the week (in DDD format). Allowed values: "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"
+	// (String) Day of the week (in DDD format). Allowed values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
-	// Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+	// (Number) Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+	// Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type GreenplumClusterMaintenanceWindowParameters struct {
 
-	// Day of the week (in DDD format). Allowed values: "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"
+	// (String) Day of the week (in DDD format). Allowed values: MON, TUE, WED, THU, FRI, SAT, SUN.
+	// Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
 	// +kubebuilder:validation:Optional
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
-	// Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+	// (Number) Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+	// Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
 	// +kubebuilder:validation:Optional
 	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
 
-	// Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+	// Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type GreenplumClusterObservation struct {
 
-	// Access policy to the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Access policy to the Greenplum cluster. (see below for nested schema)
+	// Access policy to the Greenplum cluster.
 	Access []GreenplumClusterAccessObservation `json:"access,omitempty" tf:"access,omitempty"`
 
+	// (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	// Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
+	// (Block List) Background activities settings. (see below for nested schema)
+	// Background activities settings.
+	BackgroundActivities []BackgroundActivitiesObservation `json:"backgroundActivities,omitempty" tf:"background_activities,omitempty"`
+
+	// (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+	// Time to start the daily backup, in the UTC timezone.
 	BackupWindowStart []GreenplumClusterBackupWindowStartObservation `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
-	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Cloud Storage settings of the Greenplum cluster. (see below for nested schema)
+	// Cloud Storage settings of the Greenplum cluster.
 	CloudStorage []GreenplumClusterCloudStorageObservation `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
-	// Creation timestamp of the cluster.
+	// (String) The creation timestamp of the resource.
+	// The creation timestamp of the resource.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the Greenplum cluster.
+	// (String) The resource description.
+	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	// Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
+	// (Map of String) Greenplum cluster config. Detail info in Greenplum cluster settings block.
+	// Greenplum cluster config. Detail info in `Greenplum cluster settings` block.
 	// +mapType=granular
 	GreenplumConfig map[string]*string `json:"greenplumConfig,omitempty" tf:"greenplum_config,omitempty"`
 
+	// (String) Aggregated health of the cluster.
 	// Aggregated health of the cluster.
 	Health *string `json:"health,omitempty" tf:"health,omitempty"`
 
+	// (String) The ID of this resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A set of key/value label pairs to assign to the Greenplum cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Maintenance policy of the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Cloud Logging settings. (see below for nested schema)
+	// Cloud Logging settings.
+	Logging []LoggingObservation `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// (Block List, Max: 1) Maintenance policy of the Greenplum cluster. (see below for nested schema)
+	// Maintenance policy of the Greenplum cluster.
 	MaintenanceWindow []GreenplumClusterMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// (Number) Number of hosts in master subcluster (1 or 2).
 	// Number of hosts in master subcluster (1 or 2).
 	MasterHostCount *float64 `json:"masterHostCount,omitempty" tf:"master_host_count,omitempty"`
 
-	// (Computed) Info about hosts in master subcluster. The structure is documented below.
+	// (Set of String) A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// +listType=set
+	MasterHostGroupIds []*string `json:"masterHostGroupIds,omitempty" tf:"master_host_group_ids,omitempty"`
+
+	// (List of Object) Info about hosts in master subcluster. (see below for nested schema)
+	// Info about hosts in master subcluster.
 	MasterHosts []MasterHostsObservation `json:"masterHosts,omitempty" tf:"master_hosts,omitempty"`
 
-	// Settings for master subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Settings for master subcluster. (see below for nested schema)
+	// Settings for master subcluster.
 	MasterSubcluster []MasterSubclusterObservation `json:"masterSubcluster,omitempty" tf:"master_subcluster,omitempty"`
 
-	// Name of the Greenplum cluster. Provided by the client when the cluster is created.
+	// (String) The resource name.
+	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the Greenplum cluster uses.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
 
-	// Configuration of the connection pooler. The structure is documented below.
+	// (Block List, Max: 1) Configuration of the connection pooler. (see below for nested schema)
+	// Configuration of the connection pooler.
 	PoolerConfig []PoolerConfigObservation `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
-	// Configuration of the PXF daemon. The structure is documented below.
+	// (Block List, Max: 1) Configuration of the PXF daemon. (see below for nested schema)
+	// Configuration of the PXF daemon.
 	PxfConfig []PxfConfigObservation `json:"pxfConfig,omitempty" tf:"pxf_config,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +listType=set
 	SecurityGroupIds []*string `json:"securityGroupIds,omitempty" tf:"security_group_ids,omitempty"`
 
+	// (Number) Number of hosts in segment subcluster (from 1 to 32).
 	// Number of hosts in segment subcluster (from 1 to 32).
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
 
-	// (Computed) Info about hosts in segment subcluster. The structure is documented below.
+	// (Set of String) A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// +listType=set
+	SegmentHostGroupIds []*string `json:"segmentHostGroupIds,omitempty" tf:"segment_host_group_ids,omitempty"`
+
+	// (List of Object) Info about hosts in segment subcluster. (see below for nested schema)
+	// Info about hosts in segment subcluster.
 	SegmentHosts []SegmentHostsObservation `json:"segmentHosts,omitempty" tf:"segment_hosts,omitempty"`
 
+	// (Number) Number of segments on segment host (not more then 1 + RAM/8).
 	// Number of segments on segment host (not more then 1 + RAM/8).
 	SegmentInHost *float64 `json:"segmentInHost,omitempty" tf:"segment_in_host,omitempty"`
 
-	// Settings for segment subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Settings for segment subcluster. (see below for nested schema)
+	// Settings for segment subcluster.
 	SegmentSubcluster []SegmentSubclusterObservation `json:"segmentSubcluster,omitempty" tf:"segment_subcluster,omitempty"`
 
+	// (String) ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+	// ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// (String) Status of the cluster.
 	// Status of the cluster.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// (String) The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
 	// The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
+	// (String) Greenplum cluster admin user name.
 	// Greenplum cluster admin user name.
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
-	// Version of the Greenplum cluster. (6.22 or 6.25)
+	// (String) Version of the Greenplum cluster. (6.28)
+	// Version of the Greenplum cluster. (`6.28`)
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// The availability zone where the Greenplum hosts will be created.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type GreenplumClusterParameters struct {
 
-	// Access policy to the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Access policy to the Greenplum cluster. (see below for nested schema)
+	// Access policy to the Greenplum cluster.
 	// +kubebuilder:validation:Optional
 	Access []GreenplumClusterAccessParameters `json:"access,omitempty" tf:"access,omitempty"`
 
+	// (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	// Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// Time to start the daily backup, in the UTC timezone. The structure is documented below.
+	// (Block List) Background activities settings. (see below for nested schema)
+	// Background activities settings.
+	// +kubebuilder:validation:Optional
+	BackgroundActivities []BackgroundActivitiesParameters `json:"backgroundActivities,omitempty" tf:"background_activities,omitempty"`
+
+	// (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+	// Time to start the daily backup, in the UTC timezone.
 	// +kubebuilder:validation:Optional
 	BackupWindowStart []GreenplumClusterBackupWindowStartParameters `json:"backupWindowStart,omitempty" tf:"backup_window_start,omitempty"`
 
-	// Cloud Storage settings of the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Cloud Storage settings of the Greenplum cluster. (see below for nested schema)
+	// Cloud Storage settings of the Greenplum cluster.
 	// +kubebuilder:validation:Optional
 	CloudStorage []GreenplumClusterCloudStorageParameters `json:"cloudStorage,omitempty" tf:"cloud_storage,omitempty"`
 
-	// Inhibits deletion of the cluster.  Can be either true or false.
+	// (Boolean) The true value means that resource is protected from accidental deletion.
+	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// Description of the Greenplum cluster.
+	// (String) The resource description.
+	// The resource description.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// (String) Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	// Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
 	// +kubebuilder:validation:Optional
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
-	// The ID of the folder that the resource belongs to. If it
-	// is not provided, the default provider folder is used.
+	// id is used.
+	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -399,33 +659,51 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// Greenplum cluster config. Detail info in "Greenplum cluster settings" section (documented below).
+	// (Map of String) Greenplum cluster config. Detail info in Greenplum cluster settings block.
+	// Greenplum cluster config. Detail info in `Greenplum cluster settings` block.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	GreenplumConfig map[string]*string `json:"greenplumConfig,omitempty" tf:"greenplum_config,omitempty"`
 
-	// A set of key/value label pairs to assign to the Greenplum cluster.
+	// (Map of String) A set of key/value label pairs which assigned to resource.
+	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// Maintenance policy of the Greenplum cluster. The structure is documented below.
+	// (Block List, Max: 1) Cloud Logging settings. (see below for nested schema)
+	// Cloud Logging settings.
+	// +kubebuilder:validation:Optional
+	Logging []LoggingParameters `json:"logging,omitempty" tf:"logging,omitempty"`
+
+	// (Block List, Max: 1) Maintenance policy of the Greenplum cluster. (see below for nested schema)
+	// Maintenance policy of the Greenplum cluster.
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []GreenplumClusterMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
+	// (Number) Number of hosts in master subcluster (1 or 2).
 	// Number of hosts in master subcluster (1 or 2).
 	// +kubebuilder:validation:Optional
 	MasterHostCount *float64 `json:"masterHostCount,omitempty" tf:"master_host_count,omitempty"`
 
-	// Settings for master subcluster. The structure is documented below.
+	// (Set of String) A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	MasterHostGroupIds []*string `json:"masterHostGroupIds,omitempty" tf:"master_host_group_ids,omitempty"`
+
+	// (Block List, Min: 1, Max: 1) Settings for master subcluster. (see below for nested schema)
+	// Settings for master subcluster.
 	// +kubebuilder:validation:Optional
 	MasterSubcluster []MasterSubclusterParameters `json:"masterSubcluster,omitempty" tf:"master_subcluster,omitempty"`
 
-	// Name of the Greenplum cluster. Provided by the client when the cluster is created.
+	// (String) The resource name.
+	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// ID of the network, to which the Greenplum cluster uses.
+	// (String) The VPC Network ID of subnets which resource attached to.
+	// The `VPC Network ID` of subnets which resource attached to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/vpc/v1alpha1.Network
 	// +kubebuilder:validation:Optional
 	NetworkID *string `json:"networkId,omitempty" tf:"network_id,omitempty"`
@@ -438,15 +716,18 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	NetworkIDSelector *v1.Selector `json:"networkIdSelector,omitempty" tf:"-"`
 
-	// Configuration of the connection pooler. The structure is documented below.
+	// (Block List, Max: 1) Configuration of the connection pooler. (see below for nested schema)
+	// Configuration of the connection pooler.
 	// +kubebuilder:validation:Optional
 	PoolerConfig []PoolerConfigParameters `json:"poolerConfig,omitempty" tf:"pooler_config,omitempty"`
 
-	// Configuration of the PXF daemon. The structure is documented below.
+	// (Block List, Max: 1) Configuration of the PXF daemon. (see below for nested schema)
+	// Configuration of the PXF daemon.
 	// +kubebuilder:validation:Optional
 	PxfConfig []PxfConfigParameters `json:"pxfConfig,omitempty" tf:"pxf_config,omitempty"`
 
-	// A set of ids of security groups assigned to hosts of the cluster.
+	// (Set of String) The list of security groups applied to resource or their components.
+	// The list of security groups applied to resource or their components.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/vpc/v1alpha1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -460,18 +741,33 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SecurityGroupIdsSelector *v1.Selector `json:"securityGroupIdsSelector,omitempty" tf:"-"`
 
+	// (Number) Number of hosts in segment subcluster (from 1 to 32).
 	// Number of hosts in segment subcluster (from 1 to 32).
 	// +kubebuilder:validation:Optional
 	SegmentHostCount *float64 `json:"segmentHostCount,omitempty" tf:"segment_host_count,omitempty"`
 
+	// (Set of String) A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	SegmentHostGroupIds []*string `json:"segmentHostGroupIds,omitempty" tf:"segment_host_group_ids,omitempty"`
+
+	// (Number) Number of segments on segment host (not more then 1 + RAM/8).
 	// Number of segments on segment host (not more then 1 + RAM/8).
 	// +kubebuilder:validation:Optional
 	SegmentInHost *float64 `json:"segmentInHost,omitempty" tf:"segment_in_host,omitempty"`
 
-	// Settings for segment subcluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Settings for segment subcluster. (see below for nested schema)
+	// Settings for segment subcluster.
 	// +kubebuilder:validation:Optional
 	SegmentSubcluster []SegmentSubclusterParameters `json:"segmentSubcluster,omitempty" tf:"segment_subcluster,omitempty"`
 
+	// (String) ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+	// ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+	// +kubebuilder:validation:Optional
+	ServiceAccountID *string `json:"serviceAccountId,omitempty" tf:"service_account_id,omitempty"`
+
+	// (String) The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
 	// The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/vpc/v1alpha1.Subnet
 	// +kubebuilder:validation:Optional
@@ -485,21 +781,112 @@ type GreenplumClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
+	// (String) Greenplum cluster admin user name.
 	// Greenplum cluster admin user name.
 	// +kubebuilder:validation:Optional
 	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 
+	// (String, Sensitive) Greenplum cluster admin password name.
 	// Greenplum cluster admin password name.
 	// +kubebuilder:validation:Optional
 	UserPasswordSecretRef v1.SecretKeySelector `json:"userPasswordSecretRef" tf:"-"`
 
-	// Version of the Greenplum cluster. (6.22 or 6.25)
+	// (String) Version of the Greenplum cluster. (6.28)
+	// Version of the Greenplum cluster. (`6.28`)
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
-	// The availability zone where the Greenplum hosts will be created.
+	// (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+	// The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type LoggingInitParameters struct {
+
+	// (Boolean) Deliver Yandex Command Center's logs to Cloud Logging.
+	// Deliver Yandex Command Center's logs to Cloud Logging.
+	CommandCenterEnabled *bool `json:"commandCenterEnabled,omitempty" tf:"command_center_enabled,omitempty"`
+
+	// (Boolean) Flag that indicates whether log delivery to Cloud Logging is enabled.
+	// Flag that indicates whether log delivery to Cloud Logging is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// id is used.
+	// ID of folder to which deliver logs.
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// (Boolean) Deliver Greenplum's logs to Cloud Logging.
+	// Deliver Greenplum's logs to Cloud Logging.
+	GreenplumEnabled *bool `json:"greenplumEnabled,omitempty" tf:"greenplum_enabled,omitempty"`
+
+	// (String) Cloud Logging group ID to send logs to.
+	// Cloud Logging group ID to send logs to.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (Boolean) Deliver connection pooler's logs to Cloud Logging.
+	// Deliver connection pooler's logs to Cloud Logging.
+	PoolerEnabled *bool `json:"poolerEnabled,omitempty" tf:"pooler_enabled,omitempty"`
+}
+
+type LoggingObservation struct {
+
+	// (Boolean) Deliver Yandex Command Center's logs to Cloud Logging.
+	// Deliver Yandex Command Center's logs to Cloud Logging.
+	CommandCenterEnabled *bool `json:"commandCenterEnabled,omitempty" tf:"command_center_enabled,omitempty"`
+
+	// (Boolean) Flag that indicates whether log delivery to Cloud Logging is enabled.
+	// Flag that indicates whether log delivery to Cloud Logging is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// id is used.
+	// ID of folder to which deliver logs.
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// (Boolean) Deliver Greenplum's logs to Cloud Logging.
+	// Deliver Greenplum's logs to Cloud Logging.
+	GreenplumEnabled *bool `json:"greenplumEnabled,omitempty" tf:"greenplum_enabled,omitempty"`
+
+	// (String) Cloud Logging group ID to send logs to.
+	// Cloud Logging group ID to send logs to.
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (Boolean) Deliver connection pooler's logs to Cloud Logging.
+	// Deliver connection pooler's logs to Cloud Logging.
+	PoolerEnabled *bool `json:"poolerEnabled,omitempty" tf:"pooler_enabled,omitempty"`
+}
+
+type LoggingParameters struct {
+
+	// (Boolean) Deliver Yandex Command Center's logs to Cloud Logging.
+	// Deliver Yandex Command Center's logs to Cloud Logging.
+	// +kubebuilder:validation:Optional
+	CommandCenterEnabled *bool `json:"commandCenterEnabled,omitempty" tf:"command_center_enabled,omitempty"`
+
+	// (Boolean) Flag that indicates whether log delivery to Cloud Logging is enabled.
+	// Flag that indicates whether log delivery to Cloud Logging is enabled.
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// id is used.
+	// ID of folder to which deliver logs.
+	// +kubebuilder:validation:Optional
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+
+	// (Boolean) Deliver Greenplum's logs to Cloud Logging.
+	// Deliver Greenplum's logs to Cloud Logging.
+	// +kubebuilder:validation:Optional
+	GreenplumEnabled *bool `json:"greenplumEnabled,omitempty" tf:"greenplum_enabled,omitempty"`
+
+	// (String) Cloud Logging group ID to send logs to.
+	// Cloud Logging group ID to send logs to.
+	// +kubebuilder:validation:Optional
+	LogGroupID *string `json:"logGroupId,omitempty" tf:"log_group_id,omitempty"`
+
+	// (Boolean) Deliver connection pooler's logs to Cloud Logging.
+	// Deliver connection pooler's logs to Cloud Logging.
+	// +kubebuilder:validation:Optional
+	PoolerEnabled *bool `json:"poolerEnabled,omitempty" tf:"pooler_enabled,omitempty"`
 }
 
 type MasterHostsInitParameters struct {
@@ -507,10 +894,10 @@ type MasterHostsInitParameters struct {
 
 type MasterHostsObservation struct {
 
-	// (Computed) Flag indicating that master hosts should be created with a public IP address.
+	// (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// (Computed) The fully qualified domain name of the host.
+	// (String)
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 }
 
@@ -519,187 +906,403 @@ type MasterHostsParameters struct {
 
 type MasterSubclusterInitParameters struct {
 
-	// Resources allocated to hosts for master subcluster of the Greenplum cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+	// Resources allocated to hosts for master subcluster of the Greenplum cluster.
 	Resources []MasterSubclusterResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
 type MasterSubclusterObservation struct {
 
-	// Resources allocated to hosts for master subcluster of the Greenplum cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+	// Resources allocated to hosts for master subcluster of the Greenplum cluster.
 	Resources []MasterSubclusterResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
 type MasterSubclusterParameters struct {
 
-	// Resources allocated to hosts for master subcluster of the Greenplum cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+	// Resources allocated to hosts for master subcluster of the Greenplum cluster.
 	// +kubebuilder:validation:Optional
 	Resources []MasterSubclusterResourcesParameters `json:"resources" tf:"resources,omitempty"`
 }
 
 type MasterSubclusterResourcesInitParameters struct {
+
+	// (Number) Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// environment default is used if missing.
+	// Type of the storage of Greenplum hosts - environment default is used if missing.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type MasterSubclusterResourcesObservation struct {
+
+	// (Number) Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// environment default is used if missing.
+	// Type of the storage of Greenplum hosts - environment default is used if missing.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type MasterSubclusterResourcesParameters struct {
 
+	// (Number) Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
+	// environment default is used if missing.
+	// Type of the storage of Greenplum hosts - environment default is used if missing.
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
 
 type PoolerConfigInitParameters struct {
 
-	// Value for pool_client_idle_timeout parameter in Odyssey.
+	// (Number) Value for pool_client_idle_timeout parameter in Odyssey.
+	// Value for `pool_client_idle_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout).
 	PoolClientIdleTimeout *float64 `json:"poolClientIdleTimeout,omitempty" tf:"pool_client_idle_timeout,omitempty"`
 
-	// Value for pool_size parameter in Odyssey.
+	// (Number) Value for pool_idle_in_transaction_timeout parameter in Odyssey.
+	// Value for `pool_idle_in_transaction_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout).
+	PoolIdleInTransactionTimeout *float64 `json:"poolIdleInTransactionTimeout,omitempty" tf:"pool_idle_in_transaction_timeout,omitempty"`
+
+	// (Number) Value for pool_size parameter in Odyssey.
+	// Value for `pool_size` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
 	PoolSize *float64 `json:"poolSize,omitempty" tf:"pool_size,omitempty"`
 
-	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+	// (String) Mode that the connection pooler is working in. See descriptions of all modes in the documentation for Odyssey.
+	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
 	PoolingMode *string `json:"poolingMode,omitempty" tf:"pooling_mode,omitempty"`
 }
 
 type PoolerConfigObservation struct {
 
-	// Value for pool_client_idle_timeout parameter in Odyssey.
+	// (Number) Value for pool_client_idle_timeout parameter in Odyssey.
+	// Value for `pool_client_idle_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout).
 	PoolClientIdleTimeout *float64 `json:"poolClientIdleTimeout,omitempty" tf:"pool_client_idle_timeout,omitempty"`
 
-	// Value for pool_size parameter in Odyssey.
+	// (Number) Value for pool_idle_in_transaction_timeout parameter in Odyssey.
+	// Value for `pool_idle_in_transaction_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout).
+	PoolIdleInTransactionTimeout *float64 `json:"poolIdleInTransactionTimeout,omitempty" tf:"pool_idle_in_transaction_timeout,omitempty"`
+
+	// (Number) Value for pool_size parameter in Odyssey.
+	// Value for `pool_size` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
 	PoolSize *float64 `json:"poolSize,omitempty" tf:"pool_size,omitempty"`
 
-	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+	// (String) Mode that the connection pooler is working in. See descriptions of all modes in the documentation for Odyssey.
+	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
 	PoolingMode *string `json:"poolingMode,omitempty" tf:"pooling_mode,omitempty"`
 }
 
 type PoolerConfigParameters struct {
 
-	// Value for pool_client_idle_timeout parameter in Odyssey.
+	// (Number) Value for pool_client_idle_timeout parameter in Odyssey.
+	// Value for `pool_client_idle_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout).
 	// +kubebuilder:validation:Optional
 	PoolClientIdleTimeout *float64 `json:"poolClientIdleTimeout,omitempty" tf:"pool_client_idle_timeout,omitempty"`
 
-	// Value for pool_size parameter in Odyssey.
+	// (Number) Value for pool_idle_in_transaction_timeout parameter in Odyssey.
+	// Value for `pool_idle_in_transaction_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout).
+	// +kubebuilder:validation:Optional
+	PoolIdleInTransactionTimeout *float64 `json:"poolIdleInTransactionTimeout,omitempty" tf:"pool_idle_in_transaction_timeout,omitempty"`
+
+	// (Number) Value for pool_size parameter in Odyssey.
+	// Value for `pool_size` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
 	// +kubebuilder:validation:Optional
 	PoolSize *float64 `json:"poolSize,omitempty" tf:"pool_size,omitempty"`
 
-	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+	// (String) Mode that the connection pooler is working in. See descriptions of all modes in the documentation for Odyssey.
+	// Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
 	// +kubebuilder:validation:Optional
 	PoolingMode *string `json:"poolingMode,omitempty" tf:"pooling_mode,omitempty"`
 }
 
 type PxfConfigInitParameters struct {
 
+	// (Number) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
 	// The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
 	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
+	// (Number) The maximum number of PXF tomcat threads. Value is between 1 and 1024.
 	// The maximum number of PXF tomcat threads. Value is between 1 and 1024.
 	MaxThreads *float64 `json:"maxThreads,omitempty" tf:"max_threads,omitempty"`
 
+	// (Boolean) Identifies whether or not core streaming threads are allowed to time out.
 	// Identifies whether or not core streaming threads are allowed to time out.
 	PoolAllowCoreThreadTimeout *bool `json:"poolAllowCoreThreadTimeout,omitempty" tf:"pool_allow_core_thread_timeout,omitempty"`
 
+	// (Number) The number of core streaming threads. Value is between 1 and 1024.
 	// The number of core streaming threads. Value is between 1 and 1024.
 	PoolCoreSize *float64 `json:"poolCoreSize,omitempty" tf:"pool_core_size,omitempty"`
 
+	// (Number) The maximum allowed number of core streaming threads. Value is between 1 and 1024.
 	// The maximum allowed number of core streaming threads. Value is between 1 and 1024.
 	PoolMaxSize *float64 `json:"poolMaxSize,omitempty" tf:"pool_max_size,omitempty"`
 
+	// (Number) The capacity of the core streaming thread pool queue. Value is positive.
 	// The capacity of the core streaming thread pool queue. Value is positive.
 	PoolQueueCapacity *float64 `json:"poolQueueCapacity,omitempty" tf:"pool_queue_capacity,omitempty"`
 
+	// (Number) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
 	// The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
 	UploadTimeout *float64 `json:"uploadTimeout,omitempty" tf:"upload_timeout,omitempty"`
 
+	// (Number) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
 	Xms *float64 `json:"xms,omitempty" tf:"xms,omitempty"`
 
+	// (Number) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
 }
 
 type PxfConfigObservation struct {
 
+	// (Number) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
 	// The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
 	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
+	// (Number) The maximum number of PXF tomcat threads. Value is between 1 and 1024.
 	// The maximum number of PXF tomcat threads. Value is between 1 and 1024.
 	MaxThreads *float64 `json:"maxThreads,omitempty" tf:"max_threads,omitempty"`
 
+	// (Boolean) Identifies whether or not core streaming threads are allowed to time out.
 	// Identifies whether or not core streaming threads are allowed to time out.
 	PoolAllowCoreThreadTimeout *bool `json:"poolAllowCoreThreadTimeout,omitempty" tf:"pool_allow_core_thread_timeout,omitempty"`
 
+	// (Number) The number of core streaming threads. Value is between 1 and 1024.
 	// The number of core streaming threads. Value is between 1 and 1024.
 	PoolCoreSize *float64 `json:"poolCoreSize,omitempty" tf:"pool_core_size,omitempty"`
 
+	// (Number) The maximum allowed number of core streaming threads. Value is between 1 and 1024.
 	// The maximum allowed number of core streaming threads. Value is between 1 and 1024.
 	PoolMaxSize *float64 `json:"poolMaxSize,omitempty" tf:"pool_max_size,omitempty"`
 
+	// (Number) The capacity of the core streaming thread pool queue. Value is positive.
 	// The capacity of the core streaming thread pool queue. Value is positive.
 	PoolQueueCapacity *float64 `json:"poolQueueCapacity,omitempty" tf:"pool_queue_capacity,omitempty"`
 
+	// (Number) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
 	// The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
 	UploadTimeout *float64 `json:"uploadTimeout,omitempty" tf:"upload_timeout,omitempty"`
 
+	// (Number) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
 	Xms *float64 `json:"xms,omitempty" tf:"xms,omitempty"`
 
+	// (Number) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
 }
 
 type PxfConfigParameters struct {
 
+	// (Number) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
 	// The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
 	// +kubebuilder:validation:Optional
 	ConnectionTimeout *float64 `json:"connectionTimeout,omitempty" tf:"connection_timeout,omitempty"`
 
+	// (Number) The maximum number of PXF tomcat threads. Value is between 1 and 1024.
 	// The maximum number of PXF tomcat threads. Value is between 1 and 1024.
 	// +kubebuilder:validation:Optional
 	MaxThreads *float64 `json:"maxThreads,omitempty" tf:"max_threads,omitempty"`
 
+	// (Boolean) Identifies whether or not core streaming threads are allowed to time out.
 	// Identifies whether or not core streaming threads are allowed to time out.
 	// +kubebuilder:validation:Optional
 	PoolAllowCoreThreadTimeout *bool `json:"poolAllowCoreThreadTimeout,omitempty" tf:"pool_allow_core_thread_timeout,omitempty"`
 
+	// (Number) The number of core streaming threads. Value is between 1 and 1024.
 	// The number of core streaming threads. Value is between 1 and 1024.
 	// +kubebuilder:validation:Optional
 	PoolCoreSize *float64 `json:"poolCoreSize,omitempty" tf:"pool_core_size,omitempty"`
 
+	// (Number) The maximum allowed number of core streaming threads. Value is between 1 and 1024.
 	// The maximum allowed number of core streaming threads. Value is between 1 and 1024.
 	// +kubebuilder:validation:Optional
 	PoolMaxSize *float64 `json:"poolMaxSize,omitempty" tf:"pool_max_size,omitempty"`
 
+	// (Number) The capacity of the core streaming thread pool queue. Value is positive.
 	// The capacity of the core streaming thread pool queue. Value is positive.
 	// +kubebuilder:validation:Optional
 	PoolQueueCapacity *float64 `json:"poolQueueCapacity,omitempty" tf:"pool_queue_capacity,omitempty"`
 
+	// (Number) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
 	// The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
 	// +kubebuilder:validation:Optional
 	UploadTimeout *float64 `json:"uploadTimeout,omitempty" tf:"upload_timeout,omitempty"`
 
+	// (Number) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// +kubebuilder:validation:Optional
 	Xms *float64 `json:"xms,omitempty" tf:"xms,omitempty"`
 
+	// (Number) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
 	// +kubebuilder:validation:Optional
 	Xmx *float64 `json:"xmx,omitempty" tf:"xmx,omitempty"`
+}
+
+type QueryKillerIdleInTransactionInitParameters struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleInTransactionObservation struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleInTransactionParameters struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	// +kubebuilder:validation:Optional
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	// +kubebuilder:validation:Optional
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleInitParameters struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleObservation struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerIdleParameters struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	// +kubebuilder:validation:Optional
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	// +kubebuilder:validation:Optional
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerLongRunningInitParameters struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerLongRunningObservation struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
+}
+
+type QueryKillerLongRunningParameters struct {
+
+	// (Boolean) Flag that indicates whether script is enabled.
+	// Flag that indicates whether script is enabled.
+	// +kubebuilder:validation:Optional
+	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+
+	// (List of String) List of users to ignore when considering queries to terminate.
+	// List of users to ignore when considering queries to terminate.
+	// +kubebuilder:validation:Optional
+	IgnoreUsers []*string `json:"ignoreUsers,omitempty" tf:"ignore_users,omitempty"`
+
+	// (Number) Maximum duration for this type of queries (in seconds).
+	// Maximum duration for this type of queries (in seconds).
+	// +kubebuilder:validation:Optional
+	MaxAge *float64 `json:"maxAge,omitempty" tf:"max_age,omitempty"`
 }
 
 type SegmentHostsInitParameters struct {
@@ -707,7 +1310,7 @@ type SegmentHostsInitParameters struct {
 
 type SegmentHostsObservation struct {
 
-	// (Computed) The fully qualified domain name of the host.
+	// (String)
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 }
 
@@ -716,47 +1319,70 @@ type SegmentHostsParameters struct {
 
 type SegmentSubclusterInitParameters struct {
 
-	// Resources allocated to hosts for segment subcluster of the Greenplum cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+	// Resources allocated to hosts for segment subcluster of the Greenplum cluster.
 	Resources []SegmentSubclusterResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
 type SegmentSubclusterObservation struct {
 
-	// Resources allocated to hosts for segment subcluster of the Greenplum cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+	// Resources allocated to hosts for segment subcluster of the Greenplum cluster.
 	Resources []SegmentSubclusterResourcesObservation `json:"resources,omitempty" tf:"resources,omitempty"`
 }
 
 type SegmentSubclusterParameters struct {
 
-	// Resources allocated to hosts for segment subcluster of the Greenplum cluster. The structure is documented below.
+	// (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+	// Resources allocated to hosts for segment subcluster of the Greenplum cluster.
 	// +kubebuilder:validation:Optional
 	Resources []SegmentSubclusterResourcesParameters `json:"resources" tf:"resources,omitempty"`
 }
 
 type SegmentSubclusterResourcesInitParameters struct {
+
+	// (Number) Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// environment default is used if missing.
+	// Type of the storage of Greenplum hosts - environment default is used if missing.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type SegmentSubclusterResourcesObservation struct {
+
+	// (Number) Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in gigabytes.
 	DiskSize *float64 `json:"diskSize,omitempty" tf:"disk_size,omitempty"`
 
+	// environment default is used if missing.
+	// Type of the storage of Greenplum hosts - environment default is used if missing.
 	DiskTypeID *string `json:"diskTypeId,omitempty" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
 	ResourcePresetID *string `json:"resourcePresetId,omitempty" tf:"resource_preset_id,omitempty"`
 }
 
 type SegmentSubclusterResourcesParameters struct {
 
+	// (Number) Volume of the storage available to a host, in gigabytes.
+	// Volume of the storage available to a host, in gigabytes.
 	// +kubebuilder:validation:Optional
 	DiskSize *float64 `json:"diskSize" tf:"disk_size,omitempty"`
 
+	// environment default is used if missing.
+	// Type of the storage of Greenplum hosts - environment default is used if missing.
 	// +kubebuilder:validation:Optional
 	DiskTypeID *string `json:"diskTypeId" tf:"disk_type_id,omitempty"`
 
+	// (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+	// The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
 	// +kubebuilder:validation:Optional
 	ResourcePresetID *string `json:"resourcePresetId" tf:"resource_preset_id,omitempty"`
 }
@@ -788,7 +1414,7 @@ type GreenplumClusterStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// GreenplumCluster is the Schema for the GreenplumClusters API. Manages a Greenplum cluster within Yandex.Cloud.
+// GreenplumCluster is the Schema for the GreenplumClusters API. Manages a Greenplum cluster within Yandex Cloud.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

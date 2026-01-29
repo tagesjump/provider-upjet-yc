@@ -1,0 +1,96 @@
+apiVersion: mdb.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: MySQLClusterV2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/mysqlclusterv2
+  labels:
+    testing.upbound.io/example-name: cluster
+  name: cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    access:
+      dataLens: true
+      dataTransfer: true
+      webSql: true
+      yandexQuery: true
+    backupRetainPeriodDays: 8
+    backupWindowStart:
+      hours: 5
+      minutes: 5
+    deletionProtection: true
+    description: MySQL Test Cluster
+    environment: PRODUCTION
+    hosts:
+      host:
+        assign_public_ip: false
+        subnet_id: ${yandex_vpc_subnet.mdb-pg-test-subnet-a.id}
+        zone: ru-central1-a
+    labels:
+      key1: value1
+      key2: value2
+      key3: value3
+    maintenanceWindow:
+      day: MON
+      hour: 3
+      type: WEEKLY
+    name: mysql-cluster
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mdb-pg-test-net
+    performanceDiagnostics:
+      sessionsSamplingInterval: 60
+      statementsSamplingInterval: 600
+    version: "8.0"
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Network
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/mysqlclusterv2
+  labels:
+    testing.upbound.io/example-name: test-net
+  name: test-net
+  namespace: upbound-system
+spec:
+  forProvider: {}
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/mysqlclusterv2
+  labels:
+    testing.upbound.io/example-name: test-sgroup
+  name: test-sgroup
+  namespace: upbound-system
+spec:
+  forProvider:
+    description: Test security group
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mdb-pg-test-net
+
+---
+
+apiVersion: vpc.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: mdb/v1alpha1/mysqlclusterv2
+  labels:
+    testing.upbound.io/example-name: test-subnet
+  name: test-subnet
+  namespace: upbound-system
+spec:
+  forProvider:
+    networkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mdb-pg-test-net
+    v4CidrBlocks:
+    - 10.1.0.0/24
+    zone: ru-central1-a

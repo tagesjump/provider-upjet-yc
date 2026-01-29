@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: lb/v1alpha1/targetgroup
   labels:
-    testing.upbound.io/example-name: foo
-  name: foo
+    testing.upbound.io/example-name: my_tg
+  name: my-tg
   namespace: upbound-system
 spec:
   forProvider:

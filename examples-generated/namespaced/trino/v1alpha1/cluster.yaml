@@ -1,0 +1,106 @@
+apiVersion: trino.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: trino/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: trino
+  name: trino
+  namespace: upbound-system
+spec:
+  forProvider:
+    coordinator:
+      resourcePresetId: c8-m32
+    maintenanceWindow:
+      day: MON
+      hour: 15
+      type: ANYTIME
+    name: trino-created-with-terraform
+    queryProperties:
+      memory.heap-headroom-per-node: 31%
+      query.max-memory: 13GB
+      query.max-memory-per-node: 7GB
+      query.max-total-memory: 21GB
+    resource_groups: |-
+      ${jsonencode(
+          {
+            "rootGroups" : [
+              {
+                "name" : "global",
+                "softMemoryLimit" : "80%",
+                "hardConcurrencyLimit" : 100,
+                "maxQueued" : 1000,
+                "schedulingPolicy" : "weighted",
+                "subGroups" : [
+                  {
+                    "name" : "adhoc",
+                    "softMemoryLimit" : "10%",
+                    "hardConcurrencyLimit" : 50,
+                    "maxQueued" : 1,
+                    "schedulingWeight" : 10,
+                    "subGroups" : [
+                      {
+                        "name" : "other",
+                        "softMemoryLimit" : "10%",
+                        "hardConcurrencyLimit" : 2,
+                        "maxQueued" : 1,
+                        "schedulingWeight" : 10,
+                        "schedulingPolicy" : "weighted_fair",
+                        "subGroups" : [
+                          {
+                            "name" : "$${USER}",
+                            "softMemoryLimit" : "10%",
+                            "hardConcurrencyLimit" : 1,
+                            "maxQueued" : 100
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name" : "admin",
+                "softMemoryLimit" : "100%",
+                "hardConcurrencyLimit" : 50,
+                "maxQueued" : 100,
+                "schedulingPolicy" : "query_priority"
+              }
+            ],
+            "selectors" : [
+              {
+                "user" : "bob",
+                "userGroup" : "admin",
+                "queryType" : "DATA_DEFINITION",
+                "source" : "jdbc#(?<toolname>.*)",
+                "clientTags" : [
+                  "hipri"
+                ],
+                "group" : "admin"
+              },
+              {
+                "group" : "global.adhoc.other.$${USER}"
+              }
+            ],
+            "cpuQuotaPeriod" : "1h"
+          }
+        )}
+    retryPolicy:
+      additionalProperties:
+        fault-tolerant-execution-max-task-split-count: 1024
+      exchangeManager:
+        additionalProperties:
+          exchange.sink-buffer-pool-min-size: 16
+        serviceS3: {}
+      policy: TASK
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: trino
+    subnetIdsRefs:
+    - name: a
+    - name: b
+    - name: d
+    worker:
+      fixedScale:
+        count: 4
+      resourcePresetId: c4-m16

@@ -1,0 +1,30 @@
+apiVersion: metastore.yandex-cloud.upjet.m.crossplane.io/v1alpha1
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: metastore/v1alpha1/cluster
+  labels:
+    testing.upbound.io/example-name: my_metastore_cluster
+  name: my-metastore-cluster
+  namespace: upbound-system
+spec:
+  forProvider:
+    clusterConfig:
+      resourcePresetId: c2-m8
+    description: My awesome Metastore
+    logging:
+      enabled: true
+      folderId: ${var.folder_id}
+      minLevel: INFO
+    maintenanceWindow:
+      day: MON
+      hour: 12
+      type: WEEKLY
+    name: metastore-created-with-terraform
+    securityGroupIdsRefs:
+    - name: metastore-sg
+    serviceAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: for-metastore
+    subnetIdsRefs:
+    - name: a

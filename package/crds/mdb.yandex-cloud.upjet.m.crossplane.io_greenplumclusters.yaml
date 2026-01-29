@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: GreenplumCluster is the Schema for the GreenplumClusters API.
-          Manages a Greenplum cluster within Yandex.Cloud.
+          Manages a Greenplum cluster within Yandex Cloud.
         properties:
           apiVersion:
             description: |-
@@ -60,66 +60,194 @@ spec:
               forProvider:
                 properties:
                   access:
-                    description: Access policy to the Greenplum cluster. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Access policy to the Greenplum cluster. (see below for nested schema)
+                      Access policy to the Greenplum cluster.
                     items:
                       properties:
                         dataLens:
-                          description: Allow access for Yandex DataLens.
+                          description: |-
+                            (Boolean) Allow access for Yandex DataLens.
+                            Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
                           type: boolean
                         dataTransfer:
-                          description: Allow access for DataTransfer
+                          description: |-
+                            (Boolean) Allow access for DataTransfer
+                            Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
                           type: boolean
                         webSql:
-                          description: Allows access for SQL queries in the management
-                            console.
+                          description: |-
+                            (Boolean) Allows access for SQL queries in the management console.
+                            Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
+                          type: boolean
+                        yandexQuery:
+                          description: |-
+                            (Boolean) Allow access for Yandex Query
+                            Allow access for [Yandex Query](https://yandex.cloud/services/query)
                           type: boolean
                       type: object
                     type: array
                   assignPublicIp:
-                    description: Sets whether the master hosts should get a public
-                      IP address on creation. Changing this parameter for an existing
-                      host is not supported at the moment.
+                    description: |-
+                      (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+                      Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
                     type: boolean
+                  backgroundActivities:
+                    description: |-
+                      (Block List) Background activities settings. (see below for nested schema)
+                      Background activities settings.
+                    items:
+                      properties:
+                        analyzeAndVacuum:
+                          description: |-
+                            (Block List) Block to configure 'ANALYZE' and 'VACUUM' daily operations. (see below for nested schema)
+                            Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+                          items:
+                            properties:
+                              analyzeTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+                                  Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+                                type: number
+                              startTime:
+                                description: |-
+                                  (String) Time of day in 'HH:MM' format when scripts should run.
+                                  Time of day in 'HH:MM' format when scripts should run.
+                                type: string
+                              vacuumTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+                                  Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerIdle:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries that are in idle state. (see below for nested schema)
+                            Block to configure script that kills long running queries that are in `idle` state.
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerIdleInTransaction:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries that are in idle in transaction state. (see below for nested schema)
+                            Block to configure script that kills long running queries that are in `idle in transaction` state.
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerLongRunning:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries (in any state). (see below for nested schema)
+                            Block to configure script that kills long running queries (in any state).
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   backupWindowStart:
-                    description: Time to start the daily backup, in the UTC timezone.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+                      Time to start the daily backup, in the UTC timezone.
                     items:
                       properties:
                         hours:
-                          description: The hour at which backup will be started (UTC).
+                          description: |-
+                            (Number) The hour at which backup will be started (UTC).
+                            The hour at which backup will be started (UTC).
                           type: number
                         minutes:
-                          description: The minute at which backup will be started
-                            (UTC).
+                          description: |-
+                            (Number) The minute at which backup will be started (UTC).
+                            The minute at which backup will be started (UTC).
                           type: number
                       type: object
                     type: array
                   cloudStorage:
-                    description: Cloud Storage settings of the Greenplum cluster.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Cloud Storage settings of the Greenplum cluster. (see below for nested schema)
+                      Cloud Storage settings of the Greenplum cluster.
                     items:
                       properties:
                         enable:
-                          description: Whether to use cloud storage or not.
+                          description: |-
+                            (Boolean) Flag that indicates whether script is enabled.
+                            Whether to use cloud storage or not.
                           type: boolean
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the Greenplum cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   environment:
-                    description: Deployment environment of the Greenplum cluster.
-                      (PRODUCTION, PRESTABLE)
+                    description: |-
+                      (String) Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
+                      Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -206,68 +334,133 @@ spec:
                   greenplumConfig:
                     additionalProperties:
                       type: string
-                    description: Greenplum cluster config. Detail info in "Greenplum
-                      cluster settings" section (documented below).
+                    description: |-
+                      (Map of String) Greenplum cluster config. Detail info in Greenplum cluster settings block.
+                      Greenplum cluster config. Detail info in `Greenplum cluster settings` block.
                     type: object
                     x-kubernetes-map-type: granular
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Greenplum
-                      cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  logging:
+                    description: |-
+                      (Block List, Max: 1) Cloud Logging settings. (see below for nested schema)
+                      Cloud Logging settings.
+                    items:
+                      properties:
+                        commandCenterEnabled:
+                          description: |-
+                            (Boolean) Deliver Yandex Command Center's logs to Cloud Logging.
+                            Deliver Yandex Command Center's logs to Cloud Logging.
+                          type: boolean
+                        enabled:
+                          description: |-
+                            (Boolean) Flag that indicates whether log delivery to Cloud Logging is enabled.
+                            Flag that indicates whether log delivery to Cloud Logging is enabled.
+                          type: boolean
+                        folderId:
+                          description: |-
+                            id is used.
+                            ID of folder to which deliver logs.
+                          type: string
+                        greenplumEnabled:
+                          description: |-
+                            (Boolean) Deliver Greenplum's logs to Cloud Logging.
+                            Deliver Greenplum's logs to Cloud Logging.
+                          type: boolean
+                        logGroupId:
+                          description: |-
+                            (String) Cloud Logging group ID to send logs to.
+                            Cloud Logging group ID to send logs to.
+                          type: string
+                        poolerEnabled:
+                          description: |-
+                            (Boolean) Deliver connection pooler's logs to Cloud Logging.
+                            Deliver connection pooler's logs to Cloud Logging.
+                          type: boolean
+                      type: object
+                    type: array
                   maintenanceWindow:
-                    description: Maintenance policy of the Greenplum cluster. The
-                      structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Maintenance policy of the Greenplum cluster. (see below for nested schema)
+                      Maintenance policy of the Greenplum cluster.
                     items:
                       properties:
                         day:
-                          description: 'Day of the week (in DDD format). Allowed values:
-                            "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"'
+                          description: |-
+                            (String) Day of the week (in DDD format). Allowed values: MON, TUE, WED, THU, FRI, SAT, SUN.
+                            Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
                           type: string
                         hour:
-                          description: Hour of the day in UTC (in HH format). Allowed
-                            value is between 0 and 23.
+                          description: |-
+                            (Number) Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+                            Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
                           type: number
                         type:
-                          description: Type of maintenance window. Can be either ANYTIME
-                            or WEEKLY. A day and hour of window need to be specified
-                            with weekly window.
+                          description: |-
+                            (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+                            Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
                           type: string
                       type: object
                     type: array
                   masterHostCount:
-                    description: Number of hosts in master subcluster (1 or 2).
+                    description: |-
+                      (Number) Number of hosts in master subcluster (1 or 2).
+                      Number of hosts in master subcluster (1 or 2).
                     type: number
+                  masterHostGroupIds:
+                    description: |-
+                      (Set of String) A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+                      A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   masterSubcluster:
-                    description: Settings for master subcluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Settings for master subcluster. (see below for nested schema)
+                      Settings for master subcluster.
                     items:
                       properties:
                         resources:
-                          description: Resources allocated to hosts for master subcluster
-                            of the Greenplum cluster. The structure is documented
-                            below.
+                          description: |-
+                            (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+                            Resources allocated to hosts for master subcluster of the Greenplum cluster.
                           items:
                             properties:
                               diskSize:
+                                description: |-
+                                  (Number) Volume of the storage available to a host, in gigabytes.
+                                  Volume of the storage available to a host, in gigabytes.
                                 type: number
                               diskTypeId:
+                                description: |-
+                                  environment default is used if missing.
+                                  Type of the storage of Greenplum hosts - environment default is used if missing.
                                 type: string
                               resourcePresetId:
+                                description: |-
+                                  (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                  The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   name:
-                    description: Name of the Greenplum cluster. Provided by the client
-                      when the cluster is created.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   networkId:
-                    description: ID of the network, to which the Greenplum cluster
-                      uses.
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
                     type: string
                   networkIdRef:
                     description: Reference to a Network in vpc to populate networkId.
@@ -350,70 +543,90 @@ spec:
                         type: object
                     type: object
                   poolerConfig:
-                    description: Configuration of the connection pooler. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Configuration of the connection pooler. (see below for nested schema)
+                      Configuration of the connection pooler.
                     items:
                       properties:
                         poolClientIdleTimeout:
-                          description: Value for pool_client_idle_timeout parameter
-                            in Odyssey.
+                          description: |-
+                            (Number) Value for pool_client_idle_timeout parameter in Odyssey.
+                            Value for `pool_client_idle_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout).
+                          type: number
+                        poolIdleInTransactionTimeout:
+                          description: |-
+                            (Number) Value for pool_idle_in_transaction_timeout parameter in Odyssey.
+                            Value for `pool_idle_in_transaction_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout).
                           type: number
                         poolSize:
-                          description: Value for pool_size parameter in Odyssey.
+                          description: |-
+                            (Number) Value for pool_size parameter in Odyssey.
+                            Value for `pool_size` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
                           type: number
                         poolingMode:
-                          description: Mode that the connection pooler is working
-                            in. See descriptions of all modes in the [documentation
-                            for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+                          description: |-
+                            (String) Mode that the connection pooler is working in. See descriptions of all modes in the documentation for Odyssey.
+                            Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
                           type: string
                       type: object
                     type: array
                   pxfConfig:
-                    description: Configuration of the PXF daemon. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Max: 1) Configuration of the PXF daemon. (see below for nested schema)
+                      Configuration of the PXF daemon.
                     items:
                       properties:
                         connectionTimeout:
-                          description: The Tomcat server connection timeout for read
-                            operations in seconds. Value is between 5 and 600.
+                          description: |-
+                            (Number) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+                            The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
                           type: number
                         maxThreads:
-                          description: The maximum number of PXF tomcat threads. Value
-                            is between 1 and 1024.
+                          description: |-
+                            (Number) The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+                            The maximum number of PXF tomcat threads. Value is between 1 and 1024.
                           type: number
                         poolAllowCoreThreadTimeout:
-                          description: Identifies whether or not core streaming threads
-                            are allowed to time out.
+                          description: |-
+                            (Boolean) Identifies whether or not core streaming threads are allowed to time out.
+                            Identifies whether or not core streaming threads are allowed to time out.
                           type: boolean
                         poolCoreSize:
-                          description: The number of core streaming threads. Value
-                            is between 1 and 1024.
+                          description: |-
+                            (Number) The number of core streaming threads. Value is between 1 and 1024.
+                            The number of core streaming threads. Value is between 1 and 1024.
                           type: number
                         poolMaxSize:
-                          description: The maximum allowed number of core streaming
-                            threads. Value is between 1 and 1024.
+                          description: |-
+                            (Number) The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+                            The maximum allowed number of core streaming threads. Value is between 1 and 1024.
                           type: number
                         poolQueueCapacity:
-                          description: The capacity of the core streaming thread pool
-                            queue. Value is positive.
+                          description: |-
+                            (Number) The capacity of the core streaming thread pool queue. Value is positive.
+                            The capacity of the core streaming thread pool queue. Value is positive.
                           type: number
                         uploadTimeout:
-                          description: The Tomcat server connection timeout for write
-                            operations in seconds. Value is between 5 and 600.
+                          description: |-
+                            (Number) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+                            The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
                           type: number
                         xms:
-                          description: Maximum JVM heap size for PXF daemon. Value
-                            is between 64 and 16384.
+                          description: |-
+                            (Number) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+                            Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
                           type: number
                         xmx:
-                          description: Initial JVM heap size for PXF daemon. Value
-                            is between 64 and 16384.
+                          description: |-
+                            (Number) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+                            Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
                           type: number
                       type: object
                     type: array
                   securityGroupIds:
-                    description: A set of ids of security groups assigned to hosts
-                      of the cluster.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
@@ -503,38 +716,63 @@ spec:
                         type: object
                     type: object
                   segmentHostCount:
-                    description: Number of hosts in segment subcluster (from 1 to
-                      32).
+                    description: |-
+                      (Number) Number of hosts in segment subcluster (from 1 to 32).
+                      Number of hosts in segment subcluster (from 1 to 32).
                     type: number
+                  segmentHostGroupIds:
+                    description: |-
+                      (Set of String) A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+                      A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   segmentInHost:
-                    description: Number of segments on segment host (not more then
-                      1 + RAM/8).
+                    description: |-
+                      (Number) Number of segments on segment host (not more then 1 + RAM/8).
+                      Number of segments on segment host (not more then 1 + RAM/8).
                     type: number
                   segmentSubcluster:
-                    description: Settings for segment subcluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Settings for segment subcluster. (see below for nested schema)
+                      Settings for segment subcluster.
                     items:
                       properties:
                         resources:
-                          description: Resources allocated to hosts for segment subcluster
-                            of the Greenplum cluster. The structure is documented
-                            below.
+                          description: |-
+                            (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+                            Resources allocated to hosts for segment subcluster of the Greenplum cluster.
                           items:
                             properties:
                               diskSize:
+                                description: |-
+                                  (Number) Volume of the storage available to a host, in gigabytes.
+                                  Volume of the storage available to a host, in gigabytes.
                                 type: number
                               diskTypeId:
+                                description: |-
+                                  environment default is used if missing.
+                                  Type of the storage of Greenplum hosts - environment default is used if missing.
                                 type: string
                               resourcePresetId:
+                                description: |-
+                                  (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                  The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  serviceAccountId:
+                    description: |-
+                      (String) ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+                      ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+                    type: string
                   subnetId:
-                    description: The ID of the subnet, to which the hosts belongs.
-                      The subnet must be a part of the network to which the cluster
-                      belongs.
+                    description: |-
+                      (String) The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
+                      The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in vpc to populate subnetId.
@@ -617,10 +855,14 @@ spec:
                         type: object
                     type: object
                   userName:
-                    description: Greenplum cluster admin user name.
+                    description: |-
+                      (String) Greenplum cluster admin user name.
+                      Greenplum cluster admin user name.
                     type: string
                   userPasswordSecretRef:
-                    description: Greenplum cluster admin password name.
+                    description: |-
+                      (String, Sensitive) Greenplum cluster admin password name.
+                      Greenplum cluster admin password name.
                     properties:
                       key:
                         type: string
@@ -632,11 +874,14 @@ spec:
                     - name
                     type: object
                   version:
-                    description: Version of the Greenplum cluster. (6.22 or 6.25)
+                    description: |-
+                      (String) Version of the Greenplum cluster. (6.28)
+                      Version of the Greenplum cluster. (`6.28`)
                     type: string
                   zone:
-                    description: The availability zone where the Greenplum hosts will
-                      be created.
+                    description: |-
+                      (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                      The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                     type: string
                 type: object
               initProvider:
@@ -653,66 +898,194 @@ spec:
                   autoscaler.
                 properties:
                   access:
-                    description: Access policy to the Greenplum cluster. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Access policy to the Greenplum cluster. (see below for nested schema)
+                      Access policy to the Greenplum cluster.
                     items:
                       properties:
                         dataLens:
-                          description: Allow access for Yandex DataLens.
+                          description: |-
+                            (Boolean) Allow access for Yandex DataLens.
+                            Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
                           type: boolean
                         dataTransfer:
-                          description: Allow access for DataTransfer
+                          description: |-
+                            (Boolean) Allow access for DataTransfer
+                            Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
                           type: boolean
                         webSql:
-                          description: Allows access for SQL queries in the management
-                            console.
+                          description: |-
+                            (Boolean) Allows access for SQL queries in the management console.
+                            Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
+                          type: boolean
+                        yandexQuery:
+                          description: |-
+                            (Boolean) Allow access for Yandex Query
+                            Allow access for [Yandex Query](https://yandex.cloud/services/query)
                           type: boolean
                       type: object
                     type: array
                   assignPublicIp:
-                    description: Sets whether the master hosts should get a public
-                      IP address on creation. Changing this parameter for an existing
-                      host is not supported at the moment.
+                    description: |-
+                      (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+                      Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
                     type: boolean
+                  backgroundActivities:
+                    description: |-
+                      (Block List) Background activities settings. (see below for nested schema)
+                      Background activities settings.
+                    items:
+                      properties:
+                        analyzeAndVacuum:
+                          description: |-
+                            (Block List) Block to configure 'ANALYZE' and 'VACUUM' daily operations. (see below for nested schema)
+                            Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+                          items:
+                            properties:
+                              analyzeTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+                                  Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+                                type: number
+                              startTime:
+                                description: |-
+                                  (String) Time of day in 'HH:MM' format when scripts should run.
+                                  Time of day in 'HH:MM' format when scripts should run.
+                                type: string
+                              vacuumTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+                                  Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerIdle:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries that are in idle state. (see below for nested schema)
+                            Block to configure script that kills long running queries that are in `idle` state.
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerIdleInTransaction:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries that are in idle in transaction state. (see below for nested schema)
+                            Block to configure script that kills long running queries that are in `idle in transaction` state.
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerLongRunning:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries (in any state). (see below for nested schema)
+                            Block to configure script that kills long running queries (in any state).
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   backupWindowStart:
-                    description: Time to start the daily backup, in the UTC timezone.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+                      Time to start the daily backup, in the UTC timezone.
                     items:
                       properties:
                         hours:
-                          description: The hour at which backup will be started (UTC).
+                          description: |-
+                            (Number) The hour at which backup will be started (UTC).
+                            The hour at which backup will be started (UTC).
                           type: number
                         minutes:
-                          description: The minute at which backup will be started
-                            (UTC).
+                          description: |-
+                            (Number) The minute at which backup will be started (UTC).
+                            The minute at which backup will be started (UTC).
                           type: number
                       type: object
                     type: array
                   cloudStorage:
-                    description: Cloud Storage settings of the Greenplum cluster.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Cloud Storage settings of the Greenplum cluster. (see below for nested schema)
+                      Cloud Storage settings of the Greenplum cluster.
                     items:
                       properties:
                         enable:
-                          description: Whether to use cloud storage or not.
+                          description: |-
+                            (Boolean) Flag that indicates whether script is enabled.
+                            Whether to use cloud storage or not.
                           type: boolean
                       type: object
                     type: array
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the Greenplum cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   environment:
-                    description: Deployment environment of the Greenplum cluster.
-                      (PRODUCTION, PRESTABLE)
+                    description: |-
+                      (String) Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
+                      Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -799,68 +1172,133 @@ spec:
                   greenplumConfig:
                     additionalProperties:
                       type: string
-                    description: Greenplum cluster config. Detail info in "Greenplum
-                      cluster settings" section (documented below).
+                    description: |-
+                      (Map of String) Greenplum cluster config. Detail info in Greenplum cluster settings block.
+                      Greenplum cluster config. Detail info in `Greenplum cluster settings` block.
                     type: object
                     x-kubernetes-map-type: granular
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Greenplum
-                      cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  logging:
+                    description: |-
+                      (Block List, Max: 1) Cloud Logging settings. (see below for nested schema)
+                      Cloud Logging settings.
+                    items:
+                      properties:
+                        commandCenterEnabled:
+                          description: |-
+                            (Boolean) Deliver Yandex Command Center's logs to Cloud Logging.
+                            Deliver Yandex Command Center's logs to Cloud Logging.
+                          type: boolean
+                        enabled:
+                          description: |-
+                            (Boolean) Flag that indicates whether log delivery to Cloud Logging is enabled.
+                            Flag that indicates whether log delivery to Cloud Logging is enabled.
+                          type: boolean
+                        folderId:
+                          description: |-
+                            id is used.
+                            ID of folder to which deliver logs.
+                          type: string
+                        greenplumEnabled:
+                          description: |-
+                            (Boolean) Deliver Greenplum's logs to Cloud Logging.
+                            Deliver Greenplum's logs to Cloud Logging.
+                          type: boolean
+                        logGroupId:
+                          description: |-
+                            (String) Cloud Logging group ID to send logs to.
+                            Cloud Logging group ID to send logs to.
+                          type: string
+                        poolerEnabled:
+                          description: |-
+                            (Boolean) Deliver connection pooler's logs to Cloud Logging.
+                            Deliver connection pooler's logs to Cloud Logging.
+                          type: boolean
+                      type: object
+                    type: array
                   maintenanceWindow:
-                    description: Maintenance policy of the Greenplum cluster. The
-                      structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Maintenance policy of the Greenplum cluster. (see below for nested schema)
+                      Maintenance policy of the Greenplum cluster.
                     items:
                       properties:
                         day:
-                          description: 'Day of the week (in DDD format). Allowed values:
-                            "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"'
+                          description: |-
+                            (String) Day of the week (in DDD format). Allowed values: MON, TUE, WED, THU, FRI, SAT, SUN.
+                            Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
                           type: string
                         hour:
-                          description: Hour of the day in UTC (in HH format). Allowed
-                            value is between 0 and 23.
+                          description: |-
+                            (Number) Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+                            Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
                           type: number
                         type:
-                          description: Type of maintenance window. Can be either ANYTIME
-                            or WEEKLY. A day and hour of window need to be specified
-                            with weekly window.
+                          description: |-
+                            (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+                            Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
                           type: string
                       type: object
                     type: array
                   masterHostCount:
-                    description: Number of hosts in master subcluster (1 or 2).
+                    description: |-
+                      (Number) Number of hosts in master subcluster (1 or 2).
+                      Number of hosts in master subcluster (1 or 2).
                     type: number
+                  masterHostGroupIds:
+                    description: |-
+                      (Set of String) A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+                      A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   masterSubcluster:
-                    description: Settings for master subcluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Settings for master subcluster. (see below for nested schema)
+                      Settings for master subcluster.
                     items:
                       properties:
                         resources:
-                          description: Resources allocated to hosts for master subcluster
-                            of the Greenplum cluster. The structure is documented
-                            below.
+                          description: |-
+                            (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+                            Resources allocated to hosts for master subcluster of the Greenplum cluster.
                           items:
                             properties:
                               diskSize:
+                                description: |-
+                                  (Number) Volume of the storage available to a host, in gigabytes.
+                                  Volume of the storage available to a host, in gigabytes.
                                 type: number
                               diskTypeId:
+                                description: |-
+                                  environment default is used if missing.
+                                  Type of the storage of Greenplum hosts - environment default is used if missing.
                                 type: string
                               resourcePresetId:
+                                description: |-
+                                  (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                  The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   name:
-                    description: Name of the Greenplum cluster. Provided by the client
-                      when the cluster is created.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   networkId:
-                    description: ID of the network, to which the Greenplum cluster
-                      uses.
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
                     type: string
                   networkIdRef:
                     description: Reference to a Network in vpc to populate networkId.
@@ -943,70 +1381,90 @@ spec:
                         type: object
                     type: object
                   poolerConfig:
-                    description: Configuration of the connection pooler. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Configuration of the connection pooler. (see below for nested schema)
+                      Configuration of the connection pooler.
                     items:
                       properties:
                         poolClientIdleTimeout:
-                          description: Value for pool_client_idle_timeout parameter
-                            in Odyssey.
+                          description: |-
+                            (Number) Value for pool_client_idle_timeout parameter in Odyssey.
+                            Value for `pool_client_idle_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout).
+                          type: number
+                        poolIdleInTransactionTimeout:
+                          description: |-
+                            (Number) Value for pool_idle_in_transaction_timeout parameter in Odyssey.
+                            Value for `pool_idle_in_transaction_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout).
                           type: number
                         poolSize:
-                          description: Value for pool_size parameter in Odyssey.
+                          description: |-
+                            (Number) Value for pool_size parameter in Odyssey.
+                            Value for `pool_size` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
                           type: number
                         poolingMode:
-                          description: Mode that the connection pooler is working
-                            in. See descriptions of all modes in the [documentation
-                            for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+                          description: |-
+                            (String) Mode that the connection pooler is working in. See descriptions of all modes in the documentation for Odyssey.
+                            Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
                           type: string
                       type: object
                     type: array
                   pxfConfig:
-                    description: Configuration of the PXF daemon. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Max: 1) Configuration of the PXF daemon. (see below for nested schema)
+                      Configuration of the PXF daemon.
                     items:
                       properties:
                         connectionTimeout:
-                          description: The Tomcat server connection timeout for read
-                            operations in seconds. Value is between 5 and 600.
+                          description: |-
+                            (Number) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+                            The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
                           type: number
                         maxThreads:
-                          description: The maximum number of PXF tomcat threads. Value
-                            is between 1 and 1024.
+                          description: |-
+                            (Number) The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+                            The maximum number of PXF tomcat threads. Value is between 1 and 1024.
                           type: number
                         poolAllowCoreThreadTimeout:
-                          description: Identifies whether or not core streaming threads
-                            are allowed to time out.
+                          description: |-
+                            (Boolean) Identifies whether or not core streaming threads are allowed to time out.
+                            Identifies whether or not core streaming threads are allowed to time out.
                           type: boolean
                         poolCoreSize:
-                          description: The number of core streaming threads. Value
-                            is between 1 and 1024.
+                          description: |-
+                            (Number) The number of core streaming threads. Value is between 1 and 1024.
+                            The number of core streaming threads. Value is between 1 and 1024.
                           type: number
                         poolMaxSize:
-                          description: The maximum allowed number of core streaming
-                            threads. Value is between 1 and 1024.
+                          description: |-
+                            (Number) The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+                            The maximum allowed number of core streaming threads. Value is between 1 and 1024.
                           type: number
                         poolQueueCapacity:
-                          description: The capacity of the core streaming thread pool
-                            queue. Value is positive.
+                          description: |-
+                            (Number) The capacity of the core streaming thread pool queue. Value is positive.
+                            The capacity of the core streaming thread pool queue. Value is positive.
                           type: number
                         uploadTimeout:
-                          description: The Tomcat server connection timeout for write
-                            operations in seconds. Value is between 5 and 600.
+                          description: |-
+                            (Number) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+                            The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
                           type: number
                         xms:
-                          description: Maximum JVM heap size for PXF daemon. Value
-                            is between 64 and 16384.
+                          description: |-
+                            (Number) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+                            Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
                           type: number
                         xmx:
-                          description: Initial JVM heap size for PXF daemon. Value
-                            is between 64 and 16384.
+                          description: |-
+                            (Number) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+                            Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
                           type: number
                       type: object
                     type: array
                   securityGroupIds:
-                    description: A set of ids of security groups assigned to hosts
-                      of the cluster.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
@@ -1096,38 +1554,63 @@ spec:
                         type: object
                     type: object
                   segmentHostCount:
-                    description: Number of hosts in segment subcluster (from 1 to
-                      32).
+                    description: |-
+                      (Number) Number of hosts in segment subcluster (from 1 to 32).
+                      Number of hosts in segment subcluster (from 1 to 32).
                     type: number
+                  segmentHostGroupIds:
+                    description: |-
+                      (Set of String) A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+                      A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   segmentInHost:
-                    description: Number of segments on segment host (not more then
-                      1 + RAM/8).
+                    description: |-
+                      (Number) Number of segments on segment host (not more then 1 + RAM/8).
+                      Number of segments on segment host (not more then 1 + RAM/8).
                     type: number
                   segmentSubcluster:
-                    description: Settings for segment subcluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Settings for segment subcluster. (see below for nested schema)
+                      Settings for segment subcluster.
                     items:
                       properties:
                         resources:
-                          description: Resources allocated to hosts for segment subcluster
-                            of the Greenplum cluster. The structure is documented
-                            below.
+                          description: |-
+                            (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+                            Resources allocated to hosts for segment subcluster of the Greenplum cluster.
                           items:
                             properties:
                               diskSize:
+                                description: |-
+                                  (Number) Volume of the storage available to a host, in gigabytes.
+                                  Volume of the storage available to a host, in gigabytes.
                                 type: number
                               diskTypeId:
+                                description: |-
+                                  environment default is used if missing.
+                                  Type of the storage of Greenplum hosts - environment default is used if missing.
                                 type: string
                               resourcePresetId:
+                                description: |-
+                                  (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                  The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  serviceAccountId:
+                    description: |-
+                      (String) ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+                      ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+                    type: string
                   subnetId:
-                    description: The ID of the subnet, to which the hosts belongs.
-                      The subnet must be a part of the network to which the cluster
-                      belongs.
+                    description: |-
+                      (String) The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
+                      The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
                     type: string
                   subnetIdRef:
                     description: Reference to a Subnet in vpc to populate subnetId.
@@ -1210,10 +1693,14 @@ spec:
                         type: object
                     type: object
                   userName:
-                    description: Greenplum cluster admin user name.
+                    description: |-
+                      (String) Greenplum cluster admin user name.
+                      Greenplum cluster admin user name.
                     type: string
                   userPasswordSecretRef:
-                    description: Greenplum cluster admin password name.
+                    description: |-
+                      (String, Sensitive) Greenplum cluster admin password name.
+                      Greenplum cluster admin password name.
                     properties:
                       key:
                         type: string
@@ -1225,11 +1712,14 @@ spec:
                     - name
                     type: object
                   version:
-                    description: Version of the Greenplum cluster. (6.22 or 6.25)
+                    description: |-
+                      (String) Version of the Greenplum cluster. (6.28)
+                      Version of the Greenplum cluster. (`6.28`)
                     type: string
                   zone:
-                    description: The availability zone where the Greenplum hosts will
-                      be created.
+                    description: |-
+                      (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                      The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                     type: string
                 required:
                 - userPasswordSecretRef
@@ -1346,282 +1836,533 @@ spec:
               atProvider:
                 properties:
                   access:
-                    description: Access policy to the Greenplum cluster. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Access policy to the Greenplum cluster. (see below for nested schema)
+                      Access policy to the Greenplum cluster.
                     items:
                       properties:
                         dataLens:
-                          description: Allow access for Yandex DataLens.
+                          description: |-
+                            (Boolean) Allow access for Yandex DataLens.
+                            Allow access for [Yandex DataLens](https://yandex.cloud/services/datalens).
                           type: boolean
                         dataTransfer:
-                          description: Allow access for DataTransfer
+                          description: |-
+                            (Boolean) Allow access for DataTransfer
+                            Allow access for [DataTransfer](https://yandex.cloud/services/data-transfer)
                           type: boolean
                         webSql:
-                          description: Allows access for SQL queries in the management
-                            console.
+                          description: |-
+                            (Boolean) Allows access for SQL queries in the management console.
+                            Allows access for [SQL queries in the management console](https://yandex.cloud/docs/managed-mysql/operations/web-sql-query).
+                          type: boolean
+                        yandexQuery:
+                          description: |-
+                            (Boolean) Allow access for Yandex Query
+                            Allow access for [Yandex Query](https://yandex.cloud/services/query)
                           type: boolean
                       type: object
                     type: array
                   assignPublicIp:
-                    description: Sets whether the master hosts should get a public
-                      IP address on creation. Changing this parameter for an existing
-                      host is not supported at the moment.
+                    description: |-
+                      (Boolean) Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
+                      Sets whether the master hosts should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
                     type: boolean
+                  backgroundActivities:
+                    description: |-
+                      (Block List) Background activities settings. (see below for nested schema)
+                      Background activities settings.
+                    items:
+                      properties:
+                        analyzeAndVacuum:
+                          description: |-
+                            (Block List) Block to configure 'ANALYZE' and 'VACUUM' daily operations. (see below for nested schema)
+                            Block to configure 'ANALYZE' and 'VACUUM' daily operations.
+                          items:
+                            properties:
+                              analyzeTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the ANALYZE operation, in seconds. The default value is 36000. As soon as this period expires, the ANALYZE operation will be forced to terminate.
+                                  Maximum duration of the `ANALYZE` operation, in seconds. The default value is `36000`. As soon as this period expires, the `ANALYZE` operation will be forced to terminate.
+                                type: number
+                              startTime:
+                                description: |-
+                                  (String) Time of day in 'HH:MM' format when scripts should run.
+                                  Time of day in 'HH:MM' format when scripts should run.
+                                type: string
+                              vacuumTimeout:
+                                description: |-
+                                  (Number) Maximum duration of the VACUUM operation, in seconds. The default value is 36000. As soon as this period expires, the VACUUM operation will be forced to terminate.
+                                  Maximum duration of the `VACUUM` operation, in seconds. The default value is `36000`. As soon as this period expires, the `VACUUM` operation will be forced to terminate.
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerIdle:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries that are in idle state. (see below for nested schema)
+                            Block to configure script that kills long running queries that are in `idle` state.
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerIdleInTransaction:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries that are in idle in transaction state. (see below for nested schema)
+                            Block to configure script that kills long running queries that are in `idle in transaction` state.
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                        queryKillerLongRunning:
+                          description: |-
+                            (Block List) Block to configure script that kills long running queries (in any state). (see below for nested schema)
+                            Block to configure script that kills long running queries (in any state).
+                          items:
+                            properties:
+                              enable:
+                                description: |-
+                                  (Boolean) Flag that indicates whether script is enabled.
+                                  Flag that indicates whether script is enabled.
+                                type: boolean
+                              ignoreUsers:
+                                description: |-
+                                  (List of String) List of users to ignore when considering queries to terminate.
+                                  List of users to ignore when considering queries to terminate.
+                                items:
+                                  type: string
+                                type: array
+                              maxAge:
+                                description: |-
+                                  (Number) Maximum duration for this type of queries (in seconds).
+                                  Maximum duration for this type of queries (in seconds).
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   backupWindowStart:
-                    description: Time to start the daily backup, in the UTC timezone.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Time to start the daily backup, in the UTC timezone. (see below for nested schema)
+                      Time to start the daily backup, in the UTC timezone.
                     items:
                       properties:
                         hours:
-                          description: The hour at which backup will be started (UTC).
+                          description: |-
+                            (Number) The hour at which backup will be started (UTC).
+                            The hour at which backup will be started (UTC).
                           type: number
                         minutes:
-                          description: The minute at which backup will be started
-                            (UTC).
+                          description: |-
+                            (Number) The minute at which backup will be started (UTC).
+                            The minute at which backup will be started (UTC).
                           type: number
                       type: object
                     type: array
                   cloudStorage:
-                    description: Cloud Storage settings of the Greenplum cluster.
-                      The structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Cloud Storage settings of the Greenplum cluster. (see below for nested schema)
+                      Cloud Storage settings of the Greenplum cluster.
                     items:
                       properties:
                         enable:
-                          description: Whether to use cloud storage or not.
+                          description: |-
+                            (Boolean) Flag that indicates whether script is enabled.
+                            Whether to use cloud storage or not.
                           type: boolean
                       type: object
                     type: array
                   createdAt:
-                    description: Creation timestamp of the cluster.
+                    description: |-
+                      (String) The creation timestamp of the resource.
+                      The creation timestamp of the resource.
                     type: string
                   deletionProtection:
-                    description: Inhibits deletion of the cluster.  Can be either
-                      true or false.
+                    description: |-
+                      (Boolean) The true value means that resource is protected from accidental deletion.
+                      The `true` value means that resource is protected from accidental deletion.
                     type: boolean
                   description:
-                    description: Description of the Greenplum cluster.
+                    description: |-
+                      (String) The resource description.
+                      The resource description.
                     type: string
                   environment:
-                    description: Deployment environment of the Greenplum cluster.
-                      (PRODUCTION, PRESTABLE)
+                    description: |-
+                      (String) Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
+                      Deployment environment of the Greenplum cluster. (PRODUCTION, PRESTABLE)
                     type: string
                   folderId:
                     description: |-
-                      The ID of the folder that the resource belongs to. If it
-                      is not provided, the default provider folder is used.
+                      id is used.
+                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
                     type: string
                   greenplumConfig:
                     additionalProperties:
                       type: string
-                    description: Greenplum cluster config. Detail info in "Greenplum
-                      cluster settings" section (documented below).
+                    description: |-
+                      (Map of String) Greenplum cluster config. Detail info in Greenplum cluster settings block.
+                      Greenplum cluster config. Detail info in `Greenplum cluster settings` block.
                     type: object
                     x-kubernetes-map-type: granular
                   health:
-                    description: Aggregated health of the cluster.
+                    description: |-
+                      (String) Aggregated health of the cluster.
+                      Aggregated health of the cluster.
                     type: string
                   id:
+                    description: (String) The ID of this resource.
                     type: string
                   labels:
                     additionalProperties:
                       type: string
-                    description: A set of key/value label pairs to assign to the Greenplum
-                      cluster.
+                    description: |-
+                      (Map of String) A set of key/value label pairs which assigned to resource.
+                      A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  logging:
+                    description: |-
+                      (Block List, Max: 1) Cloud Logging settings. (see below for nested schema)
+                      Cloud Logging settings.
+                    items:
+                      properties:
+                        commandCenterEnabled:
+                          description: |-
+                            (Boolean) Deliver Yandex Command Center's logs to Cloud Logging.
+                            Deliver Yandex Command Center's logs to Cloud Logging.
+                          type: boolean
+                        enabled:
+                          description: |-
+                            (Boolean) Flag that indicates whether log delivery to Cloud Logging is enabled.
+                            Flag that indicates whether log delivery to Cloud Logging is enabled.
+                          type: boolean
+                        folderId:
+                          description: |-
+                            id is used.
+                            ID of folder to which deliver logs.
+                          type: string
+                        greenplumEnabled:
+                          description: |-
+                            (Boolean) Deliver Greenplum's logs to Cloud Logging.
+                            Deliver Greenplum's logs to Cloud Logging.
+                          type: boolean
+                        logGroupId:
+                          description: |-
+                            (String) Cloud Logging group ID to send logs to.
+                            Cloud Logging group ID to send logs to.
+                          type: string
+                        poolerEnabled:
+                          description: |-
+                            (Boolean) Deliver connection pooler's logs to Cloud Logging.
+                            Deliver connection pooler's logs to Cloud Logging.
+                          type: boolean
+                      type: object
+                    type: array
                   maintenanceWindow:
-                    description: Maintenance policy of the Greenplum cluster. The
-                      structure is documented below.
+                    description: |-
+                      (Block List, Max: 1) Maintenance policy of the Greenplum cluster. (see below for nested schema)
+                      Maintenance policy of the Greenplum cluster.
                     items:
                       properties:
                         day:
-                          description: 'Day of the week (in DDD format). Allowed values:
-                            "MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"'
+                          description: |-
+                            (String) Day of the week (in DDD format). Allowed values: MON, TUE, WED, THU, FRI, SAT, SUN.
+                            Day of the week (in `DDD` format). Allowed values: `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
                           type: string
                         hour:
-                          description: Hour of the day in UTC (in HH format). Allowed
-                            value is between 0 and 23.
+                          description: |-
+                            (Number) Hour of the day in UTC (in HH format). Allowed value is between 0 and 23.
+                            Hour of the day in UTC (in `HH` format). Allowed value is between 0 and 23.
                           type: number
                         type:
-                          description: Type of maintenance window. Can be either ANYTIME
-                            or WEEKLY. A day and hour of window need to be specified
-                            with weekly window.
+                          description: |-
+                            (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+                            Type of maintenance window. Can be either `ANYTIME` or `WEEKLY`. A day and hour of window need to be specified with weekly window.
                           type: string
                       type: object
                     type: array
                   masterHostCount:
-                    description: Number of hosts in master subcluster (1 or 2).
+                    description: |-
+                      (Number) Number of hosts in master subcluster (1 or 2).
+                      Number of hosts in master subcluster (1 or 2).
                     type: number
+                  masterHostGroupIds:
+                    description: |-
+                      (Set of String) A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+                      A list of IDs of the host groups to place master subclusters' VMs of the cluster on.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   masterHosts:
-                    description: (Computed) Info about hosts in master subcluster.
-                      The structure is documented below.
+                    description: |-
+                      (List of Object) Info about hosts in master subcluster. (see below for nested schema)
+                      Info about hosts in master subcluster.
                     items:
                       properties:
                         assignPublicIp:
-                          description: (Computed) Flag indicating that master hosts
-                            should be created with a public IP address.
+                          description: (Boolean) Sets whether the master hosts should
+                            get a public IP address on creation. Changing this parameter
+                            for an existing host is not supported at the moment.
                           type: boolean
                         fqdn:
-                          description: (Computed) The fully qualified domain name
-                            of the host.
+                          description: (String)
                           type: string
                       type: object
                     type: array
                   masterSubcluster:
-                    description: Settings for master subcluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Settings for master subcluster. (see below for nested schema)
+                      Settings for master subcluster.
                     items:
                       properties:
                         resources:
-                          description: Resources allocated to hosts for master subcluster
-                            of the Greenplum cluster. The structure is documented
-                            below.
+                          description: |-
+                            (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+                            Resources allocated to hosts for master subcluster of the Greenplum cluster.
                           items:
                             properties:
                               diskSize:
+                                description: |-
+                                  (Number) Volume of the storage available to a host, in gigabytes.
+                                  Volume of the storage available to a host, in gigabytes.
                                 type: number
                               diskTypeId:
+                                description: |-
+                                  environment default is used if missing.
+                                  Type of the storage of Greenplum hosts - environment default is used if missing.
                                 type: string
                               resourcePresetId:
+                                description: |-
+                                  (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                  The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
                   name:
-                    description: Name of the Greenplum cluster. Provided by the client
-                      when the cluster is created.
+                    description: |-
+                      (String) The resource name.
+                      The resource name.
                     type: string
                   networkId:
-                    description: ID of the network, to which the Greenplum cluster
-                      uses.
+                    description: |-
+                      (String) The VPC Network ID of subnets which resource attached to.
+                      The `VPC Network ID` of subnets which resource attached to.
                     type: string
                   poolerConfig:
-                    description: Configuration of the connection pooler. The structure
-                      is documented below.
+                    description: |-
+                      (Block List, Max: 1) Configuration of the connection pooler. (see below for nested schema)
+                      Configuration of the connection pooler.
                     items:
                       properties:
                         poolClientIdleTimeout:
-                          description: Value for pool_client_idle_timeout parameter
-                            in Odyssey.
+                          description: |-
+                            (Number) Value for pool_client_idle_timeout parameter in Odyssey.
+                            Value for `pool_client_idle_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_client_idle_timeout).
+                          type: number
+                        poolIdleInTransactionTimeout:
+                          description: |-
+                            (Number) Value for pool_idle_in_transaction_timeout parameter in Odyssey.
+                            Value for `pool_idle_in_transaction_timeout` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_idle_in_transaction_timeout).
                           type: number
                         poolSize:
-                          description: Value for pool_size parameter in Odyssey.
+                          description: |-
+                            (Number) Value for pool_size parameter in Odyssey.
+                            Value for `pool_size` [parameter in Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool_size).
                           type: number
                         poolingMode:
-                          description: Mode that the connection pooler is working
-                            in. See descriptions of all modes in the [documentation
-                            for Odyssey](https://github.com/yandex/odyssey/blob/master/documentation/configuration.md#pool-string.
+                          description: |-
+                            (String) Mode that the connection pooler is working in. See descriptions of all modes in the documentation for Odyssey.
+                            Mode that the connection pooler is working in. See descriptions of all modes in the [documentation for Odyssey](https://github.com/yandex/odyssey/blob/master/docs/configuration/rules.md#pool).
                           type: string
                       type: object
                     type: array
                   pxfConfig:
-                    description: Configuration of the PXF daemon. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Max: 1) Configuration of the PXF daemon. (see below for nested schema)
+                      Configuration of the PXF daemon.
                     items:
                       properties:
                         connectionTimeout:
-                          description: The Tomcat server connection timeout for read
-                            operations in seconds. Value is between 5 and 600.
+                          description: |-
+                            (Number) The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
+                            The Tomcat server connection timeout for read operations in seconds. Value is between 5 and 600.
                           type: number
                         maxThreads:
-                          description: The maximum number of PXF tomcat threads. Value
-                            is between 1 and 1024.
+                          description: |-
+                            (Number) The maximum number of PXF tomcat threads. Value is between 1 and 1024.
+                            The maximum number of PXF tomcat threads. Value is between 1 and 1024.
                           type: number
                         poolAllowCoreThreadTimeout:
-                          description: Identifies whether or not core streaming threads
-                            are allowed to time out.
+                          description: |-
+                            (Boolean) Identifies whether or not core streaming threads are allowed to time out.
+                            Identifies whether or not core streaming threads are allowed to time out.
                           type: boolean
                         poolCoreSize:
-                          description: The number of core streaming threads. Value
-                            is between 1 and 1024.
+                          description: |-
+                            (Number) The number of core streaming threads. Value is between 1 and 1024.
+                            The number of core streaming threads. Value is between 1 and 1024.
                           type: number
                         poolMaxSize:
-                          description: The maximum allowed number of core streaming
-                            threads. Value is between 1 and 1024.
+                          description: |-
+                            (Number) The maximum allowed number of core streaming threads. Value is between 1 and 1024.
+                            The maximum allowed number of core streaming threads. Value is between 1 and 1024.
                           type: number
                         poolQueueCapacity:
-                          description: The capacity of the core streaming thread pool
-                            queue. Value is positive.
+                          description: |-
+                            (Number) The capacity of the core streaming thread pool queue. Value is positive.
+                            The capacity of the core streaming thread pool queue. Value is positive.
                           type: number
                         uploadTimeout:
-                          description: The Tomcat server connection timeout for write
-                            operations in seconds. Value is between 5 and 600.
+                          description: |-
+                            (Number) The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
+                            The Tomcat server connection timeout for write operations in seconds. Value is between 5 and 600.
                           type: number
                         xms:
-                          description: Maximum JVM heap size for PXF daemon. Value
-                            is between 64 and 16384.
+                          description: |-
+                            (Number) Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
+                            Maximum JVM heap size for PXF daemon. Value is between 64 and 16384.
                           type: number
                         xmx:
-                          description: Initial JVM heap size for PXF daemon. Value
-                            is between 64 and 16384.
+                          description: |-
+                            (Number) Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
+                            Initial JVM heap size for PXF daemon. Value is between 64 and 16384.
                           type: number
                       type: object
                     type: array
                   securityGroupIds:
-                    description: A set of ids of security groups assigned to hosts
-                      of the cluster.
+                    description: |-
+                      (Set of String) The list of security groups applied to resource or their components.
+                      The list of security groups applied to resource or their components.
                     items:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
                   segmentHostCount:
-                    description: Number of hosts in segment subcluster (from 1 to
-                      32).
+                    description: |-
+                      (Number) Number of hosts in segment subcluster (from 1 to 32).
+                      Number of hosts in segment subcluster (from 1 to 32).
                     type: number
+                  segmentHostGroupIds:
+                    description: |-
+                      (Set of String) A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+                      A list of IDs of the host groups to place segment subclusters' VMs of the cluster on.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
                   segmentHosts:
-                    description: (Computed) Info about hosts in segment subcluster.
-                      The structure is documented below.
+                    description: |-
+                      (List of Object) Info about hosts in segment subcluster. (see below for nested schema)
+                      Info about hosts in segment subcluster.
                     items:
                       properties:
                         fqdn:
-                          description: (Computed) The fully qualified domain name
-                            of the host.
+                          description: (String)
                           type: string
                       type: object
                     type: array
                   segmentInHost:
-                    description: Number of segments on segment host (not more then
-                      1 + RAM/8).
+                    description: |-
+                      (Number) Number of segments on segment host (not more then 1 + RAM/8).
+                      Number of segments on segment host (not more then 1 + RAM/8).
                     type: number
                   segmentSubcluster:
-                    description: Settings for segment subcluster. The structure is
-                      documented below.
+                    description: |-
+                      (Block List, Min: 1, Max: 1) Settings for segment subcluster. (see below for nested schema)
+                      Settings for segment subcluster.
                     items:
                       properties:
                         resources:
-                          description: Resources allocated to hosts for segment subcluster
-                            of the Greenplum cluster. The structure is documented
-                            below.
+                          description: |-
+                            (Block List, Min: 1, Max: 1) Resources allocated to hosts for master subcluster of the Greenplum cluster. (see below for nested schema)
+                            Resources allocated to hosts for segment subcluster of the Greenplum cluster.
                           items:
                             properties:
                               diskSize:
+                                description: |-
+                                  (Number) Volume of the storage available to a host, in gigabytes.
+                                  Volume of the storage available to a host, in gigabytes.
                                 type: number
                               diskTypeId:
+                                description: |-
+                                  environment default is used if missing.
+                                  Type of the storage of Greenplum hosts - environment default is used if missing.
                                 type: string
                               resourcePresetId:
+                                description: |-
+                                  (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                  The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/ru/docs/managed-greenplum/concepts/instance-types).
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  serviceAccountId:
+                    description: |-
+                      (String) ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+                      ID of service account to use with Yandex Cloud resources (e.g. S3, Cloud Logging).
+                    type: string
                   status:
-                    description: Status of the cluster.
+                    description: |-
+                      (String) Status of the cluster.
+                      Status of the cluster.
                     type: string
                   subnetId:
-                    description: The ID of the subnet, to which the hosts belongs.
-                      The subnet must be a part of the network to which the cluster
-                      belongs.
+                    description: |-
+                      (String) The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
+                      The ID of the subnet, to which the hosts belongs. The subnet must be a part of the network to which the cluster belongs.
                     type: string
                   userName:
-                    description: Greenplum cluster admin user name.
+                    description: |-
+                      (String) Greenplum cluster admin user name.
+                      Greenplum cluster admin user name.
                     type: string
                   version:
-                    description: Version of the Greenplum cluster. (6.22 or 6.25)
+                    description: |-
+                      (String) Version of the Greenplum cluster. (6.28)
+                      Version of the Greenplum cluster. (`6.28`)
                     type: string
                   zone:
-                    description: The availability zone where the Greenplum hosts will
-                      be created.
+                    description: |-
+                      (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
+                      The [availability zone](https://yandex.cloud/docs/overview/concepts/geo-scope) where resource is located. If it is not provided, the default provider zone will be used.
                     type: string
                 type: object
               conditions:

@@ -14,7 +14,8 @@ spec:
     retention:
     - afterBackup: false
     scheduling:
-    - enabled: false
-      executeByInterval: 86400
+    - backupSets:
+      - executeByInterval: 86400
+      enabled: false
     vmSnapshotReattempts:
     - {}

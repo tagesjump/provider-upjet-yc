@@ -4,8 +4,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: organizationmanager/v1alpha1/samlfederation
   labels:
-    testing.upbound.io/example-name: federation
-  name: federation
+    testing.upbound.io/example-name: saml_fed
+  name: saml-fed
 spec:
   forProvider:
     description: My new SAML federation
