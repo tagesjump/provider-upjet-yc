@@ -9,11 +9,11 @@ require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/crossplane/crossplane-runtime/v2 v2.0.0-20250730220209-c306b1c8b181
 	github.com/crossplane/crossplane-tools v0.0.0-20250731192036-00d407d8b7ec
-	github.com/crossplane/upjet/v2 v2.2.1-0.20260123134305-127e8754d16b
+	github.com/crossplane/upjet/v2 v2.2.1-0.20260202111611-56fd3e8c5b3b
 	github.com/hashicorp/terraform-json v0.26.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.37.0
 	github.com/pkg/errors v0.9.1
-	github.com/yandex-cloud/terraform-provider-yandex v0.181.0
+	github.com/yandex-cloud/terraform-provider-yandex v0.184.0
 	google.golang.org/grpc v1.75.0
 	k8s.io/api v0.34.1
 	k8s.io/apiextensions-apiserver v0.34.1
@@ -130,16 +130,16 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xhit/go-str2duration/v2 v2.1.0 // indirect
-	github.com/yandex-cloud/go-genproto v0.44.0 // indirect
-	github.com/yandex-cloud/go-sdk v0.29.0 // indirect
+	github.com/yandex-cloud/go-genproto v0.51.0 // indirect
+	github.com/yandex-cloud/go-sdk v0.31.0 // indirect
 	github.com/yandex-cloud/go-sdk/services/certificatemanager v0.0.10 // indirect
 	github.com/yandex-cloud/go-sdk/services/clouddesktop v0.0.2 // indirect
-	github.com/yandex-cloud/go-sdk/services/cloudregistry v0.0.12 // indirect
+	github.com/yandex-cloud/go-sdk/services/cloudregistry v0.0.33 // indirect
 	github.com/yandex-cloud/go-sdk/services/compute v1.0.15 // indirect
 	github.com/yandex-cloud/go-sdk/services/connectionmanager v0.0.8 // indirect
 	github.com/yandex-cloud/go-sdk/services/containerregistry v0.0.12 // indirect
 	github.com/yandex-cloud/go-sdk/services/datasphere v0.0.12 // indirect
-	github.com/yandex-cloud/go-sdk/services/datatransfer v0.0.22 // indirect
+	github.com/yandex-cloud/go-sdk/services/datatransfer v0.0.25 // indirect
 	github.com/yandex-cloud/go-sdk/services/dns v0.0.12 // indirect
 	github.com/yandex-cloud/go-sdk/services/k8s v0.0.12 // indirect
 	github.com/yandex-cloud/go-sdk/services/kms v0.0.12 // indirect
@@ -152,9 +152,10 @@ require (
 	github.com/yandex-cloud/go-sdk/services/serverless/containers v0.0.1 // indirect
 	github.com/yandex-cloud/go-sdk/services/serverless/eventrouter v0.0.3 // indirect
 	github.com/yandex-cloud/go-sdk/services/serverless/functions v0.0.3 // indirect
+	github.com/yandex-cloud/go-sdk/services/smartcaptcha v0.0.29 // indirect
 	github.com/yandex-cloud/go-sdk/services/ydb v0.0.12 // indirect
 	github.com/yandex-cloud/go-sdk/services/ytsaurus v0.0.2 // indirect
-	github.com/yandex-cloud/go-sdk/v2 v2.35.0 // indirect
+	github.com/yandex-cloud/go-sdk/v2 v2.49.0 // indirect
 	github.com/ydb-platform/terraform-provider-ydb v0.0.29 // indirect
 	github.com/ydb-platform/ydb-go-genproto v0.0.0-20250519101544-1f330d77b70f // indirect
 	github.com/ydb-platform/ydb-go-sdk/v3 v3.115.7 // indirect

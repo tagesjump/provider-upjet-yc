@@ -782,6 +782,21 @@ spec:
                                   type: string
                               type: object
                             type: array
+                          queryMetricLogEnabled:
+                            description: |-
+                              (Boolean) Enables or disables query_metric_log system table.
+                              Enables or disables query_metric_log system table.
+                            type: boolean
+                          queryMetricLogRetentionSize:
+                            description: |-
+                              (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+                              The maximum size that query_metric_log can grow to before old data will be removed. If set to **0**, automatic removal of query_metric_log data based on size is disabled.
+                            type: number
+                          queryMetricLogRetentionTime:
+                            description: |-
+                              (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
+                              The maximum time that query_metric_log records will be retained before removal. If set to **0**, automatic removal of query_metric_log data based on time is disabled.
+                            type: number
                           queryThreadLogEnabled:
                             description: |-
                               (Boolean) Enable or disable query_thread_log system table.
@@ -2142,6 +2157,21 @@ spec:
                                   type: string
                               type: object
                             type: array
+                          queryMetricLogEnabled:
+                            description: |-
+                              (Boolean) Enables or disables query_metric_log system table.
+                              Enables or disables query_metric_log system table.
+                            type: boolean
+                          queryMetricLogRetentionSize:
+                            description: |-
+                              (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+                              The maximum size that query_metric_log can grow to before old data will be removed. If set to **0**, automatic removal of query_metric_log data based on size is disabled.
+                            type: number
+                          queryMetricLogRetentionTime:
+                            description: |-
+                              (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
+                              The maximum time that query_metric_log records will be retained before removal. If set to **0**, automatic removal of query_metric_log data based on time is disabled.
+                            type: number
                           queryThreadLogEnabled:
                             description: |-
                               (Boolean) Enable or disable query_thread_log system table.
@@ -3537,6 +3567,21 @@ spec:
                                   type: string
                               type: object
                             type: array
+                          queryMetricLogEnabled:
+                            description: |-
+                              (Boolean) Enables or disables query_metric_log system table.
+                              Enables or disables query_metric_log system table.
+                            type: boolean
+                          queryMetricLogRetentionSize:
+                            description: |-
+                              (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+                              The maximum size that query_metric_log can grow to before old data will be removed. If set to **0**, automatic removal of query_metric_log data based on size is disabled.
+                            type: number
+                          queryMetricLogRetentionTime:
+                            description: |-
+                              (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
+                              The maximum time that query_metric_log records will be retained before removal. If set to **0**, automatic removal of query_metric_log data based on time is disabled.
+                            type: number
                           queryThreadLogEnabled:
                             description: |-
                               (Boolean) Enable or disable query_thread_log system table.

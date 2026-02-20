@@ -579,22 +579,16 @@ type ClusterTLSParamsTLSParameters struct {
 
 type ConnectionInitParameters struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the connection to retrieve.
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Description of the connection.
+	// Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the folder that the connection belongs to.
+	// ID of the folder that the connection belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -606,21 +600,19 @@ type ConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// (Map of String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Map of String) Connection labels as key:value pairs.
+	// Connection labels as `key:value` pairs.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Attributes) Specification for creating a new Lockbox secret. (see below for nested schema)
+	LockboxSecretSpec *LockboxSecretSpecInitParameters `json:"lockboxSecretSpec,omitempty" tf:"lockbox_secret_spec,omitempty"`
+
+	// (String) Name of the connection.
+	// Name of the connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Connection parameters specific to the database or service type. (see below for nested schema)
 	Params *ParamsInitParameters `json:"params,omitempty" tf:"params,omitempty"`
 
 	// (Attributes) (see below for nested schema)
@@ -629,103 +621,77 @@ type ConnectionInitParameters struct {
 
 type ConnectionObservation struct {
 
-	// (Boolean) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Boolean) Whether the current user can use this connection. Filled only when with_can_use has been requested in ListConnectionRequest.
+	// Whether the current user can use this connection. Filled only when `with_can_use` has been requested in ListConnectionRequest.
 	CanUse *bool `json:"canUse,omitempty" tf:"can_use,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the connection to retrieve.
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Creation timestamp.
+	// Creation timestamp.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the subject which created the connection.
+	// ID of the subject which created the connection.
 	CreatedBy *string `json:"createdBy,omitempty" tf:"created_by,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Description of the connection.
+	// Description of the connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the folder that the connection belongs to.
+	// ID of the folder that the connection belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+	// (String) ID of the connection to retrieve.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Boolean) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Boolean) Whether this connection is managed by the system (e.g. an MDB cluster).
+	// Whether this connection is managed by the system (e.g. an MDB cluster).
 	IsManaged *bool `json:"isManaged,omitempty" tf:"is_managed,omitempty"`
 
-	// (Map of String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Map of String) Connection labels as key:value pairs.
+	// Connection labels as `key:value` pairs.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Reference to the Lockbox secret containing connection credentials. (see below for nested schema)
 	LockboxSecret *LockboxSecretObservation `json:"lockboxSecret,omitempty" tf:"lockbox_secret,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Attributes) Specification for creating a new Lockbox secret. (see below for nested schema)
+	LockboxSecretSpec *LockboxSecretSpecObservation `json:"lockboxSecretSpec,omitempty" tf:"lockbox_secret_spec,omitempty"`
+
+	// (String) Name of the connection.
+	// Name of the connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Connection parameters specific to the database or service type. (see below for nested schema)
 	Params *ParamsObservation `json:"params,omitempty" tf:"params,omitempty"`
 
 	// (Attributes) (see below for nested schema)
 	Timeouts *TimeoutsObservation `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Last update timestamp.
+	// Last update timestamp.
 	UpdatedAt *string `json:"updatedAt,omitempty" tf:"updated_at,omitempty"`
 }
 
 type ConnectionParameters struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the connection to retrieve.
 	// +kubebuilder:validation:Optional
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Description of the connection.
+	// Description of the connection.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the folder that the connection belongs to.
+	// ID of the folder that the connection belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -738,23 +704,22 @@ type ConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// (Map of String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Map of String) Connection labels as key:value pairs.
+	// Connection labels as `key:value` pairs.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (Attributes) Specification for creating a new Lockbox secret. (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	LockboxSecretSpec *LockboxSecretSpecParameters `json:"lockboxSecretSpec,omitempty" tf:"lockbox_secret_spec,omitempty"`
+
+	// (String) Name of the connection.
+	// Name of the connection.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Connection parameters specific to the database or service type. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Params *ParamsParameters `json:"params,omitempty" tf:"params,omitempty"`
 
@@ -1408,48 +1373,58 @@ type LockboxPasswordGenerationOptionsParameters struct {
 
 type LockboxSecretInitParameters struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the Lockbox secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type LockboxSecretObservation struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the Lockbox secret.
 	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the Lockbox secret.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) The newest available version of the Lockbox secret.
+	// The newest available version of the Lockbox secret.
 	NewestVersion *string `json:"newestVersion,omitempty" tf:"newest_version,omitempty"`
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Lockbox secret version.
+	// Lockbox secret version.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type LockboxSecretParameters struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-	// package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) ID of the connection to retrieve.
+	// ID of the Lockbox secret.
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type LockboxSecretSpecInitParameters struct {
+
+	// (String) ID of the folder that the connection belongs to.
+	// ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+}
+
+type LockboxSecretSpecObservation struct {
+
+	// (String) ID of the folder that the connection belongs to.
+	// ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
+}
+
+type LockboxSecretSpecParameters struct {
+
+	// (String) ID of the folder that the connection belongs to.
+	// ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
+	// +kubebuilder:validation:Optional
+	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 }
 
 type MongodbAuthInitParameters struct {
@@ -2755,152 +2730,119 @@ type OpensearchParameters struct {
 
 type ParamsInitParameters struct {
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) ClickHouse database connection parameters. (see below for nested schema)
 	Clickhouse *ClickhouseInitParameters `json:"clickhouse,omitempty" tf:"clickhouse,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Greenplum data warehouse connection parameters. (see below for nested schema)
 	Greenplum *GreenplumInitParameters `json:"greenplum,omitempty" tf:"greenplum,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Apache Kafka message broker connection parameters. (see below for nested schema)
 	Kafka *KafkaInitParameters `json:"kafka,omitempty" tf:"kafka,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) MongoDB database connection parameters. (see below for nested schema)
 	Mongodb *MongodbInitParameters `json:"mongodb,omitempty" tf:"mongodb,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) MySQL database connection parameters. (see below for nested schema)
 	MySQL *MySQLInitParameters `json:"mysql,omitempty" tf:"mysql,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) OpenSearch search engine connection parameters. (see below for nested schema)
 	Opensearch *OpensearchInitParameters `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) PostgreSQL database connection parameters. (see below for nested schema)
 	Postgresql *PostgresqlInitParameters `json:"postgresql,omitempty" tf:"postgresql,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// memory data store connection parameters. (see below for nested schema)
 	Redis *RedisInitParameters `json:"redis,omitempty" tf:"redis,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) StoreDoc document store connection parameters. (see below for nested schema)
 	Storedoc *StoredocInitParameters `json:"storedoc,omitempty" tf:"storedoc,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Trino distributed SQL query engine connection parameters. (see below for nested schema)
 	Trino *TrinoInitParameters `json:"trino,omitempty" tf:"trino,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// memory data store connection parameters. (see below for nested schema)
 	Valkey *ValkeyInitParameters `json:"valkey,omitempty" tf:"valkey,omitempty"`
 }
 
 type ParamsObservation struct {
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) ClickHouse database connection parameters. (see below for nested schema)
 	Clickhouse *ClickhouseObservation `json:"clickhouse,omitempty" tf:"clickhouse,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Greenplum data warehouse connection parameters. (see below for nested schema)
 	Greenplum *GreenplumObservation `json:"greenplum,omitempty" tf:"greenplum,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Apache Kafka message broker connection parameters. (see below for nested schema)
 	Kafka *KafkaObservation `json:"kafka,omitempty" tf:"kafka,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) MongoDB database connection parameters. (see below for nested schema)
 	Mongodb *MongodbObservation `json:"mongodb,omitempty" tf:"mongodb,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) MySQL database connection parameters. (see below for nested schema)
 	MySQL *MySQLObservation `json:"mysql,omitempty" tf:"mysql,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) OpenSearch search engine connection parameters. (see below for nested schema)
 	Opensearch *OpensearchObservation `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) PostgreSQL database connection parameters. (see below for nested schema)
 	Postgresql *PostgresqlObservation `json:"postgresql,omitempty" tf:"postgresql,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// memory data store connection parameters. (see below for nested schema)
 	Redis *RedisObservation `json:"redis,omitempty" tf:"redis,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) StoreDoc document store connection parameters. (see below for nested schema)
 	Storedoc *StoredocObservation `json:"storedoc,omitempty" tf:"storedoc,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Trino distributed SQL query engine connection parameters. (see below for nested schema)
 	Trino *TrinoObservation `json:"trino,omitempty" tf:"trino,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// memory data store connection parameters. (see below for nested schema)
 	Valkey *ValkeyObservation `json:"valkey,omitempty" tf:"valkey,omitempty"`
 }
 
 type ParamsParameters struct {
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) ClickHouse database connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Clickhouse *ClickhouseParameters `json:"clickhouse,omitempty" tf:"clickhouse,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Greenplum data warehouse connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Greenplum *GreenplumParameters `json:"greenplum,omitempty" tf:"greenplum,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Apache Kafka message broker connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Kafka *KafkaParameters `json:"kafka,omitempty" tf:"kafka,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) MongoDB database connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Mongodb *MongodbParameters `json:"mongodb,omitempty" tf:"mongodb,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) MySQL database connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	MySQL *MySQLParameters `json:"mysql,omitempty" tf:"mysql,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) OpenSearch search engine connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Opensearch *OpensearchParameters `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) PostgreSQL database connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Postgresql *PostgresqlParameters `json:"postgresql,omitempty" tf:"postgresql,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// memory data store connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Redis *RedisParameters `json:"redis,omitempty" tf:"redis,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) StoreDoc document store connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Storedoc *StoredocParameters `json:"storedoc,omitempty" tf:"storedoc,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// (Attributes) Trino distributed SQL query engine connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Trino *TrinoParameters `json:"trino,omitempty" tf:"trino,omitempty"`
 
-	// (Attributes) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+	// memory data store connection parameters. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Valkey *ValkeyParameters `json:"valkey,omitempty" tf:"valkey,omitempty"`
 }
@@ -4664,8 +4606,7 @@ type SaslPasswordPasswordGenerationOptionsParameters struct {
 
 type ShardGroupsInitParameters struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Name of the connection.
 	// package: yandex.cloud.connectionmanager.v1
 	// filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -4679,8 +4620,7 @@ type ShardGroupsInitParameters struct {
 
 type ShardGroupsObservation struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Name of the connection.
 	// package: yandex.cloud.connectionmanager.v1
 	// filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -4694,8 +4634,7 @@ type ShardGroupsObservation struct {
 
 type ShardGroupsParameters struct {
 
-	// (String) package: yandex.cloud.connectionmanager.v1
-	// filename: yandex/cloud/connectionmanager/v1/connection.proto
+	// (String) Name of the connection.
 	// package: yandex.cloud.connectionmanager.v1
 	// filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
 	// +kubebuilder:validation:Optional

@@ -109,6 +109,311 @@ spec:
                       (String) The ID of the OpenSearch cluster that the resource belongs to.
                       The ID of the OpenSearch cluster that the resource belongs to.
                     type: string
+                  config:
+                    description: |-
+                      (Block, Optional) Configuration of the OpenSearch cluster. (see below for nested schema)
+                      Configuration of the OpenSearch cluster.
+                    items:
+                      properties:
+                        access:
+                          description: |-
+                            (Block, Optional) Enable access to the Yandex Cloud services. (see below for nested schema)
+                            Enable access to the Yandex Cloud services.
+                          items:
+                            properties:
+                              dataTransfer:
+                                description: |-
+                                  (Boolean) Enable access to the Data Transfer service.
+                                  Enable access to the [Data Transfer](https://yandex.cloud/docs/data-transfer) service.
+                                type: boolean
+                              serverless:
+                                description: |-
+                                  (Boolean) Enable access to the Cloud Functions service.
+                                  Enable access to the [Cloud Functions](https://yandex.cloud/docs/functions) service.
+                                type: boolean
+                            type: object
+                          type: array
+                        adminPasswordSecretRef:
+                          description: |-
+                            (String, Sensitive) Password for admin user of OpenSearch.
+                            Password for admin user of OpenSearch.
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          type: object
+                        dashboards:
+                          description: |-
+                            (Block, Optional) Configuration for Dashboards node groups. (see below for nested schema)
+                            Configuration for Dashboards node groups.
+                          items:
+                            properties:
+                              nodeGroups:
+                                description: (Block List) (see below for nested schema)
+                                items:
+                                  properties:
+                                    assignPublicIp:
+                                      description: |-
+                                        (Boolean) Sets whether the hosts should get a public IP address.
+                                        Sets whether the hosts should get a public IP address.
+                                      type: boolean
+                                    hostsCount:
+                                      description: |-
+                                        (Number) Number of hosts in this node group.
+                                        Number of hosts in this node group.
+                                      type: number
+                                    name:
+                                      description: |-
+                                        (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+                                        Name of OpenSearch node group.
+                                      type: string
+                                    resources:
+                                      description: |-
+                                        (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+                                        Resources allocated to hosts of this OpenSearch node group.
+                                      items:
+                                        properties:
+                                          diskSize:
+                                            description: |-
+                                              (Number) Volume of the storage available to a host, in bytes.
+                                              Volume of the storage available to a host, in bytes.
+                                            type: number
+                                          diskTypeId:
+                                            description: |-
+                                              (String) Type of the storage of OpenSearch hosts.
+                                              Type of the storage of OpenSearch hosts.
+                                            type: string
+                                          resourcePresetId:
+                                            description: |-
+                                              (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                              The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
+                                            type: string
+                                        type: object
+                                      type: array
+                                    subnetIds:
+                                      description: |-
+                                        (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                        A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    zoneIds:
+                                      description: |-
+                                        (Set of String) A set of availability zones where hosts of node group may be allocated.
+                                        A set of availability zones where hosts of node group may be allocated.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        opensearch:
+                          description: |-
+                            (Block, Optional) Configuration for OpenSearch node groups. (see below for nested schema)
+                            Configuration for OpenSearch node groups.
+                          items:
+                            properties:
+                              nodeGroups:
+                                description: |-
+                                  (Block List) (see below for nested schema)
+                                  A set of named OpenSearch node group configurations.
+                                items:
+                                  properties:
+                                    assignPublicIp:
+                                      description: |-
+                                        (Boolean) Sets whether the hosts should get a public IP address.
+                                        Sets whether the hosts should get a public IP address.
+                                      type: boolean
+                                    diskSizeAutoscaling:
+                                      description: (Attributes) Node group disk size
+                                        autoscaling settings. (see below for nested
+                                        schema)
+                                      properties:
+                                        diskSizeLimit:
+                                          description: |-
+                                            (Number) The overall maximum for disk size that limit all autoscaling iterations. See the documentation for details.
+                                            The overall maximum for disk size that limit all autoscaling iterations. See the [documentation](https://yandex.cloud/en/docs/managed-opensearch/concepts/storage#auto-rescale) for details.
+                                          type: number
+                                        emergencyUsageThreshold:
+                                          description: |-
+                                            (Number) Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+                                            Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+                                          type: number
+                                        plannedUsageThreshold:
+                                          description: |-
+                                            (Number) Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+                                            Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+                                          type: number
+                                      type: object
+                                    hostsCount:
+                                      description: |-
+                                        (Number) Number of hosts in this node group.
+                                        Number of hosts in this node group.
+                                      type: number
+                                    name:
+                                      description: |-
+                                        (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+                                        Name of OpenSearch node group.
+                                      type: string
+                                    resources:
+                                      description: |-
+                                        (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+                                        Resources allocated to hosts of this OpenSearch node group.
+                                      items:
+                                        properties:
+                                          diskSize:
+                                            description: |-
+                                              (Number) Volume of the storage available to a host, in bytes.
+                                              Volume of the storage available to a host, in bytes.
+                                            type: number
+                                          diskTypeId:
+                                            description: |-
+                                              (String) Type of the storage of OpenSearch hosts.
+                                              Type of the storage of OpenSearch hosts.
+                                            type: string
+                                          resourcePresetId:
+                                            description: |-
+                                              (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                              The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
+                                            type: string
+                                        type: object
+                                      type: array
+                                    roles:
+                                      description: |-
+                                        (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
+                                        A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    subnetIds:
+                                      description: |-
+                                        (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                        A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    subnetIdsRefs:
+                                      description: References to Subnet in vpc to
+                                        populate subnetIds.
+                                      items:
+                                        description: A NamespacedReference to a named
+                                          object.
+                                        properties:
+                                          name:
+                                            description: Name of the referenced object.
+                                            type: string
+                                          namespace:
+                                            description: Namespace of the referenced
+                                              object
+                                            type: string
+                                          policy:
+                                            description: Policies for referencing.
+                                            properties:
+                                              resolution:
+                                                default: Required
+                                                description: |-
+                                                  Resolution specifies whether resolution of this reference is required.
+                                                  The default is 'Required', which means the reconcile will fail if the
+                                                  reference cannot be resolved. 'Optional' means this reference will be
+                                                  a no-op if it cannot be resolved.
+                                                enum:
+                                                - Required
+                                                - Optional
+                                                type: string
+                                              resolve:
+                                                description: |-
+                                                  Resolve specifies when this reference should be resolved. The default
+                                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                  the corresponding field is not present. Use 'Always' to resolve the
+                                                  reference on every reconcile.
+                                                enum:
+                                                - Always
+                                                - IfNotPresent
+                                                type: string
+                                            type: object
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
+                                    subnetIdsSelector:
+                                      description: Selector for a list of Subnet in
+                                        vpc to populate subnetIds.
+                                      properties:
+                                        matchControllerRef:
+                                          description: |-
+                                            MatchControllerRef ensures an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        namespace:
+                                          description: Namespace for the selector
+                                          type: string
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: |-
+                                                Resolution specifies whether resolution of this reference is required.
+                                                The default is 'Required', which means the reconcile will fail if the
+                                                reference cannot be resolved. 'Optional' means this reference will be
+                                                a no-op if it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: |-
+                                                Resolve specifies when this reference should be resolved. The default
+                                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                the corresponding field is not present. Use 'Always' to resolve the
+                                                reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
+                                    zoneIds:
+                                      description: |-
+                                        (Set of String) A set of availability zones where hosts of node group may be allocated.
+                                        A set of availability zones where hosts of node group may be allocated.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                              plugins:
+                                description: |-
+                                  (Set of String) A set of requested OpenSearch plugins.
+                                  A set of requested OpenSearch plugins.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        version:
+                          description: |-
+                            (String) Version of OpenSearch.
+                            Version of OpenSearch.
+                          type: string
+                      type: object
+                    type: array
                   deletionProtection:
                     description: |-
                       (Boolean) The true value means that resource is protected from accidental deletion.
@@ -216,6 +521,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  hosts:
+                    description: (Attributes List) A hosts of the OpenSearch cluster.
+                      (see below for nested schema)
+                    items:
+                      properties:
+                        assignPublicIp:
+                          description: |-
+                            (Boolean) Sets whether the hosts should get a public IP address.
+                            Sets whether the host should get a public IP address. Can be either `true` or `false`.
+                          type: boolean
+                        subnetId:
+                          description: |-
+                            (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                            The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                          type: string
+                      type: object
+                    type: array
                   labels:
                     additionalProperties:
                       type: string
@@ -224,6 +546,21 @@ spec:
                       A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  maintenanceWindow:
+                    description: (Block, Optional) (see below for nested schema)
+                    items:
+                      properties:
+                        day:
+                          description: (String)
+                          type: string
+                        hour:
+                          description: (Number)
+                          type: number
+                        type:
+                          description: (String)
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       (String) Name of the OpenSearch cluster. The name must be unique within the folder.
@@ -557,6 +894,313 @@ spec:
                       (String) The ID of the OpenSearch cluster that the resource belongs to.
                       The ID of the OpenSearch cluster that the resource belongs to.
                     type: string
+                  config:
+                    description: |-
+                      (Block, Optional) Configuration of the OpenSearch cluster. (see below for nested schema)
+                      Configuration of the OpenSearch cluster.
+                    items:
+                      properties:
+                        access:
+                          description: |-
+                            (Block, Optional) Enable access to the Yandex Cloud services. (see below for nested schema)
+                            Enable access to the Yandex Cloud services.
+                          items:
+                            properties:
+                              dataTransfer:
+                                description: |-
+                                  (Boolean) Enable access to the Data Transfer service.
+                                  Enable access to the [Data Transfer](https://yandex.cloud/docs/data-transfer) service.
+                                type: boolean
+                              serverless:
+                                description: |-
+                                  (Boolean) Enable access to the Cloud Functions service.
+                                  Enable access to the [Cloud Functions](https://yandex.cloud/docs/functions) service.
+                                type: boolean
+                            type: object
+                          type: array
+                        adminPasswordSecretRef:
+                          description: |-
+                            (String, Sensitive) Password for admin user of OpenSearch.
+                            Password for admin user of OpenSearch.
+                          properties:
+                            key:
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          type: object
+                        dashboards:
+                          description: |-
+                            (Block, Optional) Configuration for Dashboards node groups. (see below for nested schema)
+                            Configuration for Dashboards node groups.
+                          items:
+                            properties:
+                              nodeGroups:
+                                description: (Block List) (see below for nested schema)
+                                items:
+                                  properties:
+                                    assignPublicIp:
+                                      description: |-
+                                        (Boolean) Sets whether the hosts should get a public IP address.
+                                        Sets whether the hosts should get a public IP address.
+                                      type: boolean
+                                    hostsCount:
+                                      description: |-
+                                        (Number) Number of hosts in this node group.
+                                        Number of hosts in this node group.
+                                      type: number
+                                    name:
+                                      description: |-
+                                        (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+                                        Name of OpenSearch node group.
+                                      type: string
+                                    resources:
+                                      description: |-
+                                        (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+                                        Resources allocated to hosts of this OpenSearch node group.
+                                      items:
+                                        properties:
+                                          diskSize:
+                                            description: |-
+                                              (Number) Volume of the storage available to a host, in bytes.
+                                              Volume of the storage available to a host, in bytes.
+                                            type: number
+                                          diskTypeId:
+                                            description: |-
+                                              (String) Type of the storage of OpenSearch hosts.
+                                              Type of the storage of OpenSearch hosts.
+                                            type: string
+                                          resourcePresetId:
+                                            description: |-
+                                              (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                              The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
+                                            type: string
+                                        type: object
+                                      type: array
+                                    subnetIds:
+                                      description: |-
+                                        (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                        A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    zoneIds:
+                                      description: |-
+                                        (Set of String) A set of availability zones where hosts of node group may be allocated.
+                                        A set of availability zones where hosts of node group may be allocated.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        opensearch:
+                          description: |-
+                            (Block, Optional) Configuration for OpenSearch node groups. (see below for nested schema)
+                            Configuration for OpenSearch node groups.
+                          items:
+                            properties:
+                              nodeGroups:
+                                description: |-
+                                  (Block List) (see below for nested schema)
+                                  A set of named OpenSearch node group configurations.
+                                items:
+                                  properties:
+                                    assignPublicIp:
+                                      description: |-
+                                        (Boolean) Sets whether the hosts should get a public IP address.
+                                        Sets whether the hosts should get a public IP address.
+                                      type: boolean
+                                    diskSizeAutoscaling:
+                                      description: (Attributes) Node group disk size
+                                        autoscaling settings. (see below for nested
+                                        schema)
+                                      properties:
+                                        diskSizeLimit:
+                                          description: |-
+                                            (Number) The overall maximum for disk size that limit all autoscaling iterations. See the documentation for details.
+                                            The overall maximum for disk size that limit all autoscaling iterations. See the [documentation](https://yandex.cloud/en/docs/managed-opensearch/concepts/storage#auto-rescale) for details.
+                                          type: number
+                                        emergencyUsageThreshold:
+                                          description: |-
+                                            (Number) Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+                                            Threshold of storage usage (in percent) that triggers immediate automatic scaling of the storage. Zero value means disabled threshold.
+                                          type: number
+                                        plannedUsageThreshold:
+                                          description: |-
+                                            (Number) Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+                                            Threshold of storage usage (in percent) that triggers automatic scaling of the storage during the maintenance window. Zero value means disabled threshold.
+                                          type: number
+                                      type: object
+                                    hostsCount:
+                                      description: |-
+                                        (Number) Number of hosts in this node group.
+                                        Number of hosts in this node group.
+                                      type: number
+                                    name:
+                                      description: |-
+                                        (String) Name of the OpenSearch cluster. The name must be unique within the folder.
+                                        Name of OpenSearch node group.
+                                      type: string
+                                    resources:
+                                      description: |-
+                                        (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+                                        Resources allocated to hosts of this OpenSearch node group.
+                                      items:
+                                        properties:
+                                          diskSize:
+                                            description: |-
+                                              (Number) Volume of the storage available to a host, in bytes.
+                                              Volume of the storage available to a host, in bytes.
+                                            type: number
+                                          diskTypeId:
+                                            description: |-
+                                              (String) Type of the storage of OpenSearch hosts.
+                                              Type of the storage of OpenSearch hosts.
+                                            type: string
+                                          resourcePresetId:
+                                            description: |-
+                                              (String) The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see the official documentation.
+                                              The ID of the preset for computational resources available to a host (CPU, memory etc.). For more information, see [the official documentation](https://yandex.cloud/docs/managed-opensearch/concepts).
+                                            type: string
+                                        type: object
+                                      type: array
+                                    roles:
+                                      description: |-
+                                        (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
+                                        A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                    subnetIds:
+                                      description: |-
+                                        (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                        A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    subnetIdsRefs:
+                                      description: References to Subnet in vpc to
+                                        populate subnetIds.
+                                      items:
+                                        description: A NamespacedReference to a named
+                                          object.
+                                        properties:
+                                          name:
+                                            description: Name of the referenced object.
+                                            type: string
+                                          namespace:
+                                            description: Namespace of the referenced
+                                              object
+                                            type: string
+                                          policy:
+                                            description: Policies for referencing.
+                                            properties:
+                                              resolution:
+                                                default: Required
+                                                description: |-
+                                                  Resolution specifies whether resolution of this reference is required.
+                                                  The default is 'Required', which means the reconcile will fail if the
+                                                  reference cannot be resolved. 'Optional' means this reference will be
+                                                  a no-op if it cannot be resolved.
+                                                enum:
+                                                - Required
+                                                - Optional
+                                                type: string
+                                              resolve:
+                                                description: |-
+                                                  Resolve specifies when this reference should be resolved. The default
+                                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                  the corresponding field is not present. Use 'Always' to resolve the
+                                                  reference on every reconcile.
+                                                enum:
+                                                - Always
+                                                - IfNotPresent
+                                                type: string
+                                            type: object
+                                        required:
+                                        - name
+                                        type: object
+                                      type: array
+                                    subnetIdsSelector:
+                                      description: Selector for a list of Subnet in
+                                        vpc to populate subnetIds.
+                                      properties:
+                                        matchControllerRef:
+                                          description: |-
+                                            MatchControllerRef ensures an object with the same controller reference
+                                            as the selecting object is selected.
+                                          type: boolean
+                                        matchLabels:
+                                          additionalProperties:
+                                            type: string
+                                          description: MatchLabels ensures an object
+                                            with matching labels is selected.
+                                          type: object
+                                        namespace:
+                                          description: Namespace for the selector
+                                          type: string
+                                        policy:
+                                          description: Policies for selection.
+                                          properties:
+                                            resolution:
+                                              default: Required
+                                              description: |-
+                                                Resolution specifies whether resolution of this reference is required.
+                                                The default is 'Required', which means the reconcile will fail if the
+                                                reference cannot be resolved. 'Optional' means this reference will be
+                                                a no-op if it cannot be resolved.
+                                              enum:
+                                              - Required
+                                              - Optional
+                                              type: string
+                                            resolve:
+                                              description: |-
+                                                Resolve specifies when this reference should be resolved. The default
+                                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                                the corresponding field is not present. Use 'Always' to resolve the
+                                                reference on every reconcile.
+                                              enum:
+                                              - Always
+                                              - IfNotPresent
+                                              type: string
+                                          type: object
+                                      type: object
+                                    zoneIds:
+                                      description: |-
+                                        (Set of String) A set of availability zones where hosts of node group may be allocated.
+                                        A set of availability zones where hosts of node group may be allocated.
+                                      items:
+                                        type: string
+                                      type: array
+                                      x-kubernetes-list-type: set
+                                  type: object
+                                type: array
+                              plugins:
+                                description: |-
+                                  (Set of String) A set of requested OpenSearch plugins.
+                                  A set of requested OpenSearch plugins.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                            type: object
+                          type: array
+                        version:
+                          description: |-
+                            (String) Version of OpenSearch.
+                            Version of OpenSearch.
+                          type: string
+                      required:
+                      - adminPasswordSecretRef
+                      type: object
+                    type: array
                   deletionProtection:
                     description: |-
                       (Boolean) The true value means that resource is protected from accidental deletion.
@@ -664,6 +1308,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  hosts:
+                    description: (Attributes List) A hosts of the OpenSearch cluster.
+                      (see below for nested schema)
+                    items:
+                      properties:
+                        assignPublicIp:
+                          description: |-
+                            (Boolean) Sets whether the hosts should get a public IP address.
+                            Sets whether the host should get a public IP address. Can be either `true` or `false`.
+                          type: boolean
+                        subnetId:
+                          description: |-
+                            (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                            The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
+                          type: string
+                      type: object
+                    type: array
                   labels:
                     additionalProperties:
                       type: string
@@ -672,6 +1333,21 @@ spec:
                       A set of key/value label pairs which assigned to resource.
                     type: object
                     x-kubernetes-map-type: granular
+                  maintenanceWindow:
+                    description: (Block, Optional) (see below for nested schema)
+                    items:
+                      properties:
+                        day:
+                          description: (String)
+                          type: string
+                        hour:
+                          description: (Number)
+                          type: number
+                        type:
+                          description: (String)
+                          type: string
+                      type: object
+                    type: array
                   name:
                     description: |-
                       (String) Name of the OpenSearch cluster. The name must be unique within the folder.
@@ -1001,6 +1677,18 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
+            - message: spec.forProvider.config is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.config)
+                || (has(self.initProvider) && has(self.initProvider.config))'
+            - message: spec.forProvider.hosts is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hosts)
+                || (has(self.initProvider) && has(self.initProvider.hosts))'
+            - message: spec.forProvider.maintenanceWindow is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maintenanceWindow)
+                || (has(self.initProvider) && has(self.initProvider.maintenanceWindow))'
             - message: spec.forProvider.name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.name)

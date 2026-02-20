@@ -94,6 +94,3 @@ func (tr *ShardedPostgresqlShard) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ShardedPostgresqlUser) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SqlserverCluster) Hub() {}

@@ -1137,6 +1137,18 @@ type ClickhouseConfigInitParameters struct {
 	// (Attributes List) Query masking rules configuration. (see below for nested schema)
 	QueryMaskingRules []ConfigQueryMaskingRulesInitParameters `json:"queryMaskingRules,omitempty" tf:"query_masking_rules,omitempty"`
 
+	// (Boolean) Enables or disables query_metric_log system table.
+	// Enables or disables query_metric_log system table.
+	QueryMetricLogEnabled *bool `json:"queryMetricLogEnabled,omitempty" tf:"query_metric_log_enabled,omitempty"`
+
+	// (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+	// The maximum size that query_metric_log can grow to before old data will be removed. If set to **0**, automatic removal of query_metric_log data based on size is disabled.
+	QueryMetricLogRetentionSize *float64 `json:"queryMetricLogRetentionSize,omitempty" tf:"query_metric_log_retention_size,omitempty"`
+
+	// (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
+	// The maximum time that query_metric_log records will be retained before removal. If set to **0**, automatic removal of query_metric_log data based on time is disabled.
+	QueryMetricLogRetentionTime *float64 `json:"queryMetricLogRetentionTime,omitempty" tf:"query_metric_log_retention_time,omitempty"`
+
 	// (Boolean) Enable or disable query_thread_log system table.
 	// Enable or disable query_thread_log system table.
 	QueryThreadLogEnabled *bool `json:"queryThreadLogEnabled,omitempty" tf:"query_thread_log_enabled,omitempty"`
@@ -1441,6 +1453,18 @@ type ClickhouseConfigObservation struct {
 
 	// (Attributes List) Query masking rules configuration. (see below for nested schema)
 	QueryMaskingRules []ConfigQueryMaskingRulesObservation `json:"queryMaskingRules,omitempty" tf:"query_masking_rules,omitempty"`
+
+	// (Boolean) Enables or disables query_metric_log system table.
+	// Enables or disables query_metric_log system table.
+	QueryMetricLogEnabled *bool `json:"queryMetricLogEnabled,omitempty" tf:"query_metric_log_enabled,omitempty"`
+
+	// (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+	// The maximum size that query_metric_log can grow to before old data will be removed. If set to **0**, automatic removal of query_metric_log data based on size is disabled.
+	QueryMetricLogRetentionSize *float64 `json:"queryMetricLogRetentionSize,omitempty" tf:"query_metric_log_retention_size,omitempty"`
+
+	// (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
+	// The maximum time that query_metric_log records will be retained before removal. If set to **0**, automatic removal of query_metric_log data based on time is disabled.
+	QueryMetricLogRetentionTime *float64 `json:"queryMetricLogRetentionTime,omitempty" tf:"query_metric_log_retention_time,omitempty"`
 
 	// (Boolean) Enable or disable query_thread_log system table.
 	// Enable or disable query_thread_log system table.
@@ -1799,6 +1823,21 @@ type ClickhouseConfigParameters struct {
 	// (Attributes List) Query masking rules configuration. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	QueryMaskingRules []ConfigQueryMaskingRulesParameters `json:"queryMaskingRules,omitempty" tf:"query_masking_rules,omitempty"`
+
+	// (Boolean) Enables or disables query_metric_log system table.
+	// Enables or disables query_metric_log system table.
+	// +kubebuilder:validation:Optional
+	QueryMetricLogEnabled *bool `json:"queryMetricLogEnabled,omitempty" tf:"query_metric_log_enabled,omitempty"`
+
+	// (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+	// The maximum size that query_metric_log can grow to before old data will be removed. If set to **0**, automatic removal of query_metric_log data based on size is disabled.
+	// +kubebuilder:validation:Optional
+	QueryMetricLogRetentionSize *float64 `json:"queryMetricLogRetentionSize,omitempty" tf:"query_metric_log_retention_size,omitempty"`
+
+	// (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
+	// The maximum time that query_metric_log records will be retained before removal. If set to **0**, automatic removal of query_metric_log data based on time is disabled.
+	// +kubebuilder:validation:Optional
+	QueryMetricLogRetentionTime *float64 `json:"queryMetricLogRetentionTime,omitempty" tf:"query_metric_log_retention_time,omitempty"`
 
 	// (Boolean) Enable or disable query_thread_log system table.
 	// Enable or disable query_thread_log system table.

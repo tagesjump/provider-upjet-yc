@@ -50,8 +50,8 @@ type PostgresqlUserInitParameters struct {
 	// User's ability to login.
 	Login *bool `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (String) The name of the user.
-	// The name of the user.
+	// (String) The name of the PostgreSQL user.
+	// The name of the PostgreSQL user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String, Sensitive) The password of the user.
@@ -65,47 +65,47 @@ type PostgresqlUserInitParameters struct {
 	// (Map of String) Map of user settings. Full description.
 	// Map of user settings. [Full description](https://yandex.cloud/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.UserSettings).
 	//
-	// * `default_transaction_isolation` - defines the default isolation level to be set for all new SQL transactions. One of:
+	// - `default_transaction_isolation` - defines the default isolation level to be set for all new SQL transactions. One of:
 	// - `read uncommitted`
 	// - `read committed`
 	// - `repeatable read`
 	// - `serializable`
 	//
-	// * `lock_timeout` - The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object (default 0)
+	// - `lock_timeout` - The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object (default 0)
 	//
-	// * `log_min_duration_statement` - This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)
+	// - `log_min_duration_statement` - This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)
 	//
-	// * `synchronous_commit` - This setting defines whether DBMS will commit transaction in a synchronous way. One of:
+	// - `synchronous_commit` - This setting defines whether DBMS will commit transaction in a synchronous way. One of:
 	// - `on`
 	// - `off`
 	// - `local`
 	// - `remote write`
 	// - `remote apply`
 	//
-	// * `temp_file_limit` - The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
+	// - `temp_file_limit` - The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
 	//
-	// * `log_statement` - This setting specifies which SQL statements should be logged (on the user level). One of:
+	// - `log_statement` - This setting specifies which SQL statements should be logged (on the user level). One of:
 	// - `none`
 	// - `ddl`
 	// - `mod`
 	// - `all`
 	//
-	// * `pool_mode` - Mode that the connection pooler is working in with specified user. One of:
+	// - `pool_mode` - Mode that the connection pooler is working in with specified user. One of:
 	// - `session`
 	// - `transaction`
 	// - `statement`
 	//
-	// * `prepared_statements_pooling` - This setting allows user to use prepared statements with transaction pooling. Boolean.
+	// - `prepared_statements_pooling` - This setting allows user to use prepared statements with transaction pooling. Boolean.
 	//
-	// * `catchup_timeout` - The connection pooler setting. It determines the maximum allowed replication lag (in seconds). Pooler will reject connections to the replica with a lag above this threshold. Default value is 0, which disables this feature. Integer.
+	// - `catchup_timeout` - The connection pooler setting. It determines the maximum allowed replication lag (in seconds). Pooler will reject connections to the replica with a lag above this threshold. Default value is 0, which disables this feature. Integer.
 	//
-	// * `wal_sender_timeout` - The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+). Terminate replication connections that are inactive for longer than this amount of time. Integer.
+	// - `wal_sender_timeout` - The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+). Terminate replication connections that are inactive for longer than this amount of time. Integer.
 	//
-	// * `idle_in_transaction_session_timeout` - Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction. Value of 0 (default) disables the timeout. Integer.
+	// - `idle_in_transaction_session_timeout` - Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction. Value of 0 (default) disables the timeout. Integer.
 	//
-	// * `statement_timeout` - The maximum time (in milliseconds) to wait for statement. Value of 0 (default) disables the timeout. Integer.
+	// - `statement_timeout` - The maximum time (in milliseconds) to wait for statement. Value of 0 (default) disables the timeout. Integer.
 	//
-	// * `pgaudit` - Settings of the PostgreSQL Audit Extension (pgaudit). [Full description](https://yandex.cloud/ru/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.PGAuditSettings). String (json with with escaped quotes). Example `"{\"log\": [\"READ\", \"WRITE\"]}"`
+	// - `pgaudit` - Settings of the PostgreSQL Audit Extension (pgaudit). [Full description](https://yandex.cloud/ru/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.PGAuditSettings). String (json with with escaped quotes). Example `"{\"log\": [\"READ\", \"WRITE\"]}"`
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
@@ -158,8 +158,8 @@ type PostgresqlUserObservation struct {
 	// User's ability to login.
 	Login *bool `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (String) The name of the user.
-	// The name of the user.
+	// (String) The name of the PostgreSQL user.
+	// The name of the PostgreSQL user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (Block Set) Set of permissions granted to the user. (see below for nested schema)
@@ -169,47 +169,47 @@ type PostgresqlUserObservation struct {
 	// (Map of String) Map of user settings. Full description.
 	// Map of user settings. [Full description](https://yandex.cloud/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.UserSettings).
 	//
-	// * `default_transaction_isolation` - defines the default isolation level to be set for all new SQL transactions. One of:
+	// - `default_transaction_isolation` - defines the default isolation level to be set for all new SQL transactions. One of:
 	// - `read uncommitted`
 	// - `read committed`
 	// - `repeatable read`
 	// - `serializable`
 	//
-	// * `lock_timeout` - The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object (default 0)
+	// - `lock_timeout` - The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object (default 0)
 	//
-	// * `log_min_duration_statement` - This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)
+	// - `log_min_duration_statement` - This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)
 	//
-	// * `synchronous_commit` - This setting defines whether DBMS will commit transaction in a synchronous way. One of:
+	// - `synchronous_commit` - This setting defines whether DBMS will commit transaction in a synchronous way. One of:
 	// - `on`
 	// - `off`
 	// - `local`
 	// - `remote write`
 	// - `remote apply`
 	//
-	// * `temp_file_limit` - The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
+	// - `temp_file_limit` - The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
 	//
-	// * `log_statement` - This setting specifies which SQL statements should be logged (on the user level). One of:
+	// - `log_statement` - This setting specifies which SQL statements should be logged (on the user level). One of:
 	// - `none`
 	// - `ddl`
 	// - `mod`
 	// - `all`
 	//
-	// * `pool_mode` - Mode that the connection pooler is working in with specified user. One of:
+	// - `pool_mode` - Mode that the connection pooler is working in with specified user. One of:
 	// - `session`
 	// - `transaction`
 	// - `statement`
 	//
-	// * `prepared_statements_pooling` - This setting allows user to use prepared statements with transaction pooling. Boolean.
+	// - `prepared_statements_pooling` - This setting allows user to use prepared statements with transaction pooling. Boolean.
 	//
-	// * `catchup_timeout` - The connection pooler setting. It determines the maximum allowed replication lag (in seconds). Pooler will reject connections to the replica with a lag above this threshold. Default value is 0, which disables this feature. Integer.
+	// - `catchup_timeout` - The connection pooler setting. It determines the maximum allowed replication lag (in seconds). Pooler will reject connections to the replica with a lag above this threshold. Default value is 0, which disables this feature. Integer.
 	//
-	// * `wal_sender_timeout` - The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+). Terminate replication connections that are inactive for longer than this amount of time. Integer.
+	// - `wal_sender_timeout` - The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+). Terminate replication connections that are inactive for longer than this amount of time. Integer.
 	//
-	// * `idle_in_transaction_session_timeout` - Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction. Value of 0 (default) disables the timeout. Integer.
+	// - `idle_in_transaction_session_timeout` - Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction. Value of 0 (default) disables the timeout. Integer.
 	//
-	// * `statement_timeout` - The maximum time (in milliseconds) to wait for statement. Value of 0 (default) disables the timeout. Integer.
+	// - `statement_timeout` - The maximum time (in milliseconds) to wait for statement. Value of 0 (default) disables the timeout. Integer.
 	//
-	// * `pgaudit` - Settings of the PostgreSQL Audit Extension (pgaudit). [Full description](https://yandex.cloud/ru/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.PGAuditSettings). String (json with with escaped quotes). Example `"{\"log\": [\"READ\", \"WRITE\"]}"`
+	// - `pgaudit` - Settings of the PostgreSQL Audit Extension (pgaudit). [Full description](https://yandex.cloud/ru/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.PGAuditSettings). String (json with with escaped quotes). Example `"{\"log\": [\"READ\", \"WRITE\"]}"`
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`
 
@@ -270,8 +270,8 @@ type PostgresqlUserParameters struct {
 	// +kubebuilder:validation:Optional
 	Login *bool `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (String) The name of the user.
-	// The name of the user.
+	// (String) The name of the PostgreSQL user.
+	// The name of the PostgreSQL user.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -288,47 +288,47 @@ type PostgresqlUserParameters struct {
 	// (Map of String) Map of user settings. Full description.
 	// Map of user settings. [Full description](https://yandex.cloud/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.UserSettings).
 	//
-	// * `default_transaction_isolation` - defines the default isolation level to be set for all new SQL transactions. One of:
+	// - `default_transaction_isolation` - defines the default isolation level to be set for all new SQL transactions. One of:
 	// - `read uncommitted`
 	// - `read committed`
 	// - `repeatable read`
 	// - `serializable`
 	//
-	// * `lock_timeout` - The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object (default 0)
+	// - `lock_timeout` - The maximum time (in milliseconds) for any statement to wait for acquiring a lock on an table, index, row or other database object (default 0)
 	//
-	// * `log_min_duration_statement` - This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)
+	// - `log_min_duration_statement` - This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)
 	//
-	// * `synchronous_commit` - This setting defines whether DBMS will commit transaction in a synchronous way. One of:
+	// - `synchronous_commit` - This setting defines whether DBMS will commit transaction in a synchronous way. One of:
 	// - `on`
 	// - `off`
 	// - `local`
 	// - `remote write`
 	// - `remote apply`
 	//
-	// * `temp_file_limit` - The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
+	// - `temp_file_limit` - The maximum storage space size (in kilobytes) that a single process can use to create temporary files.
 	//
-	// * `log_statement` - This setting specifies which SQL statements should be logged (on the user level). One of:
+	// - `log_statement` - This setting specifies which SQL statements should be logged (on the user level). One of:
 	// - `none`
 	// - `ddl`
 	// - `mod`
 	// - `all`
 	//
-	// * `pool_mode` - Mode that the connection pooler is working in with specified user. One of:
+	// - `pool_mode` - Mode that the connection pooler is working in with specified user. One of:
 	// - `session`
 	// - `transaction`
 	// - `statement`
 	//
-	// * `prepared_statements_pooling` - This setting allows user to use prepared statements with transaction pooling. Boolean.
+	// - `prepared_statements_pooling` - This setting allows user to use prepared statements with transaction pooling. Boolean.
 	//
-	// * `catchup_timeout` - The connection pooler setting. It determines the maximum allowed replication lag (in seconds). Pooler will reject connections to the replica with a lag above this threshold. Default value is 0, which disables this feature. Integer.
+	// - `catchup_timeout` - The connection pooler setting. It determines the maximum allowed replication lag (in seconds). Pooler will reject connections to the replica with a lag above this threshold. Default value is 0, which disables this feature. Integer.
 	//
-	// * `wal_sender_timeout` - The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+). Terminate replication connections that are inactive for longer than this amount of time. Integer.
+	// - `wal_sender_timeout` - The maximum time (in milliseconds) to wait for WAL replication (can be set only for PostgreSQL 12+). Terminate replication connections that are inactive for longer than this amount of time. Integer.
 	//
-	// * `idle_in_transaction_session_timeout` - Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction. Value of 0 (default) disables the timeout. Integer.
+	// - `idle_in_transaction_session_timeout` - Sets the maximum allowed idle time (in milliseconds) between queries, when in a transaction. Value of 0 (default) disables the timeout. Integer.
 	//
-	// * `statement_timeout` - The maximum time (in milliseconds) to wait for statement. Value of 0 (default) disables the timeout. Integer.
+	// - `statement_timeout` - The maximum time (in milliseconds) to wait for statement. Value of 0 (default) disables the timeout. Integer.
 	//
-	// * `pgaudit` - Settings of the PostgreSQL Audit Extension (pgaudit). [Full description](https://yandex.cloud/ru/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.PGAuditSettings). String (json with with escaped quotes). Example `"{\"log\": [\"READ\", \"WRITE\"]}"`
+	// - `pgaudit` - Settings of the PostgreSQL Audit Extension (pgaudit). [Full description](https://yandex.cloud/ru/docs/managed-postgresql/api-ref/grpc/Cluster/create#yandex.cloud.mdb.postgresql.v1.PGAuditSettings). String (json with with escaped quotes). Example `"{\"log\": [\"READ\", \"WRITE\"]}"`
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Settings map[string]*string `json:"settings,omitempty" tf:"settings,omitempty"`

@@ -110,6 +110,10 @@ type NodeGroupsInitParameters struct {
 	// Name of OpenSearch node group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+	// Resources allocated to hosts of this OpenSearch node group.
+	Resources []NodeGroupsResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
+
 	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	SubnetIds []*string `json:"subnetIds,omitempty" tf:"subnet_ids,omitempty"`
@@ -164,6 +168,11 @@ type NodeGroupsParameters struct {
 	// Name of OpenSearch node group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+	// Resources allocated to hosts of this OpenSearch node group.
+	// +kubebuilder:validation:Optional
+	Resources []NodeGroupsResourcesParameters `json:"resources" tf:"resources,omitempty"`
 
 	// (List of String) A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
 	// A set of the subnets, to which the hosts belongs. The subnets must be a part of the network to which the cluster belongs.
@@ -270,6 +279,14 @@ type OpensearchClusterConfigInitParameters struct {
 	// Password for admin user of OpenSearch.
 	AdminPasswordSecretRef v1.LocalSecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
+	// (Block, Optional) Configuration for Dashboards node groups. (see below for nested schema)
+	// Configuration for Dashboards node groups.
+	Dashboards []DashboardsInitParameters `json:"dashboards,omitempty" tf:"dashboards,omitempty"`
+
+	// (Block, Optional) Configuration for OpenSearch node groups. (see below for nested schema)
+	// Configuration for OpenSearch node groups.
+	Opensearch []OpensearchInitParameters `json:"opensearch,omitempty" tf:"opensearch,omitempty"`
+
 	// (String) Version of OpenSearch.
 	// Version of OpenSearch.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -305,6 +322,16 @@ type OpensearchClusterConfigParameters struct {
 	// Password for admin user of OpenSearch.
 	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef v1.LocalSecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+
+	// (Block, Optional) Configuration for Dashboards node groups. (see below for nested schema)
+	// Configuration for Dashboards node groups.
+	// +kubebuilder:validation:Optional
+	Dashboards []DashboardsParameters `json:"dashboards" tf:"dashboards,omitempty"`
+
+	// (Block, Optional) Configuration for OpenSearch node groups. (see below for nested schema)
+	// Configuration for OpenSearch node groups.
+	// +kubebuilder:validation:Optional
+	Opensearch []OpensearchParameters `json:"opensearch" tf:"opensearch,omitempty"`
 
 	// (String) Version of OpenSearch.
 	// Version of OpenSearch.
@@ -377,6 +404,10 @@ type OpensearchClusterInitParameters struct {
 	// The ID of the OpenSearch cluster that the resource belongs to.
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
+	// (Block, Optional) Configuration of the OpenSearch cluster. (see below for nested schema)
+	// Configuration of the OpenSearch cluster.
+	Config []OpensearchClusterConfigInitParameters `json:"config,omitempty" tf:"config,omitempty"`
+
 	// (Boolean) The true value means that resource is protected from accidental deletion.
 	// The `true` value means that resource is protected from accidental deletion.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
@@ -406,10 +437,16 @@ type OpensearchClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Attributes List) A hosts of the OpenSearch cluster. (see below for nested schema)
+	Hosts []OpensearchClusterHostsInitParameters `json:"hosts,omitempty" tf:"hosts,omitempty"`
+
 	// (Map of String) A set of key/value label pairs which assigned to resource.
 	// A set of key/value label pairs which assigned to resource.
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (Block, Optional) (see below for nested schema)
+	MaintenanceWindow []OpensearchClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of the OpenSearch cluster. The name must be unique within the folder.
@@ -583,6 +620,11 @@ type OpensearchClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	ClusterID *string `json:"clusterId,omitempty" tf:"cluster_id,omitempty"`
 
+	// (Block, Optional) Configuration of the OpenSearch cluster. (see below for nested schema)
+	// Configuration of the OpenSearch cluster.
+	// +kubebuilder:validation:Optional
+	Config []OpensearchClusterConfigParameters `json:"config,omitempty" tf:"config,omitempty"`
+
 	// (Boolean) The true value means that resource is protected from accidental deletion.
 	// The `true` value means that resource is protected from accidental deletion.
 	// +kubebuilder:validation:Optional
@@ -617,11 +659,19 @@ type OpensearchClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
+	// (Attributes List) A hosts of the OpenSearch cluster. (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Hosts []OpensearchClusterHostsParameters `json:"hosts,omitempty" tf:"hosts,omitempty"`
+
 	// (Map of String) A set of key/value label pairs which assigned to resource.
 	// A set of key/value label pairs which assigned to resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// (Block, Optional) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	MaintenanceWindow []OpensearchClusterMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of the OpenSearch cluster. The name must be unique within the folder.
@@ -700,6 +750,10 @@ type OpensearchNodeGroupsInitParameters struct {
 	// (String) Name of the OpenSearch cluster. The name must be unique within the folder.
 	// Name of OpenSearch node group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+	// Resources allocated to hosts of this OpenSearch node group.
+	Resources []OpensearchNodeGroupsResourcesInitParameters `json:"resources,omitempty" tf:"resources,omitempty"`
 
 	// (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
 	// A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
@@ -781,6 +835,11 @@ type OpensearchNodeGroupsParameters struct {
 	// Name of OpenSearch node group.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// (Block, Optional) Resources allocated to hosts of this OpenSearch node group. (see below for nested schema)
+	// Resources allocated to hosts of this OpenSearch node group.
+	// +kubebuilder:validation:Optional
+	Resources []OpensearchNodeGroupsResourcesParameters `json:"resources" tf:"resources,omitempty"`
 
 	// (Set of String) A set of OpenSearch roles assigned to hosts. Available roles are: DATA, MANAGER. Default: [DATA, MANAGER].
 	// A set of OpenSearch roles assigned to hosts. Available roles are: `DATA`, `MANAGER`. Default: [`DATA`, `MANAGER`].
@@ -1019,6 +1078,9 @@ type OpensearchClusterStatus struct {
 type OpensearchCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.config) || (has(self.initProvider) && has(self.initProvider.config))",message="spec.forProvider.config is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hosts) || (has(self.initProvider) && has(self.initProvider.hosts))",message="spec.forProvider.hosts is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maintenanceWindow) || (has(self.initProvider) && has(self.initProvider.maintenanceWindow))",message="spec.forProvider.maintenanceWindow is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   OpensearchClusterSpec   `json:"spec"`
 	Status OpensearchClusterStatus `json:"status,omitempty"`

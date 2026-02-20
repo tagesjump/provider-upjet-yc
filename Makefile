@@ -7,7 +7,7 @@ PROJECT_REPO ?= github.com/tagesjump/$(PROJECT_NAME)
 export TERRAFORM_VERSION ?= 1.6.1
 export TERRAFORM_PROVIDER_SOURCE ?= yandex-cloud/yandex
 export TERRAFORM_PROVIDER_REPO ?= https://github.com/yandex-cloud/terraform-provider-yandex
-export TERRAFORM_PROVIDER_VERSION ?= 0.181.0
+export TERRAFORM_PROVIDER_VERSION ?= 0.184.0
 export TERRAFORM_DOCS_PATH ?= docs/resources
 
 

@@ -165,7 +165,7 @@ spec:
                       properties:
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of the PostgreSQL database.
                             Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
                           type: string
                       type: object
@@ -182,8 +182,8 @@ spec:
                     type: string
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      (String) The name of the PostgreSQL database.
+                      The name of the PostgreSQL database.
                     type: string
                   owner:
                     description: |-
@@ -377,7 +377,7 @@ spec:
                       properties:
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of the PostgreSQL database.
                             Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
                           type: string
                       type: object
@@ -394,8 +394,8 @@ spec:
                     type: string
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      (String) The name of the PostgreSQL database.
+                      The name of the PostgreSQL database.
                     type: string
                   owner:
                     description: |-
@@ -598,7 +598,7 @@ spec:
                       properties:
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of the PostgreSQL database.
                             Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
                           type: string
                       type: object
@@ -618,8 +618,8 @@ spec:
                     type: string
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      (String) The name of the PostgreSQL database.
+                      The name of the PostgreSQL database.
                     type: string
                   owner:
                     description: |-

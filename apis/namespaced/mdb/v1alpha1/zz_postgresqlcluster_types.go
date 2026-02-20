@@ -226,7 +226,7 @@ type ConfigResourcesParameters struct {
 
 type ExtensionInitParameters struct {
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -237,7 +237,7 @@ type ExtensionInitParameters struct {
 
 type ExtensionObservation struct {
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -248,7 +248,7 @@ type ExtensionObservation struct {
 
 type ExtensionParameters struct {
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -489,7 +489,7 @@ type PostgresqlClusterDatabaseInitParameters struct {
 	// POSIX locale for character classification. Forbidden to change in an existing database.
 	LcType *string `json:"lcType,omitempty" tf:"lc_type,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -516,7 +516,7 @@ type PostgresqlClusterDatabaseObservation struct {
 	// POSIX locale for character classification. Forbidden to change in an existing database.
 	LcType *string `json:"lcType,omitempty" tf:"lc_type,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// The resource name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -546,7 +546,7 @@ type PostgresqlClusterDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	LcType *string `json:"lcType,omitempty" tf:"lc_type,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// The resource name.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -568,7 +568,7 @@ type PostgresqlClusterHostInitParameters struct {
 	// Whether the host should get a public IP address.
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replication_source_name` parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -608,7 +608,7 @@ type PostgresqlClusterHostObservation struct {
 	// The fully qualified domain name of the host.
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replication_source_name` parameter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -644,7 +644,7 @@ type PostgresqlClusterHostParameters struct {
 	// +kubebuilder:validation:Optional
 	AssignPublicIP *bool `json:"assignPublicIp,omitempty" tf:"assign_public_ip,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replication_source_name` parameter.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -697,8 +697,8 @@ type PostgresqlClusterInitParameters struct {
 	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
-	// ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+	// (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
+	// ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
 	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
 
 	// (String) Deployment environment of the PostgreSQL cluster.
@@ -740,8 +740,8 @@ type PostgresqlClusterInitParameters struct {
 	// Maintenance policy of the PostgreSQL cluster.
 	MaintenanceWindow []PostgresqlClusterMaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The name of PostgreSQL cluster.
+	// The name of PostgreSQL cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) The VPC Network ID of subnets which resource attached to.
@@ -850,8 +850,8 @@ type PostgresqlClusterObservation struct {
 	// The resource description.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
-	// ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+	// (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
+	// ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
 	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
 
 	// (String) Deployment environment of the PostgreSQL cluster.
@@ -891,8 +891,8 @@ type PostgresqlClusterObservation struct {
 	// Maintenance policy of the PostgreSQL cluster.
 	MaintenanceWindow []PostgresqlClusterMaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The name of PostgreSQL cluster.
+	// The name of PostgreSQL cluster.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) The VPC Network ID of subnets which resource attached to.
@@ -939,8 +939,8 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
-	// ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+	// (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
+	// ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
 	// +kubebuilder:validation:Optional
 	DiskEncryptionKeyID *string `json:"diskEncryptionKeyId,omitempty" tf:"disk_encryption_key_id,omitempty"`
 
@@ -990,8 +990,8 @@ type PostgresqlClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow []PostgresqlClusterMaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The name of PostgreSQL cluster.
+	// The name of PostgreSQL cluster.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -1103,7 +1103,7 @@ type PostgresqlClusterUserInitParameters struct {
 	// User's ability to login.
 	Login *bool `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -1175,7 +1175,7 @@ type PostgresqlClusterUserObservation struct {
 	// User's ability to login.
 	Login *bool `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// The name of the user.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -1246,7 +1246,7 @@ type PostgresqlClusterUserParameters struct {
 	// +kubebuilder:validation:Optional
 	Login *bool `json:"login,omitempty" tf:"login,omitempty"`
 
-	// (String) The resource name.
+	// (String) The name of PostgreSQL cluster.
 	// The name of the user.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
