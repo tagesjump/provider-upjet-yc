@@ -1598,6 +1598,29 @@ func (mg *OpensearchCluster) ResolveReferences(ctx context.Context, c client.Rea
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Config); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Config[i3].Opensearch); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups); i5++ {
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs,
+					Selector:      mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsSelector,
+					To: reference.To{
+						List:    &v1alpha11.SubnetList{},
+						Managed: &v1alpha11.Subnet{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds")
+				}
+				mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+				mg.Spec.ForProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs = mrsp.ResolvedReferences
+
+			}
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.FolderID),
 		Extract:      reference.ExternalName(),
@@ -1666,6 +1689,29 @@ func (mg *OpensearchCluster) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ServiceAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceAccountIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Config); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Config[i3].Opensearch); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups); i5++ {
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds),
+					Extract:       reference.ExternalName(),
+					Namespace:     mg.GetNamespace(),
+					References:    mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs,
+					Selector:      mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsSelector,
+					To: reference.To{
+						List:    &v1alpha11.SubnetList{},
+						Managed: &v1alpha11.Subnet{},
+					},
+				})
+				if err != nil {
+					return errors.Wrap(err, "mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds")
+				}
+				mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+				mg.Spec.InitProvider.Config[i3].Opensearch[i4].NodeGroups[i5].SubnetIdsRefs = mrsp.ResolvedReferences
+
+			}
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FolderID),
 		Extract:      reference.ExternalName(),

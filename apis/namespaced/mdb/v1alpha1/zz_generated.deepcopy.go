@@ -31315,6 +31315,13 @@ func (in *NodeGroupsInitParameters) DeepCopyInto(out *NodeGroupsInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Resources != nil {
+		in, out := &in.Resources, &out.Resources
+		*out = make([]NodeGroupsResourcesInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
 		*out = make([]*string, len(*in))
@@ -31425,6 +31432,13 @@ func (in *NodeGroupsParameters) DeepCopyInto(out *NodeGroupsParameters) {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.Resources != nil {
+		in, out := &in.Resources, &out.Resources
+		*out = make([]NodeGroupsResourcesParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.SubnetIds != nil {
 		in, out := &in.SubnetIds, &out.SubnetIds
@@ -31663,6 +31677,20 @@ func (in *OpensearchClusterConfigInitParameters) DeepCopyInto(out *OpensearchClu
 		}
 	}
 	in.AdminPasswordSecretRef.DeepCopyInto(&out.AdminPasswordSecretRef)
+	if in.Dashboards != nil {
+		in, out := &in.Dashboards, &out.Dashboards
+		*out = make([]DashboardsInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Opensearch != nil {
+		in, out := &in.Opensearch, &out.Opensearch
+		*out = make([]OpensearchInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -31732,6 +31760,20 @@ func (in *OpensearchClusterConfigParameters) DeepCopyInto(out *OpensearchCluster
 		}
 	}
 	in.AdminPasswordSecretRef.DeepCopyInto(&out.AdminPasswordSecretRef)
+	if in.Dashboards != nil {
+		in, out := &in.Dashboards, &out.Dashboards
+		*out = make([]DashboardsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Opensearch != nil {
+		in, out := &in.Opensearch, &out.Opensearch
+		*out = make([]OpensearchParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -31868,6 +31910,13 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.Config != nil {
+		in, out := &in.Config, &out.Config
+		*out = make([]OpensearchClusterConfigInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.DeletionProtection != nil {
 		in, out := &in.DeletionProtection, &out.DeletionProtection
 		*out = new(bool)
@@ -31903,6 +31952,13 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Hosts != nil {
+		in, out := &in.Hosts, &out.Hosts
+		*out = make([]OpensearchClusterHostsInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -31917,6 +31973,13 @@ func (in *OpensearchClusterInitParameters) DeepCopyInto(out *OpensearchClusterIn
 				**out = **in
 			}
 			(*out)[key] = outVal
+		}
+	}
+	if in.MaintenanceWindow != nil {
+		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = make([]OpensearchClusterMaintenanceWindowInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.Name != nil {
@@ -32257,6 +32320,13 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.Config != nil {
+		in, out := &in.Config, &out.Config
+		*out = make([]OpensearchClusterConfigParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.DeletionProtection != nil {
 		in, out := &in.DeletionProtection, &out.DeletionProtection
 		*out = new(bool)
@@ -32292,6 +32362,13 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 		*out = new(v1.NamespacedSelector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.Hosts != nil {
+		in, out := &in.Hosts, &out.Hosts
+		*out = make([]OpensearchClusterHostsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Labels != nil {
 		in, out := &in.Labels, &out.Labels
 		*out = make(map[string]*string, len(*in))
@@ -32306,6 +32383,13 @@ func (in *OpensearchClusterParameters) DeepCopyInto(out *OpensearchClusterParame
 				**out = **in
 			}
 			(*out)[key] = outVal
+		}
+	}
+	if in.MaintenanceWindow != nil {
+		in, out := &in.MaintenanceWindow, &out.MaintenanceWindow
+		*out = make([]OpensearchClusterMaintenanceWindowParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
 	if in.Name != nil {
@@ -32469,6 +32553,13 @@ func (in *OpensearchNodeGroupsInitParameters) DeepCopyInto(out *OpensearchNodeGr
 		*out = new(string)
 		**out = **in
 	}
+	if in.Resources != nil {
+		in, out := &in.Resources, &out.Resources
+		*out = make([]OpensearchNodeGroupsResourcesInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Roles != nil {
 		in, out := &in.Roles, &out.Roles
 		*out = make([]*string, len(*in))
@@ -32623,6 +32714,13 @@ func (in *OpensearchNodeGroupsParameters) DeepCopyInto(out *OpensearchNodeGroups
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.Resources != nil {
+		in, out := &in.Resources, &out.Resources
+		*out = make([]OpensearchNodeGroupsResourcesParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 	if in.Roles != nil {
 		in, out := &in.Roles, &out.Roles

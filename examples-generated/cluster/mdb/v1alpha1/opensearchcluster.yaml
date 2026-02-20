@@ -8,7 +8,30 @@ metadata:
   name: my-cluster
 spec:
   forProvider:
+    config:
+    - adminPasswordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      opensearch:
+      - nodeGroups:
+        - assignPublicIp: true
+          hostsCount: 1
+          name: group0
+          resources:
+          - diskSize: 10737418240
+            diskTypeId: network-ssd
+            resourcePresetId: s2.micro
+          roles:
+          - data
+          - manager
+          subnetIdsRefs:
+          - name: foo
+          zoneIds:
+          - ru-central1-d
     environment: PRESTABLE
+    maintenanceWindow:
+    - type: ANYTIME
     name: test
     networkIdSelector:
       matchLabels:

@@ -1,8 +1,11 @@
 package common
 
 import (
+	"fmt"
 	xpref "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"strings"
 
 	"github.com/crossplane/upjet/v2/pkg/resource"
 )
@@ -54,4 +57,28 @@ func ExtractSpecName() xpref.ExtractValueFn {
 		}
 		return ""
 	}
+}
+
+func MustLookup(root map[string]*schema.Schema, path ...string) *schema.Schema {
+	current := root
+
+	for i, p := range path {
+		s, ok := current[p]
+		if !ok {
+			panic(fmt.Sprintf("schema path not found: %s", strings.Join(path, ".")))
+		}
+
+		if i == len(path)-1 {
+			return s
+		}
+
+		res, ok := s.Elem.(*schema.Resource)
+		if !ok {
+			panic(fmt.Sprintf("schema path is not a resource: %s", strings.Join(path[:i+1], ".")))
+		}
+
+		current = res.Schema
+	}
+
+	panic("unreachable")
 }

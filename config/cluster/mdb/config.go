@@ -2,6 +2,7 @@ package mdb
 
 import (
 	"fmt"
+	"github.com/tagesjump/provider-upjet-yc/config/cluster/common"
 	"strings"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
@@ -500,6 +501,13 @@ func Configure(p *ujconfig.Provider) {
 		r.References["config.dashboard.node_groups.subnet_ids"] = ujconfig.Reference{
 			Type: fmt.Sprintf("%s.%s", vpc.ApisPackagePath, "Subnet"),
 		}
+		common.MustLookup(r.TerraformResource.Schema, "config").Computed = false
+		common.MustLookup(r.TerraformResource.Schema, "config", "opensearch").Computed = false
+		common.MustLookup(r.TerraformResource.Schema, "config", "opensearch", "node_groups", "resources").Computed = false
+		common.MustLookup(r.TerraformResource.Schema, "config", "dashboards").Computed = false
+		common.MustLookup(r.TerraformResource.Schema, "config", "dashboards", "node_groups", "resources").Computed = false
+		common.MustLookup(r.TerraformResource.Schema, "maintenance_window").Computed = false
+		common.MustLookup(r.TerraformResource.Schema, "hosts").Computed = false
 		r.UseAsync = true
 		// TODO: AdditionalConnDetails
 	})
