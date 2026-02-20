@@ -7,6 +7,7 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -105,17 +106,31 @@ func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn {
 				ps.Configuration[setting] = value
 			}
 		}
-		return ps, errors.Wrap(configureNoForkYandexCloudClient(ctx, &ps, *tfProvider), "failed to configure the Terraform YandexCloud provider meta")
+		// deliberately not using the caller context as context used to configure terraform is stored
+		// nolint:contextcheck
+		return ps, errors.Wrap(configureNoForkYandexCloudClient(&ps, *tfProvider), "failed to configure the Terraform YandexCloud provider meta")
 	}
 }
 
-func configureNoForkYandexCloudClient(ctx context.Context, ps *terraform.Setup, p schema.Provider) error {
+func configureNoForkYandexCloudClient(ps *terraform.Setup, p schema.Provider) error {
 	// Please be aware that this implementation relies on the schema.Provider
 	// parameter `p` being a non-pointer. This is because normally
 	// the Terraform plugin SDK normally configures the provider
 	// only once and using a pointer argument here will cause
 	// race conditions between resources referring to different
 	// ProviderConfigs.
+
+	// Terraform provider stores the context used for its configuration
+	// - the context needs to stay active for a longer period of time than terraform plugin sdk operations
+	// - the context needs to be eventually cancelled otherwise google provider resources are leaked
+	const (
+		// terraformPluginSDKAsyncTimeout = time.Hour * 0
+		// gracePeriod                    = 10 * time.Minute
+		providerTimeout = 20 * time.Minute // terraformPluginSDKAsyncTimeout + gracePeriod
+	)
+	ctx, cancel := context.WithCancel(context.Background())
+	time.AfterFunc(providerTimeout, cancel)
+
 	diag := p.Configure(ctx, &tfsdk.ResourceConfig{
 		Config: ps.Configuration,
 	})

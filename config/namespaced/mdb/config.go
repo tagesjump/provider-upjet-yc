@@ -2,8 +2,9 @@ package mdb
 
 import (
 	"fmt"
-	"github.com/tagesjump/provider-upjet-yc/config/namespaced/common"
 	"strings"
+
+	"github.com/tagesjump/provider-upjet-yc/config/namespaced/common"
 
 	ujconfig "github.com/crossplane/upjet/v2/pkg/config"
 	"github.com/tagesjump/provider-upjet-yc/config/namespaced/iam"

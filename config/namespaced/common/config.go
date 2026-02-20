@@ -2,10 +2,11 @@ package common
 
 import (
 	"fmt"
+	"strings"
+
 	xpref "github.com/crossplane/crossplane-runtime/v2/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/v2/pkg/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"strings"
 
 	"github.com/crossplane/upjet/v2/pkg/resource"
 )
@@ -15,7 +16,7 @@ const (
 	ConfigPath = "github.com/tagesjump/provider-upjet-yc/config/namespaced/common"
 	// ExtractPublicKeyFuncPath resource ID extractor access key
 	ExtractPublicKeyFuncPath = ConfigPath + ".ExtractAccessKey()"
-	// ExtractSpecNameFuncPath  resource ID extractor func name
+	// ExtractSpecNameFuncPath resource ID extractor func name
 	ExtractSpecNameFuncPath = ConfigPath + ".ExtractSpecName()"
 )
 

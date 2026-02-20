@@ -42,7 +42,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	"yandex_dataproc_cluster": config.IdentifierFromProvider,
 
-
 	"yandex_dns_recordset": config.IdentifierFromProvider,
 	"yandex_dns_zone":      config.IdentifierFromProvider,
 
@@ -257,7 +256,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	"yandex_serverless_container_iam_binding": config.IdentifierFromProvider,
 	"yandex_serverless_eventrouter_bus":       config.IdentifierFromProvider,
-	"yandex_smartcaptcha_captcha": config.IdentifierFromProvider,
+	"yandex_smartcaptcha_captcha":             config.IdentifierFromProvider,
 
 	"yandex_spark_cluster": config.IdentifierFromProvider,
 
