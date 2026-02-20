@@ -469,12 +469,15 @@ type IotParameters struct {
 type LogGroupInitParameters struct {
 
 	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
 	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// (Set of String)
+	// Log group IDs for Yandex Cloud Functions Trigger.
 	// +listType=set
 	LogGroupIds []*string `json:"logGroupIds,omitempty" tf:"log_group_ids,omitempty"`
 }
@@ -482,12 +485,15 @@ type LogGroupInitParameters struct {
 type LogGroupObservation struct {
 
 	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	BatchCutoff *string `json:"batchCutoff,omitempty" tf:"batch_cutoff,omitempty"`
 
 	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// (Set of String)
+	// Log group IDs for Yandex Cloud Functions Trigger.
 	// +listType=set
 	LogGroupIds []*string `json:"logGroupIds,omitempty" tf:"log_group_ids,omitempty"`
 }
@@ -495,14 +501,17 @@ type LogGroupObservation struct {
 type LogGroupParameters struct {
 
 	// (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+	// Batch Duration in seconds for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchCutoff *string `json:"batchCutoff" tf:"batch_cutoff,omitempty"`
 
 	// (String) Batch Size for Yandex Cloud Functions Trigger.
+	// Batch Size for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	BatchSize *string `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// (Set of String)
+	// Log group IDs for Yandex Cloud Functions Trigger.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	LogGroupIds []*string `json:"logGroupIds" tf:"log_group_ids,omitempty"`
@@ -952,6 +961,7 @@ type TriggerInitParameters struct {
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Block List, Max: 1) (see below for nested schema)
+	// Deprecated Logging settings definition for Yandex Cloud Functions Trigger. Please, use logging instead.
 	LogGroup []LogGroupInitParameters `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
 	// (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
@@ -1026,6 +1036,7 @@ type TriggerObservation struct {
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Block List, Max: 1) (see below for nested schema)
+	// Deprecated Logging settings definition for Yandex Cloud Functions Trigger. Please, use logging instead.
 	LogGroup []LogGroupObservation `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 
 	// (Block List, Max: 1) Logging settings definition for Yandex Cloud Functions Trigger, if present. (see below for nested schema)
@@ -1111,6 +1122,7 @@ type TriggerParameters struct {
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// (Block List, Max: 1) (see below for nested schema)
+	// Deprecated Logging settings definition for Yandex Cloud Functions Trigger. Please, use logging instead.
 	// +kubebuilder:validation:Optional
 	LogGroup []LogGroupParameters `json:"logGroup,omitempty" tf:"log_group,omitempty"`
 

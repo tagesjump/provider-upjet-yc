@@ -76,41 +76,39 @@ spec:
                   allowedSites:
                     description: |-
                       (List of String) List of allowed host names, see Domain validation.
-                      List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+                      List of allowed host names, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
                     items:
                       type: string
                     type: array
+                  captchaId:
+                    description: |-
+                      (String) ID of the Captcha resource to return.
+                      ID of the Captcha resource to return.
+                    type: string
                   challengeType:
                     description: |-
-                      (String) Additional task type of the captcha. Possible values:
-                      Additional task type of the captcha. Possible values:
-                      * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
-                      * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
-                      * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
+                      (String) Additional task type of the captcha.
+                      Additional task type of the captcha.
                     type: string
                   cloudId:
                     description: |-
-                      id is used.
-                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
+                      (String) ID of the cloud that the captcha belongs to.
+                      ID of the cloud that the captcha belongs to.
                     type: string
                   complexity:
                     description: |-
-                      (String) Complexity of the captcha. Possible values:
-                      Complexity of the captcha. Possible values:
-                      * `EASY` - High chance to pass pre-check and easy advanced challenge.
-                      * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
-                      * `HARD` - Little chance to pass pre-check and hard advanced challenge.
-                      * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
+                      (String) Complexity of the captcha.
+                      Complexity of the captcha.
                     type: string
                   deletionProtection:
                     description: |-
-                      (Boolean) The true value means that resource is protected from accidental deletion.
-                      The `true` value means that resource is protected from accidental deletion.
+                      (Boolean) Determines whether captcha is protected from being deleted.
+                      Determines whether captcha is protected from being deleted.
                     type: boolean
                   folderId:
                     description: |-
-                      id is used.
-                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                      (String) ID of the folder that the captcha belongs to.
+                      ID of the folder that the captcha belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -190,33 +188,34 @@ spec:
                     type: object
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      63 characters long.
+                      Name of the captcha. The name is unique within the folder. 3-63 characters long.
                     type: string
                   overrideVariant:
                     description: |-
-                      (Block List) List of variants to use in security_rules. (see below for nested schema)
-                      List of variants to use in security_rules.
+                      (Block List) List of variants to use in security_rules (see below for nested schema)
+                      List of variants to use in security_rules
                     items:
                       properties:
                         challengeType:
                           description: |-
-                            (String) Additional task type of the captcha. Possible values:
+                            (String) Additional task type of the captcha.
                             Additional task type of the captcha.
                           type: string
                         complexity:
                           description: |-
-                            (String) Complexity of the captcha. Possible values:
+                            (String) Complexity of the captcha.
                             Complexity of the captcha.
                           type: string
                         description:
                           description: |-
-                            512 characters long.
+                            (String) package: yandex.cloud.smartcaptcha.v1
+                            filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                             Optional description of the rule. 0-512 characters long.
                           type: string
                         preCheckType:
                           description: |-
-                            (String) Basic check type of the captcha.Possible values:
+                            (String) Basic check type of the captcha.
                             Basic check type of the captcha.
                           type: string
                         uuid:
@@ -228,10 +227,8 @@ spec:
                     type: array
                   preCheckType:
                     description: |-
-                      (String) Basic check type of the captcha.Possible values:
-                      Basic check type of the captcha.Possible values:
-                      * `CHECKBOX` - User must click the 'I am not a robot' button.
-                      * `SLIDER` - User must move the slider from left to right.
+                      (String) Basic check type of the captcha.
+                      Basic check type of the captcha.
                     type: string
                   securityRule:
                     description: |-
@@ -240,125 +237,188 @@ spec:
                     items:
                       properties:
                         condition:
-                          description: |-
-                            (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
-                            The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+                          description: (Attributes List) The condition for matching
+                            the rule. (see below for nested schema)
                           items:
                             properties:
                               headers:
-                                description: (Block List) (see below for nested schema)
+                                description: (Attributes List) Captcha request headers.
+                                  (see below for nested schema)
                                 items:
                                   properties:
                                     name:
-                                      description: (String) The resource name.
+                                      description: |-
+                                        63 characters long.
+                                        Name of header (case insensitive).
                                       type: string
                                     value:
-                                      description: '(Block List, Min: 1, Max: 1) (see
-                                        below for nested schema)'
+                                      description: (Attributes List) Value of the
+                                        header. (see below for nested schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               host:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) Host where captcha
+                                  placed. (see below for nested schema)
                                 items:
                                   properties:
                                     hosts:
-                                      description: (Block List) (see below for nested
+                                      description: (Attributes List) List of hosts.
+                                        OR semantics implied. (see below for nested
                                         schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               sourceIp:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) The IP address of the
+                                  requester. (see below for nested schema)
                                 items:
                                   properties:
                                     geoIpMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           locations:
-                                            description: (List of String)
+                                            description: |-
+                                              1 alpha 2. OR semantics implied.
+                                              ISO 3166-1 alpha 2. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     geoIpNotMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           locations:
-                                            description: (List of String)
+                                            description: |-
+                                              1 alpha 2. OR semantics implied.
+                                              ISO 3166-1 alpha 2. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           ipRanges:
-                                            description: (List of String)
+                                            description: |-
+                                              (List of String) List of IP ranges. OR semantics implied.
+                                              List of IP ranges. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesNotMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           ipRanges:
-                                            description: (List of String)
+                                            description: |-
+                                              (List of String) List of IP ranges. OR semantics implied.
+                                              List of IP ranges. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
@@ -367,65 +427,116 @@ spec:
                                   type: object
                                 type: array
                               uri:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) URI where captcha placed.
+                                  (see below for nested schema)
                                 items:
                                   properties:
                                     path:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: (Attributes List) Path of the URI
+                                        RFC3986. (see below for nested schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                     queries:
-                                      description: (Block List) (see below for nested
-                                        schema)
+                                      description: (Attributes List) List of query
+                                        matchers. AND semantics implied. (see below
+                                        for nested schema)
                                       items:
                                         properties:
                                           key:
-                                            description: (String)
+                                            description: |-
+                                              (String) Key of the query parameter.
+                                              Key of the query parameter.
                                             type: string
                                           value:
-                                            description: '(Block List, Min: 1, Max:
-                                              1) (see below for nested schema)'
+                                            description: (Attributes List) Value of
+                                              the header. (see below for nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 exactNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 pireRegexMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 pireRegexNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 prefixMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 prefixNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                               type: object
                                             type: array
@@ -437,12 +548,13 @@ spec:
                           type: array
                         description:
                           description: |-
-                            512 characters long.
-                            Description of the rule. 0-512 characters long.
+                            (String) package: yandex.cloud.smartcaptcha.v1
+                            filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            63 characters long.
                             Name of the rule. The name is unique within the captcha. 1-50 characters long.
                           type: string
                         overrideVariantUuid:
@@ -462,10 +574,34 @@ spec:
                       (String) JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                       JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                     type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                   turnOffHostnameCheck:
                     description: |-
                       (Boolean) Turn off host name check, see Domain validation.
-                      Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+                      Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
                     type: boolean
                 type: object
               initProvider:
@@ -484,41 +620,39 @@ spec:
                   allowedSites:
                     description: |-
                       (List of String) List of allowed host names, see Domain validation.
-                      List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+                      List of allowed host names, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
                     items:
                       type: string
                     type: array
+                  captchaId:
+                    description: |-
+                      (String) ID of the Captcha resource to return.
+                      ID of the Captcha resource to return.
+                    type: string
                   challengeType:
                     description: |-
-                      (String) Additional task type of the captcha. Possible values:
-                      Additional task type of the captcha. Possible values:
-                      * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
-                      * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
-                      * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
+                      (String) Additional task type of the captcha.
+                      Additional task type of the captcha.
                     type: string
                   cloudId:
                     description: |-
-                      id is used.
-                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
+                      (String) ID of the cloud that the captcha belongs to.
+                      ID of the cloud that the captcha belongs to.
                     type: string
                   complexity:
                     description: |-
-                      (String) Complexity of the captcha. Possible values:
-                      Complexity of the captcha. Possible values:
-                      * `EASY` - High chance to pass pre-check and easy advanced challenge.
-                      * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
-                      * `HARD` - Little chance to pass pre-check and hard advanced challenge.
-                      * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
+                      (String) Complexity of the captcha.
+                      Complexity of the captcha.
                     type: string
                   deletionProtection:
                     description: |-
-                      (Boolean) The true value means that resource is protected from accidental deletion.
-                      The `true` value means that resource is protected from accidental deletion.
+                      (Boolean) Determines whether captcha is protected from being deleted.
+                      Determines whether captcha is protected from being deleted.
                     type: boolean
                   folderId:
                     description: |-
-                      id is used.
-                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                      (String) ID of the folder that the captcha belongs to.
+                      ID of the folder that the captcha belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -598,33 +732,34 @@ spec:
                     type: object
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      63 characters long.
+                      Name of the captcha. The name is unique within the folder. 3-63 characters long.
                     type: string
                   overrideVariant:
                     description: |-
-                      (Block List) List of variants to use in security_rules. (see below for nested schema)
-                      List of variants to use in security_rules.
+                      (Block List) List of variants to use in security_rules (see below for nested schema)
+                      List of variants to use in security_rules
                     items:
                       properties:
                         challengeType:
                           description: |-
-                            (String) Additional task type of the captcha. Possible values:
+                            (String) Additional task type of the captcha.
                             Additional task type of the captcha.
                           type: string
                         complexity:
                           description: |-
-                            (String) Complexity of the captcha. Possible values:
+                            (String) Complexity of the captcha.
                             Complexity of the captcha.
                           type: string
                         description:
                           description: |-
-                            512 characters long.
+                            (String) package: yandex.cloud.smartcaptcha.v1
+                            filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                             Optional description of the rule. 0-512 characters long.
                           type: string
                         preCheckType:
                           description: |-
-                            (String) Basic check type of the captcha.Possible values:
+                            (String) Basic check type of the captcha.
                             Basic check type of the captcha.
                           type: string
                         uuid:
@@ -636,10 +771,8 @@ spec:
                     type: array
                   preCheckType:
                     description: |-
-                      (String) Basic check type of the captcha.Possible values:
-                      Basic check type of the captcha.Possible values:
-                      * `CHECKBOX` - User must click the 'I am not a robot' button.
-                      * `SLIDER` - User must move the slider from left to right.
+                      (String) Basic check type of the captcha.
+                      Basic check type of the captcha.
                     type: string
                   securityRule:
                     description: |-
@@ -648,125 +781,188 @@ spec:
                     items:
                       properties:
                         condition:
-                          description: |-
-                            (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
-                            The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+                          description: (Attributes List) The condition for matching
+                            the rule. (see below for nested schema)
                           items:
                             properties:
                               headers:
-                                description: (Block List) (see below for nested schema)
+                                description: (Attributes List) Captcha request headers.
+                                  (see below for nested schema)
                                 items:
                                   properties:
                                     name:
-                                      description: (String) The resource name.
+                                      description: |-
+                                        63 characters long.
+                                        Name of header (case insensitive).
                                       type: string
                                     value:
-                                      description: '(Block List, Min: 1, Max: 1) (see
-                                        below for nested schema)'
+                                      description: (Attributes List) Value of the
+                                        header. (see below for nested schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               host:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) Host where captcha
+                                  placed. (see below for nested schema)
                                 items:
                                   properties:
                                     hosts:
-                                      description: (Block List) (see below for nested
+                                      description: (Attributes List) List of hosts.
+                                        OR semantics implied. (see below for nested
                                         schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               sourceIp:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) The IP address of the
+                                  requester. (see below for nested schema)
                                 items:
                                   properties:
                                     geoIpMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           locations:
-                                            description: (List of String)
+                                            description: |-
+                                              1 alpha 2. OR semantics implied.
+                                              ISO 3166-1 alpha 2. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     geoIpNotMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           locations:
-                                            description: (List of String)
+                                            description: |-
+                                              1 alpha 2. OR semantics implied.
+                                              ISO 3166-1 alpha 2. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           ipRanges:
-                                            description: (List of String)
+                                            description: |-
+                                              (List of String) List of IP ranges. OR semantics implied.
+                                              List of IP ranges. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesNotMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           ipRanges:
-                                            description: (List of String)
+                                            description: |-
+                                              (List of String) List of IP ranges. OR semantics implied.
+                                              List of IP ranges. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
@@ -775,65 +971,116 @@ spec:
                                   type: object
                                 type: array
                               uri:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) URI where captcha placed.
+                                  (see below for nested schema)
                                 items:
                                   properties:
                                     path:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: (Attributes List) Path of the URI
+                                        RFC3986. (see below for nested schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                     queries:
-                                      description: (Block List) (see below for nested
-                                        schema)
+                                      description: (Attributes List) List of query
+                                        matchers. AND semantics implied. (see below
+                                        for nested schema)
                                       items:
                                         properties:
                                           key:
-                                            description: (String)
+                                            description: |-
+                                              (String) Key of the query parameter.
+                                              Key of the query parameter.
                                             type: string
                                           value:
-                                            description: '(Block List, Min: 1, Max:
-                                              1) (see below for nested schema)'
+                                            description: (Attributes List) Value of
+                                              the header. (see below for nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 exactNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 pireRegexMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 pireRegexNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 prefixMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 prefixNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                               type: object
                                             type: array
@@ -845,12 +1092,13 @@ spec:
                           type: array
                         description:
                           description: |-
-                            512 characters long.
-                            Description of the rule. 0-512 characters long.
+                            (String) package: yandex.cloud.smartcaptcha.v1
+                            filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            63 characters long.
                             Name of the rule. The name is unique within the captcha. 1-50 characters long.
                           type: string
                         overrideVariantUuid:
@@ -870,10 +1118,34 @@ spec:
                       (String) JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                       JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                     type: string
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                   turnOffHostnameCheck:
                     description: |-
                       (Boolean) Turn off host name check, see Domain validation.
-                      Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+                      Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
                     type: boolean
                 type: object
               managementPolicies:
@@ -970,84 +1242,107 @@ spec:
                   allowedSites:
                     description: |-
                       (List of String) List of allowed host names, see Domain validation.
-                      List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+                      List of allowed host names, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
                     items:
                       type: string
                     type: array
+                  captchaId:
+                    description: |-
+                      (String) ID of the Captcha resource to return.
+                      ID of the Captcha resource to return.
+                    type: string
                   challengeType:
                     description: |-
-                      (String) Additional task type of the captcha. Possible values:
-                      Additional task type of the captcha. Possible values:
-                      * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
-                      * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
-                      * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
+                      (String) Additional task type of the captcha.
+                      Additional task type of the captcha.
                     type: string
                   clientKey:
                     description: |-
                       (String) Client key of the captcha, see CAPTCHA keys.
-                      Client key of the captcha, see [CAPTCHA keys](https://yandex.cloud/docs/smartcaptcha/concepts/keys).
+                      Client key of the captcha, see [CAPTCHA keys](/docs/smartcaptcha/concepts/keys).
                     type: string
                   cloudId:
                     description: |-
-                      id is used.
-                      The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
+                      (String) ID of the cloud that the captcha belongs to.
+                      ID of the cloud that the captcha belongs to.
                     type: string
                   complexity:
                     description: |-
-                      (String) Complexity of the captcha. Possible values:
-                      Complexity of the captcha. Possible values:
-                      * `EASY` - High chance to pass pre-check and easy advanced challenge.
-                      * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
-                      * `HARD` - Little chance to pass pre-check and hard advanced challenge.
-                      * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
+                      (String) Complexity of the captcha.
+                      Complexity of the captcha.
                     type: string
                   createdAt:
                     description: |-
-                      (String) The creation timestamp of the resource.
-                      The creation timestamp of the resource.
+                      (String) Creation timestamp in RFC3339 text format.
+                      Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
                     type: string
                   deletionProtection:
                     description: |-
-                      (Boolean) The true value means that resource is protected from accidental deletion.
-                      The `true` value means that resource is protected from accidental deletion.
+                      (Boolean) Determines whether captcha is protected from being deleted.
+                      Determines whether captcha is protected from being deleted.
+                    type: boolean
+                  description:
+                    description: |-
+                      (String) package: yandex.cloud.smartcaptcha.v1
+                      filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                      package: yandex.cloud.smartcaptcha.v1
+                      filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                    type: string
+                  disallowDataProcessing:
+                    description: |-
+                      (Boolean) package: yandex.cloud.smartcaptcha.v1
+                      filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                      package: yandex.cloud.smartcaptcha.v1
+                      filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                     type: boolean
                   folderId:
                     description: |-
-                      id is used.
-                      The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+                      (String) ID of the folder that the captcha belongs to.
+                      ID of the folder that the captcha belongs to.
                     type: string
                   id:
-                    description: (String) The ID of this resource.
+                    description: (String) ID of the Captcha resource to return.
                     type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    description: |-
+                      (Map of String) package: yandex.cloud.smartcaptcha.v1
+                      filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                      package: yandex.cloud.smartcaptcha.v1
+                      filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                    type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      63 characters long.
+                      Name of the captcha. The name is unique within the folder. 3-63 characters long.
                     type: string
                   overrideVariant:
                     description: |-
-                      (Block List) List of variants to use in security_rules. (see below for nested schema)
-                      List of variants to use in security_rules.
+                      (Block List) List of variants to use in security_rules (see below for nested schema)
+                      List of variants to use in security_rules
                     items:
                       properties:
                         challengeType:
                           description: |-
-                            (String) Additional task type of the captcha. Possible values:
+                            (String) Additional task type of the captcha.
                             Additional task type of the captcha.
                           type: string
                         complexity:
                           description: |-
-                            (String) Complexity of the captcha. Possible values:
+                            (String) Complexity of the captcha.
                             Complexity of the captcha.
                           type: string
                         description:
                           description: |-
-                            512 characters long.
+                            (String) package: yandex.cloud.smartcaptcha.v1
+                            filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                             Optional description of the rule. 0-512 characters long.
                           type: string
                         preCheckType:
                           description: |-
-                            (String) Basic check type of the captcha.Possible values:
+                            (String) Basic check type of the captcha.
                             Basic check type of the captcha.
                           type: string
                         uuid:
@@ -1059,10 +1354,8 @@ spec:
                     type: array
                   preCheckType:
                     description: |-
-                      (String) Basic check type of the captcha.Possible values:
-                      Basic check type of the captcha.Possible values:
-                      * `CHECKBOX` - User must click the 'I am not a robot' button.
-                      * `SLIDER` - User must move the slider from left to right.
+                      (String) Basic check type of the captcha.
+                      Basic check type of the captcha.
                     type: string
                   securityRule:
                     description: |-
@@ -1071,125 +1364,188 @@ spec:
                     items:
                       properties:
                         condition:
-                          description: |-
-                            (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
-                            The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+                          description: (Attributes List) The condition for matching
+                            the rule. (see below for nested schema)
                           items:
                             properties:
                               headers:
-                                description: (Block List) (see below for nested schema)
+                                description: (Attributes List) Captcha request headers.
+                                  (see below for nested schema)
                                 items:
                                   properties:
                                     name:
-                                      description: (String) The resource name.
+                                      description: |-
+                                        63 characters long.
+                                        Name of header (case insensitive).
                                       type: string
                                     value:
-                                      description: '(Block List, Min: 1, Max: 1) (see
-                                        below for nested schema)'
+                                      description: (Attributes List) Value of the
+                                        header. (see below for nested schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               host:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) Host where captcha
+                                  placed. (see below for nested schema)
                                 items:
                                   properties:
                                     hosts:
-                                      description: (Block List) (see below for nested
+                                      description: (Attributes List) List of hosts.
+                                        OR semantics implied. (see below for nested
                                         schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                   type: object
                                 type: array
                               sourceIp:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) The IP address of the
+                                  requester. (see below for nested schema)
                                 items:
                                   properties:
                                     geoIpMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           locations:
-                                            description: (List of String)
+                                            description: |-
+                                              1 alpha 2. OR semantics implied.
+                                              ISO 3166-1 alpha 2. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     geoIpNotMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           locations:
-                                            description: (List of String)
+                                            description: |-
+                                              1 alpha 2. OR semantics implied.
+                                              ISO 3166-1 alpha 2. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           ipRanges:
-                                            description: (List of String)
+                                            description: |-
+                                              (List of String) List of IP ranges. OR semantics implied.
+                                              List of IP ranges. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
                                         type: object
                                       type: array
                                     ipRangesNotMatch:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: |-
+                                        (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                                        filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
                                       items:
                                         properties:
                                           ipRanges:
-                                            description: (List of String)
+                                            description: |-
+                                              (List of String) List of IP ranges. OR semantics implied.
+                                              List of IP ranges. OR semantics implied.
                                             items:
                                               type: string
                                             type: array
@@ -1198,65 +1554,116 @@ spec:
                                   type: object
                                 type: array
                               uri:
-                                description: '(Block List, Max: 1) (see below for
-                                  nested schema)'
+                                description: (Attributes List) URI where captcha placed.
+                                  (see below for nested schema)
                                 items:
                                   properties:
                                     path:
-                                      description: '(Block List, Max: 1) (see below
-                                        for nested schema)'
+                                      description: (Attributes List) Path of the URI
+                                        RFC3986. (see below for nested schema)
                                       items:
                                         properties:
                                           exactMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           exactNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           pireRegexNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                           prefixNotMatch:
-                                            description: (String)
+                                            description: |-
+                                              (String) package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                              package: yandex.cloud.smartcaptcha.v1
+                                              filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                             type: string
                                         type: object
                                       type: array
                                     queries:
-                                      description: (Block List) (see below for nested
-                                        schema)
+                                      description: (Attributes List) List of query
+                                        matchers. AND semantics implied. (see below
+                                        for nested schema)
                                       items:
                                         properties:
                                           key:
-                                            description: (String)
+                                            description: |-
+                                              (String) Key of the query parameter.
+                                              Key of the query parameter.
                                             type: string
                                           value:
-                                            description: '(Block List, Min: 1, Max:
-                                              1) (see below for nested schema)'
+                                            description: (Attributes List) Value of
+                                              the header. (see below for nested schema)
                                             items:
                                               properties:
                                                 exactMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 exactNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 pireRegexMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 pireRegexNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 prefixMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                                 prefixNotMatch:
-                                                  description: (String)
+                                                  description: |-
+                                                    (String) package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                                                    package: yandex.cloud.smartcaptcha.v1
+                                                    filename: yandex/cloud/smartcaptcha/v1/captcha.proto
                                                   type: string
                                               type: object
                                             type: array
@@ -1268,12 +1675,13 @@ spec:
                           type: array
                         description:
                           description: |-
-                            512 characters long.
-                            Description of the rule. 0-512 characters long.
+                            (String) package: yandex.cloud.smartcaptcha.v1
+                            filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+                            Optional description of the rule. 0-512 characters long.
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            63 characters long.
                             Name of the rule. The name is unique within the captcha. 1-50 characters long.
                           type: string
                         overrideVariantUuid:
@@ -1294,12 +1702,38 @@ spec:
                       JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
                     type: string
                   suspend:
-                    description: (Boolean)
+                    description: |-
+                      (Boolean) Determines that the captcha is currently in restricted mode, see SmartCaptcha restricted mode.
+                      Determines that the captcha is currently in restricted mode, see [SmartCaptcha restricted mode](/docs/smartcaptcha/concepts/restricted-mode).
                     type: boolean
+                  timeouts:
+                    description: (Attributes) (see below for nested schema)
+                    properties:
+                      create:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                      delete:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+                        type: string
+                      read:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+                        type: string
+                      update:
+                        description: |-
+                          (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                          A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+                        type: string
+                    type: object
                   turnOffHostnameCheck:
                     description: |-
                       (Boolean) Turn off host name check, see Domain validation.
-                      Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+                      Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
                     type: boolean
                 type: object
               conditions:

@@ -201,9 +201,9 @@ spec:
                             The largest record batch size allowed by Kafka (after compression if compression is enabled).
                           type: string
                         messageTimestampType:
-                          description: 'Define whether the timestamp in the message
-                            is message create time or log append time. Possible values:
-                            LOG_APPEND_TIME or CREATE_TIME.'
+                          description: |-
+                            (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
+                            Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                           type: string
                         minCompactionLagMs:
                           description: |-
@@ -393,9 +393,9 @@ spec:
                             The largest record batch size allowed by Kafka (after compression if compression is enabled).
                           type: string
                         messageTimestampType:
-                          description: 'Define whether the timestamp in the message
-                            is message create time or log append time. Possible values:
-                            LOG_APPEND_TIME or CREATE_TIME.'
+                          description: |-
+                            (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
+                            Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                           type: string
                         minCompactionLagMs:
                           description: |-
@@ -571,9 +571,9 @@ spec:
                             The largest record batch size allowed by Kafka (after compression if compression is enabled).
                           type: string
                         messageTimestampType:
-                          description: 'Define whether the timestamp in the message
-                            is message create time or log append time. Possible values:
-                            LOG_APPEND_TIME or CREATE_TIME.'
+                          description: |-
+                            (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
+                            Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                           type: string
                         minCompactionLagMs:
                           description: |-

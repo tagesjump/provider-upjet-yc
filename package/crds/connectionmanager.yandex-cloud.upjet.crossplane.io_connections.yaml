@@ -75,24 +75,18 @@ spec:
                 properties:
                   connectionId:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+                      (String) ID of the connection to retrieve.
+                      ID of the connection to retrieve.
                     type: string
                   description:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Description of the connection.
+                      Description of the connection.
                     type: string
                   folderId:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) ID of the folder that the connection belongs to.
+                      ID of the folder that the connection belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -174,28 +168,32 @@ spec:
                     additionalProperties:
                       type: string
                     description: |-
-                      (Map of String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (Map of String) Connection labels as key:value pairs.
+                      Connection labels as `key:value` pairs.
                     type: object
                     x-kubernetes-map-type: granular
+                  lockboxSecretSpec:
+                    description: (Attributes) Specification for creating a new Lockbox
+                      secret. (see below for nested schema)
+                    properties:
+                      folderId:
+                        description: |-
+                          (String) ID of the folder that the connection belongs to.
+                          ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
+                        type: string
+                    type: object
                   name:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Name of the connection.
+                      Name of the connection.
                     type: string
                   params:
-                    description: |-
-                      (Attributes) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                    description: (Attributes) Connection parameters specific to the
+                      database or service type. (see below for nested schema)
                     properties:
                       clickhouse:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) ClickHouse database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -373,8 +371,7 @@ spec:
                                   properties:
                                     name:
                                       description: |-
-                                        (String) package: yandex.cloud.connectionmanager.v1
-                                        filename: yandex/cloud/connectionmanager/v1/connection.proto
+                                        (String) Name of the connection.
                                         package: yandex.cloud.connectionmanager.v1
                                         filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
                                       type: string
@@ -432,9 +429,8 @@ spec:
                             type: string
                         type: object
                       greenplum:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Greenplum data warehouse connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -642,9 +638,8 @@ spec:
                             type: string
                         type: object
                       kafka:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Apache Kafka message broker connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -850,9 +845,8 @@ spec:
                             type: string
                         type: object
                       mongodb:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) MongoDB database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -1074,9 +1068,8 @@ spec:
                             type: string
                         type: object
                       mysql:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) MySQL database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -1284,9 +1277,8 @@ spec:
                             type: string
                         type: object
                       opensearch:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) OpenSearch search engine connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -1487,9 +1479,8 @@ spec:
                             type: string
                         type: object
                       postgresql:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) PostgreSQL database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -1704,9 +1695,8 @@ spec:
                             type: string
                         type: object
                       redis:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: memory data store connection parameters. (see
+                          below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -1921,9 +1911,8 @@ spec:
                             type: array
                         type: object
                       storedoc:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) StoreDoc document store connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -2145,9 +2134,8 @@ spec:
                             type: string
                         type: object
                       trino:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Trino distributed SQL query engine
+                          connection parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -2323,9 +2311,8 @@ spec:
                             type: object
                         type: object
                       valkey:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: memory data store connection parameters. (see
+                          below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -2587,24 +2574,18 @@ spec:
                 properties:
                   connectionId:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+                      (String) ID of the connection to retrieve.
+                      ID of the connection to retrieve.
                     type: string
                   description:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Description of the connection.
+                      Description of the connection.
                     type: string
                   folderId:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) ID of the folder that the connection belongs to.
+                      ID of the folder that the connection belongs to.
                     type: string
                   folderIdRef:
                     description: Reference to a Folder in resourcemanager to populate
@@ -2686,28 +2667,32 @@ spec:
                     additionalProperties:
                       type: string
                     description: |-
-                      (Map of String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (Map of String) Connection labels as key:value pairs.
+                      Connection labels as `key:value` pairs.
                     type: object
                     x-kubernetes-map-type: granular
+                  lockboxSecretSpec:
+                    description: (Attributes) Specification for creating a new Lockbox
+                      secret. (see below for nested schema)
+                    properties:
+                      folderId:
+                        description: |-
+                          (String) ID of the folder that the connection belongs to.
+                          ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
+                        type: string
+                    type: object
                   name:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Name of the connection.
+                      Name of the connection.
                     type: string
                   params:
-                    description: |-
-                      (Attributes) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                    description: (Attributes) Connection parameters specific to the
+                      database or service type. (see below for nested schema)
                     properties:
                       clickhouse:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) ClickHouse database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -2885,8 +2870,7 @@ spec:
                                   properties:
                                     name:
                                       description: |-
-                                        (String) package: yandex.cloud.connectionmanager.v1
-                                        filename: yandex/cloud/connectionmanager/v1/connection.proto
+                                        (String) Name of the connection.
                                         package: yandex.cloud.connectionmanager.v1
                                         filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
                                       type: string
@@ -2944,9 +2928,8 @@ spec:
                             type: string
                         type: object
                       greenplum:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Greenplum data warehouse connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -3154,9 +3137,8 @@ spec:
                             type: string
                         type: object
                       kafka:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Apache Kafka message broker connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -3362,9 +3344,8 @@ spec:
                             type: string
                         type: object
                       mongodb:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) MongoDB database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -3586,9 +3567,8 @@ spec:
                             type: string
                         type: object
                       mysql:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) MySQL database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -3796,9 +3776,8 @@ spec:
                             type: string
                         type: object
                       opensearch:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) OpenSearch search engine connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -3999,9 +3978,8 @@ spec:
                             type: string
                         type: object
                       postgresql:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) PostgreSQL database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -4216,9 +4194,8 @@ spec:
                             type: string
                         type: object
                       redis:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: memory data store connection parameters. (see
+                          below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -4433,9 +4410,8 @@ spec:
                             type: array
                         type: object
                       storedoc:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) StoreDoc document store connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -4657,9 +4633,8 @@ spec:
                             type: string
                         type: object
                       trino:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Trino distributed SQL query engine
+                          connection parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -4835,9 +4810,8 @@ spec:
                             type: object
                         type: object
                       valkey:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: memory data store connection parameters. (see
+                          below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -5177,118 +5151,97 @@ spec:
                 properties:
                   canUse:
                     description: |-
-                      (Boolean) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (Boolean) Whether the current user can use this connection. Filled only when with_can_use has been requested in ListConnectionRequest.
+                      Whether the current user can use this connection. Filled only when `with_can_use` has been requested in ListConnectionRequest.
                     type: boolean
                   connectionId:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+                      (String) ID of the connection to retrieve.
+                      ID of the connection to retrieve.
                     type: string
                   createdAt:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Creation timestamp.
+                      Creation timestamp.
                     type: string
                   createdBy:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) ID of the subject which created the connection.
+                      ID of the subject which created the connection.
                     type: string
                   description:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Description of the connection.
+                      Description of the connection.
                     type: string
                   folderId:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) ID of the folder that the connection belongs to.
+                      ID of the folder that the connection belongs to.
                     type: string
                   id:
-                    description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+                    description: (String) ID of the connection to retrieve.
                     type: string
                   isManaged:
                     description: |-
-                      (Boolean) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (Boolean) Whether this connection is managed by the system (e.g. an MDB cluster).
+                      Whether this connection is managed by the system (e.g. an MDB cluster).
                     type: boolean
                   labels:
                     additionalProperties:
                       type: string
                     description: |-
-                      (Map of String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (Map of String) Connection labels as key:value pairs.
+                      Connection labels as `key:value` pairs.
                     type: object
                     x-kubernetes-map-type: granular
                   lockboxSecret:
-                    description: |-
-                      (Attributes) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                    description: (Attributes) Reference to the Lockbox secret containing
+                      connection credentials. (see below for nested schema)
                     properties:
                       connectionId:
                         description: |-
-                          (String) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-                          package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto
+                          (String) ID of the connection to retrieve.
+                          ID of the Lockbox secret.
                         type: string
                       id:
                         description: |-
-                          (String) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection_service.proto
-                          package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto
+                          (String) ID of the connection to retrieve.
+                          ID of the Lockbox secret.
                         type: string
                       newestVersion:
                         description: |-
-                          (String) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto
-                          package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto
+                          (String) The newest available version of the Lockbox secret.
+                          The newest available version of the Lockbox secret.
                         type: string
                       version:
                         description: |-
-                          (String) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto
-                          package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto
+                          (String) Lockbox secret version.
+                          Lockbox secret version.
+                        type: string
+                    type: object
+                  lockboxSecretSpec:
+                    description: (Attributes) Specification for creating a new Lockbox
+                      secret. (see below for nested schema)
+                    properties:
+                      folderId:
+                        description: |-
+                          (String) ID of the folder that the connection belongs to.
+                          ID of the folder where the Lockbox secret will be created. If omitted, the secret will be created in the connection's folder.
                         type: string
                     type: object
                   name:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Name of the connection.
+                      Name of the connection.
                     type: string
                   params:
-                    description: |-
-                      (Attributes) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                    description: (Attributes) Connection parameters specific to the
+                      database or service type. (see below for nested schema)
                     properties:
                       clickhouse:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) ClickHouse database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -5441,8 +5394,7 @@ spec:
                                   properties:
                                     name:
                                       description: |-
-                                        (String) package: yandex.cloud.connectionmanager.v1
-                                        filename: yandex/cloud/connectionmanager/v1/connection.proto
+                                        (String) Name of the connection.
                                         package: yandex.cloud.connectionmanager.v1
                                         filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
                                       type: string
@@ -5500,9 +5452,8 @@ spec:
                             type: string
                         type: object
                       greenplum:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Greenplum data warehouse connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -5685,9 +5636,8 @@ spec:
                             type: string
                         type: object
                       kafka:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Apache Kafka message broker connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -5868,9 +5818,8 @@ spec:
                             type: string
                         type: object
                       mongodb:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) MongoDB database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -6067,9 +6016,8 @@ spec:
                             type: string
                         type: object
                       mysql:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) MySQL database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -6252,9 +6200,8 @@ spec:
                             type: string
                         type: object
                       opensearch:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) OpenSearch search engine connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -6430,9 +6377,8 @@ spec:
                             type: string
                         type: object
                       postgresql:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) PostgreSQL database connection parameters.
+                          (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -6622,9 +6568,8 @@ spec:
                             type: string
                         type: object
                       redis:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: memory data store connection parameters. (see
+                          below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -6814,9 +6759,8 @@ spec:
                             type: array
                         type: object
                       storedoc:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) StoreDoc document store connection
+                          parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -7013,9 +6957,8 @@ spec:
                             type: string
                         type: object
                       trino:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: (Attributes) Trino distributed SQL query engine
+                          connection parameters. (see below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -7166,9 +7109,8 @@ spec:
                             type: object
                         type: object
                       valkey:
-                        description: |-
-                          (Attributes) package: yandex.cloud.connectionmanager.v1
-                          filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+                        description: memory data store connection parameters. (see
+                          below for nested schema)
                         properties:
                           auth:
                             description: |-
@@ -7391,10 +7333,8 @@ spec:
                     type: object
                   updatedAt:
                     description: |-
-                      (String) package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
-                      package: yandex.cloud.connectionmanager.v1
-                      filename: yandex/cloud/connectionmanager/v1/connection.proto
+                      (String) Last update timestamp.
+                      Last update timestamp.
                     type: string
                 type: object
               conditions:

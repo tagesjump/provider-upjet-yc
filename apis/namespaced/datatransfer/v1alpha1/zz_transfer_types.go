@@ -12,693 +12,935 @@ import (
 
 type ColumnsInitParameters struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
-	// List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
-	// List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type ColumnsObservation struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
-	// List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
-	// List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type ColumnsParameters struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
-	// List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
-	// List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type ConvertToStringInitParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of included and excluded columns
 	Columns []ColumnsInitParameters `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []TablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type ConvertToStringObservation struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of included and excluded columns
 	Columns []ColumnsObservation `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []TablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type ConvertToStringParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of included and excluded columns
 	// +kubebuilder:validation:Optional
 	Columns []ColumnsParameters `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	// +kubebuilder:validation:Optional
 	Tables []TablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterColumnsColumnsInitParameters struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type FilterColumnsColumnsObservation struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type FilterColumnsColumnsParameters struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type FilterColumnsInitParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of the columns to transfer to the target tables using lists of included and
+	// excluded columns.
 	Columns []FilterColumnsColumnsInitParameters `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of the tables to filter using lists of included and excluded tables.
 	Tables []FilterColumnsTablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterColumnsObservation struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of the columns to transfer to the target tables using lists of included and
+	// excluded columns.
 	Columns []FilterColumnsColumnsObservation `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of the tables to filter using lists of included and excluded tables.
 	Tables []FilterColumnsTablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterColumnsParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of the columns to transfer to the target tables using lists of included and
+	// excluded columns.
 	// +kubebuilder:validation:Optional
 	Columns []FilterColumnsColumnsParameters `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of the tables to filter using lists of included and excluded tables.
 	// +kubebuilder:validation:Optional
 	Tables []FilterColumnsTablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterColumnsTablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type FilterColumnsTablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type FilterColumnsTablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type FilterRowsInitParameters struct {
 
-	// (String) Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details here.
-	// Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details [here](https://yandex.cloud/docs/data-transfer/concepts/data-transformation#append-only-sources).
+	// ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Deprecated: Use filters instead.
+	// Filtering criterion. This can be comparison operators for numeric, string, and
+	// Boolean values,
+	// comparison to NULL, and checking whether a substring is part of a string.
+	// Details here:
+	// https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Deprecated: Use filters instead.
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Data is transported if it satisfies at least one of filters. Consider that there
+	// is OR statement between filters.
+	// Each filter can be comparison operators for numeric, string, and Boolean values,
+	// comparison to NULL, and
+	// checking whether a substring is part of a string.
+	// Details in docs:
+	// https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	Filters []*string `json:"filters,omitempty" tf:"filters,omitempty"`
+
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables.
 	Tables []FilterRowsTablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterRowsObservation struct {
 
-	// (String) Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details here.
-	// Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details [here](https://yandex.cloud/docs/data-transfer/concepts/data-transformation#append-only-sources).
+	// ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Deprecated: Use filters instead.
+	// Filtering criterion. This can be comparison operators for numeric, string, and
+	// Boolean values,
+	// comparison to NULL, and checking whether a substring is part of a string.
+	// Details here:
+	// https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Deprecated: Use filters instead.
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Data is transported if it satisfies at least one of filters. Consider that there
+	// is OR statement between filters.
+	// Each filter can be comparison operators for numeric, string, and Boolean values,
+	// comparison to NULL, and
+	// checking whether a substring is part of a string.
+	// Details in docs:
+	// https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	Filters []*string `json:"filters,omitempty" tf:"filters,omitempty"`
+
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables.
 	Tables []FilterRowsTablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterRowsParameters struct {
 
-	// (String) Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details here.
-	// Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details [here](https://yandex.cloud/docs/data-transfer/concepts/data-transformation#append-only-sources).
+	// ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Deprecated: Use filters instead.
+	// Filtering criterion. This can be comparison operators for numeric, string, and
+	// Boolean values,
+	// comparison to NULL, and checking whether a substring is part of a string.
+	// Details here:
+	// https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Deprecated: Use filters instead.
 	// +kubebuilder:validation:Optional
 	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// Data is transported if it satisfies at least one of filters. Consider that there
+	// is OR statement between filters.
+	// Each filter can be comparison operators for numeric, string, and Boolean values,
+	// comparison to NULL, and
+	// checking whether a substring is part of a string.
+	// Details in docs:
+	// https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+	// +kubebuilder:validation:Optional
+	Filters []*string `json:"filters,omitempty" tf:"filters,omitempty"`
+
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables.
 	// +kubebuilder:validation:Optional
 	Tables []FilterRowsTablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type FilterRowsTablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type FilterRowsTablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type FilterRowsTablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type FunctionInitParameters struct {
 
-	// (Block List, Max: 1) Hash mask function. (see below for nested schema)
-	// Hash mask function.
+	// (Block List) Hash mask function (see below for nested schema)
+	// Hash mask function
 	MaskFunctionHash []MaskFunctionHashInitParameters `json:"maskFunctionHash,omitempty" tf:"mask_function_hash,omitempty"`
 }
 
 type FunctionObservation struct {
 
-	// (Block List, Max: 1) Hash mask function. (see below for nested schema)
-	// Hash mask function.
+	// (Block List) Hash mask function (see below for nested schema)
+	// Hash mask function
 	MaskFunctionHash []MaskFunctionHashObservation `json:"maskFunctionHash,omitempty" tf:"mask_function_hash,omitempty"`
 }
 
 type FunctionParameters struct {
 
-	// (Block List, Max: 1) Hash mask function. (see below for nested schema)
-	// Hash mask function.
+	// (Block List) Hash mask function (see below for nested schema)
+	// Hash mask function
 	// +kubebuilder:validation:Optional
 	MaskFunctionHash []MaskFunctionHashParameters `json:"maskFunctionHash,omitempty" tf:"mask_function_hash,omitempty"`
 }
 
 type MaskFieldInitParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of strings that specify the name of the column for data masking (a regular expression).
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// Specify the name of the column for data masking (a regular expression).
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Mask function. (see below for nested schema)
-	// Mask function.
+	// (Block List) Mask function (see below for nested schema)
+	// Mask function
 	Function []FunctionInitParameters `json:"function,omitempty" tf:"function,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []MaskFieldTablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type MaskFieldObservation struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of strings that specify the name of the column for data masking (a regular expression).
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// Specify the name of the column for data masking (a regular expression).
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Mask function. (see below for nested schema)
-	// Mask function.
+	// (Block List) Mask function (see below for nested schema)
+	// Mask function
 	Function []FunctionObservation `json:"function,omitempty" tf:"function,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []MaskFieldTablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type MaskFieldParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of strings that specify the name of the column for data masking (a regular expression).
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// Specify the name of the column for data masking (a regular expression).
 	// +kubebuilder:validation:Optional
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Block List, Max: 1) Mask function. (see below for nested schema)
-	// Mask function.
+	// (Block List) Mask function (see below for nested schema)
+	// Mask function
 	// +kubebuilder:validation:Optional
 	Function []FunctionParameters `json:"function,omitempty" tf:"function,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	// +kubebuilder:validation:Optional
 	Tables []MaskFieldTablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type MaskFieldTablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type MaskFieldTablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type MaskFieldTablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type MaskFunctionHashInitParameters struct {
 
-	// (String) This string will be used in the HMAC(sha256, salt) function applied to the column data.
-	// This string will be used in the HMAC(sha256, salt) function applied to the column data.
+	// (String) This string will be used in the HMAC(sha256, salt) function applied to the
+	// column data.
+	// This string will be used in the HMAC(sha256, salt) function applied to the
+	// column data.
 	UserDefinedSalt *string `json:"userDefinedSalt,omitempty" tf:"user_defined_salt,omitempty"`
 }
 
 type MaskFunctionHashObservation struct {
 
-	// (String) This string will be used in the HMAC(sha256, salt) function applied to the column data.
-	// This string will be used in the HMAC(sha256, salt) function applied to the column data.
+	// (String) This string will be used in the HMAC(sha256, salt) function applied to the
+	// column data.
+	// This string will be used in the HMAC(sha256, salt) function applied to the
+	// column data.
 	UserDefinedSalt *string `json:"userDefinedSalt,omitempty" tf:"user_defined_salt,omitempty"`
 }
 
 type MaskFunctionHashParameters struct {
 
-	// (String) This string will be used in the HMAC(sha256, salt) function applied to the column data.
-	// This string will be used in the HMAC(sha256, salt) function applied to the column data.
+	// (String) This string will be used in the HMAC(sha256, salt) function applied to the
+	// column data.
+	// This string will be used in the HMAC(sha256, salt) function applied to the
+	// column data.
 	// +kubebuilder:validation:Optional
 	UserDefinedSalt *string `json:"userDefinedSalt,omitempty" tf:"user_defined_salt,omitempty"`
 }
 
 type NewNameInitParameters struct {
 
-	// (String) The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	NameSpace *string `json:"nameSpace,omitempty" tf:"name_space,omitempty"`
 }
 
 type NewNameObservation struct {
 
-	// (String) The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	NameSpace *string `json:"nameSpace,omitempty" tf:"name_space,omitempty"`
 }
 
 type NewNameParameters struct {
 
-	// (String) The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	NameSpace *string `json:"nameSpace,omitempty" tf:"name_space,omitempty"`
 }
 
 type OriginalNameInitParameters struct {
 
-	// (String) The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	NameSpace *string `json:"nameSpace,omitempty" tf:"name_space,omitempty"`
 }
 
 type OriginalNameObservation struct {
 
-	// (String) The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	NameSpace *string `json:"nameSpace,omitempty" tf:"name_space,omitempty"`
 }
 
 type OriginalNameParameters struct {
 
-	// (String) The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	NameSpace *string `json:"nameSpace,omitempty" tf:"name_space,omitempty"`
 }
 
+type RandomInitParameters struct {
+}
+
+type RandomObservation struct {
+}
+
+type RandomParameters struct {
+}
+
 type RenameTablesInitParameters struct {
 
-	// (Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)
-	// List of renaming rules.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// List of renaming rules
 	RenameTables []RenameTablesRenameTablesInitParameters `json:"renameTables,omitempty" tf:"rename_tables,omitempty"`
 }
 
 type RenameTablesObservation struct {
 
-	// (Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)
-	// List of renaming rules.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// List of renaming rules
 	RenameTables []RenameTablesRenameTablesObservation `json:"renameTables,omitempty" tf:"rename_tables,omitempty"`
 }
 
 type RenameTablesParameters struct {
 
-	// (Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)
-	// List of renaming rules.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// List of renaming rules
 	// +kubebuilder:validation:Optional
 	RenameTables []RenameTablesRenameTablesParameters `json:"renameTables,omitempty" tf:"rename_tables,omitempty"`
 }
 
 type RenameTablesRenameTablesInitParameters struct {
 
-	// (Block List, Max: 1) Specify the new names for this table in the target. (see below for nested schema)
-	// Specify the new names for this table in the target.
+	// (Block List) Specify the new names for this table in the target (see below for nested schema)
+	// Specify the new names for this table in the target
 	NewName []NewNameInitParameters `json:"newName,omitempty" tf:"new_name,omitempty"`
 
-	// (Block List, Max: 1) Specify the current names of the table in the source. (see below for nested schema)
-	// Specify the current names of the table in the source.
+	// (Block List) Specify the current names of the table in the source (see below for nested schema)
+	// Specify the current names of the table in the source
 	OriginalName []OriginalNameInitParameters `json:"originalName,omitempty" tf:"original_name,omitempty"`
 }
 
 type RenameTablesRenameTablesObservation struct {
 
-	// (Block List, Max: 1) Specify the new names for this table in the target. (see below for nested schema)
-	// Specify the new names for this table in the target.
+	// (Block List) Specify the new names for this table in the target (see below for nested schema)
+	// Specify the new names for this table in the target
 	NewName []NewNameObservation `json:"newName,omitempty" tf:"new_name,omitempty"`
 
-	// (Block List, Max: 1) Specify the current names of the table in the source. (see below for nested schema)
-	// Specify the current names of the table in the source.
+	// (Block List) Specify the current names of the table in the source (see below for nested schema)
+	// Specify the current names of the table in the source
 	OriginalName []OriginalNameObservation `json:"originalName,omitempty" tf:"original_name,omitempty"`
 }
 
 type RenameTablesRenameTablesParameters struct {
 
-	// (Block List, Max: 1) Specify the new names for this table in the target. (see below for nested schema)
-	// Specify the new names for this table in the target.
+	// (Block List) Specify the new names for this table in the target (see below for nested schema)
+	// Specify the new names for this table in the target
 	// +kubebuilder:validation:Optional
 	NewName []NewNameParameters `json:"newName,omitempty" tf:"new_name,omitempty"`
 
-	// (Block List, Max: 1) Specify the current names of the table in the source. (see below for nested schema)
-	// Specify the current names of the table in the source.
+	// (Block List) Specify the current names of the table in the source (see below for nested schema)
+	// Specify the current names of the table in the source
 	// +kubebuilder:validation:Optional
 	OriginalName []OriginalNameParameters `json:"originalName,omitempty" tf:"original_name,omitempty"`
 }
 
 type ReplacePrimaryKeyInitParameters struct {
 
-	// (List of String) List of columns to be used as primary keys.
-	// List of columns to be used as primary keys.
+	// (List of String) List of columns to be used as primary keys
+	// List of columns to be used as primary keys
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []ReplacePrimaryKeyTablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type ReplacePrimaryKeyObservation struct {
 
-	// (List of String) List of columns to be used as primary keys.
-	// List of columns to be used as primary keys.
+	// (List of String) List of columns to be used as primary keys
+	// List of columns to be used as primary keys
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []ReplacePrimaryKeyTablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type ReplacePrimaryKeyParameters struct {
 
-	// (List of String) List of columns to be used as primary keys.
-	// List of columns to be used as primary keys.
+	// (List of String) List of columns to be used as primary keys
+	// List of columns to be used as primary keys
 	// +kubebuilder:validation:Optional
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	// +kubebuilder:validation:Optional
 	Tables []ReplacePrimaryKeyTablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type ReplacePrimaryKeyTablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type ReplacePrimaryKeyTablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type ReplacePrimaryKeyTablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
-type RuntimeInitParameters struct {
+type ReplicationRuntimeInitParameters struct {
 
-	// (Block List, Max: 1) YC Runtime parameters for the transfer. (see below for nested schema)
-	// YC Runtime parameters for the transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	YcRuntime []YcRuntimeInitParameters `json:"ycRuntime,omitempty" tf:"yc_runtime,omitempty"`
 }
 
-type RuntimeObservation struct {
+type ReplicationRuntimeObservation struct {
 
-	// (Block List, Max: 1) YC Runtime parameters for the transfer. (see below for nested schema)
-	// YC Runtime parameters for the transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	YcRuntime []YcRuntimeObservation `json:"ycRuntime,omitempty" tf:"yc_runtime,omitempty"`
 }
 
-type RuntimeParameters struct {
+type ReplicationRuntimeParameters struct {
 
-	// (Block List, Max: 1) YC Runtime parameters for the transfer. (see below for nested schema)
-	// YC Runtime parameters for the transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	YcRuntime []YcRuntimeParameters `json:"ycRuntime,omitempty" tf:"yc_runtime,omitempty"`
 }
 
+type RuntimeInitParameters struct {
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	YcRuntime []RuntimeYcRuntimeInitParameters `json:"ycRuntime,omitempty" tf:"yc_runtime,omitempty"`
+}
+
+type RuntimeObservation struct {
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	YcRuntime []RuntimeYcRuntimeObservation `json:"ycRuntime,omitempty" tf:"yc_runtime,omitempty"`
+}
+
+type RuntimeParameters struct {
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	YcRuntime []RuntimeYcRuntimeParameters `json:"ycRuntime,omitempty" tf:"yc_runtime,omitempty"`
+}
+
+type RuntimeYcRuntimeInitParameters struct {
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	UploadShardParams []YcRuntimeUploadShardParamsInitParameters `json:"uploadShardParams,omitempty" tf:"upload_shard_params,omitempty"`
+}
+
+type RuntimeYcRuntimeObservation struct {
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	UploadShardParams []YcRuntimeUploadShardParamsObservation `json:"uploadShardParams,omitempty" tf:"upload_shard_params,omitempty"`
+}
+
+type RuntimeYcRuntimeParameters struct {
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	UploadShardParams []YcRuntimeUploadShardParamsParameters `json:"uploadShardParams,omitempty" tf:"upload_shard_params,omitempty"`
+}
+
 type SharderTransformerColumnsInitParameters struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type SharderTransformerColumnsObservation struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type SharderTransformerColumnsParameters struct {
 
-	// (List of String) List of columns that will be excluded to transfer.
+	// (List of String) List of columns that will be excluded to transfer
+	// List of columns that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeColumns []*string `json:"excludeColumns,omitempty" tf:"exclude_columns,omitempty"`
 
-	// (List of String) List of columns that will be included to transfer.
+	// (List of String) List of columns that will be included to transfer
+	// List of columns that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeColumns []*string `json:"includeColumns,omitempty" tf:"include_columns,omitempty"`
 }
 
 type SharderTransformerInitParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of included and excluded columns
 	Columns []SharderTransformerColumnsInitParameters `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Number) Number of shards.
-	// Number of shards.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	Random []RandomInitParameters `json:"random,omitempty" tf:"random,omitempty"`
+
+	// (Number) Number of shards
+	// Number of shards
 	ShardsCount *float64 `json:"shardsCount,omitempty" tf:"shards_count,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []SharderTransformerTablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type SharderTransformerObservation struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of included and excluded columns
 	Columns []SharderTransformerColumnsObservation `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Number) Number of shards.
-	// Number of shards.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	Random []RandomParameters `json:"random,omitempty" tf:"random,omitempty"`
+
+	// (Number) Number of shards
+	// Number of shards
 	ShardsCount *float64 `json:"shardsCount,omitempty" tf:"shards_count,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []SharderTransformerTablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type SharderTransformerParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of the columns to transfer to the target tables using lists of included and excluded columns.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// List of included and excluded columns
 	// +kubebuilder:validation:Optional
 	Columns []SharderTransformerColumnsParameters `json:"columns,omitempty" tf:"columns,omitempty"`
 
-	// (Number) Number of shards.
-	// Number of shards.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	Random []RandomParameters `json:"random,omitempty" tf:"random,omitempty"`
+
+	// (Number) Number of shards
+	// Number of shards
 	// +kubebuilder:validation:Optional
 	ShardsCount *float64 `json:"shardsCount,omitempty" tf:"shards_count,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	// +kubebuilder:validation:Optional
 	Tables []SharderTransformerTablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type SharderTransformerTablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type SharderTransformerTablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type SharderTransformerTablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TableSplitterTransformerInitParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of strings that specify the columns in the tables to be partitioned.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// Specify the columns in the tables to be partitioned.
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
 	// (String) Specify the split string to be used for merging components in a new table name.
 	// Specify the split string to be used for merging components in a new table name.
 	Splitter *string `json:"splitter,omitempty" tf:"splitter,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []TableSplitterTransformerTablesInitParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type TableSplitterTransformerObservation struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of strings that specify the columns in the tables to be partitioned.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// Specify the columns in the tables to be partitioned.
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
 	// (String) Specify the split string to be used for merging components in a new table name.
 	// Specify the split string to be used for merging components in a new table name.
 	Splitter *string `json:"splitter,omitempty" tf:"splitter,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	Tables []TableSplitterTransformerTablesObservation `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type TableSplitterTransformerParameters struct {
 
-	// (Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)
-	// List of strings that specify the columns in the tables to be partitioned.
+	// (Block List) List of included and excluded columns (see below for nested schema)
+	// Specify the columns in the tables to be partitioned.
 	// +kubebuilder:validation:Optional
 	Columns []*string `json:"columns,omitempty" tf:"columns,omitempty"`
 
@@ -707,84 +949,93 @@ type TableSplitterTransformerParameters struct {
 	// +kubebuilder:validation:Optional
 	Splitter *string `json:"splitter,omitempty" tf:"splitter,omitempty"`
 
-	// (Block List, Max: 1) Table filter. (see below for nested schema)
-	// Table filter.
+	// (Block List) List of included and excluded tables (see below for nested schema)
+	// List of included and excluded tables
 	// +kubebuilder:validation:Optional
 	Tables []TableSplitterTransformerTablesParameters `json:"tables,omitempty" tf:"tables,omitempty"`
 }
 
 type TableSplitterTransformerTablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TableSplitterTransformerTablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TableSplitterTransformerTablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TablesInitParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
-	// List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
-	// List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TablesObservation struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
-	// List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
-	// List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TablesParameters struct {
 
-	// (List of String) List of tables that will be excluded to transfer.
-	// List of tables that will be excluded to transfer.
+	// (List of String) List of tables that will be excluded to transfer
+	// List of tables that will be excluded to transfer
 	// +kubebuilder:validation:Optional
 	ExcludeTables []*string `json:"excludeTables,omitempty" tf:"exclude_tables,omitempty"`
 
-	// (List of String) List of tables that will be included to transfer.
-	// List of tables that will be included to transfer.
+	// (List of String) List of tables that will be included to transfer
+	// List of tables that will be included to transfer
 	// +kubebuilder:validation:Optional
 	IncludeTables []*string `json:"includeTables,omitempty" tf:"include_tables,omitempty"`
 }
 
 type TransferInitParameters struct {
 
-	// (String) The resource description.
-	// The resource description.
+	// (String) Description of the transfer.
+	// Description of the transfer.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// id is used.
-	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+	// (String) ID of the folder to create the transfer in.
+	// ID of the folder to create the transfer in.
+	//
+	// To get the folder ID, make a
+	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -796,25 +1047,36 @@ type TransferInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// (Map of String) A set of key/value label pairs which assigned to resource.
-	// A set of key/value label pairs which assigned to resource.
+	// (Map of String) Transfer labels as key:value pairs.
+	// Transfer labels as `key:value` pairs.
+	//
+	// For details about the concept, see [documentation]( api-url-prefix
+	// /resource-manager/concepts/labels).
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// The transfer name. Must be unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is sync_activate.
-	// Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of `sync_activate`, `async_activate`, `dont_activate`. The default is `sync_activate`.
+	// (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is async_activate.
+	// Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of `sync_activate`, `async_activate`, `dont_activate`. The default is `async_activate`.
 	OnCreateActivateMode *string `json:"onCreateActivateMode,omitempty" tf:"on_create_activate_mode,omitempty"`
 
-	// (Block List, Max: 1) Runtime parameters for the transfer. (see below for nested schema)
-	// Runtime parameters for the transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	ReplicationRuntime []ReplicationRuntimeInitParameters `json:"replicationRuntime,omitempty" tf:"replication_runtime,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Runtime []RuntimeInitParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// (String) ID of the source endpoint for the transfer.
-	// ID of the source endpoint for the transfer.
+	// (String) Identifier of the source endpoint.
+	// Identifier of the source endpoint.
 	// +crossplane:generate:reference:type=Endpoint
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
 
@@ -826,8 +1088,8 @@ type TransferInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIDSelector *v1.NamespacedSelector `json:"sourceIdSelector,omitempty" tf:"-"`
 
-	// (String) ID of the target endpoint for the transfer.
-	// ID of the target endpoint for the transfer.
+	// (String) Identifier of the target endpoint.
+	// Identifier of the target endpoint.
 	// +crossplane:generate:reference:type=Endpoint
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
@@ -839,75 +1101,120 @@ type TransferInitParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIDSelector *v1.NamespacedSelector `json:"targetIdSelector,omitempty" tf:"-"`
 
-	// (Block List, Max: 1) Transformation for the transfer. (see below for nested schema)
-	// Transformation for the transfer.
+	// (Attributes) (see below for nested schema)
+	Timeouts *TransferTimeoutsInitParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+
+	// (String) Identifier of the transfer to be returned.
+	// Identifier of the transfer to be returned.
+	//
+	// To get the list of all available transfers, make a [List] request.
+	TransferID *string `json:"transferId,omitempty" tf:"transfer_id,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Transformation []TransformationInitParameters `json:"transformation,omitempty" tf:"transformation,omitempty"`
 
-	// (String) Type of the transfer. One of SNAPSHOT_ONLY, INCREMENT_ONLY, SNAPSHOT_AND_INCREMENT
-	// Type of the transfer. One of `SNAPSHOT_ONLY`, `INCREMENT_ONLY`, `SNAPSHOT_AND_INCREMENT`
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TransferObservation struct {
 
-	// (String) The resource description.
-	// The resource description.
+	// (String) Description of the transfer.
+	// Description of the transfer.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// id is used.
-	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+	// (String) ID of the folder to create the transfer in.
+	// ID of the folder to create the transfer in.
+	//
+	// To get the folder ID, make a
+	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// (String) The ID of this resource.
+	// (String) Identifier of the transfer to be returned.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (Map of String) A set of key/value label pairs which assigned to resource.
-	// A set of key/value label pairs which assigned to resource.
+	// (Map of String) Transfer labels as key:value pairs.
+	// Transfer labels as `key:value` pairs.
+	//
+	// For details about the concept, see [documentation]( api-url-prefix
+	// /resource-manager/concepts/labels).
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// The transfer name. Must be unique within the folder.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is sync_activate.
-	// Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of `sync_activate`, `async_activate`, `dont_activate`. The default is `sync_activate`.
+	// (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is async_activate.
+	// Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of `sync_activate`, `async_activate`, `dont_activate`. The default is `async_activate`.
 	OnCreateActivateMode *string `json:"onCreateActivateMode,omitempty" tf:"on_create_activate_mode,omitempty"`
 
-	// (Block List, Max: 1) Runtime parameters for the transfer. (see below for nested schema)
-	// Runtime parameters for the transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	ReplicationRuntime []ReplicationRuntimeObservation `json:"replicationRuntime,omitempty" tf:"replication_runtime,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Runtime []RuntimeObservation `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// (String) ID of the source endpoint for the transfer.
-	// ID of the source endpoint for the transfer.
+	// (String) Identifier of the source endpoint.
+	// Identifier of the source endpoint.
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
 
-	// (String) ID of the target endpoint for the transfer.
-	// ID of the target endpoint for the transfer.
+	// (String) Identifier of the target endpoint.
+	// Identifier of the target endpoint.
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
 
-	// (Block List, Max: 1) Transformation for the transfer. (see below for nested schema)
-	// Transformation for the transfer.
+	// (Attributes) (see below for nested schema)
+	Timeouts *TransferTimeoutsObservation `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+
+	// (String) Identifier of the transfer to be returned.
+	// Identifier of the transfer to be returned.
+	//
+	// To get the list of all available transfers, make a [List] request.
+	TransferID *string `json:"transferId,omitempty" tf:"transfer_id,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Transformation []TransformationObservation `json:"transformation,omitempty" tf:"transformation,omitempty"`
 
-	// (String) Type of the transfer. One of SNAPSHOT_ONLY, INCREMENT_ONLY, SNAPSHOT_AND_INCREMENT
-	// Type of the transfer. One of `SNAPSHOT_ONLY`, `INCREMENT_ONLY`, `SNAPSHOT_AND_INCREMENT`
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
-	// (String) Error description if transfer has any errors.
-	// Error description if transfer has any errors.
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	Warning *string `json:"warning,omitempty" tf:"warning,omitempty"`
 }
 
 type TransferParameters struct {
 
-	// (String) The resource description.
-	// The resource description.
+	// (String) Description of the transfer.
+	// Description of the transfer.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// id is used.
-	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+	// (String) ID of the folder to create the transfer in.
+	// ID of the folder to create the transfer in.
+	//
+	// To get the folder ID, make a
+	// [yandex.cloud.resourcemanager.v1.FolderService.List] request.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -920,29 +1227,41 @@ type TransferParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.NamespacedSelector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// (Map of String) A set of key/value label pairs which assigned to resource.
-	// A set of key/value label pairs which assigned to resource.
+	// (Map of String) Transfer labels as key:value pairs.
+	// Transfer labels as `key:value` pairs.
+	//
+	// For details about the concept, see [documentation]( api-url-prefix
+	// /resource-manager/concepts/labels).
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The transfer name. Must be unique within the folder.
+	// The transfer name. Must be unique within the folder.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is sync_activate.
-	// Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of `sync_activate`, `async_activate`, `dont_activate`. The default is `sync_activate`.
+	// (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is async_activate.
+	// Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of `sync_activate`, `async_activate`, `dont_activate`. The default is `async_activate`.
 	// +kubebuilder:validation:Optional
 	OnCreateActivateMode *string `json:"onCreateActivateMode,omitempty" tf:"on_create_activate_mode,omitempty"`
 
-	// (Block List, Max: 1) Runtime parameters for the transfer. (see below for nested schema)
-	// Runtime parameters for the transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	ReplicationRuntime []ReplicationRuntimeParameters `json:"replicationRuntime,omitempty" tf:"replication_runtime,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	Runtime []RuntimeParameters `json:"runtime,omitempty" tf:"runtime,omitempty"`
 
-	// (String) ID of the source endpoint for the transfer.
-	// ID of the source endpoint for the transfer.
+	// (String) Identifier of the source endpoint.
+	// Identifier of the source endpoint.
 	// +crossplane:generate:reference:type=Endpoint
 	// +kubebuilder:validation:Optional
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
@@ -955,8 +1274,8 @@ type TransferParameters struct {
 	// +kubebuilder:validation:Optional
 	SourceIDSelector *v1.NamespacedSelector `json:"sourceIdSelector,omitempty" tf:"-"`
 
-	// (String) ID of the target endpoint for the transfer.
-	// ID of the target endpoint for the transfer.
+	// (String) Identifier of the target endpoint.
+	// Identifier of the target endpoint.
 	// +crossplane:generate:reference:type=Endpoint
 	// +kubebuilder:validation:Optional
 	TargetID *string `json:"targetId,omitempty" tf:"target_id,omitempty"`
@@ -969,220 +1288,433 @@ type TransferParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetIDSelector *v1.NamespacedSelector `json:"targetIdSelector,omitempty" tf:"-"`
 
-	// (Block List, Max: 1) Transformation for the transfer. (see below for nested schema)
-	// Transformation for the transfer.
+	// (Attributes) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Timeouts *TransferTimeoutsParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+
+	// (String) Identifier of the transfer to be returned.
+	// Identifier of the transfer to be returned.
+	//
+	// To get the list of all available transfers, make a [List] request.
+	// +kubebuilder:validation:Optional
+	TransferID *string `json:"transferId,omitempty" tf:"transfer_id,omitempty"`
+
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	Transformation []TransformationParameters `json:"transformation,omitempty" tf:"transformation,omitempty"`
 
-	// (String) Type of the transfer. One of SNAPSHOT_ONLY, INCREMENT_ONLY, SNAPSHOT_AND_INCREMENT
-	// Type of the transfer. One of `SNAPSHOT_ONLY`, `INCREMENT_ONLY`, `SNAPSHOT_AND_INCREMENT`
+	// (String) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
+type TransferTimeoutsInitParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type TransferTimeoutsObservation struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type TransferTimeoutsParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// +kubebuilder:validation:Optional
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// +kubebuilder:validation:Optional
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
 type TransformationInitParameters struct {
 
-	// (Block List) A list of transformers. You can specify exactly 1 transformer in each element of list. (see below for nested schema)
-	// A list of transformers. You can specify exactly 1 transformer in each element of list.
+	// (Block List) Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list. (see below for nested schema)
+	// Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list.
 	Transformers []TransformersInitParameters `json:"transformers,omitempty" tf:"transformers,omitempty"`
 }
 
 type TransformationObservation struct {
 
-	// (Block List) A list of transformers. You can specify exactly 1 transformer in each element of list. (see below for nested schema)
-	// A list of transformers. You can specify exactly 1 transformer in each element of list.
+	// (Block List) Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list. (see below for nested schema)
+	// Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list.
 	Transformers []TransformersObservation `json:"transformers,omitempty" tf:"transformers,omitempty"`
 }
 
 type TransformationParameters struct {
 
-	// (Block List) A list of transformers. You can specify exactly 1 transformer in each element of list. (see below for nested schema)
-	// A list of transformers. You can specify exactly 1 transformer in each element of list.
+	// (Block List) Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list. (see below for nested schema)
+	// Transformers are set as a list.
+	// When activating a transfer, a transformation plan is made for the tables that
+	// match the specified criteria.
+	// Transformers are applied to the tables in the sequence specified in the list.
 	// +kubebuilder:validation:Optional
 	Transformers []TransformersParameters `json:"transformers,omitempty" tf:"transformers,omitempty"`
 }
 
 type TransformersInitParameters struct {
 
-	// (Block List, Max: 1) Convert column values to strings. (see below for nested schema)
-	// Convert column values to strings.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	ConvertToString []ConvertToStringInitParameters `json:"convertToString,omitempty" tf:"convert_to_string,omitempty"`
 
-	// (Block List, Max: 1) Set up a list of table columns to transfer. (see below for nested schema)
-	// Set up a list of table columns to transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	FilterColumns []FilterColumnsInitParameters `json:"filterColumns,omitempty" tf:"filter_columns,omitempty"`
 
-	// (Block List, Max: 1) This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed. (see below for nested schema)
-	// This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	FilterRows []FilterRowsInitParameters `json:"filterRows,omitempty" tf:"filter_rows,omitempty"`
 
-	// (Block List, Max: 1) Mask field transformer allows you to hash data. (see below for nested schema)
-	// Mask field transformer allows you to hash data.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	MaskField []MaskFieldInitParameters `json:"maskField,omitempty" tf:"mask_field,omitempty"`
 
-	// (Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)
-	// Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	RenameTables []RenameTablesInitParameters `json:"renameTables,omitempty" tf:"rename_tables,omitempty"`
 
-	// (Block List, Max: 1) Override primary keys. (see below for nested schema)
-	// Override primary keys.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	ReplacePrimaryKey []ReplacePrimaryKeyInitParameters `json:"replacePrimaryKey,omitempty" tf:"replace_primary_key,omitempty"`
 
-	// (Block List, Max: 1) Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard. (see below for nested schema)
-	// Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	SharderTransformer []SharderTransformerInitParameters `json:"sharderTransformer,omitempty" tf:"sharder_transformer,omitempty"`
 
-	// (Block List, Max: 1) Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data. (see below for nested schema)
-	// Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	TableSplitterTransformer []TableSplitterTransformerInitParameters `json:"tableSplitterTransformer,omitempty" tf:"table_splitter_transformer,omitempty"`
 }
 
 type TransformersObservation struct {
 
-	// (Block List, Max: 1) Convert column values to strings. (see below for nested schema)
-	// Convert column values to strings.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	ConvertToString []ConvertToStringObservation `json:"convertToString,omitempty" tf:"convert_to_string,omitempty"`
 
-	// (Block List, Max: 1) Set up a list of table columns to transfer. (see below for nested schema)
-	// Set up a list of table columns to transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	FilterColumns []FilterColumnsObservation `json:"filterColumns,omitempty" tf:"filter_columns,omitempty"`
 
-	// (Block List, Max: 1) This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed. (see below for nested schema)
-	// This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	FilterRows []FilterRowsObservation `json:"filterRows,omitempty" tf:"filter_rows,omitempty"`
 
-	// (Block List, Max: 1) Mask field transformer allows you to hash data. (see below for nested schema)
-	// Mask field transformer allows you to hash data.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	MaskField []MaskFieldObservation `json:"maskField,omitempty" tf:"mask_field,omitempty"`
 
-	// (Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)
-	// Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	RenameTables []RenameTablesObservation `json:"renameTables,omitempty" tf:"rename_tables,omitempty"`
 
-	// (Block List, Max: 1) Override primary keys. (see below for nested schema)
-	// Override primary keys.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	ReplacePrimaryKey []ReplacePrimaryKeyObservation `json:"replacePrimaryKey,omitempty" tf:"replace_primary_key,omitempty"`
 
-	// (Block List, Max: 1) Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard. (see below for nested schema)
-	// Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	SharderTransformer []SharderTransformerObservation `json:"sharderTransformer,omitempty" tf:"sharder_transformer,omitempty"`
 
-	// (Block List, Max: 1) Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data. (see below for nested schema)
-	// Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	TableSplitterTransformer []TableSplitterTransformerObservation `json:"tableSplitterTransformer,omitempty" tf:"table_splitter_transformer,omitempty"`
 }
 
 type TransformersParameters struct {
 
-	// (Block List, Max: 1) Convert column values to strings. (see below for nested schema)
-	// Convert column values to strings.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	ConvertToString []ConvertToStringParameters `json:"convertToString,omitempty" tf:"convert_to_string,omitempty"`
 
-	// (Block List, Max: 1) Set up a list of table columns to transfer. (see below for nested schema)
-	// Set up a list of table columns to transfer.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	FilterColumns []FilterColumnsParameters `json:"filterColumns,omitempty" tf:"filter_columns,omitempty"`
 
-	// (Block List, Max: 1) This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed. (see below for nested schema)
-	// This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	FilterRows []FilterRowsParameters `json:"filterRows,omitempty" tf:"filter_rows,omitempty"`
 
-	// (Block List, Max: 1) Mask field transformer allows you to hash data. (see below for nested schema)
-	// Mask field transformer allows you to hash data.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	MaskField []MaskFieldParameters `json:"maskField,omitempty" tf:"mask_field,omitempty"`
 
-	// (Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)
-	// Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	RenameTables []RenameTablesParameters `json:"renameTables,omitempty" tf:"rename_tables,omitempty"`
 
-	// (Block List, Max: 1) Override primary keys. (see below for nested schema)
-	// Override primary keys.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	ReplacePrimaryKey []ReplacePrimaryKeyParameters `json:"replacePrimaryKey,omitempty" tf:"replace_primary_key,omitempty"`
 
-	// (Block List, Max: 1) Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard. (see below for nested schema)
-	// Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	SharderTransformer []SharderTransformerParameters `json:"sharderTransformer,omitempty" tf:"sharder_transformer,omitempty"`
 
-	// (Block List, Max: 1) Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data. (see below for nested schema)
-	// Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	TableSplitterTransformer []TableSplitterTransformerParameters `json:"tableSplitterTransformer,omitempty" tf:"table_splitter_transformer,omitempty"`
 }
 
 type UploadShardParamsInitParameters struct {
 
-	// (Number) Number of workers in parallel replication.
-	// Number of workers.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
 
-	// (Number) Number of threads.
-	// Number of threads.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	ProcessCount *float64 `json:"processCount,omitempty" tf:"process_count,omitempty"`
 }
 
 type UploadShardParamsObservation struct {
 
-	// (Number) Number of workers in parallel replication.
-	// Number of workers.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
 
-	// (Number) Number of threads.
-	// Number of threads.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	ProcessCount *float64 `json:"processCount,omitempty" tf:"process_count,omitempty"`
 }
 
 type UploadShardParamsParameters struct {
 
-	// (Number) Number of workers in parallel replication.
-	// Number of workers.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
 
-	// (Number) Number of threads.
-	// Number of threads.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	ProcessCount *float64 `json:"processCount,omitempty" tf:"process_count,omitempty"`
 }
 
 type YcRuntimeInitParameters struct {
 
-	// (Number) Number of workers in parallel replication.
-	// Number of workers in parallel replication.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
 
-	// (Block List, Max: 1) Parallel snapshot parameters. (see below for nested schema)
-	// Parallel snapshot parameters.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	UploadShardParams []UploadShardParamsInitParameters `json:"uploadShardParams,omitempty" tf:"upload_shard_params,omitempty"`
 }
 
 type YcRuntimeObservation struct {
 
-	// (Number) Number of workers in parallel replication.
-	// Number of workers in parallel replication.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
 
-	// (Block List, Max: 1) Parallel snapshot parameters. (see below for nested schema)
-	// Parallel snapshot parameters.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	UploadShardParams []UploadShardParamsObservation `json:"uploadShardParams,omitempty" tf:"upload_shard_params,omitempty"`
 }
 
 type YcRuntimeParameters struct {
 
-	// (Number) Number of workers in parallel replication.
-	// Number of workers in parallel replication.
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
 
-	// (Block List, Max: 1) Parallel snapshot parameters. (see below for nested schema)
-	// Parallel snapshot parameters.
+	// (Block List) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
 	// +kubebuilder:validation:Optional
 	UploadShardParams []UploadShardParamsParameters `json:"uploadShardParams,omitempty" tf:"upload_shard_params,omitempty"`
+}
+
+type YcRuntimeUploadShardParamsInitParameters struct {
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	ProcessCount *float64 `json:"processCount,omitempty" tf:"process_count,omitempty"`
+}
+
+type YcRuntimeUploadShardParamsObservation struct {
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	ProcessCount *float64 `json:"processCount,omitempty" tf:"process_count,omitempty"`
+}
+
+type YcRuntimeUploadShardParamsParameters struct {
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	JobCount *float64 `json:"jobCount,omitempty" tf:"job_count,omitempty"`
+
+	// (Number) package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// package: yandex.cloud.datatransfer.v1
+	// filename: yandex/cloud/datatransfer/v1/transfer.proto
+	// +kubebuilder:validation:Optional
+	ProcessCount *float64 `json:"processCount,omitempty" tf:"process_count,omitempty"`
 }
 
 // TransferSpec defines the desired state of Transfer

@@ -134,6 +134,7 @@ type KafkaTopicTopicConfigInitParameters struct {
 	// The largest record batch size allowed by Kafka (after compression if compression is enabled).
 	MaxMessageBytes *string `json:"maxMessageBytes,omitempty" tf:"max_message_bytes,omitempty"`
 
+	// (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
 	// Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
 	MessageTimestampType *string `json:"messageTimestampType,omitempty" tf:"message_timestamp_type,omitempty"`
 
@@ -192,6 +193,7 @@ type KafkaTopicTopicConfigObservation struct {
 	// The largest record batch size allowed by Kafka (after compression if compression is enabled).
 	MaxMessageBytes *string `json:"maxMessageBytes,omitempty" tf:"max_message_bytes,omitempty"`
 
+	// (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
 	// Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
 	MessageTimestampType *string `json:"messageTimestampType,omitempty" tf:"message_timestamp_type,omitempty"`
 
@@ -257,6 +259,7 @@ type KafkaTopicTopicConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxMessageBytes *string `json:"maxMessageBytes,omitempty" tf:"max_message_bytes,omitempty"`
 
+	// (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
 	// Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
 	// +kubebuilder:validation:Optional
 	MessageTimestampType *string `json:"messageTimestampType,omitempty" tf:"message_timestamp_type,omitempty"`

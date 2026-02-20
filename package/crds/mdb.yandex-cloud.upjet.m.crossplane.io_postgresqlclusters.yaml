@@ -242,7 +242,7 @@ spec:
                             properties:
                               name:
                                 description: |-
-                                  (String) The resource name.
+                                  (String) The name of PostgreSQL cluster.
                                   Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
                                 type: string
                               version:
@@ -264,7 +264,7 @@ spec:
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             The resource name.
                           type: string
                         owner:
@@ -291,8 +291,8 @@ spec:
                     type: string
                   diskEncryptionKeyId:
                     description: |-
-                      (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
-                      ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+                      (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
+                      ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
                     type: string
                   environment:
                     description: |-
@@ -399,7 +399,7 @@ spec:
                           type: boolean
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replication_source_name` parameter.
                           type: string
                         priority:
@@ -550,8 +550,8 @@ spec:
                     type: array
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      (String) The name of PostgreSQL cluster.
+                      The name of PostgreSQL cluster.
                     type: string
                   networkId:
                     description: |-
@@ -780,7 +780,7 @@ spec:
                           type: boolean
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             The name of the user.
                           type: string
                         passwordSecretRef:
@@ -1057,7 +1057,7 @@ spec:
                             properties:
                               name:
                                 description: |-
-                                  (String) The resource name.
+                                  (String) The name of PostgreSQL cluster.
                                   Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
                                 type: string
                               version:
@@ -1079,7 +1079,7 @@ spec:
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             The resource name.
                           type: string
                         owner:
@@ -1106,8 +1106,8 @@ spec:
                     type: string
                   diskEncryptionKeyId:
                     description: |-
-                      (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
-                      ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+                      (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
+                      ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
                     type: string
                   environment:
                     description: |-
@@ -1214,7 +1214,7 @@ spec:
                           type: boolean
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replication_source_name` parameter.
                           type: string
                         priority:
@@ -1365,8 +1365,8 @@ spec:
                     type: array
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      (String) The name of PostgreSQL cluster.
+                      The name of PostgreSQL cluster.
                     type: string
                   networkId:
                     description: |-
@@ -1595,7 +1595,7 @@ spec:
                           type: boolean
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             The name of the user.
                           type: string
                         passwordSecretRef:
@@ -1946,7 +1946,7 @@ spec:
                             properties:
                               name:
                                 description: |-
-                                  (String) The resource name.
+                                  (String) The name of PostgreSQL cluster.
                                   Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
                                 type: string
                               version:
@@ -1968,7 +1968,7 @@ spec:
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             The resource name.
                           type: string
                         owner:
@@ -1995,8 +1995,8 @@ spec:
                     type: string
                   diskEncryptionKeyId:
                     description: |-
-                      (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
-                      ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+                      (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
+                      ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
                     type: string
                   environment:
                     description: |-
@@ -2031,7 +2031,7 @@ spec:
                           type: string
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             Host state name. It should be set for all hosts or unset for all hosts. This field can be used by another host, to select which host will be its replication source. Please see `replication_source_name` parameter.
                           type: string
                         priority:
@@ -2115,8 +2115,8 @@ spec:
                     type: array
                   name:
                     description: |-
-                      (String) The resource name.
-                      The resource name.
+                      (String) The name of PostgreSQL cluster.
+                      The name of PostgreSQL cluster.
                     type: string
                   networkId:
                     description: |-
@@ -2186,7 +2186,7 @@ spec:
                           type: boolean
                         name:
                           description: |-
-                            (String) The resource name.
+                            (String) The name of PostgreSQL cluster.
                             The name of the user.
                           type: string
                         permission:

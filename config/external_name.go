@@ -88,7 +88,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_mdb_postgresql_database": config.IdentifierFromProvider,
 	"yandex_mdb_postgresql_user":     config.IdentifierFromProvider,
 	"yandex_mdb_redis_cluster":       config.IdentifierFromProvider,
-	"yandex_mdb_sqlserver_cluster":   config.IdentifierFromProvider,
+	// "yandex_mdb_sqlserver_cluster":   config.IdentifierFromProvider,
 
 	"yandex_message_queue": config.IdentifierFromProvider,
 

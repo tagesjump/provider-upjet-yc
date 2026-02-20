@@ -136,7 +136,6 @@ import (
 	shardedpostgresqldatabase "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/mdb/shardedpostgresqldatabase"
 	shardedpostgresqlshard "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/mdb/shardedpostgresqlshard"
 	shardedpostgresqluser "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/mdb/shardedpostgresqluser"
-	sqlservercluster "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/mdb/sqlservercluster"
 	queue "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/message/queue"
 	clustermetastore "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/metastore/cluster"
 	dashboard "github.com/tagesjump/provider-upjet-yc/internal/controller/cluster/monitoring/dashboard"
@@ -348,7 +347,6 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		shardedpostgresqldatabase.Setup,
 		shardedpostgresqlshard.Setup,
 		shardedpostgresqluser.Setup,
-		sqlservercluster.Setup,
 		queue.Setup,
 		clustermetastore.Setup,
 		dashboard.Setup,
@@ -566,7 +564,6 @@ func SetupGated(mgr ctrl.Manager, o controller.Options) error {
 		shardedpostgresqldatabase.SetupGated,
 		shardedpostgresqlshard.SetupGated,
 		shardedpostgresqluser.SetupGated,
-		sqlservercluster.SetupGated,
 		queue.SetupGated,
 		clustermetastore.SetupGated,
 		dashboard.SetupGated,

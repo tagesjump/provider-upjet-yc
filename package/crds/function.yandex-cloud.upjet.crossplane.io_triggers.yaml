@@ -371,19 +371,25 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   logGroup:
-                    description: '(Block List, Max: 1) (see below for nested schema)'
+                    description: |-
+                      (Block List, Max: 1) (see below for nested schema)
+                      Deprecated Logging settings definition for Yandex Cloud Functions Trigger. Please, use logging instead.
                     items:
                       properties:
                         batchCutoff:
-                          description: (String) Batch Duration in seconds for Yandex
-                            Cloud Functions Trigger.
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: (String) Batch Size for Yandex Cloud Functions
-                            Trigger.
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         logGroupIds:
-                          description: (Set of String)
+                          description: |-
+                            (Set of String)
+                            Log group IDs for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
@@ -889,19 +895,25 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   logGroup:
-                    description: '(Block List, Max: 1) (see below for nested schema)'
+                    description: |-
+                      (Block List, Max: 1) (see below for nested schema)
+                      Deprecated Logging settings definition for Yandex Cloud Functions Trigger. Please, use logging instead.
                     items:
                       properties:
                         batchCutoff:
-                          description: (String) Batch Duration in seconds for Yandex
-                            Cloud Functions Trigger.
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: (String) Batch Size for Yandex Cloud Functions
-                            Trigger.
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         logGroupIds:
-                          description: (Set of String)
+                          description: |-
+                            (Set of String)
+                            Log group IDs for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array
@@ -1422,19 +1434,25 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   logGroup:
-                    description: '(Block List, Max: 1) (see below for nested schema)'
+                    description: |-
+                      (Block List, Max: 1) (see below for nested schema)
+                      Deprecated Logging settings definition for Yandex Cloud Functions Trigger. Please, use logging instead.
                     items:
                       properties:
                         batchCutoff:
-                          description: (String) Batch Duration in seconds for Yandex
-                            Cloud Functions Trigger.
+                          description: |-
+                            (String) Batch Duration in seconds for Yandex Cloud Functions Trigger.
+                            Batch Duration in seconds for Yandex Cloud Functions Trigger.
                           type: string
                         batchSize:
-                          description: (String) Batch Size for Yandex Cloud Functions
-                            Trigger.
+                          description: |-
+                            (String) Batch Size for Yandex Cloud Functions Trigger.
+                            Batch Size for Yandex Cloud Functions Trigger.
                           type: string
                         logGroupIds:
-                          description: (Set of String)
+                          description: |-
+                            (Set of String)
+                            Log group IDs for Yandex Cloud Functions Trigger.
                           items:
                             type: string
                           type: array

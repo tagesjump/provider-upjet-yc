@@ -12,21 +12,21 @@ import (
 
 type PostgresqlDatabaseExtensionInitParameters struct {
 
-	// (String) The resource name.
+	// (String) The name of the PostgreSQL database.
 	// Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PostgresqlDatabaseExtensionObservation struct {
 
-	// (String) The resource name.
+	// (String) The name of the PostgreSQL database.
 	// Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PostgresqlDatabaseExtensionParameters struct {
 
-	// (String) The resource name.
+	// (String) The name of the PostgreSQL database.
 	// Name of the database extension. For more information on available extensions see [the official documentation](https://yandex.cloud/docs/managed-postgresql/operations/cluster-extensions).
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
@@ -63,8 +63,8 @@ type PostgresqlDatabaseInitParameters struct {
 	// POSIX locale for character classification. Forbidden to change in an existing database.
 	LcType *string `json:"lcType,omitempty" tf:"lc_type,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The name of the PostgreSQL database.
+	// The name of the PostgreSQL database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) Name of the user assigned as the owner of the database. Forbidden to change in an existing database.
@@ -111,8 +111,8 @@ type PostgresqlDatabaseObservation struct {
 	// POSIX locale for character classification. Forbidden to change in an existing database.
 	LcType *string `json:"lcType,omitempty" tf:"lc_type,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The name of the PostgreSQL database.
+	// The name of the PostgreSQL database.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// (String) Name of the user assigned as the owner of the database. Forbidden to change in an existing database.
@@ -160,8 +160,8 @@ type PostgresqlDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	LcType *string `json:"lcType,omitempty" tf:"lc_type,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (String) The name of the PostgreSQL database.
+	// The name of the PostgreSQL database.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

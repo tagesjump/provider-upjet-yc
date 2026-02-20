@@ -267,7 +267,7 @@ spec:
                   environment:
                     description: |-
                       (String) Deployment environment of the PostgreSQL cluster.
-                      Deployment environment of the PostgreSQL cluster.
+                      Deployment environment of the Sharded PostgreSQL cluster.
                     type: string
                   folderId:
                     description: |-
@@ -721,7 +721,7 @@ spec:
                   environment:
                     description: |-
                       (String) Deployment environment of the PostgreSQL cluster.
-                      Deployment environment of the PostgreSQL cluster.
+                      Deployment environment of the Sharded PostgreSQL cluster.
                     type: string
                   folderId:
                     description: |-
@@ -1271,7 +1271,7 @@ spec:
                   environment:
                     description: |-
                       (String) Deployment environment of the PostgreSQL cluster.
-                      Deployment environment of the PostgreSQL cluster.
+                      Deployment environment of the Sharded PostgreSQL cluster.
                     type: string
                   folderId:
                     description: |-

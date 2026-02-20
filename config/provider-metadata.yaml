@@ -2792,18 +2792,12 @@ resources:
             ca_certificate: |-
                 (String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/common.proto
-            can_use: |-
-                (Boolean) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
-            clickhouse: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            can_use: (Boolean) Whether the current user can use this connection. Filled only when with_can_use has been requested in ListConnectionRequest.
+            clickhouse: (Attributes) ClickHouse database connection parameters. (see below for nested schema)
             cluster: |-
                 (Attributes) When creating/updating Connection, the field "cluster" is mutually
                 exclusive with "managed_cluster_id". (see below for nested schema)
-            connection_id: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+            connection_id: (String) ID of the connection to retrieve.
             cookie: |-
                 (String) Cookie is an arbitrary non-sensitive string that is saved with the
                 password. When updating PasswordGenerationOptions, if the cookie passed
@@ -2817,29 +2811,19 @@ resources:
                 (Attributes List) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/greenplum.proto (see below for nested schema)
             create: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-            created_at: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
-            created_by: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
+            created_at: (String) Creation timestamp.
+            created_by: (String) ID of the subject which created the connection.
             databases: |-
                 (List of String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
             delete: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
-            description: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
+            description: (String) Description of the connection.
             disabled: |-
                 (Attributes) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/common.proto (see below for nested schema)
             excluded_punctuation: (String) a string of punctuation characters to exclude from the default
-            folder_id: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
-            greenplum: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            folder_id: (String) ID of the folder that the connection belongs to.
+            greenplum: (Attributes) Greenplum data warehouse connection parameters. (see below for nested schema)
             health: |-
                 (String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
@@ -2850,9 +2834,7 @@ resources:
                 (Attributes List) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/clickhouse.proto (see below for nested schema)
             http_port: (Number) depends on tls params may vary as http or https
-            id: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection_service.proto
+            id: (String) ID of the connection to retrieve.
             include_digits: (Boolean) whether at least one 0..9 character is included in the password, true by default
             include_lowercase: (Boolean) whether at least one a..z character is included in the password, true by default
             include_punctuation: |-
@@ -2863,44 +2845,25 @@ resources:
             included_punctuation: |-
                 (String) If include_punctuation is true, one of these two fields (not both) may be used optionally to customize the punctuation:
                 a string of specific punctuation characters to use
-            is_managed: |-
-                (Boolean) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
-            kafka: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
-            labels: |-
-                (Map of String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
+            is_managed: (Boolean) Whether this connection is managed by the system (e.g. an MDB cluster).
+            kafka: (Attributes) Apache Kafka message broker connection parameters. (see below for nested schema)
+            labels: (Map of String) Connection labels as key:value pairs.
             length: (Number) password length; by default, a reasonable length will be decided
             lockbox_password_generation_options: |-
                 (Attributes) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/common.proto (see below for nested schema)
-            lockbox_secret: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            lockbox_secret: (Attributes) Reference to the Lockbox secret containing connection credentials. (see below for nested schema)
             lockbox_secret_key: (String) Read-only. Do not fill this field in create/update requests.
+            lockbox_secret_spec: (Attributes) Specification for creating a new Lockbox secret. (see below for nested schema)
             managed_cluster_id: |-
                 (String) When creating/updating Connection, the field "managed_cluster_id" is
                 mutually exclusive with "cluster".
-            mongodb: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
-            mysql: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
-            name: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
-            newest_version: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
-            opensearch: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
-            params: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            mongodb: (Attributes) MongoDB database connection parameters. (see below for nested schema)
+            mysql: (Attributes) MySQL database connection parameters. (see below for nested schema)
+            name: (String) Name of the connection.
+            newest_version: (String) The newest available version of the Lockbox secret.
+            opensearch: (Attributes) OpenSearch search engine connection parameters. (see below for nested schema)
+            params: (Attributes) Connection parameters specific to the database or service type. (see below for nested schema)
             password: |-
                 (Attributes) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/common.proto (see below for nested schema)
@@ -2912,18 +2875,14 @@ resources:
             port: |-
                 (Number) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/greenplum.proto
-            postgresql: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            postgresql: (Attributes) PostgreSQL database connection parameters. (see below for nested schema)
             raw: |-
                 (String, Sensitive) When creating/updating Password, the field "raw" is mutually exclusive
                 with "password_generation_options". In order to switch to the "raw"
                 password you have to explicitly clear the "password_generation_options"
                 field.
             read: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
-            redis: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            redis: (Attributes) Redis in-memory data store connection parameters. (see below for nested schema)
             replica_type: |-
                 (String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/postgresql.proto
@@ -2948,9 +2907,7 @@ resources:
             shard_names: |-
                 (List of String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/clickhouse.proto
-            storedoc: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            storedoc: (Attributes) StoreDoc document store connection parameters. (see below for nested schema)
             supported_mechanisms: |-
                 (List of String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/kafka.proto
@@ -2964,28 +2921,20 @@ resources:
             tls_params: |-
                 (Attributes) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/clickhouse.proto (see below for nested schema)
-            trino: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
+            trino: (Attributes) Trino distributed SQL query engine connection parameters. (see below for nested schema)
             type: |-
                 (String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/mongodb.proto
             update: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-            updated_at: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
+            updated_at: (String) Last update timestamp.
             user: |-
                 (String) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/common.proto
             user_password: |-
                 (Attributes) package: yandex.cloud.connectionmanager.v1
                 filename: yandex/cloud/connectionmanager/v1/clickhouse.proto (see below for nested schema)
-            valkey: |-
-                (Attributes) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto (see below for nested schema)
-            version: |-
-                (String) package: yandex.cloud.connectionmanager.v1
-                filename: yandex/cloud/connectionmanager/v1/connection.proto
+            valkey: (Attributes) Valkey in-memory data store connection parameters. (see below for nested schema)
+            version: (String) Lockbox secret version.
         importStatements: []
     yandex_container_registry:
         subCategory: Container Registry
@@ -4048,47 +3997,113 @@ resources:
                       ]
                     }
         argumentDocs:
-            columns: '(Block List, Max: 1) List of the columns to transfer to the target tables using lists of included and excluded columns. (see below for nested schema)'
-            convert_to_string: '(Block List, Max: 1) Convert column values to strings. (see below for nested schema)'
-            description: (String) The resource description.
-            exclude_columns: (List of String) List of columns that will be excluded to transfer.
-            exclude_tables: (List of String) List of tables that will be excluded to transfer.
-            filter: (String) Filtering criterion. This can be comparison operators for numeric, string, and Boolean values, comparison to NULL, and checking whether a substring is part of a string. See details here.
-            filter_columns: '(Block List, Max: 1) Set up a list of table columns to transfer. (see below for nested schema)'
-            filter_rows: '(Block List, Max: 1) This filter only applies to transfers with queues (Apache Kafka®) as a data source. When running a transfer, only the strings meeting the specified criteria remain in a changefeed. (see below for nested schema)'
-            folder_id: (String) The folder identifier that resource belongs to. If it is not provided, the default provider folder-id is used.
-            function: '(Block List, Max: 1) Mask function. (see below for nested schema)'
-            id: (String) The ID of this resource.
-            include_columns: (List of String) List of columns that will be included to transfer.
-            include_tables: (List of String) List of tables that will be included to transfer.
-            job_count: (Number) Number of workers in parallel replication.
-            keys: (List of String) List of columns to be used as primary keys.
-            labels: (Map of String) A set of key/value label pairs which assigned to resource.
-            mask_field: '(Block List, Max: 1) Mask field transformer allows you to hash data. (see below for nested schema)'
-            mask_function_hash: '(Block List, Max: 1) Hash mask function. (see below for nested schema)'
-            name: (String) The resource name.
-            name_space: (String)
-            new_name: '(Block List, Max: 1) Specify the new names for this table in the target. (see below for nested schema)'
-            on_create_activate_mode: (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is sync_activate.
-            original_name: '(Block List, Max: 1) Specify the current names of the table in the source. (see below for nested schema)'
-            process_count: (Number) Number of threads.
-            rename_tables: '(Block List, Max: 1) Set rules for renaming tables by specifying the current names of the tables in the source and new names for these tables in the target. (see below for nested schema)'
-            replace_primary_key: '(Block List, Max: 1) Override primary keys. (see below for nested schema)'
-            runtime: '(Block List, Max: 1) Runtime parameters for the transfer. (see below for nested schema)'
-            sharder_transformer: '(Block List, Max: 1) Set the number of shards for particular tables and a list of columns whose values will be used for calculating a hash to determine a shard. (see below for nested schema)'
-            shards_count: (Number) Number of shards.
-            source_id: (String) ID of the source endpoint for the transfer.
+            columns: (Block List) List of included and excluded columns (see below for nested schema)
+            convert_to_string: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            create: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+            delete: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+            description: (String) Description of the transfer.
+            exclude_columns: (List of String) List of columns that will be excluded to transfer
+            exclude_tables: (List of String) List of tables that will be excluded to transfer
+            filter: |-
+                (String) Filtering criterion. This can be comparison operators for numeric, string, and
+                Boolean values,
+                comparison to NULL, and checking whether a substring is part of a string.
+                Details here:
+                https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+                Deprecated: Use filters instead.
+            filter_columns: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            filter_rows: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            filters: |-
+                (List of String) Data is transported if it satisfies at least one of filters. Consider that there
+                is OR statement between filters.
+                Each filter can be comparison operators for numeric, string, and Boolean values,
+                comparison to NULL, and
+                checking whether a substring is part of a string.
+                Details in docs:
+                https://yandex.cloud/en-ru/docs/data-transfer/concepts/data-transformation#append-only-sources.
+            folder_id: (String) ID of the folder to create the transfer in.
+            function: (Block List) Mask function (see below for nested schema)
+            id: (String) Identifier of the transfer to be returned.
+            include_columns: (List of String) List of columns that will be included to transfer
+            include_tables: (List of String) List of tables that will be included to transfer
+            job_count: |-
+                (Number) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto
+            keys: (List of String) List of columns to be used as primary keys
+            labels: (Map of String) Transfer labels as key:value pairs.
+            mask_field: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            mask_function_hash: (Block List) Hash mask function (see below for nested schema)
+            name: (String) The transfer name. Must be unique within the folder.
+            name_space: |-
+                (String) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto
+            new_name: (Block List) Specify the new names for this table in the target (see below for nested schema)
+            on_create_activate_mode: (String) Activation action on create a new incremental transfer. It is not part of the transfer parameter and is used only on create. One of sync_activate, async_activate, dont_activate. The default is async_activate.
+            original_name: (Block List) Specify the current names of the table in the source (see below for nested schema)
+            process_count: |-
+                (Number) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto
+            random: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            read: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+            rename_tables: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            replace_primary_key: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            replication_runtime: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            runtime: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            sharder_transformer: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            shards_count: (Number) Number of shards
+            source_id: (String) Identifier of the source endpoint.
             splitter: (String) Specify the split string to be used for merging components in a new table name.
-            table_splitter_transformer: '(Block List, Max: 1) Splits the X table into multiple tables (X_1, X_2, ..., X_n) based on data. (see below for nested schema)'
-            tables: '(Block List, Max: 1) Table filter. (see below for nested schema)'
-            target_id: (String) ID of the target endpoint for the transfer.
-            transformation: '(Block List, Max: 1) Transformation for the transfer. (see below for nested schema)'
-            transformers: (Block List) A list of transformers. You can specify exactly 1 transformer in each element of list. (see below for nested schema)
-            type: (String) Type of the transfer. One of SNAPSHOT_ONLY, INCREMENT_ONLY, SNAPSHOT_AND_INCREMENT
-            upload_shard_params: '(Block List, Max: 1) Parallel snapshot parameters. (see below for nested schema)'
-            user_defined_salt: (String) This string will be used in the HMAC(sha256, salt) function applied to the column data.
-            warning: (String) Error description if transfer has any errors.
-            yc_runtime: '(Block List, Max: 1) YC Runtime parameters for the transfer. (see below for nested schema)'
+            table_splitter_transformer: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            tables: (Block List) List of included and excluded tables (see below for nested schema)
+            target_id: (String) Identifier of the target endpoint.
+            timeouts: (Attributes) (see below for nested schema)
+            transfer_id: (String) Identifier of the transfer to be returned.
+            transformation: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            transformers: |-
+                (Block List) Transformers are set as a list.
+                When activating a transfer, a transformation plan is made for the tables that
+                match the specified criteria.
+                Transformers are applied to the tables in the sequence specified in the list. (see below for nested schema)
+            type: |-
+                (String) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto
+            update: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+            upload_shard_params: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
+            user_defined_salt: |-
+                (String) This string will be used in the HMAC(sha256, salt) function applied to the
+                column data.
+            warning: |-
+                (String) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto
+            yc_runtime: |-
+                (Block List) package: yandex.cloud.datatransfer.v1
+                filename: yandex/cloud/datatransfer/v1/transfer.proto (see below for nested schema)
         importStatements: []
     yandex_dns_recordset:
         subCategory: Cloud Domain Name System (DNS)
@@ -7839,6 +7854,9 @@ resources:
             query_log_retention_size: (Number) The maximum size that query_log can grow to before old data will be removed.
             query_log_retention_time: (Number) The maximum time that query_log records will be retained before removal.
             query_masking_rules: (Attributes List) Query masking rules configuration. (see below for nested schema)
+            query_metric_log_enabled: (Boolean) Enables or disables query_metric_log system table.
+            query_metric_log_retention_size: (Number) The maximum size that query_metric_log can grow to before old data will be removed. If set to 0, automatic removal of query_metric_log data based on size is disabled.
+            query_metric_log_retention_time: (Number) The maximum time that query_metric_log records will be retained before removal. If set to 0, automatic removal of query_metric_log data based on time is disabled.
             query_thread_log_enabled: (Boolean) Enable or disable query_thread_log system table.
             query_thread_log_retention_size: (Number) The maximum size that query_thread_log can grow to before old data will be removed.
             query_thread_log_retention_time: (Number) The maximum time that query_thread_log records will be retained before removal.
@@ -9408,6 +9426,7 @@ resources:
             maintenance_window: '(Block List, Max: 1) Maintenance policy of the Kafka cluster. (see below for nested schema)'
             max_message_bytes: (String) The largest record batch size allowed by Kafka (after compression if compression is enabled).
             message_max_bytes: (String) The largest record batch size allowed by Kafka (after compression if compression is enabled).
+            message_timestamp_type: '(String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.'
             min_compaction_lag_ms: (String) The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted.
             min_insync_replicas: (String) When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful.
             name: (String) The resource name.
@@ -9689,6 +9708,7 @@ resources:
             flush_ms: (String) This setting allows specifying a time interval at which we will force an fsync of data written to the log.
             id: (String) The ID of this resource.
             max_message_bytes: (String) The largest record batch size allowed by Kafka (after compression if compression is enabled).
+            message_timestamp_type: '(String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.'
             min_compaction_lag_ms: (String) The minimum time a message will remain uncompacted in the log. Only applicable for logs that are being compacted.
             min_insync_replicas: (String) When a producer sets acks to "all" (or "-1"), this configuration specifies the minimum number of replicas that must acknowledge a write for the write to be considered successful.
             name: (String) The resource name.
@@ -11326,7 +11346,7 @@ resources:
             delete: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
             deletion_protection: (Boolean) The true value means that resource is protected from accidental deletion.
             description: (String) The resource description.
-            disk_encryption_key_id: (String) ID of the KMS key for cluster disk encryption. Restoring without an encryption key will disable encryption if any exists.
+            disk_encryption_key_id: (String) ID of the KMS key used for cluster disk encryption. Encryption can`t be disabled for an existing cluster. If the source cluster is encrypted and you leave this field empty when restoring, the restored cluster will be created without encryption.
             disk_size: (Number) Volume of the storage available to a PostgreSQL host, in gigabytes.
             disk_size_autoscaling: '(Block List, Max: 1) Cluster disk size autoscaling settings. (see below for nested schema)'
             disk_size_limit: (Number) The overall maximum for disk size that limit all autoscaling iterations. See the documentation for details.
@@ -11356,7 +11376,7 @@ resources:
             login: (Boolean) User's ability to login.
             maintenance_window: '(Block List, Max: 1) Maintenance policy of the PostgreSQL cluster. (see below for nested schema)'
             minutes: (Number) The minute at which backup will be started.
-            name: (String) The resource name.
+            name: (String) The name of PostgreSQL cluster.
             network_id: (String) The VPC Network ID of subnets which resource attached to.
             owner: (String) Name of the user assigned as the owner of the database. Forbidden to change in an existing database.
             password: (String, Sensitive) The password of the user.
@@ -11596,7 +11616,7 @@ resources:
             id: (String) The ID of this resource.
             lc_collate: (String) POSIX locale for string sorting order. Forbidden to change in an existing database.
             lc_type: (String) POSIX locale for character classification. Forbidden to change in an existing database.
-            name: (String) The resource name.
+            name: (String) The name of the PostgreSQL database.
             owner: (String) Name of the user assigned as the owner of the database. Forbidden to change in an existing database.
             read: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
             template_db: (String) Name of the template database.
@@ -11679,7 +11699,7 @@ resources:
             log_min_duration_statement: '- This setting controls logging of the duration of statements. (default -1 disables logging of the duration of statements.)'
             log_statement: '- This setting specifies which SQL statements should be logged (on the user level). One of:'
             login: (Boolean) User's ability to login.
-            name: (String) The name of the user.
+            name: (String) The name of the PostgreSQL user.
             password: (String, Sensitive) The password of the user.
             permission: (Block Set) Set of permissions granted to the user. (see below for nested schema)
             pgaudit: '- Settings of the PostgreSQL Audit Extension (pgaudit). Full description. String (json with with escaped quotes). Example "{\"log\": [\"READ\", \"WRITE\"]}"'
@@ -12663,191 +12683,6 @@ resources:
             - |-
               # terraform import yandex_mdb_sharded_postgresql_user.<resource Name> <resource Id>
               terraform import yandex_mdb_sharded_postgresql_user.my_user ...
-    yandex_mdb_sqlserver_cluster:
-        subCategory: Managed Service for SQLServer
-        description: Manages a Microsoft SQLServer cluster within Yandex Cloud.
-        name: yandex_mdb_sqlserver_cluster
-        title: yandex_mdb_sqlserver_cluster
-        examples:
-            - name: my_cluster
-              manifest: |-
-                {
-                  "backup_window_start": [
-                    {
-                      "hours": 20,
-                      "minutes": 30
-                    }
-                  ],
-                  "database": [
-                    {
-                      "name": "db_name_a"
-                    },
-                    {
-                      "name": "db_name"
-                    },
-                    {
-                      "name": "db_name_b"
-                    }
-                  ],
-                  "environment": "PRESTABLE",
-                  "host": [
-                    {
-                      "subnet_id": "${yandex_vpc_subnet.foo.id}",
-                      "zone": "ru-central1-a"
-                    }
-                  ],
-                  "host_group_ids": [
-                    "host_group_1",
-                    "host_group_2"
-                  ],
-                  "labels": {
-                    "test_key": "test_value"
-                  },
-                  "name": "test",
-                  "network_id": "${yandex_vpc_network.foo.id}",
-                  "resources": [
-                    {
-                      "disk_size": 20,
-                      "disk_type_id": "network-ssd",
-                      "resource_preset_id": "s2.small"
-                    }
-                  ],
-                  "security_group_ids": [
-                    "${yandex_vpc_security_group.test-sg-x.id}"
-                  ],
-                  "sqlserver_config": {
-                    "fill_factor_percent": 49,
-                    "optimize_for_ad_hoc_workloads": true
-                  },
-                  "user": [
-                    {
-                      "name": "bob",
-                      "password": "mysecurepassword"
-                    },
-                    {
-                      "name": "alice",
-                      "password": "mysecurepassword",
-                      "permission": [
-                        {
-                          "database_name": "db_name",
-                          "roles": [
-                            "DDLADMIN"
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "name": "chuck",
-                      "password": "mysecurepassword",
-                      "permission": [
-                        {
-                          "database_name": "db_name_a",
-                          "roles": [
-                            "OWNER"
-                          ]
-                        },
-                        {
-                          "database_name": "db_name",
-                          "roles": [
-                            "OWNER",
-                            "DDLADMIN"
-                          ]
-                        },
-                        {
-                          "database_name": "db_name_b",
-                          "roles": [
-                            "OWNER",
-                            "DDLADMIN"
-                          ]
-                        }
-                      ]
-                    }
-                  ],
-                  "version": "2016sp2std"
-                }
-              references:
-                host.subnet_id: yandex_vpc_subnet.foo.id
-                network_id: yandex_vpc_network.foo.id
-                security_group_ids: yandex_vpc_security_group.test-sg-x.id
-              dependencies:
-                yandex_vpc_network.foo: '{}'
-                yandex_vpc_security_group.test-sg-x: |-
-                    {
-                      "egress": [
-                        {
-                          "description": "Allow outgoing traffic to members of the same security group",
-                          "from_port": 0,
-                          "protocol": "ANY",
-                          "to_port": 65535,
-                          "v4_cidr_blocks": [
-                            "0.0.0.0/0"
-                          ]
-                        }
-                      ],
-                      "ingress": [
-                        {
-                          "description": "Allow incoming traffic from members of the same security group",
-                          "from_port": 0,
-                          "protocol": "ANY",
-                          "to_port": 65535,
-                          "v4_cidr_blocks": [
-                            "0.0.0.0/0"
-                          ]
-                        }
-                      ],
-                      "network_id": "${yandex_vpc_network.foo.id}"
-                    }
-                yandex_vpc_subnet.foo: |-
-                    {
-                      "network_id": "${yandex_vpc_network.foo.id}",
-                      "v4_cidr_blocks": [
-                        "10.5.0.0/24"
-                      ],
-                      "zone": "ru-central1-a"
-                    }
-        argumentDocs:
-            assign_public_ip: (Boolean) Sets whether the host should get a public IP address on creation. Changing this parameter for an existing host is not supported at the moment.
-            backup_window_start: '(Block List, Max: 1) Time to start the daily backup, in the UTC. (see below for nested schema)'
-            create: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-            created_at: (String) The creation timestamp of the resource.
-            database: '(Block List, Min: 1) A database of the SQLServer cluster. (see below for nested schema)'
-            database_name: (String) The name of the database that the permission grants access to.
-            delete: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
-            deletion_protection: (Boolean) The true value means that resource is protected from accidental deletion.
-            description: (String) The resource description.
-            disk_size: (Number) Volume of the storage available to a SQLServer host, in gigabytes.
-            disk_type_id: (String) Type of the storage of SQLServer hosts.
-            environment: (String) Deployment environment of the SQLServer cluster. (PRODUCTION, PRESTABLE).
-            folder_id: (String) The folder identifier that resource belongs to. If it is not provided, the default provider folder-id is used.
-            fqdn: (String) The fully qualified domain name of the host.
-            health: (String) Aggregated health of the cluster.
-            host: '(Block List, Min: 1) A host of the SQLServer cluster. (see below for nested schema)'
-            host_group_ids: (Set of String) A list of IDs of the host groups hosting VMs of the cluster.
-            hours: (Number) The hour at which backup will be started.
-            id: (String) The ID of this resource.
-            labels: (Map of String) A set of key/value label pairs which assigned to resource.
-            minutes: (Number) The minute at which backup will be started.
-            name: (String) The resource name.
-            network_id: (String) The VPC Network ID of subnets which resource attached to.
-            password: (String, Sensitive) The password of the user.
-            permission: (Block Set) Set of permissions granted to the user. (see below for nested schema)
-            resource_preset_id: (String) The ID of the preset for computational resources available to a SQLServer host (CPU, memory etc.). For more information, see the official documentation.
-            resources: '(Block List, Min: 1, Max: 1) Resources allocated to hosts of the SQLServer cluster. (see below for nested schema)'
-            roles: '(Set of String) List user''s roles in the database. Allowed roles: OWNER, SECURITYADMIN, ACCESSADMIN, BACKUPOPERATOR, DDLADMIN, DATAWRITER, DATAREADER, DENYDATAWRITER, DENYDATAREADER.'
-            security_group_ids: (Set of String) The list of security groups applied to resource or their components.
-            sqlcollation: (String) SQL Collation cluster will be created with. This attribute cannot be changed when cluster is created!
-            sqlserver_config: (Map of String) SQLServer cluster config. Detail info in SQLServer config section.
-            status: (String) Status of the cluster.
-            subnet_id: (String) The ID of the subnet, to which the host belongs. The subnet must be a part of the network to which the cluster belongs.
-            timeouts: (Block, Optional) (see below for nested schema)
-            update: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-            user: '(Block List, Min: 1) A user of the SQLServer cluster. (see below for nested schema)'
-            version: (String) Version of the SQLServer cluster. (2016sp2std, 2016sp2ent).
-            zone: (String) The availability zone where resource is located. If it is not provided, the default provider zone will be used.
-        importStatements:
-            - |-
-              # terraform import yandex_mdb_sqlserver_cluster.<resource Name> <resource Id>
-              terraform import yandex_mdb_sqlserver_cluster.my_cluster ...
     yandex_message_queue:
         subCategory: Message Queue
         description: Allows management of a Yandex Cloud Message Queue.
@@ -14782,62 +14617,82 @@ resources:
                   ]
                 }
         argumentDocs:
-            CHECKBOX: '- User must click the ''I am not a robot'' button.'
-            EASY: '- High chance to pass pre-check and easy advanced challenge.'
-            FORCE_HARD: '- Impossible to pass pre-check and hard advanced challenge.'
-            HARD: '- Little chance to pass pre-check and hard advanced challenge.'
-            IMAGE_TEXT: '- Text recognition: The user has to type a distorted text from the picture into a special field.'
-            KALEIDOSCOPE: '- Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.'
-            MEDIUM: '- Medium chance to pass pre-check and normal advanced challenge.'
-            SILHOUETTES: '- Silhouettes: The user has to mark several icons from the picture in a particular order.'
-            SLIDER: '- User must move the slider from left to right.'
             allowed_sites: (List of String) List of allowed host names, see Domain validation.
-            challenge_type: '(String) Additional task type of the captcha. Possible values:'
+            captcha_id: (String) ID of the Captcha resource to return.
+            challenge_type: (String) Additional task type of the captcha.
             client_key: (String) Client key of the captcha, see CAPTCHA keys.
-            cloud_id: (String) The Cloud ID which resource belongs to. If it is not provided, the default provider cloud-id is used.
-            complexity: '(String) Complexity of the captcha. Possible values:'
-            condition: '(Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)'
+            cloud_id: (String) ID of the cloud that the captcha belongs to.
+            complexity: (String) Complexity of the captcha.
+            condition: (Attributes List) The condition for matching the rule. (see below for nested schema)
             create: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-            created_at: (String) The creation timestamp of the resource.
+            created_at: (String) Creation timestamp in RFC3339 text format.
             delete: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
-            deletion_protection: (Boolean) The true value means that resource is protected from accidental deletion.
-            description: (String) Optional description of the rule. 0-512 characters long.
-            exact_match: (String)
-            exact_not_match: (String)
-            folder_id: (String) The folder identifier that resource belongs to. If it is not provided, the default provider folder-id is used.
-            geo_ip_match: '(Block List, Max: 1) (see below for nested schema)'
-            geo_ip_not_match: '(Block List, Max: 1) (see below for nested schema)'
-            headers: (Block List) (see below for nested schema)
-            host: '(Block List, Max: 1) (see below for nested schema)'
-            hosts: (Block List) (see below for nested schema)
-            id: (String) The ID of this resource.
-            ip_ranges: (List of String)
-            ip_ranges_match: '(Block List, Max: 1) (see below for nested schema)'
-            ip_ranges_not_match: '(Block List, Max: 1) (see below for nested schema)'
-            key: (String)
-            locations: (List of String)
-            name: (String) The resource name.
-            override_variant: (Block List) List of variants to use in security_rules. (see below for nested schema)
+            deletion_protection: (Boolean) Determines whether captcha is protected from being deleted.
+            description: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            disallow_data_processing: |-
+                (Boolean) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            exact_match: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            exact_not_match: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            folder_id: (String) ID of the folder that the captcha belongs to.
+            geo_ip_match: |-
+                (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
+            geo_ip_not_match: |-
+                (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
+            headers: (Attributes List) Captcha request headers. (see below for nested schema)
+            host: (Attributes List) Host where captcha placed. (see below for nested schema)
+            hosts: (Attributes List) List of hosts. OR semantics implied. (see below for nested schema)
+            id: (String) ID of the Captcha resource to return.
+            ip_ranges: (List of String) List of IP ranges. OR semantics implied.
+            ip_ranges_match: |-
+                (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
+            ip_ranges_not_match: |-
+                (Attributes List) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
+            key: (String) Key of the query parameter.
+            labels: |-
+                (Map of String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            locations: (List of String) ISO 3166-1 alpha 2. OR semantics implied.
+            name: (String) Name of the captcha. The name is unique within the folder. 3-63 characters long.
+            override_variant: (Block List) List of variants to use in security_rules (see below for nested schema)
             override_variant_uuid: (String) Variant UUID to show in case of match the rule. Keep empty to use defaults.
-            path: '(Block List, Max: 1) (see below for nested schema)'
-            pire_regex_match: (String)
-            pire_regex_not_match: (String)
-            pre_check_type: '(String) Basic check type of the captcha.Possible values:'
-            prefix_match: (String)
-            prefix_not_match: (String)
+            path: (Attributes List) Path of the URI RFC3986. (see below for nested schema)
+            pire_regex_match: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            pire_regex_not_match: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            pre_check_type: (String) Basic check type of the captcha.
+            prefix_match: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+            prefix_not_match: |-
+                (String) package: yandex.cloud.smartcaptcha.v1
+                filename: yandex/cloud/smartcaptcha/v1/captcha.proto
             priority: (Number) Priority of the rule. Lower value means higher priority.
-            queries: (Block List) (see below for nested schema)
+            queries: (Attributes List) List of query matchers. AND semantics implied. (see below for nested schema)
             read: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
             security_rule: (Block List) List of security rules. (see below for nested schema)
-            source_ip: '(Block List, Max: 1) (see below for nested schema)'
+            source_ip: (Attributes List) The IP address of the requester. (see below for nested schema)
             style_json: (String) JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
-            suspend: (Boolean)
-            timeouts: (Block, Optional) (see below for nested schema)
+            suspend: (Boolean) Determines that the captcha is currently in restricted mode, see SmartCaptcha restricted mode.
+            timeouts: (Attributes) (see below for nested schema)
             turn_off_hostname_check: (Boolean) Turn off host name check, see Domain validation.
             update: (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
-            uri: '(Block List, Max: 1) (see below for nested schema)'
+            uri: (Attributes List) URI where captcha placed. (see below for nested schema)
             uuid: (String) Unique identifier of the variant.
-            value: '(Block List, Min: 1, Max: 1) (see below for nested schema)'
+            value: (Attributes List) Value of the header. (see below for nested schema)
         importStatements:
             - |-
               # terraform import yandex_smartcaptcha_captcha.<resource Name> <resource Id>

@@ -839,7 +839,7 @@ spec:
                                 type: string
                               messageTimestampType:
                                 description: |-
-                                  (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+                                  (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                                   Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                                 type: string
                               minCompactionLagMs:
@@ -1714,7 +1714,7 @@ spec:
                                 type: string
                               messageTimestampType:
                                 description: |-
-                                  (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+                                  (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                                   Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                                 type: string
                               minCompactionLagMs:
@@ -2425,7 +2425,7 @@ spec:
                                 type: string
                               messageTimestampType:
                                 description: |-
-                                  (String) Type of maintenance window. Can be either ANYTIME or WEEKLY. A day and hour of window need to be specified with weekly window.
+                                  (String) Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                                   Define whether the timestamp in the message is message create time or log append time. Possible values: LOG_APPEND_TIME or CREATE_TIME.
                                 type: string
                               minCompactionLagMs:

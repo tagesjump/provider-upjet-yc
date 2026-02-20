@@ -499,7 +499,7 @@ type ShardedPostgresqlClusterInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (String) Deployment environment of the PostgreSQL cluster.
-	// Deployment environment of the PostgreSQL cluster.
+	// Deployment environment of the Sharded PostgreSQL cluster.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// id is used.
@@ -615,7 +615,7 @@ type ShardedPostgresqlClusterObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (String) Deployment environment of the PostgreSQL cluster.
-	// Deployment environment of the PostgreSQL cluster.
+	// Deployment environment of the Sharded PostgreSQL cluster.
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// id is used.
@@ -670,7 +670,7 @@ type ShardedPostgresqlClusterParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// (String) Deployment environment of the PostgreSQL cluster.
-	// Deployment environment of the PostgreSQL cluster.
+	// Deployment environment of the Sharded PostgreSQL cluster.
 	// +kubebuilder:validation:Optional
 	Environment *string `json:"environment,omitempty" tf:"environment,omitempty"`
 

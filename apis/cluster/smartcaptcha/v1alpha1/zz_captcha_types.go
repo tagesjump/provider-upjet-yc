@@ -12,34 +12,31 @@ import (
 type CaptchaInitParameters struct {
 
 	// (List of String) List of allowed host names, see Domain validation.
-	// List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+	// List of allowed host names, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
 	AllowedSites []*string `json:"allowedSites,omitempty" tf:"allowed_sites,omitempty"`
 
-	// (String) Additional task type of the captcha. Possible values:
-	// Additional task type of the captcha. Possible values:
-	// * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
-	// * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
-	// * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
+	// (String) ID of the Captcha resource to return.
+	// ID of the Captcha resource to return.
+	CaptchaID *string `json:"captchaId,omitempty" tf:"captcha_id,omitempty"`
+
+	// (String) Additional task type of the captcha.
+	// Additional task type of the captcha.
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 
-	// id is used.
-	// The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
+	// (String) ID of the cloud that the captcha belongs to.
+	// ID of the cloud that the captcha belongs to.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
-	// (String) Complexity of the captcha. Possible values:
-	// Complexity of the captcha. Possible values:
-	// * `EASY` - High chance to pass pre-check and easy advanced challenge.
-	// * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
-	// * `HARD` - Little chance to pass pre-check and hard advanced challenge.
-	// * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
+	// (String) Complexity of the captcha.
+	// Complexity of the captcha.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// (Boolean) The true value means that resource is protected from accidental deletion.
-	// The `true` value means that resource is protected from accidental deletion.
+	// (Boolean) Determines whether captcha is protected from being deleted.
+	// Determines whether captcha is protected from being deleted.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// id is used.
-	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+	// (String) ID of the folder that the captcha belongs to.
+	// ID of the folder that the captcha belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
@@ -51,18 +48,16 @@ type CaptchaInitParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// (String) The resource name.
-	// The resource name.
+	// 63 characters long.
+	// Name of the captcha. The name is unique within the folder. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Block List) List of variants to use in security_rules. (see below for nested schema)
-	// List of variants to use in security_rules.
+	// (Block List) List of variants to use in security_rules (see below for nested schema)
+	// List of variants to use in security_rules
 	OverrideVariant []OverrideVariantInitParameters `json:"overrideVariant,omitempty" tf:"override_variant,omitempty"`
 
-	// (String) Basic check type of the captcha.Possible values:
-	// Basic check type of the captcha.Possible values:
-	// * `CHECKBOX` - User must click the 'I am not a robot' button.
-	// * `SLIDER` - User must move the slider from left to right.
+	// (String) Basic check type of the captcha.
+	// Basic check type of the captcha.
 	PreCheckType *string `json:"preCheckType,omitempty" tf:"pre_check_type,omitempty"`
 
 	// (Block List) List of security rules. (see below for nested schema)
@@ -73,67 +68,84 @@ type CaptchaInitParameters struct {
 	// JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
 	StyleJSON *string `json:"styleJson,omitempty" tf:"style_json,omitempty"`
 
+	// (Attributes) (see below for nested schema)
+	Timeouts *TimeoutsInitParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+
 	// (Boolean) Turn off host name check, see Domain validation.
-	// Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+	// Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
 	TurnOffHostnameCheck *bool `json:"turnOffHostnameCheck,omitempty" tf:"turn_off_hostname_check,omitempty"`
 }
 
 type CaptchaObservation struct {
 
 	// (List of String) List of allowed host names, see Domain validation.
-	// List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+	// List of allowed host names, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
 	AllowedSites []*string `json:"allowedSites,omitempty" tf:"allowed_sites,omitempty"`
 
-	// (String) Additional task type of the captcha. Possible values:
-	// Additional task type of the captcha. Possible values:
-	// * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
-	// * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
-	// * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
+	// (String) ID of the Captcha resource to return.
+	// ID of the Captcha resource to return.
+	CaptchaID *string `json:"captchaId,omitempty" tf:"captcha_id,omitempty"`
+
+	// (String) Additional task type of the captcha.
+	// Additional task type of the captcha.
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 
 	// (String) Client key of the captcha, see CAPTCHA keys.
-	// Client key of the captcha, see [CAPTCHA keys](https://yandex.cloud/docs/smartcaptcha/concepts/keys).
+	// Client key of the captcha, see [CAPTCHA keys](/docs/smartcaptcha/concepts/keys).
 	ClientKey *string `json:"clientKey,omitempty" tf:"client_key,omitempty"`
 
-	// id is used.
-	// The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
+	// (String) ID of the cloud that the captcha belongs to.
+	// ID of the cloud that the captcha belongs to.
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
-	// (String) Complexity of the captcha. Possible values:
-	// Complexity of the captcha. Possible values:
-	// * `EASY` - High chance to pass pre-check and easy advanced challenge.
-	// * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
-	// * `HARD` - Little chance to pass pre-check and hard advanced challenge.
-	// * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
+	// (String) Complexity of the captcha.
+	// Complexity of the captcha.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// (String) The creation timestamp of the resource.
-	// The creation timestamp of the resource.
+	// (String) Creation timestamp in RFC3339 text format.
+	// Creation timestamp in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
 	CreatedAt *string `json:"createdAt,omitempty" tf:"created_at,omitempty"`
 
-	// (Boolean) The true value means that resource is protected from accidental deletion.
-	// The `true` value means that resource is protected from accidental deletion.
+	// (Boolean) Determines whether captcha is protected from being deleted.
+	// Determines whether captcha is protected from being deleted.
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// id is used.
-	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// (Boolean) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	DisallowDataProcessing *bool `json:"disallowDataProcessing,omitempty" tf:"disallow_data_processing,omitempty"`
+
+	// (String) ID of the folder that the captcha belongs to.
+	// ID of the folder that the captcha belongs to.
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
 
-	// (String) The ID of this resource.
+	// (String) ID of the Captcha resource to return.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// (String) The resource name.
-	// The resource name.
+	// (Map of String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// +mapType=granular
+	Labels map[string]*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// 63 characters long.
+	// Name of the captcha. The name is unique within the folder. 3-63 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Block List) List of variants to use in security_rules. (see below for nested schema)
-	// List of variants to use in security_rules.
+	// (Block List) List of variants to use in security_rules (see below for nested schema)
+	// List of variants to use in security_rules
 	OverrideVariant []OverrideVariantObservation `json:"overrideVariant,omitempty" tf:"override_variant,omitempty"`
 
-	// (String) Basic check type of the captcha.Possible values:
-	// Basic check type of the captcha.Possible values:
-	// * `CHECKBOX` - User must click the 'I am not a robot' button.
-	// * `SLIDER` - User must move the slider from left to right.
+	// (String) Basic check type of the captcha.
+	// Basic check type of the captcha.
 	PreCheckType *string `json:"preCheckType,omitempty" tf:"pre_check_type,omitempty"`
 
 	// (Block List) List of security rules. (see below for nested schema)
@@ -144,50 +156,52 @@ type CaptchaObservation struct {
 	// JSON with variables to define the captcha appearance. For more details see generated JSON in cloud console.
 	StyleJSON *string `json:"styleJson,omitempty" tf:"style_json,omitempty"`
 
-	// (Boolean)
+	// (Boolean) Determines that the captcha is currently in restricted mode, see SmartCaptcha restricted mode.
+	// Determines that the captcha is currently in restricted mode, see [SmartCaptcha restricted mode](/docs/smartcaptcha/concepts/restricted-mode).
 	Suspend *bool `json:"suspend,omitempty" tf:"suspend,omitempty"`
 
+	// (Attributes) (see below for nested schema)
+	Timeouts *TimeoutsObservation `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+
 	// (Boolean) Turn off host name check, see Domain validation.
-	// Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+	// Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
 	TurnOffHostnameCheck *bool `json:"turnOffHostnameCheck,omitempty" tf:"turn_off_hostname_check,omitempty"`
 }
 
 type CaptchaParameters struct {
 
 	// (List of String) List of allowed host names, see Domain validation.
-	// List of allowed host names, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+	// List of allowed host names, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
 	// +kubebuilder:validation:Optional
 	AllowedSites []*string `json:"allowedSites,omitempty" tf:"allowed_sites,omitempty"`
 
-	// (String) Additional task type of the captcha. Possible values:
-	// Additional task type of the captcha. Possible values:
-	// * `IMAGE_TEXT` - Text recognition: The user has to type a distorted text from the picture into a special field.
-	// * `SILHOUETTES` - Silhouettes: The user has to mark several icons from the picture in a particular order.
-	// * `KALEIDOSCOPE` - Kaleidoscope: The user has to build a picture from individual parts by shuffling them using a slider.
+	// (String) ID of the Captcha resource to return.
+	// ID of the Captcha resource to return.
+	// +kubebuilder:validation:Optional
+	CaptchaID *string `json:"captchaId,omitempty" tf:"captcha_id,omitempty"`
+
+	// (String) Additional task type of the captcha.
+	// Additional task type of the captcha.
 	// +kubebuilder:validation:Optional
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 
-	// id is used.
-	// The `Cloud ID` which resource belongs to. If it is not provided, the default provider `cloud-id` is used.
+	// (String) ID of the cloud that the captcha belongs to.
+	// ID of the cloud that the captcha belongs to.
 	// +kubebuilder:validation:Optional
 	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
 
-	// (String) Complexity of the captcha. Possible values:
-	// Complexity of the captcha. Possible values:
-	// * `EASY` - High chance to pass pre-check and easy advanced challenge.
-	// * `MEDIUM` - Medium chance to pass pre-check and normal advanced challenge.
-	// * `HARD` - Little chance to pass pre-check and hard advanced challenge.
-	// * `FORCE_HARD` - Impossible to pass pre-check and hard advanced challenge.
+	// (String) Complexity of the captcha.
+	// Complexity of the captcha.
 	// +kubebuilder:validation:Optional
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// (Boolean) The true value means that resource is protected from accidental deletion.
-	// The `true` value means that resource is protected from accidental deletion.
+	// (Boolean) Determines whether captcha is protected from being deleted.
+	// Determines whether captcha is protected from being deleted.
 	// +kubebuilder:validation:Optional
 	DeletionProtection *bool `json:"deletionProtection,omitempty" tf:"deletion_protection,omitempty"`
 
-	// id is used.
-	// The folder identifier that resource belongs to. If it is not provided, the default provider `folder-id` is used.
+	// (String) ID of the folder that the captcha belongs to.
+	// ID of the folder that the captcha belongs to.
 	// +crossplane:generate:reference:type=github.com/tagesjump/provider-upjet-yc/apis/cluster/resourcemanager/v1alpha1.Folder
 	// +kubebuilder:validation:Optional
 	FolderID *string `json:"folderId,omitempty" tf:"folder_id,omitempty"`
@@ -200,20 +214,18 @@ type CaptchaParameters struct {
 	// +kubebuilder:validation:Optional
 	FolderIDSelector *v1.Selector `json:"folderIdSelector,omitempty" tf:"-"`
 
-	// (String) The resource name.
-	// The resource name.
+	// 63 characters long.
+	// Name of the captcha. The name is unique within the folder. 3-63 characters long.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Block List) List of variants to use in security_rules. (see below for nested schema)
-	// List of variants to use in security_rules.
+	// (Block List) List of variants to use in security_rules (see below for nested schema)
+	// List of variants to use in security_rules
 	// +kubebuilder:validation:Optional
 	OverrideVariant []OverrideVariantParameters `json:"overrideVariant,omitempty" tf:"override_variant,omitempty"`
 
-	// (String) Basic check type of the captcha.Possible values:
-	// Basic check type of the captcha.Possible values:
-	// * `CHECKBOX` - User must click the 'I am not a robot' button.
-	// * `SLIDER` - User must move the slider from left to right.
+	// (String) Basic check type of the captcha.
+	// Basic check type of the captcha.
 	// +kubebuilder:validation:Optional
 	PreCheckType *string `json:"preCheckType,omitempty" tf:"pre_check_type,omitempty"`
 
@@ -227,269 +239,343 @@ type CaptchaParameters struct {
 	// +kubebuilder:validation:Optional
 	StyleJSON *string `json:"styleJson,omitempty" tf:"style_json,omitempty"`
 
+	// (Attributes) (see below for nested schema)
+	// +kubebuilder:validation:Optional
+	Timeouts *TimeoutsParameters `json:"timeouts,omitempty" tf:"timeouts,omitempty"`
+
 	// (Boolean) Turn off host name check, see Domain validation.
-	// Turn off host name check, see [Domain validation](https://yandex.cloud/docs/smartcaptcha/concepts/domain-validation).
+	// Turn off host name check, see [Domain validation](/docs/smartcaptcha/concepts/domain-validation).
 	// +kubebuilder:validation:Optional
 	TurnOffHostnameCheck *bool `json:"turnOffHostnameCheck,omitempty" tf:"turn_off_hostname_check,omitempty"`
 }
 
 type ConditionInitParameters struct {
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) Captcha request headers. (see below for nested schema)
 	Headers []HeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) Host where captcha placed. (see below for nested schema)
 	Host []HostInitParameters `json:"host,omitempty" tf:"host,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) The IP address of the requester. (see below for nested schema)
 	SourceIP []SourceIPInitParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) URI where captcha placed. (see below for nested schema)
 	URI []URIInitParameters `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ConditionObservation struct {
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) Captcha request headers. (see below for nested schema)
 	Headers []HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) Host where captcha placed. (see below for nested schema)
 	Host []HostObservation `json:"host,omitempty" tf:"host,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) The IP address of the requester. (see below for nested schema)
 	SourceIP []SourceIPObservation `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) URI where captcha placed. (see below for nested schema)
 	URI []URIObservation `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ConditionParameters struct {
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) Captcha request headers. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Headers []HeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) Host where captcha placed. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Host []HostParameters `json:"host,omitempty" tf:"host,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) The IP address of the requester. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	SourceIP []SourceIPParameters `json:"sourceIp,omitempty" tf:"source_ip,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) URI where captcha placed. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	URI []URIParameters `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type GeoIPMatchInitParameters struct {
 
-	// (List of String)
+	// 1 alpha 2. OR semantics implied.
+	// ISO 3166-1 alpha 2. OR semantics implied.
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
 type GeoIPMatchObservation struct {
 
-	// (List of String)
+	// 1 alpha 2. OR semantics implied.
+	// ISO 3166-1 alpha 2. OR semantics implied.
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
 type GeoIPMatchParameters struct {
 
-	// (List of String)
+	// 1 alpha 2. OR semantics implied.
+	// ISO 3166-1 alpha 2. OR semantics implied.
 	// +kubebuilder:validation:Optional
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
 type GeoIPNotMatchInitParameters struct {
 
-	// (List of String)
+	// 1 alpha 2. OR semantics implied.
+	// ISO 3166-1 alpha 2. OR semantics implied.
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
 type GeoIPNotMatchObservation struct {
 
-	// (List of String)
+	// 1 alpha 2. OR semantics implied.
+	// ISO 3166-1 alpha 2. OR semantics implied.
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
 type GeoIPNotMatchParameters struct {
 
-	// (List of String)
+	// 1 alpha 2. OR semantics implied.
+	// ISO 3166-1 alpha 2. OR semantics implied.
 	// +kubebuilder:validation:Optional
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 }
 
 type HeadersInitParameters struct {
 
-	// (String) The resource name.
+	// 63 characters long.
+	// Name of header (case insensitive).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// (Attributes List) Value of the header. (see below for nested schema)
 	Value []ValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HeadersObservation struct {
 
-	// (String) The resource name.
+	// 63 characters long.
+	// Name of header (case insensitive).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// (Attributes List) Value of the header. (see below for nested schema)
 	Value []ValueObservation `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HeadersParameters struct {
 
-	// (String) The resource name.
+	// 63 characters long.
+	// Name of header (case insensitive).
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
-	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// (Attributes List) Value of the header. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Value []ValueParameters `json:"value" tf:"value,omitempty"`
 }
 
 type HostInitParameters struct {
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) List of hosts. OR semantics implied. (see below for nested schema)
 	Hosts []HostsInitParameters `json:"hosts,omitempty" tf:"hosts,omitempty"`
 }
 
 type HostObservation struct {
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) List of hosts. OR semantics implied. (see below for nested schema)
 	Hosts []HostsObservation `json:"hosts,omitempty" tf:"hosts,omitempty"`
 }
 
 type HostParameters struct {
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) List of hosts. OR semantics implied. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Hosts []HostsParameters `json:"hosts,omitempty" tf:"hosts,omitempty"`
 }
 
 type HostsInitParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type HostsObservation struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type HostsParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type IPRangesMatchInitParameters struct {
 
-	// (List of String)
+	// (List of String) List of IP ranges. OR semantics implied.
+	// List of IP ranges. OR semantics implied.
 	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
 }
 
 type IPRangesMatchObservation struct {
 
-	// (List of String)
+	// (List of String) List of IP ranges. OR semantics implied.
+	// List of IP ranges. OR semantics implied.
 	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
 }
 
 type IPRangesMatchParameters struct {
 
-	// (List of String)
+	// (List of String) List of IP ranges. OR semantics implied.
+	// List of IP ranges. OR semantics implied.
 	// +kubebuilder:validation:Optional
 	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
 }
 
 type IPRangesNotMatchInitParameters struct {
 
-	// (List of String)
+	// (List of String) List of IP ranges. OR semantics implied.
+	// List of IP ranges. OR semantics implied.
 	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
 }
 
 type IPRangesNotMatchObservation struct {
 
-	// (List of String)
+	// (List of String) List of IP ranges. OR semantics implied.
+	// List of IP ranges. OR semantics implied.
 	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
 }
 
 type IPRangesNotMatchParameters struct {
 
-	// (List of String)
+	// (List of String) List of IP ranges. OR semantics implied.
+	// List of IP ranges. OR semantics implied.
 	// +kubebuilder:validation:Optional
 	IPRanges []*string `json:"ipRanges,omitempty" tf:"ip_ranges,omitempty"`
 }
 
 type OverrideVariantInitParameters struct {
 
-	// (String) Additional task type of the captcha. Possible values:
+	// (String) Additional task type of the captcha.
 	// Additional task type of the captcha.
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 
-	// (String) Complexity of the captcha. Possible values:
+	// (String) Complexity of the captcha.
 	// Complexity of the captcha.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// 512 characters long.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// Optional description of the rule. 0-512 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) Basic check type of the captcha.Possible values:
+	// (String) Basic check type of the captcha.
 	// Basic check type of the captcha.
 	PreCheckType *string `json:"preCheckType,omitempty" tf:"pre_check_type,omitempty"`
 
@@ -500,19 +586,20 @@ type OverrideVariantInitParameters struct {
 
 type OverrideVariantObservation struct {
 
-	// (String) Additional task type of the captcha. Possible values:
+	// (String) Additional task type of the captcha.
 	// Additional task type of the captcha.
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 
-	// (String) Complexity of the captcha. Possible values:
+	// (String) Complexity of the captcha.
 	// Complexity of the captcha.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// 512 characters long.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// Optional description of the rule. 0-512 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) Basic check type of the captcha.Possible values:
+	// (String) Basic check type of the captcha.
 	// Basic check type of the captcha.
 	PreCheckType *string `json:"preCheckType,omitempty" tf:"pre_check_type,omitempty"`
 
@@ -523,22 +610,23 @@ type OverrideVariantObservation struct {
 
 type OverrideVariantParameters struct {
 
-	// (String) Additional task type of the captcha. Possible values:
+	// (String) Additional task type of the captcha.
 	// Additional task type of the captcha.
 	// +kubebuilder:validation:Optional
 	ChallengeType *string `json:"challengeType,omitempty" tf:"challenge_type,omitempty"`
 
-	// (String) Complexity of the captcha. Possible values:
+	// (String) Complexity of the captcha.
 	// Complexity of the captcha.
 	// +kubebuilder:validation:Optional
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// 512 characters long.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// Optional description of the rule. 0-512 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) Basic check type of the captcha.Possible values:
+	// (String) Basic check type of the captcha.
 	// Basic check type of the captcha.
 	// +kubebuilder:validation:Optional
 	PreCheckType *string `json:"preCheckType,omitempty" tf:"pre_check_type,omitempty"`
@@ -551,182 +639,293 @@ type OverrideVariantParameters struct {
 
 type PathInitParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type PathObservation struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type PathParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type QueriesInitParameters struct {
 
-	// (String)
+	// (String) Key of the query parameter.
+	// Key of the query parameter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// (Attributes List) Value of the header. (see below for nested schema)
 	Value []QueriesValueInitParameters `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type QueriesObservation struct {
 
-	// (String)
+	// (String) Key of the query parameter.
+	// Key of the query parameter.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
-	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// (Attributes List) Value of the header. (see below for nested schema)
 	Value []QueriesValueObservation `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type QueriesParameters struct {
 
-	// (String)
+	// (String) Key of the query parameter.
+	// Key of the query parameter.
 	// +kubebuilder:validation:Optional
 	Key *string `json:"key" tf:"key,omitempty"`
 
-	// (Block List, Min: 1, Max: 1) (see below for nested schema)
+	// (Attributes List) Value of the header. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Value []QueriesValueParameters `json:"value" tf:"value,omitempty"`
 }
 
 type QueriesValueInitParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type QueriesValueObservation struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type QueriesValueParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type SecurityRuleInitParameters struct {
 
-	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
-	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+	// (Attributes List) The condition for matching the rule. (see below for nested schema)
 	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// 512 characters long.
-	// Description of the rule. 0-512 characters long.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// Optional description of the rule. 0-512 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) The resource name.
+	// 63 characters long.
 	// Name of the rule. The name is unique within the captcha. 1-50 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -741,15 +940,15 @@ type SecurityRuleInitParameters struct {
 
 type SecurityRuleObservation struct {
 
-	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
-	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+	// (Attributes List) The condition for matching the rule. (see below for nested schema)
 	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// 512 characters long.
-	// Description of the rule. 0-512 characters long.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// Optional description of the rule. 0-512 characters long.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) The resource name.
+	// 63 characters long.
 	// Name of the rule. The name is unique within the captcha. 1-50 characters long.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -764,20 +963,20 @@ type SecurityRuleObservation struct {
 
 type SecurityRuleParameters struct {
 
-	// (Block List, Max: 1) The condition for matching the rule. You can find all possibilities of condition in gRPC specs. (see below for nested schema)
-	// The condition for matching the rule. You can find all possibilities of condition in [gRPC specs](https://github.com/yandex-cloud/cloudapi/blob/master/yandex/cloud/smartcaptcha/v1/captcha.proto).
+	// (Attributes List) The condition for matching the rule. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
-	// 512 characters long.
-	// Description of the rule. 0-512 characters long.
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// Optional description of the rule. 0-512 characters long.
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// (String) The resource name.
+	// 63 characters long.
 	// Name of the rule. The name is unique within the captcha. 1-50 characters long.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// (String) Variant UUID to show in case of match the rule. Keep empty to use defaults.
 	// Variant UUID to show in case of match the rule. Keep empty to use defaults.
@@ -792,147 +991,274 @@ type SecurityRuleParameters struct {
 
 type SourceIPInitParameters struct {
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	GeoIPMatch []GeoIPMatchInitParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	GeoIPNotMatch []GeoIPNotMatchInitParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	IPRangesMatch []IPRangesMatchInitParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	IPRangesNotMatch []IPRangesNotMatchInitParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
 }
 
 type SourceIPObservation struct {
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	GeoIPMatch []GeoIPMatchObservation `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	GeoIPNotMatch []GeoIPNotMatchObservation `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	IPRangesMatch []IPRangesMatchObservation `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	IPRangesNotMatch []IPRangesNotMatchObservation `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
 }
 
 type SourceIPParameters struct {
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	GeoIPMatch []GeoIPMatchParameters `json:"geoIpMatch,omitempty" tf:"geo_ip_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	GeoIPNotMatch []GeoIPNotMatchParameters `json:"geoIpNotMatch,omitempty" tf:"geo_ip_not_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	IPRangesMatch []IPRangesMatchParameters `json:"ipRangesMatch,omitempty" tf:"ip_ranges_match,omitempty"`
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	IPRangesNotMatch []IPRangesNotMatchParameters `json:"ipRangesNotMatch,omitempty" tf:"ip_ranges_not_match,omitempty"`
 }
 
+type TimeoutsInitParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type TimeoutsObservation struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type TimeoutsParameters struct {
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Create *string `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Setting a timeout for a Delete operation is only applicable if changes are saved into state before the destroy operation occurs.
+	// +kubebuilder:validation:Optional
+	Delete *string `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours). Read operations occur during any refresh or planning operation when refresh is enabled.
+	// +kubebuilder:validation:Optional
+	Read *string `json:"read,omitempty" tf:"read,omitempty"`
+
+	// (String) A string that can be parsed as a duration consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// A string that can be [parsed as a duration](https://pkg.go.dev/time#ParseDuration) consisting of numbers and unit suffixes, such as "30s" or "2h45m". Valid time units are "s" (seconds), "m" (minutes), "h" (hours).
+	// +kubebuilder:validation:Optional
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
 type URIInitParameters struct {
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) Path of the URI RFC3986. (see below for nested schema)
 	Path []PathInitParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) List of query matchers. AND semantics implied. (see below for nested schema)
 	Queries []QueriesInitParameters `json:"queries,omitempty" tf:"queries,omitempty"`
 }
 
 type URIObservation struct {
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) Path of the URI RFC3986. (see below for nested schema)
 	Path []PathObservation `json:"path,omitempty" tf:"path,omitempty"`
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) List of query matchers. AND semantics implied. (see below for nested schema)
 	Queries []QueriesObservation `json:"queries,omitempty" tf:"queries,omitempty"`
 }
 
 type URIParameters struct {
 
-	// (Block List, Max: 1) (see below for nested schema)
+	// (Attributes List) Path of the URI RFC3986. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Path []PathParameters `json:"path,omitempty" tf:"path,omitempty"`
 
-	// (Block List) (see below for nested schema)
+	// (Attributes List) List of query matchers. AND semantics implied. (see below for nested schema)
 	// +kubebuilder:validation:Optional
 	Queries []QueriesParameters `json:"queries,omitempty" tf:"queries,omitempty"`
 }
 
 type ValueInitParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type ValueObservation struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
 
 type ValueParameters struct {
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactMatch *string `json:"exactMatch,omitempty" tf:"exact_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	ExactNotMatch *string `json:"exactNotMatch,omitempty" tf:"exact_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexMatch *string `json:"pireRegexMatch,omitempty" tf:"pire_regex_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PireRegexNotMatch *string `json:"pireRegexNotMatch,omitempty" tf:"pire_regex_not_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixMatch *string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 
-	// (String)
+	// (String) package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
+	// package: yandex.cloud.smartcaptcha.v1
+	// filename: yandex/cloud/smartcaptcha/v1/captcha.proto
 	// +kubebuilder:validation:Optional
 	PrefixNotMatch *string `json:"prefixNotMatch,omitempty" tf:"prefix_not_match,omitempty"`
 }
