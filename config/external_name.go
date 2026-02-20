@@ -42,7 +42,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	"yandex_dataproc_cluster": config.IdentifierFromProvider,
 
-	"yandex_datatransfer_transfer": config.IdentifierFromProvider,
 
 	"yandex_dns_recordset": config.IdentifierFromProvider,
 	"yandex_dns_zone":      config.IdentifierFromProvider,
@@ -106,8 +105,6 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"yandex_serverless_container":             config.IdentifierFromProvider,
 	"yandex_serverless_eventrouter_connector": config.IdentifierFromProvider,
 	"yandex_serverless_eventrouter_rule":      config.IdentifierFromProvider,
-
-	"yandex_smartcaptcha_captcha": config.IdentifierFromProvider,
 
 	"yandex_storage_bucket": config.IdentifierFromProvider,
 	"yandex_storage_object": config.IdentifierFromProvider,
@@ -173,6 +170,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 	"yandex_container_repository_iam_binding": config.IdentifierFromProvider,
 
 	"yandex_datatransfer_endpoint": config.IdentifierFromProvider,
+	"yandex_datatransfer_transfer": config.IdentifierFromProvider,
 
 	"yandex_datasphere_community":             config.IdentifierFromProvider,
 	"yandex_datasphere_community_iam_binding": config.IdentifierFromProvider,
@@ -259,6 +257,7 @@ var TerraformPluginFrameworkExternalNameConfigs = map[string]config.ExternalName
 
 	"yandex_serverless_container_iam_binding": config.IdentifierFromProvider,
 	"yandex_serverless_eventrouter_bus":       config.IdentifierFromProvider,
+	"yandex_smartcaptcha_captcha": config.IdentifierFromProvider,
 
 	"yandex_spark_cluster": config.IdentifierFromProvider,
 
